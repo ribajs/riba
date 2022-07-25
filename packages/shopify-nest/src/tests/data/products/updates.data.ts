@@ -1,4 +1,4 @@
-import type { ProductUpdateCreate } from "../../../interfaces/shopify-api/product-update-create";
+import type { ProductUpdateCreate } from "../../../interfaces/shopify-api/product-update-create.js";
 
 const products: ProductUpdateCreate[] = [
   /**

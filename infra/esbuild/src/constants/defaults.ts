@@ -1,5 +1,5 @@
 import { Config } from "../types/index.js";
-import { resolve, findDir, rootPath } from "../path";
+import { resolve, findDir, rootPath } from "../path.js";
 
 export const TS_SOURCE_DIR: Config["tsSourceDir"] =
   findDir([

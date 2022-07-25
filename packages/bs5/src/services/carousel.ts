@@ -1,5 +1,5 @@
 import { Carousel as _Carousel } from "bootstrap";
-// import { CarouselOption } from "../interfaces";
+// import { CarouselOption } from "../interfaces.js";
 
 /**
  * @see https://github.com/twbs/bootstrap/blob/main/js/src/carousel.js

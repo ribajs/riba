@@ -1,5 +1,5 @@
-import { ObserverSyncCallback } from "../../src/types";
-import { Observer } from "../../src/observer";
+import { ObserverSyncCallback } from "../../src/types/index.js";
+import { Observer } from "../../src/observer.js";
 
 export interface Change {
   [key: string]: Observer[];

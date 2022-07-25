@@ -1,16 +1,20 @@
-import { Riba } from "../../riba";
+import { Riba } from "../../riba.js";
 import { parseType, isBase64 } from "@ribajs/utils/src/index.js";
 
 import { dotAdapter } from "../../adapters/dot.adapter.js";
 
 import { toBase64Formatter } from "./to-base64.formatter.js";
-import { parseFormatter } from "./parse.formatter";
+import { parseFormatter } from "./parse.formatter.js";
 import { jsonFormatter } from "./json.formatter.js";
 import { TextBinder } from "../../binders/text.binder.js";
 
 const riba = new Riba();
 riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regists([toBase64Formatter, parseFormatter, jsonFormatter]);
+riba.module.formatter.regists([
+  toBase64Formatter,
+  parseFormatter,
+  jsonFormatter,
+]);
 riba.module.binder.regist(TextBinder);
 
 interface Model {

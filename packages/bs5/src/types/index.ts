@@ -1,6 +1,6 @@
 export * from "./jsx/index.js";
 
-export * from "./accordion-item";
+export * from "./accordion-item.js";
 export * from "./breakpoint.js";
 export * from "./carousel-options.js";
 export * from "./collapse-events.js";

@@ -6,7 +6,7 @@ import {
 } from "@ribajs/core";
 import { getLocation } from "@ribajs/utils/src/index.js";
 import { BaseCache } from "@ribajs/cache";
-import { JsxBs5IconProps } from "../../types/jsx/jsx-icon-props";
+import { JsxBs5IconProps } from "../../types/jsx/jsx-icon-props.js";
 
 export class Bs5IconComponent extends BasicComponent {
   public static tagName = "bs5-icon";

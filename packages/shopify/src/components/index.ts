@@ -1,4 +1,4 @@
-// export * from './shopify-section.component';
+// export * from './shopify-section.component.js';
 export { ShopifyAddressesComponent } from "./addresses-form/addresses-form.component.js";
 export { ShopifyCartComponent } from "./cart/cart.component.js";
 export { ShopifyCartButtonComponent } from "./cart-button/cart-button.component.js";

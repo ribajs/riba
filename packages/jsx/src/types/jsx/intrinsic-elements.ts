@@ -51,7 +51,7 @@ import type {
   JsxVideoElementProps,
   JsxSvgElementProps,
   JsxPathElementProps,
-} from ".";
+} from "./index.js";
 
 export interface BasicIntrinsicElements {
   // HTML Elements

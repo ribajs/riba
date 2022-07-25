@@ -1,5 +1,5 @@
 import { Riba, TextBinder, dotAdapter } from '@ribajs/core';
-import { DurationFormatter } from './duration.formatter';
+import { DurationFormatter } from "./duration.formatter.js";
 import { MomentInput } from 'moment';
 import moment from 'moment';
 

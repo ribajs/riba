@@ -1,4 +1,4 @@
-import type { JsxHtmlGlobalProps } from "./jsx-html-global-props";
+import type { JsxHtmlGlobalProps } from "./jsx-html-global-props.js";
 
 /**
  * Properties permitted on the `<details>` element.

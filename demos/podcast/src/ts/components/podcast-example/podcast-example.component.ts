@@ -1,9 +1,9 @@
 import { Component } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
-import { episode03 } from "../../data/episode-03/episode";
-import { episode01 } from "../../data/episode-01/episode";
-import { config } from "../../data/config";
+import { episode03 } from "../../data/episode-03/episode.js";
+import { episode01 } from "../../data/episode-01/episode.js";
+import { config } from "../../data/config.js";
 
 export class PodcastExampleComponent extends Component {
   public static tagName = "podcast-example";

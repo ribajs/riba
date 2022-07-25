@@ -35,9 +35,9 @@ import { BarWrapperService } from "./shopify-easdk-bar.service.js";
 import { ModalWrapperService } from "./shopify-easdk-modal.service.js";
 import { UserWrapperService } from "./shopify-easdk-user.service.js";
 
-// import { AlertComponent } from './alert/alert.component';
-// import { ConfirmComponent } from './confirm/confirm.component';
-// import { OpenComponent } from './open/open.component';
+// import { AlertComponent } from './alert/alert.component.js';
+// import { ConfirmComponent } from './confirm/confirm.component.js';
+// import { OpenComponent } from './open/open.component.js';
 
 export class EASDKWrapperService
   extends WrapperService

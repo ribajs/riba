@@ -1,7 +1,7 @@
 import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
 import { bs5Module } from "@ribajs/bs5";
-import { SlideshowDemoModule } from "./slideshow.module";
+import { SlideshowDemoModule } from "./slideshow.module.js";
 
 const riba = new Riba();
 const model = {};

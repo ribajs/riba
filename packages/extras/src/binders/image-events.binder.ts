@@ -8,8 +8,18 @@ import imagesLoaded from "imagesloaded";
  * * load-done - Triggered after all images have successfully loaded without any broken images.
  * * load-fail - Triggered after all images have been loaded with at least one broken image.
  * * load-progress - Triggered after each image has been loaded.
+ *
+ * @note You need to use this binder on a parent element of the image(s).
+ * @see https://www.npmjs.com/package/imagesloaded
+ *
+ * @example
+ * ```html
+ *  <div class="product-images" rv-image-events rv-on-load-done="onImageLoaded">
+ *    <img loading="lazy" rv-src="productImage" rv-alt="product.title">
+ *  </div>
+ * ```
  */
-export class ImageEventsBinder extends Binder<string, HTMLImageElement> {
+export class ImageEventsBinder extends Binder<string, HTMLElement> {
   static key = "image-events";
 
   private events?: ImagesLoaded.ImagesLoaded;

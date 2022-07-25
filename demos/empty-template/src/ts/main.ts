@@ -1,6 +1,6 @@
 import { coreModule, Riba } from "@ribajs/core";
 import { emptyTemplateModule } from "@ribajs/empty-template";
-import { EmptyTemplateDemoModule } from "./empty-template-demo.module";
+import { EmptyTemplateDemoModule } from "./empty-template-demo.module.js";
 
 const riba = new Riba();
 const model = {};

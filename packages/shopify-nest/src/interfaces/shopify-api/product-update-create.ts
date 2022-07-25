@@ -4,7 +4,7 @@ import type {
   ProductOption,
   ProductVariant,
 } from "@ribajs/shopify-tda";
-import type { MetafieldUpdateCreate } from "./metafield-update-create";
+import type { MetafieldUpdateCreate } from "./metafield-update-create.js";
 
 export interface ProductUpdateCreate extends Partial<ShopifyObject> {
   /**

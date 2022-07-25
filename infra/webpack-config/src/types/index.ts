@@ -1,3 +1,3 @@
-export * from "./config-style";
-export * from "./config";
-export * from "./loader-item";
+export * from "./config-style.js";
+export * from "./config.js";
+export * from "./loader-item.js";

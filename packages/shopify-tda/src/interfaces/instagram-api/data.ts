@@ -1,4 +1,4 @@
-import type { InstagramPaging } from "./paging";
+import type { InstagramPaging } from "./paging.js";
 
 export interface InstagramData<T> {
   data: T;

@@ -1,6 +1,6 @@
 import { Riba } from "@ribajs/core";
 import { leafletModule } from "@ribajs/leaflet-map";
-import { LeafletDemoModule } from "./leaflet-demo.module";
+import { LeafletDemoModule } from "./leaflet-demo.module.js";
 
 const riba = new Riba();
 const model = {};

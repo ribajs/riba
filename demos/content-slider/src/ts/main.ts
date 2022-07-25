@@ -2,7 +2,7 @@ import { bs5Module } from "@ribajs/bs5";
 import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
 import { contentSliderModule } from "@ribajs/content-slider";
-import { ContentSliderDemoModule } from "./content-slider-demo.module";
+import { ContentSliderDemoModule } from "./content-slider-demo.module.js";
 
 const riba = new Riba();
 const model = {};

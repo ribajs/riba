@@ -1,6 +1,6 @@
 import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
-import { extrasScrollEventsModule } from "./extras-scroll-events.module";
+import { extrasScrollEventsModule } from "./extras-scroll-events.module.js";
 
 const riba = new Riba();
 const model = {};

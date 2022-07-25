@@ -1,5 +1,5 @@
 import { Riba, TextBinder, dotAdapter } from '@ribajs/core';
-import { DaysFormatter } from './days.formatter';
+import { DaysFormatter } from "./days.formatter.js";
 import { Moment, Duration, duration } from 'moment';
 import moment from 'moment';
 

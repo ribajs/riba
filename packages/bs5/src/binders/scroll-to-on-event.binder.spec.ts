@@ -1,5 +1,5 @@
 import { Riba, dotAdapter } from '@ribajs/core';
-import { ScrollToOnEventBinder } from './scroll-to-on-event.binder';
+import { ScrollToOnEventBinder } from "./scroll-to-on-event.binder.js";
 
 describe('riba.binders', () => {
   let el: HTMLDivElement;

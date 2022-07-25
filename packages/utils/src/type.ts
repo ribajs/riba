@@ -1,4 +1,4 @@
-import { BASE64_PREFIX, KEYPATH, PRIMITIVE, QUOTED_STR } from "./constants";
+import { BASE64_PREFIX, KEYPATH, PRIMITIVE, QUOTED_STR } from "./constants.js";
 
 /**
  * Fixed version of typeof operator

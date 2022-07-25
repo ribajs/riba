@@ -1,4 +1,4 @@
-import type { ThemeChoice } from "./theme-choice";
+import type { ThemeChoice } from "./theme-choice.js";
 
 export interface ThemeData {
   /** true if the system / OS and browser supports color scheme (if this is not the case the color scheme can still be changed via css) */

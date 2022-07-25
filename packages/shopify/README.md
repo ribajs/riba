@@ -35,18 +35,12 @@ These two plugins automatically use the .eslintrc.js from thisk repository, the 
 yarn add -D webpack webpack-cli webpack-stream typescript @yarnpkg/pnpify html-loader babel-loader
 ```
 
-Add webpack to `resolutions` in your package.json to be shure to use the latest Webpack v4 version:
+Add webpack to `resolutions` in your package.json to be sure to use the latest Webpack v4 version:
 
 ```json
 "resolutions": {
   "webpack": "^4.42.1"
 }
-```
-
-### Gulp 4 and (Slate) tools
-
-```bash
-yarn add -D @ribajs/shopify-gulp gulp gulp-cheerio gulp-ext-replace gulp-plumber gulp-rename gulp-size gulp-svgmin gulp-util gulp-zip @ribajs/webpack-config
 ```
 
 ## Regist Riba

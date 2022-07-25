@@ -1,4 +1,4 @@
-import type { SharedContext } from "./shared-context";
+import type { SharedContext } from "./shared-context.js";
 
 declare global {
   interface Window {

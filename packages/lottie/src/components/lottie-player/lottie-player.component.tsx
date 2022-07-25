@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, HttpService } from "@ribajs/core";
 import { JsxElement } from "@ribajs/jsx";
 
 import {
@@ -9,55 +9,13 @@ import {
   JsxLottiePlayerProps,
 } from "../../types/index.js";
 
-/**
- * Parse a resource into a JSON object or a URL string
- */
-function parseSrc(src: string | object): string | object {
-  if (typeof src === "object") {
-    return src;
-  }
-
-  try {
-    return JSON.parse(src);
-  } catch (e) {
-    // Try construct an absolute URL from the src URL
-    const srcUrl: URL = new URL(src, window.location.href);
-
-    return srcUrl.toString();
-  }
-}
-
-function isLottie(json: Record<string, any>): boolean {
+const isLottie = (json: Record<string, any>) => {
   const mandatory: string[] = ["v", "ip", "op", "layers", "fr", "w", "h"];
 
   return mandatory.every((field: string) =>
     Object.prototype.hasOwnProperty.call(json, field)
   );
-}
-
-async function fromURL(url: string): Promise<Record<string, any>> {
-  if (typeof url !== "string") {
-    throw new Error(`The url value must be a string`);
-  }
-
-  let json;
-
-  try {
-    // Try construct an absolute URL from the src URL
-    const srcUrl: URL = new URL(url);
-
-    // Fetch the JSON file from the URL
-    const result: any = await fetch(srcUrl.toString());
-
-    json = await result.json();
-  } catch (err) {
-    throw new Error(
-      `An error occurred while trying to load the Lottie file from URL`
-    );
-  }
-
-  return json;
-}
+};
 
 /**
  * LottiePlayer web component class ported to Riba.js
@@ -142,7 +100,7 @@ export class LottiePlayerComponent extends Component {
   }
 
   protected async afterBind() {
-    this.load(this.scope.src);
+    await this.firstUpdated();
     await super.afterBind();
   }
 
@@ -169,51 +127,53 @@ export class LottiePlayerComponent extends Component {
     };
 
     // Load the resource information
+    let jsonData = {};
+    let srcAttrib = typeof src === "string" ? "path" : "animationData";
+
+    // Clear previous animation, if any
+    if (this._lottie) {
+      this._lottie.destroy();
+    }
+
+    // if (this.scope.webworkers) {
+    //   lottie.useWebWorker(true);
+    // }
+
+    const { default: lottie } = await import(
+      "lottie-web/build/player/lottie.js"
+    );
+
+    // Initialize lottie player and load animation
+    this._lottie = lottie.loadAnimation({
+      ...options,
+      [srcAttrib]: src,
+    });
+
+    // Attach the event listeners before we check the requested json file for errors
+    this._attachEventListeners();
+
     try {
-      const srcParsed = parseSrc(src);
-      let jsonData = {};
-      let srcAttrib = typeof srcParsed === "string" ? "path" : "animationData";
-
-      // Clear previous animation, if any
-      if (this._lottie) {
-        this._lottie.destroy();
-      }
-
-      // if (this.scope.webworkers) {
-      //   lottie.useWebWorker(true);
-      // }
-
-      const { default: lottie } = await import(
-        "lottie-web/build/player/lottie"
-      );
-
-      // Initialize lottie player and load animation
-      this._lottie = lottie.loadAnimation({
-        ...options,
-
-        [srcAttrib]: srcParsed,
-      });
-
-      // Attach the event listeners before we check the requested json file for errors
-      this._attachEventListeners();
-
       // Fetch resource if src is a remote URL
       if (srcAttrib === "path") {
-        jsonData = await fromURL(srcParsed as string);
+        jsonData = (
+          await HttpService.getJSON<Record<string, any>>(src as string)
+        ).body;
         srcAttrib = "animationData";
       } else {
-        jsonData = srcParsed;
-      }
-
-      if (!isLottie(jsonData)) {
-        console.error("Json data is not a valid lottie json: ", jsonData);
-        this.scope.currentState = PlayerState.Error;
-        this.dispatchEvent(new CustomEvent(PlayerEvents.Error));
+        jsonData = src;
       }
     } catch (err) {
       console.error(err);
       this.scope.currentState = PlayerState.Error;
       this.dispatchEvent(new CustomEvent(PlayerEvents.Error));
+      return;
+    }
+
+    if (!isLottie(jsonData)) {
+      console.error("Json data is not a valid lottie json: ", jsonData);
+      this.scope.currentState = PlayerState.Error;
+      this.dispatchEvent(new CustomEvent(PlayerEvents.Error));
+      return;
     }
   }
 
@@ -443,7 +403,7 @@ export class LottiePlayerComponent extends Component {
   /**
    * Initialize everything on component first render.
    */
-  protected firstUpdated(): void {
+  protected async firstUpdated() {
     // Add intersection observer for detecting component being out-of-view.
     if ("IntersectionObserver" in window) {
       this._io = new IntersectionObserver(
@@ -470,7 +430,7 @@ export class LottiePlayerComponent extends Component {
 
     // Setup lottie player
     if (this.scope.src) {
-      this.load(this.scope.src);
+      await this.load(this.scope.src);
     }
     this.dispatchEvent(new CustomEvent(PlayerEvents.Rendered));
   }

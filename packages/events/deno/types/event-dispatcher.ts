@@ -1,4 +1,4 @@
-import type { EventDispatcher } from "../services/event-dispatcher.service.ts";
+import type { EventDispatcher } from "../services/event-dispatcher.service.js";
 
 export type EventCallback = (...args: any[]) => any;
 

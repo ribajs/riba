@@ -12,7 +12,7 @@ import {
   ShopifyShippingRates,
   ShopifyShippingRate,
   ShopifyShippingRatesNormalized,
-} from "../interfaces";
+} from "../interfaces/index.js";
 
 export interface ShopifyCartRequestOptions {
   triggerOnStart: boolean;

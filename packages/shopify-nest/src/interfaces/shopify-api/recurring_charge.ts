@@ -1,4 +1,4 @@
-import type { Charge } from "./charge";
+import type { Charge } from "./charge.js";
 
 /**
  * Represents a recurring (e.g. monthly subscription) application charge.

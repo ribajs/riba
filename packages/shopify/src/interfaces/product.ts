@@ -1,4 +1,4 @@
-import { ShopifyImage } from "./image";
+import { ShopifyImage } from "./image.js";
 
 export declare interface ShopifyProductImage extends ShopifyImage {
   position: number;

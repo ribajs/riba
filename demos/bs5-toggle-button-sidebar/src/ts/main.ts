@@ -1,7 +1,7 @@
 import { bs5Module } from "@ribajs/bs5";
 import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
-import { Bs5ToggleButtonSidebarModule } from "./bs5-toggle-button-sidebar.module";
+import { Bs5ToggleButtonSidebarModule } from "./bs5-toggle-button-sidebar.module.js";
 
 const riba = new Riba();
 const model = {};

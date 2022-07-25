@@ -1,4 +1,4 @@
-import type { SidebarState } from ".";
+import type { SidebarState } from "./index.js";
 import type { Bs5SidebarComponent } from "../components/bs5-sidebar/bs5-sidebar.component.js";
 
 export interface Bs5SidebarComponentScope {

@@ -1,7 +1,7 @@
 import { coreModule, Riba } from "@ribajs/core";
 import { ready } from "@ribajs/utils/src/dom.js";
 import { i18nModule, LocalesStaticService } from "@ribajs/i18n";
-import I18nStaticModule from "./i18n-static.module";
+import I18nStaticModule from "./i18n-static.module.js";
 
 const locales = {
   de: {

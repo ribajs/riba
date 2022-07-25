@@ -1,5 +1,5 @@
 import { Riba, TextBinder, dotAdapter } from '@ribajs/core';
-import { DateFormatFormatter } from './date-format.formatter';
+import { DateFormatFormatter } from "./date-format.formatter.js";
 import { Moment } from 'moment';
 import moment from 'moment';
 

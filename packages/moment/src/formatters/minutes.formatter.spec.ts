@@ -1,5 +1,5 @@
 import { Riba, TextBinder, dotAdapter } from '@ribajs/core';
-import { MinutesFormatter } from './minutes.formatter';
+import { MinutesFormatter } from "./minutes.formatter.js";
 import moment from 'moment';
 
 const riba = new Riba();

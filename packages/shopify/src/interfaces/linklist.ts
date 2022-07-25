@@ -1,4 +1,4 @@
-import { LinklistLink } from "./linklist-link";
+import { LinklistLink } from "./linklist-link.js";
 
 export interface Linklist {
   handle: string;

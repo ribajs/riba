@@ -2,7 +2,7 @@ import { bs4Module } from "@ribajs/bs4";
 import { coreModule, Riba } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
 import { photoswipeModule } from "@ribajs/photoswipe";
-import { PhotoswipeDemoModule } from "./photoswipe-demo.module";
+import { PhotoswipeDemoModule } from "./photoswipe-demo.module.js";
 
 const riba = new Riba();
 riba.configure({});

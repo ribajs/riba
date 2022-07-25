@@ -3,7 +3,7 @@ import {
   EventCallback,
   EventDispatcherInstances,
   Events,
-} from "../types/event-dispatcher.ts";
+} from "../types/event-dispatcher.js";
 
 /**
  * Little Dispatcher inspired by MicroEvent.js

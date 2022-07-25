@@ -1,4 +1,4 @@
-import type { InputButton } from "./input-button";
+import type { InputButton } from "./input-button.js";
 
 export interface GamepadKeysComponentScope {
   controls: {

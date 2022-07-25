@@ -1,4 +1,4 @@
-import type { Transition } from "./transition";
+import type { Transition } from "./transition.js";
 
 export type RouterModuleOptions = {
   defaultTransition: Transition;

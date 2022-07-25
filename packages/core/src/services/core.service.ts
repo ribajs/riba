@@ -2,7 +2,7 @@ import { CoreModuleOptions } from "../types/index.js";
 
 export class CoreService {
   protected static _options: CoreModuleOptions = {};
-  public static instance?: CoreService;
+  protected static instance?: CoreService;
 
   public static get options() {
     return this._options;
@@ -29,5 +29,9 @@ export class CoreService {
     this._options = options;
     this.instance = new this();
     return this.instance;
+  }
+
+  public static hasInstance() {
+    return !!this.instance;
   }
 }

@@ -1,1 +1,1 @@
-export * from "./typedoc.service";
+export * from "./typedoc.service.js";

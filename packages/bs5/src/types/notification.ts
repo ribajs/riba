@@ -1,4 +1,4 @@
-import type { NotificationEventBinderData } from "./notification-event-binder-data";
+import type { NotificationEventBinderData } from "./notification-event-binder-data.js";
 export abstract class Notification implements NotificationEventBinderData {
   type: string;
   title?: string;

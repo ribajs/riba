@@ -4,8 +4,8 @@
 import path from "path";
 import webpack from "webpack";
 import WDS from "webpack-dev-server";
-import pkgDir from "./dependencies/pkg-dir";
-import getPort from "./dependencies/get-port";
+import pkgDir from "./dependencies/pkg-dir.js";
+import getPort from "./dependencies/get-port.js";
 import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
 

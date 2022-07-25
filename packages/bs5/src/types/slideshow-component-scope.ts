@@ -4,7 +4,7 @@ import type {
   SlideshowSlide,
   SlideshowControlsPosition,
   SlideshowIndicatorsPosition,
-} from ".";
+} from "./index.js";
 
 export interface Bs5SlideshowComponentScope {
   // TEMPLATE METHODS

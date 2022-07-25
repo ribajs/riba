@@ -1,6 +1,6 @@
 import { coreModule, Riba } from "@ribajs/core";
 import { momentModule } from "@ribajs/moment";
-import { MomentDemoModule } from "./moment-demo.module";
+import { MomentDemoModule } from "./moment-demo.module.js";
 
 const riba = new Riba();
 const model = {};

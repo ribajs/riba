@@ -1,5 +1,5 @@
 import { JsxChildren } from "./jsx-children.js";
-import { JsxHtmlCustomGlobalProps } from "./jsx-html-custom-global-props";
+import { JsxHtmlCustomGlobalProps } from "./jsx-html-custom-global-props.js";
 
 /**
  * The common properties that may appear on any HTML element.

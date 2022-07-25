@@ -1,7 +1,7 @@
 import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { clone, camelCase } from "@ribajs/utils/src/type.js";
-import { throttle, debounce } from "@ribajs/utils/src/control";
+import { throttle, debounce } from "@ribajs/utils";
 import { TemplateFunction, TemplatesComponent } from "@ribajs/core";
 
 import {

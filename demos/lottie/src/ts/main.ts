@@ -1,6 +1,6 @@
 import { coreModule, Riba } from "@ribajs/core";
 import { LottieModule } from "@ribajs/lottie";
-import { LottieDemoModule } from "./lottie-demo.module";
+import { LottieDemoModule } from "./lottie-demo.module.js";
 
 const riba = new Riba();
 const model = {};

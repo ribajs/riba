@@ -1,4 +1,4 @@
-import type { ThemeData } from "./theme-data";
+import type { ThemeData } from "./theme-data.js";
 
 export type ThemeChangedData = {
   oldValue: ThemeData;

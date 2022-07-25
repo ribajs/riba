@@ -1,14 +1,14 @@
 import { PodloveWebPlayerEpisode } from "@ribajs/podcast";
 
-import { chapters } from "./chapters";
-import { transcripts } from "./transcripts";
+import { chapters } from "./chapters.js";
+import { transcripts } from "./transcripts.js";
 import {
   alexanderHeimbuch,
   michaelaLehr,
   ericTeubert,
   simon,
 } from "../contributors/index.js";
-import { show } from "../show";
+import { show } from "../show.js";
 
 /**
  * Epsiode Meta Information

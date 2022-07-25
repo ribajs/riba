@@ -1,4 +1,4 @@
-import { StrapiImageFormats } from "./strapi-image-format";
+import { StrapiImageFormats } from "./strapi-image-format.js";
 export interface StrapiImage {
   formats: StrapiImageFormats;
   alternativeText: string | null;

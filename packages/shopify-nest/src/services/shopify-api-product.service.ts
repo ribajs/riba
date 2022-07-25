@@ -4,7 +4,7 @@ import {
   Product,
 } from "@ribajs/shopify-tda";
 
-import type { ProductUpdateCreate } from "../interfaces/shopify-api/product-update-create";
+import type { ProductUpdateCreate } from "../interfaces/shopify-api/product-update-create.js";
 
 export class ShopifyApiProductService extends _ShopifyApiProductService {
   public static instance?: ShopifyApiProductService;

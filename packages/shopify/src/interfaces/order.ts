@@ -1,5 +1,5 @@
-import { ShopifyCustomer } from "./customer.";
-import { ShopifyDiscount } from "./discount";
+import { ShopifyCustomer } from "./customer.js";
+import { ShopifyDiscount } from "./discount.js";
 
 export interface ShopifyOrderCustomAttributes {
   [key: string]: string;

@@ -1,5 +1,5 @@
 import { PodloveWebPlayerConfig } from "@ribajs/podcast";
-import { playlist } from "./playlist";
+import { playlist } from "./playlist.js";
 
 /**
  * Configuration Meta Information

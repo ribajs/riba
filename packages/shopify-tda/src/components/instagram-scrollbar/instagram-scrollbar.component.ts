@@ -4,7 +4,7 @@ import {
   getViewportDimensions,
   hasChildNodesTrim,
 } from "@ribajs/utils/src/dom.js";
-import type { InstagramMedia } from "../../interfaces/instagram-api";
+import type { InstagramMedia } from "../../interfaces/instagram-api/index.js";
 import { InstagramApiService } from "../../services/instagram-api.service.js";
 
 export interface Scope extends ScopeBase {

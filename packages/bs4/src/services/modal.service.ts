@@ -15,7 +15,7 @@ import {
 } from "../helper/utils.js";
 import { setData, getData, removeData } from "../helper/dom/data.js";
 import { on, one, off, trigger } from "../helper/dom/event-handler.js";
-// import Manipulator from "./dom/manipulator";
+// import Manipulator from "./dom/manipulator.js";
 import * as SelectorEngine from "../helper/dom/selector-engine.js";
 
 export interface Config {

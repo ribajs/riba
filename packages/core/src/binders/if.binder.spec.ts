@@ -1,6 +1,6 @@
 import { Riba } from "../riba.js";
 import { IfBinder } from "./if.binder.js";
-import { EachStarBinder } from "../binders";
+import { EachStarBinder } from "../binders/index.js";
 import { dotAdapter } from "../adapters/dot.adapter.js";
 
 describe("if", () => {

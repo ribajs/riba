@@ -1,4 +1,4 @@
-import { EventDispatcher } from "./event-dispatcher.service.ts";
+import { EventDispatcher } from "./event-dispatcher.service.js";
 
 describe("riba.core", () => {
   describe("EventDispatcher", () => {
@@ -89,7 +89,7 @@ describe("riba.core", () => {
       eventDispatcher.on("test1", obj.testFunction, thatContext);
       eventDispatcher.on("test1", obj.testFunction, thisContext);
       eventDispatcher.off("test1", obj.testFunction, thisContext);
-      eventDispatcher.on("test1", () => value = 23);
+      eventDispatcher.on("test1", () => (value = 23));
 
       eventDispatcher.off("test1");
       eventDispatcher.trigger("test1");
@@ -119,7 +119,7 @@ describe("riba.core", () => {
       eventDispatcher.on("test2", obj.testFunction1, thatContext);
       eventDispatcher.on("test3", obj.testFunction1, thisContext);
       eventDispatcher.on("test1", obj.testFunction1, thisContext);
-      eventDispatcher.on("test4", () => value1 = 777);
+      eventDispatcher.on("test4", () => (value1 = 777));
       eventDispatcher.on("test5", testFunction2);
       eventDispatcher.on("test6", testFunction3);
 

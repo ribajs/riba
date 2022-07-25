@@ -1,2 +1,2 @@
-export * from './config';
-export * from './esbuild-options';
+export * from "./config.js";
+export * from "./esbuild-options.js";

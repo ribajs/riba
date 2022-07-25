@@ -1,5 +1,5 @@
 import type { EventDispatcher } from "@ribajs/events";
-import type { RequestContext } from "./request-context";
+import type { RequestContext } from "./request-context.js";
 export interface SharedContext {
   events?: EventDispatcher;
   env: {

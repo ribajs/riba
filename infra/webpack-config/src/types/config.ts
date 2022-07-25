@@ -7,7 +7,7 @@ import type HtmlWebpackPlugin from "html-webpack-plugin";
 import type NodeExternalsPlugin from "webpack-node-externals";
 // import type CopyPlugin from "copy-webpack-plugin"
 
-import { ConfigStyle, LoaderItem } from ".";
+import { ConfigStyle, LoaderItem } from "./index.js";
 
 export interface Config {
   styles: ConfigStyle;

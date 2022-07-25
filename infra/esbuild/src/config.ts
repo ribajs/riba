@@ -1,6 +1,6 @@
 import { Config, ESBuildConfig } from "./types/index.js";
-import * as DEF from "./constants/defaults";
-import { findFile, basename, rootPath, resolve, extname } from "./path";
+import * as DEF from "./constants/defaults.js";
+import { findFile, basename, rootPath, resolve, extname } from "./path.js";
 import { pnpPlugin } from "@yarnpkg/esbuild-plugin-pnp";
 
 export const searchForTsIndexPath = (

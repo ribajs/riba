@@ -1,4 +1,4 @@
-import type { OcFormComponentScope } from "./oc-form-component-scope";
+import type { OcFormComponentScope } from "./oc-form-component-scope.js";
 
 export interface ReCaptchaFormComponentScope extends OcFormComponentScope {
   recaptchaSrc: string;

@@ -1,5 +1,5 @@
 import { Riba, TextBinder, dotAdapter } from '@ribajs/core';
-import { ToISOStringFormatter } from './to-iso-string.formatter';
+import { ToISOStringFormatter } from "./to-iso-string.formatter.js";
 import moment from 'moment';
 
 const riba = new Riba();

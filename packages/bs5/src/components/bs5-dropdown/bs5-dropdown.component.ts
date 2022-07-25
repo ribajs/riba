@@ -1,7 +1,7 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { Dropdown } from "../../services/dropdown.js";
 import { Dropdown as BSDropdown } from "bootstrap";
-import { JsxBs5DropdownProps } from "../../types/jsx/jsx-dropdown-props";
+import { JsxBs5DropdownProps } from "../../types/jsx/jsx-dropdown-props.js";
 
 interface Scope extends Partial<BSDropdown.Options> {
   toggle: Bs5DropdownComponent["toggle"];

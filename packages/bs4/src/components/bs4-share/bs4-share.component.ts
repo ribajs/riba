@@ -1,5 +1,5 @@
 import { Component, ScopeBase } from "@ribajs/core";
-import { getUrl } from "@ribajs/utils/src/url";
+import { getUrl } from "@ribajs/utils";
 import labelTemplate from "./bs4-share.label.html";
 import { ShareItem, ShareUrlType } from "../../interfaces/index.js";
 import { DropdownService } from "@ribajs/bs4";

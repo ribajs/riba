@@ -1,6 +1,6 @@
 import { HttpService } from "@ribajs/core";
 
-import { ShopifyProduct, ShopifyProductVariant } from "../interfaces";
+import { ShopifyProduct, ShopifyProductVariant } from "../interfaces/index.js";
 
 export interface ProductsCache {
   [handle: string]: ShopifyProduct;

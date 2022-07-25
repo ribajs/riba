@@ -1,4 +1,4 @@
-import { ESBuildConfig } from './esbuild-options';
+import { ESBuildConfig } from "./esbuild-options.js";
 
 export interface Config {
   esbuild: ESBuildConfig;

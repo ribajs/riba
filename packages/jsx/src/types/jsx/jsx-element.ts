@@ -1,5 +1,5 @@
-import type { JsxComponent, JsxChildren } from ".";
-import type { JsxFragment } from "../../jsx-fragment";
+import type { JsxComponent, JsxChildren } from "./index.js";
+import type { JsxFragment } from "../../jsx-fragment.js";
 
 export interface JsxElement {
   tag: typeof JsxFragment | string | JsxComponent<any>;

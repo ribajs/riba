@@ -1,4 +1,4 @@
-import { Riba } from "../../riba";
+import { Riba } from "../../riba.js";
 
 import { dotAdapter } from "../../adapters/dot.adapter.js";
 
@@ -17,7 +17,7 @@ interface Model {
   bolStr: string;
   bol?: boolean;
   strArrStr: string;
-  strArr?: string[]
+  strArr?: string[];
   objStr: string;
   obj?: {
     a: number;
@@ -31,11 +31,12 @@ interface Model {
 describe("riba.formatters", () => {
   describe("parse", () => {
     let model: Model = {
-      numStr: '42',
-      bolStr: 'true',
+      numStr: "42",
+      bolStr: "true",
       strArrStr: "['a', 'b', 'c']",
       objStr: "{'a': 1, 'b': 2, 'c': 3}",
-      base64Str: "base64:QSUyMHB1cHBldCUyMHRoYXQlMjBjYW4lMjBubyUyMGxvbmdlciUyMGJlJTIwdXNlZCUyMGlzJTIwbWVyZSUyMGdhcmJhZ2UuJTIwVGhpcyUyMHB1cHBldCdzJTIwcm9sZSUyMGhhcyUyMGp1c3QlMjBlbmRlZC4uLg=="
+      base64Str:
+        "base64:QSUyMHB1cHBldCUyMHRoYXQlMjBjYW4lMjBubyUyMGxvbmdlciUyMGJlJTIwdXNlZCUyMGlzJTIwbWVyZSUyMGdhcmJhZ2UuJTIwVGhpcyUyMHB1cHBldCdzJTIwcm9sZSUyMGhhcyUyMGp1c3QlMjBlbmRlZC4uLg==",
     };
 
     it("A string number should be parsed to a number", () => {
@@ -56,22 +57,23 @@ describe("riba.formatters", () => {
       const el = document.createElement("div");
       el.setAttribute("rv-assign-str-arr", "strArrStr | parse");
       riba.bind(el, model);
-      expect(model.strArr).toEqual(['a', 'b', 'c']);
+      expect(model.strArr).toEqual(["a", "b", "c"]);
     });
 
     it("A json string object should be parsed to a object", () => {
       const el = document.createElement("div");
       el.setAttribute("rv-assign-obj", "objStr | parse");
       riba.bind(el, model);
-      expect(model.obj).toEqual({'a': 1, 'b': 2, 'c': 3});
+      expect(model.obj).toEqual({ a: 1, b: 2, c: 3 });
     });
 
     it("A base64 string should be decoded to a to its real value", () => {
       const el = document.createElement("div");
       el.setAttribute("rv-assign-base64", "base64Str | parse");
       riba.bind(el, model);
-      expect(model.base64).toEqual("A puppet that can no longer be used is mere garbage. This puppet's role has just ended...");
+      expect(model.base64).toEqual(
+        "A puppet that can no longer be used is mere garbage. This puppet's role has just ended..."
+      );
     });
-
   });
 });

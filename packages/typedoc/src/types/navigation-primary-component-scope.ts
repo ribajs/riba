@@ -4,7 +4,7 @@ import type {
   JsxTsdNavigationPrimaryProps,
   Dataset,
 } from "./index.js";
-import type { NavigationPrimaryComponent } from "../components/navigation-primary/navigation-primary.component";
+import type { NavigationPrimaryComponent } from "../components/navigation-primary/navigation-primary.component.js";
 
 export interface NavigationPrimaryComponentScope
   extends ScopeBase<{ dataset: Dataset }> {

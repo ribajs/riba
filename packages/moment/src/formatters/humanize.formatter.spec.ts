@@ -1,5 +1,5 @@
 import { Riba, TextBinder, dotAdapter } from '@ribajs/core';
-import { HumanizeFormatter } from './humanize.formatter';
+import { HumanizeFormatter } from "./humanize.formatter.js";
 import { Duration, duration } from 'moment';
 
 const riba = new Riba();
