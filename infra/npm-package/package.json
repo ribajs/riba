@@ -53,6 +53,6 @@
     "@ribajs/shopify-easdk": "workspace:^",
     "@ribajs/shopify-tda": "workspace:^",
     "bootstrap": "*",
-    "leaflet": "^1.8.0"
+    "leaflet": "^1.9.2"
   }
 }

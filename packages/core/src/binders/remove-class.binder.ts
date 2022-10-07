@@ -2,7 +2,7 @@ import { Binder } from "../binder.js";
 
 /**
  * remove-class
- * Removes the given class string the class attibute.
+ * Removes the given class string.
  * Instead of `class-[classname]` the classname is removed by the
  * given attribute and not by the star value,
  * @example

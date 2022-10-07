@@ -10,7 +10,7 @@ npm install --save @ribajs/moment
 
 ## Regist
 
-To regist the module include `import momentModule from '@ribajs/moment';` in your `main.ts` file and regist the module with `riba.module.regist(momentModule.init());`:
+To regist the module include `import momentModule from '@ribajs/moment';` in your `main.ts` file and regist the module with `riba.module.register(momentModule.init());`:
 
 ```ts
 import { Riba, coreModule } from '@ribajs/core';
@@ -18,8 +18,8 @@ import { momentModule } from '@ribajs/moment';
 import { ready } from '@ribajs/utils/src/dom';
 const riba = new Riba();
 const model = {};
-riba.module.regist(coreModule.init());
-riba.module.regist(momentModule.init());
+riba.module.register(coreModule.init());
+riba.module.register(momentModule.init());
 ready(() => {
   riba.bind(document.body, model);
 });

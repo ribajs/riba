@@ -7,9 +7,9 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule.init());
-riba.module.regist(bs4Module.init());
-riba.module.regist(extrasModule.init());
-riba.module.regist(BS4ToggleButtonSidebarModule.init());
+riba.module.register(coreModule.init());
+riba.module.register(bs4Module.init());
+riba.module.register(extrasModule.init());
+riba.module.register(BS4ToggleButtonSidebarModule.init());
 
 riba.bind(document.body, model);

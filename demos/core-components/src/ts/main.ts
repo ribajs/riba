@@ -5,8 +5,8 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule.init());
-riba.module.regist(componentsModule.init());
+riba.module.register(coreModule.init());
+riba.module.register(componentsModule.init());
 
 const bindToElement = document.getElementById("rv-app");
 if (!bindToElement) {

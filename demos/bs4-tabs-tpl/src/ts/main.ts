@@ -6,9 +6,9 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule.init());
-riba.module.regist(bs4Module.init());
-riba.module.regist(Bs4TabsTplModule.init());
+riba.module.register(coreModule.init());
+riba.module.register(bs4Module.init());
+riba.module.register(Bs4TabsTplModule.init());
 
 const bindToElement = document.getElementById("rv-bs4-tabs-tpl");
 if (!bindToElement) {

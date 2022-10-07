@@ -18,6 +18,8 @@ import imagesLoaded from "imagesloaded";
  *    <img loading="lazy" rv-src="productImage" rv-alt="product.title">
  *  </div>
  * ```
+ *
+ * TODO: Not working if src attribute changes?
  */
 export class ImageEventsBinder extends Binder<string, HTMLElement> {
   static key = "image-events";

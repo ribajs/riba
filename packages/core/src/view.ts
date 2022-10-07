@@ -100,24 +100,6 @@ export class View {
   }
 
   /**
-   * Regist all components
-   * This can sometimes be useful so that the browser automatically recognizes whether a component is inserted into the dom.
-   * However, the components are already registered when they are found by riba in the DOM.
-   *
-   * Please note, this method does not support the browser fallback for browsers that cannot use custom elements.
-   */
-  public registComponents() {
-    for (const nodeName in this.options.components) {
-      if (this.options.components[nodeName]) {
-        // Not already registered?
-        if (!customElements.get(nodeName)) {
-          const COMPONENT = this.options.components[nodeName];
-          this.registComponent(COMPONENT, nodeName);
-        }
-      }
-    }
-  }
-  /**
    * Binds all of the current bindings for this view.
    */
   public bind() {
@@ -338,7 +320,7 @@ export class View {
     const COMPONENT = this.options.components[nodeName];
     if (COMPONENT) {
       // this.registComponentWithFallback(node, COMPONENT, nodeName);
-      this.registComponent(COMPONENT, nodeName);
+      this.registerComponent(COMPONENT, nodeName);
       block = true;
     }
     // Also block unknown custom elements except page components
@@ -391,11 +373,30 @@ export class View {
   }
 
   /**
+   * Regist all components
+   * This can sometimes be useful so that the browser automatically recognizes whether a component is inserted into the dom.
+   * However, the components are already registered when they are found by riba in the DOM.
+   *
+   * Please note, this method does not support the browser fallback for browsers that cannot use custom elements.
+   */
+  public registerComponents() {
+    for (const nodeName in this.options.components) {
+      if (this.options.components[nodeName]) {
+        // Not already registered?
+        if (!customElements.get(nodeName)) {
+          const COMPONENT = this.options.components[nodeName];
+          this.registerComponent(COMPONENT, nodeName);
+        }
+      }
+    }
+  }
+
+  /**
    * Register a custom element using the native customElements feature.
    * @param COMPONENT
    * @param nodeName
    */
-  protected registComponent(COMPONENT: ClassOfComponent, nodeName?: string) {
+  public registerComponent(COMPONENT: ClassOfComponent, nodeName?: string) {
     if (!customElements) {
       console.error("customElements not supported by your browser!");
       throw new Error("customElements not supported by your browser!");

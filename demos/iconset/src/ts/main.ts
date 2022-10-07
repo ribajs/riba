@@ -12,8 +12,8 @@ const model = {
 };
 
 // Register modules
-riba.module.regist(coreModule.init());
-riba.module.regist(bs5Module.init({}));
-riba.module.regist(IconsetModule.init());
+riba.module.register(coreModule.init());
+riba.module.register(bs5Module.init({}));
+riba.module.register(IconsetModule.init());
 
 riba.bind(document.body, model);

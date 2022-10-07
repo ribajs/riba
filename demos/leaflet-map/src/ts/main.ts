@@ -6,7 +6,7 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(leafletModule.init());
-riba.module.regist(LeafletDemoModule.init());
+riba.module.register(leafletModule.init());
+riba.module.register(LeafletDemoModule.init());
 
 riba.bind(document.body, model);

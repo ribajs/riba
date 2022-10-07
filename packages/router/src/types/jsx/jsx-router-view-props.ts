@@ -16,4 +16,5 @@ export interface JsxRouterViewProps extends JsxHtmlGlobalProps {
   "parse-title"?: JSXComponentBoolean;
   "change-browser-url"?: JSXComponentBoolean;
   "prefetch-links"?: JSXComponentBoolean;
+  disable?: JSXComponentBoolean;
 }

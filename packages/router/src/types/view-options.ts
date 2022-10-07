@@ -14,4 +14,5 @@ export interface RouterViewOptions {
   changeBrowserUrl: boolean;
   prefetchLinks: boolean;
   transition: Transition;
+  disable?: boolean;
 }

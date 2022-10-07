@@ -6,9 +6,9 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule.init());
-riba.module.regist(accessibilityModule.init());
-riba.module.regist(AccessibilityKeyboardDemoModule.init());
+riba.module.register(coreModule.init());
+riba.module.register(accessibilityModule.init());
+riba.module.register(AccessibilityKeyboardDemoModule.init());
 
 // Bind Riba
 riba.bind(document.body, model);

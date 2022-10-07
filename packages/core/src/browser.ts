@@ -12,7 +12,7 @@ declare global {
 const riba = new Riba();
 
 // regist formatters
-riba.module.regist(coreModule);
+riba.module.register(coreModule);
 
 window.Riba = Riba;
 window.riba = riba;

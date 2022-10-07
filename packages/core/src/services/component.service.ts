@@ -15,10 +15,8 @@ export class ComponentService extends ModuleElementService {
 
   /**
    * Regist a component with his name
-   * @param component
-   * @param name
    */
-  public regist(
+  public register(
     component: typeof Component,
     fallbackName?: string,
     forceFallback = false

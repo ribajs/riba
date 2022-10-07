@@ -22,10 +22,8 @@ export class AdapterService
 
   /**
    * Regist a adapter with his name
-   * @param adapter
-   * @param name
    */
-  public regist(
+  public register(
     adapter: Adapter,
     fallbackName?: string,
     forceFallback = false

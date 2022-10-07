@@ -10,11 +10,11 @@ riba.configure({});
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule.init());
-riba.module.regist(bs5Module.init());
-riba.module.regist(extrasModule.init());
-riba.module.regist(bs5PhotoswipeModule.init());
-riba.module.regist(masonryModule.init());
-riba.module.regist(PhotoswipeDemoModule.init());
+riba.module.register(coreModule.init());
+riba.module.register(bs5Module.init());
+riba.module.register(extrasModule.init());
+riba.module.register(bs5PhotoswipeModule.init());
+riba.module.register(masonryModule.init());
+riba.module.register(PhotoswipeDemoModule.init());
 
 riba.bind(document.body, model);

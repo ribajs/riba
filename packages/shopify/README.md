@@ -45,7 +45,7 @@ Add webpack to `resolutions` in your package.json to be sure to use the latest W
 
 ## Regist Riba
 
-To regist the module create a `src/ts/main.ts` and insert `import shopifyModule from '@ribajs/shopify';`, than you can regist the module with `riba.module.regist(shopifyModule.init());`:
+To regist the module create a `src/ts/main.ts` and insert `import shopifyModule from '@ribajs/shopify';`, than you can regist the module with `riba.module.register(shopifyModule.init());`:
 
 The main.ts could look like this:
 
@@ -55,8 +55,8 @@ import { shopifyModule } from '@ribajs/shopify';
 import { ready } from '@ribajs/utils/src/dom';
 const riba = new Riba();
 const model = {};
-riba.module.regist(coreModule.init());
-riba.module.regist(shopifyModule.init());
+riba.module.register(coreModule.init());
+riba.module.register(shopifyModule.init());
 ready(() => {
   riba.bind(document.body, model);
 });

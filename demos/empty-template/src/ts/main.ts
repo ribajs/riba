@@ -6,9 +6,9 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule.init());
-riba.module.regist(emptyTemplateModule.init());
-riba.module.regist(EmptyTemplateDemoModule.init());
+riba.module.register(coreModule.init());
+riba.module.register(emptyTemplateModule.init());
+riba.module.register(EmptyTemplateDemoModule.init());
 
 // Bind Riba
 riba.bind(document.body, model);

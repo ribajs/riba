@@ -35,22 +35,22 @@ export class ModulesService {
     this.adapter = new AdapterService(adapters);
   }
 
-  public regist(module: RibaModule) {
+  public register(module: RibaModule) {
     if (!module) {
       console.error(module);
       throw new Error("The Riba module is falsy!");
     }
     if (module.binders) {
-      this.binder.regists(module.binders);
+      this.binder.registerAll(module.binders);
     }
     if (module.components) {
-      this.component.regists(module.components);
+      this.component.registerAll(module.components);
     }
     if (module.formatters) {
-      this.formatter.regists(module.formatters);
+      this.formatter.registerAll(module.formatters);
     }
     if (module.adapters) {
-      this.adapter.regists(module.adapters);
+      this.adapter.registerAll(module.adapters);
     }
   }
 }

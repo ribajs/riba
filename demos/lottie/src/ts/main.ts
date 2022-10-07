@@ -6,9 +6,9 @@ const riba = new Riba();
 const model = {};
 
 // Register modules
-riba.module.regist(coreModule.init());
-riba.module.regist(LottieModule.init());
-riba.module.regist(LottieDemoModule.init());
+riba.module.register(coreModule.init());
+riba.module.register(LottieModule.init());
+riba.module.register(LottieDemoModule.init());
 
 // Bind Riba
 riba.bind(document.body, model);

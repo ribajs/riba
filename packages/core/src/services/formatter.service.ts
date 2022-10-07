@@ -14,10 +14,8 @@ export class FormatterService extends ModuleElementService {
 
   /**
    * Regist a formatter with his name
-   * @param formatter
-   * @param name
    */
-  public regist(
+  public register(
     formatter: Formatter,
     fallbackName?: string,
     forceFallback = false

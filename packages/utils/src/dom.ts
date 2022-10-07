@@ -297,7 +297,7 @@ export const scrollToPosition = async (
           top /= 2;
           // if element is window
           if ((scrollElement as Window).document) {
-            top -= (scrollElement as Window).visualViewport.height / 2;
+            top -= ((scrollElement as Window).visualViewport?.height || 0) / 2;
           } else {
             top -= (scrollElement as HTMLElement).clientHeight / 2;
           }
@@ -323,7 +323,7 @@ export const scrollToPosition = async (
           left /= 2;
           // if element is window
           if ((scrollElement as Window).document) {
-            left -= (scrollElement as Window).visualViewport.width / 2;
+            left -= ((scrollElement as Window).visualViewport?.width || 0) / 2;
           } else {
             left -= (scrollElement as HTMLElement).clientWidth / 2;
           }

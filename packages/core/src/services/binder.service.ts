@@ -17,10 +17,8 @@ export class BindersService extends ModuleElementService<ClassOfBinder> {
 
   /**
    * Regist a binder
-   * @param binder
-   * @param name  Overwrites the name to access the binder over
    */
-  public regist(
+  public register(
     Binder: ClassOfBinder,
     fallbackName?: string,
     forceFallback = false
