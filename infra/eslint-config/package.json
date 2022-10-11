@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/eslint-config",
   "description": "Default ESLint configuration for Riba.js projects",
-  "version": "2.0.0-alpha.10",
+  "version": "2.0.0-alpha.11",
   "type": "commonjs",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],

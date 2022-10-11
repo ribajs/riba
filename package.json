@@ -1,7 +1,7 @@
 {
   "name": "ribajs",
   "description": "Declarative data binding + template solution.",
-  "version": "2.0.0-alpha.10",
+  "version": "2.0.0-alpha.11",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -157,5 +157,5 @@
     "glob": "^8.0.3",
     "pug": "^3.0.2"
   },
-  "packageManager": "yarn@4.0.0-rc.22"
+  "packageManager": "yarn@4.0.0-rc.25"
 }
