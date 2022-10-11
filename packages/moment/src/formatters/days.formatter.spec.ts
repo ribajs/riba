@@ -4,9 +4,9 @@ import { Moment, Duration, duration } from 'moment';
 import moment from 'moment';
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regist(DaysFormatter);
-riba.module.binder.regist(TextBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.register(DaysFormatter);
+riba.module.binder.register(TextBinder);
 
 interface Model {
   obj?: {

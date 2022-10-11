@@ -6,8 +6,8 @@ import { Adapters } from "../types/index.js";
 describe("riba.binders", () => {
   let el: HTMLUnknownElement;
   const riba = new Riba();
-  riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(HtmlBinder);
+  riba.module.adapter.register(dotAdapter);
+  riba.module.binder.register(HtmlBinder);
 
   beforeEach(() => {
     riba.configure({

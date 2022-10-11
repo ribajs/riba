@@ -5,8 +5,8 @@ import { dotAdapter } from "../adapters/dot.adapter.js";
 import { RemoveClassBinder } from "./remove-class.binder.js";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(RemoveClassBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.binder.register(RemoveClassBinder);
 
 describe("riba.binders", () => {
   let element: HTMLDivElement;

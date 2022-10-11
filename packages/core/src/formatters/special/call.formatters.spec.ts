@@ -6,9 +6,9 @@ import { callFormatter } from "./call.formatter.js";
 import { TextBinder } from "../../binders/text.binder.js";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regist(callFormatter, "call");
-riba.module.binder.regist(TextBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.register(callFormatter, "call");
+riba.module.binder.register(TextBinder);
 
 interface Model {
   fn?: (arg1: string, arg2: string) => string;

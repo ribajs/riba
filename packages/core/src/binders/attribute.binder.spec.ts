@@ -5,8 +5,8 @@ import { AttributeBinder } from "./attribute.binder.js";
 import { dotAdapter } from "../adapters/dot.adapter.js";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(AttributeBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.binder.register(AttributeBinder);
 
 describe("riba.binders", () => {
   let element: HTMLDivElement;

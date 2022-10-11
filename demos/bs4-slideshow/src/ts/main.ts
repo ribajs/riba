@@ -11,6 +11,6 @@ const model = {};
 riba.module.register(coreModule.init());
 riba.module.register(extrasModule.init());
 riba.module.register(SlideshowDemoModule.init());
-riba.module.component.regists([Bs4SlideshowComponent, Bs4IconComponent]);
+riba.module.component.registerAll([Bs4SlideshowComponent, Bs4IconComponent]);
 
 riba.bind(document.body, model);

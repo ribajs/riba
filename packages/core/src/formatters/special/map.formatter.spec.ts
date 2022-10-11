@@ -2,9 +2,9 @@ import { Riba, TextBinder, dotAdapter } from '@ribajs/core';
 import { mapFormatter } from './map.formatter.js';
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regist(mapFormatter);
-riba.module.binder.regist(TextBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.register(mapFormatter);
+riba.module.binder.register(TextBinder);
 
 interface Model {
   Math: Math;

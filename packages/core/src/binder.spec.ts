@@ -12,14 +12,13 @@ import {
 import { Formatter, Adapter } from "./types/index.js";
 
 describe("riba.Binder", () => {
-
   const riba = new Riba();
-  riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(TextBinder);
-  riba.module.binder.regist(HtmlBinder);
-  riba.module.binder.regist(ValueBinder);
-  riba.module.binder.regist(EachStarBinder);
-  riba.module.binder.regist(AddClassBinder);
+  riba.module.adapter.register(dotAdapter);
+  riba.module.binder.register(TextBinder);
+  riba.module.binder.register(HtmlBinder);
+  riba.module.binder.register(ValueBinder);
+  riba.module.binder.register(EachStarBinder);
+  riba.module.binder.register(AddClassBinder);
 
   let model: object;
   let el: HTMLElement;
@@ -94,13 +93,12 @@ describe("riba.Binder", () => {
       }).not.toThrow();
 
       // Positive test
-      expect(el.getAttribute('a')).toEqual('a');
-      expect(el.getAttribute('b')).toEqual('b');
-      expect(el.getAttribute('c')).toEqual('c');
+      expect(el.getAttribute("a")).toEqual("a");
+      expect(el.getAttribute("b")).toEqual("b");
+      expect(el.getAttribute("c")).toEqual("c");
 
       // Negative test
-      expect(el.getAttribute('d')).toBeNull();
-
+      expect(el.getAttribute("d")).toBeNull();
     });
   });
 
@@ -123,11 +121,11 @@ describe("riba.Binder", () => {
         read: (value, affix) => value + affix,
       } as Formatter;
 
-      riba.module.formatter.regist(awesomeFormatter);
-      riba.module.formatter.regist(totallyFormatter);
-      riba.module.formatter.regist(placeholderFormatter, "and", true);
-      riba.module.formatter.regist(placeholderFormatter, "radical", true);
-      riba.module.formatter.regist(placeholderFormatter, "totally", true);
+      riba.module.formatter.register(awesomeFormatter);
+      riba.module.formatter.register(totallyFormatter);
+      riba.module.formatter.register(placeholderFormatter, "and", true);
+      riba.module.formatter.register(placeholderFormatter, "radical", true);
+      riba.module.formatter.register(placeholderFormatter, "totally", true);
     });
 
     it("register all formatters", () => {
@@ -251,10 +249,7 @@ describe("riba.Binder", () => {
       }
       binding.set("sweater");
 
-      expect(binding.routine).toHaveBeenCalledWith(
-        el,
-        "awesome sweater"
-      );
+      expect(binding.routine).toHaveBeenCalledWith(el, "awesome sweater");
     });
   });
 
@@ -285,7 +280,7 @@ describe("riba.Binder", () => {
         read: (value) => "awesome " + value,
       } as Formatter;
 
-      riba.module.formatter.regist(awesomeFormatter, "awesome");
+      riba.module.formatter.register(awesomeFormatter, "awesome");
 
       routineFn = jest.spyOn(binding, "routine");
 
@@ -542,7 +537,7 @@ describe("riba.Binder", () => {
 
       expect(binding.name).toEqual("value");
       model = binding.model;
- 
+
       // TODO fixme
       // expect(binding.routine).toHaveBeenCalledWith(
       //   valueInput,
@@ -664,14 +659,13 @@ describe("riba.Binder", () => {
 });
 
 describe("Functional", () => {
-
   const riba = new Riba();
-  riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(TextBinder);
-  riba.module.binder.regist(HtmlBinder);
-  riba.module.binder.regist(ValueBinder);
-  riba.module.binder.regist(EachStarBinder);
-  riba.module.binder.regist(AddClassBinder);
+  riba.module.adapter.register(dotAdapter);
+  riba.module.binder.register(TextBinder);
+  riba.module.binder.register(HtmlBinder);
+  riba.module.binder.register(ValueBinder);
+  riba.module.binder.register(EachStarBinder);
+  riba.module.binder.register(AddClassBinder);
 
   let data: Data;
   let bindData: { data: Data };
@@ -700,7 +694,7 @@ describe("Functional", () => {
         obj.set(attributes);
       },
     };
-    riba.module.adapter.regist(adapter);
+    riba.module.adapter.register(adapter);
     riba.configure({ preloadData: true });
 
     data = new Data({
@@ -849,13 +843,13 @@ describe("Functional", () => {
           }
         }
 
-        riba.module.binder.regist(ABinder);
-        riba.module.binder.regist(BBinder);
-        riba.module.binder.regist(CBinder);
-        riba.module.binder.regist(DBinder);
-        riba.module.binder.regist(EBinder);
-        riba.module.binder.regist(FBinder);
-        riba.module.binder.regist(GBinder);
+        riba.module.binder.register(ABinder);
+        riba.module.binder.register(BBinder);
+        riba.module.binder.register(CBinder);
+        riba.module.binder.register(DBinder);
+        riba.module.binder.register(EBinder);
+        riba.module.binder.register(FBinder);
+        riba.module.binder.register(GBinder);
 
         el.setAttribute("data-a", "data:foo");
         el.setAttribute("data-b", "data:foo");
@@ -913,7 +907,7 @@ describe("Functional", () => {
       });
     });
 
-    describe("Iteration", () => { 
+    describe("Iteration", () => {
       let listItem: HTMLLIElement;
       let list: HTMLUListElement;
       beforeEach(() => {

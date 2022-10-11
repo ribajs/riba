@@ -3,9 +3,9 @@ import { MonthsFormatter } from "./months.formatter.js";
 import moment from 'moment';
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regist(MonthsFormatter);
-riba.module.binder.regist(TextBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.register(MonthsFormatter);
+riba.module.binder.register(TextBinder);
 
 interface Model {
   obj?: {

@@ -3,9 +3,9 @@ import { ToDateFormatter } from "./to-date.formatter.js";
 import moment from 'moment';
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regist(ToDateFormatter);
-riba.module.binder.regist(TextBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.register(ToDateFormatter);
+riba.module.binder.register(TextBinder);
 
 interface Model {
   timestamp: number;

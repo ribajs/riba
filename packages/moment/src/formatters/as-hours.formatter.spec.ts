@@ -3,9 +3,9 @@ import { AsHoursFormatter } from "./as-hours.formatter.js";
 import { duration, Duration } from "moment";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regist(AsHoursFormatter);
-riba.module.binder.regist(TextBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.register(AsHoursFormatter);
+riba.module.binder.register(TextBinder);
 
 interface Model {
   duration: Duration,

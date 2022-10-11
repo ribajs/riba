@@ -3,9 +3,9 @@ import { ToISOStringFormatter } from "./to-iso-string.formatter.js";
 import moment from 'moment';
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regist(ToISOStringFormatter);
-riba.module.binder.regist(TextBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.register(ToISOStringFormatter);
+riba.module.binder.register(TextBinder);
 
 interface Model {
   obj?: {

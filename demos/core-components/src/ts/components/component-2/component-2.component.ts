@@ -1,5 +1,6 @@
 import { Component } from "@ribajs/core";
 import { ComponentsExampleScope } from "../components-example/components-example.component.js";
+import template from "./component-2.component.html";
 
 export interface Component2Scope {
   myInputVal: string;
@@ -8,6 +9,8 @@ export interface Component2Scope {
 
 export class Component2Component extends Component {
   public static tagName = "rv-component-2";
+
+  _debug = true;
 
   public scope: Component2Scope = {
     myInputVal: "",
@@ -32,7 +35,7 @@ export class Component2Component extends Component {
   }
 
   protected async template() {
-    const { default: template } = await import("./component-2.component.html");
+    // const { default: template } = await import("./component-2.component.html");
     return template;
   }
 }

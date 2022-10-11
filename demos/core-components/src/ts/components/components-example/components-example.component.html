@@ -2,6 +2,10 @@
 <p>This demo presents how Riba allows to have two way databinding between native custom elements. You can do this with the "rv-co-*" and "rv-parent" binders</p>
 <rv-component-1 rv-co-input-val="defaultInputVal"></rv-component-1>
 <rv-component-2 rv-co-my-input-val="defaultInputVal" rv-parent></rv-component-2>
+<rv-component-3 rv-co-required-attribute="requiredAttributeCo3">
+  <p>Component 3</p>
+  <p>I am initialized late and therefore ignored by the LifecycleService. requiredAttribute: {requiredAttribute}</p>
+</rv-component-3>
 <input type="text" placeholder="Component Example" rv-value="defaultInputVal">
 <input type="text" placeholder="Component Example" rv-value="anotherVal">
 <p rv-text="defaultInputVal"></p>

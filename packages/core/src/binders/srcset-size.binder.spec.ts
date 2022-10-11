@@ -10,8 +10,8 @@ describe("riba.binders", () => {
   let model: any = {};
 
   const riba = new Riba();
-  riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(SrcsetSizeBinder);
+  riba.module.adapter.register(dotAdapter);
+  riba.module.binder.register(SrcsetSizeBinder);
 
   beforeEach(() => {
     fragment = document.createDocumentFragment();

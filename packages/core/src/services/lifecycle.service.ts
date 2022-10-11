@@ -16,6 +16,7 @@ export class LifecycleService {
   protected debug = false;
   protected routerEvents = EventDispatcher.getInstance();
   protected timeout: number | null = null;
+  protected allBound = false;
   protected static instance: LifecycleService;
 
   protected components: {
@@ -46,6 +47,9 @@ export class LifecycleService {
     this.events.on(
       "Component:connected",
       (data: ComponentLifecycleEventData) => {
+        if (data.options.ignore) {
+          return;
+        }
         this.resetTimeout();
 
         this.components[data.tagName] =
@@ -54,15 +58,27 @@ export class LifecycleService {
       }
     );
 
-    this.events.on("Component:disconnected", () => {
-      this.resetTimeout();
-      this.checkStates();
-    });
+    this.events.on(
+      "Component:disconnected",
+      (data: ComponentLifecycleEventData) => {
+        if (data.options.ignore) {
+          return;
+        }
+        this.resetTimeout();
+        this.checkStates();
+      }
+    );
 
-    this.events.on("Component:afterBind", () => {
-      this.resetTimeout();
-      this.checkStates();
-    });
+    this.events.on(
+      "Component:afterBind",
+      (data: ComponentLifecycleEventData) => {
+        if (data.options.ignore) {
+          return;
+        }
+        this.resetTimeout();
+        this.checkStates();
+      }
+    );
 
     this.events.on(
       "Component:error",
@@ -147,9 +163,10 @@ export class LifecycleService {
         break;
       }
     }
-    if (allBound) {
+    if (allBound && !this.allBound) {
       this.onAllBound();
     }
+    this.allBound = allBound;
     return {
       states,
       allBound,
@@ -221,6 +238,7 @@ export class LifecycleService {
 
   protected reset() {
     if (this.debug) console.debug("[ComponentLifecycle] reset!");
+    this.allBound = false;
     this.components = {};
     this.resetTimeout();
   }

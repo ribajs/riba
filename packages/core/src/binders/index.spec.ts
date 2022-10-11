@@ -13,7 +13,7 @@ export class CustomBinder extends Binder<string> {
 
 describe("Custom binder with no attribute value", () => {
   const riba = new Riba();
-  riba.module.binder.regist(CustomBinder);
+  riba.module.binder.register(CustomBinder);
 
   let el: HTMLDivElement;
   let model: any;

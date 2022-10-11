@@ -14,6 +14,7 @@ export * from "./class-of-component.js";
 export * from "./class-of.js";
 export * from "./component-lifecycle-event-data.js";
 export * from "./component-lifecycle-object.js";
+export * from "./component-lifecycle-options.js";
 export * from "./component-lifecycle-state.js";
 export * from "./component-lifecycle-states.js";
 export * from "./components.js";

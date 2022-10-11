@@ -3,9 +3,9 @@ import { ToMomentFormatter } from "./to-moment.formatter.js";
 import moment from 'moment';
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regist(ToMomentFormatter);
-riba.module.binder.regist(TextBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.register(ToMomentFormatter);
+riba.module.binder.register(TextBinder);
 
 interface Model {
   value: moment.MomentInput;

@@ -7,8 +7,8 @@ describe("riba.binders", () => {
   let el: HTMLUnknownElement;
 
   const riba = new Riba();
-  riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(TextBinder);
+  riba.module.adapter.register(dotAdapter);
+  riba.module.binder.register(TextBinder);
 
   beforeEach(() => {
     riba.configure({

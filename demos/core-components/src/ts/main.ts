@@ -1,5 +1,18 @@
-import { Riba, coreModule } from "@ribajs/core";
+import { Riba, coreModule, LifecycleService } from "@ribajs/core";
 import { componentsModule } from "./components.module.js";
+
+const lifecycle = LifecycleService.getInstance();
+lifecycle.events.on("ComponentLifecycle:allBound", () => {
+  console.info("[Riba.js] All components bound 👍");
+});
+
+lifecycle.events.on("ComponentLifecycle:error", (error: Error) => {
+  console.warn("[Riba.js] Error on bound components 🫤", error);
+});
+
+lifecycle.events.on("ComponentLifecycle:noComponents", () => {
+  console.warn("[Riba.js] No component to bound found ❓");
+});
 
 const riba = new Riba();
 const model = {};

@@ -3,6 +3,7 @@ import { Component } from "@ribajs/core";
 export interface ComponentsExampleScope {
   defaultInputVal: string;
   anotherVal: string;
+  requiredAttributeCo3?: any;
 }
 
 export class ComponentsExampleComponent extends Component {
@@ -20,6 +21,10 @@ export class ComponentsExampleComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.init([]);
+
+    setTimeout(() => {
+      this.scope.requiredAttributeCo3 = "Defined after 3000ms";
+    }, 3000);
   }
 
   protected async template() {

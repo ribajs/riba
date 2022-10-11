@@ -4,8 +4,8 @@ import { ShowBinder } from "./show.binder.js";
 import { Adapters } from "../types/index.js";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(ShowBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.binder.register(ShowBinder);
 
 describe("riba.binders", () => {
   let el: HTMLUnknownElement;

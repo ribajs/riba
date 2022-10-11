@@ -4,9 +4,9 @@ import { MomentInput } from 'moment';
 import moment from 'moment';
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regist(DurationFormatter);
-riba.module.binder.regist(TextBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.register(DurationFormatter);
+riba.module.binder.register(TextBinder);
 
 interface Model {
   startAt: MomentInput;

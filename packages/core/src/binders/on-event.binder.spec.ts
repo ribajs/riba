@@ -4,9 +4,9 @@ import { OnEventBinder } from "./on-event.binder.js";
 import { ValueBinder } from "./value.binder.js";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(OnEventBinder);
-riba.module.binder.regist(ValueBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.binder.register(OnEventBinder);
+riba.module.binder.register(ValueBinder);
 
 describe("riba.binders", () => {
   let element: HTMLInputElement;

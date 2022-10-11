@@ -3,9 +3,9 @@ import { AsYearsFormatter } from "./as-years.formatter.js";
 import { duration, Duration } from "moment";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regist(AsYearsFormatter);
-riba.module.binder.regist(TextBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.register(AsYearsFormatter);
+riba.module.binder.register(TextBinder);
 
 interface Model {
   duration: Duration,

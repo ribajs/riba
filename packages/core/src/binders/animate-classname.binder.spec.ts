@@ -3,8 +3,8 @@ import { AnimateStarBinder } from "./animate-classname.binder.js";
 import { dotAdapter } from "../adapters/dot.adapter.js";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(AnimateStarBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.binder.register(AnimateStarBinder);
 
 describe("riba.binders", () => {
   let element: HTMLDivElement;

@@ -5,8 +5,8 @@ import { EachStarBinder } from "./each-item.binder.js";
 
 describe("unless", () => {
   const riba = new Riba();
-  riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(UnlessBinder);
+  riba.module.adapter.register(dotAdapter);
+  riba.module.binder.register(UnlessBinder);
 
   let el: HTMLDivElement;
   let model: any;
@@ -148,7 +148,7 @@ describe("unless", () => {
 
 describe("Array observe and unobserve", () => {
   const riba = new Riba();
-  riba.module.binder.regist(EachStarBinder);
+  riba.module.binder.register(EachStarBinder);
 
   let fragment: DocumentFragment;
   let el1: HTMLDivElement;

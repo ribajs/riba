@@ -4,8 +4,8 @@ import { OnEventBinder } from "./on-event.binder.js";
 
 describe("riba.binders", () => {
   const riba = new Riba();
-  riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regists([OnEventBinder, ValueBinder]);
+  riba.module.adapter.register(dotAdapter);
+  riba.module.binder.registerAll([OnEventBinder, ValueBinder]);
 
   let element: HTMLInputElement;
   let fragment: DocumentFragment;

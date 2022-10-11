@@ -1,7 +1,10 @@
 import { Component } from "@ribajs/core";
+import template from "./component-1.component.html";
 
 export class Component1Component extends Component {
   public static tagName = "rv-component-1";
+
+  _debug = true;
 
   public scope = {
     inputVal: "",
@@ -21,7 +24,7 @@ export class Component1Component extends Component {
   }
 
   protected async template() {
-    const { default: template } = await import("./component-1.component.html");
+    // const { default: template } = await import("./component-1.component.html");
     return template;
   }
 }

@@ -8,9 +8,9 @@ import { dotAdapter } from "../adapters/dot.adapter.js";
 
 describe("each-*", () => {
   const riba = new Riba();
-  riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(EachStarBinder);
-  riba.module.binder.regist(TextBinder);
+  riba.module.adapter.register(dotAdapter);
+  riba.module.binder.register(EachStarBinder);
+  riba.module.binder.register(TextBinder);
 
   let fragment: DocumentFragment;
   let el: HTMLLIElement;
@@ -142,7 +142,7 @@ describe("each-*", () => {
 
 describe("nested-each-*", () => {
   const riba = new Riba();
-  riba.module.binder.regist(EachStarBinder);
+  riba.module.binder.register(EachStarBinder);
 
   let fragment: DocumentFragment;
   let el: HTMLSpanElement;

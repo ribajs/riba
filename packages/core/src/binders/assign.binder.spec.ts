@@ -5,8 +5,8 @@ import { AssignBinder } from "./assign.binder.js";
 import { dotAdapter } from "../adapters/dot.adapter.js";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(AssignBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.binder.register(AssignBinder);
 
 describe("riba.binders", () => {
   let element: HTMLDivElement;

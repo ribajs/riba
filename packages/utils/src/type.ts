@@ -139,7 +139,8 @@ export const isJson = (str?: string | null) => {
 
 /**
  * Parser and tokenizer for getting the type and value from a string.
- * @param string
+ * @param input
+ * @param isAttribute
  */
 export const parseType = (input?: string | null, isAttribute = false) => {
   let type = PRIMITIVE;
@@ -391,8 +392,8 @@ export const capitalize = (str: string) => {
 
 /**
  * Merge the contents of two or more objects together into the first object.
- * @param deep If true, the merge becomes recursive (aka. deep copy).
- * @param target An object that will receive the new properties
+ * @param options
+ * @param extended An object that will receive the new properties
  * @param objects The objects containing additional properties to merge in.
  * @see http://www.damirscorner.com/blog/posts/20180216-VariableNumberOfArgumentsInTypescript.html
  * @see https://gomakethings.com/merging-objects-with-vanilla-javascript/

@@ -3,8 +3,8 @@ import { BlockBinder } from "./block.binder.js";
 import { dotAdapter } from "../adapters/dot.adapter.js";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(BlockBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.binder.register(BlockBinder);
 
 describe("riba.binders", () => {
   let element: HTMLDivElement;

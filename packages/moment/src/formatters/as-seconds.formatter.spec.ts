@@ -3,9 +3,9 @@ import { AsSecondsFormatter } from "./as-seconds.formatter.js";
 import { duration, Duration } from "moment";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regist(AsSecondsFormatter);
-riba.module.binder.regist(TextBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.register(AsSecondsFormatter);
+riba.module.binder.register(TextBinder);
 
 interface Model {
   duration: Duration,

@@ -6,9 +6,9 @@ import { plusFormatter } from "./plus.formatter.js";
 import { TextBinder } from "../../binders/text.binder.js";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regist(plusFormatter);
-riba.module.binder.regist(TextBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.register(plusFormatter);
+riba.module.binder.register(TextBinder);
 
 interface Model {
   obj?: {

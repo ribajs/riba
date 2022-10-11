@@ -7,9 +7,9 @@ import { TextBinder } from "../../binders/text.binder.js";
 import { AssignPropertyBinder } from "../../binders/assign-property.binder.js";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regists([parseFormatter]);
-riba.module.binder.regists([TextBinder, AssignPropertyBinder]);
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.registerAll([parseFormatter]);
+riba.module.binder.registerAll([TextBinder, AssignPropertyBinder]);
 
 interface Model {
   numStr: string;

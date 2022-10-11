@@ -7,8 +7,8 @@ import { Adapters } from "../types/index.js";
 describe("riba.binders", () => {
   describe("value", () => {
     const riba = new Riba();
-    riba.module.adapter.regist(dotAdapter);
-    riba.module.binder.regist(ValueBinder);
+    riba.module.adapter.register(dotAdapter);
+    riba.module.binder.register(ValueBinder);
 
     let fragment: DocumentFragment;
     let el: HTMLInputElement;
@@ -119,9 +119,9 @@ describe("riba.binders", () => {
     };
 
     beforeEach(() => {
-      riba.module.binder.regist(ValueBinder);
+      riba.module.binder.register(ValueBinder);
       riba.configure({
-        adapters: ({
+        adapters: {
           subscribe: () => {
             /**/
           },
@@ -134,7 +134,7 @@ describe("riba.binders", () => {
           publish: () => {
             /**/
           },
-        } as unknown) as Adapters,
+        } as unknown as Adapters,
       });
 
       input = createInputElement("text");
@@ -235,10 +235,7 @@ describe("riba.binders", () => {
         expect(view.bindings).toBeArrayOfSize(1);
         expect(valueBinder).toBeDefined();
         expect(valueBinder.name).toEqual("value");
-        valueBinder.routine(groupedMultipleSelectEl, [
-          "a",
-          "c",
-        ]);
+        valueBinder.routine(groupedMultipleSelectEl, ["a", "c"]);
         const result = Array.prototype.slice
           .call(groupedMultipleSelectEl.options)
           .filter((option: any) => {

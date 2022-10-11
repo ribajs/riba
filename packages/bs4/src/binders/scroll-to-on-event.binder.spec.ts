@@ -9,8 +9,8 @@ describe('riba.binders', () => {
   const model: any = {};
 
   const riba = new Riba();
-  riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(ScrollToOnEventBinder);
+  riba.module.adapter.register(dotAdapter);
+  riba.module.binder.register(ScrollToOnEventBinder);
 
   beforeEach(() => {
 

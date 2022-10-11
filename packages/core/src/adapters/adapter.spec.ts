@@ -14,9 +14,9 @@ describe("Functional", () => {
   let adapter: Adapter;
 
   const riba = new Riba();
-  riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(TextBinder);
-  riba.module.binder.regist(ValueBinder);
+  riba.module.adapter.register(dotAdapter);
+  riba.module.binder.register(TextBinder);
+  riba.module.binder.register(ValueBinder);
 
   beforeEach(() => {
     originalPrefix = riba.prefix;

@@ -4,8 +4,8 @@ import { dotAdapter } from "../adapters/dot.adapter.js";
 import { Adapters } from "../types/index.js";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.binder.regist(HideBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.binder.register(HideBinder);
 
 describe("riba.binders", () => {
   let el: HTMLUnknownElement;

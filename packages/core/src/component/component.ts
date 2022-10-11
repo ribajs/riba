@@ -9,7 +9,10 @@ import { Binder } from "../binder.js";
 import { BasicComponent } from "./basic-component.js";
 import { Formatter } from "../types/index.js";
 import { EventDispatcher } from "@ribajs/events";
-import type { ComponentLifecycleEventData } from "../types/index.js";
+import type {
+  ComponentLifecycleEventData,
+  ComponentLifecycleOptions,
+} from "../types/index.js";
 
 export abstract class Component extends BasicComponent {
   protected view?: View | null = null;
@@ -23,6 +26,8 @@ export abstract class Component extends BasicComponent {
   /** true when component is disconnected from the dom */
   protected _disconnected = false;
   protected lifecycleEvents = EventDispatcher.getInstance("lifecycle");
+
+  protected lifecycleOptions: ComponentLifecycleOptions = {};
 
   /** true when binding is in progress */
   public get binds() {
@@ -69,7 +74,7 @@ export abstract class Component extends BasicComponent {
         "Component:init",
         this.getLifecycleEventData()
       );
-      return this.bindIfReady();
+      return await this.bindIfReady();
     } catch (error) {
       this.throw(error as Error);
     }
@@ -163,6 +168,7 @@ export abstract class Component extends BasicComponent {
       // scope: this.scope,
       component: this,
       // id: this.id,
+      options: this.lifecycleOptions,
     };
     return data;
   }
@@ -204,6 +210,11 @@ export abstract class Component extends BasicComponent {
       );
       this.lifecycleEvents.off(
         "ComponentLifecycle:allBound",
+        this.afterAllBind,
+        this
+      );
+      this.lifecycleEvents.off(
+        "ComponentLifecycle:error",
         this.afterAllBind,
         this
       );

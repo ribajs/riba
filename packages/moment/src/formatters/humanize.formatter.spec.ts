@@ -3,9 +3,9 @@ import { HumanizeFormatter } from "./humanize.formatter.js";
 import { Duration, duration } from 'moment';
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regist(HumanizeFormatter);
-riba.module.binder.regist(TextBinder);
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.register(HumanizeFormatter);
+riba.module.binder.register(TextBinder);
 
 interface Model {
   obj?: {

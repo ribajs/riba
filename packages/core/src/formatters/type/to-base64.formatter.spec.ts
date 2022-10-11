@@ -9,13 +9,13 @@ import { jsonFormatter } from "./json.formatter.js";
 import { TextBinder } from "../../binders/text.binder.js";
 
 const riba = new Riba();
-riba.module.adapter.regist(dotAdapter);
-riba.module.formatter.regists([
+riba.module.adapter.register(dotAdapter);
+riba.module.formatter.registerAll([
   toBase64Formatter,
   parseFormatter,
   jsonFormatter,
 ]);
-riba.module.binder.regist(TextBinder);
+riba.module.binder.register(TextBinder);
 
 interface Model {
   obj?: {

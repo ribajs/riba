@@ -5,8 +5,8 @@ describe("riba.binders", () => {
   let el: HTMLImageElement;
 
   const riba = new Riba();
-  riba.module.adapter.regist(dotAdapter);
-  riba.module.binder.regist(ShopifyImgBinder);
+  riba.module.adapter.register(dotAdapter);
+  riba.module.binder.register(ShopifyImgBinder);
 
   beforeEach(() => {
     el = document.createElement("img");
