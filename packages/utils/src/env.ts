@@ -1,11 +1,13 @@
-// Credits https://github.com/flexdinesh/browser-or-node
+// Credits
+// * https://github.com/flexdinesh/browser-or-node
+// * https://stackoverflow.com/a/33697246/1465919
 
 // For real types see https://github.com/denoland/deno/blob/main/core/lib.deno_core.d.ts
 declare const Deno: any;
 declare const process: any;
-
-const isBrowser =
-  typeof window !== "undefined" && typeof window.document !== "undefined";
+declare const WorkerGlobalScope: any;
+declare const importScripts: any;
+declare const WorkerNavigator: any;
 
 const isNode =
   typeof process !== "undefined" &&
@@ -13,9 +15,13 @@ const isNode =
   process.versions.node != null;
 
 const isWebWorker =
-  typeof self === "object" &&
-  self.constructor &&
-  self.constructor.name === "DedicatedWorkerGlobalScope";
+  !isNode &&
+  "undefined" !== typeof WorkerGlobalScope &&
+  "function" === typeof importScripts &&
+  navigator instanceof WorkerNavigator;
+typeof self === "object" &&
+  (self as any).constructor &&
+  (self as any).constructor.name === "DedicatedWorkerGlobalScope";
 
 /**
  * @see https://github.com/jsdom/jsdom/releases/tag/12.0.0
@@ -26,6 +32,13 @@ const isJsDom =
   (typeof navigator !== "undefined" &&
     (navigator.userAgent.includes("Node.js") ||
       navigator.userAgent.includes("jsdom")));
+
+const isBrowser =
+  !isJsDom &&
+  !isNode &&
+  !isWebWorker &&
+  typeof window !== "undefined" &&
+  typeof window.document !== "undefined";
 
 const isDeno = typeof Deno !== "undefined" && typeof Deno.core !== "undefined";
 

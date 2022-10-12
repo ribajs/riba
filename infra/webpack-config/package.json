@@ -25,7 +25,7 @@
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/npm-package": "workspace:^",
     "@ribajs/postcss-config": "workspace:^",
-    "@yarnpkg/pnpify": "^4.0.0-rc.22",
+    "@yarnpkg/pnpify": "^4.0.0-rc.25",
     "babel-loader": "^8.2.5",
     "copy-webpack-plugin": "^9.1.0",
     "css-loader": "^6.7.1",

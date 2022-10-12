@@ -191,11 +191,6 @@ export class LifecycleService {
   protected onTimeout() {
     this.clearTimeout();
     const states = this.getStates();
-    if (Object.keys(states).length <= 0) {
-      console.warn("No component found");
-      this.events.trigger("ComponentLifecycle:noComponents");
-      return;
-    }
 
     let errorMessage =
       "[ComponentLifecycle] Timeout! {count} component(s) takes too long!\nUnfinished components:\n";
@@ -210,6 +205,12 @@ export class LifecycleService {
           2
         )} + \n`;
       }
+    }
+
+    if (count <= 0) {
+      console.warn("No component found");
+      this.events.trigger("ComponentLifecycle:noComponents");
+      return;
     }
 
     errorMessage = errorMessage.replace("{count}", count.toString());

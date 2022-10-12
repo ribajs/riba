@@ -11,7 +11,7 @@ $modal-body-bg-level:               $alert-bg-level !default; // default is -10
 $modal-body-color-level:            $alert-color-level !default; // default is 6
 
 $modal-header-bg-level:             $alert-bg-level + 2 !default;
-$modal-header-color-level:          $alert-color-level +2 !default;
+$modal-header-color-level:          $alert-color-level + 2 !default;
 
 .modal {
   @each $color, $value in $theme-colors {
