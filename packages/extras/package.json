@@ -50,7 +50,6 @@
     "@babel/runtime-corejs3": "^7.19.4",
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/imagesloaded": "^4.1.2",
     "@types/jest": "^28.1.8",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
@@ -72,7 +71,8 @@
     "@ribajs/core": "workspace:^",
     "@ribajs/events": "workspace:^",
     "@ribajs/utils": "workspace:^",
-    "imagesloaded": "^5.0.0"
+    "ev-emitter": "^2.1.2",
+    "imagesloaded": "github:JumpLink/imagesloaded"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
