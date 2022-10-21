@@ -1,4 +1,4 @@
-import { Component, TemplateFunction, HttpService } from "@ribajs/core";
+import { Component, TemplateFunction /*, HttpService*/ } from "@ribajs/core";
 import { JsxElement } from "@ribajs/jsx";
 
 import {
