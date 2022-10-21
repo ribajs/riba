@@ -16263,10 +16263,10 @@ __metadata:
 
 "imagesloaded@github:JumpLink/imagesloaded":
   version: 5.0.0
-  resolution: "imagesloaded@https://github.com/JumpLink/imagesloaded.git#commit=e79747d55799506f742535a4c633126396123d70"
+  resolution: "imagesloaded@https://github.com/JumpLink/imagesloaded.git#commit=af6386897e1bf2d030d48387e90f5d373cb9b263"
   dependencies:
     ev-emitter: "npm:^2.1.2"
-  checksum: 576282299179504a3378ae9fcd45ed233188275717c8842b9844051cf2a188b1504a2264759e0b7a7712b0f0861eebaf74a78f3a71e4089ad07c3ff2ebd33774
+  checksum: 4d09484183a1eb8a8da31aa775a4b100c2481c45aa90160683530605870ee6b7468f58064fb6718e8e1cfc6b23f14ef369d63a7d4075d75e449e2cdda322f367
   languageName: node
   linkType: hard
 
