@@ -17,6 +17,30 @@ const isLottie = (json: Record<string, any>) => {
   );
 };
 
+async function fromURL(url: string): Promise<Record<string, any>> {
+  if (typeof url !== "string") {
+    throw new Error(`The url value must be a string`);
+  }
+
+  let json;
+
+  try {
+    // Try construct an absolute URL from the src URL
+    const srcUrl: URL = new URL(url);
+
+    // Fetch the JSON file from the URL
+    const result: any = await fetch(srcUrl.toString());
+
+    json = await result.json();
+  } catch (err) {
+    throw new Error(
+      `An error occurred while trying to load the Lottie file from URL`
+    );
+  }
+
+  return json;
+}
+
 /**
  * LottiePlayer web component class ported to Riba.js
  * @see https://github.com/LottieFiles/lottie-player/blob/master/src/lottie-player.ts
@@ -155,9 +179,10 @@ export class LottiePlayerComponent extends Component {
     try {
       // Fetch resource if src is a remote URL
       if (srcAttrib === "path") {
-        jsonData = (
-          await HttpService.getJSON<Record<string, any>>(src as string)
-        ).body;
+        // jsonData = (
+        //   await HttpService.getJSON<Record<string, any>>(src as string)
+        // ).body;
+        jsonData = await fromURL(src as string);
         srcAttrib = "animationData";
       } else {
         jsonData = src;
