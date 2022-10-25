@@ -9,6 +9,8 @@ import {
   JsxLottiePlayerProps,
 } from "../../types/index.js";
 
+import type Lottie from "lottie-web/build/player/lottie.js";
+
 const isLottie = (json: Record<string, any>) => {
   const mandatory: string[] = ["v", "ip", "op", "layers", "fr", "w", "h"];
 
@@ -53,6 +55,7 @@ export class LottiePlayerComponent extends Component {
 
   public scope: LottiePlayerComponentScope = {
     autoplay: false,
+    light: false,
     background: "transparent",
     controls: false,
     count: 0,
@@ -81,6 +84,7 @@ export class LottiePlayerComponent extends Component {
   static get observedAttributes(): (keyof JsxLottiePlayerProps)[] {
     return [
       "autoplay",
+      "light",
       "background",
       "controls",
       "count",
@@ -163,9 +167,13 @@ export class LottiePlayerComponent extends Component {
     //   lottie.useWebWorker(true);
     // }
 
-    const { default: lottie } = await import(
-      "lottie-web/build/player/lottie.js"
-    );
+    let lottie: typeof Lottie;
+
+    if (this.scope.light) {
+      lottie = await this.importLottieLight();
+    } else {
+      lottie = await this.importLottie();
+    }
 
     // Initialize lottie player and load animation
     this._lottie = lottie.loadAnimation({
@@ -200,6 +208,20 @@ export class LottiePlayerComponent extends Component {
       this.dispatchEvent(new CustomEvent(PlayerEvents.Error));
       return;
     }
+  }
+
+  protected async importLottie() {
+    const { default: lottie } = await import(
+      "lottie-web/build/player/lottie.js"
+    );
+    return lottie;
+  }
+
+  protected async importLottieLight() {
+    const { default: lottieLite } = await import(
+      "lottie-web/build/player/lottie_light.js"
+    );
+    return lottieLite;
   }
 
   /**

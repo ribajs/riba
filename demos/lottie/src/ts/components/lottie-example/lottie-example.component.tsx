@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core";
+import { Component, TemplateFunction, HttpService } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils";
 import { PlayMode } from "@ribajs/lottie";
 
@@ -10,15 +10,30 @@ export class LottieExampleComponent extends Component {
     return [];
   }
 
-  public scope = {};
+  public scope = {
+    animationData1: {} as any,
+  };
 
   constructor() {
     super();
   }
 
-  protected connectedCallback() {
+  protected async connectedCallback() {
     super.connectedCallback();
     super.init(LottieExampleComponent.observedAttributes);
+  }
+
+  protected async beforeBind() {
+    super.beforeBind();
+    this.scope.animationData1 = await this.loadAnimationData();
+  }
+
+  protected async loadAnimationData() {
+    // https://lottiefiles.com/120771-infinite-thing?lang=de
+    const res = await HttpService.getJSON(
+      "https://assets9.lottiefiles.com/packages/lf20_kAsZEvAyfc.json"
+    );
+    return res.body;
   }
 
   protected template(): ReturnType<TemplateFunction> {
@@ -38,6 +53,29 @@ export class LottieExampleComponent extends Component {
           <h3>Play from remote URL with controls displayed</h3>
           <lottie-player
             src="https://assets4.lottiefiles.com/datafiles/zc3XRzudyWE36ZBJr7PIkkqq0PFIrIBgp4ojqShI/newAnimation.json"
+            style="width: 400px;"
+            autoplay={true}
+            loop={true}
+            controls={true}
+          ></lottie-player>
+
+          <hr style="border: 3px #999 solid; margin: 20px 0;" />
+
+          <h3>Use light version of the lottie web player</h3>
+          <lottie-player
+            src="https://assets4.lottiefiles.com/datafiles/zc3XRzudyWE36ZBJr7PIkkqq0PFIrIBgp4ojqShI/newAnimation.json"
+            light={true}
+            style="width: 400px;"
+            autoplay={true}
+            loop={true}
+            controls={true}
+          ></lottie-player>
+
+          <hr style="border: 3px #999 solid; margin: 20px 0;" />
+
+          <h3>Play from JSON Object</h3>
+          <lottie-player
+            rv-co-src="animationData1"
             style="width: 400px;"
             autoplay={true}
             loop={true}

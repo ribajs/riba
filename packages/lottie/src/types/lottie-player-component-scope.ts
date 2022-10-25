@@ -8,6 +8,11 @@ export interface LottiePlayerComponentScope {
   autoplay: boolean;
 
   /**
+   * If true the light version of the lottie web player will be used
+   */
+  light: boolean;
+
+  /**
    * Background color.
    */
   background?: string;
@@ -78,7 +83,7 @@ export interface LottiePlayerComponentScope {
   speed: number;
 
   /**
-   * Bodymovin JSON data or URL to JSON.
+   * JSON data or URL to JSON.
    */
   src?: any | string; // TODO
 

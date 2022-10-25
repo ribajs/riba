@@ -8,6 +8,11 @@ export interface JsxLottiePlayerProps extends JsxHtmlGlobalProps {
   autoplay?: boolean;
 
   /**
+   * If true the light version of the lottie web player will be used
+   */
+  light?: boolean;
+
+  /**
    * Background color.
    */
   background?: string;
