@@ -1,6 +1,6 @@
 import type { EventDispatcher } from "../services/event-dispatcher.service.js";
-export declare type EventCallback = (...args: any[]) => any;
-export declare type BoundEventCallback = {
+export type EventCallback = (...args: any[]) => any;
+export type BoundEventCallback = {
     cb: EventCallback;
     orgCb: EventCallback;
     thisContext: any;
