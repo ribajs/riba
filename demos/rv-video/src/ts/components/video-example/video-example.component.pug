@@ -1,11 +1,21 @@
 section.row.text-center.text-white.my-5
   .col-12
+    h2 Responsive Videos
+    p Using rv-bs5-attr-[breakpoint]-[attribute-name] binder
+
+    video.w-100(loop autoplay mute controls rv-bs5-attr-xs-src="'/videos/mobile.mp4'" rv-bs5-attr-xl-src="'/videos/desktop.mp4'")
+    video.w-100(loop autoplay mute controls preload="metadata")
+      source(rv-bs5-attr-xs-src="'/videos/mobile.mp4'" rv-bs5-attr-xl-src="'/videos/desktop.mp4'" type="video/mp4")
+
+
+section.row.text-center.text-white.my-5
+  .col-12
     h1 rv-video Demo
 
 section.row.text-center.text-white.my-5
   .col-12
     h2 Responsive Videos
-    p Resize the viewport to swich the video source
+    p Resize the viewport to switch the video source
 
     rv-video(rv-video-src="videos | get 0" autoplay-on-min-buffer="0.3" autoplay-media-query="(min-width: 1200px)")
       .video-wrapper(rv-class-loading="loading")
