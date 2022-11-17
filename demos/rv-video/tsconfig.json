@@ -1,7 +1,7 @@
 {
   "extends": "@ribajs/tsconfig",
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "public",
     "types": ["jest"]
   },
   "exclude": [

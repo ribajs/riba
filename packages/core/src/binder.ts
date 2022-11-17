@@ -80,7 +80,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
   public keypath?: string;
 
   /**
-   * Arguments parsed from star binders, e.g. on foo-*-* args[0] is the first star, args[1] the second-
+   * Arguments parsed from star binders, e.g. on `foo-*-*` `args[0]` is the first star and `args[1]` the second
    */
   public args: Array<string | number>;
 
@@ -98,13 +98,13 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
    * All information about the binding is passed into the constructor; the
    * containing view, the DOM node, the type of binding, the model object and the
    * keypath at which to listen for changes.
-   * @param {*} view
-   * @param {*} el
-   * @param {*} type
-   * @param {*} keypath
-   * @param {*} binder
-   * @param {*} args The start binders, on `class-*` args[0] wil be the classname.
-   * @param {*} formatters
+   * @param view
+   * @param el
+   * @param type
+   * @param name
+   * @param keypath
+   * @param formatters
+   * @param identifier
    */
   constructor(
     view: View,

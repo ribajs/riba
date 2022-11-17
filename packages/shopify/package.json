@@ -38,7 +38,7 @@
   "scripts": {
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
     "build": "npm run lint && tsc",
-    "test": "npm run type-check && jest --config=jest.config.cjs",
+    "test": "npm run lint && jest --config=jest.config.cjs",
     "clean": "rm -rf ./dist ./lib"
   },
   "files": [
@@ -48,31 +48,31 @@
   ],
   "devDependencies": {
     "@babel/cli": "^7.19.3",
-    "@babel/core": "^7.19.6",
+    "@babel/core": "^7.20.2",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-object-rest-spread": "^7.19.4",
-    "@babel/preset-env": "^7.19.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
-    "@babel/runtime": "^7.19.4",
-    "@babel/runtime-corejs3": "^7.19.6",
+    "@babel/runtime": "^7.20.1",
+    "@babel/runtime-corejs3": "^7.20.1",
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/npm-package": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
     "@tsconfig/node14": "^1.0.3",
     "@types/debug": "^4.1.7",
     "@types/jest": "^28.1.8",
-    "@types/lodash": "^4.14.186",
-    "@types/node": "^18.11.5",
+    "@types/lodash": "^4.14.189",
+    "@types/node": "^18.11.9",
     "@types/open": "^6.2.1",
     "@types/prettier": "^2.7.1",
-    "@typescript-eslint/eslint-plugin": "^5.41.0",
-    "@typescript-eslint/parser": "^5.41.0",
-    "babel-loader": "^8.2.5",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
+    "babel-loader": "^8.3.0",
     "babel-plugin-array-includes": "^2.0.3",
-    "core-js": "^3.26.0",
+    "core-js": "^3.26.1",
     "debug": "^4.3.4",
-    "eslint": "^8.26.0",
+    "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "graceful-fs": "^4.2.10",
@@ -81,7 +81,7 @@
     "prettier": "^2.7.1",
     "terser": "^5.15.1",
     "ts-jest": "^28.0.8",
-    "typescript": "4.8.4"
+    "typescript": "4.9.3"
   },
   "optionalDependencies": {
     "@ribajs/shopify-tda": "workspace:^"
@@ -93,11 +93,11 @@
     "@ribajs/i18n": "workspace:^",
     "@ribajs/router": "workspace:^",
     "@ribajs/utils": "workspace:^",
-    "bitbucket": "^2.8.0",
+    "bitbucket": "^2.9.0",
     "form-data": "^4.0.0",
     "got": "^11.8.5",
     "gulp-print": "^5.0.2",
-    "webpack": "^5.74.0",
+    "webpack": "^5.75.0",
     "webpack-cli": "^4.10.0"
   }
 }
