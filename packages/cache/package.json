@@ -52,17 +52,17 @@
   "homepage": "https://github.com/ribajs/riba#readme",
   "directories": {},
   "devDependencies": {
-    "@babel/runtime": "^7.20.1",
-    "@babel/runtime-corejs3": "^7.20.1",
+    "@babel/runtime": "^7.20.6",
+    "@babel/runtime-corejs3": "^7.20.6",
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
     "@types/jest": "^28.1.8",
-    "@typescript-eslint/eslint-plugin": "^5.43.0",
-    "@typescript-eslint/parser": "^5.43.0",
-    "eslint": "^8.27.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.7.1",
+    "prettier": "^2.8.0",
     "typescript": "4.9.3"
   },
   "dependencies": {

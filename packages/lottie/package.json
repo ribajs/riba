@@ -17,19 +17,19 @@
     "@ribajs/core": "workspace:^",
     "@ribajs/jsx": "workspace:^",
     "@ribajs/utils": "workspace:^",
-    "lottie-web": "^5.9.6"
+    "lottie-web": "^5.10.0"
   },
   "main": "./src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.20.1",
-    "@babel/runtime-corejs3": "^7.20.1",
+    "@babel/runtime": "^7.20.6",
+    "@babel/runtime-corejs3": "^7.20.6",
     "@ribajs/tsconfig": "workspace:^",
     "@types/eslint": "^8.4.10",
-    "@types/node": "^18.11.9",
-    "eslint": "^8.27.0",
-    "sass": "^1.55.0",
+    "@types/node": "^18.11.10",
+    "eslint": "^8.28.0",
+    "sass": "^1.56.1",
     "typescript": "4.9.3"
   }
 }
