@@ -7,7 +7,7 @@ export class HtmlBinder extends Binder<number | string | boolean, HTMLElement> {
   static key = "html";
   routine(el: HTMLElement, value: number | string | boolean) {
     if (typeof value !== "string") {
-      if (!value) {
+      if (value === undefined || value === null) {
         value = "";
       } else if (typeof value?.toString === "function") {
         value = value.toString();
