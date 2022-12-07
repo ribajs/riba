@@ -7,12 +7,15 @@ module.exports = {
   testPathIgnorePatterns: ["/node_modules/", "/packages/*/dist/"],
   coverageReporters: ["json", "lcov"],
   setupFilesAfterEnv: [require.resolve("jest-extended/all")],
-  globals: {
-    "ts-jest": {
-      babelConfig: require("./babel.config.cjs"),
-      tsconfig: "./tsconfig.spec.json",
-      isolatedModules: true,
-    },
+  transform: {
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        babelConfig: require("./babel.config.cjs"),
+        tsconfig: "./tsconfig.spec.json",
+        isolatedModules: true,
+      },
+    ],
   },
   preset: "ts-jest",
   testMatch: null,

@@ -4,20 +4,20 @@ module.exports = {
   moduleFileExtensions: ["js", "json", "ts", "tsx"],
   resetModules: true,
   transform: {
-    "^.+\\.tsx?$": require.resolve("ts-jest"),
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        babelConfig: require("./babel.config.cjs"),
+        tsconfig: "./tsconfig.spec.json",
+        isolatedModules: true,
+      },
+    ],
   },
   testRegex: "/src/.*\\.(test|spec).(ts|tsx)$",
   transformIgnorePatterns: ["node_modules/(?!(@ribajs)/)", "\\.pnp\\.[^\\/]+$"],
   testPathIgnorePatterns: ["/node_modules/"],
   coverageReporters: ["json", "lcov"],
   setupFilesAfterEnv: [require.resolve("jest-extended/all")],
-  globals: {
-    "ts-jest": {
-      babelConfig: "./babel.config.cjs",
-      tsconfig: "./tsconfig.spec.json",
-      isolatedModules: true,
-    },
-  },
   preset: "ts-jest",
   testMatch: null,
   /**

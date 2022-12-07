@@ -58,7 +58,7 @@
     "@babel/runtime-corejs3": "^7.20.6",
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/jest": "^28.1.8",
+    "@types/jest": "^29.2.4",
     "@typescript-eslint/eslint-plugin": "^5.45.1",
     "@typescript-eslint/experimental-utils": "^5.45.1",
     "@typescript-eslint/parser": "^5.45.1",
