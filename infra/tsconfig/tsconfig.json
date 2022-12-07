@@ -19,6 +19,7 @@
     "lib": ["ESNext", "DOM"],
     "jsx": "react",
     "jsxFactory": "jsxCreateElement",
-    "jsxFragmentFactory": "jsxFragment"
+    "jsxFragmentFactory": "jsxFragment",
+    "skipLibCheck": true,
   }
 }
