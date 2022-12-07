@@ -1,7 +1,8 @@
 import { BasicComponent, TemplateFunction } from "@ribajs/core";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface Scope {}
+interface Scope {
+  jsStr?: string;
+}
 
 /**
  * Use this component to be able to write inline scripts which also works with client side routing.
@@ -35,12 +36,14 @@ export class InlineScriptComponent extends BasicComponent {
   protected connectedCallback() {
     super.connectedCallback();
     this.init(InlineScriptComponent.observedAttributes);
-    const jsStr = this.innerHTML; // Do not use innerText here to keep the breakpoints
+    if (!this.scope.jsStr) {
+      this.scope.jsStr = this.innerHTML; // Do not use innerText here to keep the breakpoints
+    }
     try {
-      eval(jsStr);
+      eval(this.scope.jsStr);
     } catch (error) {
       console.error(
-        `[rv-inline-script] Error on evaluate inline script!\n"${jsStr}"\n`,
+        `[rv-inline-script] Error on evaluate inline script!\n"${this.scope.jsStr}"\n`,
         error
       );
     }
