@@ -25,9 +25,9 @@
     "url": "git+https://github.com/ribajs/riba.git"
   },
   "scripts": {
-    "test": "npm run lint && jest --config=jest.config.cjs",
+    "test": "yarn run lint && jest --config=jest.config.cjs",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
-    "build": "npm run lint && npm run build:module && npm run build:build-system",
+    "build": "yarn run lint && yarn run build:module && yarn run build:build-system",
     "build:build-system": "tsc --project tsconfig.build-system.json",
     "build:module": "tsc",
     "packages:npm:link": "npm link @ribajs/core",
@@ -61,7 +61,7 @@
     "@types/node": "^18.11.11",
     "@typescript-eslint/eslint-plugin": "^5.45.1",
     "@typescript-eslint/parser": "^5.45.1",
-    "babel-loader": "^8.3.0",
+    "babel-loader": "^9.1.0",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.26.1",
     "eslint": "^8.29.0",

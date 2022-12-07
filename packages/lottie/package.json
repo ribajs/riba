@@ -8,7 +8,7 @@
   },
   "scripts": {
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
-    "build": "npm run lint && npm run build:module && npm run build:sass",
+    "build": "yarn run lint && yarn run build:module && yarn run build:sass",
     "build:module": "tsc",
     "build:sass": "sass index.scss:dist/index.css",
     "clean": "rm -rf ./dist ./lib"

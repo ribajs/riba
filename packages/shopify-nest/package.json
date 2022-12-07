@@ -7,7 +7,7 @@
   },
   "scripts": {
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
-    "build": "npm run build:module",
+    "build": "yarn run build:module",
     "build:module": "tsc",
     "clean": "rm -rf ./dist ./lib"
   },

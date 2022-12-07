@@ -35,8 +35,8 @@
     "Browser"
   ],
   "scripts": {
-    "build": "npm run build:svg && npm run build:filelist:svg",
-    "build:svg": "npm run clean:svg && gulp build:svg --gulpfile gulpfile.cjs",
+    "build": "yarn run build:svg && yarn run build:filelist:svg",
+    "build:svg": "yarn run clean:svg && gulp build:svg --gulpfile gulpfile.cjs",
     "build:filelist": "gulp build:filelist --gulpfile gulpfile.cjs",
     "build:filelist:svg": "gulp build:filelist:svg --gulpfile gulpfile.cjs",
     "build:filelist:png": "gulp build:filelist:png --gulpfile gulpfile.cjs",

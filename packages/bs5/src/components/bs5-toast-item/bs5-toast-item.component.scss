@@ -20,7 +20,7 @@ $toast-body-bg-scale:               $alert-bg-scale !default; // default is -10
 $toast-body-color-scale:            $alert-color-scale !default; // default is 6
 
 $toast-header-bg-scale:             $alert-bg-scale + 2 !default;
-$toast-header-color-scale:          $alert-color-scale +2 !default;
+$toast-header-color-scale:          $alert-color-scale + 2 !default;
 
 .toast {
   min-width: $toast-min-width;

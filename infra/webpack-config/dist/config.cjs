@@ -130,10 +130,11 @@ module.exports.getConfig = (config = {}, env = {}) => {
       config.copyPluginConfig.patterns || getCopyPluginPatterns(config);
     if (config.copyPluginConfig.patterns.length && config.CopyPlugin) {
       // Copy the files before the build starts for the case the files are required for the build itself
-      copy(config.copyPluginConfig.patterns);
-      if (config.CopyPlugin) {
-        config.plugins.push(new config.CopyPlugin(config.copyPluginConfig));
-      }
+      // TODO needs a fix
+      // copy(config.copyPluginConfig.patterns);
+      // if (config.CopyPlugin) {
+      //   config.plugins.push(new config.CopyPlugin(config.copyPluginConfig));
+      // }
     }
   }
 

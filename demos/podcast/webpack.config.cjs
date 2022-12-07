@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const ribaWebpackConfig = require("@ribajs/webpack-config");
 const webpackConfig = ribaWebpackConfig({
   template: "local",
@@ -9,10 +10,10 @@ const webpackConfig = ribaWebpackConfig({
     foldername: "dist",
     patterns: [
       {
-        from: "src/*",
-        to: "assets",
+        from: "*",
+        to: "../../dist/assets",
         toType: "dir",
-        context: "./src/assets",
+        context: "src/assets",
       },
     ],
   },

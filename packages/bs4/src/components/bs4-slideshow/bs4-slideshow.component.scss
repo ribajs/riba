@@ -44,11 +44,11 @@ bs4-slideshow {
         }
         &.control#{$infix}-bottom {
           flex-direction: column;
-          justify-content: start;
+          justify-content: flex-start;
         }
         &.control#{$infix}-top {
           flex-direction: column;
-          justify-content: end;
+          justify-content: flex-end;
         }
       }
     }

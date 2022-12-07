@@ -11,7 +11,7 @@ $modal-body-bg-scale:               $alert-bg-scale !default; // default is -10
 $modal-body-color-scale:            $alert-color-scale !default; // default is 6
 
 $modal-header-bg-scale:             $alert-bg-scale + 2 !default;
-$modal-header-color-scale:          $alert-color-scale +2 !default;
+$modal-header-color-scale:          $alert-color-scale + 2 !default;
 
 .modal {
   @each $state, $value in $theme-colors {

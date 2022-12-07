@@ -591,21 +591,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-module-imports@npm:^7.10.4, @babel/helper-module-imports@npm:^7.18.6":
-  version: 7.18.6
-  resolution: "@babel/helper-module-imports@npm:7.18.6"
-  dependencies:
-    "@babel/types": "npm:^7.18.6"
-  checksum: 5c2d1987e4854abe7ca227d2e318b699c100dedc8ec45fe858755d5e9da8760ac136c0b1e669cc381f44eb79607b6f4ffcf7642e1aa84504389f9ca6065e8ee1
-  languageName: node
-  linkType: hard
-
 "@babel/helper-module-imports@npm:^7.16.7":
   version: 7.16.7
   resolution: "@babel/helper-module-imports@npm:7.16.7"
   dependencies:
     "@babel/types": "npm:^7.16.7"
   checksum: 1f16f73f6c221fa401b9342884c331f560946a75b8ed66d45a1e25411a73cf91d79fa8ed337a3dcfb1ab9ba4178fb59c1543ab509ba5396295c5e5a08c373046
+  languageName: node
+  linkType: hard
+
+"@babel/helper-module-imports@npm:^7.18.6":
+  version: 7.18.6
+  resolution: "@babel/helper-module-imports@npm:7.18.6"
+  dependencies:
+    "@babel/types": "npm:^7.18.6"
+  checksum: 5c2d1987e4854abe7ca227d2e318b699c100dedc8ec45fe858755d5e9da8760ac136c0b1e669cc381f44eb79607b6f4ffcf7642e1aa84504389f9ca6065e8ee1
   languageName: node
   linkType: hard
 
@@ -2765,14 +2765,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fullhuman/postcss-purgecss@npm:^4.1.3":
-  version: 4.1.3
-  resolution: "@fullhuman/postcss-purgecss@npm:4.1.3"
+"@fullhuman/postcss-purgecss@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@fullhuman/postcss-purgecss@npm:5.0.0"
   dependencies:
-    purgecss: "npm:^4.1.3"
+    purgecss: "npm:^5.0.0"
   peerDependencies:
     postcss: ^8.0.0
-  checksum: e047fce13fb6aafcc45076ffc3ea57be2bdbc36fc41c76bed1d0f49e379e9bbd1edc11d2ed8591cc39eac98f5e3b1baf7b550bb15a2fd641c443b846d22f6358
+  checksum: 76000597e69970eb3e6cf425fc0ea09fa6dbb82271aa0f43ae0fc75bef88c12346dcb29c4a769457ffacd038c319e8df11cb0c8158e38eec4b6836cb978d66dd
   languageName: node
   linkType: hard
 
@@ -3433,7 +3433,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -3508,7 +3508,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     bootstrap: "npm:^4.6.2"
     core-js: "npm:^3.26.1"
@@ -3552,7 +3552,7 @@ __metadata:
     "@types/jest": "npm:^28.1.8"
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -3603,7 +3603,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     bootstrap: "npm:^5.2.3"
     core-js: "npm:^3.26.1"
@@ -3669,7 +3669,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -3715,7 +3715,7 @@ __metadata:
     "@types/jest": "npm:^28.1.8"
     "@types/node": "npm:^18.11.11"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -3767,7 +3767,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     core-js: "npm:^3.26.1"
@@ -3775,19 +3775,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -3828,7 +3828,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     core-js: "npm:^3.26.1"
@@ -3836,19 +3836,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -3890,7 +3890,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^4.6.2"
@@ -3899,19 +3899,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -3955,7 +3955,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^4.6.2"
@@ -3964,19 +3964,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -4020,28 +4020,28 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^4.6.2"
-    copy-webpack-plugin: "npm:^9.1.0"
+    copy-webpack-plugin: "npm:^11.0.0"
     core-js: "npm:^3.26.1"
     css-loader: "npm:^6.7.2"
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -4084,7 +4084,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^4.6.2"
@@ -4093,18 +4093,18 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -4144,25 +4144,25 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^4.6.2"
-    copy-webpack-plugin: "npm:^9.1.0"
+    copy-webpack-plugin: "npm:^11.0.0"
     core-js: "npm:^3.26.1"
     css-loader: "npm:^6.7.2"
     eslint: "npm:^8.29.0"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:^5.5.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
@@ -4204,24 +4204,24 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^4.6.2"
     core-js: "npm:^3.26.1"
     css-loader: "npm:^6.7.2"
     eslint: "npm:^8.29.0"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:^5.5.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     ts-jest: "npm:^28.0.8"
     typescript: "npm:4.9.3"
@@ -4266,7 +4266,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^4.6.2"
@@ -4276,19 +4276,19 @@ __metadata:
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
     file-loader: "npm:^6.2.0"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     style-loader: "npm:^3.3.1"
     terser-webpack-plugin: "npm:^5.3.6"
@@ -4334,7 +4334,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^4.6.2"
@@ -4343,19 +4343,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -4397,7 +4397,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -4406,19 +4406,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -4461,7 +4461,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -4470,19 +4470,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -4525,7 +4525,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -4534,19 +4534,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -4591,28 +4591,28 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
-    copy-webpack-plugin: "npm:^9.1.0"
+    copy-webpack-plugin: "npm:^11.0.0"
     core-js: "npm:^3.26.1"
     css-loader: "npm:^6.7.2"
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -4658,7 +4658,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -4667,18 +4667,18 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
@@ -4723,7 +4723,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -4732,19 +4732,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -4787,7 +4787,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -4796,18 +4796,18 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -4851,7 +4851,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -4861,19 +4861,19 @@ __metadata:
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
     file-loader: "npm:^6.2.0"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     style-loader: "npm:^3.3.1"
     terser-webpack-plugin: "npm:^5.3.6"
@@ -4919,7 +4919,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -4928,19 +4928,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -4983,7 +4983,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -4992,19 +4992,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -5047,7 +5047,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -5057,18 +5057,18 @@ __metadata:
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
     file-loader: "npm:^6.2.0"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     ts-jest: "npm:^28.0.8"
     typescript: "npm:4.9.3"
@@ -5110,7 +5110,7 @@ __metadata:
     "@webpack-cli/serve": "npm:^2.0.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     core-js: "npm:^3.26.1"
@@ -5118,18 +5118,18 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:^5.5.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
@@ -5172,7 +5172,7 @@ __metadata:
     "@webpack-cli/serve": "npm:^2.0.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     core-js: "npm:^3.26.1"
@@ -5180,18 +5180,18 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:^5.5.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
@@ -5234,7 +5234,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     core-js: "npm:^3.26.1"
@@ -5242,19 +5242,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -5294,23 +5294,23 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     core-js: "npm:^3.26.1"
     css-loader: "npm:^6.7.2"
     eslint: "npm:^8.29.0"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:^5.5.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
@@ -5353,23 +5353,23 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
     core-js: "npm:^3.26.1"
     css-loader: "npm:^6.7.2"
     eslint: "npm:^8.29.0"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:^5.5.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
@@ -5412,7 +5412,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:5.2.3"
@@ -5421,18 +5421,18 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:^5.5.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
@@ -5477,7 +5477,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -5486,19 +5486,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -5538,7 +5538,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:5.2.3"
@@ -5547,18 +5547,18 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:^5.5.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
@@ -5603,7 +5603,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -5612,19 +5612,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -5668,7 +5668,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -5677,19 +5677,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -5730,7 +5730,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:5.2.3"
@@ -5740,20 +5740,20 @@ __metadata:
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
     file-loader: "npm:^6.2.0"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     leaflet: "npm:^1.9.3"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     resolve-url-loader: "npm:^5.0.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
@@ -5797,7 +5797,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     core-js: "npm:^3.26.1"
@@ -5805,19 +5805,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -5858,7 +5858,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:5.2.3"
@@ -5868,18 +5868,18 @@ __metadata:
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
     file-loader: "npm:^6.2.0"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
     typescript: "npm:4.9.3"
@@ -5920,7 +5920,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:5.2.3"
@@ -5930,18 +5930,18 @@ __metadata:
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
     file-loader: "npm:^6.2.0"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
     typescript: "npm:4.9.3"
@@ -5983,7 +5983,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:5.2.3"
@@ -5993,18 +5993,18 @@ __metadata:
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
     file-loader: "npm:^6.2.0"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
     typescript: "npm:4.9.3"
@@ -6046,7 +6046,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:5.2.3"
@@ -6056,7 +6056,7 @@ __metadata:
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
     file-loader: "npm:^6.2.0"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
@@ -6064,13 +6064,13 @@ __metadata:
     monaco-editor: "npm:0.30.1"
     monaco-editor-webpack-plugin: "npm:6.0.0"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
     typescript: "npm:4.9.3"
@@ -6116,7 +6116,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^4.6.2"
@@ -6125,18 +6125,18 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
@@ -6180,7 +6180,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -6190,18 +6190,18 @@ __metadata:
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
     file-loader: "npm:^6.2.0"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     terser-webpack-plugin: "npm:^5.3.6"
     ts-jest: "npm:^28.0.8"
@@ -6254,8 +6254,8 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
-    abbrev: "npm:^1.1.1"
-    babel-loader: "npm:^8.3.0"
+    abbrev: "npm:^2.0.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^4.6.2"
@@ -6274,9 +6274,9 @@ __metadata:
     extract-text-webpack-plugin: "npm:^3.0.2"
     file-loader: "npm:^6.2.0"
     has-unicode: "npm:^2.0.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inherits: "npm:^2.0.4"
-    ini: "npm:^2.0.0"
+    ini: "npm:^3.0.1"
     inspectpack: "npm:^4.7.1"
     jquery: "npm:^3.6.1"
     jshint: "npm:^2.13.6"
@@ -6288,9 +6288,9 @@ __metadata:
     nodemon: "npm:^2.0.20"
     popper.js: "npm:^1.16.1"
     postcss: "npm:^8.4.19"
-    postcss-cli: "npm:^9.1.0"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-cli: "npm:^10.1.0"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     prismjs: "npm:^1.29.0"
@@ -6298,7 +6298,7 @@ __metadata:
     pug-loader: "npm:^2.4.0"
     require-dir: "npm:^1.2.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     semver: "npm:^7.3.8"
     shelljs: "npm:^0.8.5"
     style-loader: "npm:^3.3.1"
@@ -6410,7 +6410,7 @@ __metadata:
     "@types/jest": "npm:^28.1.8"
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -6483,7 +6483,7 @@ __metadata:
     "@types/jest": "npm:^28.1.8"
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -6536,7 +6536,7 @@ __metadata:
     "@types/jquery": "npm:^3.5.14"
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -6599,7 +6599,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -6658,7 +6658,7 @@ __metadata:
     "@types/luxon": "npm:^1.27.1"
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -6700,7 +6700,7 @@ __metadata:
     "@types/masonry-layout": "npm:^4.2.5"
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -6745,7 +6745,7 @@ __metadata:
     "@types/jest": "npm:^28.1.8"
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -6787,7 +6787,7 @@ __metadata:
     "@types/jest": "npm:^28.1.8"
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -6891,7 +6891,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -6937,7 +6937,7 @@ __metadata:
     "@types/jest": "npm:^28.1.8"
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -6987,7 +6987,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -6996,19 +6996,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -7050,7 +7050,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     babelify: "npm:^10.0.0"
     bootstrap: "npm:^5.2.3"
@@ -7059,19 +7059,19 @@ __metadata:
     eslint: "npm:^8.29.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-prettier: "npm:^4.2.1"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     inspectpack: "npm:^4.7.1"
     jest: "npm:^28.1.3"
     jest-extended: "npm:^2.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
-    postcss-modules: "npm:^4.3.1"
+    postcss-loader: "npm:^7.0.2"
+    postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^7.8.3"
     prettier: "npm:^2.8.0"
     pug-loader: "npm:^2.4.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     serve: "npm:^14.1.2"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
@@ -7103,7 +7103,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/postcss-config@workspace:infra/postcss-config"
   dependencies:
-    "@fullhuman/postcss-purgecss": "npm:^4.1.3"
+    "@fullhuman/postcss-purgecss": "npm:^5.0.0"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/content-slider": "workspace:^"
@@ -7179,7 +7179,7 @@ __metadata:
     "@typescript-eslint/experimental-utils": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@typescript-eslint/typescript-estree": "npm:^5.45.1"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -7218,7 +7218,7 @@ __metadata:
     "@types/jest": "npm:^28.1.8"
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -7280,7 +7280,7 @@ __metadata:
     "@types/node": "npm:^18.11.11"
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -7326,7 +7326,7 @@ __metadata:
     "@types/prettier": "npm:^2.7.1"
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     bitbucket: "npm:^2.9.0"
     core-js: "npm:^3.26.1"
@@ -7379,7 +7379,7 @@ __metadata:
     "@types/masonry-layout": "npm:^4.2.5"
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
     "@typescript-eslint/parser": "npm:^5.45.1"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -7482,29 +7482,29 @@ __metadata:
     "@types/webpack-node-externals": "npm:^2.5.3"
     "@types/webpackbar": "npm:^4.0.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
-    babel-loader: "npm:^8.3.0"
-    copy-webpack-plugin: "npm:^9.1.0"
+    babel-loader: "npm:^9.1.0"
+    copy-webpack-plugin: "npm:^11.0.0"
     css-loader: "npm:^6.7.2"
     file-loader: "npm:^6.2.0"
     find-root: "npm:^1.1.0"
     fork-ts-checker-webpack-plugin: "npm:^7.2.13"
     glob: "npm:^8.0.3"
     graphql: "npm:^16.6.0"
-    html-loader: "npm:^3.1.2"
+    html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:^5.5.0"
     inspectpack: "npm:^4.7.1"
     markdown-loader: "npm:^8.0.0"
     mini-css-extract-plugin: "npm:^2.7.2"
-    pkg-dir: "npm:^6.0.1"
+    pkg-dir: "npm:^7.0.0"
     postcss: "npm:^8.4.19"
-    postcss-loader: "npm:^6.2.1"
+    postcss-loader: "npm:^7.0.2"
     pug: "npm:^3.0.2"
     pug-loader: "npm:^2.4.0"
     raw-loader: "npm:^4.0.2"
-    resolve-typescript-plugin: "npm:^1.2.0"
+    resolve-typescript-plugin: "npm:^2.0.0"
     resolve-url-loader: "npm:^5.0.0"
     sass: "npm:^1.56.1"
-    sass-loader: "npm:^12.6.0"
+    sass-loader: "npm:^13.2.0"
     style-loader: "npm:^3.3.1"
     terser-webpack-plugin: "npm:^5.3.6"
     typescript: "npm:4.9.3"
@@ -7526,7 +7526,7 @@ __metadata:
     "@types/node": "npm:^18.11.11"
     "@types/yargs": "npm:^17.0.16"
     get-port: "npm:^6.1.2"
-    pkg-dir: "npm:^6.0.1"
+    pkg-dir: "npm:^7.0.0"
     typescript: "npm:4.9.3"
     webpack: "npm:^5.75.0"
     webpack-dev-server: "npm:^4.11.1"
@@ -7536,33 +7536,38 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@rollup/plugin-babel@npm:^5.3.1":
-  version: 5.3.1
-  resolution: "@rollup/plugin-babel@npm:5.3.1"
+"@rollup/plugin-babel@npm:^6.0.3":
+  version: 6.0.3
+  resolution: "@rollup/plugin-babel@npm:6.0.3"
   dependencies:
-    "@babel/helper-module-imports": "npm:^7.10.4"
-    "@rollup/pluginutils": "npm:^3.1.0"
+    "@babel/helper-module-imports": "npm:^7.18.6"
+    "@rollup/pluginutils": "npm:^5.0.1"
   peerDependencies:
     "@babel/core": ^7.0.0
     "@types/babel__core": ^7.1.9
-    rollup: ^1.20.0||^2.0.0
+    rollup: ^1.20.0||^2.0.0||^3.0.0
   peerDependenciesMeta:
     "@types/babel__core":
       optional: true
-  checksum: fb457bba770c4547468c69fa26765ac734d86d07513924e862e91c1d9ee453785717bd08c6f5471a5024d00fbb02553421c9e2bfb5d1267820a4331900d833e7
+    rollup:
+      optional: true
+  checksum: 3ccf11c0320e6f1923ce2a8cfb53f47fb352683bfdd8400ec0b070faaba25efb2c9cb4cee8e6af7ad61227c02e7408288db3ca0d516e2da4348fbe06cd88c018
   languageName: node
   linkType: hard
 
-"@rollup/pluginutils@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "@rollup/pluginutils@npm:3.1.0"
+"@rollup/pluginutils@npm:^5.0.1":
+  version: 5.0.2
+  resolution: "@rollup/pluginutils@npm:5.0.2"
   dependencies:
-    "@types/estree": "npm:0.0.39"
-    estree-walker: "npm:^1.0.1"
-    picomatch: "npm:^2.2.2"
+    "@types/estree": "npm:^1.0.0"
+    estree-walker: "npm:^2.0.2"
+    picomatch: "npm:^2.3.1"
   peerDependencies:
-    rollup: ^1.20.0||^2.0.0
-  checksum: cd1fa3b565bab5556479aeea8ae14d4c622e2071abbac2de4182715c5220074a55d6ec08be31a1207676d307330eef6697fc739d2d7e1cf34937e87d23770dc3
+    rollup: ^1.20.0||^2.0.0||^3.0.0
+  peerDependenciesMeta:
+    rollup:
+      optional: true
+  checksum: c8e01caaf5d63c23f82ad6a1402cd8878718b298c29e09e57592dfffa18e01c389242610c41cb608f429828d13ef0848ff83fa474bbfe568966a9a8b2e93d25a
   languageName: node
   linkType: hard
 
@@ -7865,17 +7870,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/estree@npm:0.0.39":
-  version: 0.0.39
-  resolution: "@types/estree@npm:0.0.39"
-  checksum: 17875aa97e2734f4a6c5d1e7d4978888961f4c890694c6e0d1c51b17b3eaceba6be1478cf76c50730860002766e4a05c3e8afa12cccbcd5f0b628c458b607357
-  languageName: node
-  linkType: hard
-
 "@types/estree@npm:^0.0.51":
   version: 0.0.51
   resolution: "@types/estree@npm:0.0.51"
   checksum: a5fbdddce8a2b79477d0cb92d9998e42d5ae096d98ed0245983551423fd849c0e34a9877a2bb503dbd6716265d03f520155c2047996460872f82f25e1811e0c7
+  languageName: node
+  linkType: hard
+
+"@types/estree@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@types/estree@npm:1.0.0"
+  checksum: 474df434e3a469cb7a68d44c8b7ac3a21bca344fa3b49651c3451d0f3662ff0c3b2ba52149cbc5b9c9a9f3f1ac37958c163ef29b65a8b36fccb5ccb2acfc9b08
   languageName: node
   linkType: hard
 
@@ -8128,7 +8133,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/json-schema@npm:*, @types/json-schema@npm:^7.0.5, @types/json-schema@npm:^7.0.6":
+"@types/json-schema@npm:*, @types/json-schema@npm:^7.0.6":
   version: 7.0.6
   resolution: "@types/json-schema@npm:7.0.6"
   checksum: 96a3d012a73aa9fda166bfb78122e3ca77356daed0d6e7ab10df74c664584a4249507ecae1141b8654196487b2c877e73d9b76a85c3cdb945e1074ff0cee890e
@@ -9096,10 +9101,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"abbrev@npm:1, abbrev@npm:^1.1.1":
+"abbrev@npm:1":
   version: 1.1.1
   resolution: "abbrev@npm:1.1.1"
   checksum: 76e7fb9283b13208d5cf55df46669f9cf5e72007cb66595849be2d5e96c0a43704132d030c5705f9447266183986e1e8a4fc3e9578cb60a1f19cf0157664f957
+  languageName: node
+  linkType: hard
+
+"abbrev@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "abbrev@npm:2.0.0"
+  checksum: e407d8fbca2621f0925fdbb73b0901c526d6d469b3c0ea21edf8ccef74464f0d6e1f30442c60e8189fa338322facca3aa9b6dc989ed6ad602aa65720c546261a
   languageName: node
   linkType: hard
 
@@ -10150,18 +10162,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-loader@npm:^8.3.0":
-  version: 8.3.0
-  resolution: "babel-loader@npm:8.3.0"
+"babel-loader@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "babel-loader@npm:9.1.0"
   dependencies:
-    find-cache-dir: "npm:^3.3.1"
-    loader-utils: "npm:^2.0.0"
-    make-dir: "npm:^3.1.0"
-    schema-utils: "npm:^2.6.5"
+    find-cache-dir: "npm:^3.3.2"
+    schema-utils: "npm:^4.0.0"
   peerDependencies:
-    "@babel/core": ^7.0.0
-    webpack: ">=2"
-  checksum: 6c0554dbfc9a630bcbb785faebe9ca4c28e4c7de5ced633cc80bd6004f8e9f71096325263e27a1aabf39db532972eda98139e6abb1634c7ef347b8e51560b05f
+    "@babel/core": ^7.12.0
+    webpack: ">=5"
+  checksum: 6e5cd3c28c76fad44ece15f4379e9903e6fb9a5c93b0a4bbdce051c40fbc41c5e834fedc106dd222e50c1fc03448ccd50cc62870b0955bc99ba12fa0083b9256
   languageName: node
   linkType: hard
 
@@ -11801,6 +11811,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clean-css@npm:5.2.0":
+  version: 5.2.0
+  resolution: "clean-css@npm:5.2.0"
+  dependencies:
+    source-map: "npm:~0.6.0"
+  checksum: 845c87cf21e30358f9caff7cae0401e33b086764ced11c9ca5cd86666547a53ef20ff4bd7458187be5bf96922fe6a5f8f35d657c0488b4fefe527457afd6559f
+  languageName: node
+  linkType: hard
+
 "clean-css@npm:^4.1.11":
   version: 4.2.4
   resolution: "clean-css@npm:4.2.4"
@@ -12109,13 +12128,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^8.0.0":
-  version: 8.3.0
-  resolution: "commander@npm:8.3.0"
-  checksum: 94dba589da4444bc07d60537438ce36bbf78b52b18bb720fb3727a3b589cb27b53171065742e6e442962e273976f034ca7475cc5517d92c7033fae2f6ed50e76
-  languageName: node
-  linkType: hard
-
 "commander@npm:^8.1.0":
   version: 8.2.0
   resolution: "commander@npm:8.2.0"
@@ -12123,17 +12135,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:^9.0.0, commander@npm:^9.4.1":
+  version: 9.4.1
+  resolution: "commander@npm:9.4.1"
+  checksum: 7d4c1f3bd4ad451f43fce51b9c73dc2d61fca00a9249196aa2d3d66fc46f2460c917c73ea9221c278fb8d35f496384f5125806e69108581a8e8bc673752c94e6
+  languageName: node
+  linkType: hard
+
 "commander@npm:^9.3.0":
   version: 9.3.0
   resolution: "commander@npm:9.3.0"
   checksum: 110e8e7a5476adfc7d76a2cc4928077dd094053d4387213db5f343327f4f7ef242d13d123788aacf172706264b184b5fa94b29556d9506493ca3325f31782f54
-  languageName: node
-  linkType: hard
-
-"commander@npm:^9.4.1":
-  version: 9.4.1
-  resolution: "commander@npm:9.4.1"
-  checksum: 7d4c1f3bd4ad451f43fce51b9c73dc2d61fca00a9249196aa2d3d66fc46f2460c917c73ea9221c278fb8d35f496384f5125806e69108581a8e8bc673752c94e6
   languageName: node
   linkType: hard
 
@@ -12406,19 +12418,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-webpack-plugin@npm:^9.1.0":
-  version: 9.1.0
-  resolution: "copy-webpack-plugin@npm:9.1.0"
+"copy-webpack-plugin@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "copy-webpack-plugin@npm:11.0.0"
   dependencies:
-    fast-glob: "npm:^3.2.7"
+    fast-glob: "npm:^3.2.11"
     glob-parent: "npm:^6.0.1"
-    globby: "npm:^11.0.3"
+    globby: "npm:^13.1.1"
     normalize-path: "npm:^3.0.0"
-    schema-utils: "npm:^3.1.1"
+    schema-utils: "npm:^4.0.0"
     serialize-javascript: "npm:^6.0.0"
   peerDependencies:
     webpack: ^5.1.0
-  checksum: 46e5acca63ad6879855cce6d223f8b9bc68e80c88c880e95f5d822e2696adb5b53d92b8251c3460c449ea9d8d3662008e81b677cab85de1154aa86e2fe3ed302
+  checksum: 4a51ac9461187ff33855778a6f422e3e9c9145dec06f9bc666221816edb502f1f7437c33fa690c9a57783b8cdf80d5b4e0c6f851480d2eb580b332cdf06026b9
   languageName: node
   linkType: hard
 
@@ -13938,10 +13950,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"estree-walker@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "estree-walker@npm:1.0.1"
-  checksum: 09ecd33e911a135ff62716f88a48f8dbf1206f8f6d6869205885c1e6d1aebf5049b5e0c725fe2d907b1394a17afb2002f7a57aafdc8b7bbff255dffa8c3b98c9
+"estree-walker@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "estree-walker@npm:2.0.2"
+  checksum: 6fd7656e20b3c8f1fa74cd3d922e09d2cc9815ba5ea2d4cc0d5f16870b00e4c40d9aaae5efeb26299ea684a89b8e64868f42ecdddd45e8d18283f47098c9943a
   languageName: node
   linkType: hard
 
@@ -14463,14 +14475,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"find-cache-dir@npm:^3.3.1":
-  version: 3.3.1
-  resolution: "find-cache-dir@npm:3.3.1"
+"find-cache-dir@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "find-cache-dir@npm:3.3.2"
   dependencies:
     commondir: "npm:^1.0.1"
     make-dir: "npm:^3.0.2"
     pkg-dir: "npm:^4.1.0"
-  checksum: df2a3218992261e24f3336a1f13859c24419875b3c6ab8440d6aa6c9f152bdf9cd0e749436d9d91dda2f1699dc054a18e6d7e0eeeb426f47fb74256a8e51091c
+  checksum: 39e977251433aacc1d60b40f6d9bdfa7e5290aa181f4828d654f109a57738326bf39cd88a597a77f64ce5fc7af394a5fe6993c7343b285bc82e12eb6dfc96d04
   languageName: node
   linkType: hard
 
@@ -14529,13 +14541,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"find-up@npm:^6.1.0":
-  version: 6.2.0
-  resolution: "find-up@npm:6.2.0"
+"find-up@npm:^6.3.0":
+  version: 6.3.0
+  resolution: "find-up@npm:6.3.0"
   dependencies:
-    locate-path: "npm:^7.0.0"
+    locate-path: "npm:^7.1.0"
     path-exists: "npm:^5.0.0"
-  checksum: a0894b057b5c483427c262ee811f36c94c8e68150336d27b443cfa78b0906ff832933214c95c7479191c9128683c2e9e4f40a2d4596350e626727981043637a8
+  checksum: 0615da27dd04f46bb55790ac16dc3235fc34ef948280c461363d4a6ff27ad4d5b5568761007d2dbe9da83e9e732c5b764f2dbbb6e3b674ed7a65d9ffe45c7762
   languageName: node
   linkType: hard
 
@@ -14792,6 +14804,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fs-extra@npm:^11.0.0":
+  version: 11.1.0
+  resolution: "fs-extra@npm:11.1.0"
+  dependencies:
+    graceful-fs: "npm:^4.2.0"
+    jsonfile: "npm:^6.0.1"
+    universalify: "npm:^2.0.0"
+  checksum: 20d9909070e7d9754cb651af067ae4343b5fc9b05fa9b8765a9348dab7dfa9b78c0f1ebe791774f06d4cca4231f4be9889a916d0457e8e87097a613e6bdd1746
+  languageName: node
+  linkType: hard
+
 "fs-minipass@npm:^2.0.0":
   version: 2.1.0
   resolution: "fs-minipass@npm:2.1.0"
@@ -14944,7 +14967,7 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.20.2"
     "@babel/preset-env": "npm:^7.20.2"
     "@babel/preset-typescript": "npm:^7.18.6"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     http-server: "npm:^14.1.1"
     jest: "npm:^28.1.3"
     jest-environment-jsdom: "npm:^29.3.1"
@@ -15204,7 +15227,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^7.1.0, glob@npm:^7.1.7, glob@npm:^7.2.0":
+"glob@npm:^7.1.0, glob@npm:^7.2.0":
   version: 7.2.0
   resolution: "glob@npm:7.2.0"
   dependencies:
@@ -15299,20 +15322,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globby@npm:^11.0.3":
-  version: 11.0.3
-  resolution: "globby@npm:11.0.3"
-  dependencies:
-    array-union: "npm:^2.1.0"
-    dir-glob: "npm:^3.0.1"
-    fast-glob: "npm:^3.1.1"
-    ignore: "npm:^5.1.4"
-    merge2: "npm:^1.3.0"
-    slash: "npm:^3.0.0"
-  checksum: ec319e0918bbaf142ac55a1c854feeb654381290aeec29adbfc38e31bebaa418fc7284d5d79c53ca5c03d2fe57775a9766e0bec021a9c4bd730a0f7ea0a8607f
-  languageName: node
-  linkType: hard
-
 "globby@npm:^11.1.0":
   version: 11.1.0
   resolution: "globby@npm:11.1.0"
@@ -15324,20 +15333,6 @@ __metadata:
     merge2: "npm:^1.4.1"
     slash: "npm:^3.0.0"
   checksum: 3047df770874d103dafe26084f998f562e8a8e2930896940e0bdbdc27c1f7574570f231dc2aa981d941dc84c93db05ce7cd81667488b040412e88740186fc22e
-  languageName: node
-  linkType: hard
-
-"globby@npm:^12.0.0":
-  version: 12.0.2
-  resolution: "globby@npm:12.0.2"
-  dependencies:
-    array-union: "npm:^3.0.1"
-    dir-glob: "npm:^3.0.1"
-    fast-glob: "npm:^3.2.7"
-    ignore: "npm:^5.1.8"
-    merge2: "npm:^1.4.1"
-    slash: "npm:^4.0.0"
-  checksum: 5f05f57469b8b4dad2e341d59d6048a103acca569f7e05b89582de941c7142287c72d854c9082e1a955d13d49f643bc110817da3cd8d76c76075e637500bf54e
   languageName: node
   linkType: hard
 
@@ -15355,7 +15350,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globby@npm:^13.1.2":
+"globby@npm:^13.0.0, globby@npm:^13.1.1, globby@npm:^13.1.2":
   version: 13.1.2
   resolution: "globby@npm:13.1.2"
   dependencies:
@@ -15845,15 +15840,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-loader@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "html-loader@npm:3.1.2"
+"html-loader@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "html-loader@npm:4.2.0"
   dependencies:
-    html-minifier-terser: "npm:^6.0.2"
-    parse5: "npm:^6.0.1"
+    html-minifier-terser: "npm:^7.0.0"
+    parse5: "npm:^7.0.0"
   peerDependencies:
     webpack: ^5.0.0
-  checksum: 0afa721a81994255272971c7ad2bdd60d15d2c87170e44e5b5b01d9a3f5e4acd7beb86fe103ec68714bd270e3a25aad287e4503ec0eb53d5f2a697f5e377eec1
+  checksum: 483f3fef65fefefce672817bdadd16a627e27eeb6ce043af579e2ee9a6208d0cccc115ecbf6d99ed49c87d533be842ee322d6eaeb9a4cebec5d757ac45581499
   languageName: node
   linkType: hard
 
@@ -15871,6 +15866,23 @@ __metadata:
   bin:
     html-minifier-terser: cli.js
   checksum: a51ed9dcd4771ae9c9db569d4eb70e234069171949f0cb9c20e4d2647bce2dbec64410f0451b3ce1ecd116c09e34e629655e24c5d2e21c9622ba0c30e5b9ea9e
+  languageName: node
+  linkType: hard
+
+"html-minifier-terser@npm:^7.0.0":
+  version: 7.1.0
+  resolution: "html-minifier-terser@npm:7.1.0"
+  dependencies:
+    camel-case: "npm:^4.1.2"
+    clean-css: "npm:5.2.0"
+    commander: "npm:^9.4.1"
+    entities: "npm:^4.4.0"
+    param-case: "npm:^3.0.4"
+    relateurl: "npm:^0.2.7"
+    terser: "npm:^5.15.1"
+  bin:
+    html-minifier-terser: cli.js
+  checksum: 188f77b3cf44c7d13a6137d3a337c41fa0ac628b4c69816ca4cf4aa60d80eb7803082ddb7d4fd883e386c420bf9cc59c58b8f528c26d9ce0f7adf072edcf8920
   languageName: node
   linkType: hard
 
@@ -16093,13 +16105,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"icss-replace-symbols@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "icss-replace-symbols@npm:1.1.0"
-  checksum: ca588cbb990aac4d8e4427c22571f0d33b73ad275c3f5ddc5564500b89e5a3486231b838b6d7d924a488a4425a572eb016f92e98a99bb84d1192f66d6f8bc6e0
-  languageName: node
-  linkType: hard
-
 "icss-utils@npm:^5.0.0, icss-utils@npm:^5.1.0":
   version: 5.1.0
   resolution: "icss-utils@npm:5.1.0"
@@ -16139,7 +16144,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore@npm:^5.1.4, ignore@npm:^5.1.8":
+"ignore@npm:^5.1.4":
   version: 5.1.8
   resolution: "ignore@npm:5.1.8"
   checksum: 9c1d38c6403bd658acc579a14f45d29c70a2ee05fc1a8d6b4a94e4bc927f439e622a7e2983e0166614512d656284f06960eb4fd8d24fb315f7eb97de58891640
@@ -16257,10 +16262,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ini@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "ini@npm:2.0.0"
-  checksum: 5642843f494ec7c3867bbe0b47e7429456e613fe8e301a9f852e06763999216ea2c5ca862b28c6e123bbea789fc1109a325f4efb03a1c912dbe3b6ccc3ebeff5
+"ini@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "ini@npm:3.0.1"
+  checksum: aa3a701669e6dc7ef1c9ce1b86931ca712cd255f0ad2b909189b2207491c95319999ee758c3395e86c9f5b6c9368cda493deeaf284cd139577dc2271e0fd422e
   languageName: node
   linkType: hard
 
@@ -18148,10 +18153,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lilconfig@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "lilconfig@npm:2.0.4"
-  checksum: adb6ba6fbcf037bb06ff6c8b198261e4a2e4dd19d117be171396b5df3d0090cc7d8b3343c5ea60b72de8efa42160d6ee3c3e42d115aa189b44aa5c5e7ae42937
+"lilconfig@npm:^2.0.5":
+  version: 2.0.6
+  resolution: "lilconfig@npm:2.0.6"
+  checksum: 12b2f81da97b0f00a06d13a0a86d40c00ce46cc24fcb46b70b374af9593adf4e8a013047101535611c98b5edd10fdeb30942823cb237361c01d033049725a8aa
   languageName: node
   linkType: hard
 
@@ -18258,12 +18263,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"locate-path@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "locate-path@npm:7.0.0"
+"locate-path@npm:^7.1.0":
+  version: 7.1.1
+  resolution: "locate-path@npm:7.1.1"
   dependencies:
     p-locate: "npm:^6.0.0"
-  checksum: 386547bf72e303c648548a5af7f7fd4ae1aaa71d527946bda00f7f79ae5697e319bcbb898a9656f159ae71fa8dd63371a17686c046f9dd90732be56a95c5f1d3
+  checksum: 9d9c87be22cbfe0e5e258d7e8bb94954086b2a7f3a1acf15c716684cd9aa9ce0cc916a030e2fda0d7c02b1e0dbd996391af7880245adf165faeef93cb099fbde
   languageName: node
   linkType: hard
 
@@ -18424,7 +18429,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"make-dir@npm:^3.0.0, make-dir@npm:^3.0.2, make-dir@npm:^3.1.0":
+"make-dir@npm:^3.0.0, make-dir@npm:^3.0.2":
   version: 3.1.0
   resolution: "make-dir@npm:3.1.0"
   dependencies:
@@ -19040,15 +19045,6 @@ __metadata:
   version: 0.1.12
   resolution: "nanocolors@npm:0.1.12"
   checksum: 1338ebfb0b17dd6c1f02ab6cc53d134bb9c78368fd293fc00b8688bce3aea4f92d54bd7baf3291fa25c90d2c324ba9efaed4aa462e4edc2f17f5e272458da7be
-  languageName: node
-  linkType: hard
-
-"nanoid@npm:^3.1.30":
-  version: 3.1.30
-  resolution: "nanoid@npm:3.1.30"
-  bin:
-    nanoid: bin/nanoid.cjs
-  checksum: a096eafdc87543b0e0e4b7b68ec6874497bf272cf60956bc34086d9eb74672667f67022b83b9874b54bd44a66259397736d647673f74d4c80e0a17dfc7c0909b
   languageName: node
   linkType: hard
 
@@ -19878,13 +19874,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse5@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "parse5@npm:6.0.1"
-  checksum: fc646cd35285973de9322a034872c145bb8c07559bd0fa46e9c133567978622f3fe3977794b6e31089b3b6692284b2a3b8fb3fc547b9b21ef059fd20cac72982
-  languageName: node
-  linkType: hard
-
 "parse5@npm:^7.0.0, parse5@npm:^7.1.1":
   version: 7.1.1
   resolution: "parse5@npm:7.1.1"
@@ -20093,17 +20082,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picomatch@npm:^2.2.2":
-  version: 2.3.1
-  resolution: "picomatch@npm:2.3.1"
-  checksum: 6ba5938c24af2c5918e94b39aa0ad48d71f2c30634de69d46e0bd32feb666de4e909406db6ffb78f98d39ef450d6a41b6fa3954dc3659d7b2b750766c1261e5e
-  languageName: node
-  linkType: hard
-
 "picomatch@npm:^2.2.3":
   version: 2.3.0
   resolution: "picomatch@npm:2.3.0"
   checksum: d4faab222672fe1742c07aa4126e57f77236f51ac02f1ff7b698344dc1cf043b31ee70105317b42a889a6c19dd244cf99a9ba143ec85b863eed318652d0e6afb
+  languageName: node
+  linkType: hard
+
+"picomatch@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "picomatch@npm:2.3.1"
+  checksum: 6ba5938c24af2c5918e94b39aa0ad48d71f2c30634de69d46e0bd32feb666de4e909406db6ffb78f98d39ef450d6a41b6fa3954dc3659d7b2b750766c1261e5e
   languageName: node
   linkType: hard
 
@@ -20178,12 +20167,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pkg-dir@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "pkg-dir@npm:6.0.1"
+"pkg-dir@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "pkg-dir@npm:7.0.0"
   dependencies:
-    find-up: "npm:^6.1.0"
-  checksum: fb6664d4f710ec53f8dc59877df780bdb220005df9d0b9deda4c3a8f02c7eb12eb49337dcbd79cee0947bf3df5ecb44e222d8d5602fa71a3de3c54b5616157bd
+    find-up: "npm:^6.3.0"
+  checksum: 3f83c8b2d9e57bde96f9f88a2d684be40fb0d296211049e793314a064775708194ba0185d7259a1a35b81d50fa49146c7db326214464e828f3fa9ee952ae6d7f
   languageName: node
   linkType: hard
 
@@ -20268,27 +20257,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-cli@npm:^9.1.0":
-  version: 9.1.0
-  resolution: "postcss-cli@npm:9.1.0"
+"postcss-cli@npm:^10.1.0":
+  version: 10.1.0
+  resolution: "postcss-cli@npm:10.1.0"
   dependencies:
     chokidar: "npm:^3.3.0"
     dependency-graph: "npm:^0.11.0"
-    fs-extra: "npm:^10.0.0"
+    fs-extra: "npm:^11.0.0"
     get-stdin: "npm:^9.0.0"
-    globby: "npm:^12.0.0"
+    globby: "npm:^13.0.0"
     picocolors: "npm:^1.0.0"
-    postcss-load-config: "npm:^3.0.0"
+    postcss-load-config: "npm:^4.0.0"
     postcss-reporter: "npm:^7.0.0"
     pretty-hrtime: "npm:^1.0.3"
     read-cache: "npm:^1.0.0"
-    slash: "npm:^4.0.0"
+    slash: "npm:^5.0.0"
     yargs: "npm:^17.0.0"
   peerDependencies:
     postcss: ^8.0.0
   bin:
     postcss: index.js
-  checksum: bff76013dc8f6568755dcdd346f635af46d32f7da8992dcc60c0426d8c3b17573c6b811b94efbc5a9c9d011fecb19cd7aead850248a39576ae15f0a9b62329d7
+  checksum: 6c454a0b066a261d832aa00311a8061fce4502f5e92653acf7fb4fc5f5f152d944eef2c73a669305c15e626cfd0e86162eb8d1b23cb2d845c5ce4b44f580a8fc
   languageName: node
   linkType: hard
 
@@ -20464,32 +20453,35 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-load-config@npm:^3.0.0":
-  version: 3.1.1
-  resolution: "postcss-load-config@npm:3.1.1"
+"postcss-load-config@npm:^4.0.0":
+  version: 4.0.1
+  resolution: "postcss-load-config@npm:4.0.1"
   dependencies:
-    lilconfig: "npm:^2.0.4"
-    yaml: "npm:^1.10.2"
+    lilconfig: "npm:^2.0.5"
+    yaml: "npm:^2.1.1"
   peerDependencies:
+    postcss: ">=8.0.9"
     ts-node: ">=9.0.0"
   peerDependenciesMeta:
+    postcss:
+      optional: true
     ts-node:
       optional: true
-  checksum: a6cc4028dd261dfbfb62a3193d286298bb92d128341c9db147df06e317445175df31324dc2d132812d76cb5eee9ade0ac229d0d4e0a6e98f6e80b270a32160a0
+  checksum: 140d83311c39661ec16cc106bc2c8bcc34f0e67bf4f10206d7eeb43e04b70e1edfedab23163ab6cd7fb7ef8f1001b73e5c8098fbae279bbbf27b0d95bf2d7911
   languageName: node
   linkType: hard
 
-"postcss-loader@npm:^6.2.1":
-  version: 6.2.1
-  resolution: "postcss-loader@npm:6.2.1"
+"postcss-loader@npm:^7.0.2":
+  version: 7.0.2
+  resolution: "postcss-loader@npm:7.0.2"
   dependencies:
     cosmiconfig: "npm:^7.0.0"
     klona: "npm:^2.0.5"
-    semver: "npm:^7.3.5"
+    semver: "npm:^7.3.8"
   peerDependencies:
     postcss: ^7.0.0 || ^8.0.1
     webpack: ^5.0.0
-  checksum: 073f009ed4fc11c4795d9ba47ee453201e1b147c3391ca69db13f1b67dc4db23911387ae3e6715b12a099184c6bc5c1de42e6471be9817c43763e9a5f3b4fab7
+  checksum: 6a8fbb68160e6b7ef071003b4067035fd967ec6e1856addcb82919b0a374be7823d790665af49336d0cd016d20ad8e04ee7763b416dffe8c63666fb6df807cab
   languageName: node
   linkType: hard
 
@@ -20555,12 +20547,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-modules@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "postcss-modules@npm:4.3.1"
+"postcss-modules@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "postcss-modules@npm:6.0.0"
   dependencies:
     generic-names: "npm:^4.0.0"
-    icss-replace-symbols: "npm:^1.1.0"
+    icss-utils: "npm:^5.1.0"
     lodash.camelcase: "npm:^4.3.0"
     postcss-modules-extract-imports: "npm:^3.0.0"
     postcss-modules-local-by-default: "npm:^4.0.0"
@@ -20569,7 +20561,7 @@ __metadata:
     string-hash: "npm:^1.1.1"
   peerDependencies:
     postcss: ^8.0.0
-  checksum: f6087266fc339364020c9f1c6ccfe17da4549a5249f0b7ee41f208b9e80eb2ad96506fd1ff86afdb6dcbbff934d18fab53efcb4339fe82ed52eeef91d73cc39e
+  checksum: aeda1bbdcd08b94588acecffad61bf668fd61442055229af45e517a4b674ca761ed48ef78e64615b4de2d588ee1ce3e3b3c47f65157abcf2cf145bf96ff72d73
   languageName: node
   linkType: hard
 
@@ -20747,13 +20739,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-selector-parser@npm:^6.0.6":
-  version: 6.0.6
-  resolution: "postcss-selector-parser@npm:6.0.6"
+"postcss-selector-parser@npm:^6.0.7":
+  version: 6.0.11
+  resolution: "postcss-selector-parser@npm:6.0.11"
   dependencies:
     cssesc: "npm:^3.0.0"
     util-deprecate: "npm:^1.0.2"
-  checksum: d2a36c128d71f77f77029df258f354010dcf3167d7488586cfbf710b8676852959d626ff37576b81f7cfc09be07d1c4bb8ddf8f2ab8e721facf26a8add0a6861
+  checksum: 7bee200415c2a0b35e41add91cded19209d746be9b2ab7c7b877cbac4358cda4e5dd19d3559544abfc7d87ff8824dcb5619657ac326973f323d0bda2cee0f1a8
   languageName: node
   linkType: hard
 
@@ -20792,17 +20784,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.3.5":
-  version: 8.4.4
-  resolution: "postcss@npm:8.4.4"
-  dependencies:
-    nanoid: "npm:^3.1.30"
-    picocolors: "npm:^1.0.0"
-    source-map-js: "npm:^1.0.1"
-  checksum: e4a4907176b1335dfb0fe113f61ded09d036069b48624a3d683cb3731a219fb89a73eabf7103a9b26cb6cc7ffa740b1821d52b89ae1fcc811f11dcef2205bce0
-  languageName: node
-  linkType: hard
-
 "postcss@npm:^8.4.18":
   version: 8.4.18
   resolution: "postcss@npm:8.4.18"
@@ -20814,7 +20795,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.19":
+"postcss@npm:^8.4.19, postcss@npm:^8.4.4":
   version: 8.4.19
   resolution: "postcss@npm:8.4.19"
   dependencies:
@@ -21390,17 +21371,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"purgecss@npm:^4.1.3":
-  version: 4.1.3
-  resolution: "purgecss@npm:4.1.3"
+"purgecss@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "purgecss@npm:5.0.0"
   dependencies:
-    commander: "npm:^8.0.0"
-    glob: "npm:^7.1.7"
-    postcss: "npm:^8.3.5"
-    postcss-selector-parser: "npm:^6.0.6"
+    commander: "npm:^9.0.0"
+    glob: "npm:^8.0.3"
+    postcss: "npm:^8.4.4"
+    postcss-selector-parser: "npm:^6.0.7"
   bin:
     purgecss: bin/purgecss.js
-  checksum: 141d2ea4236d53b7ea4eecf03de02be4f004709859ce9836dbf2f93463b3c0c2d877adfa34229464f0f87f1294fdcc05ea09de499b3b4e50010358e84b141ef1
+  checksum: fe1ca33ccad9fe92f384822995718fa7be063457da0dc4ecb78ea4f9667dfc0adcb7c6f82eba9ba5014af1a6eb8941c84d781ddc849dd1e7076810b34a3eac10
   languageName: node
   linkType: hard
 
@@ -22120,14 +22101,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve-typescript-plugin@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "resolve-typescript-plugin@npm:1.2.0"
+"resolve-typescript-plugin@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "resolve-typescript-plugin@npm:2.0.0"
   dependencies:
-    tslib: "npm:2.3.1"
+    tslib: "npm:2.4.0"
   peerDependencies:
     webpack: ^4.0.0 || ^5.0.0
-  checksum: 2b5435298812894b89cd31c8ecbb2692e2647deb95aeae1f5c141546753463a9797db00b37a91ba9649315e7ec5ce360298be9eaa3ece79aab20af85674f8da1
+  checksum: 719c2df55a37aa739474d78fa54f66d49bba8e02d9431cf5b06d2fb70bdbfe5f8982b066610848be0a0290fd012b211e5c2eba4b5b89e1a485d9925bf1bbd4f1
   languageName: node
   linkType: hard
 
@@ -22312,7 +22293,7 @@ __metadata:
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/types": "workspace:^"
-    "@rollup/plugin-babel": "npm:^5.3.1"
+    "@rollup/plugin-babel": "npm:^6.0.3"
     "@types/core-js": "npm:^2.5.5"
     "@types/jest": "npm:^28.1.8"
     "@typescript-eslint/eslint-plugin": "npm:^5.45.1"
@@ -22320,7 +22301,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.45.1"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.32"
     babel-jest: "npm:^28.1.3"
-    babel-loader: "npm:^8.3.0"
+    babel-loader: "npm:^9.1.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.26.1"
     eslint: "npm:^8.29.0"
@@ -22334,7 +22315,7 @@ __metadata:
     jest-environment-jsdom: "npm:^29.3.1"
     jest-extended: "npm:^2.0.0"
     jest-ts-webcompat-resolver: "npm:^1.0.0"
-    pkg-dir: "npm:^6.0.1"
+    pkg-dir: "npm:^7.0.0"
     prettier: "npm:^2.8.0"
     pug: "npm:^3.0.2"
     reflect-metadata: "npm:^0.1.13"
@@ -22452,15 +22433,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^12.6.0":
-  version: 12.6.0
-  resolution: "sass-loader@npm:12.6.0"
+"sass-loader@npm:^13.2.0":
+  version: 13.2.0
+  resolution: "sass-loader@npm:13.2.0"
   dependencies:
     klona: "npm:^2.0.4"
     neo-async: "npm:^2.6.2"
   peerDependencies:
     fibers: ">= 3.1.0"
-    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
+    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
     sass: ^1.3.0
     sass-embedded: "*"
     webpack: ^5.0.0
@@ -22473,7 +22454,7 @@ __metadata:
       optional: true
     sass-embedded:
       optional: true
-  checksum: 9683348ed90fc2745f0ef91b496cc3a9c3968c509fffd7238a938a1d4cf9e686725c8e0f8e81305c1c40a6799ade3547c8a3f665f696ac986a5e1ba7de875437
+  checksum: f27b3e640bdc9ca674b84535ec019e6c429d59d8ab4c5adb360385ad896b3b6b75da30b624df5f66129f7676e8451f7d69ba2747b9ee024b3d8ee0a24deb50bc
   languageName: node
   linkType: hard
 
@@ -22528,17 +22509,6 @@ __metadata:
     ajv-errors: "npm:^1.0.0"
     ajv-keywords: "npm:^3.1.0"
   checksum: 129214e1e75a90d84f2800ec4daa9a97a48d8a5ac94389774d961983b4b794fdee62af68c627c088f098587e73162efa8896e5a21c5231ee94e628642c9618f0
-  languageName: node
-  linkType: hard
-
-"schema-utils@npm:^2.6.5":
-  version: 2.7.1
-  resolution: "schema-utils@npm:2.7.1"
-  dependencies:
-    "@types/json-schema": "npm:^7.0.5"
-    ajv: "npm:^6.12.4"
-    ajv-keywords: "npm:^3.5.2"
-  checksum: 80a77b8fe8793a81a37fb4915a1c7c93b9f43029a3f6d8e1971574ae1dd8808114ead54bd1f6c50c66988050e85126238cd61c0151b4894187e92bea8c661130
   languageName: node
   linkType: hard
 
@@ -22959,6 +22929,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"slash@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "slash@npm:5.0.0"
+  checksum: 3d4c526dd5dad186270bc93f2967a7f9b60d9a70e8f8c8383e83a2ba7871f18870547074bdf8133fa4055824f47f2a8f501d7f672d82f05334cd934538fe8b7d
+  languageName: node
+  linkType: hard
+
 "snapdragon-node@npm:^2.0.1":
   version: 2.1.1
   resolution: "snapdragon-node@npm:2.1.1"
@@ -23035,7 +23012,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map-js@npm:>=0.6.2 <2.0.0, source-map-js@npm:^1.0.1":
+"source-map-js@npm:>=0.6.2 <2.0.0":
   version: 1.0.1
   resolution: "source-map-js@npm:1.0.1"
   checksum: 3627e824036461de5da52b85085ee9d2b02478ad353c72abdc44a4af35b2f74566e8e1e5b498d10304542f391e7bd1bc9de063cfd001f7e6136d2bd6000ab425
@@ -23831,7 +23808,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"terser@npm:^5.16.1":
+"terser@npm:^5.15.1, terser@npm:^5.16.1":
   version: 5.16.1
   resolution: "terser@npm:5.16.1"
   dependencies:
@@ -24234,10 +24211,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:2.3.1":
-  version: 2.3.1
-  resolution: "tslib@npm:2.3.1"
-  checksum: 78b00432027abb82405d5986a091fa593c6ef6589d0104d20ecdcaf24f2b02be428d9a38e7cd5304e5d64544cddb83210e326dac4fea9b2b83128a869c825d19
+"tslib@npm:2.4.0, tslib@npm:^2.1.0, tslib@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "tslib@npm:2.4.0"
+  checksum: 022a70708abbc3491734959effd9a87e6e0af5932b61d0c9f1d07b8b80cabbbfc9fc9e9c0fe86e5ab2d32d766ae30117edf00b02d170ff255ab7e60361a4b711
   languageName: node
   linkType: hard
 
@@ -24252,13 +24229,6 @@ __metadata:
   version: 2.0.3
   resolution: "tslib@npm:2.0.3"
   checksum: b83883c166be366318bf81d3860a9ba666abe7d2d0a83bbcf8c9d16b2e5253472d0f27c5cc609eeb28470d444c735066a395c28d2cea00db38ae974f4992c17a
-  languageName: node
-  linkType: hard
-
-"tslib@npm:^2.1.0, tslib@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "tslib@npm:2.4.0"
-  checksum: 022a70708abbc3491734959effd9a87e6e0af5932b61d0c9f1d07b8b80cabbbfc9fc9e9c0fe86e5ab2d32d766ae30117edf00b02d170ff255ab7e60361a4b711
   languageName: node
   linkType: hard
 
@@ -25663,10 +25633,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^1.10.2":
-  version: 1.10.2
-  resolution: "yaml@npm:1.10.2"
-  checksum: d6f04384bdf1105256581aef39991f825e358f3f48f081974b0e0f39ff5240c60ccafb5842cb79d1287517efa2b9ee172c702f2e4855ba6cc46948b40a43aa6e
+"yaml@npm:^2.1.1":
+  version: 2.1.3
+  resolution: "yaml@npm:2.1.3"
+  checksum: 2747f51351cbf5f0d8b1cdd0e25ddfbf3cf3b7604822a1f4024f059af90679f0f6a51943f75dcac6ba119c26c58cf29ce4326aed175c2c17071414c724582389
   languageName: node
   linkType: hard
 

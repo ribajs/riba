@@ -71,8 +71,8 @@ podlove-play-button {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: start;
-    justify-content: start;
+    align-items: flex-start;
+    justify-content: flex-start;
     text-align: left;
     @media (min-width: 600px) { 
       margin-left: $podlove-play-button-spacing;

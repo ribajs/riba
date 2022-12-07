@@ -50,11 +50,11 @@ bs5-slideshow {
     }
     &.control-bottom {
       flex-direction: column;
-      justify-content: start;
+      justify-content: flex-start;
     }
     &.control-top {
       flex-direction: column;
-      justify-content: end;
+      justify-content:flex-end;
     }
 
     &.slideshow-control-prev {

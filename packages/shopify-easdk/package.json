@@ -26,7 +26,7 @@
   },
   "scripts": {
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
-    "build": "npm run build:module",
+    "build": "yarn run build:module",
     "build:module": "tsc",
     "clean": "rm -rf ./dist ./lib"
   },
@@ -49,7 +49,7 @@
     "@types/jest": "^28.1.8",
     "@typescript-eslint/eslint-plugin": "^5.45.1",
     "@typescript-eslint/parser": "^5.45.1",
-    "babel-loader": "^8.3.0",
+    "babel-loader": "^9.1.0",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.26.1",
     "eslint": "^8.29.0",
