@@ -468,7 +468,10 @@ export const ready = (callback: () => void) => {
     return new Error("The callback is required!");
   }
 
-  const checkReady = () => {
+  const checkReady = (event?: Event & { fake?: boolean }) => {
+    // Do nothing if this is a fake event
+    if (event?.fake) return;
+
     if (document.readyState !== "loading") {
       callback();
       if ((document as any).attachEvent) {
