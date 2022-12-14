@@ -468,6 +468,22 @@ export const ready = (callback: () => void) => {
     return new Error("The callback is required!");
   }
 
+  /**
+   * In some cases it can be useful to dispatch the "DOMContentLoaded" by hand,
+   * but Riba should only react to the real event.
+   *
+   * For this case you can create the event in this way:
+   *
+   * @example
+   * ```ts
+   *   const event: Event & { fake?: boolean } = new Event('DOMContentLoaded', {
+   *     bubbles: true,
+   *     cancelable: true,
+   *   })
+   *   event.fake = true
+   *   window.document.dispatchEvent(event)
+   * ```
+   */
   const checkReady = (event?: Event & { fake?: boolean }) => {
     // Do nothing if this is a fake event
     if (event?.fake) return;
