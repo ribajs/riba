@@ -199,11 +199,7 @@ export class LifecycleService {
       const state = states[tagName].state;
       if (state.connected !== state.bound) {
         count++;
-        errorMessage += `${tagName}: ${JSON.stringify(
-          states[tagName].state,
-          null,
-          2
-        )} + \n`;
+        errorMessage += `${tagName}: connected: ${states[tagName].state.connected}, bound: ${states[tagName].state.bound}\n`;
       }
     }
 
