@@ -159,7 +159,7 @@ export const scrolling = async (
       }, 100);
     };
     scrollElement.removeEventListener("scroll", checkScroll);
-    scrollElement.addEventListener("scroll", checkScroll);
+    scrollElement.addEventListener("scroll", checkScroll, { passive: true });
     checkScroll();
   });
 };
