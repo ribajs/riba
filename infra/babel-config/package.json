@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/babel-config",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0-beta.5",
   "type": "commonjs",
   "description": "Default babel config used in Riba.js projects",
   "author": "Pascal Garber <pascal@artandcode.studio",
