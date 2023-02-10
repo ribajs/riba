@@ -1,7 +1,8 @@
 import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
-import * as monaco from "monaco-editor";
+import MonacoLoader from '@monaco-editor/loader'
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import pugTemplate from "./monaco-editor.component.pug";
+import type { editor } from "monaco-editor";
 
 interface Scope extends ScopeBase {
   dataValue: string;
@@ -70,7 +71,7 @@ export class MonacoEditorComponent extends Component {
 
   public _debug = true;
 
-  protected editor?: monaco.editor.IStandaloneCodeEditor;
+  protected editor?: editor.IStandaloneCodeEditor;
 
   static get observedAttributes(): string[] {
     return [
@@ -135,11 +136,11 @@ export class MonacoEditorComponent extends Component {
   }
 
   protected async afterBind() {
-    this.createEditor(this.scope.dataValue);
+    await this.createEditor(this.scope.dataValue);
     await super.afterBind();
   }
 
-  protected createEditor(value: any) {
+  protected async createEditor(value: any) {
     if (typeof value === "object") {
       value = JSON.stringify(value, null, 4);
     } else if (typeof value !== "string") {
@@ -149,6 +150,8 @@ export class MonacoEditorComponent extends Component {
     if (this.editor) {
       return;
     }
+
+    const monaco = await MonacoLoader.init()
 
     monaco.editor.onDidCreateEditor((/*editor*/) => {
       this.debug("onDidCreateEditor");
