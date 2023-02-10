@@ -34,6 +34,7 @@ There are a few OctoberCMS v1.x themes which were developed using Riba:
 ### Shopify Themes
 
 * The [Riba Documentation Theme](https://github.com/ribajs/doc) is currently implemented as Shopify Theme.
+* The [Seeberger Shop](https://www.seeberger.de/) was developed using Riba.js as a Shopify Theme.
 
 ### Node.js
 
