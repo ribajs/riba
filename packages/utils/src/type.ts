@@ -88,9 +88,12 @@ export const isBase64 = (str?: string | null) => {
  * @param obj
  * @returns
  */
-export const toBase64 = (obj: any) => {
-  if (isObject(obj)) {
-    obj = JSON.stringify(obj, null, 0);
+export const toBase64 = (_obj: any) => {
+  let obj: string;
+  if (isObject(_obj)) {
+    obj = JSON.stringify(_obj, null, 0);
+  } else {
+    obj = _obj.toString();
   }
   return BASE64_PREFIX + btoa(encodeURIComponent(obj));
 };

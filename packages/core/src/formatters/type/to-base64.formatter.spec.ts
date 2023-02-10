@@ -86,14 +86,14 @@ describe("riba.formatters", () => {
     });
 
     it("A object should be encoded to a base64 string and should be encoded back", () => {
+      if (!model.obj) {
+        throw new Error("beforeEach was not called correctly!");
+      }
       const el = document.createElement("div");
       el.setAttribute("rv-text", "obj | toBase64");
       riba.bind(el, model);
       expect(isBase64(el.textContent)).toBeTrue();
-      if (!model.obj) {
-        throw new Error("beforeEach was not called correctly!");
-      }
-      expect(parseType(el.textContent).value).toMatchObject(model.obj);
+      expect(parseType(el.textContent).value).toEqual(model.obj);
     });
   });
 });
