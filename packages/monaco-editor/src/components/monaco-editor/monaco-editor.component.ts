@@ -209,7 +209,7 @@ export class MonacoEditorComponent extends Component {
       this.debug("Format document");
       this.editor
         .getAction("editor.action.formatDocument")
-        .run()
+        ?.run()
         .then(() => {
           this.debug("Document formatted");
         })
