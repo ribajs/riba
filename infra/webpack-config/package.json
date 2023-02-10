@@ -61,11 +61,8 @@
     "webpack": "^5.x.x"
   },
   "devDependencies": {
-    "@types/copy-webpack-plugin": "^10.1.0",
     "@types/find-root": "^1.1.2",
-    "@types/fork-ts-checker-webpack-plugin": "^0.4.5",
     "@types/html-webpack-plugin": "^3.2.6",
-    "@types/mini-css-extract-plugin": "^2.5.1",
     "@types/webpack": "^5.28.0",
     "@types/webpack-node-externals": "^2.5.3",
     "@types/webpackbar": "^4.0.3"
