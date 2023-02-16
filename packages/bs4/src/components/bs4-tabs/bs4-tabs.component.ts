@@ -5,8 +5,8 @@ import {
   TemplatesComponent,
   ScopeBase,
 } from "@ribajs/core";
-import templateHorizontal from "./bs4-tabs-horizontal.component.html";
-import templateVertical from "./bs4-tabs-vertical.component.html";
+import templateHorizontal from "./bs4-tabs-horizontal.component.html?raw";
+import templateVertical from "./bs4-tabs-vertical.component.html?raw";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { debounce } from "@ribajs/utils/src/control";
 

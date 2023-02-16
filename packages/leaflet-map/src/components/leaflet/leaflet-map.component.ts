@@ -148,7 +148,9 @@ export class LeafletMapComponent extends Component {
   }
 
   protected async template() {
-    const { default: template } = await import("./leaflet-map.component.html");
+    const { default: template } = await import(
+      "./leaflet-map.component.html?raw"
+    );
 
     for (const el of Array.from(this.children)) {
       if (el.tagName === "ICON") {

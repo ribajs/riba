@@ -297,7 +297,7 @@ export class ShopifyProductItemComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./product-item.component.html"
+        "./product-item.component.html?raw"
       );
       return template;
     }

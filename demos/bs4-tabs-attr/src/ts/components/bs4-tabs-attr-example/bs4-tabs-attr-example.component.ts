@@ -16,7 +16,7 @@ export class Bs4TabsAttrExampleComponent extends Component {
 
   protected async template() {
     const { default: template } = await import(
-      "./bs4-tabs-attr-example.component.html"
+      "./bs4-tabs-attr-example.component.html?raw"
     );
     return template;
   }

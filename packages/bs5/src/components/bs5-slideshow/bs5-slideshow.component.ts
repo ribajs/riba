@@ -19,10 +19,10 @@ import {
   ScrollEventsService,
   getScrollPosition,
 } from "@ribajs/extras";
-import templateSlides from "./bs5-slideshow-slides.component.html";
-import templateControls from "./bs5-slideshow-controls.component.html";
-import templateIndicators from "./bs5-slideshow-indicators.component.html";
-import templateImage from "./bs5-slideshow-image.component.html";
+import templateSlides from "./bs5-slideshow-slides.component.html?raw";
+import templateControls from "./bs5-slideshow-controls.component.html?raw";
+import templateIndicators from "./bs5-slideshow-indicators.component.html?raw";
+import templateImage from "./bs5-slideshow-image.component.html?raw";
 
 const SLIDESHOW_INNER_SELECTOR = ".slideshow-row";
 

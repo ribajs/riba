@@ -378,7 +378,9 @@ export class Bs4FormComponent extends Component {
       this.initForm();
       return null;
     } else {
-      const { default: template } = await import("./bs4-form.component.html");
+      const { default: template } = await import(
+        "./bs4-form.component.html?raw"
+      );
       return template;
     }
   }

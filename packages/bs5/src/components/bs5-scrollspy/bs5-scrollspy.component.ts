@@ -69,7 +69,7 @@ export class Bs5ScrollspyComponent extends Bs5ContentsComponent {
       return null;
     } else {
       const { default: template } = await import(
-        "./bs5-scrollspy.component.html"
+        "./bs5-scrollspy.component.html?raw"
       );
       return template;
     }

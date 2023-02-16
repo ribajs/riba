@@ -130,7 +130,7 @@ export class ShopifyCommentsFormComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./comments-form.component.html"
+        "./comments-form.component.html?raw"
       );
       return template;
     }

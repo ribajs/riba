@@ -49,7 +49,7 @@ export class IconsetExampleComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./iconset-example.component.html"
+        "./iconset-example.component.html?raw"
       );
       return template;
     }

@@ -31,7 +31,7 @@ export class LuxonExampleComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./luxon-example.component.html"
+        "./luxon-example.component.html?raw"
       );
       return template;
     }

@@ -124,7 +124,7 @@ export class I18nShareComponent extends Bs4ShareComponent {
     }
 
     const { default: template } = await import(
-      "@ribajs/bs4/src/components/bs4-share/bs4-share.component.html"
+      "@ribajs/bs4/src/components/bs4-share/bs4-share.component.html?raw"
     );
 
     return template;

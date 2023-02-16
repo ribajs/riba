@@ -88,7 +88,7 @@ export class Bs5TaggedImageExampleComponent extends Component {
 
   protected async template() {
     const { default: template } = await import(
-      "./bs5-taggedimage-example.component.html"
+      "./bs5-taggedimage-example.component.html?raw"
     );
     return template;
   }

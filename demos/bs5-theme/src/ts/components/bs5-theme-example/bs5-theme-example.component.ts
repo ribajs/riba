@@ -30,7 +30,7 @@ export class Bs5ThemeExampleComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./bs5-theme-example.component.html"
+        "./bs5-theme-example.component.html?raw"
       );
       return template;
     }

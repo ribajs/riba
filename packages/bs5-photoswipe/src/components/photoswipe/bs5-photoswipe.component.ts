@@ -1,6 +1,6 @@
 import { Component, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import fullscreenTemplate from "./bs5-photoswipe.fullscreen.component.html";
+import fullscreenTemplate from "./bs5-photoswipe.fullscreen.component.html?raw";
 import { EventDispatcher } from "@ribajs/events";
 
 import PhotoSwipe from "photoswipe";
@@ -664,7 +664,7 @@ export class PhotoswipeComponent extends Component {
       return (this as HTMLElement).innerHTML + fullscreenTemplate;
     } else {
       const { default: template } = await import(
-        "./bs5-photoswipe.component.html"
+        "./bs5-photoswipe.component.html?raw"
       );
       return template + fullscreenTemplate;
     }

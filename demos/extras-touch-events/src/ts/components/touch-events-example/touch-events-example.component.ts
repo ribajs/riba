@@ -48,7 +48,7 @@ export class TouchEventsExampleComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./touch-events-example.component.html"
+        "./touch-events-example.component.html?raw"
       );
       return template;
     }

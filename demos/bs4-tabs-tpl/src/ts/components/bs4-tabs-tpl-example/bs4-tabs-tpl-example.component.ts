@@ -12,7 +12,7 @@ export class Bs4TabsTplExampleComponent extends Component {
   }
   protected async template() {
     const { default: template } = await import(
-      "./bs4-tabs-tpl-example.component.html"
+      "./bs4-tabs-tpl-example.component.html?raw"
     );
     return template;
   }

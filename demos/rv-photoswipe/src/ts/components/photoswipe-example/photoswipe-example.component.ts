@@ -43,7 +43,7 @@ export class PhotoswipeExampleComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./photoswipe-example.component.html"
+        "./photoswipe-example.component.html?raw"
       );
       return template;
     }

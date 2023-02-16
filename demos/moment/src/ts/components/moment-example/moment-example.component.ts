@@ -31,7 +31,7 @@ export class MomentExampleComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./moment-example.component.html"
+        "./moment-example.component.html?raw"
       );
       return template;
     }

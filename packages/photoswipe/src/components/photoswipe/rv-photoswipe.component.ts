@@ -589,14 +589,14 @@ export class PhotoswipeComponent extends Component {
 
   protected async template() {
     const { default: fullscreenTemplate } = await import(
-      "./rv-photoswipe.fullscreen.component.html"
+      "./rv-photoswipe.fullscreen.component.html?raw"
     );
     // Only set the component template if there no childs already: `<rv-photoswipe> any childs here.. <rv-photoswipe/>`
     if (hasChildNodesTrim(this)) {
       return (this as HTMLElement).innerHTML + fullscreenTemplate;
     } else {
       const { default: template } = await import(
-        "./rv-photoswipe.component.html"
+        "./rv-photoswipe.component.html?raw"
       );
       return template + fullscreenTemplate;
     }

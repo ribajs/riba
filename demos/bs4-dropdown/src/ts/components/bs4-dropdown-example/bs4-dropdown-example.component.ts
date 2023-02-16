@@ -90,7 +90,7 @@ export class Bs4DropdownExampleComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./bs4-dropdown-example.component.html"
+        "./bs4-dropdown-example.component.html?raw"
       );
       return template;
     }

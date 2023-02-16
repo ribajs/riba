@@ -29,7 +29,7 @@ export class ComponentsExampleComponent extends Component {
 
   protected async template() {
     const { default: template } = await import(
-      "./components-example.component.html"
+      "./components-example.component.html?raw"
     );
     return template;
   }

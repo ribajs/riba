@@ -230,7 +230,9 @@ export class ShopifyProductComponent extends Component {
     if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import("./product.component.html");
+      const { default: template } = await import(
+        "./product.component.html?raw"
+      );
       return template;
     }
   }

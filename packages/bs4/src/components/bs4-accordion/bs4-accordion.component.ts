@@ -237,7 +237,7 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     // Only set the component template if there no childs or the childs are templates
     if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
       const { default: template } = await import(
-        "./bs4-accordion.component.html"
+        "./bs4-accordion.component.html?raw"
       );
       return template;
     } else {

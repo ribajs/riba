@@ -31,7 +31,7 @@ export class ContentSliderExampleComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./content-slider-example.component.html"
+        "./content-slider-example.component.html?raw"
       );
       return template;
     }

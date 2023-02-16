@@ -394,7 +394,9 @@ export class Bs4ShareComponent extends Component {
       this.scope.labelTemplate = this.innerHTML;
       this.debug("Custom label template: ", this.scope.labelTemplate);
     }
-    const { default: template } = await import("./bs4-share.component.html");
+    const { default: template } = await import(
+      "./bs4-share.component.html?raw"
+    );
     return template;
   }
 }

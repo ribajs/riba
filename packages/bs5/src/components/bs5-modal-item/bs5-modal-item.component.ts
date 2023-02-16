@@ -97,7 +97,7 @@ export class Bs5ModalItemComponent extends Component {
   }
   protected async template() {
     const { default: template } = await import(
-      "./bs5-modal-item.component.html"
+      "./bs5-modal-item.component.html?raw"
     );
     return template;
   }

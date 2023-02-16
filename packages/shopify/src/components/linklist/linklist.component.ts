@@ -248,7 +248,9 @@ export class ShopifyLinklistComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import("./linklist.component.html");
+      const { default: template } = await import(
+        "./linklist.component.html?raw"
+      );
       return template;
     }
   }

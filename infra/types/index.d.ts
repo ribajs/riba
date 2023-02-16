@@ -1,5 +1,5 @@
 /** Type definition for html-loader / html template files */
-declare module "*.html" {
+declare module "*.html?raw" {
   const html: string;
   export default html;
 }

@@ -102,7 +102,9 @@ export class ShopifyDebugBarComponent extends Component {
     if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import("./debug-bar.component.html");
+      const { default: template } = await import(
+        "./debug-bar.component.html?raw"
+      );
       return template;
     }
   }

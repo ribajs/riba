@@ -91,7 +91,7 @@ export class Bs4NotificationContainerComponent extends Component {
     // Only set the component template if there no childs or the childs are templates
     if (!hasChildNodesTrim(this)) {
       const { default: template } = await import(
-        "./bs4-notification-container.component.html"
+        "./bs4-notification-container.component.html?raw"
       );
       return template;
     }

@@ -174,7 +174,7 @@ export class Bs4ContentsComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./bs4-contents.component.html"
+        "./bs4-contents.component.html?raw"
       );
       return template;
     }

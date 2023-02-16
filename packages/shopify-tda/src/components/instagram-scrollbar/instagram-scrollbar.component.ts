@@ -134,7 +134,7 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./instagram-scrollbar.component.html"
+        "./instagram-scrollbar.component.html?raw"
       );
       return template;
     }

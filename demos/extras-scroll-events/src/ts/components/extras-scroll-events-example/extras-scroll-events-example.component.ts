@@ -47,7 +47,7 @@ export class ExtrasScrollEventsExampleComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./extras-scroll-events-example.component.html"
+        "./extras-scroll-events-example.component.html?raw"
       );
       return template;
     }

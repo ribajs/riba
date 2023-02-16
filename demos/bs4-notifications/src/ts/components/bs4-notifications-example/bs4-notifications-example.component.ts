@@ -69,7 +69,7 @@ export class Bs4NotificationsExampleComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./bs4-notifications-example.component.html"
+        "./bs4-notifications-example.component.html?raw"
       );
       return template;
     }

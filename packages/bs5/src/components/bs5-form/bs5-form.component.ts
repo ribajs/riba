@@ -382,7 +382,9 @@ export class Bs5FormComponent extends Component {
       this.initForm();
       return null;
     } else {
-      const { default: template } = await import("./bs5-form.component.html");
+      const { default: template } = await import(
+        "./bs5-form.component.html?raw"
+      );
       return template;
     }
   }

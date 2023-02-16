@@ -99,7 +99,7 @@ export class ShopifyCartButtonComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./cart-button.component.html"
+        "./cart-button.component.html?raw"
       );
       return template;
     }

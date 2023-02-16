@@ -69,7 +69,7 @@ export class Bs4ScrollspyComponent extends Bs4ContentsComponent {
       return null;
     } else {
       const { default: template } = await import(
-        "./bs4-scrollspy.component.html"
+        "./bs4-scrollspy.component.html?raw"
       );
       return template;
     }

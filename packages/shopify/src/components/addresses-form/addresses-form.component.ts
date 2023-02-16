@@ -162,7 +162,7 @@ export class ShopifyAddressesComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./addresses-form.component.html"
+        "./addresses-form.component.html?raw"
       );
       return template;
     }

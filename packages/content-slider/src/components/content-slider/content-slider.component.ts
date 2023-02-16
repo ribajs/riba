@@ -325,7 +325,7 @@ export class ContentSliderComponent extends TemplatesComponent {
     // Only set the component template if there no childs or the childs are templates
     if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
       const { default: template } = await import(
-        "./content-slider.component.html"
+        "./content-slider.component.html?raw"
       );
       this.debug("Use template", template);
       return template;

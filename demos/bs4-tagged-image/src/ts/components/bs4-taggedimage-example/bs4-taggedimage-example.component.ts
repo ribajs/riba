@@ -88,7 +88,7 @@ export class Bs4TaggedImageExampleComponent extends Component {
 
   protected async template() {
     const { default: template } = await import(
-      "./bs4-taggedimage-example.component.html"
+      "./bs4-taggedimage-example.component.html?raw"
     );
     return template;
   }

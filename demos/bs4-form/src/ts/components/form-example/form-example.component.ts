@@ -30,7 +30,7 @@ export class FormExampleComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./form-example.component.html"
+        "./form-example.component.html?raw"
       );
       return template;
     }

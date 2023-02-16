@@ -30,7 +30,7 @@ export class Bs5ToggleButtonSidebarExampleComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./bs5-toggle-button-sidebar-example.component.html"
+        "./bs5-toggle-button-sidebar-example.component.html?raw"
       );
       return template;
     }

@@ -14,11 +14,11 @@ import {
   getScrollPosition,
 } from "@ribajs/extras";
 
-import templateSlides from "./bs4-slideshow-slides.component.html";
+import templateSlides from "./bs4-slideshow-slides.component.html?raw";
 
-import templateControls from "./bs4-slideshow-controls.component.html";
+import templateControls from "./bs4-slideshow-controls.component.html?raw";
 
-import templateIndicators from "./bs4-slideshow-indicators.component.html";
+import templateIndicators from "./bs4-slideshow-indicators.component.html?raw";
 
 const SLIDESHOW_INNER_SELECTOR = ".slideshow-inner";
 

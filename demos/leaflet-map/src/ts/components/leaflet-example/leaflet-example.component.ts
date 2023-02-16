@@ -37,7 +37,7 @@ export class LeafletExampleComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./leaflet-example.component.html"
+        "./leaflet-example.component.html?raw"
       );
       return template;
     }

@@ -218,7 +218,7 @@ export class ShopifyCartComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import("./cart.component.html");
+      const { default: template } = await import("./cart.component.html?raw");
       return template;
     }
   }

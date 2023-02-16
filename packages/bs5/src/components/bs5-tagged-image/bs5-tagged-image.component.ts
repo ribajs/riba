@@ -4,7 +4,7 @@ import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { PopoverOptions } from "@ribajs/bs5";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { TaggedImageTag as Tag } from "../../types/index.js";
-import template from "./bs5-tagged-image.component.html";
+import template from "./bs5-tagged-image.component.html?raw";
 import { debounce } from "@ribajs/utils/src/control";
 
 interface Options {

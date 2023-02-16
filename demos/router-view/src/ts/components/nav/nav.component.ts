@@ -23,7 +23,7 @@ export class NavComponent extends Component {
   }
 
   protected async template() {
-    const { default: template } = await import("./nav.component.html");
+    const { default: template } = await import("./nav.component.html?raw");
     return template;
   }
 }

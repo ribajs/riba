@@ -271,7 +271,7 @@ export class Bs4ColorPickerComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./bs4-colorpicker.component.html"
+        "./bs4-colorpicker.component.html?raw"
       );
       return template;
     }

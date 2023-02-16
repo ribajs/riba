@@ -108,7 +108,7 @@ export class ShopifyContactFormComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./contact-form.component.html"
+        "./contact-form.component.html?raw"
       );
       return template;
     }

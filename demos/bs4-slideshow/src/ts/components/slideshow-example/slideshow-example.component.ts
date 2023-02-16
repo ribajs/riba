@@ -37,7 +37,7 @@ export class SlideshowExampleComponent extends Component {
       return null;
     } else {
       const { default: template } = await import(
-        "./slideshow-example.component.html"
+        "./slideshow-example.component.html?raw"
       );
       return template;
     }

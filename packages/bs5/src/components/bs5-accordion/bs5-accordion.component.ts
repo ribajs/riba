@@ -228,7 +228,7 @@ export class Bs5AccordionComponent extends TemplatesComponent {
     // Only set the component template if there no childs or the childs are templates
     if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
       const { default: template } = await import(
-        "./bs5-accordion.component.html"
+        "./bs5-accordion.component.html?raw"
       );
       return template;
     } else {
