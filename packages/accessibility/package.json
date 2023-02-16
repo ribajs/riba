@@ -23,9 +23,9 @@
     "@babel/runtime": "^7.20.13",
     "@babel/runtime-corejs3": "^7.20.13",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/eslint": "^8.21.0",
+    "@types/eslint": "^8.21.1",
     "@types/node": "^18.13.0",
-    "eslint": "^8.33.0",
+    "eslint": "^8.34.0",
     "gamecontroller.js": "workspace:^",
     "typescript": "4.9.5"
   }

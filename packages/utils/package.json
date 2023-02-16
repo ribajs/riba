@@ -58,8 +58,8 @@
     "@ribajs/tsconfig": "workspace:^",
     "@types/jest": "^29.4.0",
     "@types/node": "^18.13.0",
-    "babel-jest": "^29.4.2",
-    "eslint": "^8.33.0",
+    "babel-jest": "^29.4.3",
+    "eslint": "^8.34.0",
     "typescript": "4.9.5"
   }
 }
