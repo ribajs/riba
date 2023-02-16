@@ -1,7 +1,7 @@
 import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { getUrl } from "@ribajs/utils/src/url";
 import template from "./bs5-share.component.html?raw";
-import labelTemplate from "./bs5-share.label.html";
+import labelTemplate from "./bs5-share.label.html?raw";
 import { ShareItem, ShareUrlType } from "../../types/index.js";
 import { Dropdown } from "@ribajs/bs5";
 import {
