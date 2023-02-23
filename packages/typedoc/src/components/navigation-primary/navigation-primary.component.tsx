@@ -3,8 +3,8 @@ import { EventDispatcher } from "@ribajs/events";
 import { Dropdown } from "@ribajs/bs5";
 import { Pjax } from "@ribajs/router";
 import type {} from "@ribajs/fuse";
-import childTemplateList from "./child-template-list.html";
-import childTemplateDropdown from "./child-template-dropdown.html";
+import childTemplateList from "./child-template-list.html?raw";
+import childTemplateDropdown from "./child-template-dropdown.html?raw";
 
 import type {
   NavigationPrimaryComponentScope,

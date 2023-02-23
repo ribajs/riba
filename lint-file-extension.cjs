@@ -22,7 +22,7 @@ const search = async (dir, regex, ext, exclude) => {
  * @param {string} dir
  * @param {string} ext
  * @param {string[]} excludes
- * @returns
+ * @returns {Promise<string[]>}
  */
 const getFiles = async (dir, ext, excludes) => {
   let files = [];
@@ -63,7 +63,7 @@ const getFiles = async (dir, ext, excludes) => {
 
 search(
   "./packages",
-  /(import|from) ("|')\..*(?<!.(js|html|pug))("|')/g,
+  /(import|from) ("|')\..*(?<!.(js|html\?raw|pug))("|')/g,
   ".ts",
   ["dist", "node_modules", "compiler.spec.ts", "mod.ts"]
 )

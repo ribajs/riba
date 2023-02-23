@@ -3,7 +3,7 @@ import {
   Bs4ShareComponent,
   Scope as Bs4ShareScope,
 } from "@ribajs/bs4/src/components/bs4-share/bs4-share.component.js";
-import labelTemplate from "./share.label.html";
+import labelTemplate from "./share.label.html?raw";
 import { I18nService } from "../../services/index.js";
 import { LocalesService } from "../../types/index.js";
 

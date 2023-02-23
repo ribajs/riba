@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/eslint-config",
   "description": "Default ESLint configuration for Riba.js projects",
-  "version": "2.0.0-beta.5",
+  "version": "2.0.0-beta.6",
   "type": "commonjs",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
@@ -34,9 +34,9 @@
     "prettier"
   ],
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.52.0",
-    "@typescript-eslint/experimental-utils": "^5.52.0",
-    "@typescript-eslint/parser": "^5.52.0",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/experimental-utils": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-import-resolver-typescript": "^3.5.3",

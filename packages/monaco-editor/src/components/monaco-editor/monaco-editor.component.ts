@@ -1,5 +1,5 @@
 import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
-import MonacoLoader from '@monaco-editor/loader'
+import MonacoLoader from "@monaco-editor/loader";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import pugTemplate from "./monaco-editor.component.pug";
 import type { editor } from "monaco-editor";
@@ -151,7 +151,7 @@ export class MonacoEditorComponent extends Component {
       return;
     }
 
-    const monaco = await MonacoLoader.init()
+    const monaco = await MonacoLoader.init();
 
     monaco.editor.onDidCreateEditor((/*editor*/) => {
       this.debug("onDidCreateEditor");
