@@ -1,7 +1,7 @@
 {
   "name": "ribajs",
   "description": "Declarative data binding + template solution.",
-  "version": "2.0.0-beta.6",
+  "version": "2.0.0-beta.7",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -41,16 +41,16 @@
     "test:watch": "jest --config=jest.config.cjs --watch",
     "test:clear": "jest --config=jest.config.cjs --clearCache",
     "test:migrate": "ts-jest config:migrate jest.config.cjs",
-    "lint": "yarn run lint:ext && yarn workspaces foreach -p run lint",
+    "lint": "yarn run lint:ext && yarn workspaces foreach -v -p run lint",
     "lint:ext": "node lint-file-extension.cjs",
-    "build": "yarn workspaces foreach -p run build",
-    "clean": "yarn workspaces foreach -p run clean",
-    "bump:prerelease": "yarn workspaces foreach version prerelease",
-    "bump:patch": "yarn workspaces foreach version patch",
-    "bump:minor": "yarn workspaces foreach version minor",
-    "bump:major": "yarn workspaces foreach version major",
-    "publish:next": "yarn run build && yarn workspaces foreach npm publish --tolerate-republish --tag next --access public",
-    "publish:latest": "yarn run build && yarn workspaces foreach npm publish --tolerate-republish --tag latest --access public"
+    "build": "yarn workspaces foreach -v -p run build",
+    "clean": "yarn workspaces foreach -v -p run clean",
+    "bump:prerelease": "yarn workspaces foreach -v version prerelease",
+    "bump:patch": "yarn workspaces foreach -v version patch",
+    "bump:minor": "yarn workspaces foreach -v version minor",
+    "bump:major": "yarn workspaces foreach -v version major",
+    "publish:next": "yarn run build && yarn workspaces foreach -v npm publish --tolerate-republish --tag next --access public",
+    "publish:latest": "yarn run build && yarn workspaces foreach -v npm publish --tolerate-republish --tag latest --access public"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
