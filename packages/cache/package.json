@@ -56,14 +56,14 @@
     "@babel/runtime-corejs3": "^7.21.0",
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/jest": "^29.4.0",
-    "@typescript-eslint/eslint-plugin": "^5.53.0",
-    "@typescript-eslint/parser": "^5.53.0",
-    "eslint": "^8.34.0",
-    "eslint-config-prettier": "^8.6.0",
+    "@types/jest": "^29.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.4",
-    "typescript": "4.9.5"
+    "prettier": "^2.8.6",
+    "typescript": "5.0.2"
   },
   "dependencies": {
     "idb-keyval": "^6.2.0",

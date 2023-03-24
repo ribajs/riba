@@ -5,8 +5,6 @@
  * see https://github.com/twbs/bootstrap/blob/master/js/src/dom/selector-engine.js
  * --------------------------------------------------------------------------
  */
-import { NODE_TEXT } from "../../constants/index.js";
-
 import { makeArray } from "../utils.js";
 
 export const matches = (
@@ -43,11 +41,7 @@ export const parents = (element: HTMLElement, selector: string) => {
 
   let ancestor = element.parentNode;
 
-  while (
-    ancestor &&
-    ancestor.nodeType === Node.ELEMENT_NODE &&
-    ancestor.nodeType !== NODE_TEXT
-  ) {
+  while (ancestor && ancestor.nodeType === Node.ELEMENT_NODE) {
     if (matches(ancestor, selector)) {
       parents.push(ancestor);
     }
@@ -67,11 +61,7 @@ export const prev = (element: HTMLElement, selector: string) => {
 
   let previous = element.previousSibling;
 
-  while (
-    previous &&
-    previous.nodeType === Node.ELEMENT_NODE &&
-    previous.nodeType !== NODE_TEXT
-  ) {
+  while (previous && previous.nodeType === Node.ELEMENT_NODE) {
     if (matches(previous as HTMLElement, selector)) {
       siblings.push(previous);
     }
