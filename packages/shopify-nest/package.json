@@ -25,7 +25,7 @@
     "@ribajs/utils": "workspace:^",
     "@types/debug": "^4.1.7",
     "debug": "^4.3.4",
-    "monaco-editor": "^0.36.1"
+    "monaco-editor": "^0.37.0"
   },
   "main": "./src/index.ts",
   "module": "src/index.ts",
@@ -34,8 +34,8 @@
     "@babel/runtime": "^7.21.0",
     "@babel/runtime-corejs3": "^7.21.0",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^18.15.6",
-    "eslint": "^8.36.0",
-    "typescript": "5.0.2"
+    "@types/node": "^18.15.11",
+    "eslint": "^8.37.0",
+    "typescript": "5.0.3"
   }
 }

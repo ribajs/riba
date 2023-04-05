@@ -31,20 +31,20 @@
     "@ribajs/tsconfig": "workspace:^",
     "@ribajs/types": "workspace:^",
     "@types/jest": "^29.5.0",
-    "concurrently": "^7.6.0",
-    "eslint": "^8.36.0",
+    "concurrently": "^8.0.1",
+    "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "inspectpack": "^4.7.1",
     "jest": "^29.5.0",
     "jest-extended": "^3.2.4",
-    "prettier": "^2.8.6",
+    "prettier": "^2.8.7",
     "rollup-plugin-pug": "^1.1.1",
     "sass": "^1.60.0",
-    "ts-jest": "^29.0.5",
-    "typescript": "5.0.2",
-    "vite": "^4.2.1",
-    "vite-plugin-pug": "^0.3.2"
+    "serve": "^14.2.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "5.0.3",
+    "vite": "^4.2.1"
   },
   "dependencies": {
     "@ribajs/core": "workspace:^",
@@ -52,7 +52,6 @@
     "@ribajs/monaco-editor": "workspace:^",
     "@ribajs/utils": "workspace:^",
     "bootstrap": "5.2.3",
-    "monaco-editor": "0.36.1",
-    "serve": "^14.2.0"
+    "monaco-editor": "0.37.0"
   }
 }
