@@ -1,0 +1,180 @@
+bs5-slider {
+
+  --bs5-slider-control-inside-spacing: 20px;
+  --bs5-slider-control-outside-spacing: 20px;
+  --bs5-slider-indicators-outside-spacing: 20px;
+  --bs5-slider-indicators-inside-spacing: 20px;
+  --bs5-slider-indicator-spacer: 3px;
+  --bs5-slider-control-width: 15%;  
+
+  user-select: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+  display: block;
+  position: relative;
+
+  &.bs5-slider-ready {
+    .slider-controls {
+      @extend .opacity-100;
+    }
+  }
+
+  .slider-row {
+    @extend .flex-scrollbar-x-scroll;
+    @extend .scrollbar-invisible;
+
+    // slide
+    > .slide {
+      position: relative;
+      user-select: none;
+      -webkit-user-drag: none;
+      user-drag: none;
+      .slide-caption {
+        // TODO: add caption
+      }
+    }
+  }
+
+  &.touchscroll-disabled {
+    .slider-row {
+      overflow-x: hidden;
+    }
+  }
+
+  .slider-controls {
+    color: inherit;
+    width: 0px;
+    padding: 0px;
+    opacity: 0;
+
+    &.slider-control-prev, &.slider-control-next {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    &.control-middle {
+      flex-direction: column;
+      justify-content: center;
+    }
+    &.control-bottom {
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    &.control-top {
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    &.control-inside {
+      button {
+        // Use your custom style here for the inside controls
+      }
+    }
+
+    &.control-outside {
+      button {
+        // Use your custom style here for the outside controls
+      }
+    }
+
+    &.slider-control-prev {
+      &.control-inside {
+        left: var(--bs5-slider-control-inside-spacing);
+      }
+      &.control-outside {
+        left: calc(var(--bs5-slider-control-outside-spacing) * -1);
+      }
+    }
+    &.slider-control-next {
+      &.control-inside {
+        right: var(--bs5-slider-control-inside-spacing);
+      }
+      &.control-outside {
+        right: calc(var(--bs5-slider-control-outside-spacing) * -1);
+      }
+    }
+  }
+
+  // TODO
+  .slider-indicators {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-right: $carousel-control-width;
+    margin-left: $carousel-control-width;
+    padding: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    li {
+      flex: 0 1 auto;
+      margin-right: $carousel-indicator-spacer;
+      margin-left: $carousel-indicator-spacer;
+      cursor: pointer;
+    }
+
+    &.indicators-bottom {
+      top: auto;
+      right: 0;
+      bottom: var(--bs5-slider-indicators-inside-spacing);
+      left: 0;
+
+      &.indicators-inside {
+        bottom: var(--bs5-slider-indicators-inside-spacing);
+      }
+      &.indicators-outside {
+        bottom: calc(-1 * var(--bs5-slider-indicators-outside-spacing));
+      }
+    }
+    &.indicators-top {
+      top: var(--bs5-slider-indicators-inside-spacing);
+      right: 0;
+      bottom: auto;
+      left: 0;
+  
+      &.indicators-inside {
+        top: var(--bs5-slider-indicators-inside-spacing);
+      }
+      &.indicators-outside {
+        top: var(--bs5-slider-indicators-outside-spacing);
+      }
+    }
+    &.indicators-right {
+      top: 0;
+      right: var(--bs5-slider-indicators-inside-spacing);
+      bottom: 0;
+      left: auto;
+      
+      &.indicators-inside {
+        right: var(--bs5-slider-indicators-inside-spacing);
+      }
+      &.indicators-outside {
+        right: calc(-1 * var(--bs5-slider-indicators-outside-spacing));
+      }
+    }
+    &.indicators-left {
+      top: 0;
+      right: auto;
+      bottom: 0;
+      left: var(--bs5-slider-indicators-inside-spacing);
+      &.indicators-inside {
+        left: var(--bs5-slider-indicators-inside-spacing);
+      }
+      &.indicators-outside {
+        left: calc(-1 * var(--bs5-slider-indicators-outside-spacing));
+      }
+    }
+
+  }
+
+}

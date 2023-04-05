@@ -14,6 +14,7 @@ export { Bs5ScrollspyComponent } from "./bs5-scrollspy/bs5-scrollspy.component.j
 export { Bs5ShareComponent } from "./bs5-share/bs5-share.component.js";
 export { Bs5SidebarComponent } from "./bs5-sidebar/bs5-sidebar.component.js";
 export { Bs5SlideshowComponent } from "./bs5-slideshow/bs5-slideshow.component.js";
+export { Bs5SliderComponent } from "./bs5-slider/bs5-slider.component.js";
 export { Bs5TabsComponent } from "./bs5-tabs/bs5-tabs.component.js";
 export { Bs5TaggedImageComponent } from "./bs5-tagged-image/bs5-tagged-image.component.js";
 export { Bs5ThemeButtonComponent } from "./bs5-theme-button/bs5-theme-button.component.js";

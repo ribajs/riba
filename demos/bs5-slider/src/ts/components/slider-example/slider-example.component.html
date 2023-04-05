@@ -1,0 +1,149 @@
+<div class="container-fluid">
+  <div class="row">
+    <section class="col-12 mb-5">
+      <bs5-slider rv-parent>
+
+        <!-- Slides -->
+        <div class="row slider-row m-5">
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=1"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=2"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=3"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=4"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=5"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=6"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=7"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=8"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+        </div>
+
+        <!-- Control left -->
+        <span rv-show="showControls" class="slider-controls slider-control-prev" rv-add-class="controlsPositionClass">
+          <button class="btn btn-link" rv-enabled="enablePrevControl"
+            class="transition-all flex justify-center items-center w-10 h-10 text-foreground p-0" aria-hidden="true"
+            role="button" rv-on-click="prev">
+            <bs5-icon class="text-body" rv-src="$parent.iconArrowCarrot" size="32" direction="left"></bs5-icon>
+          </button>
+          <span class="visually-hidden">Previous</span>
+        </span>
+
+        <!-- Control right -->
+        <span rv-show="showControls" class="slider-controls slider-control-next" rv-add-class="controlsPositionClass">
+          <button class="btn btn-link" rv-enabled="enableNextControl"
+            class="transition-all flex justify-center items-center w-10 h-10 text-foreground p-0" aria-hidden="true"
+            role="button" data-slide="next" rv-on-click="next">
+            <bs5-icon class="text-body" rv-src="$parent.iconArrowCarrot" size="32" direction="right"></bs5-icon>
+          </button>
+          <span class="visually-hidden">Next</span>
+        </span>
+
+
+        <!-- Indicators -->
+        <ol rv-if="indicators" class="slider-indicators" rv-add-class="indicatorsPositionClass">
+          <li rv-each-slide="items" rv-class-active="slide.active" rv-on-click="goTo | args slide.index">
+            <rv-icon rv-hide="slide.active" rv-src="indicatorInactiveIconSrc" size="16"></rv-icon>
+            <rv-icon rv-show="slide.active" rv-src="indicatorActiveIconSrc" size="16"></rv-icon>
+          </li>
+        </ol>
+
+      </bs5-slider>
+    </section>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <section class="col-12 mb-5">
+      <bs5-slider rv-parent columns="2" slides-to-scroll="1" sticky="true" drag="true" infinite="true">
+
+        <!-- Slides -->
+        <div class="row slider-row m-5">
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=1"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=2"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=3"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=4"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=5"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=6"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=7"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/3000/800?random=8"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+        </div>
+
+        <!-- Control left -->
+        <span rv-show="showControls" class="slider-controls slider-control-prev" rv-add-class="controlsPositionClass">
+          <button class="btn btn-link" rv-enabled="enablePrevControl"
+            class="transition-all flex justify-center items-center w-10 h-10 text-foreground p-0" aria-hidden="true"
+            role="button" rv-on-click="prev">
+            <bs5-icon class="text-body" rv-src="$parent.iconArrowCarrot" size="32" direction="left"></bs5-icon>
+          </button>
+          <span class="visually-hidden">Previous</span>
+        </span>
+
+        <!-- Control right -->
+        <span rv-show="showControls" class="slider-controls slider-control-next" rv-add-class="controlsPositionClass">
+          <button class="btn btn-link" rv-enabled="enableNextControl"
+            class="transition-all flex justify-center items-center w-10 h-10 text-foreground p-0" aria-hidden="true"
+            role="button" data-slide="next" rv-on-click="next">
+            <bs5-icon class="text-body" rv-src="$parent.iconArrowCarrot" size="32" direction="right"></bs5-icon>
+          </button>
+          <span class="visually-hidden">Next</span>
+        </span>
+
+
+        <!-- Indicators -->
+        <ol rv-if="indicators" class="slider-indicators" rv-add-class="indicatorsPositionClass">
+          <li rv-each-slide="items" rv-class-active="slide.active" rv-on-click="goTo | args slide.index">
+            <rv-icon rv-hide="slide.active" rv-src="$parent.iconCircleEmpty" size="16"></rv-icon>
+            <rv-icon rv-show="slide.active" rv-src="$parent.iconCircleSelected" size="16"></rv-icon>
+          </li>
+        </ol>
+
+      </bs5-slider>
+    </section>
+  </div>
+</div>
