@@ -19,19 +19,19 @@
   > * {
     object-fit: cover;
   }
-  &.fit-cover {
+  &.object-fit-cover {
     > * {
       object-fit: cover !important;
     }
   }
-  &.fit-contain {
+  &.object-fit-contain {
     > * {
       object-fit: contain !important;
     }
   }
-  &.fit-initial {
+  &.object-fit-none {
     > * {
-      object-fit: initial !important;
+      object-fit: none !important;
     }
   }
 }

@@ -1,8 +1,6 @@
 import { Dropdown as _Dropdown } from "bootstrap";
 import { Bs5DropdownComponent } from "../components/bs5-dropdown/bs5-dropdown.component.js";
 
-const DROPDOWN_DATA_KEY = "bs.dropdown";
-const DROPDOWN_EVENT_KEY = `.${DROPDOWN_DATA_KEY}`;
 const DROPDOWN_DATA_API_KEY = ".data-api";
 
 const DROPDOWN_ARROW_DOWN_KEY = "ArrowDown";
@@ -36,11 +34,11 @@ export class Dropdown extends _Dropdown {
     super(element, options);
   }
 
-  static NAME = "dropdown";
-  static get DATA_KEY() {
-    return DROPDOWN_DATA_KEY;
-  }
-  static EVENT_KEY = DROPDOWN_EVENT_KEY;
+  // static NAME = "dropdown";
+  // static get DATA_KEY() {
+  //   return DROPDOWN_DATA_KEY;
+  // }
+  // static EVENT_KEY = Dropdown.EVENT_KEY;
   static DATA_API_KEY = DROPDOWN_DATA_API_KEY;
 
   static ESCAPE_KEY = DROPDOWN_ESCAPE_KEY;
@@ -54,14 +52,14 @@ export class Dropdown extends _Dropdown {
     `${DROPDOWN_ARROW_UP_KEY}|${DROPDOWN_ARROW_DOWN_KEY}|${DROPDOWN_ESCAPE_KEY}`
   );
 
-  static EVENT_HIDE = `hide${DROPDOWN_EVENT_KEY}`;
-  static EVENT_HIDDEN = `hidden${DROPDOWN_EVENT_KEY}`;
-  static EVENT_SHOW = `show${DROPDOWN_EVENT_KEY}`;
-  static EVENT_SHOWN = `shown${DROPDOWN_EVENT_KEY}`;
-  static EVENT_CLICK = `click${DROPDOWN_EVENT_KEY}`;
-  static EVENT_CLICK_DATA_API = `click${DROPDOWN_EVENT_KEY}${DROPDOWN_DATA_API_KEY}`;
-  static EVENT_KEYDOWN_DATA_API = `keydown${DROPDOWN_EVENT_KEY}${DROPDOWN_DATA_API_KEY}`;
-  static EVENT_KEYUP_DATA_API = `keyup${DROPDOWN_EVENT_KEY}${DROPDOWN_DATA_API_KEY}`;
+  static EVENT_HIDE = `hide${Dropdown.EVENT_KEY}`;
+  static EVENT_HIDDEN = `hidden${Dropdown.EVENT_KEY}`;
+  static EVENT_SHOW = `show${Dropdown.EVENT_KEY}`;
+  static EVENT_SHOWN = `shown${Dropdown.EVENT_KEY}`;
+  static EVENT_CLICK = `click${Dropdown.EVENT_KEY}`;
+  static EVENT_CLICK_DATA_API = `click${Dropdown.EVENT_KEY}${DROPDOWN_DATA_API_KEY}`;
+  static EVENT_KEYDOWN_DATA_API = `keydown${Dropdown.EVENT_KEY}${DROPDOWN_DATA_API_KEY}`;
+  static EVENT_KEYUP_DATA_API = `keyup${Dropdown.EVENT_KEY}${DROPDOWN_DATA_API_KEY}`;
 
   static CLASS_NAME_DISABLED = "disabled";
   static CLASS_NAME_SHOW = "show";

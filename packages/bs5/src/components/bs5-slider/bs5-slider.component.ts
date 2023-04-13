@@ -17,6 +17,7 @@ import {
   ScrollPosition,
   ScrollEventsService,
   getScrollPosition,
+  ScrollEventDetail,
 } from "@ribajs/extras";
 
 const SLIDER_INNER_SELECTOR = ".slider-row";
@@ -46,6 +47,11 @@ export class Bs5SliderComponent extends Component {
   protected get indicatorsElement() {
     return this.querySelector(".slider-indicators");
   }
+
+  public static EVENTS = {
+    scrolling: "scrolling",
+    scrollended: "scrollended",
+  };
 
   static get observedAttributes(): (keyof JsxBs5SliderProps)[] {
     return [
@@ -314,25 +320,15 @@ export class Bs5SliderComponent extends Component {
     }
   }
 
-  protected onScroll(
-    event: CustomEvent<{
-      startPosition: ScrollPosition | null;
-      currentPosition: ScrollPosition;
-      direction: string;
-    }>
-  ) {
+  protected onScroll(event: CustomEvent<ScrollEventDetail>) {
     this.scope.isScrolling = true;
     // Forward the event to this component, so that other components can listen to it
-    this.dispatchEvent(new CustomEvent(event.type, { detail: event.detail }));
+    this.dispatchEvent(
+      new CustomEvent<ScrollEventDetail>(event.type, { detail: event.detail })
+    );
   }
 
-  protected onScrollEnd(
-    event: CustomEvent<{
-      startPosition: ScrollPosition | null;
-      endPosition: ScrollPosition | null;
-      direction: string;
-    }>
-  ) {
+  protected onScrollEnd(event: CustomEvent<ScrollEventDetail>) {
     this.scope.isScrolling = false;
     if (!this.scope.items?.length) {
       return;
@@ -342,14 +338,16 @@ export class Bs5SliderComponent extends Component {
       return;
     }
 
-    // Forward the event to this component, so that other components can listen to it
-    this.dispatchEvent(new CustomEvent(event.type, { detail: event.detail }));
-
     try {
       this.updateSlides();
     } catch (error: any) {
       this.throw(error);
     }
+
+    // Forward the event to this component, so that other components can listen to it
+    this.dispatchEvent(
+      new CustomEvent<ScrollEventDetail>(event.type, { detail: event.detail })
+    );
   }
 
   protected connectedCallback() {
@@ -383,14 +381,14 @@ export class Bs5SliderComponent extends Component {
     );
 
     this.sliderInner?.addEventListener(
-      "scrolling",
+      Bs5SliderComponent.EVENTS.scrolling,
       this.onScroll as EventListener,
       {
         passive: true,
       }
     );
     this.sliderInner?.addEventListener(
-      "scrollended",
+      Bs5SliderComponent.EVENTS.scrollended,
       this.onScrollEnd as EventListener,
       {
         passive: true,
@@ -413,11 +411,11 @@ export class Bs5SliderComponent extends Component {
     );
 
     this.sliderInner?.removeEventListener(
-      "scrolling",
+      Bs5SliderComponent.EVENTS.scrolling,
       this.onScroll as EventListener
     );
     this.sliderInner?.removeEventListener(
-      "scrollended",
+      Bs5SliderComponent.EVENTS.scrollended,
       this.onScrollEnd as EventListener
     );
   }
@@ -739,6 +737,7 @@ export class Bs5SliderComponent extends Component {
       return this.updateSlides(fallbackOffset, true);
     }
 
+    // const oldActiveSlides = this.scope.activeSlides;
     this.scope.activeSlides = activeSlides;
     this.scope.prevIndex = prevIndex;
     this.scope.nextIndex = nextIndex;

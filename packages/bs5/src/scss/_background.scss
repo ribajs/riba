@@ -1,0 +1,38 @@
+// Size
+.bg-size-cover, .bg-size-contain {
+  background-repeat: no-repeat;
+}
+
+.bg-size-cover {
+  background-size: cover;
+}
+
+.bg-size-contain {
+  background-size: contain;
+}
+
+// Position
+.bg-position-center {
+  background-position: center center;
+}
+
+.bg-position-top {
+  background-position-y: top;
+}
+
+.bg-position-bottom {
+  background-position-y: bottom;
+}
+
+.bg-position-end {
+  background-position-x: right;
+}
+
+.bg-position-start {
+  background-position-x: left;
+}
+
+// Attachment
+.bg-attachment-fixed {
+  background-attachment: fixed;
+}

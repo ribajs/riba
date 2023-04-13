@@ -1,0 +1,30 @@
+bs5-slide-video {
+  display: block;
+}
+
+.ratio {
+  // default fit is cover
+  > bs5-slide-video > rv-video > video, > bs5-slide-video > rv-video > video > img {
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &.object-fit-cover {
+    > bs5-slide-video > rv-video > video, > bs5-slide-video > rv-video > video > img {
+      object-fit: cover !important;
+    }
+  }
+  &.object-fit-contain {
+    > bs5-slide-video > rv-video > video, > bs5-slide-video > rv-video > video > img {
+      object-fit: contain !important;
+    }
+  }
+  &.object-fit-none {
+    > bs5-slide-video > rv-video > video, > bs5-slide-video > rv-video > video > img {
+      object-fit: none !important;
+    }
+  }
+}

@@ -24,10 +24,10 @@ bs5-tagged-image {
   &.ratio img {
     object-fit: cover;
   }
-  &.fit-contain img {
+  &.object-fit-contain img {
     object-fit: contain !important;
   }
-  &.fit-cover img {
+  &.object-fit-cover img {
     object-fit: cover !important;
   }
   &.fit-initial img {

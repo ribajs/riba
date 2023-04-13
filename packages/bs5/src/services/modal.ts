@@ -20,7 +20,7 @@ export class Modal extends _Modal {
     return EVENT_KEY;
   }
 
-  static NAME = "modal";
+  // static NAME = "modal";
 
   static ESCAPE_KEY = "Escape";
 
