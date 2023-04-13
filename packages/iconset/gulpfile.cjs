@@ -28,12 +28,6 @@ gulp.task("build:svg", () => {
               // You can declare the preset-default, override some of its plugins settings, and then extend it with other built-in plugins
               {
                 name: "preset-default",
-                params: {
-                  overrides: {
-                    addAttributesToSVGElement: true,
-                    removeDimensions: true,
-                  },
-                },
               },
               {
                 name: "removeDimensions",

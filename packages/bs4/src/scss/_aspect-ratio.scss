@@ -29,10 +29,10 @@
   // default aspect ratio is 1:1
   padding-top: 100%; 
 
-  &.fit-cover {
+  &.object-fit-cover {
     background-size: cover !important;
   }
-  &.fit-contain {
+  &.object-fit-contain {
     background-size: contain !important;
   }
 
@@ -88,12 +88,12 @@
       object-fit: initial !important;
     }
   }
-  .fit-cover {
+  .object-fit-cover {
     &.embed-responsive-item {
       object-fit: cover !important;
     }
   }
-  .fit-contain {
+  .object-fit-contain {
     &.embed-responsive-item {
       object-fit: contain !important;
     }
@@ -121,5 +121,5 @@
 }
 
 .embed-responsive-100vh {
-    padding-top: 100vh
+  padding-top: 100vh
 }

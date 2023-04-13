@@ -25,8 +25,8 @@
     "@ribajs/tsconfig": "workspace:^",
     "@types/eslint": "^8.37.0",
     "@types/node": "^18.15.11",
-    "eslint": "^8.37.0",
+    "eslint": "^8.38.0",
     "gamecontroller.js": "workspace:^",
-    "typescript": "5.0.3"
+    "typescript": "5.0.4"
   }
 }
