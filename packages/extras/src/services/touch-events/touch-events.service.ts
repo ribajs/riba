@@ -2,6 +2,7 @@ import { getElementIndex } from "@ribajs/utils/src/dom.js";
 import {
   Position,
   TouchData,
+  TouchEventData,
   TouchOffset,
   TouchSettings,
   TouchType,
@@ -552,7 +553,7 @@ export class TouchEventsService extends BaseEventsService {
         const eventName =
           touchesLength > 1 ? "taphold" + touchesLength : "taphold";
 
-        const touchData = {
+        const touchData: TouchEventData = {
           touches,
           time: Date.now(),
           duration,
@@ -582,13 +583,13 @@ export class TouchEventsService extends BaseEventsService {
     ) {
       this.doubletapped = true;
       window.clearTimeout(this.tapTimer);
-      const lastTap: TouchData = this.getTouchData(
+      const lastTap = this.getTouchData(
         event,
         true,
         TouchType.CHANGED,
         TouchType.CHANGED
       );
-      const touchData = {
+      const touchData: TouchEventData = {
         firstTap: this.firstTap,
         secondTap: lastTap,
         interval: lastTap.time - this.firstTap.time,
@@ -616,7 +617,7 @@ export class TouchEventsService extends BaseEventsService {
 
   /**
    * singletap Event
-   * This is used in conjuction with doubletap when both events are needed on the same element
+   * This is used in conjunction with doubletap when both events are needed on the same element
    */
   protected singletap(event: TouchEvent | MouseEvent) {
     this.tapTimer = window.setTimeout(() => {
@@ -634,7 +635,7 @@ export class TouchEventsService extends BaseEventsService {
             diffPosition.y >= -this.settings.tapPixelRange &&
             diffPosition.y <= this.settings.tapPixelRange))
       ) {
-        const touchData: TouchData = this.getTouchData(
+        const touchData = this.getTouchData(
           event,
           false,
           TouchType.CHANGED,

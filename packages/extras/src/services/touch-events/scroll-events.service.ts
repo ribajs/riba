@@ -1,4 +1,9 @@
-import { ScrollPosition, ScrollEventsOptions } from "../../types/index.js";
+import {
+  ScrollPosition,
+  ScrollEventsOptions,
+  ScrollDirection,
+  ScrollEventDetail,
+} from "../../types/index.js";
 import { getScrollPosition } from "../../helper/scroll.js";
 import { BaseEventsService } from "./base-events.service.js";
 
@@ -42,7 +47,7 @@ export class ScrollEventsService extends BaseEventsService {
   protected getScrollDir(
     start: ScrollPosition | null,
     end: ScrollPosition | null
-  ) {
+  ): ScrollDirection {
     if (!start || !end) {
       return "unknown";
     }
@@ -111,7 +116,7 @@ export class ScrollEventsService extends BaseEventsService {
     this.isScrolling = false;
     this.endPosition = getScrollPosition(this.el);
     const direction = this.getScrollDir(this.startPosition, this.endPosition);
-    this.triggerCustomEvent("scrollended", event, {
+    this.triggerCustomEvent<ScrollEventDetail>("scrollended", event, {
       startPosition: this.startPosition,
       endPosition: this.endPosition,
       direction,
@@ -124,7 +129,7 @@ export class ScrollEventsService extends BaseEventsService {
   protected scrollstart(event: TouchEvent | MouseEvent) {
     this.isScrolling = true;
     this.startPosition = getScrollPosition(this.el);
-    this.triggerCustomEvent("scrollstart", event, {
+    this.triggerCustomEvent<ScrollEventDetail>("scrollstart", event, {
       startPosition: this.startPosition,
     });
   }
@@ -135,12 +140,12 @@ export class ScrollEventsService extends BaseEventsService {
   protected _scroll(event: TouchEvent | MouseEvent) {
     const currentPosition = getScrollPosition(this.el);
     const direction = this.getScrollDir(this.startPosition, currentPosition);
-    this.triggerCustomEvent("scroll" + direction, event, {
+    this.triggerCustomEvent<ScrollEventDetail>("scroll" + direction, event, {
       startPosition: this.startPosition,
       currentPosition,
       direction,
     });
-    this.triggerCustomEvent("scrolling", event, {
+    this.triggerCustomEvent<ScrollEventDetail>("scrolling", event, {
       startPosition: this.startPosition,
       currentPosition,
       direction,

@@ -1,3 +1,30 @@
 rv-video {
   display: block;
 }
+
+.ratio {
+  // default fit is cover
+  > rv-video > video, > rv-video > video > img {
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &.object-fit-cover {
+    > rv-video > video, > rv-video > video > img {
+      object-fit: cover !important;
+    }
+  }
+  &.object-fit-contain {
+    > rv-video > video, > rv-video > video > img {
+      object-fit: contain !important;
+    }
+  }
+  &.object-fit-none {
+    > rv-video > video, > rv-video > video > img {
+      object-fit: none !important;
+    }
+  }
+}
