@@ -89,6 +89,7 @@ export class Bs5SliderComponent extends Component {
     enableNextControl: false,
     enablePrevControl: false,
     showControls: false,
+    showIndicators: false,
     activeSlides: [],
     isScrolling: false,
     slideItemStyle: {},
@@ -743,6 +744,7 @@ export class Bs5SliderComponent extends Component {
     this.scope.nextIndex = nextIndex;
 
     this.updateControls();
+    this.updateIndicators();
 
     if (this.scope.sticky) {
       this.goTo(firstIndex);
@@ -753,7 +755,8 @@ export class Bs5SliderComponent extends Component {
 
   protected updateControls() {
     const isScrollable = this.isScrollable();
-    this.scope.showControls = this.scope.controls && isScrollable;
+    this.scope.showControls =
+      this.scope.controls && isScrollable && this.scope.items.length > 1;
 
     if (this.scope.infinite) {
       this.scope.enableNextControl = true;
@@ -767,6 +770,12 @@ export class Bs5SliderComponent extends Component {
       this.scope.nextIndex <= this.scope.items.length - 1;
     this.scope.enablePrevControl =
       isScrollable && this.scope.prevIndex !== -1 && this.scope.prevIndex >= 0;
+  }
+
+  protected updateIndicators() {
+    const isScrollable = this.isScrollable();
+    this.scope.showIndicators =
+      this.scope.indicators && isScrollable && this.scope.items.length > 1;
   }
 
   protected requiredAttributes(): string[] {

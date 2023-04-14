@@ -33,6 +33,7 @@ export interface Bs5SliderComponentScope {
   activeSlides: number[];
   isScrolling: boolean;
   showControls: boolean;
+  showIndicators: boolean;
   slideItemStyle: {
     [key: string]: string;
   };
