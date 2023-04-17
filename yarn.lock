@@ -4106,6 +4106,7 @@ __metadata:
     "@ribajs/extras": "workspace:^"
     "@ribajs/iconset": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/types": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/jest": "npm:^29.5.0"
     "@typescript-eslint/eslint-plugin": "npm:^5.58.0"

@@ -81,6 +81,7 @@
     "@ribajs/core": "workspace:^",
     "@ribajs/extras": "workspace:^",
     "@ribajs/iconset": "workspace:^",
+    "@ribajs/types": "workspace:^",
     "@ribajs/utils": "workspace:^",
     "bootstrap": "^5.2.3"
   }
