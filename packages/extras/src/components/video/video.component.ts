@@ -193,8 +193,23 @@ export class VideoComponent extends Component {
 
   constructor() {
     super();
-    const video = this.querySelector("video") as HTMLVideoElement;
-    this.video = video;
+    this.video = this.getVideoEl();
+  }
+
+  protected getVideoEl() {
+    const video = this.querySelector<HTMLVideoElement>("video");
+    if (!video) {
+      throw new Error("No video element found");
+    }
+    return video;
+  }
+
+  public load() {
+    this.video.load();
+    // Workaround for Firefox
+    setTimeout(() => {
+      this.video.load();
+    }, 100);
   }
 
   public toggleMute() {
@@ -246,6 +261,10 @@ export class VideoComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.init(VideoComponent.observedAttributes);
+    this.video = this.getVideoEl();
+    if (this.preload === "auto" || this.preload === "metadata") {
+      this.load();
+    }
   }
 
   protected initVideoElement() {
