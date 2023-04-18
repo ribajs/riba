@@ -110,7 +110,34 @@ export class Bs5IconComponent extends BasicComponent {
       return;
     }
 
-    icon = await this.fetchIcon(this.scope.src);
+    try {
+      icon = await this.fetchIcon(this.scope.src);
+    } catch (error) {
+      console.warn(
+        `Error on fetch icon "${this.scope.src}"! Try to switch the protocol...`,
+        error
+      );
+      // Try to switch protocol on error
+      if (this.scope.src.startsWith("//")) {
+        this.scope.src = location.protocol + this.scope.src;
+      }
+      const url = new URL(this.scope.src);
+      if (url.protocol === "http:") {
+        url.protocol = "https:";
+      } else {
+        url.protocol = "http:";
+      }
+      try {
+        icon = await this.fetchIcon(url.href);
+      } catch (error2) {
+        console.error(
+          `Error on fetch icon "${this.scope.src}"!`,
+          error,
+          error2
+        );
+        return;
+      }
+    }
 
     if (!icon) {
       console.error(`Error on fetch icon "${this.scope.src}"!`);

@@ -35,7 +35,7 @@ export class Bs5SlideVideoComponent extends Component {
   }
 
   protected onSlideEnd(event: ScrollEvent) {
-    console.debug(
+    this.debug(
       "[Bs5SlideVideoComponent] onSlideEnd",
       event,
       this.slideEl?.classList
