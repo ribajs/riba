@@ -62,6 +62,11 @@ export interface Bs5SidebarComponentScope {
    */
   closeOnSwipe: boolean;
 
+  /**
+   * Prevent scrolling on open overlap mode
+   */
+  preventScrollingOnOverlap: boolean;
+
   // Template methods
 
   /**

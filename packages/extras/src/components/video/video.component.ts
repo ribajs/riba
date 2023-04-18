@@ -209,9 +209,13 @@ export class VideoComponent extends Component {
     this.onUpdate();
   }
 
-  public play() {
+  public async play() {
     this.debug("play");
-    this.video.play();
+    try {
+      this.video.play();
+    } catch (error) {
+      this.error(error);
+    }
   }
 
   public pause() {
@@ -220,7 +224,7 @@ export class VideoComponent extends Component {
     this.onUpdate();
   }
 
-  public togglePlay() {
+  public async togglePlay() {
     if (this.paused) {
       return this.play();
     } else {
@@ -257,7 +261,7 @@ export class VideoComponent extends Component {
   /**
    * Used to load new video source file
    */
-  protected resetVideo() {
+  public resetVideo() {
     this.video.innerHTML = "";
     const videoEl = this.video.cloneNode(true) as HTMLVideoElement;
     const videoWrapperEl = this.querySelector(".video-wrapper");
@@ -332,6 +336,8 @@ export class VideoComponent extends Component {
     this.scope.loading = false;
 
     this.initVideoElement();
+
+    this.reset();
   }
 
   protected setVideoSource() {

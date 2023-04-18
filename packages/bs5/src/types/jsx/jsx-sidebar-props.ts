@@ -13,7 +13,8 @@ export interface JsxBs5SidebarProps extends JsxHtmlGlobalProps {
   "auto-hide"?: JSXComponentBoolean;
   "force-hide-on-location-pathnames"?: string;
   "force-show-on-location-pathnames"?: string;
-  "mode-on-slimmer-than"?: string;
-  "watch-new-page-ready-event"?: string;
-  "close-on-swipe"?: string;
+  "mode-on-slimmer-than"?: string | number;
+  "watch-new-page-ready-event"?: JSXComponentBoolean;
+  "close-on-swipe"?: JSXComponentBoolean;
+  "prevent-scrolling-on-overlap"?: JSXComponentBoolean;
 }

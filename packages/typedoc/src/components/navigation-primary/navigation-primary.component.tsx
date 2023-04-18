@@ -61,7 +61,6 @@ export class NavigationPrimaryComponent extends Component {
   }
 
   protected async onNewPage() {
-    console.debug("onNewPage", this.scope, this.scope.selectedModule);
     if (this.scope.$root?.dataset) {
       this.setSelectedModule(this.scope.$root?.dataset);
     }

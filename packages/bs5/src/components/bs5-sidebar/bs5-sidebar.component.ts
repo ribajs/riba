@@ -14,6 +14,16 @@ import { debounce } from "@ribajs/utils/src/control";
 export class Bs5SidebarComponent extends Component {
   public static tagName = "bs5-sidebar";
 
+  public static states = [
+    "hidden",
+    "side-left",
+    "side-right",
+    "overlap-left",
+    "overlap-right",
+    "move-left",
+    "move-right",
+  ];
+
   protected computedStyle?: CSSStyleDeclaration;
 
   protected autobind = true;
@@ -37,6 +47,7 @@ export class Bs5SidebarComponent extends Component {
       "force-show-on-location-pathnames",
       "watch-new-page-ready-event",
       "close-on-swipe",
+      "prevent-scrolling-on-overlap",
     ];
   }
 
@@ -61,6 +72,7 @@ export class Bs5SidebarComponent extends Component {
     forceHideOnLocationPathnames: [],
     forceShowOnLocationPathnames: [],
     closeOnSwipe: true,
+    preventScrollingOnOverlap: true,
 
     // Template methods
     hide: this.hide,
@@ -112,6 +124,16 @@ export class Bs5SidebarComponent extends Component {
       this.hide();
     }
     this.debug("toggled state: " + this.scope.state);
+  }
+
+  protected preventScrolling(scrollEl = document.body) {
+    scrollEl.style.overflow = "hidden";
+  }
+
+  protected allowScrolling(scrollEl = document.body) {
+    if (scrollEl.style.overflow === "hidden") {
+      scrollEl.style.overflow = "";
+    }
   }
 
   protected connectedCallback() {
@@ -178,6 +200,9 @@ export class Bs5SidebarComponent extends Component {
     this.style.transform = `translateX(${translateX})`;
     this.width = this.scope.width;
     this.setContainersStyle(this.scope.state);
+    if (this.scope.preventScrollingOnOverlap) {
+      this.allowScrolling();
+    }
   }
 
   protected onMove(state: SidebarState) {
@@ -185,6 +210,9 @@ export class Bs5SidebarComponent extends Component {
     this.style.width = this.scope.width;
     this.width = this.scope.width;
     this.setContainersStyle(state);
+    if (this.scope.preventScrollingOnOverlap) {
+      this.allowScrolling();
+    }
   }
 
   protected onSide(state: SidebarState) {
@@ -192,12 +220,18 @@ export class Bs5SidebarComponent extends Component {
     this.style.width = this.scope.width;
     this.width = this.scope.width;
     this.setContainersStyle(state);
+    if (this.scope.preventScrollingOnOverlap) {
+      this.allowScrolling();
+    }
   }
 
   protected onOverlap(state: SidebarState) {
     this.style.transform = `translateX(0)`;
     this.width = this.scope.width;
     this.setContainersStyle(state);
+    if (this.scope.preventScrollingOnOverlap) {
+      this.preventScrolling();
+    }
   }
 
   protected triggerState() {
@@ -223,6 +257,10 @@ export class Bs5SidebarComponent extends Component {
         this.onHidden();
         break;
     }
+
+    this.classList.remove(...Bs5SidebarComponent.states);
+    this.classList.add(this.scope.state);
+
     if (this.events) {
       this.events.trigger(TOGGLE_BUTTON.eventNames.toggled, this.scope.state);
     }
