@@ -1,13 +1,16 @@
-// Size
-.bg-size-cover, .bg-size-contain {
+.background-no-repeat {
   background-repeat: no-repeat;
 }
 
+// Size
+
 .bg-size-cover {
+  @extend .background-no-repeat;
   background-size: cover;
 }
 
 .bg-size-contain {
+  @extend .background-no-repeat;
   background-size: contain;
 }
 

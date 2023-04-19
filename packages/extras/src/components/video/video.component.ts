@@ -206,10 +206,6 @@ export class VideoComponent extends Component {
 
   public load() {
     this.video.load();
-    // Workaround for Firefox
-    setTimeout(() => {
-      this.video.load();
-    }, 100);
   }
 
   public toggleMute() {
@@ -467,6 +463,11 @@ export class VideoComponent extends Component {
 
   protected async beforeBind() {
     this.initVideoElement();
+  }
+
+  protected async afterBind() {
+    // Workaround for Firefox
+    this.video.load();
   }
 
   /**

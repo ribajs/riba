@@ -7,6 +7,7 @@ import {
   JsxBs5SidebarProps,
   Bs5SidebarComponentScope,
   SidebarState,
+  // Breakpoint,
 } from "../../types/index.js";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { debounce } from "@ribajs/utils/src/control";
@@ -145,18 +146,24 @@ export class Bs5SidebarComponent extends Component {
     this.onEnvironmentChanges();
   }
 
+  protected onBreakpoint(/*breakpoint: Breakpoint | null*/) {
+    this.onEnvironmentChanges();
+  }
+
   protected addEventListeners() {
-    window.addEventListener("resize", this.onEnvironmentChanges, {
-      passive: true,
-    });
+    // window.addEventListener("resize", this.onEnvironmentChanges, {
+    //   passive: true,
+    // });
     this.addEventListener("swipe" as any, this.onSwipe);
+    this.bs5.events.on("breakpoint:changed", this.onBreakpoint, this);
   }
 
   protected removeEventListeners() {
     this.events?.off(TOGGLE_BUTTON.eventNames.init, this.triggerState, this);
     this.events?.off(TOGGLE_BUTTON.eventNames.toggle, this.toggle, this);
     this.routerEvents.off("newPageReady", this.onEnvironmentChanges, this);
-    window.removeEventListener("resize", this.onEnvironmentChanges);
+    // window.removeEventListener("resize", this.onEnvironmentChanges);
+    this.bs5.events.off("breakpoint:changed", this.onBreakpoint, this);
   }
 
   protected initToggleButtonEventDispatcher() {
