@@ -60,10 +60,9 @@ export class ThemeService {
    * @returns The selected theme or or `null` in case of an error
    */
   public init() {
-    let savedTheme: ThemeChoice = "theme-os";
+    let savedTheme: ThemeChoice = "os";
     if (this.bs5.options.allowStoreDataInBrowser) {
-      savedTheme = (localStorage.getItem("bs5-theme") ||
-        "theme-os") as ThemeChoice;
+      savedTheme = (localStorage.getItem("bs5-theme") || "os") as ThemeChoice;
     }
 
     return this.set(savedTheme);
@@ -94,7 +93,7 @@ export class ThemeService {
       systemIsLight: true,
       bySystem: true,
       byUser: false,
-      choice: "theme-os",
+      choice: "os",
     };
   }
 
@@ -137,9 +136,9 @@ export class ThemeService {
 
   /**
    * Sets the theme class to the <html>.
-   * - `theme-os` means that the theme will be used by the operating system (which corresponds to theme-light or theme-dark)
-   * - `theme-light` means that the light theme will be used
-   * - `theme-dark` means that the dark theme will be used
+   * - `os` means that the theme will be used by the operating system (which corresponds to light or dark)
+   * - `light` means that the light theme will be used
+   * - `dark` means that the dark theme will be used
    * @param choices
    * @returns The selected theme
    */
@@ -147,19 +146,15 @@ export class ThemeService {
     const oldData = this.get();
     if (!themeChoices.includes(newColorScheme)) {
       console.warn(
-        `Unsupported theme "${newColorScheme}", set instead the default "theme-os".`
+        `Unsupported theme "${newColorScheme}", set instead the default "os".`
       );
-      newColorScheme = "theme-os";
+      newColorScheme = "os";
     }
     if (this.bs5.options.allowStoreDataInBrowser) {
       localStorage.setItem("bs5-theme", newColorScheme);
     }
-    document.documentElement.classList.remove(
-      "theme-light",
-      "theme-dark",
-      "theme-os"
-    );
-    document.documentElement.classList.add(newColorScheme);
+
+    document.documentElement.setAttribute("data-bs-theme", newColorScheme);
     return this.triggerChange(oldData);
   }
 
@@ -170,22 +165,24 @@ export class ThemeService {
     ).matches;
     data.systemIsLight = !data.systemIsDark;
 
-    if (document.documentElement.classList.contains("theme-os")) {
+    const currentTheme = document.documentElement.getAttribute("data-bs-theme");
+
+    if (currentTheme === "os") {
       data.bySystem = true;
       data.byUser = false;
-      data.choice = "theme-os";
+      data.choice = "os";
       data.isDark = data.systemIsDark;
       data.isLight = data.systemIsLight;
     } else {
       data.bySystem = false;
       data.byUser = true;
-      if (document.documentElement.classList.contains("theme-dark")) {
+      if (currentTheme === "dark") {
         data.isDark = true;
-        data.choice = "theme-dark";
+        data.choice = "dark";
       }
-      if (document.documentElement.classList.contains("theme-light")) {
+      if (currentTheme === "light") {
         data.isLight = true;
-        data.choice = "theme-light";
+        data.choice = "light";
       }
     }
     return data;

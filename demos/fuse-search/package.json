@@ -85,6 +85,6 @@
     "@ribajs/fuse": "workspace:^",
     "@ribajs/iconset": "workspace:^",
     "@ribajs/utils": "workspace:^",
-    "bootstrap": "^5.2.3"
+    "bootstrap": "^5.3.0-alpha3"
   }
 }

@@ -36,7 +36,7 @@
     "Browser"
   ],
   "scripts": {
-    "reinstall": "YARN_CHECKSUM_BEHAVIOR=update yarn install",
+    "reinstall": "YARN_CHECKSUM_BEHAVIOR=update yarn install && yarn dlx @yarnpkg/sdks vscode",
     "test": "jest --config=jest.config.cjs",
     "test:watch": "jest --config=jest.config.cjs --watch",
     "test:clear": "jest --config=jest.config.cjs --clearCache",

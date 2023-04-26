@@ -1,6 +1,6 @@
 //
 // Styles for light, dark and os default theme
-// Background colors examples
+// colors examples
 // - .bg-td-white  | White background on light theme
 // - .bg-td-blue    | Blue background on dark theme
 // - .navbar-theme          | Dark navbar on dark theme, light navbar on light theme
@@ -9,22 +9,3 @@
 // - .td-invert     | Inverts all colors (including childs) on the dark theme
 
 @import "./theme/index";
-
-.theme-os {
-    // Root css variables
-    // See https://github.com/twbs/bootstrap/blob/main/scss/_root.scss
-    @include color-scheme(dark) {
-        --#{$variable-prefix}body-color: #{$dark-body-color};
-        --#{$variable-prefix}body-bg: #{$dark-body-bg};
-    }
-}
-
-// No additional css variables for the light theme because we are using the default bootstrap css variables here
-// .td {}
-
-.theme-dark {
-    // Root css variables
-    // See https://github.com/twbs/bootstrap/blob/main/scss/_root.scss
-    --#{$variable-prefix}body-color: #{$dark-body-color};
-    --#{$variable-prefix}body-bg: #{$dark-body-bg};
-}

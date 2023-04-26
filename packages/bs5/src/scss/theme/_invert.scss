@@ -4,32 +4,34 @@
 // - .td-invert    | Inverts all colors (including childs) on the light theme
 // - .td-invert     | Inverts all colors (including childs) on the dark theme
 
-.theme-os {
-    // Invert colors on light theme
-    @include color-scheme(light) {
+@if $enable-dark-mode {
+    [data-bs-theme="os"] {
+        // Invert colors on light theme
+        @include color-scheme(light) {
+            .tl-invert {
+                filter: invert(100%);
+            }
+        }
+
+        // Invert colors on dark theme
+        @include color-scheme(dark) {
+            .td-invert {
+                filter: invert(100%);
+            }
+        }
+    }
+
+    [data-bs-theme="light"] {
+        // Invert colors on light theme
         .tl-invert {
             filter: invert(100%);
         }
     }
 
-    // Invert colors on dark theme
-    @include color-scheme(dark) {
+    [data-bs-theme="dark"] {
+        // Invert colors on dark theme
         .td-invert {
             filter: invert(100%);
         }
-    }
-}
-
-.theme-light {
-    // Invert colors on light theme
-    .tl-invert {
-        filter: invert(100%);
-    }
-}
-
-.theme-dark {
-    // Invert colors on dark theme
-    .td-invert {
-        filter: invert(100%);
     }
 }

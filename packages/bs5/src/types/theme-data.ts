@@ -15,6 +15,6 @@ export interface ThemeData {
   systemIsLight: boolean;
   /** System / OS color scheme is dark (User selection is ignored here) */
   systemIsDark: boolean;
-  /** The user selection (theme-os, theme-dark or theme-light) */
+  /** The user selection (os, dark or light) */
   choice: ThemeChoice;
 }

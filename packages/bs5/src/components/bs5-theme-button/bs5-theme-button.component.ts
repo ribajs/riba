@@ -27,9 +27,9 @@ export class Bs5ThemeButtonComponent extends Component {
     // Options // Attributes
     mode: "dropdown",
     labels: {
-      "theme-os": "OS",
-      "theme-light": "Light",
-      "theme-dark": "Dark",
+      os: "OS",
+      light: "Light",
+      dark: "Dark",
     },
     lightIconSrc: "/iconset/svg/icon_sun.svg",
     darkIconSrc: "/iconset/svg/icon_moon.svg",
@@ -93,15 +93,15 @@ export class Bs5ThemeButtonComponent extends Component {
     const current = this.theme.get();
     if (current.isDark) {
       if (current.supported && current.systemIsLight) {
-        this.theme.set("theme-os");
+        this.theme.set("os");
       } else {
-        this.theme.set("theme-light");
+        this.theme.set("light");
       }
     } else {
       if (current.supported && current.systemIsDark) {
-        this.theme.set("theme-os");
+        this.theme.set("os");
       } else {
-        this.theme.set("theme-dark");
+        this.theme.set("dark");
       }
     }
   }

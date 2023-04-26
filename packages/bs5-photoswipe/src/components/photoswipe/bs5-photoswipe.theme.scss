@@ -27,27 +27,29 @@ bs5-photoswipe {
   @include photoswipe-light;
 }
 
-.theme-os {
-  @include color-scheme(light) {
+  @if $enable-dark-mode {
+  [data-bs-theme="os"] {
+    @include color-scheme(light) {
+      bs5-photoswipe {
+        @include photoswipe-light;
+      }
+    }
+    @include color-scheme(dark) {
+      bs5-photoswipe {
+        @include photoswipe-dark;
+      }
+    }
+  }
+
+  [data-bs-theme="light"] {
     bs5-photoswipe {
       @include photoswipe-light;
     }
   }
-  @include color-scheme(dark) {
+
+  [data-bs-theme="dark"] {
     bs5-photoswipe {
       @include photoswipe-dark;
     }
-  }
-}
-
-.theme-light {
-  bs5-photoswipe {
-    @include photoswipe-light;
-  }
-}
-
-.theme-dark {
-  bs5-photoswipe {
-    @include photoswipe-dark;
   }
 }

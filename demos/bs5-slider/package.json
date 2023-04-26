@@ -74,7 +74,7 @@
     "sass-loader": "^13.2.2",
     "serve": "^14.2.0",
     "typescript": "5.0.4",
-    "vite": "^4.3.1"
+    "vite": "^4.3.2"
   },
   "dependencies": {
     "@ribajs/bs5": "workspace:^",
@@ -83,6 +83,6 @@
     "@ribajs/iconset": "workspace:^",
     "@ribajs/types": "workspace:^",
     "@ribajs/utils": "workspace:^",
-    "bootstrap": "^5.2.3"
+    "bootstrap": "^5.3.0-alpha3"
   }
 }
