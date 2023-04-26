@@ -11,7 +11,7 @@ import {
   getUID,
   hasChildNodesTrim,
   stripHtml,
-} from "@ribajs/utils/src/index.js";
+} from "@ribajs/utils";
 
 export interface ValidationObject {
   fields:

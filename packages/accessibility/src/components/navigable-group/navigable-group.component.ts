@@ -1,6 +1,6 @@
 import { Component } from "@ribajs/core";
 import { NavigableGroupComponentScope } from "../../types/index.js";
-import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils";
 
 export class NavigableGroupComponent extends Component {
   public static tagName = "a11y-navigable-group";

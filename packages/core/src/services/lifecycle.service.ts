@@ -1,6 +1,6 @@
 import { EventDispatcher } from "@ribajs/events";
 import { CoreService } from "./core.service.js";
-import type { State } from "@ribajs/history/src/index.js";
+import type { State } from "@ribajs/history";
 import type {
   ComponentLifecycleEventData,
   ComponentLifecycleObject,

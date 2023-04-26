@@ -1,7 +1,7 @@
 import { Component } from "@ribajs/core";
 import { GamepadService } from "../../services/gamepad.service.js";
 import { GamepadKeysComponentScope } from "../../types/index.js";
-import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils";
 
 /**
  * @credits https://github.com/alvaromontoro/gamecontroller.js/blob/master/examples/example-4-snes-controller.html

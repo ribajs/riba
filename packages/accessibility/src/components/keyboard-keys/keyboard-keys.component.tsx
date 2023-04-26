@@ -5,7 +5,7 @@ import {
   KeyboardLayoutKey,
   KeyboardKeyData,
 } from "../../types/index.js";
-import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils";
 import { KEYBOARD_LAYOUT_LABELS_DEFAULT } from "../../constants/index.js";
 
 export class KeyboardKeysComponent extends Component {

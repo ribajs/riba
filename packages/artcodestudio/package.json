@@ -17,7 +17,7 @@
     "@ribajs/core": "workspace:^",
     "@ribajs/utils": "workspace:^"
   },
-  "main": "./src/index.ts",
+  "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
@@ -38,9 +38,9 @@
     "@ribajs/tsconfig": "workspace:^",
     "@ribajs/types": "workspace:^",
     "@types/jest": "^29.5.1",
-    "@types/node": "^18.16.0",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
+    "@types/node": "^18.16.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
     "@yarnpkg/pnpify": "^4.0.0-rc.42",
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",

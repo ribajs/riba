@@ -1,4 +1,4 @@
-export * from "@ribajs/history/src/index.js";
+export * from "@ribajs/history";
 export * from "./constants.js";
 export * from "./binders/index.js";
 export * from "./components/index.js";

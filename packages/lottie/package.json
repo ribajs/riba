@@ -19,7 +19,7 @@
     "@ribajs/utils": "workspace:^",
     "lottie-web": "^5.11.0"
   },
-  "main": "./src/index.ts",
+  "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
@@ -27,9 +27,9 @@
     "@babel/runtime-corejs3": "^7.21.0",
     "@ribajs/tsconfig": "workspace:^",
     "@types/eslint": "^8.37.0",
-    "@types/node": "^18.16.0",
+    "@types/node": "^18.16.1",
     "eslint": "^8.39.0",
-    "sass": "^1.62.0",
+    "sass": "^1.62.1",
     "typescript": "5.0.4"
   }
 }

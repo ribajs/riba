@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { waitForProp } from "@ribajs/utils/src/control.js";
 import { requestPlay, selectEpisode } from "../../mixins/actions.mixins.js";

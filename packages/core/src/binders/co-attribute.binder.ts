@@ -1,10 +1,7 @@
 import { Binder } from "../binder.js";
 import { BasicComponent } from "../component/basic-component.js";
 import type { Observer } from "../observer.js";
-import {
-  isCustomElement,
-  waitForCustomElement,
-} from "@ribajs/utils/src/index.js";
+import { isCustomElement, waitForCustomElement } from "@ribajs/utils";
 
 const NO_RIBA_COMPONENT_ERROR_MESSAGE =
   '[componentAttributeBinder] You can only use the "rv-co-*" binder on Riba components, but "{tagName}" is not registered.';

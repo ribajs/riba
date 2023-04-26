@@ -1,6 +1,6 @@
 import { Component } from "@ribajs/core";
 import { CreditsComponentScope } from "../../types/index.js";
-import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils";
 
 export class ArtCodeCreditsComponent extends Component {
   public static tagName = "ac-credits";

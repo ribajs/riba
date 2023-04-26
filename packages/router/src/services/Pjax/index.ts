@@ -12,13 +12,13 @@ import {
   getElementFromEvent,
   getDataset,
   scrollTo,
-} from "@ribajs/utils/src/index.js";
+} from "@ribajs/utils";
 
 import { BaseCache } from "@ribajs/cache";
 import { HideShowTransition } from "../Transition/index.js";
 import { Transition, Response, PjaxOptions } from "../../types/index.js";
 import { Dom } from "./Dom.js";
-import { HistoryManager } from "@ribajs/history/src/index.js";
+import { HistoryManager } from "@ribajs/history";
 import { ROUTE_ERROR_CLASS, IGNORE_CLASS_LINK } from "../../constants.js";
 import { RouterService } from "../../services/index.js";
 

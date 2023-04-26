@@ -1,4 +1,4 @@
-import { toBase64 } from "@ribajs/utils/src/index.js";
+import { toBase64 } from "@ribajs/utils";
 
 /**
  * Decodes a string into a base64 string.

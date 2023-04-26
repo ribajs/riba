@@ -1,4 +1,4 @@
-import type { JsxHtmlGlobalProps } from "@ribajs/jsx/src/index.js";
+import type { JsxHtmlGlobalProps } from "@ribajs/jsx";
 
 export interface JsxBs5AccordionProps extends JsxHtmlGlobalProps {
   /** JSON string of an array of type `AccordionItem[]` */

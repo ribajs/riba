@@ -1,7 +1,7 @@
 import { TemplatesComponent, ScopeBase } from "@ribajs/core";
 import { EventDispatcher } from "@ribajs/events";
 import { debounce } from "@ribajs/utils/src/control";
-import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils";
 import { SlideItem } from "../../types/index.js";
 
 interface Scope extends ScopeBase {

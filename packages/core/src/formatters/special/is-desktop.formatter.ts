@@ -1,4 +1,4 @@
-import { isDesktop } from "@ribajs/utils/src/index.js";
+import { isDesktop } from "@ribajs/utils";
 
 export const isDesktopFormatter = {
   name: "is-desktop",

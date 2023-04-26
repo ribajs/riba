@@ -1,4 +1,4 @@
-import type { JsxHtmlGlobalProps } from "@ribajs/jsx/src/index.js";
+import type { JsxHtmlGlobalProps } from "@ribajs/jsx";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface JsxBs5DropdownProps extends JsxHtmlGlobalProps {

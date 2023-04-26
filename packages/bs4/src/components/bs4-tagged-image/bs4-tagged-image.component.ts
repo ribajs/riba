@@ -1,4 +1,4 @@
-import { extend } from "@ribajs/utils/src/index.js";
+import { extend } from "@ribajs/utils";
 
 import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { PopoverOptions } from "@ribajs/bs4";

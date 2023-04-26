@@ -8,7 +8,7 @@ import {
 import { parseNode } from "./parse-node.js";
 import { parseDeclaration } from "./parse-declaration.js";
 import { BasicComponent, Component } from "./component/index.js";
-import { isCustomElement } from "@ribajs/utils/src/index.js";
+import { isCustomElement } from "@ribajs/utils";
 import { Binder } from "./binder.js";
 
 /**

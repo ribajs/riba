@@ -1,4 +1,4 @@
-import { JsxElement } from "@ribajs/jsx/src/index.js";
+import { JsxElement } from "@ribajs/jsx";
 
 export type TemplateFunction = () =>
   | Promise<JsxElement | HTMLElement | string | null>

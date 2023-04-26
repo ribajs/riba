@@ -31,7 +31,7 @@ $dark-link-hover-color: $link-hover-color !default;
 // Dark Forms
 $dark-input-color: $dark-body-color !default;
 $dark-input-bg: $dark-body-bg !default;
-$dark-input-border-color: darken($input-border-color, 50%) !default;
+$dark-input-border-color: $input-border-color !default;
 $dark-input-focus-color: invert($input-focus-color, 100%) !default;
 $dark-input-focus-bg: $dark-input-bg !default;
 $dark-input-focus-border-color: darken($input-focus-border-color, 50%) !default;
@@ -50,7 +50,7 @@ $dark-input-plaintext-color: invert($input-plaintext-color, 100%) !default;
 // Dark list group TODO: fine tune colors
 $dark-list-group-color: $light !default;
 $dark-list-group-bg: $dark !default;
-$dark-list-group-border-color: darken($list-group-border-color, 50%) !default;
+$dark-list-group-border-color: $list-group-border-color !default;
 
 $dark-list-group-disabled-color: invert($list-group-disabled-color, 100%) !default;
 $dark-list-group-disabled-bg: invert($list-group-disabled-bg, 100%) !default;

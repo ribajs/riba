@@ -1,9 +1,5 @@
 import { Component, ScopeBase } from "@ribajs/core";
-import {
-  camelCase,
-  parseJsonString,
-  parseType,
-} from "@ribajs/utils/src/index.js";
+import { camelCase, parseJsonString, parseType } from "@ribajs/utils";
 
 export type AttributeType = string;
 

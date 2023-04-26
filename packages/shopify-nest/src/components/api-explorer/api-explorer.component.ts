@@ -8,7 +8,7 @@ import {
   isNumber,
   extend,
   hasChildNodesTrim,
-} from "@ribajs/utils/src/index.js";
+} from "@ribajs/utils";
 import Debug from "debug";
 
 import { DropdownService } from "@ribajs/bs4";

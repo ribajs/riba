@@ -4,7 +4,7 @@ import {
   HttpService,
   HttpServiceResponse,
 } from "@ribajs/core";
-import { getLocation } from "@ribajs/utils/src/index.js";
+import { getLocation } from "@ribajs/utils";
 import { BaseCache } from "@ribajs/cache";
 import { JsxBs5IconProps } from "../../types/jsx/jsx-icon-props.js";
 

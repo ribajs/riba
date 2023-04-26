@@ -12,7 +12,7 @@
     "Luiz Américo Pereira Câmara"
   ],
   "url": "https://github.com/ribajs/riba/tree/master/packages/utils",
-  "main": "./src/index.ts",
+  "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
   "license": "MIT",
@@ -57,7 +57,7 @@
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
     "@types/jest": "^29.5.1",
-    "@types/node": "^18.16.0",
+    "@types/node": "^18.16.1",
     "babel-jest": "^29.5.0",
     "eslint": "^8.39.0",
     "typescript": "5.0.4"

@@ -1,4 +1,4 @@
-import type { JsxHtmlGlobalProps } from "@ribajs/jsx/src/index.js";
+import type { JsxHtmlGlobalProps } from "@ribajs/jsx";
 
 export interface JsxTsdNavigationPrimaryProps extends JsxHtmlGlobalProps {
   type: "list" | "dropdown";

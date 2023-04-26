@@ -17,7 +17,7 @@
     "@ribajs/utils": "workspace:^",
     "masonry-layout": "^4.2.2"
   },
-  "main": "./src/index.ts",
+  "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
@@ -37,8 +37,8 @@
     "@types/imagesloaded": "^4.1.2",
     "@types/jest": "^29.5.1",
     "@types/masonry-layout": "^4.2.5",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
     "babel-loader": "^9.1.2",
     "babel-plugin-array-includes": "^2.0.3",
     "core-js": "^3.30.1",

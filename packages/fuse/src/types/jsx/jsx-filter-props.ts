@@ -1,4 +1,4 @@
-import type { JsxHtmlGlobalProps } from "@ribajs/jsx/src/index.js";
+import type { JsxHtmlGlobalProps } from "@ribajs/jsx";
 import type Fuse from "fuse.js";
 
 export type JsxFuseSearchProps<T = any, F = any> = JsxHtmlGlobalProps & {

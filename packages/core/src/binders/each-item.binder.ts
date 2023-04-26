@@ -1,7 +1,7 @@
 import { Bindable } from "../types/index.js";
 import { View } from "../view.js";
 import { Binder } from "../binder.js";
-import { times, camelCase } from "@ribajs/utils/src/index.js";
+import { times, camelCase } from "@ribajs/utils";
 
 /**
  * each-*

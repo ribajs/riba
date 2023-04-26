@@ -10,8 +10,8 @@ import {
   TemplateFunction,
   ObserverSyncCallback,
 } from "../types/index.js";
-import type { JsxElement } from "@ribajs/jsx/src/index.js";
-import { renderElement } from "@ribajs/jsx/src/index.js";
+import type { JsxElement } from "@ribajs/jsx";
+import { renderElement } from "@ribajs/jsx";
 import { Binder } from "../binder.js";
 import { Observer } from "../observer.js";
 import { parseJsonString, camelCase } from "@ribajs/utils/src/type.js";

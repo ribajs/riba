@@ -1,6 +1,6 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { VideoComponentScope, MediaReadyState } from "../../types/index.js";
-import { justDigits } from "@ribajs/utils/src/index.js";
+import { justDigits } from "@ribajs/utils";
 
 export class VideoComponent extends Component {
   public static tagName = "rv-video";

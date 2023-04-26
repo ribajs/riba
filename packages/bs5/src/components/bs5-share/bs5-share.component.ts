@@ -8,7 +8,7 @@ import {
   hasChildNodesTrim,
   copyTextToClipboard,
   stripHtml,
-} from "@ribajs/utils/src/index.js";
+} from "@ribajs/utils";
 
 export interface Scope extends ScopeBase {
   type: ShareUrlType;

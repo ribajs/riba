@@ -1,6 +1,6 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import { loadScript } from "@ribajs/utils/src/index.js";
+import { loadScript } from "@ribajs/utils";
 import { getPlayerConfig } from "../../mixins/config.mixins.js";
 import {
   DEFAULT_MAIN_PLAYER_ID,

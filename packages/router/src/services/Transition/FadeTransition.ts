@@ -1,6 +1,6 @@
 import { BaseTransition } from "./BaseTransition.js";
 import { Transition } from "../../types/transition.js";
-import { scrollToPosition } from "@ribajs/utils/src/index.js";
+import { scrollToPosition } from "@ribajs/utils";
 
 /**
  * Basic Transition object, wait for the new Container to be ready,

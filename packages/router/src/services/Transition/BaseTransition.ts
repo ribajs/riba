@@ -1,4 +1,4 @@
-import { deferred } from "@ribajs/utils/src/index.js";
+import { deferred } from "@ribajs/utils";
 import { Transition } from "../../types/transition.js";
 
 /**

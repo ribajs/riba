@@ -1,4 +1,4 @@
-import { parseType, PRIMITIVE, KEYPATH } from "@ribajs/utils/src/index.js";
+import { parseType, PRIMITIVE, KEYPATH } from "@ribajs/utils";
 import { Observer } from "./observer.js";
 import type {
   FormatterObservers,

@@ -1,10 +1,6 @@
 import { BasicComponent, Binder, View } from "@ribajs/core";
 import { Bs5Service } from "../services/bs5.service.js";
-import {
-  parseJsonString,
-  jsonStringify,
-  camelCase,
-} from "@ribajs/utils/src/index.js";
+import { parseJsonString, jsonStringify, camelCase } from "@ribajs/utils";
 
 export abstract class Bs5AbstractBreakpointBinder<
   E extends HTMLElement = HTMLElement

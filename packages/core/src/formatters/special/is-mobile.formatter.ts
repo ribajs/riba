@@ -1,4 +1,4 @@
-import { isMobile } from "@ribajs/utils/src/index.js";
+import { isMobile } from "@ribajs/utils";
 
 export const isMobileFormatter = {
   name: "is-mobile",

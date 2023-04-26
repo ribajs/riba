@@ -7,7 +7,7 @@ import {
   Options,
 } from "./types/index.js";
 import { parseTemplate } from "./parse-template.js";
-import { parseType } from "@ribajs/utils/src/index.js";
+import { parseType } from "@ribajs/utils";
 import { Binder } from "./binder.js";
 import { View } from "./view.js";
 import { Observer } from "./observer.js";

@@ -23,11 +23,7 @@ import type {
   JsxComponent,
   BasicIntrinsicElements,
 } from "./types/index.js";
-import {
-  isCustomElement,
-  jsonStringify,
-  escapeHtml,
-} from "@ribajs/utils/src/index.js";
+import { isCustomElement, jsonStringify, escapeHtml } from "@ribajs/utils";
 import { JsxFragment } from "./jsx-fragment.js";
 import { Raw } from "./jsx-raw.js";
 

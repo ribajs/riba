@@ -1,4 +1,4 @@
-import { Component, TemplateFunction } from "@ribajs/core/src/index.js";
+import { Component, TemplateFunction } from "@ribajs/core";
 import type { PodlovePlayButtonComponentScope, PodloveWebPlayerStore } from "../../types/index.js";
 import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-web-player.component.js";
 export declare class PodlovePlayButtonComponent extends Component {

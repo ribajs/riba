@@ -1,5 +1,5 @@
 import { Binder } from "@ribajs/core";
-import { getViewportDimensions, throttle } from "@ribajs/utils/src/index.js";
+import { getViewportDimensions, throttle } from "@ribajs/utils";
 import { imgUrlFormatter } from "../formatters/img-url.formatter.js";
 
 const PX_OFFSET = 10;

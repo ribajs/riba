@@ -1,4 +1,4 @@
-import type { JsxHtmlGlobalProps } from "@ribajs/jsx/src/index.js";
+import type { JsxHtmlGlobalProps } from "@ribajs/jsx";
 import type { PlayMode } from "../index.js";
 
 export interface JsxLottiePlayerProps extends JsxHtmlGlobalProps {

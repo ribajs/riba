@@ -1,5 +1,5 @@
 import { Riba } from "../../riba.js";
-import { parseType, isBase64 } from "@ribajs/utils/src/index.js";
+import { parseType, isBase64 } from "@ribajs/utils";
 
 import { dotAdapter } from "../../adapters/dot.adapter.js";
 

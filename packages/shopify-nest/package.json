@@ -27,14 +27,14 @@
     "debug": "^4.3.4",
     "monaco-editor": "^0.37.1"
   },
-  "main": "./src/index.ts",
+  "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
     "@babel/runtime": "^7.21.0",
     "@babel/runtime-corejs3": "^7.21.0",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^18.16.0",
+    "@types/node": "^18.16.1",
     "eslint": "^8.39.0",
     "typescript": "5.0.4"
   }

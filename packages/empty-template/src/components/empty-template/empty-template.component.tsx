@@ -3,7 +3,7 @@ import {
   EmptyTemplateComponentScope,
   JsxEmptyTemplateProps,
 } from "../../types/index.js";
-import { hasChildNodesTrim } from "@ribajs/utils/src/index.js";
+import { hasChildNodesTrim } from "@ribajs/utils";
 
 export class EmptyTemplateComponent extends Component {
   public static tagName = "empty-template";

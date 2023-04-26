@@ -1,6 +1,6 @@
 import { OcFormComponent } from "../oc-form/oc-form.component.js";
 import { ReCaptchaFormComponentScope as Scope } from "../../types/index.js";
-import { loadScript, waitForProp, getUID } from "@ribajs/utils/src/index.js";
+import { loadScript, waitForProp, getUID } from "@ribajs/utils";
 
 export class ReCaptchaFormComponent extends OcFormComponent {
   public static tagName = "recaptcha-oc-form";
