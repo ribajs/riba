@@ -1,0 +1,21 @@
+//
+// Styles for light, dark and os default text theme
+// Background colors examples
+// - .text-tl-dark   | Dark text on light theme
+// - .text-td-yellow    | Yellow text on dark theme
+
+[data-bs-theme="light"] {
+  @each $name, $value in $theme-colors {
+      .text-tl-#{$name} {
+          @include text-theme-color($name);
+      }
+  }
+}
+
+[data-bs-theme="dark"] {
+  @each $name, $value in $theme-colors {
+      .text-td-#{$name} {
+          @include text-theme-color($name);
+      }
+  }
+}

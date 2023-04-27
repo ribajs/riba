@@ -5,26 +5,6 @@
 // - .border-td-yellow    | Yellow border on dark theme
 
 @if $enable-dark-mode {
-    [data-bs-theme="os"] {
-        // border colors on light theme
-        @include color-scheme(light) {
-            @each $name, $value in $theme-colors {
-                .border-tl-#{$name} {
-                    border-color: $value !important;
-                }
-            }
-        }
-
-        // border colors on dark theme
-        @include color-scheme(dark) {
-            @each $name, $value in $theme-colors {
-                .border-td-#{$name} {
-                    border-color: $value !important;
-                }
-            }
-        }
-    }
-
     [data-bs-theme="light"] {
         @each $name, $value in $theme-colors {
             .border-tl-#{$name} {

@@ -5,33 +5,6 @@
 // - .d-td-block      | display: block on dark theme
 
 @if $enable-dark-mode {
-    [data-bs-theme="os"] {
-        // Show/Hide on light theme
-        @include color-scheme(light) {
-            .d-tl-none {
-                display: none;
-            }
-        
-            // Show on light theme
-            .d-tl-block {
-                display: block;
-            }
-        }
-
-        // Show/Hide on dark theme
-        @include color-scheme(dark) {
-            .d-td-none {
-                display: none;
-            }
-        
-            // Show on dark theme
-            .d-td-block {
-                display: block;
-            }
-        }
-
-    }
-
     [data-bs-theme="light"] {
         // Hide on light theme
         .d-tl-none {

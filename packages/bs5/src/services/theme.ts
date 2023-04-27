@@ -18,6 +18,7 @@ export class ThemeService {
 
   protected static instance?: ThemeService;
   protected bs5 = Bs5Service.getSingleton();
+  public current: ThemeChoice = "os";
 
   protected constructor() {
     this.addEventListeners();
@@ -49,8 +50,8 @@ export class ThemeService {
     // To watch for changes
     window
       .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", () => {
-        this.triggerChange();
+      .addEventListener("change", (e: MediaQueryListEvent) => {
+        this.triggerChange(e);
       });
   }
 
@@ -97,11 +98,11 @@ export class ThemeService {
     };
   }
 
-  protected triggerChange(oldValue?: ThemeData) {
+  protected triggerChange(e?: MediaQueryListEvent, oldValue?: ThemeData) {
     if (!oldValue) {
       oldValue = this.getDefaultData();
     }
-    const newValue = this.get();
+    const newValue = this.getScheme();
     this.eventDispatcher.trigger("theme-change", {
       oldValue,
       newValue,
@@ -143,7 +144,7 @@ export class ThemeService {
    * @returns The selected theme
    */
   set(newColorScheme: ThemeChoice): ThemeData {
-    const oldData = this.get();
+    const oldScheme = this.getScheme();
     if (!themeChoices.includes(newColorScheme)) {
       console.warn(
         `Unsupported theme "${newColorScheme}", set instead the default "os".`
@@ -154,20 +155,27 @@ export class ThemeService {
       localStorage.setItem("bs5-theme", newColorScheme);
     }
 
-    document.documentElement.setAttribute("data-bs-theme", newColorScheme);
-    return this.triggerChange(oldData);
+    if (newColorScheme === "os") {
+      const newScheme = this.getScheme(newColorScheme);
+      document.documentElement.setAttribute(
+        "data-bs-theme",
+        newScheme.isDark ? "dark" : "light"
+      );
+    } else {
+      document.documentElement.setAttribute("data-bs-theme", newColorScheme);
+    }
+    this.current = newColorScheme;
+    return this.triggerChange(undefined, oldScheme);
   }
 
-  get(): ThemeData {
+  getScheme(choice: ThemeChoice = this.current): ThemeData {
     const data = this.getDefaultData();
     data.systemIsDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
     data.systemIsLight = !data.systemIsDark;
 
-    const currentTheme = document.documentElement.getAttribute("data-bs-theme");
-
-    if (currentTheme === "os") {
+    if (choice === "os") {
       data.bySystem = true;
       data.byUser = false;
       data.choice = "os";
@@ -176,11 +184,11 @@ export class ThemeService {
     } else {
       data.bySystem = false;
       data.byUser = true;
-      if (currentTheme === "dark") {
+      if (choice === "dark") {
         data.isDark = true;
         data.choice = "dark";
       }
-      if (currentTheme === "light") {
+      if (choice === "light") {
         data.isLight = true;
         data.choice = "light";
       }

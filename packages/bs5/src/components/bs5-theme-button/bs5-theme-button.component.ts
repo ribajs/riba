@@ -90,8 +90,14 @@ export class Bs5ThemeButtonComponent extends Component {
    * Used in `icon` mode (which uses a button element)
    */
   public toggleTheme() {
-    const current = this.theme.get();
-    if (current.isDark) {
+    const current = this.theme.getScheme();
+    if (current.bySystem) {
+      if (current.systemIsLight) {
+        this.theme.set("dark");
+      } else {
+        this.theme.set("light");
+      }
+    } else if (current.isDark) {
       if (current.supported && current.systemIsLight) {
         this.theme.set("os");
       } else {

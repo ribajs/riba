@@ -27,20 +27,7 @@ bs5-photoswipe {
   @include photoswipe-light;
 }
 
-  @if $enable-dark-mode {
-  [data-bs-theme="os"] {
-    @include color-scheme(light) {
-      bs5-photoswipe {
-        @include photoswipe-light;
-      }
-    }
-    @include color-scheme(dark) {
-      bs5-photoswipe {
-        @include photoswipe-dark;
-      }
-    }
-  }
-
+@if $enable-dark-mode {
   [data-bs-theme="light"] {
     bs5-photoswipe {
       @include photoswipe-light;
