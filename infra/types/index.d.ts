@@ -63,6 +63,11 @@ declare module "*.graphql" {
   export default schema;
 }
 
+declare module "*.yml" {
+  const jsObject: any;
+  export default jsObject;
+}
+
 // Used by bs4 module
 declare module "@sphinxxxx/color-conversion" {
   export default class Color {

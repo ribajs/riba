@@ -1,0 +1,8 @@
+<select class="form-select form-select" id="theme" rv-if="mode | eq 'dropdown'" rv-on-change="selectTheme"
+  rv-value="selected" aria-label="Select a theme">
+  <option rv-each-choice="choices" rv-value="choice" rv-html="labels | get choice"></option>
+</select>
+<button class="btn btn-icon" rv-if="mode | eq 'icon'" rv-on-click="toggleTheme" aria-label="Toggle light/dark theme">
+  <bs5-icon class="d-td-none" rv-co-src="lightIconSrc" rv-co-size="iconSize"></bs5-icon>
+  <bs5-icon class="d-tl-none" rv-co-src="darkIconSrc" rv-co-size="iconSize"></bs5-icon>
+</button>

@@ -1,7 +1,7 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { ThemeService } from "../../services/theme.js";
 import { hasChildNodesTrim } from "@ribajs/utils";
-import template from "./bs5-theme-button.component.pug";
+import template from "./bs5-theme-button.component.html?raw";
 import { themeChoices } from "../../constants/index.js";
 
 import type {
@@ -114,7 +114,7 @@ export class Bs5ThemeButtonComponent extends Component {
 
   protected template(): ReturnType<TemplateFunction> {
     if (!hasChildNodesTrim(this)) {
-      return template(this.scope);
+      return template;
     } else {
       return null;
     }

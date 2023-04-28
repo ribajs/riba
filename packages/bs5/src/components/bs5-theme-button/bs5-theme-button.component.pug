@@ -1,5 +1,0 @@
-select#theme.form-select.form-select(rv-if="mode | eq 'dropdown'", rv-on-change="selectTheme", rv-value="selected" aria-label="Select a theme")
-  option(rv-each-choice="choices", rv-value="choice", rv-html="labels | get choice")
-button.btn.btn-icon(rv-if="mode | eq 'icon'", rv-on-click="toggleTheme", aria-label="Toggle light/dark theme")
-  bs5-icon.d-td-none(rv-co-src="lightIconSrc", rv-co-size="iconSize")
-  bs5-icon.d-tl-none(rv-co-src="darkIconSrc", rv-co-size="iconSize")
