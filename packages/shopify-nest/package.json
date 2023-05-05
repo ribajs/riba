@@ -31,10 +31,10 @@
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.21.0",
-    "@babel/runtime-corejs3": "^7.21.0",
+    "@babel/runtime": "^7.21.5",
+    "@babel/runtime-corejs3": "^7.21.5",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^18.16.2",
+    "@types/node": "^18.16.4",
     "eslint": "^8.39.0",
     "typescript": "5.0.4"
   }

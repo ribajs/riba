@@ -3,6 +3,8 @@ import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { ToastNotification, ModalNotification } from "@ribajs/bs5";
 
+import exampleIcon from "../../../icon.svg?url";
+
 export class Bs5NotificationsExampleComponent extends Component {
   public static tagName = "bs5-notifications-example";
 
@@ -12,6 +14,7 @@ export class Bs5NotificationsExampleComponent extends Component {
   }
 
   public scope = {
+    exampleIcon,
     showToast: this.showToast,
     showModal: this.showModal,
     message: "",

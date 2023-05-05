@@ -3,6 +3,8 @@ import { EventDispatcher } from "@ribajs/events";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { Notification } from "../../types/index.js";
 
+import template from "./bs5-notification-container.component.html?raw";
+
 export interface Scope extends ScopeBase {
   iconUrl?: string;
   positionClass: string;
@@ -90,9 +92,10 @@ export class Bs5NotificationContainerComponent extends Component {
   protected async template() {
     // Only set the component template if there no childs or the childs are templates
     if (!hasChildNodesTrim(this)) {
-      const { default: template } = await import(
-        "./bs5-notification-container.component.html?raw"
-      );
+      // TODO this is not working if multiple components are used on the same page
+      // const { default: template } = await import(
+      //   "./bs5-notification-container.component.html?raw"
+      // );
       return template;
     }
     return null;

@@ -3,6 +3,7 @@ import { Component, ScopeBase } from "@ribajs/core";
 import { getElementFromEvent } from "@ribajs/utils/src/dom.js";
 import { Modal, ModalNotification } from "../../services/index.js";
 import { Scope as Bs5NotificationContainerScope } from "../bs5-notification-container/bs5-notification-container.component.js";
+import template from "./bs5-modal-item.component.html?raw";
 
 interface Scope extends ScopeBase {
   iconUrl?: string;
@@ -96,9 +97,9 @@ export class Bs5ModalItemComponent extends Component {
     }
   }
   protected async template() {
-    const { default: template } = await import(
-      "./bs5-modal-item.component.html?raw"
-    );
+    // const { default: template } = await import(
+    //   "./bs5-modal-item.component.html?raw"
+    // );
     return template;
   }
 }
