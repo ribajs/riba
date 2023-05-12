@@ -26,7 +26,7 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
 
   private applyTranslation(locale: string | LocalPluralization | null) {
     if (!locale) {
-      if ((this.i18n as LocalesService).showMissingTranslation) {
+      if (this.i18n?.showMissingTranslation) {
         locale = `translation missing: "${this.properties.join(".")}"`;
       } else {
         return;
@@ -68,11 +68,11 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
 
   private translate(langcode?: string) {
     // If language service is not ready do nothing
-    if (!(this.i18n as LocalesService).ready) {
+    if (!this.i18n?.ready) {
       return;
     }
     if (!langcode) {
-      langcode = (this.i18n as LocalesService).getLangcode();
+      langcode = this.i18n.getLangcode();
       if (!langcode) {
         console.error("Langcode is required", langcode);
         return;
@@ -93,7 +93,7 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
     }
 
     // translate by properties, e.g. de.cart.add
-    return (this.i18n as LocalesService)
+    return this.i18n
       .get([langcode, ...this.properties], this.vars)
       .then((local: string) => {
         if (local && typeof local === "string") {
@@ -142,11 +142,7 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
     }
 
     // Translate if language changes
-    (this.i18n as LocalesService).event.on(
-      "changed",
-      this.onLanguageChanged,
-      this
-    );
+    this.i18n?.event.on("changed", this.onLanguageChanged, this);
 
     // Translate if binder attribute event is changed
     this.el.addEventListener("binder-changed" as any, this.onAttributeChanged);
@@ -186,7 +182,7 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
             !options.localesService.doNotTranslateDefaultLanguage
         );
       } else {
-        (this.i18n as LocalesService).event.on("ready", this.initOnReady, this);
+        this.i18n?.event.on("ready", this.initOnReady, this);
       }
     } else if (this.translateMePathString !== translateMePathString) {
       // If translate string was changed

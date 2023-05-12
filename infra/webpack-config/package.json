@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/webpack-config",
-  "version": "2.0.0-beta.10",
+  "version": "2.0.0-rc.1",
   "type": "commonjs",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -32,7 +32,7 @@
     "file-loader": "^6.2.0",
     "find-root": "^1.1.0",
     "fork-ts-checker-webpack-plugin": "^8.0.0",
-    "glob": "^10.2.2",
+    "glob": "^10.2.3",
     "graphql": "^16.6.0",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.1",
@@ -50,9 +50,9 @@
     "sass": "^1.62.1",
     "sass-loader": "^13.2.2",
     "style-loader": "^3.3.2",
-    "terser-webpack-plugin": "^5.3.7",
+    "terser-webpack-plugin": "^5.3.8",
     "typescript": "5.0.4",
-    "webpack-dev-server": "^4.13.3",
+    "webpack-dev-server": "^4.15.0",
     "webpack-manifest-plugin": "^5.0.0",
     "webpack-node-externals": "^3.0.0",
     "webpackbar": "^5.0.2"
