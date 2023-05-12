@@ -142,7 +142,11 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
     }
 
     // Translate if language changes
-    (this.i18n as LocalesService).event.on("changed", this.onLanguageChanged);
+    (this.i18n as LocalesService).event.on(
+      "changed",
+      this.onLanguageChanged,
+      this
+    );
 
     // Translate if binder attribute event is changed
     this.el.addEventListener("binder-changed" as any, this.onAttributeChanged);
@@ -182,7 +186,7 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
             !options.localesService.doNotTranslateDefaultLanguage
         );
       } else {
-        (this.i18n as LocalesService).event.on("ready", this.initOnReady);
+        (this.i18n as LocalesService).event.on("ready", this.initOnReady, this);
       }
     } else if (this.translateMePathString !== translateMePathString) {
       // If translate string was changed
@@ -200,6 +204,6 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
       "binder-changed" as any,
       this.onAttributeChanged
     );
-    this.i18n?.event.off("changed", this.onLanguageChanged);
+    this.i18n?.event.off("changed", this.onLanguageChanged, this);
   }
 }

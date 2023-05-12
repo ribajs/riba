@@ -15,6 +15,9 @@ interface Scope extends ScopeBase {
   $event?: CustomEvent;
 }
 
+/**
+ * Use this component to show a modal inside a bs5-notification-container
+ */
 export class Bs5ModalItemComponent extends Component {
   public static tagName = "bs5-modal-item";
 
