@@ -164,6 +164,8 @@ export const parseType = (input?: string | null, isAttribute = false) => {
     value = null;
   } else if (input === "undefined") {
     value = undefined;
+  } else if (input.startsWith("http://") || input.startsWith("https://")) {
+    value = input;
   } else if (input === "") {
     // An empty attribute should be handled has a true value
     if (isAttribute) {

@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-// Global riba object^
+// Global riba object
 const riba = new Riba();
 
 // regist formatters

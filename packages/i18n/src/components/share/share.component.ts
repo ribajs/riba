@@ -60,16 +60,24 @@ export class I18nShareComponent extends Bs4ShareComponent {
 
   protected async initI18n() {
     return new Promise<string | undefined>((resolve) => {
-      this.localesService?.event.on("changed", async (langcode: string) => {
-        return resolve(langcode);
-      });
+      this.localesService?.event.on(
+        "changed",
+        async (langcode: string) => {
+          return resolve(langcode);
+        },
+        this
+      );
       if (this.localesService?.ready) {
         const langcode = this.localesService?.getLangcode();
         return resolve(langcode);
       } else {
-        this.localesService?.event.on("ready", async (langcode: string) => {
-          return resolve(langcode);
-        });
+        this.localesService?.event.on(
+          "ready",
+          async (langcode: string) => {
+            return resolve(langcode);
+          },
+          this
+        );
       }
     });
   }

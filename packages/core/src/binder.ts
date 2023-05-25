@@ -13,9 +13,7 @@ import { getInputValue } from "@ribajs/utils/src/dom.js";
 /**
  * A single binding between a model attribute and a DOM element.
  */
-export abstract class Binder<T = any, E = HTMLUnknownElement>
-  implements Bindable<E>
-{
+export abstract class Binder<T = any, E = HTMLUnknownElement> implements Bindable<E> {
   /**
    * The name of the binder to access the binder by
    */
@@ -131,16 +129,16 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
   }
 
   /**
-   * Observes the object keypath
-   * @param obj
+   * Observes the model keypath
+   * @param model
    * @param keypath
    */
   public observe(
-    obj: any,
+    model: any,
     keypath: string,
     callback: ObserverSyncCallback
   ): Observer {
-    return new Observer(obj, keypath, callback);
+    return new Observer(model, keypath, callback);
   }
 
   public parseTarget() {

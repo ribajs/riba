@@ -128,7 +128,8 @@ export class I18nSwitcherComponent extends Component {
         this.scope.langcodes.forEach((langCode) => {
           langCode.active = langCode.code === changedLangcode;
         });
-      }
+      },
+      this
     );
 
     this.scope.ready = true;

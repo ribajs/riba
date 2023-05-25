@@ -32,7 +32,7 @@ export class Observer {
   }
 
   /**
-   * Tokenizes the provided keypath string into interface + path tokens for the
+   * Tokenize the provided keypath string into interface + path tokens for the
    * observer to work with.
    */
   public static tokenize(keypath: string, root: Root): any[] {
@@ -64,7 +64,7 @@ export class Observer {
   }
 
   /**
-   * Observes or unobserves a callback on the object using the provided key.
+   * Observes or unobserve a callback on the object using the provided key.
    * @param active
    * @param key
    * @param obj
@@ -93,18 +93,18 @@ export class Observer {
 
   /**
    * Constructs a new keypath observer and kicks things off.
-   * @param obj
+   * @param model
    * @param keypath
    * @param callback
    */
-  constructor(obj: Obj, keypath: string, callback: ObserverSyncCallback) {
+  constructor(model: Obj, keypath: string, callback: ObserverSyncCallback) {
     this.keypath = keypath;
     this.callback = callback;
     this.objectPath = [];
     const parseResult = this.parse();
     this.key = parseResult.key;
     this.tokens = parseResult.tokens;
-    this.obj = this.getRootObject(obj);
+    this.obj = this.getRootObject(model);
     this.target = this.realize();
     if (isObject(this.target)) {
       Observer.set(true, this.key, this.target, this.callback);
@@ -239,7 +239,7 @@ export class Observer {
   }
 
   /**
-   * Unobserves the entire keypath.
+   * Unobserve the entire keypath.
    */
   public unobserve() {
     let obj: Obj;
