@@ -40,8 +40,8 @@
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@ribajs/npm-package": "workspace:^",
-    "postcss": "^8.4.23",
-    "postcss-preset-env": "^8.3.2"
+    "postcss": "^8.4.24",
+    "postcss-preset-env": "^8.5.0"
   },
   "optionalDependencies": {
     "@ribajs/bs4": "workspace:^",
@@ -57,6 +57,6 @@
     "@ribajs/shopify": "workspace:^",
     "@ribajs/shopify-easdk": "workspace:^",
     "@ribajs/shopify-tda": "workspace:^",
-    "leaflet": "^1.9.3"
+    "leaflet": "^1.9.4"
   }
 }

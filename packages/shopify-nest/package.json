@@ -23,19 +23,19 @@
     "@ribajs/shopify-easdk": "workspace:^",
     "@ribajs/shopify-tda": "workspace:^",
     "@ribajs/utils": "workspace:^",
-    "@types/debug": "^4.1.7",
+    "@types/debug": "^4.1.8",
     "debug": "^4.3.4",
-    "monaco-editor": "^0.37.1"
+    "monaco-editor": "^0.39.0"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.21.5",
-    "@babel/runtime-corejs3": "^7.21.5",
+    "@babel/runtime": "^7.22.5",
+    "@babel/runtime-corejs3": "^7.22.5",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^18.16.8",
-    "eslint": "^8.40.0",
-    "typescript": "5.0.4"
+    "@types/node": "^18.16.18",
+    "eslint": "^8.43.0",
+    "typescript": "5.1.3"
   }
 }
