@@ -157,5 +157,5 @@
     "glob": "^10.2.7",
     "pug": "^3.0.2"
   },
-  "packageManager": "yarn@4.0.0-rc.43"
+  "packageManager": "yarn@4.0.0-rc.45"
 }

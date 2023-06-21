@@ -1,5 +1,5 @@
 {
-  "extends": "@ribajs/tsconfig",
+  "extends": "@ribajs/tsconfig/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
     "types": ["jest", "jquery", "node"]

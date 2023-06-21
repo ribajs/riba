@@ -2,40 +2,26 @@
   "name": "@ribajs/tsconfig",
   "description": "Shared TypeScript config for Riba.js projects",
   "version": "2.0.0-rc.1",
-  "type": "module",
-  "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
-  },
   "author": "Pascal Garber <pascal@artandcode.studio>",
-  "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/infra/tsconfig",
   "main": "tsconfig.json",
-  "module": "tsconfig.json",
-  "source": "tsconfig.json",
+  "exports": {
+    ".": "./tsconfig.json",
+    "./tsconfig.json": "./tsconfig.json"
+  },
   "files": [
     "LICENSE",
     "README.md",
     "tsconfig.json"
-  ],
-  "license": "MIT",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/ribajs/riba/blob/master/LICENSE"
-    }
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ribajs/riba.git"
   },
   "keywords": [
-    "Art+Code Studio",
     "Riba",
     "tsconfig"
   ],
-  "devDependencies": {
-    "@ribajs/types": "workspace:^"
-  },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"
   },

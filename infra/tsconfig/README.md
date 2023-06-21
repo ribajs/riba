@@ -14,7 +14,7 @@ npm install --save-dev @ribajs/tsconfig
 
 ```json
 {
-  "extends": "@ribajs/tsconfig",
+  "extends": "@ribajs/tsconfig/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
     "target": "es2018",
