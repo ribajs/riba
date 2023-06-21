@@ -4,11 +4,7 @@ import {
   HttpService,
   ScopeBase,
 } from "@ribajs/core";
-import {
-  isNumber,
-  extend,
-  hasChildNodesTrim,
-} from "@ribajs/utils";
+import { isNumber, extend, hasChildNodesTrim } from "@ribajs/utils";
 import Debug from "debug";
 
 import { DropdownService } from "@ribajs/bs4";

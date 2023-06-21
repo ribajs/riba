@@ -1,7 +1,4 @@
-import type {
-  JsxHtmlGlobalProps,
-  JSXComponentBoolean,
-} from "@ribajs/jsx";
+import type { JsxHtmlGlobalProps, JSXComponentBoolean } from "@ribajs/jsx";
 
 export interface JsxRouterViewProps extends JsxHtmlGlobalProps {
   id?: string;
