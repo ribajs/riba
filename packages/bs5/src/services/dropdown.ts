@@ -11,8 +11,8 @@ const DROPDOWN_ESCAPE_KEY = "Escape";
  * @see https://github.com/twbs/bootstrap/blob/main/js/src/dropdown.js
  */
 export class Dropdown extends _Dropdown {
-  public static hideAll() {
-    (this as any).clearMenus(); // TODO type
+  public static hideAll(event: Event) {
+    (this as any).clearMenus(event); // TODO type
   }
 
   public static getAllComponents() {

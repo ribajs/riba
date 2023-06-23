@@ -155,6 +155,11 @@ export interface JsxSvgElementProps
   y?: string | number;
   focusable?: boolean;
 }
+
+export interface JsxUseElementProps {
+  href?: string;
+}
+
 /**
  * Properties permitted on the `<path>` element.
  *

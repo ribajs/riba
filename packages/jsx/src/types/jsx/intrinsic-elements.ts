@@ -50,6 +50,7 @@ import type {
   JsxTrackElementProps,
   JsxVideoElementProps,
   JsxSvgElementProps,
+  JsxUseElementProps,
   JsxPathElementProps,
 } from "./index.js";
 
@@ -170,5 +171,6 @@ export interface BasicIntrinsicElements {
 
   // SVG Elements
   svg: JsxSvgElementProps;
+  use: JsxUseElementProps;
   path: JsxPathElementProps;
 }
