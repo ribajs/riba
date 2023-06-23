@@ -80,8 +80,8 @@ export class FuseSearchExampleComponent extends Component {
     return [];
   }
 
-  public select(item: DropdownItem) {
-    Dropdown.hideAll();
+  public select(item: DropdownItem, event: Event) {
+    Dropdown.hideAll(event);
     this.scope.selected = item;
   }
 
