@@ -92,7 +92,7 @@
     "@ribajs/i18n": "workspace:^",
     "@ribajs/router": "workspace:^",
     "@ribajs/utils": "workspace:^",
-    "webpack": "^5.87.0",
+    "webpack": "^5.88.0",
     "webpack-cli": "^5.1.4"
   }
 }

@@ -29,7 +29,7 @@
     "@types/eslint": "^8.40.2",
     "@types/node": "^18.16.18",
     "eslint": "^8.43.0",
-    "sass": "^1.63.4",
+    "sass": "^1.63.6",
     "typescript": "5.1.3"
   }
 }

@@ -26,7 +26,7 @@
     "@types/find-root": "^1.1.2",
     "@types/node": "^18.16.18",
     "@yarnpkg/esbuild-plugin-pnp": "^3.0.0-rc.15",
-    "@yarnpkg/pnpify": "^4.0.0-rc.45",
+    "@yarnpkg/pnpify": "^4.0.0-rc.46",
     "find-root": "^1.1.0",
     "typescript": "5.1.3"
   },
