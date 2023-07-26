@@ -49,8 +49,8 @@
     "bump:patch": "yarn workspaces foreach -v version patch",
     "bump:minor": "yarn workspaces foreach -v version minor",
     "bump:major": "yarn workspaces foreach -v version major",
-    "publish:next": "yarn run build && yarn workspaces foreach -v npm publish --tolerate-republish --tag next --access public",
-    "publish:latest": "yarn run build && yarn workspaces foreach -v npm publish --tolerate-republish --tag latest --access public"
+    "publish:next": "yarn run build && yarn workspaces foreach -v --no-private npm publish --tolerate-republish --tag next --access public",
+    "publish:latest": "yarn run build && yarn workspaces foreach -v --no-private npm publish --tolerate-republish --tag latest --access public"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.5",
@@ -157,5 +157,5 @@
     "glob": "^10.3.0",
     "pug": "^3.0.2"
   },
-  "packageManager": "yarn@4.0.0-rc.45"
+  "packageManager": "yarn@4.0.0-rc.48"
 }
