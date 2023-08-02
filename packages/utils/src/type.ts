@@ -315,9 +315,12 @@ export const escapeHtml = (html: string) => {
  * @see https://stackoverflow.com/a/11090301/1465919
  * @param str
  */
-export const withoutSpecialChars = (str: string) => {
-  // str = str.replace(/[^\w\s]/gi, ""); // http://stackoverflow.com/a/4374890
-  str = str.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi, "");
+export const withoutSpecialChars = (str: string, allowMinus = false) => {
+  if (allowMinus) {
+    str = str.replace(/[`~!@#$%^&*()_|+=?;:'",.<>{}[\]\\/]/gi, "");
+  } else {
+    str = str.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi, "");
+  }
   return str;
 };
 
@@ -355,7 +358,7 @@ export const handleize = (str: string) => {
   str = str.trim();
   str = str.toLowerCase();
   str = withoutMultiWhitespace(str);
-  str = withoutSpecialChars(str);
+  str = withoutSpecialChars(str, true);
   str = replaceUmlautChars(str);
   str = str.replace(/ /g, "-");
   return str;
