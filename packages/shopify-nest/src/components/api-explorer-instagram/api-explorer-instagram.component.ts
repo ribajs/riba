@@ -65,7 +65,7 @@ export class ShopifyNestApiExplorerInstagramComponent extends ShopifyNestApiExpl
   }
 
   protected debug = Debug(
-    "component:" + ShopifyNestApiExplorerInstagramComponent.tagName
+    "component:" + ShopifyNestApiExplorerInstagramComponent.tagName,
   );
   constructor() {
     super();
@@ -75,7 +75,7 @@ export class ShopifyNestApiExplorerInstagramComponent extends ShopifyNestApiExpl
     this.debug("loadParamValues", param);
     if (!param.dependenciesResolved) {
       this.debug(
-        `Dependencies for this parameter '${param.name}' not resolved`
+        `Dependencies for this parameter '${param.name}' not resolved`,
       );
       return;
     }

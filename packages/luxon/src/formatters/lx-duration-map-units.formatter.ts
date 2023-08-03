@@ -14,7 +14,7 @@ export const LuxonDurationMapUnitsFormatter: Formatter = {
    */
   read(
     target: Duration,
-    fn: (x: number, u: keyof DurationObjectUnits) => number
+    fn: (x: number, u: keyof DurationObjectUnits) => number,
   ): Duration {
     return target.mapUnits(fn);
   },

@@ -18,7 +18,7 @@ export class Bs4Service {
     }
 
     throw new Error(
-      `Singleton of Bs4Service not defined, please call setSingleton first!`
+      `Singleton of Bs4Service not defined, please call setSingleton first!`,
     );
   }
 

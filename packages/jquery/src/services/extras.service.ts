@@ -18,7 +18,7 @@ export class JQueryService {
     }
 
     throw new Error(
-      `Singleton of JQueryService not defined, please call setSingleton first!`
+      `Singleton of JQueryService not defined, please call setSingleton first!`,
     );
   }
 

@@ -3,7 +3,7 @@ import { Bs5Service } from "../services/bs5.service.js";
 import { parseJsonString, jsonStringify, camelCase } from "@ribajs/utils";
 
 export abstract class Bs5AbstractBreakpointBinder<
-  E extends HTMLElement = HTMLElement
+  E extends HTMLElement = HTMLElement,
 > extends Binder<string, E> {
   protected abstract defaultAttributeBinder: Binder<
     any,
@@ -21,20 +21,20 @@ export abstract class Bs5AbstractBreakpointBinder<
     name: string,
     keypath: string | undefined,
     formatters: string[] | null,
-    identifier: string | null
+    identifier: string | null,
   ) {
     super(view, el, type, name, keypath, formatters, identifier);
     this.bs5 = Bs5Service.getSingleton();
     if (this.args.length !== 2) {
       throw new Error(
-        "The Bs5AttributeBreakpointBinder was not initialized correctly!"
+        "The Bs5AttributeBreakpointBinder was not initialized correctly!",
       );
     }
     const breakpoint = this.args[0].toString();
     const attributeName = this.args[1].toString();
     if (!this.bs5.breakpointNames.includes(breakpoint)) {
       throw new Error(
-        `Unknown breakpoint "${breakpoint}"! You can define breakpoints at the initialization of the Bs5Module.`
+        `Unknown breakpoint "${breakpoint}"! You can define breakpoints at the initialization of the Bs5Module.`,
       );
     }
     this.breakpoint = breakpoint;
@@ -155,7 +155,7 @@ export abstract class Bs5AbstractBreakpointBinder<
    */
   protected getHandledBreakpoints() {
     const handledBreakpoints: string[] = parseJsonString(
-      this.el.dataset[camelCase(this.attributeName)] || "[]"
+      this.el.dataset[camelCase(this.attributeName)] || "[]",
     );
     if (!Array.isArray(handledBreakpoints)) {
       throw new Error("breakpoints dataset has unsupported values!");

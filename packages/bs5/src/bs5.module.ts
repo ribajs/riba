@@ -18,7 +18,7 @@ export const bs5Module: RibaModule<Partial<Bs5ModuleOptions>> = {
     const options = extend(
       { deep: true, keepValues: true },
       partialOptions,
-      constants.DEFAULT_MODULE_OPTIONS
+      constants.DEFAULT_MODULE_OPTIONS,
     ) as Bs5ModuleOptions;
     services.Bs5Service.setSingleton(options);
     return this;

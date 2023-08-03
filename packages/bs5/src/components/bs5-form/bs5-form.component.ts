@@ -159,7 +159,7 @@ export class Bs5FormComponent extends Component {
         typeof (this.scope.form.fields as any)[key] === "string"
       ) {
         (this.scope.form.fields as any)[key] = stripHtml(
-          (this.scope.form.fields as any)[key] as string
+          (this.scope.form.fields as any)[key] as string,
         );
       }
     }
@@ -222,7 +222,7 @@ export class Bs5FormComponent extends Component {
         submitSettings.action,
         submitSettings.method,
         this.scope.form.fields,
-        submitSettings.type
+        submitSettings.type,
       );
 
       if (!res || !res.body) {
@@ -300,7 +300,7 @@ export class Bs5FormComponent extends Component {
     this.dispatchEvent(
       new CustomEvent("invalid", {
         detail: { elements: invalidElements },
-      })
+      }),
     );
   }
 
@@ -323,7 +323,7 @@ export class Bs5FormComponent extends Component {
     this.dispatchEvent(
       new CustomEvent("submit-error", {
         detail: { status, message: message, response },
-      })
+      }),
     );
   }
 
@@ -336,14 +336,14 @@ export class Bs5FormComponent extends Component {
     this.dispatchEvent(
       new CustomEvent("submit-success", {
         detail: { status, message: message, response },
-      })
+      }),
     );
   }
 
   protected validate(
     form: HTMLFormElement,
     validationScope: ValidationObject,
-    errorEventName = "validation-error"
+    errorEventName = "validation-error",
   ) {
     validationScope.valid = form.checkValidity();
     validationScope.error = form.validationMessage;

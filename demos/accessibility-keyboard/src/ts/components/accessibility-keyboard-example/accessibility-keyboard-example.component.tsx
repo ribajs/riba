@@ -46,7 +46,7 @@ export class AccessibilityGamepadExampleComponent extends Component {
     super.afterAllBind();
     this.keyboardEl =
       this.querySelector<KeyboardKeysComponent>(
-        KeyboardKeysComponent.tagName
+        KeyboardKeysComponent.tagName,
       ) || undefined;
 
     if (this.keyboardEl) {

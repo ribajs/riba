@@ -76,7 +76,7 @@ export class FullscreenService {
     }
     if (this.enterK === "webkitRequestFullscreen") {
       el[this.enterK as "requestFullscreen"](
-        (Element as any).ALLOW_KEYBOARD_INPUT
+        (Element as any).ALLOW_KEYBOARD_INPUT,
       );
     } else {
       el[this.enterK as "requestFullscreen"]();

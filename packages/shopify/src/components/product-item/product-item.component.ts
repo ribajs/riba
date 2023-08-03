@@ -160,7 +160,7 @@ export class ShopifyProductItemComponent extends Component {
     optionValue: string | number,
     position1: number,
     optionName: string,
-    event: MouseEvent
+    event: MouseEvent,
   ) {
     optionValue = optionValue.toString();
 
@@ -171,7 +171,7 @@ export class ShopifyProductItemComponent extends Component {
     this.selectedOptions[position1 - 1] = optionValue.toString();
     const variant = ShopifyProductService.getVariantOfOptions(
       this.scope.product,
-      this.selectedOptions
+      this.selectedOptions,
     );
     if (variant) {
       // Option chosen -> so enable add to cart button
@@ -219,10 +219,10 @@ export class ShopifyProductItemComponent extends Component {
   protected activateOption(optionValue: string, optionName: string) {
     optionValue = optionValue.toString().replace("#", "");
     this.querySelector<HTMLElement>(
-      `.option-${optionName.toLocaleLowerCase()}`
+      `.option-${optionName.toLocaleLowerCase()}`,
     )?.classList.remove("active");
     this.querySelector<HTMLElement>(
-      `.option-${optionName.toLocaleLowerCase()}-${optionValue}`
+      `.option-${optionName.toLocaleLowerCase()}-${optionValue}`,
     )?.classList.add("active");
   }
 
@@ -271,13 +271,13 @@ export class ShopifyProductItemComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
     switch (attributeName) {
       case "product":

@@ -95,7 +95,7 @@ export class Bs5ModalItemComponent extends Component {
         event,
         el,
         this.scope.index,
-        this.scope.modal
+        this.scope.modal,
       );
     }
   }

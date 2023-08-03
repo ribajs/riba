@@ -99,7 +99,7 @@ export class Bs4ModalItemComponent extends Component {
         event,
         el,
         this.scope.index,
-        this.scope.modal
+        this.scope.modal,
       );
     }
   }

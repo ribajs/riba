@@ -9,7 +9,7 @@ export const czech = {
   layout: {
     default: [
       "; + \u011B \u0161 \u010D \u0159 \u017E \u00FD \u00E1 \u00ED \u00E9 \u00B4 {bksp}".split(
-        " "
+        " ",
       ),
       "{tab} q w e r t y u i o p \u00FA ) \u00A8".split(" "),
       "{capl} a s d f g h j k l \u016F \u00A7 {enter}".split(" "),

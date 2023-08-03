@@ -58,12 +58,12 @@ export abstract class Component extends BasicComponent {
     super();
     this.lifecycleEvents.trigger(
       "Component:constructor",
-      this.getLifecycleEventData()
+      this.getLifecycleEventData(),
     );
     this.lifecycleEvents.on(
       "ComponentLifecycle:allBound",
       this.afterAllBind,
-      this
+      this,
     );
   }
 
@@ -72,7 +72,7 @@ export abstract class Component extends BasicComponent {
       await super.init(observedAttributes);
       this.lifecycleEvents.trigger(
         "Component:init",
-        this.getLifecycleEventData()
+        this.getLifecycleEventData(),
       );
       return await this.bindIfReady();
     } catch (error) {
@@ -94,7 +94,7 @@ export abstract class Component extends BasicComponent {
     this.lifecycleEvents.trigger(
       "Component:error",
       error,
-      this.getLifecycleEventData()
+      this.getLifecycleEventData(),
     );
     this.error(error);
   }
@@ -119,7 +119,7 @@ export abstract class Component extends BasicComponent {
     this.debug(
       `Not all required or passed attributes are set to load and bind the template`,
       this.observedAttributesToCheck,
-      this.scope
+      this.scope,
     );
     return;
   }
@@ -130,7 +130,7 @@ export abstract class Component extends BasicComponent {
     this.debug("Start to bind Riba");
     this.lifecycleEvents.trigger(
       "Component:beforeBind",
-      this.getLifecycleEventData()
+      this.getLifecycleEventData(),
     );
   }
 
@@ -145,7 +145,7 @@ export abstract class Component extends BasicComponent {
     this._bound = true;
     this.lifecycleEvents.trigger(
       "Component:afterBind",
-      this.getLifecycleEventData()
+      this.getLifecycleEventData(),
     );
   }
 
@@ -206,17 +206,17 @@ export abstract class Component extends BasicComponent {
       // }
       this.lifecycleEvents.trigger(
         "Component:disconnected",
-        this.getLifecycleEventData()
+        this.getLifecycleEventData(),
       );
       this.lifecycleEvents.off(
         "ComponentLifecycle:allBound",
         this.afterAllBind,
-        this
+        this,
       );
       this.lifecycleEvents.off(
         "ComponentLifecycle:error",
         this.afterAllBind,
-        this
+        this,
       );
     } catch (error) {
       this.throw(error as Error);
@@ -234,7 +234,7 @@ export abstract class Component extends BasicComponent {
       super.connectedCallback();
       this.lifecycleEvents.trigger(
         "Component:connected",
-        this.getLifecycleEventData()
+        this.getLifecycleEventData(),
       );
     } catch (error) {
       this.throw(error as Error);
@@ -253,14 +253,14 @@ export abstract class Component extends BasicComponent {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     try {
       super.attributeChangedCallback(
         attributeName,
         oldValue,
         newValue,
-        namespace
+        namespace,
       );
       await this.bindIfReady();
     } catch (error) {
@@ -277,7 +277,7 @@ export abstract class Component extends BasicComponent {
       read: (fn: (...args: any[]) => any, ...args: any[]) => {
         if (!fn) {
           throw new Error(
-            `[${self.tagName}] Can not use "call" formatter: fn is undefined!`
+            `[${self.tagName}] Can not use "call" formatter: fn is undefined!`,
           );
         }
         return fn.apply(self, args);
@@ -299,7 +299,7 @@ export abstract class Component extends BasicComponent {
         return (event: Event, scope: any, el: HTMLElement, binding: Binder) => {
           if (!fn) {
             throw new Error(
-              `[${self.tagName}] Can not use "args" formatter: fn is undefined!`
+              `[${self.tagName}] Can not use "args" formatter: fn is undefined!`,
             );
           }
 
@@ -361,7 +361,7 @@ export abstract class Component extends BasicComponent {
         const view = new View(
           Array.prototype.slice.call(this.childNodes),
           this.scope,
-          viewOptions
+          viewOptions,
         );
         return view;
       }

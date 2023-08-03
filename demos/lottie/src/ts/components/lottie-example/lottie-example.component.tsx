@@ -31,7 +31,7 @@ export class LottieExampleComponent extends Component {
   protected async loadAnimationData() {
     // https://lottiefiles.com/120771-infinite-thing?lang=de
     const res = await HttpService.getJSON(
-      "https://assets9.lottiefiles.com/packages/lf20_kAsZEvAyfc.json"
+      "https://assets9.lottiefiles.com/packages/lf20_kAsZEvAyfc.json",
     );
     return res.body;
   }

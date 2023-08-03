@@ -79,7 +79,7 @@ export class PodloveWebPlayerComponent extends Component {
         DEFAULT_POLYFILLS_URL,
         DEFAULT_POLYFILLS_SCRIPT_ID,
         true,
-        true
+        true,
       );
     }
   }
@@ -103,8 +103,8 @@ export class PodloveWebPlayerComponent extends Component {
     if (typeof this.scope.config !== "object") {
       throw new Error(
         `The podlove config object must be of type "object"!\n${JSON.stringify(
-          this.scope.config
-        )}`
+          this.scope.config,
+        )}`,
       );
     }
 
@@ -116,7 +116,7 @@ export class PodloveWebPlayerComponent extends Component {
       DEFAULT_WEB_PLAYER_URL,
       DEFAULT_WEB_PLAYER_SCRIPT_ID,
       true,
-      true
+      true,
     );
 
     if (!window.podlovePlayer) {
@@ -126,7 +126,7 @@ export class PodloveWebPlayerComponent extends Component {
     const store = await window.podlovePlayer(
       this,
       this.scope.episode || this.scope.episodeUrl,
-      this.scope.config || this.scope.configUrl
+      this.scope.config || this.scope.configUrl,
     );
 
     this.store = store;

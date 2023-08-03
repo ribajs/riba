@@ -38,7 +38,7 @@ export class Bs5SlideVideoComponent extends Component {
     this.debug(
       "[Bs5SlideVideoComponent] onSlideEnd",
       event,
-      this.slideEl?.classList
+      this.slideEl?.classList,
     );
 
     if (this.scope.autoplay) {
@@ -59,14 +59,14 @@ export class Bs5SlideVideoComponent extends Component {
   protected addEventListeners() {
     this.slider?.addEventListener(
       Bs5SliderComponent.EVENTS.scrollended,
-      this.onSlideEnd as EventListener
+      this.onSlideEnd as EventListener,
     );
   }
 
   protected removeEventListeners() {
     this.slider?.removeEventListener(
       Bs5SliderComponent.EVENTS.scrollended,
-      this.onSlideEnd as EventListener
+      this.onSlideEnd as EventListener,
     );
   }
 

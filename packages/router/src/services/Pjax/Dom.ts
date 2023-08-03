@@ -8,7 +8,7 @@ class Dom {
   public static getPrefetchLinkElements(content: DocumentFragment | Document) {
     // router-preload is a custom preloader
     return content.querySelectorAll(
-      'link[href][rel="dns-prefetch"], link[href][rel="preconnect"], link[href][rel="prefetch"], link[href][rel="subresource"], link[href][rel="preload"], link[href][rel="router-preload"]'
+      'link[href][rel="dns-prefetch"], link[href][rel="preconnect"], link[href][rel="prefetch"], link[href][rel="subresource"], link[href][rel="preload"], link[href][rel="router-preload"]',
     ) as NodeListOf<HTMLLinkElement>;
   }
 
@@ -30,7 +30,7 @@ class Dom {
     responseText: string,
     parseTitle: boolean,
     containerSelector: string,
-    prefetchLinks = true
+    prefetchLinks = true,
   ): Response {
     let title = "";
     let prefetchLinkElements:
@@ -62,7 +62,7 @@ class Dom {
   public static parseInitial(
     parseTitle: boolean,
     containerSelector: string,
-    prefetchLinks = true
+    prefetchLinks = true,
   ) {
     let title = "";
     let prefetchLinkElements:
@@ -95,11 +95,11 @@ class Dom {
    */
   public static getContainer(
     element: HTMLTemplateElement | HTMLElement | Document,
-    containerSelector: string
+    containerSelector: string,
   ): HTMLElement {
     if (!element) {
       throw new Error(
-        "Barba.js: [getContainer] No element to get container from, maybe the DOM is not ready!"
+        "Barba.js: [getContainer] No element to get container from, maybe the DOM is not ready!",
       );
     }
 
@@ -137,7 +137,7 @@ class Dom {
    */
   protected static parseContainer(
     newPage: HTMLTemplateElement | HTMLElement | Document,
-    containerSelector: string
+    containerSelector: string,
   ): HTMLElement {
     if (!newPage) {
       const error = new Error("New page not loaded!");
@@ -149,7 +149,7 @@ class Dom {
 
     if ((newPage as HTMLTemplateElement).content) {
       result = (newPage as HTMLTemplateElement).content.querySelector(
-        containerSelector
+        containerSelector,
       );
     } else {
       result = newPage.querySelector(containerSelector);
@@ -157,7 +157,7 @@ class Dom {
 
     if (!result) {
       const error = new Error(
-        `No container with selector "${containerSelector}" found!`
+        `No container with selector "${containerSelector}" found!`,
       );
       console.error(error, newPage);
       throw error;

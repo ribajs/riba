@@ -4,7 +4,7 @@ import type { ClassOf } from "./class-of.js";
 import type { PageComponent } from "@ribajs/ssr";
 
 export interface ClassOfComponent<
-  T = BasicComponent | Component | PageComponent
+  T = BasicComponent | Component | PageComponent,
 > extends ClassOf<T> {
   tagName: string;
   ssrEvents?: EventDispatcher;

@@ -19,7 +19,7 @@ export class Dragscroll {
 
   constructor(
     el: HTMLElement,
-    options: DragscrollOptions = { detectGlobalMove: true }
+    options: DragscrollOptions = { detectGlobalMove: true },
   ) {
     this.el = el;
     this.options = options;

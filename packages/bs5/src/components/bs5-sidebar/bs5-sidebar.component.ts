@@ -274,7 +274,7 @@ export class Bs5SidebarComponent extends Component {
     this.dispatchEvent(
       new CustomEvent(TOGGLE_BUTTON.eventNames.toggled, {
         detail: this.scope.state,
-      })
+      }),
     );
   }
 
@@ -320,13 +320,13 @@ export class Bs5SidebarComponent extends Component {
    * If viewport size changes, location url changes or something else.
    */
   protected onEnvironmentChanges = debounce(
-    this._onEnvironmentChanges.bind(this)
+    this._onEnvironmentChanges.bind(this),
   );
 
   protected getContainers() {
     return this.scope.containerSelector
       ? document.querySelectorAll<HTMLUnknownElement>(
-          this.scope.containerSelector
+          this.scope.containerSelector,
         )
       : undefined;
   }
@@ -356,7 +356,7 @@ export class Bs5SidebarComponent extends Component {
    */
   protected setContainerStyle(
     container: HTMLUnknownElement,
-    state: SidebarState
+    state: SidebarState,
   ) {
     const currStyle = container.style;
     if (state) {
@@ -509,13 +509,13 @@ export class Bs5SidebarComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
     if (attributeName === "containerSelector") {
     }
@@ -553,7 +553,7 @@ export class Bs5SidebarComponent extends Component {
   protected template(): ReturnType<TemplateFunction> {
     if (!hasChildNodesTrim(this)) {
       console.warn(
-        "No child elements found, this component as no template so you need to define your own as child of this component."
+        "No child elements found, this component as no template so you need to define your own as child of this component.",
       );
     }
     return null;

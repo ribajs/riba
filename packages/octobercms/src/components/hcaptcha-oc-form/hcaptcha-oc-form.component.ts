@@ -72,7 +72,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
       this.widgetID,
       event,
       this.scope.hcaptchaCallback,
-      el
+      el,
     );
 
     if (this.scope.hcaptchaSize === "invisible") {
@@ -89,7 +89,7 @@ export class HCaptchaFormComponent extends OcFormComponent {
     const container = this.querySelector(this.scope.hcaptchaContainerSelector);
     if (!container) {
       console.warn(
-        `HCaptcha container element with selector "${this.scope.hcaptchaContainerSelector}" not found!`
+        `HCaptcha container element with selector "${this.scope.hcaptchaContainerSelector}" not found!`,
       );
       return;
     }

@@ -42,7 +42,8 @@ export class Bs4TaggedImageExampleComponent extends Component {
       src: `../../../images/shotokan-karate-cuxhaven-${n}.jpg`,
       srcset: [800, 1000, 1200, 1400, 1600, 1920]
         .map(
-          (w) => `../../../images/shotokan-karate-cuxhaven-${n}-${w}.jpg ${w}w,`
+          (w) =>
+            `../../../images/shotokan-karate-cuxhaven-${n}-${w}.jpg ${w}w,`,
         )
         .join("\n"),
       title: `Image ${n}`,
@@ -61,7 +62,7 @@ export class Bs4TaggedImageExampleComponent extends Component {
           Math.floor(Math.random() * 255),
           Math.floor(Math.random() * 255),
           Math.floor(Math.random() * 255),
-          Math.random()
+          Math.random(),
         ),
 
         ...((size) => ({

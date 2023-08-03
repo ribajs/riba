@@ -18,7 +18,7 @@ export class ArtCodeStudioService {
     }
 
     throw new Error(
-      `Singleton of ArtCodeStudioService not defined, please call setSingleton first!`
+      `Singleton of ArtCodeStudioService not defined, please call setSingleton first!`,
     );
   }
 

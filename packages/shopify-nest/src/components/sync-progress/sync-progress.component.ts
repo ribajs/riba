@@ -25,7 +25,7 @@ export class ShopifyNestSyncProgressComponent extends Component {
   }
 
   protected debug = Debug(
-    "component:" + ShopifyNestSyncProgressComponent.tagName
+    "component:" + ShopifyNestSyncProgressComponent.tagName,
   );
   protected syncService = new ShopifyApiSyncService();
 
@@ -238,13 +238,13 @@ export class ShopifyNestSyncProgressComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.attributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
   }
 

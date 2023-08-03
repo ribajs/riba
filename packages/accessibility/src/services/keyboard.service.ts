@@ -46,7 +46,7 @@ export class KeyboardService {
   public before(
     eventName: string,
     cb: KeyboardEventCallback,
-    thisContext?: any
+    thisContext?: any,
   ) {
     this._beforeEvents.on(eventName, cb, thisContext);
     return this;
@@ -62,7 +62,7 @@ export class KeyboardService {
   public on(
     eventName: "beforeCycle",
     cb: KeyboardEventCallback,
-    thisContext?: any
+    thisContext?: any,
   ): KeyboardService;
 
   /**
@@ -75,7 +75,7 @@ export class KeyboardService {
   public on(
     eventName: "afterCycle",
     cb: KeyboardEventCallback,
-    thisContext?: any
+    thisContext?: any,
   ): KeyboardService;
 
   /**
@@ -88,7 +88,7 @@ export class KeyboardService {
   public on(
     eventName: KeyboardEventName,
     cb: KeyboardEventCallback,
-    thisContext?: any
+    thisContext?: any,
   ): KeyboardService;
 
   /**
@@ -101,7 +101,7 @@ export class KeyboardService {
   public on(
     eventName: "any",
     cb: KeyboardEventCallback,
-    thisContext?: any
+    thisContext?: any,
   ): KeyboardService;
 
   /**
@@ -138,7 +138,7 @@ export class KeyboardService {
   public after(
     eventName: string,
     cb: KeyboardEventCallback,
-    thisContext?: any
+    thisContext?: any,
   ) {
     this._afterEvents.on(eventName, cb, thisContext);
     return this;
@@ -147,25 +147,25 @@ export class KeyboardService {
   public off(
     eventName: "beforeCycle",
     cb: KeyboardEventCallback,
-    thisContext?: any
+    thisContext?: any,
   ): KeyboardService;
 
   public off(
     eventName: "afterCycle",
     cb: KeyboardEventCallback,
-    thisContext?: any
+    thisContext?: any,
   ): KeyboardService;
 
   public off(
     eventName: KeyboardEventName,
     cb: KeyboardEventCallback,
-    thisContext?: any
+    thisContext?: any,
   ): KeyboardService;
 
   public off(
     eventName?: string,
     cb?: KeyboardEventCallback,
-    thisContext?: any
+    thisContext?: any,
   ) {
     this._beforeEvents.off(eventName, cb, thisContext);
     this._onEvents.off(eventName, cb, thisContext);
@@ -190,7 +190,7 @@ export class KeyboardService {
     }
 
     throw new Error(
-      `Singleton of KeyboardService not defined, please call setSingleton first!`
+      `Singleton of KeyboardService not defined, please call setSingleton first!`,
     );
   }
 
@@ -203,7 +203,7 @@ export class KeyboardService {
   }
 
   public getEventName(
-    event: KeyboardEvent | KeyboardKeyDesc
+    event: KeyboardEvent | KeyboardKeyDesc,
   ): KeyboardEventName {
     return (event.code || event.key) as KeyboardEventName;
   }
@@ -213,7 +213,7 @@ export class KeyboardService {
    * @param  {object} event The KeyboardEvent
    */
   public getLayoutKey(
-    event: KeyboardEvent | KeyboardKeyDesc
+    event: KeyboardEvent | KeyboardKeyDesc,
   ): KeyboardLayoutKey {
     let output = "";
     const keyId = event.code || event.key;
@@ -351,13 +351,13 @@ export class KeyboardService {
     const layoutFnKeys = this.getFunctionLayoutKeys();
 
     const keyboardFnLayoutKeyDesc = `export type KeyboardLayoutFunctionKey = "${layoutFnKeys.join(
-      '" | "'
+      '" | "',
     )}";`;
 
     const keyboardLayoutKeyDesc = `export type KeyboardLayoutKey = KeyboardLayoutFunctionKey | string;`;
 
     const keyboardEventNameDesc = `export type KeyboardEventName = "${eventNames.join(
-      '" | "'
+      '" | "',
     )}";`;
 
     console.log(keyboardFnLayoutKeyDesc);
@@ -372,7 +372,7 @@ export class KeyboardService {
    */
   public getKeyDesc(eventName: KeyboardEventName): KeyboardKeyDesc {
     const keyDesc = KEYBOARD_KEY_DESCS.find(
-      (key) => key.code === eventName || key.key === eventName
+      (key) => key.code === eventName || key.key === eventName,
     );
     if (!keyDesc) {
       throw new Error(`No key data found for "${eventName}"!`);

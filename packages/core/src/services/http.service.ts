@@ -25,7 +25,7 @@ export class HttpService {
     url: string,
     data?: any,
     headers: any = {},
-    options: HttpServiceOptions = {}
+    options: HttpServiceOptions = {},
   ) {
     return this.fetch<T>(url, "GET", data, "json", headers, options);
   }
@@ -42,7 +42,7 @@ export class HttpService {
     data?: any,
     dataType?: string,
     headers: any = {},
-    options: HttpServiceOptions = {}
+    options: HttpServiceOptions = {},
   ) {
     return this.fetch<T>(url, "POST", data, dataType, headers, options);
   }
@@ -52,7 +52,7 @@ export class HttpService {
     data?: any,
     dataType?: string,
     headers: any = {},
-    options: HttpServiceOptions = {}
+    options: HttpServiceOptions = {},
   ) {
     return this.fetch<T>(url, "DELETE", data, dataType, headers, options);
   }
@@ -62,7 +62,7 @@ export class HttpService {
     data?: any,
     dataType?: string,
     headers: any = {},
-    options: HttpServiceOptions = {}
+    options: HttpServiceOptions = {},
   ) {
     return this.fetch<T>(url, "PUT", data, dataType, headers, options);
   }
@@ -79,7 +79,7 @@ export class HttpService {
     data?: any,
     dataType?: string,
     headers: any = {},
-    options: HttpServiceOptions = {}
+    options: HttpServiceOptions = {},
   ) {
     return this.fetch<T>(url, "GET", data, dataType, headers, options);
   }
@@ -133,11 +133,11 @@ export class HttpService {
     data: any = {},
     dataType?: string,
     headers: any = {},
-    options: HttpServiceOptions = {}
+    options: HttpServiceOptions = {},
   ): Promise<HttpServiceResponse<T>> {
     if (!fetch) {
       throw new Error(
-        "Your browser does not support the fetch API, use xhr instead or install a polyfill."
+        "Your browser does not support the fetch API, use xhr instead or install a polyfill.",
       );
     }
 

@@ -17,7 +17,7 @@ export class Bs4IconComponent extends BasicComponent {
     name: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     // injects the changed attributes to scope
     super.attributeChangedCallback(name, oldValue, newValue, namespace);
@@ -42,7 +42,7 @@ export class Bs4IconComponent extends BasicComponent {
             } else {
               console.error(
                 "[bs4-icon] Only svg's are supported! But content-type is " +
-                  response.headers.get("content-type")
+                  response.headers.get("content-type"),
               );
             }
             return "";
@@ -59,7 +59,7 @@ export class Bs4IconComponent extends BasicComponent {
     if (name === "title") {
       const title = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "title"
+        "title",
       );
       title.textContent = newValue;
 
@@ -171,7 +171,7 @@ export class Bs4IconComponent extends BasicComponent {
         "direction",
         null,
         this.scope.direction,
-        null
+        null,
       );
     }
   }

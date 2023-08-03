@@ -5,7 +5,7 @@
 export const on = (
   element: Element | HTMLElement | Document | Window,
   eventName: string,
-  handler: EventListenerOrEventListenerObject
+  handler: EventListenerOrEventListenerObject,
 ) => {
   return element.addEventListener(eventName as any, handler, {});
 };
@@ -13,7 +13,7 @@ export const on = (
 export const one = (
   element: Element | HTMLElement | Document | Window,
   eventName: string,
-  handler: EventListenerOrEventListenerObject
+  handler: EventListenerOrEventListenerObject,
 ) => {
   return element.addEventListener(eventName as any, handler, { once: true });
 };
@@ -21,7 +21,7 @@ export const one = (
 export const off = (
   element: Element | HTMLElement | Document | Window,
   originalTypeEvent: string,
-  handler: EventListenerOrEventListenerObject
+  handler: EventListenerOrEventListenerObject,
 ) => {
   return element.removeEventListener(originalTypeEvent as any, handler);
 };
@@ -29,7 +29,7 @@ export const off = (
 export const trigger = <T = any>(
   element: Element | HTMLElement | Document | Window,
   eventName: string,
-  extraParameters: any = {}
+  extraParameters: any = {},
 ) => {
   const event = new CustomEvent<T>(eventName, {
     detail: extraParameters,

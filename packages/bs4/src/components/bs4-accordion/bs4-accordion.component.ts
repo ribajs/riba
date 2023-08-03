@@ -89,8 +89,8 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     const target = this.querySelector<HTMLElement>(`[data-index="${index}"]`);
     const others = Array.from(
       this.querySelectorAll<HTMLElement>(
-        `[data-index]:not([data-index="${index}"])`
-      )
+        `[data-index]:not([data-index="${index}"])`,
+      ),
     );
     if (others && this.scope.showOnlyOne) {
       for (const other of others) {
@@ -107,8 +107,8 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     const target = this.querySelector<HTMLElement>(`[data-index="${index}"]`);
     const others = Array.from(
       this.querySelectorAll<HTMLElement>(
-        `[data-index]:not([data-index="${index}"])`
-      )
+        `[data-index]:not([data-index="${index}"])`,
+      ),
     );
     if (others && this.scope.showOnlyOne) {
       for (const other of others) {
@@ -124,21 +124,21 @@ export class Bs4AccordionComponent extends TemplatesComponent {
   protected initItemEventListeners(item: AccordionItem, element: HTMLElement) {
     element.removeEventListener(
       EVENT_HIDE,
-      this.onHide.bind(this, element, item)
+      this.onHide.bind(this, element, item),
     );
     element.removeEventListener(
       EVENT_SHOW,
-      this.onShow.bind(this, element, item)
+      this.onShow.bind(this, element, item),
     );
     element.addEventListener(
       EVENT_HIDE,
       this.onHide.bind(this, element, item),
-      { once: true }
+      { once: true },
     );
     element.addEventListener(
       EVENT_SHOW,
       this.onShow.bind(this, element, item),
-      { once: true }
+      { once: true },
     );
   }
 
@@ -181,12 +181,12 @@ export class Bs4AccordionComponent extends TemplatesComponent {
    */
   protected triggerVisibilityChangedForElement(
     element: Element,
-    visible: boolean
+    visible: boolean,
   ) {
     setTimeout(() => {
       // Use this event to update any custom element when it becomes visible
       element.dispatchEvent(
-        new CustomEvent("visibility-changed", { detail: { visible } })
+        new CustomEvent("visibility-changed", { detail: { visible } }),
       );
     }, 200);
   }
@@ -218,13 +218,13 @@ export class Bs4AccordionComponent extends TemplatesComponent {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
   }
 

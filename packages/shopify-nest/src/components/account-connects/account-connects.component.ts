@@ -39,7 +39,7 @@ export class ShopifyNestAccountConnectsComponent extends Component {
   }
 
   protected debug = Debug(
-    "component:" + ShopifyNestAccountConnectsComponent.tagName
+    "component:" + ShopifyNestAccountConnectsComponent.tagName,
   );
   protected authService = new AuthService();
 
@@ -77,7 +77,7 @@ export class ShopifyNestAccountConnectsComponent extends Component {
     }
     return this.authService.connect(
       this.scope.type,
-      this.scope.myshopify_domain
+      this.scope.myshopify_domain,
     );
   }
 
@@ -90,7 +90,7 @@ export class ShopifyNestAccountConnectsComponent extends Component {
     }
     const result = await this.authService.disconnect(
       this.scope.type,
-      this.scope.account
+      this.scope.account,
     );
 
     if (result.success) {
@@ -118,7 +118,7 @@ export class ShopifyNestAccountConnectsComponent extends Component {
       let picture: FbUserPictureData;
       try {
         const res = await HttpService.getJSON<FbUserPictureData>(
-          `/facebook/api/user/picture?type=normal`
+          `/facebook/api/user/picture?type=normal`,
         );
         picture = res.body;
         return picture.url;
@@ -147,15 +147,15 @@ export class ShopifyNestAccountConnectsComponent extends Component {
 
     this.scope.locales.title = this.scope.locales.title.replace(
       "{type}",
-      this.scope.type
+      this.scope.type,
     );
     this.scope.locales.info = this.scope.locales.info.replace(
       "{type}",
-      this.scope.type
+      this.scope.type,
     );
     this.scope.locales.notConnected = this.scope.locales.notConnected.replace(
       "{type}",
-      this.scope.type
+      this.scope.type,
     );
 
     return this.isShopifyConnected()

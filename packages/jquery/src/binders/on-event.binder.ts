@@ -39,7 +39,7 @@ export class OnEventBinder extends Binder<eventHandlerFunction, HTMLElement> {
         (event as any).data = extend(
           { deep: false },
           (event as any).data || {},
-          extraParameters
+          extraParameters,
         );
         return this.handler(event);
       });
@@ -49,7 +49,7 @@ export class OnEventBinder extends Binder<eventHandlerFunction, HTMLElement> {
         (event as any).data = extend(
           { deep: false },
           (event as any).data || {},
-          extraParameters
+          extraParameters,
         );
         return this.handler(event);
       });

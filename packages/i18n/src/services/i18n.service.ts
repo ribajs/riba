@@ -18,7 +18,7 @@ export class I18nService {
     }
 
     throw new Error(
-      `Singleton of I18nService not defined, please call setSingleton first!`
+      `Singleton of I18nService not defined, please call setSingleton first!`,
     );
   }
 

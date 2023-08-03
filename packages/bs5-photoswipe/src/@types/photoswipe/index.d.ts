@@ -394,7 +394,7 @@ declare class PhotoSwipe<T extends PhotoSwipe.Options, UI> {
       | (new (pswp: PhotoSwipe<T, UI>, framework: PhotoSwipe.UIFramework) => UI)
       | boolean,
     items: PhotoSwipe.Item[],
-    options: T
+    options: T,
   );
 
   /**
@@ -562,7 +562,7 @@ declare class PhotoSwipe<T extends PhotoSwipe.Options, UI> {
     centerPoint: { x: number; y: number },
     speed: number,
     easingFn?: (k: number) => number,
-    updateFn?: (now: number) => void
+    updateFn?: (now: number) => void,
   ): void;
 
   /**
@@ -604,7 +604,7 @@ declare class PhotoSwipe<T extends PhotoSwipe.Options, UI> {
    */
   listen(
     eventName: "imageLoadComplete",
-    callback: (index: number, item: PhotoSwipe.Item) => void
+    callback: (index: number, item: PhotoSwipe.Item) => void,
   ): void;
   /**
    * Called when the viewport size changes.
@@ -616,7 +616,7 @@ declare class PhotoSwipe<T extends PhotoSwipe.Options, UI> {
    */
   listen(
     eventName: "gettingData",
-    callback: (index: number, item: PhotoSwipe.Item) => void
+    callback: (index: number, item: PhotoSwipe.Item) => void,
   ): void;
   /**
    * Called when mouse is first used (triggers only once).
@@ -652,7 +652,7 @@ declare class PhotoSwipe<T extends PhotoSwipe.Options, UI> {
    */
   listen(
     eventName: "parseVerticalMargin",
-    callback: (item: PhotoSwipe.Item) => void
+    callback: (item: PhotoSwipe.Item) => void,
   ): void;
   /**
    * Called when the gallery starts closing.
@@ -675,8 +675,8 @@ declare class PhotoSwipe<T extends PhotoSwipe.Options, UI> {
     callback: (
       e: MouseEvent,
       isDown: boolean,
-      preventObj: { prevent: boolean }
-    ) => void
+      preventObj: { prevent: boolean },
+    ) => void,
   ): void;
 
   /**

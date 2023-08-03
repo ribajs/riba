@@ -30,7 +30,7 @@ export class DropdownBinder extends Binder<string, HTMLElement> {
     }
     this.dropdownService = new DropdownService(this.toggler, option);
     this.dropdownService.toggle = this.dropdownService.toggle.bind(
-      this.dropdownService
+      this.dropdownService,
     );
     this.toggler.addEventListener("click", this.dropdownService.toggle);
   }

@@ -52,7 +52,7 @@ class EventBucket {
 
   destroy() {
     this.events.forEach((e) =>
-      EventBucket._doRemove(e.target as HTMLElement, e.type, e.handler)
+      EventBucket._doRemove(e.target as HTMLElement, e.type, e.handler),
     );
     this.events = [];
   }
@@ -61,7 +61,7 @@ class EventBucket {
 const dragTrack = (
   eventBucket: EventBucket,
   area: HTMLElement,
-  callback: any
+  callback: any,
 ) => {
   let dragging = false;
 
@@ -72,7 +72,7 @@ const dragTrack = (
   const onMove = (
     e: MouseEvent | TouchEvent,
     info: { clientX: number; clientY: number },
-    starting: boolean
+    starting: boolean,
   ) => {
     if (starting) {
       dragging = true;
@@ -156,7 +156,7 @@ function onKey(
   target: HTMLElement,
   keys: string[],
   handler: any,
-  stop = false
+  stop = false,
 ) {
   bucket.add(target, EVENT_KEY, function (e: KeyboardEvent) {
     if (keys.indexOf(e.key) >= 0) {
@@ -236,7 +236,7 @@ export class Bs4ColorPickerComponent extends Component {
   protected async beforeBind() {
     await super.beforeBind();
     this.eventDispatcher = EventDispatcher.getInstance(
-      "bs4-colorpicker:" + this.scope.namespace
+      "bs4-colorpicker:" + this.scope.namespace,
     );
     this.setColor(this.scope.color);
     this.updateUI();
@@ -244,7 +244,7 @@ export class Bs4ColorPickerComponent extends Component {
   }
 
   protected async afterTemplate(
-    template: string | HTMLElement | null
+    template: string | HTMLElement | null,
   ): Promise<any> {
     await super.afterTemplate(template);
     this.setElements();
@@ -281,13 +281,13 @@ export class Bs4ColorPickerComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
     if (attributeName === "color") {
       this.setColor(this.scope.color);
@@ -360,7 +360,7 @@ export class Bs4ColorPickerComponent extends Component {
     const addEvent = (
       target: HTMLElement | HTMLInputElement,
       type: Event["type"],
-      handler: any
+      handler: any,
     ) => {
       events.add(target, type, handler);
     };
@@ -382,18 +382,18 @@ export class Bs4ColorPickerComponent extends Component {
       throw new Error("Not ready!");
     }
     _dragTrack(events, this._domH, (x: number /*, y: number*/) =>
-      this.setHSLA(x)
+      this.setHSLA(x),
     );
 
     // Select saturation/lightness
     _dragTrack(events, this._domSL, (x: number, y: number) =>
-      this.setHSLA(null, x, 1 - y)
+      this.setHSLA(null, x, 1 - y),
     );
 
     // Select alpha
     if (this.scope.alpha) {
       _dragTrack(events, this._domA, (x: number, y: number) =>
-        this.setHSLA(null, null, null, 1 - y)
+        this.setHSLA(null, null, null, 1 - y),
       );
     }
 
@@ -431,7 +431,7 @@ export class Bs4ColorPickerComponent extends Component {
     s: number | null = null,
     l: number | null = null,
     a: number | null = null,
-    flags: any = {}
+    flags: any = {},
   ) {
     if (!this.color) {
       throw new Error("Not ready!");
@@ -471,13 +471,13 @@ export class Bs4ColorPickerComponent extends Component {
     }
 
     const thumbH = this._domH.querySelector(
-      ".picker_selector"
+      ".picker_selector",
     ) as HTMLElement | null;
     const thumbSL = this._domSL.querySelector(
-      ".picker_selector"
+      ".picker_selector",
     ) as HTMLElement | null;
     const thumbA = this._domA.querySelector(
-      ".picker_selector"
+      ".picker_selector",
     ) as HTMLElement | null;
 
     if (!thumbH || !thumbSL || !thumbA || !this._domEdit || !this._domSample) {
@@ -489,7 +489,7 @@ export class Bs4ColorPickerComponent extends Component {
         this._domSL,
         this._domH,
         this._domEdit,
-        this._domSample
+        this._domSample,
       );
       throw new Error("Not ready!");
     }

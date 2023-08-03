@@ -5,7 +5,7 @@ import { LocalesService } from "../types/locales-service.js";
 const translate = async (
   translateMePathString: string,
   localesService: LocalesService,
-  langcode?: string
+  langcode?: string,
 ) => {
   const properties = translateMePathString.split(".");
   if (!langcode) {
@@ -28,7 +28,7 @@ export const tFormatter: Formatter = {
   name: "t",
   read(
     translateMePathString: string,
-    langcode: string /*, ...vars: string[]*/
+    langcode: string /*, ...vars: string[]*/,
   ) {
     const localesService = I18nService.options.localesService;
     return new Promise((resolve, reject) => {
@@ -56,7 +56,7 @@ export const tFormatter: Formatter = {
         translate(translateMePathString, localesService, langcode).then(
           (locale) => {
             resolve(locale);
-          }
+          },
         );
       }
     });

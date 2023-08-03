@@ -40,7 +40,7 @@ export class ShopifyNestPermissionsComponent extends Component {
   }
 
   protected debug = Debug(
-    "component:" + ShopifyNestPermissionsComponent.tagName
+    "component:" + ShopifyNestPermissionsComponent.tagName,
   );
 
   public scope: Scope = {
@@ -76,7 +76,7 @@ export class ShopifyNestPermissionsComponent extends Component {
   protected async fetchAccessScopes() {
     if (this.scope.shop) {
       this.scope.selectedScopes = ((x) => (x && JSON.parse(x)) || [])(
-        await (await fetch("/shopify/api/access-scopes")).text()
+        await (await fetch("/shopify/api/access-scopes")).text(),
       ).map((scope: { handle: string }) => scope.handle);
     }
   }
@@ -97,7 +97,7 @@ export class ShopifyNestPermissionsComponent extends Component {
           action: ACCESS_SCOPE.replace("_" + groupKey, "") as "read" | "write",
           checked:
             [...this.scope.defaultScopes, ...this.scope.selectedScopes].indexOf(
-              ACCESS_SCOPE
+              ACCESS_SCOPE,
             ) !== -1,
           disabled: this.scope.defaultScopes.indexOf(ACCESS_SCOPE) !== -1,
         });
@@ -110,12 +110,12 @@ export class ShopifyNestPermissionsComponent extends Component {
       const groupKey = ACCESS_SCOPE.replace(/^(read_|write_)/i, "");
       const action = ACCESS_SCOPE.replace("_" + groupKey, "");
       const accessScope = this.scope.accessScopes[groupKey].items.find(
-        (item) => item.action === action
+        (item) => item.action === action,
       );
       if (accessScope) {
         accessScope.checked =
           [...this.scope.defaultScopes, ...this.scope.selectedScopes].indexOf(
-            ACCESS_SCOPE
+            ACCESS_SCOPE,
           ) !== -1;
       }
     }

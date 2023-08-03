@@ -55,7 +55,7 @@ export class ShopifyNestPlansComponent extends Component {
 
   protected async loadActiveCharge() {
     return HttpService.getJSON<RecurringCharge | null>(
-      `/shopify/charge/active`
+      `/shopify/charge/active`,
     ).then((res) => {
       const activeCharge = res.body;
       this.debug("activeCharge", activeCharge);
@@ -74,7 +74,7 @@ export class ShopifyNestPlansComponent extends Component {
         this.debug("available charges", availableCharges);
         this.scope.plans = availableCharges;
         return this.scope.plans;
-      }
+      },
     );
   }
 

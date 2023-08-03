@@ -49,13 +49,13 @@ export class FuseSearchComponent<T = any> extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
 
     if (attributeName === "items") {

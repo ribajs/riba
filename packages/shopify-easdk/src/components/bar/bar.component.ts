@@ -103,7 +103,7 @@ export class BarComponent extends Component {
           this.scope.pagination = config.pagination;
         }
         console.debug("bar:initialize", fallback, config);
-      }
+      },
     );
 
     this.bar.event.on("bar:setTitle", (fallback: boolean, title: string) => {
@@ -120,7 +120,7 @@ export class BarComponent extends Component {
           this.scope.loading = loading.on;
         }
         console.debug("bar:loading", fallback, loading);
-      }
+      },
     );
 
     this.bar.event.on(
@@ -130,7 +130,7 @@ export class BarComponent extends Component {
           this.scope.pagination = pagination;
         }
         console.debug("bar:setPagination", fallback, pagination);
-      }
+      },
     );
 
     this.bar.event.on(
@@ -140,7 +140,7 @@ export class BarComponent extends Component {
           this.scope.breadcrumb = breadcrumb;
         }
         console.debug("bar:setBreadcrumb", fallback, breadcrumb);
-      }
+      },
     );
   }
 
@@ -173,13 +173,13 @@ export class BarComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.attributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
 
     if (attributeName === "buttons") {

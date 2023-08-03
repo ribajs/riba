@@ -20,7 +20,7 @@ export class ShopifyNestSocketEventCardComponent extends Component {
   }
 
   protected debug = Debug(
-    "component:" + ShopifyNestSocketEventCardComponent.tagName
+    "component:" + ShopifyNestSocketEventCardComponent.tagName,
   );
 
   public scope: Scope = {
@@ -63,13 +63,13 @@ export class ShopifyNestSocketEventCardComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.attributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
   }
 

@@ -18,7 +18,7 @@ export class PhotoswipeService {
     }
 
     throw new Error(
-      `Singleton of PhotoswipeService not defined, please call setSingleton first!`
+      `Singleton of PhotoswipeService not defined, please call setSingleton first!`,
     );
   }
 

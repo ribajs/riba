@@ -28,7 +28,7 @@ export class LocalesRestService extends LocalesService {
   constructor(
     protected url: string,
     doNotTranslateDefaultLanguage = false,
-    showMissingTranslation = false
+    showMissingTranslation = false,
   ) {
     super(doNotTranslateDefaultLanguage, showMissingTranslation);
 

@@ -32,7 +32,7 @@ export class ViewStaticBinder extends Binder<string, HTMLAnchorElement> {
     const { responsePromise } = await pjax.loadResponseCached(
       options.url,
       false,
-      false
+      false,
     );
 
     const response = await responsePromise;
@@ -52,7 +52,7 @@ export class ViewStaticBinder extends Binder<string, HTMLAnchorElement> {
     this.nested = new View(
       response.container,
       this.view.models,
-      this.view.options
+      this.view.options,
     );
     this.nested.bind();
   }

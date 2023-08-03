@@ -77,7 +77,7 @@ export class Bs4ContentsComponent extends Component {
 
   protected getIdFromElementOrParent(
     element: HTMLElement,
-    depth = 1
+    depth = 1,
   ): string | null {
     if (element.id) {
       return element.id;
@@ -94,10 +94,10 @@ export class Bs4ContentsComponent extends Component {
     wrapperElement: Element,
     headersStart: number,
     headersDepth: number,
-    pushTo: Anchor[]
+    pushTo: Anchor[],
   ) {
     const headerElements = wrapperElement.querySelectorAll(
-      "h" + headersStart
+      "h" + headersStart,
     ) as NodeListOf<HTMLHeadingElement>;
     headerElements.forEach((headerElement) => {
       const id = this.getIdFromElementOrParent(headerElement);
@@ -115,7 +115,7 @@ export class Bs4ContentsComponent extends Component {
           headerElement.parentElement,
           headersStart + 1,
           headersDepth,
-          pushTo[pushTo.length - 1].childs
+          pushTo[pushTo.length - 1].childs,
         );
       }
     });
@@ -138,7 +138,7 @@ export class Bs4ContentsComponent extends Component {
         this.wrapperElement,
         this.scope.headersStart,
         this.scope.headersDepth,
-        this.scope.anchors
+        this.scope.anchors,
       );
     }
     await super.afterBind();
@@ -152,13 +152,13 @@ export class Bs4ContentsComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.attributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
   }
 

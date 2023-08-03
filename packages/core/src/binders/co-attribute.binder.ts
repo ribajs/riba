@@ -24,7 +24,7 @@ export class ComponentAttributeBinder extends Binder<any, BasicComponent> {
     } else {
       console.warn(
         NO_RIBA_COMPONENT_ERROR_MESSAGE.replace("{tagName}", el.tagName),
-        el
+        el,
       );
     }
   }
@@ -38,7 +38,7 @@ export class ComponentAttributeBinder extends Binder<any, BasicComponent> {
     } else {
       console.warn(
         NO_RIBA_COMPONENT_ERROR_MESSAGE.replace("{tagName}", el.tagName),
-        el
+        el,
       );
     }
   }
@@ -48,7 +48,7 @@ export class ComponentAttributeBinder extends Binder<any, BasicComponent> {
     if (typeof el.observeAttribute !== "function") {
       console.warn(
         NO_RIBA_COMPONENT_ERROR_MESSAGE.replace("{tagName}", el.tagName),
-        el
+        el,
       );
       return;
     }
@@ -68,7 +68,7 @@ export class ComponentAttributeBinder extends Binder<any, BasicComponent> {
     } else {
       console.warn(
         NO_RIBA_COMPONENT_ERROR_MESSAGE.replace("{tagName}", el.tagName),
-        el
+        el,
       );
     }
   }

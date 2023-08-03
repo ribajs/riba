@@ -27,7 +27,7 @@ export class ModulesService {
     binders: Binders<any>,
     components: Components,
     formatters: Formatters,
-    adapters: Adapters
+    adapters: Adapters,
   ) {
     this.binder = new BindersService(binders);
     this.component = new ComponentService(components);

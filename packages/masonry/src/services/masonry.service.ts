@@ -18,7 +18,7 @@ export class MasonryService {
     }
 
     throw new Error(
-      `Singleton of MasonryService not defined, please call setSingleton first!`
+      `Singleton of MasonryService not defined, please call setSingleton first!`,
     );
   }
 

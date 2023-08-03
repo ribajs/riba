@@ -17,7 +17,7 @@ export class Dropdown extends _Dropdown {
 
   public static getAllComponents() {
     const dropdownEls = document.querySelectorAll<Bs5DropdownComponent>(
-      Bs5DropdownComponent.tagName
+      Bs5DropdownComponent.tagName,
     );
     return Array.from(dropdownEls);
   }
@@ -49,7 +49,7 @@ export class Dropdown extends _Dropdown {
   static RIGHT_MOUSE_BUTTON = 2; // MouseEvent.button value for the secondary button, usually the right button
 
   static REGEXP_KEYDOWN = new RegExp(
-    `${DROPDOWN_ARROW_UP_KEY}|${DROPDOWN_ARROW_DOWN_KEY}|${DROPDOWN_ESCAPE_KEY}`
+    `${DROPDOWN_ARROW_UP_KEY}|${DROPDOWN_ARROW_DOWN_KEY}|${DROPDOWN_ESCAPE_KEY}`,
   );
 
   static EVENT_HIDE = `hide${Dropdown.EVENT_KEY}`;

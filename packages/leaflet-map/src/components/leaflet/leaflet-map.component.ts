@@ -81,13 +81,13 @@ export class LeafletMapComponent extends Component {
       mapElement.id = mapId;
     } else {
       console.warn(
-        `No element with selector "${this.scope.mapSelector}" found!`
+        `No element with selector "${this.scope.mapSelector}" found!`,
       );
     }
 
     this.map = new Leaflet.Map(mapId).setView(
       [this.scope.initialLat, this.scope.initialLng],
-      this.scope.initialZoom
+      this.scope.initialZoom,
     );
 
     Leaflet.tileLayer(this.scope.tileUrl, {

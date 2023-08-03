@@ -31,7 +31,7 @@ export class PriorityQueue {
       {
         priority: 0,
       },
-      options
+      options,
     );
 
     const element = { priority: options.priority, run };
@@ -44,7 +44,7 @@ export class PriorityQueue {
     const index = lowerBound(
       this._queue,
       element,
-      (a: any, b: any) => b.priority - a.priority
+      (a: any, b: any) => b.priority - a.priority,
     );
     this._queue.splice(index, 0, element);
   }

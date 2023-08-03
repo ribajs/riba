@@ -22,7 +22,7 @@ export class ScrollEventsService extends BaseEventsService {
 
   constructor(
     el: HTMLUnknownElement | Window,
-    options: Partial<ScrollEventsOptions> = {}
+    options: Partial<ScrollEventsOptions> = {},
   ) {
     super(el);
     this.el = el;
@@ -46,7 +46,7 @@ export class ScrollEventsService extends BaseEventsService {
 
   protected getScrollDir(
     start: ScrollPosition | null,
-    end: ScrollPosition | null
+    end: ScrollPosition | null,
   ): ScrollDirection {
     if (!start || !end) {
       return "unknown";
@@ -106,7 +106,7 @@ export class ScrollEventsService extends BaseEventsService {
   }
 
   protected onScrollEvent = this._onScrollEvent.bind(
-    this
+    this,
   ) as any as EventListener;
 
   /**

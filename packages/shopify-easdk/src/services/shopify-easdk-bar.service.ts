@@ -183,14 +183,14 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
       // isFirstPageLoad: boolean
       {
         this.loadingOff();
-      }
+      },
     );
 
     this.route.on(
       "initStateChange",
       (/*viewId: string, currentStatus: State, prevStatus: State*/) => {
         this.loadingOn(forceFallback);
-      }
+      },
     );
   }
 
@@ -217,7 +217,7 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
         prevStatus: State,
         container: HTMLElement,
         newPageRawHTML: string,
-        dataset: any
+        dataset: any,
         // isFirstPageLoad: boolean
       ) => {
         if (formatter) {
@@ -231,7 +231,7 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
         } else {
           this.setTitle(dataset.title);
         }
-      }
+      },
     );
   }
 
@@ -259,11 +259,11 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
         prevStatus: State,
         container: HTMLElement,
         newPageRawHTML: string,
-        dataset: any
+        dataset: any,
         // isFirstPageLoad: boolean
       ) => {
         this.setTitle(dataset.icon);
-      }
+      },
     );
   }
 
@@ -276,7 +276,7 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
       this.event.trigger(
         "bar:setPagination",
         this.useFallback(false),
-        this.pagination
+        this.pagination,
       );
       this.shopifyApp.Bar.setPagination(config);
     }
@@ -294,7 +294,7 @@ export class BarWrapperService extends WrapperService implements BarWrapper {
       this.event.trigger(
         "bar:setBreadcrumb",
         this.useFallback(false),
-        this.breadcrumb
+        this.breadcrumb,
       );
       return this.shopifyApp.Bar.setBreadcrumb(config);
     }

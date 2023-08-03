@@ -80,7 +80,7 @@ export class Bs4NavbarComponent extends Component {
 
   protected setCollapseElement() {
     const collapseElements = Array.from(
-      this.querySelectorAll<HTMLElement>(this.scope.collapseSelector) || []
+      this.querySelectorAll<HTMLElement>(this.scope.collapseSelector) || [],
     );
 
     // remove old collapse targets
@@ -95,7 +95,7 @@ export class Bs4NavbarComponent extends Component {
       if (!this.collapseTargets.has(collapseElement)) {
         this.collapseTargets.set(
           collapseElement,
-          new CollapseService(collapseElement, [this], { toggle: false })
+          new CollapseService(collapseElement, [this], { toggle: false }),
         );
         collapseElement.addEventListener(EVENT_SHOWN, this.onStateChange);
         collapseElement.addEventListener(EVENT_HIDDEN, this.onStateChange);
@@ -152,13 +152,13 @@ export class Bs4NavbarComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
     if (attributeName === "collapseSelector") {
       this.setCollapseElement();

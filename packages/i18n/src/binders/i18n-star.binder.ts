@@ -179,7 +179,7 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
         this.initOnReady(
           currentLangcode,
           currentLangcode !== initialLangcode ||
-            !options.localesService.doNotTranslateDefaultLanguage
+            !options.localesService.doNotTranslateDefaultLanguage,
         );
       } else {
         this.i18n?.event.on("ready", this.initOnReady, this);
@@ -198,7 +198,7 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
   unbind() {
     this.el.removeEventListener(
       "binder-changed" as any,
-      this.onAttributeChanged
+      this.onAttributeChanged,
     );
     this.i18n?.event.off("changed", this.onLanguageChanged, this);
   }

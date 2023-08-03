@@ -23,7 +23,7 @@ export const toType = (obj: any) => {
 export const jsonStringify = (
   object: any,
   space = 2,
-  replaceSingleQuote = true
+  replaceSingleQuote = true,
 ) => {
   const result = JSON.stringify(object, null, space);
   if (replaceSingleQuote && result) {
@@ -306,7 +306,7 @@ export const escapeHtml = (html: string) => {
         ">": "&gt;",
         '"': "&quot;",
         "'": "&#39;",
-      }[c as never])
+      })[c as never],
   );
 };
 
@@ -499,11 +499,11 @@ export const classOf = (that: any) => {
  * @return Cleared new object
  */
 export const clearObjFromRiba = (
-  obj: Record<string, any> | Array<any>
+  obj: Record<string, any> | Array<any>,
 ): Record<string, any> | Array<any> => {
   if (Array.isArray(obj)) {
     return (obj as Array<any>).map((x: any) =>
-      isObject(x) ? clearObjFromRiba(x) : x
+      isObject(x) ? clearObjFromRiba(x) : x,
     );
   }
   const newObj: any = {};

@@ -120,13 +120,13 @@ export class PodlovePlayButtonComponent extends Component {
 
   protected async initWebPlayer() {
     const webPlayerEl = document.getElementById(
-      this.scope.webPlayerId
+      this.scope.webPlayerId,
     ) as PodloveWebPlayerComponent | null;
     this.player = webPlayerEl || undefined;
 
     if (!this.player) {
       console.error(
-        `Web player element not found by id "${this.scope.webPlayerId}"!`
+        `Web player element not found by id "${this.scope.webPlayerId}"!`,
       );
       return;
     }
@@ -144,15 +144,15 @@ export class PodlovePlayButtonComponent extends Component {
     if (typeof this.scope.config !== "object") {
       throw new Error(
         `The podlove config object must be of type "object"!\n${JSON.stringify(
-          this.scope.config
-        )}`
+          this.scope.config,
+        )}`,
       );
     }
     if (typeof this.scope.episode !== "object") {
       throw new Error(
         `The episode object must be of type "object"!\n${JSON.stringify(
-          this.scope.episode
-        )}`
+          this.scope.episode,
+        )}`,
       );
     }
 
@@ -162,8 +162,8 @@ export class PodlovePlayButtonComponent extends Component {
     if (!playlist) {
       throw new Error(
         `Playlist is required to change the episode over the play button component!\n${JSON.stringify(
-          playlist
-        )}`
+          playlist,
+        )}`,
       );
     }
 
@@ -197,7 +197,7 @@ export class PodlovePlayButtonComponent extends Component {
     const store = await waitForProp<PodloveWebPlayerStore>(
       "store",
       this.player,
-      100
+      100,
     );
 
     if (!store) {

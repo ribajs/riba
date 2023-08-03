@@ -426,7 +426,7 @@ export type ProductPickerCallback = (
      * Will contain an array of errors (string), if any.
      */
     errors: [string];
-  }
+  },
 ) => void;
 
 export interface UserData {
@@ -462,7 +462,7 @@ export interface Modal {
   open(
     init: ModalInit,
     fn?: (result: boolean, data: any) => void,
-    forceFallback?: boolean
+    forceFallback?: boolean,
   ): void;
 
   /**
@@ -494,7 +494,7 @@ export interface Modal {
    */
   input(
     options: ModalInputOptions,
-    fn: (result: boolean, data: any) => void
+    fn: (result: boolean, data: any) => void,
   ): void;
 
   /**
@@ -537,7 +537,7 @@ export interface Modal {
    */
   collectionPicker(
     options: ProductPickerOptions,
-    fn: ProductPickerCallback
+    fn: ProductPickerCallback,
   ): void;
 }
 
@@ -545,22 +545,22 @@ export interface ModalWrapper extends Modal {
   open(
     init: ModalInit,
     fn: (result: boolean, data: any) => void,
-    forceFallback?: boolean
+    forceFallback?: boolean,
   ): void;
   alert(
     options: ModalAlertOptions,
     fn?: (result: boolean) => void,
-    forceFallback?: boolean
+    forceFallback?: boolean,
   ): void;
   confirm(
     options: ModalConfirmOptions,
     fn: (result: boolean) => void,
-    forceFallback?: boolean
+    forceFallback?: boolean,
   ): void;
   input(
     options: ModalInputOptions,
     fn: (result: boolean, data: any) => void,
-    forceFallback?: boolean
+    forceFallback?: boolean,
   ): void;
 }
 
@@ -621,12 +621,12 @@ export interface EASDKWrapper extends EASDK {
     message: string,
     forceFallback?: boolean,
     action?: string,
-    onAction?: () => Promise<void>
+    onAction?: () => Promise<void>,
   ): void;
   flashError(
     message: string,
     forceFallback?: boolean,
     action?: string,
-    onAction?: () => Promise<void>
+    onAction?: () => Promise<void>,
   ): void;
 }

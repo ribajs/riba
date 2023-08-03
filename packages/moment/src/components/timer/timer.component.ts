@@ -133,12 +133,12 @@ export class TimerComponent extends Component {
     if (this.scope.countdownMinutes) {
       if (this.isMinutesLastUnit()) {
         this.scope.remainingMinutes = Math.ceil(
-          remainingSeconds / secsOfMinute
+          remainingSeconds / secsOfMinute,
         );
         return;
       } else {
         this.scope.remainingMinutes = Math.floor(
-          remainingSeconds / secsOfMinute
+          remainingSeconds / secsOfMinute,
         );
         remainingSeconds -= this.scope.remainingMinutes * secsOfMinute;
       }
@@ -157,7 +157,7 @@ export class TimerComponent extends Component {
   //returns remaining seconds until this.scope.time is reached.
   protected getRemainingSeconds(): number {
     return Math.ceil(
-      (Date.parse(this.scope.time) - new Date().getTime()) / 1000
+      (Date.parse(this.scope.time) - new Date().getTime()) / 1000,
     );
   }
 

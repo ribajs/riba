@@ -73,7 +73,7 @@ export const isElement = (obj: Element | Element[]) => {
 
 export const emulateTransitionEnd = (
   element: HTMLElement,
-  duration: number
+  duration: number,
 ) => {
   let called = false;
   const durationPadding = 5;
@@ -100,7 +100,7 @@ export const emulateTransitionEnd = (
 export const typeCheckConfig = (
   componentName: string,
   config: any,
-  configTypes: any
+  configTypes: any,
 ) => {
   for (const property in configTypes) {
     if (Object.prototype.hasOwnProperty.call(configTypes, property)) {
@@ -112,7 +112,7 @@ export const typeCheckConfig = (
         throw new Error(
           `${componentName.toUpperCase()}: ` +
             `Option "${property}" provided type "${valueType}" ` +
-            `but expected type "${expectedTypes}".`
+            `but expected type "${expectedTypes}".`,
         );
       }
     }
@@ -120,7 +120,7 @@ export const typeCheckConfig = (
 };
 
 export const makeArray = (
-  nodeList: NodeList | HTMLCollection
+  nodeList: NodeList | HTMLCollection,
 ): HTMLElement[] => {
   if (!nodeList) {
     return [];
@@ -153,7 +153,7 @@ export const isVisible = (element: HTMLElement) => {
 };
 
 export const findShadowRoot = (
-  element: HTMLElement | (Node & ParentNode)
+  element: HTMLElement | (Node & ParentNode),
 ): HTMLElement | (Node & ParentNode) | null => {
   if (!document.documentElement.attachShadow) {
     return null;

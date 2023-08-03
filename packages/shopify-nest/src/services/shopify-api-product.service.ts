@@ -42,7 +42,7 @@ export class ShopifyApiProductService extends _ShopifyApiProductService {
     return HttpService.put<Product>(url, product, "json").then((res) => {
       console.debug(
         "[ShopifyApiProductService] update product result",
-        res.body
+        res.body,
       );
       return res.body;
     });
@@ -58,10 +58,10 @@ export class ShopifyApiProductService extends _ShopifyApiProductService {
       (result) => {
         console.debug(
           "[ShopifyApiProductService] delete product result",
-          result.body
+          result.body,
         );
         return result.body;
-      }
+      },
     );
   }
 }

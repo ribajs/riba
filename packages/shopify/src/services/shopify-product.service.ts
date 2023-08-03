@@ -22,7 +22,7 @@ export class ShopifyProductService {
           const product = res.body;
           this.cache[handle] = product;
           return this.cache[handle];
-        }
+        },
       );
     }
   }
@@ -35,7 +35,7 @@ export class ShopifyProductService {
    */
   public static fitsVariantOptions(
     variant: ShopifyProductVariant,
-    optionValues: string[]
+    optionValues: string[],
   ) {
     let fit = true;
     // position0 is the option index starting on 0
@@ -54,7 +54,7 @@ export class ShopifyProductService {
    */
   public static getVariantOfOptions(
     product: ShopifyProduct,
-    optionValues: string[]
+    optionValues: string[],
   ) {
     let result: ShopifyProductVariant | null = null;
     if (product) {
@@ -90,7 +90,7 @@ export class ShopifyProductService {
    */
   public static getOption(product: ShopifyProduct, name: string) {
     const result = product.options.find(
-      (option) => option.name.toLowerCase() === name.toLowerCase()
+      (option) => option.name.toLowerCase() === name.toLowerCase(),
     );
     return result;
   }
@@ -102,10 +102,10 @@ export class ShopifyProductService {
    */
   public static getOptionIncludes(
     product: ShopifyProduct,
-    searchSubstr: string
+    searchSubstr: string,
   ) {
     const result = product.options.find((option) =>
-      option.name.includes(searchSubstr)
+      option.name.includes(searchSubstr),
     );
     return result;
   }

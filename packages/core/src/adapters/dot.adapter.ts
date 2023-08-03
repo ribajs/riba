@@ -64,7 +64,7 @@ export class DotAdapter implements Adapter {
             weakmap[r].callbacks[k].forEach(
               (callback: ObserverSyncCallback) => {
                 callback.sync();
-              }
+              },
             );
           }
         }

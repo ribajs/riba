@@ -31,7 +31,7 @@ export const SSRModule: RibaModule<SSRModuleOptions> = {
     lifecycle.events.on("ComponentLifecycle:noComponents", () => {
       window.ssr.events?.trigger(
         "error",
-        new Error("[SSRModule] No component to render found!")
+        new Error("[SSRModule] No component to render found!"),
       );
     });
 

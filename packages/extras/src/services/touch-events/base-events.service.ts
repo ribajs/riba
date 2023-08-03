@@ -14,7 +14,7 @@ export abstract class BaseEventsService {
   protected triggerCustomEvent<T = any>(
     eventName: string,
     originalEvent: Event,
-    extraParameters: T & BaseEventDetail
+    extraParameters: T & BaseEventDetail,
   ) {
     extraParameters.originalEvent = originalEvent;
     extraParameters.target = originalEvent.target;

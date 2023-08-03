@@ -19,7 +19,7 @@ export class RouterService {
     }
 
     throw new Error(
-      `Singleton of RouterService not defined, please call setSingleton first!`
+      `Singleton of RouterService not defined, please call setSingleton first!`,
     );
   }
 

@@ -110,7 +110,7 @@ export class ShopifyNestApiExplorerFacebookComponent extends ShopifyNestApiExplo
   }
 
   protected debug = Debug(
-    "component:" + ShopifyNestApiExplorerFacebookComponent.tagName
+    "component:" + ShopifyNestApiExplorerFacebookComponent.tagName,
   );
   constructor() {
     super();
@@ -120,7 +120,7 @@ export class ShopifyNestApiExplorerFacebookComponent extends ShopifyNestApiExplo
     this.debug("loadParamValues", param);
     if (!param.dependenciesResolved) {
       this.debug(
-        `Dependencies for this parameter '${param.name}' not resolved`
+        `Dependencies for this parameter '${param.name}' not resolved`,
       );
       return;
     }

@@ -27,22 +27,22 @@ export class ShopifyCartCountBinder extends Binder<void, HTMLElement> {
   bind() {
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:complete",
-      this.onCartRequestComplete
+      this.onCartRequestComplete,
     );
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:changed",
-      this.onCartRequestChanged
+      this.onCartRequestChanged,
     );
   }
 
   unbind() {
     ShopifyCartService.shopifyCartEventDispatcher.off(
       "ShopifyCart:request:complete",
-      this.onCartRequestComplete
+      this.onCartRequestComplete,
     );
     ShopifyCartService.shopifyCartEventDispatcher.off(
       "ShopifyCart:request:changed",
-      this.onCartRequestChanged
+      this.onCartRequestChanged,
     );
   }
 }

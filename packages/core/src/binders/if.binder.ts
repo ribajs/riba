@@ -16,7 +16,7 @@ export class IfBinder extends Binder<boolean> {
   bind(el: HTMLUnknownElement) {
     if (!this.marker) {
       this.marker = window?.document?.createComment(
-        " riba: " + this.type + " " + this.keypath + " "
+        " riba: " + this.type + " " + this.keypath + " ",
       );
       this.attached = false;
       if (!el.parentNode?.insertBefore) {

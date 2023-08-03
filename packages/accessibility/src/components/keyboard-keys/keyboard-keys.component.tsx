@@ -20,13 +20,13 @@ export class KeyboardKeysComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
 
     if (attributeName === "layoutName") {
@@ -120,7 +120,7 @@ export class KeyboardKeysComponent extends Component {
   }
 
   public onScreenKeyDown(
-    layoutKey: KeyboardLayoutKey
+    layoutKey: KeyboardLayoutKey,
     // event: Event,
     // scope: KeyboardKeysComponentScope,
     // el: HTMLElement
@@ -136,7 +136,7 @@ export class KeyboardKeysComponent extends Component {
   }
 
   public onScreenKeyUp(
-    layoutKey: KeyboardLayoutKey
+    layoutKey: KeyboardLayoutKey,
     // event: Event,
     // scope: KeyboardKeysComponentScope,
     // el: HTMLElement
@@ -180,7 +180,7 @@ export class KeyboardKeysComponent extends Component {
     console.debug(
       `On press "${keyData.layoutKey}"...`,
       keyData,
-      this.scope.controls[keyData.layoutKey]
+      this.scope.controls[keyData.layoutKey],
     );
   }
 
@@ -197,7 +197,7 @@ export class KeyboardKeysComponent extends Component {
     console.debug(
       `After press "${keyData.layoutKey}"`,
       keyData,
-      this.scope.controls[keyData.layoutKey]
+      this.scope.controls[keyData.layoutKey],
     );
   }
 

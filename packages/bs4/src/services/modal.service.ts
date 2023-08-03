@@ -152,7 +152,7 @@ export class ModalService {
       this._element,
       EVENT_CLICK_DISMISS,
       // SELECTOR_DATA_DISMISS,
-      (event: Event) => this.hide(event)
+      (event: Event) => this.hide(event),
     );
 
     if (this._dialog) {
@@ -202,11 +202,11 @@ export class ModalService {
 
     if (transition) {
       const transitionDuration = getTransitionDurationFromElement(
-        this._element
+        this._element,
       );
 
       one(this._element, TRANSITION_END, (/*event*/) =>
-        this._hideModal(/*event*/));
+        this._hideModal(/*event*/),);
       emulateTransitionEnd(this._element, transitionDuration);
     } else {
       this._hideModal();
@@ -420,7 +420,7 @@ export class ModalService {
       }
 
       const backdropTransitionDuration = getTransitionDurationFromElement(
-        this._backdrop
+        this._backdrop,
       );
 
       one(this._backdrop, TRANSITION_END, callback);
@@ -435,7 +435,7 @@ export class ModalService {
 
       if (this._element.classList.contains(CLASS_NAME_FADE)) {
         const backdropTransitionDuration = getTransitionDurationFromElement(
-          this._backdrop
+          this._backdrop,
         );
         one(this._backdrop, TRANSITION_END, callbackRemove);
         emulateTransitionEnd(this._backdrop, backdropTransitionDuration);
@@ -469,7 +469,7 @@ export class ModalService {
       this._element.classList.add(CLASS_NAME_STATIC);
 
       const modalTransitionDuration = getTransitionDurationFromElement(
-        this._dialog
+        this._dialog,
       );
 
       const onTransitionEnd = () => {

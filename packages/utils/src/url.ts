@@ -49,7 +49,7 @@ export const getLocation = (url?: string): Location => {
  * @param url
  */
 export const normalizeUrl = (
-  url?: string
+  url?: string,
 ): { url: string; location: Location } => {
   const location = getLocation(url);
   const curHostname = getLocation().hostname;
@@ -210,6 +210,6 @@ export const removeHash = () => {
   return history.pushState(
     "",
     document.title,
-    window.location.pathname + window.location.search
+    window.location.pathname + window.location.search,
   );
 };

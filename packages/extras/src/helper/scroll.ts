@@ -1,7 +1,7 @@
 import { ScrollPosition } from "../types/scroll-position.js";
 
 export const getScrollPosition = (
-  element: HTMLUnknownElement | Window
+  element: HTMLUnknownElement | Window,
 ): ScrollPosition => {
   const window = element as Window;
   const el = element as HTMLUnknownElement;

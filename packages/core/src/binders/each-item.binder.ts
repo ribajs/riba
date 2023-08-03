@@ -62,7 +62,7 @@ export class EachStarBinder extends Binder<any[], HTMLElement> {
       throw new Error(
         `each-${
           this.args[0]
-        } needs an array or object to iterate over, but it is ${typeof collection}`
+        } needs an array or object to iterate over, but it is ${typeof collection}`,
       );
     }
 

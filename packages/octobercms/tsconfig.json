@@ -2,12 +2,12 @@
   "extends": "@ribajs/tsconfig/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "types": ["jest", "jquery", "node"]
+    "types": ["jest", "jquery", "node"],
+    "allowJs": true,
   },
-  "include": ["src/**/*", "build-system/types"],
+  "include": ["src/**/*"],
   "exclude": [
     "node_modules",
-    "build-system/**/*",
     "**/*.d.ts"
   ]
 }

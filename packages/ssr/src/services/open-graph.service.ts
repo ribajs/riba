@@ -26,7 +26,7 @@ export class OpenGraphService {
       for (const content of contents) {
         if (typeof content === "object") {
           metaElements.push(
-            ...this.createMetaTags(content, `${prefix}:${property}`)
+            ...this.createMetaTags(content, `${prefix}:${property}`),
           );
         } else {
           const meta = document.createElement("meta");
@@ -78,7 +78,7 @@ export class OpenGraphService {
 
   public static set(
     data: OpenGraphTree,
-    namespaces: OpenGraphNamespaces = { og: "https://ogp.me/ns#" }
+    namespaces: OpenGraphNamespaces = { og: "https://ogp.me/ns#" },
   ) {
     this.setNamespaces(namespaces);
     this.setMetaTags(data);

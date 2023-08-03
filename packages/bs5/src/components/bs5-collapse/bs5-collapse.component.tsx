@@ -68,11 +68,11 @@ export class Bs5CollapseComponent extends Component {
     if (this.scope.collapseEl) {
       this.scope.collapseEl.addEventListener(
         CollapseEvents.hide,
-        this.onHide.bind(this)
+        this.onHide.bind(this),
       );
       this.scope.collapseEl.addEventListener(
         CollapseEvents.show,
-        this.onShow.bind(this)
+        this.onShow.bind(this),
       );
     }
   }
@@ -81,11 +81,11 @@ export class Bs5CollapseComponent extends Component {
     if (this.scope.collapseEl) {
       this.scope.collapseEl.removeEventListener(
         CollapseEvents.hide,
-        this.onHide.bind(this)
+        this.onHide.bind(this),
       );
       this.scope.collapseEl.removeEventListener(
         CollapseEvents.show,
-        this.onShow.bind(this)
+        this.onShow.bind(this),
       );
     }
   }

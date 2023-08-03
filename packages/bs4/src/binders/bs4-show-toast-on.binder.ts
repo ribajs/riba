@@ -15,7 +15,7 @@ export class ShowToastOnEventBinder extends Binder<Toast, HTMLInputElement> {
     this.toastData.$context = this.view.models;
     const toastData: Toast = new Toast(this.toastData);
     const notificationDispatcher = new EventDispatcher(
-      toastData.channel || "toast"
+      toastData.channel || "toast",
     );
     notificationDispatcher.trigger("show-notification", toastData);
   }

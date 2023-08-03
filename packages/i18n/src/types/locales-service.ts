@@ -25,7 +25,7 @@ export abstract class LocalesService {
 
   constructor(
     public doNotTranslateDefaultLanguage: boolean,
-    showMissingTranslation: boolean
+    showMissingTranslation: boolean,
   ) {
     this.doNotTranslateDefaultLanguage = doNotTranslateDefaultLanguage;
     this.showMissingTranslation = showMissingTranslation;
@@ -40,7 +40,7 @@ export abstract class LocalesService {
   public async get(
     properties?: string[],
     vars?: LocalVar,
-    force = false
+    force = false,
   ): Promise<string> {
     if (!this.ready && !force) {
       throw new Error("not ready");
@@ -70,7 +70,7 @@ export abstract class LocalesService {
             console.warn(
               `WARNING translation missing: "${properties.join(".")}"`,
               local,
-              properties
+              properties,
             );
           }
           return local;
@@ -209,7 +209,7 @@ export abstract class LocalesService {
           ) {
             translateString = translateString.replace(
               match,
-              vars[varName] as string
+              vars[varName] as string,
             );
           }
         }
@@ -228,7 +228,7 @@ export abstract class LocalesService {
     this.currentLangcode = this.initialLangcode;
     if (!this.initialLangcode) {
       throw new Error(
-        `The lang attribute on the html element is required to detect the default theme language: ${this.initialLangcode}`
+        `The lang attribute on the html element is required to detect the default theme language: ${this.initialLangcode}`,
       );
     }
     // Detect browser language and switch to this language when available
@@ -272,7 +272,7 @@ export abstract class LocalesService {
    */
   protected setTranslateStringPluralization(
     translateObj: LocalPluralization | string,
-    vars: LocalVar
+    vars: LocalVar,
   ) {
     if (
       vars.count &&

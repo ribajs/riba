@@ -107,7 +107,7 @@ export class ShopifyTdaInstagramScrollbarComponent extends Component {
     try {
       const response = await this.instagram.media(
         this.scope.instagramId,
-        this.scope.limit
+        this.scope.limit,
       );
       if (response) {
         this.scope.media = response.media;

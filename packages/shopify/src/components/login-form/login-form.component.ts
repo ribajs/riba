@@ -125,7 +125,7 @@ export class ShopifyLoginFormComponent extends Component {
 
     this.validate(
       this.createCustomerForm,
-      this.scope.createCustomer.validation
+      this.scope.createCustomer.validation,
     );
 
     if (this.scope.createCustomer.validation.valid) {
@@ -154,7 +154,7 @@ export class ShopifyLoginFormComponent extends Component {
 
     this.validate(
       this.recoverCustomerForm,
-      this.scope.recoverCustomer.validation
+      this.scope.recoverCustomer.validation,
     );
 
     if (this.scope.recoverCustomer.validation.valid) {
@@ -162,7 +162,7 @@ export class ShopifyLoginFormComponent extends Component {
     } else {
       (this.loginCustomerForm.parentNode as HTMLElement | null)?.setAttribute(
         "hidden",
-        ""
+        "",
       );
       (
         this.recoverCustomerForm.parentNode as HTMLElement | null
@@ -186,29 +186,29 @@ export class ShopifyLoginFormComponent extends Component {
     event.stopPropagation();
 
     (this.loginCustomerForm.parentNode as HTMLElement | null)?.removeAttribute(
-      "hidden"
+      "hidden",
     );
     (this.recoverCustomerForm.parentNode as HTMLElement | null)?.setAttribute(
       "hidden",
-      ""
+      "",
     );
   }
 
   protected initValidation() {
     this.createCustomerForm = this.querySelector(
-      'form[action="/account"]'
+      'form[action="/account"]',
     ) as HTMLFormElement;
     this.createCustomerForm.setAttribute("novalidate", "");
     this.createCustomerForm.classList.add("needs-validation");
 
     this.loginCustomerForm = this.querySelector(
-      'form[action="/account/login"]'
+      'form[action="/account/login"]',
     ) as HTMLFormElement;
     this.loginCustomerForm.setAttribute("novalidate", "");
     this.loginCustomerForm.classList.add("needs-validation");
 
     this.recoverCustomerForm = this.querySelector(
-      'form[action="/account/recover"]'
+      'form[action="/account/recover"]',
     ) as HTMLFormElement;
     this.recoverCustomerForm.setAttribute("novalidate", "");
     this.recoverCustomerForm.classList.add("needs-validation");

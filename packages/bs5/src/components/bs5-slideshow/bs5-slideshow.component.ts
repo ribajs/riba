@@ -42,7 +42,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected get controlsElements() {
     return this.querySelectorAll(
-      ".slideshow-control-prev, .slideshow-control-next"
+      ".slideshow-control-prev, .slideshow-control-next",
     );
   }
 
@@ -225,7 +225,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
         this.slideElements[index],
         0,
         this.slideshowInner,
-        this.scope.angle
+        this.scope.angle,
       );
       this.setSlideActive(index);
     }
@@ -303,7 +303,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected setControlsOptions() {
     const position = this.scope.controlsPosition?.split(
-      "-"
+      "-",
     ) as SlideshowControlsPosition[];
     if (this.scope.controls && position.length === 2) {
       this.scope.controlsPositionClass = `control-${position[0]} control-${position[1]}`;
@@ -314,7 +314,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
   protected setIndicatorsOptions() {
     const positions = this.scope.indicatorsPosition?.split(
-      "-"
+      "-",
     ) as SlideshowIndicatorsPosition[];
     if (this.scope.indicators && positions.length === 2) {
       this.scope.indicatorsPositionClass = `indicators-${positions[0]} indicators-${positions[1]}`;
@@ -418,7 +418,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs5-tabs component
     this.addEventListener(
       "visibility-changed" as any,
-      this.onVisibilityChanged
+      this.onVisibilityChanged,
     );
 
     this.slideshowInner?.addEventListener("scroll", this.onScroll, {
@@ -455,7 +455,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
 
     this.removeEventListener(
       "visibility-changed" as any,
-      this.onVisibilityChanged
+      this.onVisibilityChanged,
     );
 
     this.slideshowInner?.removeEventListener("scroll", this.onScroll);
@@ -513,7 +513,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       const dragscrollOptions: DragscrollOptions = { detectGlobalMove: true };
       this.dragscrollService = new Dragscroll(
         this.slideshowInner,
-        dragscrollOptions
+        dragscrollOptions,
       );
     }
   }
@@ -542,7 +542,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       };
       this.continuousAutoplayService = new Autoscroll(
         this.slideshowInner,
-        autoscrollOptions
+        autoscrollOptions,
       );
     }
     // on continuous autoplay the scrollended event is never triggered, so call this method all `intervalsTimeMs` milliseconds as a WORKAROUND
@@ -552,7 +552,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       // this.debug('intervalsTimeMs', intervalsTimeMs);
       this.continuousAutoplayIntervalIndex = window.setInterval(
         this.onScrollend.bind(this),
-        intervalsTimeMs
+        intervalsTimeMs,
       );
     }
   }
@@ -679,8 +679,8 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     if (!this.slideElements) {
       this.throw(
         new Error(
-          "Can't not add items by child's because no slide child's are found!"
-        )
+          "Can't not add items by child's because no slide child's are found!",
+        ),
       );
     }
 
@@ -736,7 +736,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     let nearZero = Math.abs(
       this.scope.angle === "vertical"
         ? this.scope.items[0].position.centerY
-        : this.scope.items[0].position.centerX
+        : this.scope.items[0].position.centerX,
     );
     let minIndex = 0;
 
@@ -744,7 +744,7 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
       const position = Math.abs(
         this.scope.angle === "vertical"
           ? this.scope.items[i].position.centerY
-          : this.scope.items[i].position.centerX
+          : this.scope.items[i].position.centerX,
       );
       nearZero = this.getCurrentClosestNumber(0, position, nearZero);
       if (nearZero === position) {
@@ -827,10 +827,10 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     if (this.scope.items?.length !== this.slideElements?.length) {
       console.warn(
         new Error(
-          `The slide objects must be the same size as the slide elements! items (${this.scope.items?.length}) !== slideElements (${this.slideElements?.length})`
+          `The slide objects must be the same size as the slide elements! items (${this.scope.items?.length}) !== slideElements (${this.slideElements?.length})`,
         ),
         this.slideElements,
-        this
+        this,
       );
       return;
     }
@@ -872,13 +872,13 @@ export class Bs5SlideshowComponent extends TemplatesComponent {
     attributeName: keyof Bs5SlideshowComponentScope,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
 
     if (attributeName === "items") {

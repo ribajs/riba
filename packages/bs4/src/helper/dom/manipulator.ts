@@ -33,20 +33,20 @@ function normalizeDataKey(key: string) {
 export const setDataAttribute = (
   element: Element | HTMLUnknownElement | HTMLElement,
   key: string,
-  value: string
+  value: string,
 ) => {
   element.setAttribute(`data-${normalizeDataKey(key)}`, value);
 };
 
 export const removeDataAttribute = (
   element: Element | HTMLUnknownElement | HTMLElement,
-  key: string
+  key: string,
 ) => {
   element.removeAttribute(`data-${normalizeDataKey(key)}`);
 };
 
 export const getDataAttributes = (
-  element: HTMLUnknownElement | HTMLElement
+  element: HTMLUnknownElement | HTMLElement,
 ) => {
   if (!element) {
     return {};
@@ -65,7 +65,7 @@ export const getDataAttributes = (
 
 export const getDataAttribute = (
   element: Element | HTMLUnknownElement | HTMLElement,
-  key: string
+  key: string,
 ) => {
   return normalizeData(element.getAttribute(`data-${normalizeDataKey(key)}`));
 };
@@ -88,7 +88,7 @@ export const position = (element: HTMLUnknownElement | HTMLElement) => {
 
 export const toggleClass = (
   element: Element | HTMLUnknownElement | HTMLElement,
-  className: string
+  className: string,
 ) => {
   if (!element) {
     return;

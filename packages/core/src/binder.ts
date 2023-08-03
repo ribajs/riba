@@ -113,7 +113,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
     name: string,
     keypath: string | undefined,
     formatters: string[] | null,
-    identifier: string | null
+    identifier: string | null,
   ) {
     this.view = view;
     this.el = el;
@@ -138,7 +138,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
   public observe(
     model: any,
     keypath: string,
-    callback: ObserverSyncCallback
+    callback: ObserverSyncCallback,
   ): Observer {
     return new Observer(model, keypath, callback);
   }
@@ -171,7 +171,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
 
   public parseFormatterArguments(
     args: string[],
-    formatterIndex: number
+    formatterIndex: number,
   ): string[] {
     return args
       .map((arg) => parseType(arg, true))
@@ -227,13 +227,13 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
               `[${
                 this.name
               }] No args matched with regex "FORMATTER_ARGS"!\nvalue: ${JSON.stringify(
-                value
+                value,
               )}\nresult: ${JSON.stringify(
-                result
+                result,
               )}\ndeclaration: ${JSON.stringify(
-                declaration
-              )}\nindex: ${index}\n`
-            )
+                declaration,
+              )}\nindex: ${index}\n`,
+            ),
           );
           return result;
         }
@@ -251,7 +251,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
 
         if (!formatter) {
           throw new Error(
-            `[${this.name}] No formatters with id "${id}" found!`
+            `[${this.name}] No formatters with id "${id}" found!`,
           );
         }
 
@@ -271,12 +271,12 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
         ) {
           promised = true;
           return result.then((value: any) =>
-            this.formattedValue(value, index + 1)
+            this.formattedValue(value, index + 1),
           );
         }
         return result;
       },
-      value
+      value,
     );
   }
 
@@ -288,7 +288,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
    */
   public eventHandler(
     fn: eventHandlerFunction,
-    el: HTMLElement
+    el: HTMLElement,
   ): (ev: Event) => any {
     const handler = this.view.options.handler;
     return (ev) => {
@@ -360,7 +360,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
         (
           result: any /*check type*/,
           declaration: string /*check type*/,
-          index: number
+          index: number,
         ) => {
           const args = declaration.split(FORMATTER_SPLIT);
           const id = args.shift();
@@ -380,7 +380,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
           }
           return result;
         },
-        this._getValue(this.el)
+        this._getValue(this.el),
       );
 
       this.observer.setValue(value);

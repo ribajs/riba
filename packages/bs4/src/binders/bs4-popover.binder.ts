@@ -68,7 +68,7 @@ export class PopoverBinder extends Binder<string, HTMLElement> {
     // inform ancestors that this popover was bound
     // Event name in same style as the other popover CustomEvents from Bootstrap
     el.dispatchEvent(
-      new CustomEvent("bound.bs.popover", { bubbles: true, cancelable: true })
+      new CustomEvent("bound.bs.popover", { bubbles: true, cancelable: true }),
     );
   }
 

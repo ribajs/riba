@@ -25,7 +25,7 @@ export class ShopifyNestContentBlogArticlesComponent extends ShopifyNestContentC
   }
 
   protected debug = Debug(
-    "component:" + ShopifyNestContentBlogArticlesComponent.tagName
+    "component:" + ShopifyNestContentBlogArticlesComponent.tagName,
   );
 
   public scope: Scope = {
@@ -34,7 +34,7 @@ export class ShopifyNestContentBlogArticlesComponent extends ShopifyNestContentC
 
   constructor(
     element?: HTMLElement,
-    readonly shopifyApiArticleService = ShopifyApiArticleService.getSingleton()
+    readonly shopifyApiArticleService = ShopifyApiArticleService.getSingleton(),
   ) {
     super();
     this.shopifyApiArticleService = shopifyApiArticleService;
@@ -86,13 +86,13 @@ export class ShopifyNestContentBlogArticlesComponent extends ShopifyNestContentC
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.attributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
   }
 

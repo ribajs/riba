@@ -8,7 +8,7 @@ export class CollapseBinder extends Binder<string, HTMLElement> {
   static key = "bs4-collapse";
   bind() {
     console.warn(
-      "bs4-collapse is deprecated, use bs4-toggle-collapse-on-click instead."
+      "bs4-collapse is deprecated, use bs4-toggle-collapse-on-click instead.",
     );
   }
 
@@ -19,7 +19,7 @@ export class CollapseBinder extends Binder<string, HTMLElement> {
 
     targets.forEach((target) => {
       collapseServices.push(
-        new CollapseService(target, [el], { toggle: false })
+        new CollapseService(target, [el], { toggle: false }),
       );
     });
 

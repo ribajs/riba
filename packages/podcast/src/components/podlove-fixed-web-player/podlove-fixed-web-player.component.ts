@@ -56,13 +56,13 @@ export class PodloveFixedWebPlayerComponent extends Component {
 
   protected async initWebPlayer() {
     const webPlayerEl = document.getElementById(
-      this.scope.playerId
+      this.scope.playerId,
     ) as PodloveWebPlayerComponent | null;
     this.player = webPlayerEl || undefined;
 
     if (!this.player) {
       console.error(
-        `Web player element not found by id "${this.scope.playerId}"!`
+        `Web player element not found by id "${this.scope.playerId}"!`,
       );
       return;
     }
@@ -70,7 +70,7 @@ export class PodloveFixedWebPlayerComponent extends Component {
     const store = await waitForProp<PodloveWebPlayerStore>(
       "store",
       this.player,
-      100
+      100,
     );
 
     if (!store) {

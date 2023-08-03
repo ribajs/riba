@@ -18,7 +18,7 @@ export const LuxonDiffFormatter: Formatter = {
     target: DateTime,
     otherDateTime: DateTime,
     unit: DurationUnits,
-    opts?: DiffOptions
+    opts?: DiffOptions,
   ): Duration {
     return target.diff(otherDateTime, unit, opts);
   },

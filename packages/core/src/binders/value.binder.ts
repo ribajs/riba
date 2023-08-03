@@ -55,7 +55,7 @@ export class ValueBinder extends Binder<any, HTMLElement> {
 
   routine(
     el: HTMLElement | HTMLSelectElement,
-    newValue?: number | string | string[]
+    newValue?: number | string | string[],
   ) {
     let oldValue = this.getValue(el);
 

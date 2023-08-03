@@ -118,7 +118,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
       const el = this.querySelector(".monaco-editor") as HTMLElement;
       if (!el) {
         throw new Error(
-          "This component needs a container element with the class of .monaco-editor"
+          "This component needs a container element with the class of .monaco-editor",
         );
       }
       this.editor = monaco.editor.create(el, {
@@ -135,7 +135,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   }
 
   protected debug = Debug(
-    "component:" + ShopifyNestApiExplorerComponent.tagName
+    "component:" + ShopifyNestApiExplorerComponent.tagName,
   );
 
   public abstract scope: Scope;
@@ -205,7 +205,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   public selectApiParamValue(
     self: this,
     param: APIParam,
-    value: string | number
+    value: string | number,
   ) {
     self.debug("selectApiParamValue", param, value);
     param.value = value;
@@ -218,7 +218,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   public selectApiQueryValue(
     self: this,
     query: APIParam,
-    value: string | number
+    value: string | number,
   ) {
     self.debug("selectApiQueryValue", query, value);
     query.value = value;
@@ -234,7 +234,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
       (changedLangcode: string /*, initial: boolean*/) => {
         // Activate localcode and disable the other
         this.scope.langcode = changedLangcode;
-      }
+      },
     );
   }
 
@@ -407,13 +407,13 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.attributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
   }
 

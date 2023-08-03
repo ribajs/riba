@@ -18,7 +18,7 @@ export class OctobercmsService {
     }
 
     throw new Error(
-      `Singleton of OctobercmsService not defined, please call setSingleton first!`
+      `Singleton of OctobercmsService not defined, please call setSingleton first!`,
     );
   }
 

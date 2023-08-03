@@ -113,7 +113,7 @@ export class RouterViewComponent extends Component {
     container: HTMLElement,
     newPageRawHTML: string,
     dataset: any,
-    isInit: boolean
+    isInit: boolean,
   ) {
     // Only continue if the viewID is equal (in this way it is possible to have multiple views)
     if (viewId !== this.scope.id) {
@@ -165,14 +165,14 @@ export class RouterViewComponent extends Component {
       const hash = window.location.hash.substr(1);
       if (hash) {
         scrollToElement = document.getElementById(
-          window.location.hash.substr(1)
+          window.location.hash.substr(1),
         );
         // Scroll to Anchor of hash
         if (scrollToElement) {
           return await scrollTo(
             scrollToElement,
             this.scope.scrollToAnchorOffset,
-            window
+            window,
           );
         }
       }
@@ -197,13 +197,13 @@ export class RouterViewComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
     switch (attributeName) {
       case "id":

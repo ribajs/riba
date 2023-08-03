@@ -65,7 +65,7 @@ export class Bs5ToggleButtonComponent extends Component {
     this.lifecycleEvents.once(
       "ComponentLifecycle:allBound",
       this.onAllComponentsReady,
-      this
+      this,
     );
   }
 
@@ -74,7 +74,7 @@ export class Bs5ToggleButtonComponent extends Component {
     if (this.eventDispatcher) {
       this.eventDispatcher.trigger(
         TOGGLE_BUTTON.eventNames.toggle,
-        this.scope.targetId
+        this.scope.targetId,
       );
     }
   }
@@ -84,7 +84,7 @@ export class Bs5ToggleButtonComponent extends Component {
     // Trigger init to trigger there current state of all the components that are connected to this component
     this.eventDispatcher?.trigger(
       TOGGLE_BUTTON.eventNames.init,
-      this.scope.targetId
+      this.scope.targetId,
     );
   }
 
@@ -108,7 +108,7 @@ export class Bs5ToggleButtonComponent extends Component {
       this.eventDispatcher.off(
         TOGGLE_BUTTON.eventNames.toggled,
         this.onToggledEvent,
-        this
+        this,
       );
     }
     const namespace = TOGGLE_BUTTON.nsPrefix + id;
@@ -117,13 +117,13 @@ export class Bs5ToggleButtonComponent extends Component {
     this.eventDispatcher.on(
       TOGGLE_BUTTON.eventNames.toggled,
       this.onToggledEvent,
-      this
+      this,
     );
     // Triggered state triggered by `..trigger('init', ...`
     this.eventDispatcher.on(
       TOGGLE_BUTTON.eventNames.state,
       this.onToggledEvent,
-      this
+      this,
     );
   }
 
@@ -131,13 +131,13 @@ export class Bs5ToggleButtonComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.attributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
   }
 
@@ -145,13 +145,13 @@ export class Bs5ToggleButtonComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
     if (attributeName === "targetId" && newValue) {
       this.initEventDispatcher(newValue);
@@ -165,7 +165,7 @@ export class Bs5ToggleButtonComponent extends Component {
       this.eventDispatcher.off(
         TOGGLE_BUTTON.eventNames.toggled,
         this.onToggledEvent,
-        this
+        this,
       );
     }
   }
@@ -173,7 +173,7 @@ export class Bs5ToggleButtonComponent extends Component {
   protected template(): ReturnType<TemplateFunction> {
     if (!hasChildNodesTrim(this)) {
       console.warn(
-        "No child elements found, this component as no template so you need to define your own as child of this component."
+        "No child elements found, this component as no template so you need to define your own as child of this component.",
       );
     }
     return null;

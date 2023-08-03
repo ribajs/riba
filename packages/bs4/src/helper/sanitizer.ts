@@ -18,7 +18,7 @@ export type AllowList = { [key: string]: any };
 
 export const allowedAttribute = (
   attr: Node,
-  allowedAttributeList: AttributeList
+  allowedAttributeList: AttributeList,
 ) => {
   const attrName = attr.nodeName.toLowerCase();
 
@@ -26,7 +26,7 @@ export const allowedAttribute = (
     if (URI_ATTRS.indexOf(attrName) !== -1) {
       return Boolean(
         attr.nodeValue?.match(SAFE_URL_PATTERN) ||
-          attr.nodeValue?.match(DATA_URL_PATTERN)
+          attr.nodeValue?.match(DATA_URL_PATTERN),
       );
     }
 
@@ -34,7 +34,7 @@ export const allowedAttribute = (
   }
 
   const regExp = allowedAttributeList.filter(
-    (attrRegex) => attrRegex instanceof RegExp
+    (attrRegex) => attrRegex instanceof RegExp,
   );
 
   // Check if a regular expression validates the attribute.
@@ -50,7 +50,7 @@ export const allowedAttribute = (
 export function sanitizeHtml(
   unsafeHtml: string,
   allowList: AllowList,
-  sanitizeFn?: (unsafeHtml: string) => string
+  sanitizeFn?: (unsafeHtml: string) => string,
 ) {
   if (!unsafeHtml.length) {
     return unsafeHtml;

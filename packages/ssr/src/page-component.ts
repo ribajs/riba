@@ -25,7 +25,7 @@ export abstract class PageComponent extends Component {
           "Are you sure you are not trying to use this component in the browser?\n" +
           "PageComponents may only be executed on the server side, " +
           'but you can create a "normal" component with the same `tagName` and use it client-side. ' +
-          "This way you have the possibility to have a server side and a client side logic for this page component."
+          "This way you have the possibility to have a server side and a client side logic for this page component.",
       );
     }
   }

@@ -9,7 +9,7 @@ export class LocalesService extends LocalesRestService {
   protected constructor(
     baseUrl = BASE_HOST_URL,
     doNotTranslateDefaultLanguage = false,
-    showMissingTranslation = false
+    showMissingTranslation = false,
   ) {
     let url = `${baseUrl}/shopify/api/themes/${
       (window as any).Shopify.theme.id
@@ -27,7 +27,7 @@ export class LocalesService extends LocalesRestService {
   public static getSingleton(
     baseUrl = BASE_HOST_URL,
     doNotTranslateDefaultLanguage = false,
-    showMissingTranslation = false
+    showMissingTranslation = false,
   ) {
     if (LocalesService.instance) {
       return LocalesService.instance;
@@ -35,7 +35,7 @@ export class LocalesService extends LocalesRestService {
     LocalesService.instance = new LocalesService(
       baseUrl,
       doNotTranslateDefaultLanguage,
-      showMissingTranslation
+      showMissingTranslation,
     );
     return LocalesService.instance;
   }

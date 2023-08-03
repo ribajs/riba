@@ -245,13 +245,13 @@ export class ShopifyCartItemComponent extends Component {
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:start",
       this.onCartRequestStart,
-      this
+      this,
     );
 
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:complete",
       this.onCartRequestComplete,
-      this
+      this,
     );
 
     const cart = await ShopifyCartService.get();
@@ -264,13 +264,13 @@ export class ShopifyCartItemComponent extends Component {
     ShopifyCartService.shopifyCartEventDispatcher.off(
       "ShopifyCart:request:start",
       this.onCartRequestStart,
-      this
+      this,
     );
 
     ShopifyCartService.shopifyCartEventDispatcher.off(
       "ShopifyCart:request:complete",
       this.onCartRequestComplete,
-      this
+      this,
     );
   }
 

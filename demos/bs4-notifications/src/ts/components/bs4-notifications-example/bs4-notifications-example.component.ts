@@ -37,7 +37,7 @@ export class Bs4NotificationsExampleComponent extends Component {
   public showToast(event: CustomEvent) {
     this.scope.fromComponent.delay = Number(this.scope.fromComponent.delay);
     const notificationDispatcher = new EventDispatcher(
-      this.scope.fromComponent.channel
+      this.scope.fromComponent.channel,
     );
     const toast: Toast = new Toast({
       ...this.scope.fromComponent,
@@ -49,7 +49,7 @@ export class Bs4NotificationsExampleComponent extends Component {
 
   public showModal(event: CustomEvent) {
     const notificationDispatcher = new EventDispatcher(
-      this.scope.fromComponent.channel
+      this.scope.fromComponent.channel,
     );
     const modal: Modal = new Modal({
       ...this.scope.fromComponent,

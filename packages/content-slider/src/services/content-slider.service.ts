@@ -18,7 +18,7 @@ export class ContentSliderService {
     }
 
     throw new Error(
-      `Singleton of ContentSliderService not defined, please call setSingleton first!`
+      `Singleton of ContentSliderService not defined, please call setSingleton first!`,
     );
   }
 

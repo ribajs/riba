@@ -126,7 +126,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     }
     if (!this._slideshowInner) {
       throw new Error(
-        `Child element with selector ${SLIDESHOW_INNER_SELECTOR} not found!`
+        `Child element with selector ${SLIDESHOW_INNER_SELECTOR} not found!`,
       );
     }
     return this._slideshowInner;
@@ -138,7 +138,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     }
     if (!this._slideElements) {
       throw new Error(
-        `Child element with selector ${SLIDES_SELECTOR} not found!`
+        `Child element with selector ${SLIDES_SELECTOR} not found!`,
       );
     }
     return this._slideElements;
@@ -147,7 +147,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   protected get controlsElements() {
     if (!this._controlsElements) {
       this._controlsElements = this.querySelectorAll(
-        ".slideshow-control-prev, .slideshow-control-next"
+        ".slideshow-control-prev, .slideshow-control-next",
       );
     }
     return this._controlsElements;
@@ -414,7 +414,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     if (!this.scope.items[index]) {
       console.error(
         `Slide with index "${index}" not found!`,
-        this.scope.items[index]
+        this.scope.items[index],
       );
       return;
     }
@@ -460,7 +460,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected setOptions(
     dest: ResponsiveOptions | Options,
-    source: ResponsiveOptions | Options
+    source: ResponsiveOptions | Options,
   ) {
     dest.slidesToScroll =
       typeof source.slidesToScroll !== "undefined"
@@ -534,7 +534,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected setOptionsIfUndefined(
     dest: ResponsiveOptions | Options,
-    source: ResponsiveOptions | Options
+    source: ResponsiveOptions | Options,
   ) {
     dest.slidesToScroll =
       typeof dest.slidesToScroll === "undefined"
@@ -603,19 +603,19 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected setControlsOptions() {
     const xsControlsPosition = this.scope.xs.controlsPosition?.split(
-      "-"
+      "-",
     ) as ControlsPosition[];
     const smControlsPosition = this.scope.sm.controlsPosition?.split(
-      "-"
+      "-",
     ) as ControlsPosition[];
     const mdControlsPosition = this.scope.md.controlsPosition?.split(
-      "-"
+      "-",
     ) as ControlsPosition[];
     const lgControlsPosition = this.scope.lg.controlsPosition?.split(
-      "-"
+      "-",
     ) as ControlsPosition[];
     const xlControlsPosition = this.scope.xl.controlsPosition?.split(
-      "-"
+      "-",
     ) as ControlsPosition[];
 
     this.scope.controlsPositionClass = `control-${xsControlsPosition[0]} control-${xsControlsPosition[1]} control-sm-${smControlsPosition[0]} control-sm-${smControlsPosition[1]} control-md-${mdControlsPosition[0]} control-md-${mdControlsPosition[1]} control-lg-${lgControlsPosition[0]} control-lg-${lgControlsPosition[1]} control-xl-${xlControlsPosition[0]} control-xl-${xlControlsPosition[1]}`;
@@ -623,19 +623,19 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
   protected setIndicatorsOptions() {
     const xsIndicatorsPosition = this.scope.xs.indicatorsPosition?.split(
-      "-"
+      "-",
     ) as IndicatorsPosition[];
     const smIndicatorsPosition = this.scope.sm.indicatorsPosition?.split(
-      "-"
+      "-",
     ) as IndicatorsPosition[];
     const mdIndicatorsPosition = this.scope.md.indicatorsPosition?.split(
-      "-"
+      "-",
     ) as IndicatorsPosition[];
     const lgIndicatorsPosition = this.scope.lg.indicatorsPosition?.split(
-      "-"
+      "-",
     ) as IndicatorsPosition[];
     const xlIndicatorsPosition = this.scope.xl.indicatorsPosition?.split(
-      "-"
+      "-",
     ) as IndicatorsPosition[];
 
     this.scope.indicatorsPositionClass = `indicators-${xsIndicatorsPosition[0]} indicators-${xsIndicatorsPosition[1]} indicators-sm-${smIndicatorsPosition[0]} indicators-sm-${smIndicatorsPosition[1]} indicators-md-${mdIndicatorsPosition[0]} indicators-md-${mdIndicatorsPosition[1]} indicators-lg-${lgIndicatorsPosition[0]} indicators-lg-${lgIndicatorsPosition[1]} indicators-xl-${xlIndicatorsPosition[0]} indicators-xl-${xlIndicatorsPosition[1]}`;
@@ -769,7 +769,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     // What element resize
     if ((window as any).ResizeObserver as any) {
       this.resizeObserver = new (window as any).ResizeObserver(
-        this.onViewChanges
+        this.onViewChanges,
       );
       this.resizeObserver?.observe(this);
     } else {
@@ -780,7 +780,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs4-tabs component
     this.addEventListener(
       "visibility-changed" as any,
-      this.onVisibilityChanged
+      this.onVisibilityChanged,
     );
 
     this.slideshowInner.addEventListener("scroll", this.onScroll, {
@@ -821,7 +821,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
 
     this.removeEventListener(
       "visibility-changed" as any,
-      this.onVisibilityChanged
+      this.onVisibilityChanged,
     );
 
     this.slideshowInner.removeEventListener("scroll", this.onScroll);
@@ -867,7 +867,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       const dragscrollOptions: DragscrollOptions = { detectGlobalMove: true };
       this.dragscrollService = new Dragscroll(
         this.slideshowInner,
-        dragscrollOptions
+        dragscrollOptions,
       );
     }
   }
@@ -888,7 +888,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       };
       this.continuousAutoplayService = new Autoscroll(
         this.slideshowInner,
-        autoscrollOptions
+        autoscrollOptions,
       );
     }
     // on continuous autoplay the scrollended event is never triggered, so call this method all `intervalsTimeMs` milliseconds as a WORKAROUND
@@ -898,7 +898,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       // this.debug('intervalsTimeMs', intervalsTimeMs);
       this.continuousAutoplayIntervalIndex = window.setInterval(
         this.onScrollend.bind(this),
-        intervalsTimeMs
+        intervalsTimeMs,
       );
     }
   }
@@ -1037,7 +1037,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     let nearZero = Math.abs(
       this.scope.angle === "vertical"
         ? this.scope.items[0].position.centerY
-        : this.scope.items[0].position.centerX
+        : this.scope.items[0].position.centerX,
     );
     let minIndex = 0;
 
@@ -1045,7 +1045,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       const position = Math.abs(
         this.scope.angle === "vertical"
           ? this.scope.items[i].position.centerY
-          : this.scope.items[i].position.centerX
+          : this.scope.items[i].position.centerX,
       );
       nearZero = this.getCurrentClosestNumber(0, position, nearZero);
       if (nearZero === position) {
@@ -1142,7 +1142,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
   protected setSlidePositions() {
     if (this.scope.items.length !== this.slideElements?.length) {
       console.warn(
-        `The slide objects must be the same size as the slide elements! ${this.scope.items.length} !== ${this.slideElements?.length}`
+        `The slide objects must be the same size as the slide elements! ${this.scope.items.length} !== ${this.slideElements?.length}`,
       );
       return;
     }
@@ -1189,7 +1189,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     let optionForSize: Breakpoint = "xs";
 
@@ -1236,7 +1236,7 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
       optionForSize + parsedAttributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
 
     this.bindIfReady();
@@ -1253,13 +1253,13 @@ export class Bs4SlideshowComponent extends TemplatesComponent {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     return super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
   }
 

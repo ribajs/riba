@@ -190,7 +190,7 @@ export class TouchEventsService extends BaseEventsService {
       endevent: ["touchend"],
       moveevent: ["touchmove"],
       tapevent: ["tap"],
-    }
+    },
   ) {
     super(el);
     this.el = el;
@@ -221,19 +221,19 @@ export class TouchEventsService extends BaseEventsService {
     for (const eventName of this.settings.startevent) {
       this.el.removeEventListener(
         eventName,
-        this.onStartEvent as any as EventListener
+        this.onStartEvent as any as EventListener,
       );
     }
     for (const eventName of this.settings.moveevent) {
       this.el.removeEventListener(
         eventName,
-        this.onMoveEvent as any as EventListener
+        this.onMoveEvent as any as EventListener,
       );
     }
     for (const eventName of this.settings.endevent) {
       this.el.removeEventListener(
         eventName,
-        this.onEndEvent as any as EventListener
+        this.onEndEvent as any as EventListener,
       );
     }
     // this.scrollEvents.destroy();
@@ -245,7 +245,7 @@ export class TouchEventsService extends BaseEventsService {
     startPosition: Position,
     endPosition: Position,
     hThreshold: number = this.settings.swipeHThreshold,
-    vThreshold: number = this.settings.swipeVThreshold
+    vThreshold: number = this.settings.swipeVThreshold,
   ) {
     let swipeDir = "";
     if (
@@ -278,7 +278,7 @@ export class TouchEventsService extends BaseEventsService {
   protected getPosition(
     event: TouchEvent | MouseEvent,
     type: TouchType = TouchType.DEFAULT,
-    index = 0
+    index = 0,
   ): Position {
     let touchesTypes: TouchList;
     switch (type) {
@@ -306,7 +306,7 @@ export class TouchEventsService extends BaseEventsService {
   protected getOffset(
     event: TouchEvent | MouseEvent,
     type: TouchType = TouchType.DEFAULT,
-    index = 0
+    index = 0,
   ): TouchOffset {
     const boundingClientRect = (this.el as HTMLElement).getBoundingClientRect();
     let touchesTypes: TouchList;
@@ -325,20 +325,20 @@ export class TouchEventsService extends BaseEventsService {
       x: this.settings.touchCapable
         ? Math.round(
             touchesTypes[index].pageX -
-              (boundingClientRect ? boundingClientRect.left : 0)
+              (boundingClientRect ? boundingClientRect.left : 0),
           )
         : Math.round(
             (event as any as MouseEvent).pageX -
-              (boundingClientRect ? boundingClientRect.left : 0)
+              (boundingClientRect ? boundingClientRect.left : 0),
           ),
       y: this.settings.touchCapable
         ? Math.round(
             touchesTypes[index].pageY -
-              (boundingClientRect ? boundingClientRect.top : 0)
+              (boundingClientRect ? boundingClientRect.top : 0),
           )
         : Math.round(
             (event as any as MouseEvent).pageY -
-              (boundingClientRect ? boundingClientRect.top : 0)
+              (boundingClientRect ? boundingClientRect.top : 0),
           ),
     };
     return offset;
@@ -348,7 +348,7 @@ export class TouchEventsService extends BaseEventsService {
     event: TouchEvent | MouseEvent,
     withIndex = false,
     positionType = TouchType.DEFAULT,
-    offsetType = TouchType.CHANGED
+    offsetType = TouchType.CHANGED,
   ): TouchData {
     const touchData: TouchData = {
       position: this.getPosition(event, positionType),
@@ -368,7 +368,7 @@ export class TouchEventsService extends BaseEventsService {
         this.onStartEvent as any as EventListener,
         {
           passive: true,
-        }
+        },
       );
     }
     for (const eventName of this.settings.moveevent) {
@@ -377,7 +377,7 @@ export class TouchEventsService extends BaseEventsService {
         this.onMoveEvent as any as EventListener,
         {
           passive: true,
-        }
+        },
       );
     }
     for (const eventName of this.settings.endevent) {
@@ -386,7 +386,7 @@ export class TouchEventsService extends BaseEventsService {
         this.onEndEvent as any as EventListener,
         {
           passive: true,
-        }
+        },
       );
     }
   }
@@ -411,7 +411,7 @@ export class TouchEventsService extends BaseEventsService {
         event,
         true,
         TouchType.DEFAULT,
-        TouchType.CHANGED
+        TouchType.CHANGED,
       );
     }
 
@@ -426,7 +426,7 @@ export class TouchEventsService extends BaseEventsService {
       event,
       false,
       TouchType.DEFAULT,
-      TouchType.CHANGED
+      TouchType.CHANGED,
     );
 
     this.tapstart(event);
@@ -467,7 +467,7 @@ export class TouchEventsService extends BaseEventsService {
     this.triggerCustomEvent(
       "tapstart",
       event,
-      this.getTouchData(event, false, TouchType.DEFAULT, TouchType.CHANGED)
+      this.getTouchData(event, false, TouchType.DEFAULT, TouchType.CHANGED),
     );
     return true;
   }
@@ -477,7 +477,7 @@ export class TouchEventsService extends BaseEventsService {
     this.triggerCustomEvent(
       "tapmove",
       event,
-      this.getTouchData(event, false, TouchType.DEFAULT, TouchType.CHANGED)
+      this.getTouchData(event, false, TouchType.DEFAULT, TouchType.CHANGED),
     );
     return true;
   }
@@ -487,7 +487,7 @@ export class TouchEventsService extends BaseEventsService {
     this.triggerCustomEvent(
       "tapend",
       event,
-      this.getTouchData(event, false, TouchType.CHANGED, TouchType.CHANGED)
+      this.getTouchData(event, false, TouchType.CHANGED, TouchType.CHANGED),
     );
     return true;
   }
@@ -532,18 +532,19 @@ export class TouchEventsService extends BaseEventsService {
               x: this.settings.touchCapable
                 ? Math.round(
                     (event as TouchEvent).changedTouches[i].pageX -
-                      (elOffset ? elOffset.left : 0)
+                      (elOffset ? elOffset.left : 0),
                   )
                 : Math.round(
-                    (event as MouseEvent).pageX - (elOffset ? elOffset.left : 0)
+                    (event as MouseEvent).pageX -
+                      (elOffset ? elOffset.left : 0),
                   ),
               y: this.settings.touchCapable
                 ? Math.round(
                     (event as TouchEvent).changedTouches[i].pageY -
-                      (elOffset ? elOffset.top : 0)
+                      (elOffset ? elOffset.top : 0),
                   )
                 : Math.round(
-                    (event as MouseEvent).pageY - (elOffset ? elOffset.top : 0)
+                    (event as MouseEvent).pageY - (elOffset ? elOffset.top : 0),
                   ),
             },
           };
@@ -587,7 +588,7 @@ export class TouchEventsService extends BaseEventsService {
         event,
         true,
         TouchType.CHANGED,
-        TouchType.CHANGED
+        TouchType.CHANGED,
       );
       const touchData: TouchEventData = {
         firstTap: this.firstTap,
@@ -609,7 +610,7 @@ export class TouchEventsService extends BaseEventsService {
           window.clearTimeout(this.actionTimer);
         },
         this.settings.doubletapInterval,
-        [event]
+        [event],
       );
     }
     this.lastTouch = now;
@@ -639,7 +640,7 @@ export class TouchEventsService extends BaseEventsService {
           event,
           false,
           TouchType.CHANGED,
-          TouchType.CHANGED
+          TouchType.CHANGED,
         );
 
         // Was it a taphold?
@@ -687,18 +688,18 @@ export class TouchEventsService extends BaseEventsService {
             x: this.settings.touchCapable
               ? Math.round(
                   (event as TouchEvent).changedTouches[i].pageX -
-                    (elOffset ? elOffset.left : 0)
+                    (elOffset ? elOffset.left : 0),
                 )
               : Math.round(
-                  (event as MouseEvent).pageX - (elOffset ? elOffset.left : 0)
+                  (event as MouseEvent).pageX - (elOffset ? elOffset.left : 0),
                 ),
             y: this.settings.touchCapable
               ? Math.round(
                   (event as TouchEvent).changedTouches[i].pageY -
-                    (elOffset ? elOffset.top : 0)
+                    (elOffset ? elOffset.top : 0),
                 )
               : Math.round(
-                  (event as MouseEvent).pageY - (elOffset ? elOffset.top : 0)
+                  (event as MouseEvent).pageY - (elOffset ? elOffset.top : 0),
                 ),
           },
         };
@@ -736,7 +737,7 @@ export class TouchEventsService extends BaseEventsService {
         event,
         false,
         TouchType.DEFAULT,
-        TouchType.CHANGED
+        TouchType.CHANGED,
       );
 
       // Calculate the swipe amount (normalized):
@@ -766,12 +767,12 @@ export class TouchEventsService extends BaseEventsService {
       event,
       false,
       TouchType.CHANGED,
-      TouchType.CHANGED
+      TouchType.CHANGED,
     );
     if (this.hasSwiped && this.startEvnt) {
       const swipeDir = this.getSwipeDir(
         this.startEvnt.position,
-        endEvnt.position
+        endEvnt.position,
       );
 
       // Calculate the swipe amount (normalized):

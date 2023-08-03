@@ -91,28 +91,28 @@ export class EASDKWrapperService
         };
         console.debug("Receive message:", event, message, data);
       },
-      false
+      false,
     );
 
     this.event.on(
       "bar:loading",
       (fallback: boolean, loading: LoadingStateWrapper) => {
         console.debug("bar:loading", fallback, loading);
-      }
+      },
     );
 
     this.event.on(
       "bar:loadingOn",
       (fallback: boolean, loading: LoadingStateWrapper) => {
         console.debug("bar:loadingOn", fallback, loading);
-      }
+      },
     );
 
     this.event.on(
       "bar:loadingOff",
       (fallback: boolean, loading: LoadingStateWrapper) => {
         console.debug("bar:loadingOff", fallback, loading);
-      }
+      },
     );
 
     this.event.on("bar:setTitle", (fallback: boolean, title: string) => {
@@ -127,14 +127,14 @@ export class EASDKWrapperService
       "bar:setPagination",
       (fallback: boolean, config: PaginationConfig) => {
         console.debug("bar:setPagination", fallback, config);
-      }
+      },
     );
 
     this.event.on(
       "bar:setBreadcrumb",
       (fallback: boolean, config: ButtonConfig) => {
         console.debug("bar:setBreadcrumb", fallback, config);
-      }
+      },
     );
   }
 

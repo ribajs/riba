@@ -31,7 +31,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
   }
 
   protected debug = Debug(
-    "component:" + ShopifyNestApiSocketExplorerComponent.tagName
+    "component:" + ShopifyNestApiSocketExplorerComponent.tagName,
   );
 
   public scope: Scope = {
@@ -60,7 +60,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.debug("product created", product);
         return this.apProductService.update(
           product.id,
-          productUpdatesTestDatas[0]
+          productUpdatesTestDatas[0],
         );
       })
       .then((product) => {
@@ -83,7 +83,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
       (changedLangcode: string /*, initial: boolean*/) => {
         // Activate localcode and disable the other
         this.scope.langcode = changedLangcode;
-      }
+      },
     );
   }
 
@@ -109,10 +109,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
 
     const newCard = htmlToElement(
       `<shopify-nest-socket-event-card class="col-auto" event="${eventName}" data='${JSON.stringify(
-        data
+        data,
       ).replace(/'/g, `&#39;`)}' role="${
         role || ""
-      }"></shopify-nest-socket-event-card>`
+      }"></shopify-nest-socket-event-card>`,
     );
     this.debug("newCard", newCard);
     if (this.cardContainer && newCard) {
@@ -129,10 +129,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "webhook:carts/create",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -140,7 +140,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
       (data: any) => {
         this.prependNewSocketCard("carts/update", data, "shopify-staff-member");
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -149,10 +149,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "checkouts/create",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -161,10 +161,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "checkouts/update",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -173,10 +173,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "checkouts/delete",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -185,10 +185,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "collections/create",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -197,10 +197,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "collections/update",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -209,10 +209,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "collections/delete",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -221,10 +221,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "collection_listings/add",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -233,9 +233,9 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "collection_listings/remove",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
-      }
+      },
     );
 
     this.webhooksService.on(
@@ -244,9 +244,9 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "collection_listings/update",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
-      }
+      },
     );
 
     this.webhooksService.on(
@@ -255,10 +255,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "customers/create",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -267,10 +267,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "customers/disable",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -279,10 +279,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "customers/enable",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -291,10 +291,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "customers/update",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -303,10 +303,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "customers/delete",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -315,10 +315,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "customer_groups/create",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -327,10 +327,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "customer_groups/update",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -339,10 +339,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "customer_groups/delete",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -351,10 +351,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "draft_orders/create",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -363,10 +363,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "draft_orders/update",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -375,10 +375,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "fulfillments/create",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -387,10 +387,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "fulfillments/update",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -399,10 +399,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "fulfillment_events/create",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -411,10 +411,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "fulfillment_events/delete",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -423,10 +423,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "inventory_items/create",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -435,10 +435,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "inventory_items/update",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -447,10 +447,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "inventory_items/delete",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -459,10 +459,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "inventory_levels/connect",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -471,10 +471,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "inventory_levels/update",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -483,9 +483,9 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "inventory_levels/disconnect",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
-      }
+      },
     );
 
     this.webhooksService.on(
@@ -494,10 +494,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "locations/create",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -506,10 +506,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "locations/update",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -518,10 +518,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "locations/delete",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -530,10 +530,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "orders/cancelled",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -542,10 +542,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "orders/create",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -554,10 +554,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "orders/fulfilled",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -565,7 +565,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
       (data: any) => {
         this.prependNewSocketCard("orders/paid", data, "shopify-staff-member");
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -574,10 +574,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "orders/partially_fulfilled",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -586,10 +586,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "orders/updated",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -598,10 +598,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "orders/delete",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -610,10 +610,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "order_transactions/create",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -627,7 +627,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         }
         this.prependNewSocketCard("products/create", product, role);
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -641,7 +641,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         }
         this.prependNewSocketCard("products/update", product, role);
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -650,7 +650,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.debug("products/delete", data);
         this.prependNewSocketCard("products/delete", data);
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -659,10 +659,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "product_listings/add",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -671,10 +671,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "product_listings/remove",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -683,10 +683,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "product_listings/update",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -695,10 +695,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "refunds/create",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -706,7 +706,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
       (data: any) => {
         this.prependNewSocketCard("app/uninstalled", data);
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -714,7 +714,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
       (data: any) => {
         this.prependNewSocketCard("shop/update", data, "shopify-staff-member");
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -723,10 +723,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "themes/create",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -735,10 +735,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "themes/publish",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -747,10 +747,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "themes/update",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
 
     this.webhooksService.on(
@@ -759,10 +759,10 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
         this.prependNewSocketCard(
           "themes/delete",
           data,
-          "shopify-staff-member"
+          "shopify-staff-member",
         );
       },
-      this
+      this,
     );
   }
 
@@ -774,13 +774,13 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.attributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
   }
 

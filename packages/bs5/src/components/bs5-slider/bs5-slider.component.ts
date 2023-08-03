@@ -280,7 +280,7 @@ export class Bs5SliderComponent extends Component {
 
   protected setControlsOptions() {
     const position = this.scope.controlsPosition?.split(
-      "-"
+      "-",
     ) as Bs5SliderControlsPosition[];
     if (this.scope.controls && position.length === 2) {
       this.scope.controlsPositionClass = `control-${position[0]} control-${position[1]}`;
@@ -291,7 +291,7 @@ export class Bs5SliderComponent extends Component {
 
   protected setIndicatorsOptions() {
     const positions = this.scope.indicatorsPosition?.split(
-      "-"
+      "-",
     ) as Bs5SliderIndicatorsPosition[];
     if (this.scope.indicators && positions.length === 2) {
       this.scope.indicatorsPositionClass = `indicators-${positions[0]} indicators-${positions[1]}`;
@@ -325,7 +325,7 @@ export class Bs5SliderComponent extends Component {
     this.scope.isScrolling = true;
     // Forward the event to this component, so that other components can listen to it
     this.dispatchEvent(
-      new CustomEvent<ScrollEventDetail>(event.type, { detail: event.detail })
+      new CustomEvent<ScrollEventDetail>(event.type, { detail: event.detail }),
     );
   }
 
@@ -347,7 +347,7 @@ export class Bs5SliderComponent extends Component {
 
     // Forward the event to this component, so that other components can listen to it
     this.dispatchEvent(
-      new CustomEvent<ScrollEventDetail>(event.type, { detail: event.detail })
+      new CustomEvent<ScrollEventDetail>(event.type, { detail: event.detail }),
     );
   }
 
@@ -378,7 +378,7 @@ export class Bs5SliderComponent extends Component {
     // Custom event triggered by some parent components when this component changes his visibility, e.g. triggered in the bs5-tabs component
     this.addEventListener(
       "visibility-changed" as any,
-      this.onVisibilityChanged
+      this.onVisibilityChanged,
     );
 
     this.sliderInner?.addEventListener(
@@ -386,14 +386,14 @@ export class Bs5SliderComponent extends Component {
       this.onScroll as EventListener,
       {
         passive: true,
-      }
+      },
     );
     this.sliderInner?.addEventListener(
       Bs5SliderComponent.EVENTS.scrollended,
       this.onScrollEnd as EventListener,
       {
         passive: true,
-      }
+      },
     );
   }
 
@@ -408,16 +408,16 @@ export class Bs5SliderComponent extends Component {
 
     this.removeEventListener(
       "visibility-changed" as any,
-      this.onVisibilityChanged
+      this.onVisibilityChanged,
     );
 
     this.sliderInner?.removeEventListener(
       Bs5SliderComponent.EVENTS.scrolling,
-      this.onScroll as EventListener
+      this.onScroll as EventListener,
     );
     this.sliderInner?.removeEventListener(
       Bs5SliderComponent.EVENTS.scrollended,
-      this.onScrollEnd as EventListener
+      this.onScrollEnd as EventListener,
     );
   }
 
@@ -463,7 +463,7 @@ export class Bs5SliderComponent extends Component {
       const dragscrollOptions: DragscrollOptions = { detectGlobalMove: true };
       this.dragscrollService = new Dragscroll(
         this.sliderInner,
-        dragscrollOptions
+        dragscrollOptions,
       );
     }
   }
@@ -566,8 +566,8 @@ export class Bs5SliderComponent extends Component {
     if (!this.slideElements) {
       this.throw(
         new Error(
-          "Can't not add items by child's because no slide child's are found!"
-        )
+          "Can't not add items by child's because no slide child's are found!",
+        ),
       );
     }
     this.scope.items = [];
@@ -647,7 +647,7 @@ export class Bs5SliderComponent extends Component {
       return undefined;
     }
     const slideEl = this.sliderInner.querySelector(
-      `[index="${index}"]`
+      `[index="${index}"]`,
     ) as HTMLElement;
     return slideEl;
   }
@@ -793,13 +793,13 @@ export class Bs5SliderComponent extends Component {
     attributeName: keyof Bs5SliderComponentScope,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
 
     if (attributeName === "items") {

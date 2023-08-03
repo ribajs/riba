@@ -18,7 +18,7 @@ export class MomentService {
     }
 
     throw new Error(
-      `Singleton of MomentService not defined, please call setSingleton first!`
+      `Singleton of MomentService not defined, please call setSingleton first!`,
     );
   }
 

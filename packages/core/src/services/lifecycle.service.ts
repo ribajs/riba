@@ -55,7 +55,7 @@ export class LifecycleService {
         this.components[data.tagName] =
           this.components[data.tagName] || this.getEmpty();
         this.components[data.tagName].components.push(data.component);
-      }
+      },
     );
 
     this.events.on(
@@ -66,7 +66,7 @@ export class LifecycleService {
         }
         this.resetTimeout();
         this.checkStates();
-      }
+      },
     );
 
     this.events.on(
@@ -77,14 +77,14 @@ export class LifecycleService {
         }
         this.resetTimeout();
         this.checkStates();
-      }
+      },
     );
 
     this.events.on(
       "Component:error",
       (error: Error, data: ComponentLifecycleEventData) => {
         this.onError(error, data);
-      }
+      },
     );
 
     // Router
@@ -98,7 +98,7 @@ export class LifecycleService {
         container: HTMLElement,
         containerHtml: string,
         dataset: any,
-        firstPageLoad: boolean
+        firstPageLoad: boolean,
       ) => {
         if (this.debug)
           console.debug(
@@ -107,12 +107,12 @@ export class LifecycleService {
             newStatus,
             oldStatus,
             "firstPageLoad",
-            firstPageLoad
+            firstPageLoad,
           );
         if (!firstPageLoad) {
           this.reset();
         }
-      }
+      },
     );
   }
 
@@ -183,7 +183,7 @@ export class LifecycleService {
     this.clearTimeout();
     console.error(
       `The component "${data.tagName}" has caused an error:`,
-      error
+      error,
     );
     this.events.trigger("ComponentLifecycle:error", error, data);
   }
@@ -213,7 +213,7 @@ export class LifecycleService {
     this.events.trigger(
       "ComponentLifecycle:error",
       new Error(errorMessage),
-      {}
+      {},
     );
   }
 
@@ -228,7 +228,7 @@ export class LifecycleService {
     this.clearTimeout();
     this.timeout = window.setTimeout(
       this.onTimeout.bind(this),
-      CoreService.options.lifecycle?.timeout || 5000
+      CoreService.options.lifecycle?.timeout || 5000,
     );
     return this.timeout;
   }

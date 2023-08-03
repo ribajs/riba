@@ -21,7 +21,7 @@ export class BindersService extends ModuleElementService<ClassOfBinder> {
   public register(
     Binder: ClassOfBinder,
     fallbackName?: string,
-    forceFallback = false
+    forceFallback = false,
   ) {
     if (!Binder) {
       throw new Error("No Binder passed to register!");

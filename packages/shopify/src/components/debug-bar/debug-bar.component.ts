@@ -34,7 +34,7 @@ export class ShopifyDebugBarComponent extends Component {
     name: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     this.debug("attributeChangedCallback", name, oldValue, newValue, namespace);
     // injects the changed attributes to scope
@@ -74,10 +74,10 @@ export class ShopifyDebugBarComponent extends Component {
   protected async beforeBind(): Promise<any> {
     // this.debug('beforeBind');
     this.previewBar = document.getElementById(
-      "preview-bar-iframe"
+      "preview-bar-iframe",
     ) as HTMLIFrameElement | null;
     this.adminBar = document.getElementById(
-      "admin-bar-iframe"
+      "admin-bar-iframe",
     ) as HTMLIFrameElement | null;
 
     if (this.previewBar) {

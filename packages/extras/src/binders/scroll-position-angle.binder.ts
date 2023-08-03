@@ -35,7 +35,7 @@ export class ScrollPositionAngleBinder extends Binder<
     scrollToPosition(
       this.el,
       this.position,
-      this.angle as "horizontal" | "vertical" | "both"
+      this.angle as "horizontal" | "vertical" | "both",
     );
   }
 
@@ -43,7 +43,7 @@ export class ScrollPositionAngleBinder extends Binder<
 
   routine(
     el: HTMLElement | (Window & typeof globalThis) | null,
-    position: number | "end" | "start"
+    position: number | "end" | "start",
   ) {
     this.position = position;
     this.angle = this.args[0] as "x" | "y" | "horizontal" | "vertical" | "both";

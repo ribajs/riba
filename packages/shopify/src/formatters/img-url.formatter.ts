@@ -17,7 +17,7 @@ export const imgUrlFormatter: Formatter = {
     size: string,
     scale?: number,
     crop?: string,
-    extension?: string
+    extension?: string,
     // element?: HTMLImageElement
   ) {
     try {

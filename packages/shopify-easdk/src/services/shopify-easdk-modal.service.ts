@@ -58,7 +58,7 @@ export class ModalWrapperService
   public open(
     init: ModalInit,
     fn?: (confirmed: boolean, data: any) => void,
-    forceFallback = false
+    forceFallback = false,
   ) {
     const fallback = this.useFallback(forceFallback);
     this.event.trigger("open", fallback, init);
@@ -83,7 +83,7 @@ export class ModalWrapperService
   public alert(
     options: ModalAlertOptions,
     fn: (confirmed: boolean) => void,
-    forceFallback = false
+    forceFallback = false,
   ) {
     const fallback = this.useFallback(forceFallback);
     console.debug("alert", options);
@@ -109,7 +109,7 @@ export class ModalWrapperService
   public confirm(
     options: ModalConfirmOptions,
     fn: (confirmed: boolean) => void,
-    forceFallback = false
+    forceFallback = false,
   ) {
     const fallback = this.useFallback(forceFallback);
     console.debug("alert", fallback, options);
@@ -135,7 +135,7 @@ export class ModalWrapperService
   public input(
     options: ModalInputOptions,
     fn: (result: boolean, data: any) => void,
-    forceFallback = false
+    forceFallback = false,
   ) {
     const fallback = this.useFallback(forceFallback);
     console.debug("alert", fallback, options);
@@ -188,7 +188,7 @@ export class ModalWrapperService
    */
   public productPicker(
     options: ProductPickerOptions,
-    fn: ProductPickerCallback
+    fn: ProductPickerCallback,
   ): void {
     return this.shopifyApp.Modal.productPicker(options, fn);
   }
@@ -202,7 +202,7 @@ export class ModalWrapperService
    */
   public collectionPicker(
     options: ProductPickerOptions,
-    fn: ProductPickerCallback
+    fn: ProductPickerCallback,
   ): void {
     return this.shopifyApp.Modal.collectionPicker(options, fn);
   }

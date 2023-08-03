@@ -26,7 +26,7 @@ export const ARROW_UP_KEYCODE = 38; // KeyboardEvent.which value for up arrow ke
 export const ARROW_DOWN_KEYCODE = 40; // KeyboardEvent.which value for down arrow key
 export const RIGHT_MOUSE_BUTTON_WHICH = 3; // MouseEvent.which value for the right button (assuming a right-handed mouse)
 export const REGEXP_KEYDOWN = new RegExp(
-  `${ARROW_UP_KEYCODE}|${ARROW_DOWN_KEYCODE}|${ESCAPE_KEYCODE}`
+  `${ARROW_UP_KEYCODE}|${ARROW_DOWN_KEYCODE}|${ESCAPE_KEYCODE}`,
 );
 
 export const EVENT = {
@@ -114,7 +114,7 @@ export class DropdownService {
       if (button.parentElement) {
         const menu =
           button.parentElement.querySelector(
-            SELECTOR.MENU + "." + CLASSNAME.SHOW
+            SELECTOR.MENU + "." + CLASSNAME.SHOW,
           ) || undefined;
         if (menu) {
           return this.close(button, menu, button);
@@ -127,7 +127,7 @@ export class DropdownService {
   public static close(
     triggerCloseElement: Element,
     menu: Element,
-    dropdown?: Element
+    dropdown?: Element,
   ) {
     const relatedTarget = {
       relatedTarget: triggerCloseElement,
@@ -140,7 +140,7 @@ export class DropdownService {
     if (dropdown && dropdown.classList.contains(CLASSNAME.SHOW)) {
       dropdown.classList.remove(CLASSNAME.SHOW);
       dropdown.dispatchEvent(
-        new CustomEvent(EVENT.HIDDEN, { detail: relatedTarget })
+        new CustomEvent(EVENT.HIDDEN, { detail: relatedTarget }),
       );
     }
 
@@ -149,7 +149,7 @@ export class DropdownService {
     if (parent && parent.classList.contains(CLASSNAME.SHOW)) {
       parent.classList.remove(CLASSNAME.SHOW);
       parent.dispatchEvent(
-        new CustomEvent(EVENT.HIDDEN, { detail: relatedTarget })
+        new CustomEvent(EVENT.HIDDEN, { detail: relatedTarget }),
       );
     }
   }
@@ -194,7 +194,7 @@ export class DropdownService {
     if (parent && !parent.classList.contains(CLASSNAME.SHOW)) {
       parent.classList.add(CLASSNAME.SHOW);
       parent.dispatchEvent(
-        new CustomEvent(EVENT.SHOWN, { detail: relatedTarget })
+        new CustomEvent(EVENT.SHOWN, { detail: relatedTarget }),
       );
     }
   }
@@ -237,7 +237,7 @@ export class DropdownService {
        */
       if (typeof Popper === "undefined") {
         throw new TypeError(
-          "Bootstrap dropdown require Popper.js (https://popper.js.org)"
+          "Bootstrap dropdown require Popper.js (https://popper.js.org)",
         );
       }
 
@@ -263,7 +263,7 @@ export class DropdownService {
       this._popper = new Popper(
         referenceElement,
         this._menu as HTMLElement,
-        this._getPopperConfig()
+        this._getPopperConfig(),
       );
     }
 
@@ -276,7 +276,7 @@ export class DropdownService {
       this._menu.classList.add(CLASSNAME.SHOW);
     }
     this._menu.dispatchEvent(
-      new CustomEvent(EVENT.SHOWN, { detail: relatedTarget })
+      new CustomEvent(EVENT.SHOWN, { detail: relatedTarget }),
     );
   }
 

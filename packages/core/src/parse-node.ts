@@ -7,7 +7,7 @@ import { parseTemplate } from "./parse-template.js";
 export function parseNode(
   view: View,
   node: DataElement,
-  templateDelimiters: Array<string>
+  templateDelimiters: Array<string>,
 ) {
   /** If true stop / block the parseNode  recursion */
   let blockRecursion = false;

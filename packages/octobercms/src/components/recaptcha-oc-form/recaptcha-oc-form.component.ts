@@ -72,7 +72,7 @@ export class ReCaptchaFormComponent extends OcFormComponent {
       this.widgetID,
       event,
       this.scope.recaptchaCallback,
-      el
+      el,
     );
 
     if (this.scope.recaptchaSize === "invisible") {
@@ -89,7 +89,7 @@ export class ReCaptchaFormComponent extends OcFormComponent {
     const container = this.querySelector(this.scope.recaptchaContainerSelector);
     if (!container) {
       console.warn(
-        `ReCaptcha container element with selector "${this.scope.recaptchaContainerSelector}" not found!`
+        `ReCaptcha container element with selector "${this.scope.recaptchaContainerSelector}" not found!`,
       );
       return;
     }

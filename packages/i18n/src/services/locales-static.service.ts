@@ -23,7 +23,7 @@ export class LocalesStaticService extends LocalesService {
     protected locales: any,
     protected id?: string,
     doNotTranslateDefaultLanguage = false,
-    showMissingTranslation = false
+    showMissingTranslation = false,
   ) {
     super(doNotTranslateDefaultLanguage, showMissingTranslation);
     if (!id) {

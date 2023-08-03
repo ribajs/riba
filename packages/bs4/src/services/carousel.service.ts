@@ -196,9 +196,9 @@ class CarouselService {
     if (this.config && this.config.interval && !this.isPaused) {
       this.interval = window.setInterval(
         (document.visibilityState ? this.nextWhenVisible : this.next).bind(
-          this
+          this,
         ),
-        this.config.interval
+        this.config.interval,
       );
     }
   }
@@ -390,8 +390,8 @@ class CarouselService {
       this.touchTimeout = Number(
         setTimeout(
           (event: TouchEvent & MouseEvent & PointerEvent) => this.cycle(event),
-          TOUCHEVENT_COMPAT_WAIT + (this.config.interval || 0)
-        )
+          TOUCHEVENT_COMPAT_WAIT + (this.config.interval || 0),
+        ),
       );
     }
   }
@@ -436,7 +436,7 @@ class CarouselService {
 
   private getItemByDirection(
     direction: CarouselDirection,
-    activeElement: HTMLElement
+    activeElement: HTMLElement,
   ) {
     if (this.items === null) {
       throw new Error("No items found!");
@@ -463,11 +463,11 @@ class CarouselService {
 
   private triggerSlideEvent(
     relatedTarget: HTMLElement,
-    eventDirectionName: CarouselDirection
+    eventDirectionName: CarouselDirection,
   ) {
     const targetIndex = this.getItemIndex(relatedTarget);
     const fromIndex = this.getItemIndex(
-      (findOne(Selector.ACTIVE_ITEM, this.element) as HTMLElement) || null
+      (findOne(Selector.ACTIVE_ITEM, this.element) as HTMLElement) || null,
     );
 
     return trigger(this.element, Event.SLIDE, {
@@ -557,7 +557,7 @@ class CarouselService {
 
       const nextElementInterval = parseInt(
         nextElement.getAttribute("data-interval") || "0",
-        10
+        10,
       );
       if (nextElementInterval) {
         this.config.defaultInterval =

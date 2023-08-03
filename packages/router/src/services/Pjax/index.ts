@@ -38,7 +38,7 @@ class Pjax {
     const result = Pjax.instances[id];
     if (!result) {
       console.warn(
-        `[Pjax.getInstance] No pjax instance for viewId "${id}" found!`
+        `[Pjax.getInstance] No pjax instance for viewId "${id}" found!`,
       );
     }
     return result;
@@ -89,7 +89,7 @@ class Pjax {
   public static preventCheck(
     url: string,
     element?: HTMLAnchorElement | HTMLLinkElement | HTMLUnknownElement,
-    evt?: Event
+    evt?: Event,
   ): boolean {
     if (!window.history.pushState) {
       return false;
@@ -142,7 +142,7 @@ class Pjax {
    * and handle special cases (like xlink:href)
    */
   public static getHref(
-    el: HTMLAnchorElement | SVGAElement | HTMLLinkElement | HTMLUnknownElement
+    el: HTMLAnchorElement | SVGAElement | HTMLLinkElement | HTMLUnknownElement,
   ): string | undefined {
     if (!el) {
       return undefined;
@@ -350,7 +350,7 @@ class Pjax {
    */
   protected prefetchLinkElement(
     linkElement: HTMLLinkElement,
-    head: HTMLHeadElement
+    head: HTMLHeadElement,
   ) {
     const rel = linkElement.getAttribute("rel");
     const href = Pjax.getHref(linkElement);
@@ -373,7 +373,7 @@ class Pjax {
 
   protected removePrefetchLinks(head: HTMLHeadElement) {
     const removePrefetchLinkElements = head.querySelectorAll(
-      'link[href][rel="dns-prefetch"], link[href][rel="preconnect"], link[href][rel="prefetch"], link[href][rel="subresource"], link[href][rel="preload"], link[href][rel="router-preload"]'
+      'link[href][rel="dns-prefetch"], link[href][rel="preconnect"], link[href][rel="prefetch"], link[href][rel="subresource"], link[href][rel="preload"], link[href][rel="router-preload"]',
     ) as NodeListOf<HTMLLinkElement>;
     // Remove the old prefetch link elements
     removePrefetchLinkElements.forEach((linkElement: HTMLLinkElement) => {
@@ -391,7 +391,7 @@ class Pjax {
    * @param prefetchLinks
    */
   protected replacePrefetchLinkElements(
-    prefetchLinks: NodeListOf<HTMLLinkElement> | HTMLLinkElement[]
+    prefetchLinks: NodeListOf<HTMLLinkElement> | HTMLLinkElement[],
   ) {
     const head = document.head || document.getElementsByTagName("head")[0];
     this.removePrefetchLinks(head);
@@ -410,7 +410,7 @@ class Pjax {
       const { responsePromise } = await this.loadResponseCached(
         url,
         false,
-        true
+        true,
       );
       if (!this.wrapper) {
         throw new Error("[Pjax] you need a wrapper!");
@@ -442,7 +442,7 @@ class Pjax {
   public async loadResponseCached(
     url: string,
     forceCache = false,
-    fallback = true
+    fallback = true,
   ) {
     let responsePromise: Promise<Response> | undefined;
     try {
@@ -489,7 +489,7 @@ class Pjax {
       undefined,
       "html",
       {},
-      options
+      options,
     );
     if (!data || !data.body) {
       throw new Error("No body!");
@@ -498,7 +498,7 @@ class Pjax {
       data.body,
       this.parseTitle,
       this.containerSelector,
-      this.prefetchLinks
+      this.prefetchLinks,
     );
     return response;
   }
@@ -549,7 +549,7 @@ class Pjax {
 
     if (!href) {
       throw new Error(
-        `Url is not defined, you can't cache the link without the url. Please make sure your element has the href attribute or pass the url directly to this function.`
+        `Url is not defined, you can't cache the link without the url. Please make sure your element has the href attribute or pass the url directly to this function.`,
       );
     }
 
@@ -568,7 +568,7 @@ class Pjax {
     evt: Event,
     el: HTMLAnchorElement,
     href: string,
-    newTab = false
+    newTab = false,
   ) {
     // normalize url, returns the relative url for internal urls and the full url for external urls
     const { url, location } = normalizeUrl(href);
@@ -610,7 +610,7 @@ class Pjax {
    */
   protected async onStateChange(
     event?: Event,
-    newUrl: string = this.getCurrentUrl()
+    newUrl: string = this.getCurrentUrl(),
   ) {
     // normalize url, returns the relative url for internal urls and the full url for external urls
     newUrl = normalizeUrl(newUrl).url;
@@ -626,7 +626,7 @@ class Pjax {
       "initStateChange",
       this.viewId,
       this.history.currentStatus(),
-      this.history.prevStatus()
+      this.history.prevStatus(),
     );
 
     const oldContainer = Dom.getContainer(document, this.containerSelector);
@@ -662,7 +662,7 @@ class Pjax {
       container,
       container.innerHTML,
       dataset,
-      false // true if this is the first time newPageReady is triggered / true on initialization
+      false, // true if this is the first time newPageReady is triggered / true on initialization
     );
   }
 
@@ -676,7 +676,7 @@ class Pjax {
       "transitionCompleted",
       this.viewId,
       this.history.currentStatus(),
-      this.history.prevStatus()
+      this.history.prevStatus(),
     );
   }
 
@@ -686,12 +686,12 @@ class Pjax {
   protected init(
     wrapper: HTMLElement,
     listenAllLinks: boolean,
-    listenPopstate: boolean
+    listenPopstate: boolean,
   ) {
     const initialResponse = Dom.parseInitial(
       this.parseTitle,
       this.containerSelector,
-      this.prefetchLinks
+      this.prefetchLinks,
     );
     const url = window.location.pathname;
     // Reload the current site with pjax to cache the initial page
@@ -708,14 +708,14 @@ class Pjax {
 
     this.history.add(
       this.getCurrentUrl(),
-      Dom.getNamespace(initialResponse.container)
+      Dom.getNamespace(initialResponse.container),
     );
 
     // Fire for the current view.
     this.dispatcher.trigger(
       "initStateChange",
       this.viewId,
-      this.history.currentStatus()
+      this.history.currentStatus(),
     );
 
     const dataset = getDataset(initialResponse.container);
@@ -728,13 +728,13 @@ class Pjax {
       initialResponse.container,
       initialResponse.container.innerHTML,
       dataset,
-      true // true if this is the first time newPageReady is triggered / true on initialization
+      true, // true if this is the first time newPageReady is triggered / true on initialization
     );
 
     this.dispatcher.trigger(
       "transitionCompleted",
       this.viewId,
-      this.history.currentStatus()
+      this.history.currentStatus(),
     );
 
     this.bindEvents(listenAllLinks, listenPopstate);

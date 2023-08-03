@@ -14,7 +14,7 @@ export const parseFormatter = {
       typeof str === "number"
     ) {
       console.warn(
-        "[parseFormatter] You do not need to parse the value because since it already been parsed"
+        "[parseFormatter] You do not need to parse the value because since it already been parsed",
       );
       return str;
     }

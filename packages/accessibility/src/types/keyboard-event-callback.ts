@@ -4,5 +4,5 @@ import type { KeyboardService } from "../services/index.js";
 export type KeyboardEventCallback = (
   keyData: KeyboardKeyData,
   keyboard: KeyboardService,
-  event: KeyboardEvent
+  event: KeyboardEvent,
 ) => any;

@@ -74,7 +74,7 @@ export class Observer {
     active: boolean,
     key: Key,
     obj: Obj,
-    callback: ObserverSyncCallback
+    callback: ObserverSyncCallback,
   ) {
     if (active) {
       Observer.adapters[key.i].observe(obj, key.path, callback);
@@ -122,8 +122,8 @@ export class Observer {
     if (!Observer.interfaces || !Observer.interfaces.length) {
       throw new Error(
         `[Observer] Must define at least one adapter interface. interfaces: "${JSON.stringify(
-          Observer.interfaces
-        )}" adapters: "${JSON.stringify(Observer.adapters)}"`
+          Observer.interfaces,
+        )}" adapters: "${JSON.stringify(Observer.adapters)}"`,
       );
     }
 

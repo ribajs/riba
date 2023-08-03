@@ -411,7 +411,7 @@ export class PhotoswipeComponent extends Component {
     this.debug("open", item, this.scope.items);
     if (!this.pswpElement) {
       console.error(
-        `Element with selector "${this.scope.fullscreenContainerSelector}" not found`
+        `Element with selector "${this.scope.fullscreenContainerSelector}" not found`,
       );
       return;
     }
@@ -430,7 +430,7 @@ export class PhotoswipeComponent extends Component {
         this.pswpElement,
         PhotoSwipeUI,
         this.scope.items,
-        this.options
+        this.options,
       );
       this.addPswpEventListeners();
       this.pswp.init();
@@ -460,14 +460,14 @@ export class PhotoswipeComponent extends Component {
     this.pswp?.listen("initialZoomOutEnd", this.onInitialZoomOutEnd.bind(this));
     this.pswp?.listen(
       "parseVerticalMargin",
-      this.onParseVerticalMargin.bind(this)
+      this.onParseVerticalMargin.bind(this),
     );
     this.pswp?.listen("onUnbindEvents", this.onUnbindEvents.bind(this));
     this.pswp?.listen("close", this.onClose.bind(this));
     this.pswp?.listen("destroy", this.onDestroy.bind(this));
     this.pswp?.listen(
       "updateScrollOffset",
-      this.onUpdateScrollOffset.bind(this)
+      this.onUpdateScrollOffset.bind(this),
     );
   }
 
@@ -480,7 +480,7 @@ export class PhotoswipeComponent extends Component {
       for (let i = 0; i < this.images.length; i++) {
         this.images[i].removeEventListener(
           "click",
-          (this.images[i] as any)._rv_click_listener
+          (this.images[i] as any)._rv_click_listener,
         );
       }
     }
@@ -493,11 +493,11 @@ export class PhotoswipeComponent extends Component {
       if (this.scope.openImageOnClick) {
         (this.images[i] as any)._rv_click_listener = this.openByIndex.bind(
           this,
-          i
+          i,
         );
         this.images[i].addEventListener(
           "click",
-          (this.images[i] as any)._rv_click_listener
+          (this.images[i] as any)._rv_click_listener,
         );
       }
 
@@ -515,7 +515,7 @@ export class PhotoswipeComponent extends Component {
         this.images[i].naturalHeight;
       if (!src || !width || !height) {
         console.warn(
-          "[rv-photoswipe] image element found without src, width or height. Ignoring.."
+          "[rv-photoswipe] image element found without src, width or height. Ignoring..",
         );
         continue;
       }
@@ -532,7 +532,7 @@ export class PhotoswipeComponent extends Component {
 
   protected initFullscreenTemplate() {
     this.pswpElement = this.querySelector<HTMLElement>(
-      this.scope.fullscreenContainerSelector
+      this.scope.fullscreenContainerSelector,
     );
   }
 

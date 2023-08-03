@@ -39,7 +39,7 @@ export class View {
   public static create(
     binder: Binder,
     models: any,
-    anchorEl: HTMLElement | Node | null
+    anchorEl: HTMLElement | Node | null,
   ) {
     const template = binder.el.cloneNode(true);
     const view = new View(template, models, binder.view.options);
@@ -75,7 +75,7 @@ export class View {
       | NodeListOf<ChildNode>
       | HTMLUnknownElement[],
     models: any,
-    options: Options
+    options: Options,
   ) {
     if (Array.isArray(els)) {
       this.els = els;
@@ -188,7 +188,7 @@ export class View {
         parseNode(
           this,
           element as DataElement,
-          this.options.templateDelimiters
+          this.options.templateDelimiters,
         );
       }
     }
@@ -216,7 +216,7 @@ export class View {
     let regexp: RegExp;
     if (wildcards > 1) {
       regexp = new RegExp(
-        `^${identifier.replace("*", "([^-]*)").replaceAll("-*", "-(.+)")}$`
+        `^${identifier.replace("*", "([^-]*)").replaceAll("-*", "-(.+)")}$`,
       );
     } else {
       regexp = new RegExp(`^${identifier.replaceAll("*", "(.+)")}$`);
@@ -230,7 +230,7 @@ export class View {
   private bindBinders(
     attributes: NamedNodeMap,
     node: BindableElement,
-    attributeBinders = this.options.attributeBinders
+    attributeBinders = this.options.attributeBinders,
   ) {
     let block = false;
     if (!this.options.binders) {
@@ -281,7 +281,7 @@ export class View {
             nodeName,
             attribute.value,
             Binder,
-            identifier
+            identifier,
           );
           if (node.removeAttribute && this.options.removeBinderAttributes) {
             node.removeAttribute(attribute.name);
@@ -301,7 +301,7 @@ export class View {
         bindInfo.nodeName,
         bindInfo.attr.value,
         bindInfo.Binder,
-        bindInfo.identifier
+        bindInfo.identifier,
       );
       if (node.removeAttribute && this.options.removeBinderAttributes) {
         node.removeAttribute(bindInfo.attr.name);
@@ -362,13 +362,13 @@ export class View {
     type: string | null,
     declaration: string,
     Binder: ClassOfBinder,
-    identifier: string | null
+    identifier: string | null,
   ) {
     const parsedDeclaration = parseDeclaration(declaration);
     const keypath = parsedDeclaration.keypath;
     const pipes = parsedDeclaration.pipes;
     this.bindings.push(
-      new Binder(this, node, type, Binder.key, keypath, pipes, identifier)
+      new Binder(this, node, type, Binder.key, keypath, pipes, identifier),
     );
   }
 

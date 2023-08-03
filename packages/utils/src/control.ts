@@ -17,7 +17,7 @@ export const sleep = (time: number) => {
 export const waitForProp = async <T = any>(
   propName: string,
   obj: any = window,
-  delay = 1000
+  delay = 1000,
 ) => {
   while (!obj[propName]) {
     await sleep(delay);

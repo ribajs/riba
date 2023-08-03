@@ -39,7 +39,7 @@ export class ShopifyImgBinder extends Binder<string, HTMLImageElement> {
       filterScale,
       undefined,
       undefined,
-      this.el
+      this.el,
     );
     if (typeof currentSrcset === "string" && currentSrcset.length > 0) {
       currentSrcset = currentSrcset + ", ";

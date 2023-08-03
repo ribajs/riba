@@ -23,7 +23,7 @@ export const consoleColoured = (
   if (options.color) {
     if (options.namespace) {
       printArgs.push(
-        `%c[${options.namespace}] ${options.mode.toUpperCase()}: `
+        `%c[${options.namespace}] ${options.mode.toUpperCase()}: `,
       );
     } else {
       printArgs.push(`%c${options.mode.toUpperCase()}: `);

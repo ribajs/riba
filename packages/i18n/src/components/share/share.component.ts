@@ -65,7 +65,7 @@ export class I18nShareComponent extends Bs4ShareComponent {
         async (langcode: string) => {
           return resolve(langcode);
         },
-        this
+        this,
       );
       if (this.localesService?.ready) {
         const langcode = this.localesService?.getLangcode();
@@ -76,7 +76,7 @@ export class I18nShareComponent extends Bs4ShareComponent {
           async (langcode: string) => {
             return resolve(langcode);
           },
-          this
+          this,
         );
       }
     });
@@ -113,7 +113,7 @@ export class I18nShareComponent extends Bs4ShareComponent {
         shareItem.label =
           (await this.i18n(
             langcode,
-            this.scope.serviceLabelI18n + "." + shareItem.id
+            this.scope.serviceLabelI18n + "." + shareItem.id,
           )) || shareItem.label;
       }
     }

@@ -31,7 +31,7 @@ export class PQueue {
         autoStart: true,
         queueClass: PriorityQueue,
       },
-      options
+      options,
     );
 
     if (
@@ -40,7 +40,7 @@ export class PQueue {
       throw new TypeError(
         `Expected \`concurrency\` to be a number from 1 and up, got \`${
           options.concurrency
-        }\` (${typeof options.concurrency})`
+        }\` (${typeof options.concurrency})`,
       );
     }
 
@@ -50,7 +50,7 @@ export class PQueue {
       throw new TypeError(
         `Expected \`intervalCap\` to be a number from 1 and up, got \`${
           options.intervalCap
-        }\` (${typeof options.intervalCap})`
+        }\` (${typeof options.intervalCap})`,
       );
     }
 
@@ -64,7 +64,7 @@ export class PQueue {
       throw new TypeError(
         `Expected \`interval\` to be a finite number >= 0, got \`${
           options.interval
-        }\` (${typeof options.interval})`
+        }\` (${typeof options.interval})`,
       );
     }
 
@@ -101,7 +101,7 @@ export class PQueue {
             (err) => {
               reject(err);
               this._next();
-            }
+            },
           );
         } catch (err) {
           reject(err);

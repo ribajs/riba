@@ -68,7 +68,7 @@ export class ShopifyCartButtonComponent extends Component {
       "ShopifyCart:request:start",
       () => {
         this.scope.pending = true;
-      }
+      },
     );
 
     ShopifyCartService.shopifyCartEventDispatcher.on(
@@ -78,7 +78,7 @@ export class ShopifyCartButtonComponent extends Component {
           this.cart = cart;
         }
         this.scope.pending = false;
-      }
+      },
     );
   }
 

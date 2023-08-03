@@ -207,7 +207,7 @@ export class Bs5TabsComponent extends TemplatesComponent {
     if (firstTabContentChild) {
       this.triggerVisibilityChangedForElement(
         firstTabContentChild as Element,
-        tab.active
+        tab.active,
       );
     }
   }
@@ -221,7 +221,7 @@ export class Bs5TabsComponent extends TemplatesComponent {
   protected getTabContentChildByIndex(index: number) {
     return (
       this.querySelector(
-        `.tab-content .tab-pane:nth-child(${index + 1}) > *`
+        `.tab-content .tab-pane:nth-child(${index + 1}) > *`,
       ) || undefined
     );
   }
@@ -234,12 +234,12 @@ export class Bs5TabsComponent extends TemplatesComponent {
    */
   protected triggerVisibilityChangedForElement(
     element: Element,
-    visible: boolean
+    visible: boolean,
   ) {
     setTimeout(() => {
       // Use this event to update any custom element when it becomes visible
       element.dispatchEvent(
-        new CustomEvent("visibility-changed", { detail: { visible } })
+        new CustomEvent("visibility-changed", { detail: { visible } }),
       );
     }, 200);
   }
@@ -358,13 +358,13 @@ export class Bs5TabsComponent extends TemplatesComponent {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
     if (attributeName.startsWith("tab")) {
       this.addTabByAttribute(attributeName, newValue);

@@ -2,7 +2,7 @@ import type { PodloveWebPlayerStoreActionType } from "../types/podlove-web-playe
 
 export const createAction = (
   type: PodloveWebPlayerStoreActionType,
-  payload?: any
+  payload?: any,
 ) => {
   return {
     type,

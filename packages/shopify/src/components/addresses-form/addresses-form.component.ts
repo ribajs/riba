@@ -80,7 +80,7 @@ export class ShopifyAddressesComponent extends Component {
 
   public edit(id: string, event: Event) {
     const form = this.querySelector(
-      `form[action="/account/addresses/${id}]`
+      `form[action="/account/addresses/${id}]`,
     ) as HTMLFormElement;
 
     if (!form) {
@@ -131,13 +131,13 @@ export class ShopifyAddressesComponent extends Component {
 
   protected initValidation() {
     this.editAddressForm = this.querySelector(
-      'form[action^="/account/addresses/"]'
+      'form[action^="/account/addresses/"]',
     ) as HTMLFormElement;
     this.editAddressForm.attr("novalidate", "");
     this.editAddressForm.addClass("needs-validation");
 
     this.createAddressForm = this.querySelector(
-      'form[action="/account/addresses"]'
+      'form[action="/account/addresses"]',
     ) as HTMLFormElement;
     this.createAddressForm.attr("novalidate", "");
     this.createAddressForm.addClass("needs-validation");

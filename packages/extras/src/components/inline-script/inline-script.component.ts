@@ -44,7 +44,7 @@ export class InlineScriptComponent extends BasicComponent {
     } catch (error) {
       console.error(
         `[rv-inline-script] Error on evaluate inline script!\n"${this.scope.jsStr}"\n`,
-        error
+        error,
       );
     }
   }

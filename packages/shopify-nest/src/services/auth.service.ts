@@ -19,7 +19,7 @@ export class AuthService {
 
   public connect(
     type: "shopify" | "facebook" | "vimeo",
-    myshopifyDomain?: string
+    myshopifyDomain?: string,
   ) {
     this.debug("connect");
     const connectUrl = `/${type}/auth?shop=${myshopifyDomain}`;
@@ -44,13 +44,13 @@ export class AuthService {
       (result) => {
         this.debug("shopifyConnectIframe", result.body);
         return result.body;
-      }
+      },
     );
   }
 
   public async disconnect(
     type: "shopify" | "facebook" | "vimeo",
-    profile: ShopifyConnect | FacebookConnect
+    profile: ShopifyConnect | FacebookConnect,
   ) {
     this.debug("disconnect TODO");
     const id =
@@ -58,7 +58,7 @@ export class AuthService {
       (profile as ShopifyConnect).shopifyID;
     const disconnectUrl = `/${type}/auth/disconnect/${id}`;
     const result = await HttpService.getJSON<{ success: boolean }>(
-      disconnectUrl
+      disconnectUrl,
     );
 
     this.debug("disconnected", result.body);
@@ -71,7 +71,7 @@ export class AuthService {
    */
   public async connected(type: "shopify" | "facebook" | "vimeo") {
     return HttpService.getJSON<ShopifyConnect | null>(
-      `/${type}/auth/connected/current`
+      `/${type}/auth/connected/current`,
     ).then((res) => {
       const account = res.body;
       this.debug("isConnected", account);

@@ -130,7 +130,7 @@ export abstract class BasicComponent extends HTMLElement {
     return Object.keys(this.observedAttributesToCheck).every(
       (key) =>
         !this.observedAttributesToCheck[key]?.passed ||
-        this.observedAttributesToCheck[key]?.initialized
+        this.observedAttributesToCheck[key]?.initialized,
     );
   }
 
@@ -190,11 +190,11 @@ export abstract class BasicComponent extends HTMLElement {
       context: Binder,
       event: Event,
       binding: Binder,
-      el: HTMLElement
+      el: HTMLElement,
     ) {
       if (!this || !this.call) {
         const error = new Error(
-          `[rv-${binding.type}="${binding.keypath}"] Event handler "${binding.keypath}" not found!"`
+          `[rv-${binding.type}="${binding.keypath}"] Event handler "${binding.keypath}" not found!"`,
         );
         console.error(binding, el);
         throw error;
@@ -238,7 +238,7 @@ export abstract class BasicComponent extends HTMLElement {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     // this.debug("attributeChangedCallback", attributeName, newValue);
     if (
@@ -264,7 +264,7 @@ export abstract class BasicComponent extends HTMLElement {
       parsedAttributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
   }
 
@@ -279,14 +279,14 @@ export abstract class BasicComponent extends HTMLElement {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     this.debug(
       "parsedAttributeChangedCallback called",
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
   }
 
@@ -342,7 +342,7 @@ export abstract class BasicComponent extends HTMLElement {
   }
 
   protected async afterTemplate(
-    template: JsxElement | HTMLElement | string | null
+    template: JsxElement | HTMLElement | string | null,
   ): Promise<any> {
     this.debug("afterTemplate", template);
   }
@@ -367,7 +367,7 @@ export abstract class BasicComponent extends HTMLElement {
    */
   public observeAttribute(
     attributeName: string,
-    callback: ObserverSyncCallback
+    callback: ObserverSyncCallback,
   ): Observer {
     const parsedAttributeName = camelCase(attributeName);
     return this.observe(parsedAttributeName, callback);
@@ -384,7 +384,7 @@ export abstract class BasicComponent extends HTMLElement {
   public setBinderAttribute(
     attributeName: string,
     newValue: any,
-    namespace: string | null = null
+    namespace: string | null = null,
   ) {
     const parsedAttributeName = camelCase(attributeName);
     const oldValue = this.scope[parsedAttributeName];

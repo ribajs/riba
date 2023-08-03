@@ -179,7 +179,7 @@ export class ContentSliderComponent extends TemplatesComponent {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     //E.g. transform "col-2 col-md-4" to ["col-2", "col-md-4"]
     if (
@@ -194,7 +194,7 @@ export class ContentSliderComponent extends TemplatesComponent {
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
 
     if (attributeName === "index") {
@@ -294,18 +294,18 @@ export class ContentSliderComponent extends TemplatesComponent {
   protected getItemWidths() {
     this.scope.activeItemWidth =
       this.querySelector(
-        `.item.${this.scope.activeClass}`
+        `.item.${this.scope.activeClass}`,
       )?.getBoundingClientRect().width || 0;
 
     this.scope.inactiveItemWidth =
       this.querySelector(
-        `.item:not(.${this.scope.activeClass})`
+        `.item:not(.${this.scope.activeClass})`,
       )?.getBoundingClientRect().width || 0;
 
     this.debug("getItemWidths activeItemWidth: ", this.scope.activeItemWidth);
     this.debug(
       "getItemWidths inactiveItemWidth: ",
-      this.scope.inactiveItemWidth
+      this.scope.inactiveItemWidth,
     );
   }
 

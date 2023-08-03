@@ -89,7 +89,7 @@ export class ShopifyApiSyncService extends EventDispatcher {
       (res) => {
         this.debug("start progress", res.body);
         return res.body;
-      }
+      },
     );
   }
 
@@ -102,7 +102,7 @@ export class ShopifyApiSyncService extends EventDispatcher {
 
   public async get() {
     return HttpService.getJSON<SyncProgress | null>(
-      this.baseUrl + "/latest"
+      this.baseUrl + "/latest",
     ).then((res) => {
       this.debug("Last progress", res.body);
       return res.body;

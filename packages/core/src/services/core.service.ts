@@ -18,7 +18,7 @@ export class CoreService {
     }
 
     throw new Error(
-      `Singleton of CoreService not defined, please call setSingleton first!`
+      `Singleton of CoreService not defined, please call setSingleton first!`,
     );
   }
 

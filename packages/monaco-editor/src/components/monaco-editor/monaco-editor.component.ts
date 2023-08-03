@@ -198,7 +198,7 @@ export class MonacoEditorComponent extends Component {
           this.dispatchEvent(
             new CustomEvent<string>("change", {
               detail: this.scope.dataValue,
-            })
+            }),
           );
         }
         // this.debug('onDidChangeContent', this.scope.dataValue);
@@ -243,13 +243,13 @@ export class MonacoEditorComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
     this.debug("attributeName", attributeName);
     if (attributeName === "dataValue") {

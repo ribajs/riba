@@ -18,7 +18,7 @@ export class ModuleService {
     }
 
     throw new Error(
-      `Singleton of ModuleService not defined, please call setSingleton first!`
+      `Singleton of ModuleService not defined, please call setSingleton first!`,
     );
   }
 

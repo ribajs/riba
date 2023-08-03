@@ -75,7 +75,7 @@ export class Bs5NavbarComponent extends Component {
 
   protected setCollapseElement() {
     const collapseElements = Array.from(
-      this.querySelectorAll<HTMLElement>(this.scope.collapseSelector) || []
+      this.querySelectorAll<HTMLElement>(this.scope.collapseSelector) || [],
     );
 
     // remove old collapse targets
@@ -90,15 +90,15 @@ export class Bs5NavbarComponent extends Component {
       if (!this.collapseTargets.has(collapseElement)) {
         this.collapseTargets.set(
           collapseElement,
-          new Collapse(collapseElement, { toggle: false })
+          new Collapse(collapseElement, { toggle: false }),
         );
         collapseElement.addEventListener(
           Collapse.Events.shown,
-          this.onStateChange
+          this.onStateChange,
         );
         collapseElement.addEventListener(
           Collapse.Events.hidden,
-          this.onStateChange
+          this.onStateChange,
         );
       }
     }
@@ -120,11 +120,11 @@ export class Bs5NavbarComponent extends Component {
     this.collapseTargets.delete(collapseElement);
     collapseElement.removeEventListener(
       Collapse.Events.shown,
-      this.onStateChange
+      this.onStateChange,
     );
     collapseElement.removeEventListener(
       Collapse.Events.hidden,
-      this.onStateChange
+      this.onStateChange,
     );
   }
 
@@ -159,13 +159,13 @@ export class Bs5NavbarComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
     if (attributeName === "collapseSelector") {
       this.setCollapseElement();

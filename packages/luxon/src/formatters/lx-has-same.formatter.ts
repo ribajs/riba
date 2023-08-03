@@ -16,7 +16,7 @@ export const LuxonHasSameFormatter: Formatter = {
   read(
     target: DateTime,
     otherDateTime: DateTime,
-    unit: keyof DurationObjectUnits
+    unit: keyof DurationObjectUnits,
   ): boolean {
     return target.hasSame(otherDateTime, unit);
   },

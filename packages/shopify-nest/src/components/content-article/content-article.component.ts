@@ -29,7 +29,7 @@ export class ShopifyNestContentBlogArticleComponent extends ShopifyNestContentCo
 
   protected editor: Element | null = null;
   protected debug = Debug(
-    "component:" + ShopifyNestContentBlogArticleComponent.tagName
+    "component:" + ShopifyNestContentBlogArticleComponent.tagName,
   );
 
   public scope: Scope = {
@@ -39,7 +39,7 @@ export class ShopifyNestContentBlogArticleComponent extends ShopifyNestContentCo
 
   constructor(
     element?: HTMLElement,
-    readonly shopifyApiArticleService = ShopifyApiArticleService.getSingleton()
+    readonly shopifyApiArticleService = ShopifyApiArticleService.getSingleton(),
   ) {
     super();
     this.shopifyApiArticleService = shopifyApiArticleService;
@@ -54,7 +54,7 @@ export class ShopifyNestContentBlogArticleComponent extends ShopifyNestContentCo
   public save() {
     if (!this.scope.blogId || !this.scope.articleId || !this.scope.article) {
       throw new Error(
-        "Blog id and article id are required to update an article!"
+        "Blog id and article id are required to update an article!",
       );
     }
 
@@ -118,13 +118,13 @@ export class ShopifyNestContentBlogArticleComponent extends ShopifyNestContentCo
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.attributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
   }
 

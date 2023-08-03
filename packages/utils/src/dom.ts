@@ -14,7 +14,7 @@ export const MAX_UID = 1000;
 export const setAttribute = (
   el: HTMLElement,
   attributeName: string,
-  newValue: any
+  newValue: any,
 ) => {
   if (!attributeName) {
     throw new Error("Can't set attribute of " + attributeName);
@@ -97,7 +97,7 @@ export const getInputValue = (
     | HTMLElement
     | HTMLSelectElement
     | HTMLInputElement
-    | HTMLOptionsCollection
+    | HTMLOptionsCollection,
 ) => {
   const results: string[] = [];
   if ((el as HTMLSelectElement).type === "checkbox") {
@@ -145,7 +145,7 @@ export const elementIsVisible = (el: HTMLElement) => {
  * @returns Returns a promise which resolves when an element stops scrolling
  */
 export const scrolling = async (
-  scrollElement: HTMLElement | (Window & typeof globalThis)
+  scrollElement: HTMLElement | (Window & typeof globalThis),
 ) => {
   return new Promise<void>((resolve) => {
     let scrollTimeout: ReturnType<typeof setTimeout> | undefined;
@@ -178,7 +178,7 @@ export const scrollTo = async (
   offset = 0,
   scrollElement: HTMLElement | (Window & typeof globalThis) | null = window,
   angle: "horizontal" | "vertical" = "vertical",
-  behavior: "auto" | "smooth" | undefined = "smooth"
+  behavior: "auto" | "smooth" | undefined = "smooth",
 ) => {
   if (!scrollElement) {
     scrollElement = window;
@@ -205,12 +205,12 @@ export const scrollTo = async (
   } else {
     if (angle === "vertical") {
       const marginTop = justDigits(
-        window.getComputedStyle(scrollElement as HTMLElement).marginTop
+        window.getComputedStyle(scrollElement as HTMLElement).marginTop,
       );
       top = Math.round(to.offsetTop - offset - marginTop);
     } else {
       const marginLeft = justDigits(
-        window.getComputedStyle(scrollElement as HTMLElement).marginLeft
+        window.getComputedStyle(scrollElement as HTMLElement).marginLeft,
       );
       left = Math.round(to.offsetLeft - offset - marginLeft);
     }
@@ -226,7 +226,7 @@ export const scrollTo = async (
 };
 
 export const getScrollHeight = (
-  scrollElement: HTMLElement | (Window & typeof globalThis)
+  scrollElement: HTMLElement | (Window & typeof globalThis),
 ): number => {
   // if element is window
   if ((scrollElement as Window).document) {
@@ -240,7 +240,7 @@ export const getScrollHeight = (
         doc.documentElement.clientHeight,
         doc.documentElement.scrollHeight,
         doc.documentElement.offsetHeight,
-        0
+        0,
       )
     );
   }
@@ -248,7 +248,7 @@ export const getScrollHeight = (
 };
 
 export const getScrollWidth = (
-  scrollElement: HTMLElement | (Window & typeof globalThis)
+  scrollElement: HTMLElement | (Window & typeof globalThis),
 ): number => {
   // if element is window
   if ((scrollElement as Window).document) {
@@ -261,7 +261,7 @@ export const getScrollWidth = (
         doc.body.offsetWidth,
         doc.documentElement.clientWidth,
         doc.documentElement.scrollWidth,
-        doc.documentElement.offsetWidth
+        doc.documentElement.offsetWidth,
       )
     );
   }
@@ -272,7 +272,7 @@ export const scrollToPosition = async (
   scrollElement: HTMLElement | (Window & typeof globalThis) | null,
   position: number | "end" | "start" | "center",
   angle: "horizontal" | "vertical" | "both" = "vertical",
-  behavior: "auto" | "smooth" | undefined = "smooth"
+  behavior: "auto" | "smooth" | undefined = "smooth",
 ) => {
   let top: number | undefined;
   let left: number | undefined;
@@ -345,7 +345,7 @@ export const scrollToPosition = async (
 };
 
 export const getElementFromEvent = <T = HTMLAnchorElement | HTMLUnknownElement>(
-  event: Event | MouseEvent | TouchEvent
+  event: Event | MouseEvent | TouchEvent,
 ) => {
   const el =
     ((event as Event).target as unknown as T | null) ||
@@ -360,11 +360,11 @@ export const getElementFromEvent = <T = HTMLAnchorElement | HTMLUnknownElement>(
 export const getViewportDimensions = () => {
   const w = Math.max(
     document.documentElement ? document.documentElement.clientWidth : 0,
-    window.innerWidth || 0
+    window.innerWidth || 0,
   );
   const h = Math.max(
     document.documentElement ? document.documentElement.clientHeight : 0,
-    window.innerHeight || 0
+    window.innerHeight || 0,
   );
   return {
     h,
@@ -386,7 +386,7 @@ export const isInViewport = (
     bottom?: number;
     left?: number;
     right?: number;
-  } = {}
+  } = {},
 ) => {
   if (!elem) {
     return false;
@@ -510,7 +510,7 @@ export const loadScript = async (
   src: string,
   id: string,
   async = true,
-  defer = true
+  defer = true,
 ) => {
   const script = await new Promise<HTMLScriptElement>((resolve, reject) => {
     let script = document.getElementById(id) as HTMLScriptElement | null;
@@ -582,7 +582,7 @@ export const getUID = (prefix: string): string => {
 export const isCustomElement = (
   element: HTMLUnknownElement | string,
   isRegistered = false,
-  isUpgraded = false
+  isUpgraded = false,
 ) => {
   // A custom element's name is required to contain a -, whereas an HTML-defined element will not. So:
   const localName = typeof element === "string" ? element : element.localName;

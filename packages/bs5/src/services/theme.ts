@@ -24,7 +24,7 @@ export class ThemeService {
     this.addEventListeners();
     const data = this.init();
     const selectEl = document.getElementById(
-      "theme"
+      "theme",
     ) as HTMLSelectElement | null;
 
     if (selectEl) this.select(data.choice, selectEl);
@@ -147,7 +147,7 @@ export class ThemeService {
     const oldScheme = this.getScheme();
     if (!themeChoices.includes(newColorScheme)) {
       console.warn(
-        `Unsupported theme "${newColorScheme}", set instead the default "os".`
+        `Unsupported theme "${newColorScheme}", set instead the default "os".`,
       );
       newColorScheme = "os";
     }
@@ -159,7 +159,7 @@ export class ThemeService {
       const newScheme = this.getScheme(newColorScheme);
       document.documentElement.setAttribute(
         "data-bs-theme",
-        newScheme.isDark ? "dark" : "light"
+        newScheme.isDark ? "dark" : "light",
       );
     } else {
       document.documentElement.setAttribute("data-bs-theme", newColorScheme);
@@ -171,7 +171,7 @@ export class ThemeService {
   getScheme(choice: ThemeChoice = this.current): ThemeData {
     const data = this.getDefaultData();
     data.systemIsDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
+      "(prefers-color-scheme: dark)",
     ).matches;
     data.systemIsLight = !data.systemIsDark;
 

@@ -57,7 +57,7 @@ export class OcFormComponent extends Bs4FormComponent {
           this.onErrorSubmit(
             jqXHR.responseJSON.error,
             jqXHR.responseJSON.error,
-            jqXHR
+            jqXHR,
           );
         } else {
           this.onErrorSubmit(statusText, statusText, jqXHR);
@@ -73,10 +73,10 @@ export class OcFormComponent extends Bs4FormComponent {
         context: any,
         body: any,
         statusText: string,
-        jqXHR: any
+        jqXHR: any,
       ) => {
         this.onSuccessSubmit(statusText, body.result, jqXHR);
-      }
+      },
     );
     $form.one(
       "ajaxError",
@@ -85,10 +85,10 @@ export class OcFormComponent extends Bs4FormComponent {
         context: any,
         message: string,
         statusText: string,
-        jqXHR: any
+        jqXHR: any,
       ) => {
         this.onErrorSubmit(statusText, message, jqXHR);
-      }
+      },
     );
   }
 }

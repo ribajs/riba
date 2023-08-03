@@ -35,7 +35,7 @@ export class PhotoSwipeUI {
 
     addCaptionHTMLFn: function (
       item: Item,
-      captionEl: HTMLElement
+      captionEl: HTMLElement,
       /*isFake?: boolean*/
     ) {
       if (!item.title) {
@@ -82,7 +82,7 @@ export class PhotoSwipeUI {
 
   constructor(
     protected readonly pswp: PhotoSwipe<Options, PhotoSwipeUI>,
-    protected readonly framework: PhotoSwipe.UIFramework
+    protected readonly framework: PhotoSwipe.UIFramework,
   ) {
     this.pswp = pswp;
     this.framework = framework;
@@ -198,7 +198,7 @@ export class PhotoSwipeUI {
         this.framework.bind(
           document,
           this._fullscreenAPI.eventK,
-          this.updateFullscreen
+          this.updateFullscreen,
         );
         this.updateFullscreen();
         this.framework.addClass(this.pswp.template, "pswp--supports-fs");
@@ -220,17 +220,17 @@ export class PhotoSwipeUI {
       if (this._options.captionEl && bars && bars.bottom === "auto") {
         if (!this._fakeCaptionContainer) {
           this._fakeCaptionContainer = this.framework.createEl(
-            "pswp__caption pswp__caption--fake"
+            "pswp__caption pswp__caption--fake",
           );
           if (this._fakeCaptionContainer) {
             this._fakeCaptionContainer.appendChild(
-              this.framework.createEl("pswp__caption__center")
+              this.framework.createEl("pswp__caption__center"),
             );
             if (this._controls) {
               if (this._captionContainer) {
                 this._controls.insertBefore(
                   this._fakeCaptionContainer,
-                  this._captionContainer
+                  this._captionContainer,
                 );
               } else {
                 console.warn("_captionContainer not found!");
@@ -273,20 +273,23 @@ export class PhotoSwipeUI {
         this.framework.bind(
           document,
           "mousemove",
-          this._onIdleMouseMove.bind(this)
+          this._onIdleMouseMove.bind(this),
         );
         this.framework.bind(
           document,
           "mouseout",
-          this._onMouseLeaveWindow.bind(this)
+          this._onMouseLeaveWindow.bind(this),
         );
 
-        this._idleInterval = window.setInterval(() => {
-          this._idleIncrement++;
-          if (this._idleIncrement === 2) {
-            this.setIdle(true);
-          }
-        }, (this._options.timeToIdle || 0) / 2);
+        this._idleInterval = window.setInterval(
+          () => {
+            this._idleIncrement++;
+            if (this._idleIncrement === 2) {
+              this.setIdle(true);
+            }
+          },
+          (this._options.timeToIdle || 0) / 2,
+        );
       });
     }
   }
@@ -357,7 +360,7 @@ export class PhotoSwipeUI {
 
     const topBar = this.framework.getChildByClass(
       this._controls,
-      "pswp__top-bar"
+      "pswp__top-bar",
     );
     if (topBar) {
       loopThroughChildElements(topBar.children);
@@ -374,7 +377,7 @@ export class PhotoSwipeUI {
     // find pswp__ui element
     this._controls = this.framework.getChildByClass(
       this.pswp.scrollWrap,
-      "pswp__ui"
+      "pswp__ui",
     );
 
     // create local link
@@ -406,7 +409,7 @@ export class PhotoSwipeUI {
         isDown: boolean,
         preventObj: {
           prevent: boolean;
-        }
+        },
       ) => {
         const t = (e.target || e.srcElement) as
           | (EventTarget & HTMLElement)
@@ -420,7 +423,7 @@ export class PhotoSwipeUI {
         ) {
           preventObj.prevent = false;
         }
-      }
+      },
     );
 
     // bind events for UI
@@ -428,12 +431,12 @@ export class PhotoSwipeUI {
       this.framework.bind(
         this._controls,
         "pswpTap click",
-        this._onControlsTap.bind(this)
+        this._onControlsTap.bind(this),
       );
       this.framework.bind(
         this.pswp.scrollWrap,
         "pswpTap",
-        this.onGlobalTap.bind(this)
+        this.onGlobalTap.bind(this),
       );
     });
 
@@ -447,7 +450,7 @@ export class PhotoSwipeUI {
       this.framework.unbind(
         this._controls,
         "pswpTap click",
-        this._onControlsTap
+        this._onControlsTap,
       );
       this.framework.unbind(this.pswp.scrollWrap, "pswpTap", this.onGlobalTap);
 
@@ -455,7 +458,7 @@ export class PhotoSwipeUI {
         this.framework.unbind(
           document,
           this._fullscreenAPI.eventK,
-          this.updateFullscreen
+          this.updateFullscreen,
         );
         if (this._fullscreenAPI.isFullscreen()) {
           this._options.hideAnimationDuration = 0;
@@ -473,7 +476,7 @@ export class PhotoSwipeUI {
         }
         this.framework.removeClass(
           this._captionContainer,
-          "pswp__caption--empty"
+          "pswp__caption--empty",
         );
       }
 
@@ -523,13 +526,13 @@ export class PhotoSwipeUI {
         if (this._captionContainer) {
           this._options.addCaptionHTMLFn(
             this.pswp.currItem,
-            this._captionContainer
+            this._captionContainer,
           );
 
           this._togglePswpClass(
             this._captionContainer,
             "caption--empty",
-            !(this.pswp.currItem as Item).title
+            !(this.pswp.currItem as Item).title,
           );
         } else {
           console.warn("_captionContainer not found!");

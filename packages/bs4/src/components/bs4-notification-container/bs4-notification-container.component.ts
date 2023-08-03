@@ -45,7 +45,7 @@ export class Bs4NotificationContainerComponent extends Component {
     event: Event,
     el: HTMLElement,
     index: number,
-    notification: Notification
+    notification: Notification,
   ) {
     if (index > -1) {
       this.notifications.splice(index, 1);
@@ -58,7 +58,7 @@ export class Bs4NotificationContainerComponent extends Component {
     this.debug(
       "Received notification container on " + this.scope.channelName,
       this.scope,
-      notification
+      notification,
     );
     this.scope.notifications.push(notification);
   }
@@ -69,7 +69,7 @@ export class Bs4NotificationContainerComponent extends Component {
     this.notificationDispatcher.on(
       "show-notification",
       this.onShowNotification,
-      this
+      this,
     );
     await super.afterBind();
   }
@@ -79,7 +79,7 @@ export class Bs4NotificationContainerComponent extends Component {
     (this.notificationDispatcher as EventDispatcher).off(
       "show-notification",
       this.onShowNotification,
-      this
+      this,
     );
   }
 

@@ -18,7 +18,7 @@ export class MonacoEditorService {
     }
 
     throw new Error(
-      `Singleton of MonacoEditorService not defined, please call setSingleton first!`
+      `Singleton of MonacoEditorService not defined, please call setSingleton first!`,
     );
   }
 

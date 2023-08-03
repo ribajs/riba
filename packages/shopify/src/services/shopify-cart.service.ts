@@ -32,7 +32,7 @@ export class ShopifyCartService {
    * @param options
    */
   public static async updateExtern(
-    options: ShopifyCartRequestOptions = this.requestOptionDefaults
+    options: ShopifyCartRequestOptions = this.requestOptionDefaults,
   ) {
     if (options.triggerOnStart) {
       this.triggerOnStart();
@@ -68,7 +68,7 @@ export class ShopifyCartService {
     id: number,
     quantity = 1,
     properties = {},
-    options: ShopifyCartRequestOptions = this.requestOptionDefaults
+    options: ShopifyCartRequestOptions = this.requestOptionDefaults,
   ): Promise<ShopifyCartLineItem | ShopifyCartAddError> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
@@ -92,7 +92,7 @@ export class ShopifyCartService {
       const cartRes = await HttpService.get<ShopifyCartObject>(
         this.CART_GET_URL,
         {},
-        "json"
+        "json",
       );
 
       if (cartRes.status >= 400) {
@@ -116,7 +116,7 @@ export class ShopifyCartService {
     const cartRes = await HttpService.get<ShopifyCartObject>(
       this.CART_GET_URL,
       {},
-      "json"
+      "json",
     );
 
     let cart: ShopifyCartObject;
@@ -152,7 +152,7 @@ export class ShopifyCartService {
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#get-cart
    */
   public static get(
-    options: ShopifyCartRequestOptions = this.requestOptionDefaults
+    options: ShopifyCartRequestOptions = this.requestOptionDefaults,
   ): Promise<ShopifyCartObject> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
@@ -178,7 +178,7 @@ export class ShopifyCartService {
     id: number | number,
     quantity: number,
     properties = {},
-    options: ShopifyCartRequestOptions = this.requestOptionDefaults
+    options: ShopifyCartRequestOptions = this.requestOptionDefaults,
   ): Promise<ShopifyCartObject> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
@@ -217,7 +217,7 @@ export class ShopifyCartService {
    */
   public static updates(
     updates: ShopifyCartUpdateProperty | Array<number>,
-    options: ShopifyCartRequestOptions = this.requestOptionDefaults
+    options: ShopifyCartRequestOptions = this.requestOptionDefaults,
   ): Promise<ShopifyCartObject> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
@@ -229,7 +229,7 @@ export class ShopifyCartService {
           {
             updates,
           },
-          "form"
+          "form",
         );
       })
       // because type is form we need to parse the json response by self
@@ -272,7 +272,7 @@ export class ShopifyCartService {
     id: number | number,
     quantity: number,
     properties = {},
-    options: ShopifyCartRequestOptions = this.requestOptionDefaults
+    options: ShopifyCartRequestOptions = this.requestOptionDefaults,
   ): Promise<ShopifyCartObject> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
@@ -286,7 +286,7 @@ export class ShopifyCartService {
       const cartRes = await HttpService.post<ShopifyCartObject | string>(
         this.CART_POST_CHANGE_URL,
         body,
-        "form"
+        "form",
       );
 
       let cart: ShopifyCartObject;
@@ -323,7 +323,7 @@ export class ShopifyCartService {
     line: string | number,
     quantity: number,
     properties = {},
-    options: ShopifyCartRequestOptions = this.requestOptionDefaults
+    options: ShopifyCartRequestOptions = this.requestOptionDefaults,
   ): Promise<ShopifyCartObject> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
@@ -336,7 +336,7 @@ export class ShopifyCartService {
       const cartRes = await HttpService.post<ShopifyCartObject | string>(
         this.CART_POST_CHANGE_URL,
         body,
-        "form"
+        "form",
       );
 
       let cart: ShopifyCartObject;
@@ -367,7 +367,7 @@ export class ShopifyCartService {
    * @see https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#clear-cart
    */
   public static async clear(
-    options: ShopifyCartRequestOptions = this.requestOptionDefaults
+    options: ShopifyCartRequestOptions = this.requestOptionDefaults,
   ): Promise<ShopifyCartObject> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
@@ -376,7 +376,7 @@ export class ShopifyCartService {
       const cartRes = await HttpService.post<ShopifyCartObject>(
         this.CART_POST_CLEAR_URL,
         {},
-        "form"
+        "form",
       );
       let cart: ShopifyCartObject;
 
@@ -401,12 +401,12 @@ export class ShopifyCartService {
 
   public static async _getShippingRates(
     shippingAddress: ShopifyCustomerAddress,
-    normalize = true
+    normalize = true,
   ): Promise<ShopifyShippingRates | ShopifyShippingRatesNormalized> {
     const res = await HttpService.get<{ shipping_rates: ShopifyShippingRates }>(
       this.CART_GET_SHIPPING_RATES_URL,
       { shipping_address: shippingAddress },
-      "json"
+      "json",
     );
 
     const shippingRates = res.body;
@@ -418,7 +418,7 @@ export class ShopifyCartService {
       return shippingRates.shipping_rates as ShopifyShippingRates;
     } else {
       throw new Error(
-        "shipping_rates property not found: " + JSON.stringify(shippingRates)
+        "shipping_rates property not found: " + JSON.stringify(shippingRates),
       );
     }
   }
@@ -431,7 +431,7 @@ export class ShopifyCartService {
   public static getShippingRates(
     shippingAddress: ShopifyCustomerAddress,
     normalize = true,
-    options: ShopifyCartRequestOptions = this.requestOptionDefaults
+    options: ShopifyCartRequestOptions = this.requestOptionDefaults,
   ): Promise<ShopifyShippingRates | ShopifyShippingRatesNormalized> {
     if (options.triggerOnStart) {
       this.triggerOnStart();
@@ -474,7 +474,7 @@ export class ShopifyCartService {
       return this.queue.onIdle().then(() => {
         ShopifyCartService.shopifyCartEventDispatcher.trigger(
           "ShopifyCart:request:complete",
-          this.cart
+          this.cart,
         );
         this.waitForComplete = false;
       });
@@ -489,7 +489,7 @@ export class ShopifyCartService {
     this.cart = cart;
     ShopifyCartService.shopifyCartEventDispatcher.trigger(
       "ShopifyCart:request:changed",
-      this.cart
+      this.cart,
     );
   }
 
@@ -501,7 +501,7 @@ export class ShopifyCartService {
       return;
     }
     ShopifyCartService.shopifyCartEventDispatcher.trigger(
-      "ShopifyCart:request:start"
+      "ShopifyCart:request:start",
     );
   }
 
@@ -517,7 +517,7 @@ export class ShopifyCartService {
   }
 
   protected static normalizeShippingRates(
-    shippingRates: ShopifyShippingRates
+    shippingRates: ShopifyShippingRates,
   ): ShopifyShippingRatesNormalized {
     const normalized = new Array<any>(shippingRates.length);
     for (const i in shippingRates) {

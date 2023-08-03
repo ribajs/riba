@@ -3,7 +3,7 @@ import { Placement } from "./placement.js";
 
 export type TooltipOffsetFn = (
   offsets: any /*TODO*/,
-  el: HTMLElement
+  el: HTMLElement,
 ) => number[];
 
 export type TooltipTitleFn = (el: HTMLElement) => string;

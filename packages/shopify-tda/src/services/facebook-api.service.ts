@@ -27,7 +27,7 @@ export class FacebookApiService extends BaseApiService {
    */
   public async pages() {
     const res = await HttpService.getJSON<IFbRequest<FbPage>>(
-      `${this.baseUrl}/user/pages`
+      `${this.baseUrl}/user/pages`,
     );
     const pages = res.body;
     console.debug("[services:FacebookApiService] pages", pages);
@@ -36,7 +36,7 @@ export class FacebookApiService extends BaseApiService {
 
   public async posts() {
     const res = await HttpService.getJSON<IFbRequest<IFbPostData>>(
-      `${this.baseUrl}/posts/user`
+      `${this.baseUrl}/posts/user`,
     );
     const posts = res.body;
     console.debug("[services:FacebookApiService] posts", posts);

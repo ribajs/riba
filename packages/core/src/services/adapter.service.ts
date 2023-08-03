@@ -26,7 +26,7 @@ export class AdapterService
   public register(
     adapter: Adapter,
     fallbackName?: string,
-    forceFallback = false
+    forceFallback = false,
   ): Adapters {
     const name = forceFallback
       ? fallbackName || adapter.name

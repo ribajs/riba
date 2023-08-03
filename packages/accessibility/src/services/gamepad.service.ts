@@ -32,7 +32,7 @@ export class GamepadService {
     }
 
     throw new Error(
-      `Singleton of GamepadService not defined, please call setSingleton first!`
+      `Singleton of GamepadService not defined, please call setSingleton first!`,
     );
   }
 

@@ -60,7 +60,7 @@ export interface Options extends PhotoSwipe.Options {
   addCaptionHTMLFn?: (
     item: Item,
     captionEl: HTMLElement,
-    isFake?: boolean
+    isFake?: boolean,
   ) => boolean;
 
   /**

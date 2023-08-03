@@ -371,13 +371,13 @@ export class VideoComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
     this.debug("parsedAttributeChangedCallback", attributeName);
     if (attributeName === "videoSrc") {

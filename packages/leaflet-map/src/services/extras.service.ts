@@ -18,7 +18,7 @@ export class LeafletService {
     }
 
     throw new Error(
-      `Singleton of LeafletService not defined, please call setSingleton first!`
+      `Singleton of LeafletService not defined, please call setSingleton first!`,
     );
   }
 

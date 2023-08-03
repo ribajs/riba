@@ -55,7 +55,7 @@ export class Bs5IconComponent extends BasicComponent {
       } else if (window.ssr.ctx) {
         url = new URL(
           src,
-          window.ssr.ctx.protocol + "://" + window.ssr.ctx.hostname
+          window.ssr.ctx.protocol + "://" + window.ssr.ctx.hostname,
         );
       } else {
         throw new Error("Host for SSR not found!");
@@ -77,7 +77,7 @@ export class Bs5IconComponent extends BasicComponent {
 
     console.error(
       "[bs5-icon] Only SVG's are supported! But content-type is " +
-        response.headers.get("content-type")
+        response.headers.get("content-type"),
     );
     return "";
   }
@@ -115,7 +115,7 @@ export class Bs5IconComponent extends BasicComponent {
     } catch (error) {
       console.warn(
         `Error on fetch icon "${this.scope.src}"! Try to switch the protocol...`,
-        error
+        error,
       );
       // Try to switch protocol on error
       if (this.scope.src.startsWith("//")) {
@@ -133,7 +133,7 @@ export class Bs5IconComponent extends BasicComponent {
         console.error(
           `Error on fetch icon "${this.scope.src}"!`,
           error,
-          error2
+          error2,
         );
         return;
       }
@@ -247,7 +247,7 @@ export class Bs5IconComponent extends BasicComponent {
     name: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     // injects the changed attributes to scope
     super.attributeChangedCallback(name, oldValue, newValue, namespace);
@@ -295,7 +295,7 @@ export class Bs5IconComponent extends BasicComponent {
         "direction",
         null,
         this.scope.direction,
-        null
+        null,
       );
     }
   }

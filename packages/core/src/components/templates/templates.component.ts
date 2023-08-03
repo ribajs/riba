@@ -41,7 +41,7 @@ export abstract class TemplatesComponent extends Component {
   protected transformTemplateAttribute(
     name: string,
     value: any,
-    type?: AttributeType
+    type?: AttributeType,
   ) {
     switch (type) {
       case "number":
@@ -72,19 +72,19 @@ export abstract class TemplatesComponent extends Component {
 
   protected getTemplateAttributes(
     tpl: HTMLTemplateElement | HTMLElement,
-    index: number
+    index: number,
   ) {
     const attributes: any = {};
     for (const attribute of this.templateAttributes) {
       const attrValue = tpl.getAttribute(attribute.name);
       if (typeof attrValue !== "string" && attribute.required) {
         console.error(
-          new Error(`template "${attribute.name}" attribute is required!`)
+          new Error(`template "${attribute.name}" attribute is required!`),
         );
       } else {
         attributes[camelCase(attribute.name)] = this.transformTemplateAttribute(
           attribute.name,
-          tpl.getAttribute(attribute.name)
+          tpl.getAttribute(attribute.name),
         );
       }
     }
@@ -93,7 +93,7 @@ export abstract class TemplatesComponent extends Component {
 
   protected addItemByTemplate(
     tpl: HTMLTemplateElement | HTMLElement,
-    index: number
+    index: number,
   ) {
     const attributes = this.getTemplateAttributes(tpl, index);
     const content = tpl.innerHTML;
@@ -105,7 +105,7 @@ export abstract class TemplatesComponent extends Component {
 
   protected addItemsByTemplate() {
     const templates = this.querySelectorAll<HTMLTemplateElement | HTMLElement>(
-      "template, .template"
+      "template, .template",
     );
     for (let index = 0; index < templates.length; index++) {
       const tpl = templates[index];
@@ -117,7 +117,7 @@ export abstract class TemplatesComponent extends Component {
 
   protected removeTemplates() {
     const templates = this.querySelectorAll<HTMLTemplateElement | HTMLElement>(
-      "template, .template"
+      "template, .template",
     );
     for (let index = 0; index < templates.length; index++) {
       const tpl = templates[index];
@@ -130,7 +130,7 @@ export abstract class TemplatesComponent extends Component {
       (child) =>
         child.nodeName !== "TEMPLATE" &&
         !child.classList?.contains("template") &&
-        child.nodeName !== "#text"
+        child.nodeName !== "#text",
     );
   }
 }

@@ -18,7 +18,7 @@ export class ToggleClassBinder extends Binder<string, HTMLButtonElement> {
   private _triggerState() {
     this.toggleButtonEvents?.trigger(
       TOGGLE_BUTTON.eventNames.state,
-      this.state
+      this.state,
     );
   }
 
@@ -45,7 +45,7 @@ export class ToggleClassBinder extends Binder<string, HTMLButtonElement> {
     el.dispatchEvent(
       new CustomEvent(TOGGLE_CLASS.elEventNames.removed, {
         detail: { className },
-      })
+      }),
     );
     this.triggerState();
   }
@@ -58,7 +58,7 @@ export class ToggleClassBinder extends Binder<string, HTMLButtonElement> {
     el.dispatchEvent(
       new CustomEvent(TOGGLE_CLASS.elEventNames.added, {
         detail: { className },
-      })
+      }),
     );
     this.triggerState();
   }
@@ -72,12 +72,12 @@ export class ToggleClassBinder extends Binder<string, HTMLButtonElement> {
     this.toggleButtonEvents?.off(
       TOGGLE_BUTTON.eventNames.toggle,
       this.onToggle,
-      this
+      this,
     );
     this.toggleButtonEvents?.off(
       TOGGLE_BUTTON.eventNames.init,
       this.triggerState,
-      this
+      this,
     );
   }
 
@@ -91,7 +91,7 @@ export class ToggleClassBinder extends Binder<string, HTMLButtonElement> {
 
     if (!this.toggleButtonEvents) {
       this.toggleButtonEvents = new EventDispatcher(
-        TOGGLE_BUTTON.nsPrefix + newId
+        TOGGLE_BUTTON.nsPrefix + newId,
       );
       toggleButton = this.toggleButtonEvents as EventDispatcher;
       toggleButton.on(TOGGLE_BUTTON.eventNames.toggle, this.onToggle, this);

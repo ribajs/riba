@@ -32,7 +32,7 @@ export class Bs4DropdownComponent extends Component {
     this.dropdownService = new DropdownService(
       this.querySelector(".dropdown-toggle") as
         | HTMLButtonElement
-        | HTMLAnchorElement
+        | HTMLAnchorElement,
     );
     this.init(Bs4DropdownComponent.observedAttributes);
   }

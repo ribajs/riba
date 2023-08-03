@@ -104,7 +104,7 @@ export class ShopifyCommentsFormComponent extends Component {
 
   protected initValidation() {
     this.newCommentForm = this.querySelector(
-      "#comment_form"
+      "#comment_form",
     ) as HTMLFormElement;
     this.newCommentForm.setAttribute("novalidate", "");
     this.newCommentForm.classList.add("needs-validation");

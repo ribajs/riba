@@ -10,7 +10,7 @@ export class WebhooksService extends EventDispatcher {
   constructor(
     protected readonly host = window.location.protocol +
       "//" +
-      window.location.host
+      window.location.host,
   ) {
     super("shopify-webhooks-service");
     this.host = host;

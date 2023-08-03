@@ -33,12 +33,12 @@ export class ToggleCollapseOnEventBinder extends Binder<string, HTMLElement> {
 
   routine(el: HTMLElement, targetSelector: string) {
     const newTargets = Array.from(
-      document.querySelectorAll<HTMLElement>(targetSelector)
+      document.querySelectorAll<HTMLElement>(targetSelector),
     );
 
     if (newTargets.length <= 0) {
       console.warn(
-        `[toggleCollapseOnEventBinder] No element with selector "${targetSelector}" found.`
+        `[toggleCollapseOnEventBinder] No element with selector "${targetSelector}" found.`,
       );
     }
 

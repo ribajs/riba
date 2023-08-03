@@ -165,11 +165,11 @@ export class TooltipService {
 
   constructor(
     element: HTMLElement | HTMLUnknownElement,
-    config: TooltipOptions
+    config: TooltipOptions,
   ) {
     if (typeof Popper === "undefined") {
       throw new TypeError(
-        "Bootstrap's tooltips require Popper.js (https://popper.js.org)"
+        "Bootstrap's tooltips require Popper.js (https://popper.js.org)",
       );
     }
 
@@ -333,7 +333,7 @@ export class TooltipService {
       this._popper = new Popper(
         this.element,
         tip,
-        this._getPopperConfig(attachment)
+        this._getPopperConfig(attachment),
       );
 
       tip.classList.add(CLASS_NAME_SHOW);
@@ -396,7 +396,7 @@ export class TooltipService {
     // empty mouseover listeners we added for iOS support
     if ("ontouchstart" in document.documentElement) {
       Array.from(document.body.children).forEach((element) =>
-        off(element, "mouseover", noop)
+        off(element, "mouseover", noop),
       );
     }
 
@@ -449,14 +449,14 @@ export class TooltipService {
     const tip = this.getTipElement();
     this.setElementContent(
       findOne(SELECTOR_TOOLTIP_INNER, tip),
-      this.getTitle()
+      this.getTitle(),
     );
     tip.classList.remove(CLASS_NAME_FADE, CLASS_NAME_SHOW);
   }
 
   setElementContent(
     element: HTMLElement | null,
-    content: Element | null | string
+    content: Element | null | string,
   ) {
     if (element === null) {
       return;
@@ -488,7 +488,7 @@ export class TooltipService {
       content = sanitizeHtml(
         content,
         this.config.allowList,
-        this.config.sanitizeFn || undefined
+        this.config.sanitizeFn || undefined,
       );
     }
     element.innerHTML = content;
@@ -551,7 +551,7 @@ export class TooltipService {
           ...data.offsets,
           ...((this.config.offset as TooltipOffsetFn)(
             data.offsets,
-            this.element
+            this.element,
           ) || {}),
         };
 
@@ -601,7 +601,7 @@ export class TooltipService {
           this.element,
           "click", // TooltipService.Event.CLICK,
           // this.config.selector,
-          (event: Event) => this.toggle(event)
+          (event: Event) => this.toggle(event),
         );
       } else if (trigger !== TRIGGER_MANUAL) {
         const eventIn =
@@ -613,10 +613,10 @@ export class TooltipService {
             ? "mouseout" // TooltipService.Event.MOUSELEAVE
             : "blur"; // TooltipService.Event.FOCUSOUT;
         on(this.element, eventIn /*, this.config.selector*/, (event) =>
-          this._enter(event)
+          this._enter(event),
         );
         on(this.element, eventOut /*, this.config.selector*/, (event) =>
-          this._leave(event)
+          this._leave(event),
         );
       }
     });
@@ -654,7 +654,7 @@ export class TooltipService {
     if (this.element.getAttribute("title") || titleType !== "string") {
       this.element.setAttribute(
         "data-original-title",
-        this.element.getAttribute("title") || ""
+        this.element.getAttribute("title") || "",
       );
 
       this.element.setAttribute("title", "");
@@ -794,7 +794,7 @@ export class TooltipService {
         sanitizeHtml(
           config.template,
           config.allowList,
-          config.sanitizeFn || undefined
+          config.sanitizeFn || undefined,
         ) || "";
     }
 

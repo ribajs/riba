@@ -18,7 +18,7 @@ export class FormatterService extends ModuleElementService {
   public register(
     formatter: Formatter,
     fallbackName?: string,
-    forceFallback = false
+    forceFallback = false,
   ): Formatters {
     const name = forceFallback
       ? fallbackName || formatter.name

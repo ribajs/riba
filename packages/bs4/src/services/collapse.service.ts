@@ -76,7 +76,7 @@ export class CollapseService {
   constructor(
     element: HTMLElement,
     triggerList: NodeListOf<HTMLElement> | HTMLElement[],
-    config: Partial<Config> = {}
+    config: Partial<Config> = {},
   ) {
     this._isTransitioning = false;
     this._element = element;
@@ -161,7 +161,7 @@ export class CollapseService {
 
     if (this._parent) {
       actives = Array.from(
-        SelectorEngine.find(SELECTOR_ACTIVES, this._parent)
+        SelectorEngine.find(SELECTOR_ACTIVES, this._parent),
       ).filter((elem) => {
         if (typeof this._config.parent === "string") {
           return elem.getAttribute("data-parent") === this._config.parent;
@@ -392,7 +392,7 @@ export class CollapseService {
   _addAriaAndCollapsedClass(
     element: HTMLElement,
     triggerArray: HTMLElement[],
-    isOpen?: boolean
+    isOpen?: boolean,
   ) {
     if (element) {
       if (typeof isOpen !== "boolean") {

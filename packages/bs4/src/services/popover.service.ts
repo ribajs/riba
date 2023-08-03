@@ -124,7 +124,7 @@ export class PopoverService extends TooltipService {
   // Overrides
   constructor(
     element: HTMLElement | HTMLUnknownElement,
-    config: Partial<PopoverOptions>
+    config: Partial<PopoverOptions>,
   ) {
     super(element, config as TooltipOptions);
     element.style.backgroundColor = "#ffff00";

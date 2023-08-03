@@ -9,7 +9,7 @@ import { makeArray } from "../utils.js";
 
 export const matches = (
   element: HTMLElement | (Node & ParentNode),
-  selector: string
+  selector: string,
 ) => {
   return Element.prototype.matches.call(element, selector);
 };
@@ -17,17 +17,17 @@ export const matches = (
 export const find = (selector: string, element = document.documentElement) => {
   return Element.prototype.querySelectorAll.call(
     element,
-    selector
+    selector,
   ) as NodeListOf<HTMLElement>;
 };
 
 export const findOne = (
   selector: string,
-  element = document.documentElement
+  element = document.documentElement,
 ) => {
   return Element.prototype.querySelector.call(
     element,
-    selector
+    selector,
   ) as HTMLElement | null;
 };
 

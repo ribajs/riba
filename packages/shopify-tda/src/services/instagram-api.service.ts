@@ -22,7 +22,7 @@ export class InstagramApiService extends BaseApiService {
   public async media(
     instagramBusinessAccountID: string,
     limit = 0,
-    fields = "caption,comments_count,is_comment_enabled,like_count,media_type,media_url,permalink,timestamp,children{media_type,media_url}"
+    fields = "caption,comments_count,is_comment_enabled,like_count,media_type,media_url,permalink,timestamp,children{media_type,media_url}",
   ) {
     const url = `${this.baseUrl}/media/${instagramBusinessAccountID}`;
     const data: any = {

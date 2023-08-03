@@ -36,7 +36,7 @@ abstract class BaseView {
         if (oldStatus && oldStatus.namespace === this.namespace) {
           this.onLeave();
         }
-      }
+      },
     );
 
     this.dispatcher.on(
@@ -45,13 +45,13 @@ abstract class BaseView {
         viewId: string,
         newStatus: State,
         oldStatus: State,
-        container: HTMLElement /*, html: string, isInit: boolean*/
+        container: HTMLElement /*, html: string, isInit: boolean*/,
       ) => {
         this.container = container;
         if (newStatus.namespace === this.namespace) {
           this.onEnter();
         }
-      }
+      },
     );
 
     this.dispatcher.on(
@@ -64,7 +64,7 @@ abstract class BaseView {
         if (oldStatus && oldStatus.namespace === this.namespace) {
           this.onLeaveCompleted();
         }
-      }
+      },
     );
   }
 

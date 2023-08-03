@@ -18,7 +18,7 @@ export class ParentBinder extends Binder<any, BasicComponent> {
       console.warn(
         "[parentBinder] You can only use this binder on Riba components",
         el.localName,
-        customElements.get(el.localName)
+        customElements.get(el.localName),
       );
     }
   }
@@ -29,14 +29,14 @@ export class ParentBinder extends Binder<any, BasicComponent> {
     } else if (isCustomElement(el, true)) {
       console.info(
         `[parentBinder] CustomElement ${el.localName} has been defined, but is not yet upgraded. Waiting for upgrade..`,
-        el
+        el,
       );
       await waitForCustomElement(el);
       this.bindIntern(el);
     } else {
       console.warn(
         "[parentBinder] You can only use this binder on Riba components",
-        el.localName
+        el.localName,
       );
     }
   }

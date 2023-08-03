@@ -26,7 +26,7 @@ export abstract class BaseTransition implements Transition {
    */
   public async init(
     oldContainer: HTMLElement,
-    newContainer: Promise<HTMLElement>
+    newContainer: Promise<HTMLElement>,
   ): Promise<void> {
     this.oldContainer = oldContainer;
 

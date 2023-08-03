@@ -26,7 +26,7 @@ export class ShopifyApiArticleService extends BaseApiService {
    */
   public async list(blogId: number) {
     return HttpService.getJSON<Article[]>(
-      `${this.baseUrl}/${blogId}/articles`
+      `${this.baseUrl}/${blogId}/articles`,
     ).then((res) => {
       console.debug("[ShopifyApiArticleService] articles", res.body);
       return res.body;
@@ -40,7 +40,7 @@ export class ShopifyApiArticleService extends BaseApiService {
    */
   public async get(blogId: number, articleId: number) {
     return HttpService.getJSON<Article>(
-      `${this.baseUrl}/${blogId}/articles/${articleId}`
+      `${this.baseUrl}/${blogId}/articles/${articleId}`,
     ).then((res) => {
       console.debug("[ShopifyApiArticleService] get article", res);
       return res.body;

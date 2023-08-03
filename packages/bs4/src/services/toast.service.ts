@@ -117,7 +117,7 @@ export class ToastService {
         this._timeout = Number(
           setTimeout(() => {
             this.hide();
-          }, this._config.delay)
+          }, this._config.delay),
         );
       }
     };
@@ -127,7 +127,7 @@ export class ToastService {
     this._element.classList.add(CLASS_NAME_SHOWING);
     if (this._config.animation) {
       const transitionDuration = getTransitionDurationFromElement(
-        this._element
+        this._element,
       );
 
       one(this._element, TRANSITION_END, complete);
@@ -159,7 +159,7 @@ export class ToastService {
     this._element.classList.remove(CLASS_NAME_SHOW);
     if (this._config.animation) {
       const transitionDuration = getTransitionDurationFromElement(
-        this._element
+        this._element,
       );
 
       one(this._element, TRANSITION_END, complete);
@@ -213,7 +213,7 @@ export class ToastService {
         if (this._element?.dataset.dismiss === "toast") {
           this.hide();
         }
-      }
+      },
     );
   }
 

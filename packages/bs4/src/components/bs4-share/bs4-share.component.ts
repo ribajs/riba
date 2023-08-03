@@ -294,12 +294,12 @@ export class Bs4ShareComponent extends Component {
 
   protected initDropdown() {
     const dropDownButtonElement = this.querySelector(
-      ".dropdown-toggle-share"
+      ".dropdown-toggle-share",
     ) as HTMLButtonElement | HTMLAnchorElement;
     if (!dropDownButtonElement) {
       console.warn(
         'Element with selector ".dropdown-toggle-share" not found!',
-        this
+        this,
       );
       return;
     }
@@ -341,7 +341,7 @@ export class Bs4ShareComponent extends Component {
       "Share",
       "scrollbars=yes,resizable=yes,toolbar=no," +
         "location=yes,width=550,height=420,top=100,left=" +
-        (window.screen ? Math.round(screen.width / 2 - 275) : 100)
+        (window.screen ? Math.round(screen.width / 2 - 275) : 100),
     );
 
     return false;

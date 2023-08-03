@@ -120,22 +120,22 @@ export class Bs4SidebarComponent extends Component {
       this.eventDispatcher.off(
         TOGGLE_BUTTON.eventNames.toggle,
         this.toggle,
-        this
+        this,
       );
       this.eventDispatcher.off(
         TOGGLE_BUTTON.eventNames.init,
         this.triggerState,
-        this
+        this,
       );
     }
     this.eventDispatcher = new EventDispatcher(
-      TOGGLE_BUTTON.nsPrefix + this.scope.id
+      TOGGLE_BUTTON.nsPrefix + this.scope.id,
     );
     this.eventDispatcher.on(TOGGLE_BUTTON.eventNames.toggle, this.toggle, this);
     this.eventDispatcher.on(
       TOGGLE_BUTTON.eventNames.init,
       this.triggerState,
-      this
+      this,
     );
   }
 
@@ -150,7 +150,7 @@ export class Bs4SidebarComponent extends Component {
     const translateX = this.scope.position === "left" ? "-100%" : "100%";
     this.setAttribute(
       "style",
-      `transform:translateX(${translateX});width:${this.scope.width};`
+      `transform:translateX(${translateX});width:${this.scope.width};`,
     );
   }
 
@@ -158,7 +158,7 @@ export class Bs4SidebarComponent extends Component {
     this.setContainersStyle(state);
     this.setAttribute(
       "style",
-      `transform:translateX(0);width:${this.scope.width};`
+      `transform:translateX(0);width:${this.scope.width};`,
     );
   }
 
@@ -166,7 +166,7 @@ export class Bs4SidebarComponent extends Component {
     this.setContainersStyle(state);
     this.setAttribute(
       "style",
-      `transform:translateX(0);width:${this.scope.width};`
+      `transform:translateX(0);width:${this.scope.width};`,
     );
   }
 
@@ -191,7 +191,7 @@ export class Bs4SidebarComponent extends Component {
     if (this.eventDispatcher) {
       this.eventDispatcher.trigger(
         TOGGLE_BUTTON.eventNames.toggled,
-        this.scope.state
+        this.scope.state,
       );
     }
   }
@@ -237,13 +237,13 @@ export class Bs4SidebarComponent extends Component {
    * If viewport size changes, location url changes or something else.
    */
   protected onEnvironmentChanges = debounce(
-    this._onEnvironmentChanges.bind(this)
+    this._onEnvironmentChanges.bind(this),
   );
 
   protected getContainers() {
     return this.scope.containerSelector
       ? document.querySelectorAll<HTMLUnknownElement>(
-          this.scope.containerSelector
+          this.scope.containerSelector,
         )
       : undefined;
   }
@@ -357,13 +357,13 @@ export class Bs4SidebarComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
     if (attributeName === "containerSelector") {
       this.initContainers(this.scope.state);
@@ -379,12 +379,12 @@ export class Bs4SidebarComponent extends Component {
     this.eventDispatcher?.off(
       TOGGLE_BUTTON.eventNames.init,
       this.triggerState,
-      this
+      this,
     );
     this.eventDispatcher?.off(
       TOGGLE_BUTTON.eventNames.toggle,
       this.toggle,
-      this
+      this,
     );
     this.routerEvents.off("newPageReady", this.onEnvironmentChanges, this);
     window.removeEventListener("resize", this.onEnvironmentChanges, false);
@@ -393,7 +393,7 @@ export class Bs4SidebarComponent extends Component {
   protected template(): ReturnType<TemplateFunction> {
     if (!hasChildNodesTrim(this)) {
       console.warn(
-        "No child elements found, this component as no template so you need to define your own as child of this component."
+        "No child elements found, this component as no template so you need to define your own as child of this component.",
       );
     }
     return null;

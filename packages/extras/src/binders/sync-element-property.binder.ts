@@ -26,7 +26,7 @@ export class SyncElementPropertyBinder extends Binder<string, HTMLElement> {
     if (this.elToSync) {
       this.elToSync.removeEventListener(
         "resize",
-        propertyName === "width" ? this.syncWidth : this.syncHeight
+        propertyName === "width" ? this.syncWidth : this.syncHeight,
       );
     }
   }
@@ -40,7 +40,7 @@ export class SyncElementPropertyBinder extends Binder<string, HTMLElement> {
     if (this.elToSync) {
       this.elToSync.removeEventListener(
         "resize",
-        propertyName === "width" ? this.syncWidth : this.syncHeight
+        propertyName === "width" ? this.syncWidth : this.syncHeight,
       );
     }
     const elementToSync = document.getElementById(value);
@@ -57,12 +57,12 @@ export class SyncElementPropertyBinder extends Binder<string, HTMLElement> {
           break;
         default:
           console.warn(
-            "[syncElementPropertyBinder] Unknown property: " + propertyName
+            "[syncElementPropertyBinder] Unknown property: " + propertyName,
           );
       }
     } else {
       console.warn(
-        "[syncElementPropertyBinder] Could not find element with id: " + value
+        "[syncElementPropertyBinder] Could not find element with id: " + value,
       );
     }
   }

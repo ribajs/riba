@@ -61,11 +61,11 @@ export class ShopifyCartComponent extends Component {
         triggerOnStart: false,
       }).then(
         (
-          shippingRates: ShopifyShippingRates | ShopifyShippingRatesNormalized
+          shippingRates: ShopifyShippingRates | ShopifyShippingRatesNormalized,
         ) => {
           this.scope.shippingRates =
             shippingRates as ShopifyShippingRatesNormalized;
-        }
+        },
       );
     }
   }
@@ -131,7 +131,7 @@ export class ShopifyCartComponent extends Component {
     lineItem: ShopifyCartLineItem,
     event: Event,
     scope: Scope,
-    htmlEl: HTMLInputElement
+    htmlEl: HTMLInputElement,
   ) {
     if (!htmlEl) {
       console.warn("Input element not found");
@@ -180,13 +180,13 @@ export class ShopifyCartComponent extends Component {
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:start",
       this.onCartRequestStart,
-      this
+      this,
     );
 
     ShopifyCartService.shopifyCartEventDispatcher.on(
       "ShopifyCart:request:complete",
       this.onCartRequestComplete,
-      this
+      this,
     );
   }
 
@@ -195,13 +195,13 @@ export class ShopifyCartComponent extends Component {
     ShopifyCartService.shopifyCartEventDispatcher.off(
       "ShopifyCart:request:start",
       this.onCartRequestStart,
-      this
+      this,
     );
 
     ShopifyCartService.shopifyCartEventDispatcher.off(
       "ShopifyCart:request:complete",
       this.onCartRequestComplete,
-      this
+      this,
     );
   }
 

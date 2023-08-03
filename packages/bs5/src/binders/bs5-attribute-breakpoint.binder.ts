@@ -31,7 +31,7 @@ export class Bs5AttributeBreakpointBinder extends Bs5AbstractBreakpointBinder<HT
     name: string,
     keypath: string | undefined,
     formatters: string[] | null,
-    identifier: string | null
+    identifier: string | null,
   ) {
     super(view, el, type, name, keypath, formatters, identifier);
     this.defaultAttributeBinder = new AttributeBinder(
@@ -41,7 +41,7 @@ export class Bs5AttributeBreakpointBinder extends Bs5AbstractBreakpointBinder<HT
       name,
       keypath,
       formatters,
-      "*"
+      "*",
     );
   }
 }

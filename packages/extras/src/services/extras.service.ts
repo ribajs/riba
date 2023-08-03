@@ -18,7 +18,7 @@ export class ExtrasService {
     }
 
     throw new Error(
-      `Singleton of ExtrasService not defined, please call setSingleton first!`
+      `Singleton of ExtrasService not defined, please call setSingleton first!`,
     );
   }
 

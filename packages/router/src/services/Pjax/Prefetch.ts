@@ -84,7 +84,7 @@ class Prefetch {
   public onLinkEnter(
     url: string,
     el: HTMLAnchorElement | HTMLUnknownElement,
-    evt: Event
+    evt: Event,
   ) {
     if (
       el.classList &&
@@ -109,7 +109,7 @@ class Prefetch {
         });
       } else {
         console.warn(
-          `[Prefetch.onLinkEnter] No pjax instance for viewId "${this.viewId}" found!`
+          `[Prefetch.onLinkEnter] No pjax instance for viewId "${this.viewId}" found!`,
         );
         el.classList.add(ROUTE_ERROR_CLASS);
       }
@@ -130,7 +130,7 @@ class Prefetch {
         });
       } else {
         console.warn(
-          `[Prefetch.url] No pjax instance for viewId "${this.viewId}" found!`
+          `[Prefetch.url] No pjax instance for viewId "${this.viewId}" found!`,
         );
       }
     }
@@ -169,7 +169,7 @@ class Prefetch {
     if (!href) {
       console.warn(
         `Url is not defined, you can't cache the link without the url. Please make sure your element has the href attribute or pass the url directly to this function.`,
-        el
+        el,
       );
       return;
     }

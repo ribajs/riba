@@ -51,13 +51,13 @@ export class Bs5ButtonComponent extends Component {
       this.onStartAnimation = this.onStartAnimation.bind(this);
       this.addEventListener(
         "webkitAnimationStart" as "animationstart",
-        this.onStartAnimation
+        this.onStartAnimation,
       );
       this.addEventListener("animationstart", this.onStartAnimation);
       this.onEndAnimation = this.onEndAnimation.bind(this);
       this.addEventListener(
         "webkitAnimationEnd" as "animationend",
-        this.onEndAnimation
+        this.onEndAnimation,
       );
       this.addEventListener("animationend", this.onEndAnimation);
       this.addEventListener("click", this.scope.onClick);
@@ -73,13 +73,13 @@ export class Bs5ButtonComponent extends Component {
     attributeName: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     super.parsedAttributeChangedCallback(
       attributeName,
       oldValue,
       newValue,
-      namespace
+      namespace,
     );
   }
 
@@ -88,12 +88,12 @@ export class Bs5ButtonComponent extends Component {
     super.disconnectedCallback();
     this.removeEventListener(
       "webkitAnimationStart" as "animationstart",
-      this.onStartAnimation
+      this.onStartAnimation,
     );
     this.removeEventListener("animationstart", this.onStartAnimation);
     this.removeEventListener(
       "webkitAnimationEnd" as "animationend",
-      this.onEndAnimation
+      this.onEndAnimation,
     );
     this.removeEventListener("animationend", this.onEndAnimation);
     this.removeEventListener("click", this.scope.onClick);

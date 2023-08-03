@@ -35,7 +35,7 @@ export class AttributeBinder extends Binder<any, HTMLElement> {
       el.dispatchEvent(
         new CustomEvent("binder-changed", {
           detail: { name: this.type, newValue: newValueFormatted, oldValue },
-        } as BinderAttributeChangedEvent)
+        } as BinderAttributeChangedEvent),
       );
     }
   }

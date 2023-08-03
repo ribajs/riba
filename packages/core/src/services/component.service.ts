@@ -19,7 +19,7 @@ export class ComponentService extends ModuleElementService {
   public register(
     component: typeof Component,
     fallbackName?: string,
-    forceFallback = false
+    forceFallback = false,
   ): Components {
     const name = forceFallback
       ? fallbackName || component.tagName

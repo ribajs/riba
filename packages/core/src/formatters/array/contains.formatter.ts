@@ -18,7 +18,7 @@ export const containsFormatter = {
       if (!isNumber(attr)) {
         console.warn(
           "[containsFormatter] The second parameter must be of type number for arrays but is " +
-            typeof attr
+            typeof attr,
         );
       }
       attr = Number(attr);
@@ -37,7 +37,7 @@ export const containsFormatter = {
           if (!isString(attr)) {
             console.warn(
               "[containsFormatter] The second parameter must be of type string for objects" +
-                typeof attr
+                typeof attr,
             );
           }
 

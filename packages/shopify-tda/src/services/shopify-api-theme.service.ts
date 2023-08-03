@@ -57,7 +57,7 @@ export class ShopifyApiThemesService extends BaseApiService {
 
   public async assetLocalesList(id: string | number) {
     const res = await HttpService.getJSON<AssetLocale[]>(
-      `/shopify/api/themes/${id}/locales/list`
+      `/shopify/api/themes/${id}/locales/list`,
     );
     const assets = res.body;
     console.debug("[ShopifyApiThemesService] assets", assets);

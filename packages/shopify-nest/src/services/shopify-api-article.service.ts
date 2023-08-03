@@ -31,7 +31,7 @@ export class ShopifyApiArticleService extends _ShopifyApiArticleService {
     return HttpService.put(
       `/shopify/api/blogs/${blogId}/articles/${articleId}`,
       article,
-      "json"
+      "json",
     ).then((res) => {
       this.debug("update article", res.body);
       return res.body;

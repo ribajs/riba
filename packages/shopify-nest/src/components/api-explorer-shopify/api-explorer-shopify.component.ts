@@ -334,7 +334,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
   }
 
   protected debug = Debug(
-    "component:" + ShopifyNestApiExplorerShopifyComponent.tagName
+    "component:" + ShopifyNestApiExplorerShopifyComponent.tagName,
   );
   constructor() {
     super();
@@ -344,7 +344,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
     this.debug("loadParamValues", param);
     if (!param.dependenciesResolved) {
       this.debug(
-        `Dependencies for this parameter '${param.name}' not resolved`
+        `Dependencies for this parameter '${param.name}' not resolved`,
       );
       return;
     }
@@ -392,7 +392,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
   protected async loadAssetKeyParamValues(
     param: APIParam,
     byPath?: string,
-    justFilname = false
+    justFilname = false,
   ) {
     let themeId: string | number | undefined;
     for (const para of this.scope.currentParams) {
@@ -464,7 +464,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
     locales: any,
     prefix = "",
     depth = 0,
-    depthLimit = 3
+    depthLimit = 3,
   ) {
     if (depth >= depthLimit) {
       return [];
@@ -479,7 +479,7 @@ export class ShopifyNestApiExplorerShopifyComponent extends ShopifyNestApiExplor
             subLocale,
             prefix + key + "/",
             depth + 1,
-            depthLimit
+            depthLimit,
           );
           keys.push(...subKeys);
         }

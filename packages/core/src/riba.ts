@@ -25,11 +25,11 @@ export class Riba {
     context: any,
     ev: Event,
     binder: Binder,
-    el: HTMLElement
+    el: HTMLElement,
   ) {
     if (!this || !this.call) {
       const error = new Error(
-        `[rv-${binder.type}="${binder.keypath}"] Event handler "${binder.keypath}" not found!"`
+        `[rv-${binder.type}="${binder.keypath}"] Event handler "${binder.keypath}" not found!"`,
       );
       console.error(error, binder, el, binder.view.models);
       throw error;
@@ -110,7 +110,7 @@ export class Riba {
       this.binders,
       this.components,
       this.formatters,
-      this.adapters
+      this.adapters,
     );
     if (Riba.instance) {
       return Riba.instance;
@@ -243,7 +243,7 @@ export class Riba {
     // get all attributeBinders from available binders
     if (viewOptions.binders) {
       const attributeBinders = Object.keys(viewOptions.binders).filter(
-        (key) => key.indexOf("*") >= 1 // Should contain, but not start with, *
+        (key) => key.indexOf("*") >= 1, // Should contain, but not start with, *
       );
       viewOptions.attributeBinders.push(...attributeBinders);
     }
@@ -261,7 +261,7 @@ export class Riba {
   public bind(
     el: HTMLElement | DocumentFragment | HTMLUnknownElement[],
     models: any = {},
-    options?: Options
+    options?: Options,
   ) {
     const viewOptions: Options = this.getViewOptions(options);
 

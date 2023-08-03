@@ -18,7 +18,7 @@ interface Scope extends ScopeBase {
   options: Options;
   tags: Tag[];
   fillPopoverOptions: (
-    options: Partial<PopoverOptions>
+    options: Partial<PopoverOptions>,
   ) => Partial<PopoverOptions>;
   triggerOnFocus: (options: Partial<PopoverOptions>) => any;
   onPopoverBound: EventListener;
@@ -80,7 +80,7 @@ export class Bs5TaggedImageComponent extends Component {
   protected parsedAttributeChangedCallback(
     attributeName: string,
     oldValue: any,
-    newValue: any
+    newValue: any,
   ) {
     if (attributeName === "options") {
       // before the component is bound, we just want to extend the default options
@@ -152,16 +152,16 @@ export class Bs5TaggedImageComponent extends Component {
   protected parseChildTags() {
     this.debug(`parseChildTags()`);
     for (const tagEl of Array.from(
-      this.querySelectorAll("tag") as NodeListOf<HTMLElement>
+      this.querySelectorAll("tag") as NodeListOf<HTMLElement>,
     )) {
       const title = tagEl.getAttribute("title") || "";
       const content = tagEl.innerHTML;
 
       const x = ((v) => (isNaN(v) ? Math.random() : v))(
-        parseFloat(tagEl.getAttribute("x") || "")
+        parseFloat(tagEl.getAttribute("x") || ""),
       );
       const y = ((v) => (isNaN(v) ? Math.random() : v))(
-        parseFloat(tagEl.getAttribute("y") || "")
+        parseFloat(tagEl.getAttribute("y") || ""),
       );
 
       const shape = tagEl.getAttribute("shape") || undefined;
@@ -271,7 +271,7 @@ export class Bs5TaggedImageComponent extends Component {
       foundTag.el = event.target as HTMLElement;
     } else {
       throw new Error(
-        `Tag with index (${boundIndex}, "${boundIndexAttr}") not found`
+        `Tag with index (${boundIndex}, "${boundIndexAttr}") not found`,
       );
     }
   }

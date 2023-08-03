@@ -16,7 +16,7 @@ export const LuxonIntervalToDurationFormatter: Formatter = {
   read(
     target: Interval,
     unit?: keyof DurationObjectUnits | (keyof DurationObjectUnits)[],
-    opts?: DiffOptions
+    opts?: DiffOptions,
   ): Duration {
     return target.toDuration(unit, opts);
   },

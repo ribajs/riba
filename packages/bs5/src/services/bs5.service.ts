@@ -28,12 +28,12 @@ export class Bs5Service {
     }
 
     throw new Error(
-      "Singleton of Bs5Service not defined, please call `Bs5Service.setSingleton` or `bs5Module.init` first!"
+      "Singleton of Bs5Service not defined, please call `Bs5Service.setSingleton` or `bs5Module.init` first!",
     );
   }
 
   public static setSingleton(
-    options: Bs5ModuleOptions = DEFAULT_MODULE_OPTIONS
+    options: Bs5ModuleOptions = DEFAULT_MODULE_OPTIONS,
   ) {
     if (Bs5Service.instance) {
       throw new Error(`Singleton of Bs5Service already defined!`);
@@ -95,7 +95,7 @@ export class Bs5Service {
   public on(
     eventName: "breakpoint:changed",
     cb: (activeBreakpoint: Breakpoint) => void,
-    thisContext?: any
+    thisContext?: any,
   ): void;
   public on(eventName: string, cb: EventCallback, thisContext?: any) {
     return this.events.on(eventName, cb, thisContext);
@@ -104,7 +104,7 @@ export class Bs5Service {
   public once(
     eventName: "breakpoint:changed",
     cb: (activeBreakpoint: Breakpoint) => void,
-    thisContext?: any
+    thisContext?: any,
   ): void;
   public once(eventName: string, cb: EventCallback, thisContext?: any) {
     return this.events.once(eventName, cb, thisContext);
@@ -113,7 +113,7 @@ export class Bs5Service {
   public off(
     eventName: "breakpoint:changed",
     cb: (activeBreakpoint: Breakpoint) => void,
-    thisContext?: any
+    thisContext?: any,
   ): void;
   public off(eventName: string, cb: EventCallback, thisContext?: any) {
     return this.events.off(eventName, cb, thisContext);
@@ -126,7 +126,7 @@ export class Bs5Service {
    */
   public getBreakpointByDimension(
     dimension: number,
-    breakpoints?: Breakpoint[]
+    breakpoints?: Breakpoint[],
   ): Breakpoint | null {
     breakpoints = breakpoints || this.options.breakpoints;
 
@@ -158,7 +158,7 @@ export class Bs5Service {
    */
   public getBreakpointByName(
     name: string,
-    breakpoints?: Breakpoint[]
+    breakpoints?: Breakpoint[],
   ): Breakpoint | null {
     breakpoints = breakpoints || this.options.breakpoints;
     const found = breakpoints.find((breakpoint) => breakpoint.name === name);
@@ -196,7 +196,7 @@ export class Bs5Service {
 
   public isBreakpointGreaterThan(
     isBreakpointName: string,
-    compareBreakpointName: string
+    compareBreakpointName: string,
   ): boolean | null {
     const isBreakpoint = this.getBreakpointByName(isBreakpointName);
     const compareBreakpoint = this.getBreakpointByName(compareBreakpointName);
@@ -208,7 +208,7 @@ export class Bs5Service {
 
   public isBreakpointSmallerThan(
     isBreakpointName: string,
-    compareBreakpointName: string
+    compareBreakpointName: string,
   ): boolean | null {
     const isBreakpoint = this.getBreakpointByName(isBreakpointName);
     const compareBreakpoint = this.getBreakpointByName(compareBreakpointName);
@@ -219,26 +219,26 @@ export class Bs5Service {
   }
 
   public isActiveBreakpointGreaterThan(
-    compareBreakpoint: string
+    compareBreakpoint: string,
   ): boolean | null {
     if (!this.activeBreakpoint) {
       return null;
     }
     return this.isBreakpointGreaterThan(
       this.activeBreakpoint.name,
-      compareBreakpoint
+      compareBreakpoint,
     );
   }
 
   public isActiveBreakpointSmallerThan(
-    compareBreakpoint: string
+    compareBreakpoint: string,
   ): boolean | null {
     if (!this.activeBreakpoint) {
       return null;
     }
     return this.isBreakpointSmallerThan(
       this.activeBreakpoint.name,
-      compareBreakpoint
+      compareBreakpoint,
     );
   }
 }

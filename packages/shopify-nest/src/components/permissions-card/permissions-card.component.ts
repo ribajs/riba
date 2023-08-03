@@ -11,7 +11,7 @@ export class ShopifyNestPermissionsCardComponent extends Component {
   }
 
   protected debug = Debug(
-    "component:" + ShopifyNestPermissionsCardComponent.tagName
+    "component:" + ShopifyNestPermissionsCardComponent.tagName,
   );
 
   public scope = {};

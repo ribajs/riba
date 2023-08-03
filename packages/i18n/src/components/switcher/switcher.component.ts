@@ -63,7 +63,7 @@ export class I18nSwitcherComponent extends Component {
         "ready",
         async (langcode: string /*, translationNeeded: boolean*/) => {
           await this.initLocales(langcode);
-        }
+        },
       );
     }
   }
@@ -129,7 +129,7 @@ export class I18nSwitcherComponent extends Component {
           langCode.active = langCode.code === changedLangcode;
         });
       },
-      this
+      this,
     );
 
     this.scope.ready = true;

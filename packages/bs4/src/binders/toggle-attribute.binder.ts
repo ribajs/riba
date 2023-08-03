@@ -18,7 +18,7 @@ export class ToggleAttributeBinder extends Binder<string, HTMLButtonElement> {
   private _triggerState() {
     this.toggleButtonEvents?.trigger(
       TOGGLE_BUTTON.eventNames.state,
-      this.state
+      this.state,
     );
   }
 
@@ -45,7 +45,7 @@ export class ToggleAttributeBinder extends Binder<string, HTMLButtonElement> {
     el.dispatchEvent(
       new CustomEvent(TOGGLE_ATTRIBUTE.elEventNames.removed, {
         detail: { attributeName },
-      })
+      }),
     );
     this.triggerState();
   }
@@ -58,7 +58,7 @@ export class ToggleAttributeBinder extends Binder<string, HTMLButtonElement> {
     el.dispatchEvent(
       new CustomEvent(TOGGLE_ATTRIBUTE.elEventNames.added, {
         detail: { attributeName },
-      })
+      }),
     );
     this.triggerState();
   }
@@ -72,12 +72,12 @@ export class ToggleAttributeBinder extends Binder<string, HTMLButtonElement> {
     this.toggleButtonEvents?.off(
       TOGGLE_BUTTON.eventNames.toggle,
       this.onToggle,
-      this
+      this,
     );
     this.toggleButtonEvents?.off(
       TOGGLE_BUTTON.eventNames.init,
       this.triggerState,
-      this
+      this,
     );
   }
 
@@ -88,28 +88,28 @@ export class ToggleAttributeBinder extends Binder<string, HTMLButtonElement> {
       this.toggleButtonEvents.off(
         TOGGLE_BUTTON.eventNames.toggle,
         this.onToggle,
-        this
+        this,
       );
       this.toggleButtonEvents.off(
         TOGGLE_BUTTON.eventNames.init,
         this.triggerState,
-        this
+        this,
       );
     }
 
     if (!this.toggleButtonEvents) {
       this.toggleButtonEvents = new EventDispatcher(
-        TOGGLE_BUTTON.nsPrefix + newId
+        TOGGLE_BUTTON.nsPrefix + newId,
       );
       this.toggleButtonEvents.on(
         TOGGLE_BUTTON.eventNames.toggle,
         this.onToggle,
-        this
+        this,
       );
       this.toggleButtonEvents.on(
         TOGGLE_BUTTON.eventNames.init,
         this.triggerState,
-        this
+        this,
       );
     }
   }

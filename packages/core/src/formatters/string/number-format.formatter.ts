@@ -26,7 +26,7 @@ export const numberFormatFormatter: Formatter = {
     target: number,
     precision = DEFAULT_PRECISION,
     decimalSeparator = DEFAULT_DECIMAL_SEPARATOR,
-    thousandSeparator = DEFAULT_THOUSAND_SEPARATOR
+    thousandSeparator = DEFAULT_THOUSAND_SEPARATOR,
   ) {
     if (!toDecimalFormatter.read) {
       throw new Error("toDecimalFormatter must have a read function");

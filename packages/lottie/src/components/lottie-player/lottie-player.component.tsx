@@ -15,7 +15,7 @@ const isLottie = (json: Record<string, any>) => {
   const mandatory: string[] = ["v", "ip", "op", "layers", "fr", "w", "h"];
 
   return mandatory.every((field: string) =>
-    Object.prototype.hasOwnProperty.call(json, field)
+    Object.prototype.hasOwnProperty.call(json, field),
   );
 };
 
@@ -36,7 +36,7 @@ async function fromURL(url: string): Promise<Record<string, any>> {
     json = await result.json();
   } catch (err) {
     throw new Error(
-      `An error occurred while trying to load the Lottie file from URL`
+      `An error occurred while trying to load the Lottie file from URL`,
     );
   }
 
@@ -341,7 +341,7 @@ export class LottiePlayerComponent extends Component {
       const element = document.createElement("a");
 
       element.href = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(
-        data
+        data,
       )}`;
       element.download = `download_${this.scope.seeker}.svg`;
       document.body.appendChild(element);
@@ -440,7 +440,7 @@ export class LottiePlayerComponent extends Component {
 
     // Remove the attached Visibility API's change event listener.
     document.removeEventListener("visibilitychange", () =>
-      this._onVisibilityChange()
+      this._onVisibilityChange(),
     );
 
     // Destroy the animation instance and element
@@ -462,7 +462,7 @@ export class LottiePlayerComponent extends Component {
           } else if (this.scope.currentState === PlayerState.Playing) {
             this.freeze();
           }
-        }
+        },
       );
 
       if (this.scope.container) this._io.observe(this.scope.container);
@@ -471,7 +471,7 @@ export class LottiePlayerComponent extends Component {
     // Add listener for Visibility API's change event.
     if (typeof document.hidden !== "undefined") {
       document.addEventListener("visibilitychange", () =>
-        this._onVisibilityChange()
+        this._onVisibilityChange(),
       );
     }
 
@@ -511,14 +511,14 @@ export class LottiePlayerComponent extends Component {
   private _handleSeekChange(
     e: any,
     context: LottiePlayerComponentScope,
-    el: HTMLInputElement
+    el: HTMLInputElement,
   ): void {
     if (!this._lottie || isNaN(Number(el.value))) {
       return;
     }
 
     const frame: number = Math.round(
-      (Number(el.value) / 100) * this._lottie.totalFrames
+      (Number(el.value) / 100) * this._lottie.totalFrames,
     );
     // const frame: number = (Number(el.value) / 100) * this._lottie.totalFrames;
     // const percents = el.value + "%";
@@ -537,7 +537,7 @@ export class LottiePlayerComponent extends Component {
             frame: this._lottie.currentFrame,
             seeker: this.scope.seeker,
           },
-        })
+        }),
       );
     });
 

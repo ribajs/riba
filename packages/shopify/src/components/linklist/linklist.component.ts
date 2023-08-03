@@ -134,7 +134,7 @@ export class ShopifyLinklistComponent extends Component {
     name: string,
     oldValue: any,
     newValue: any,
-    namespace: string | null
+    namespace: string | null,
   ) {
     // injects the changed attributes to scope
     super.attributeChangedCallback(name, oldValue, newValue, namespace);
@@ -150,7 +150,7 @@ export class ShopifyLinklistComponent extends Component {
         this.scope.linklist = (window as any).model.system.linklists[newValue];
       } else {
         throw new Error(
-          `Linklist not found! \nNote: The linklist must be available under "window.model.system.linklists['${newValue}']" to set it using his handle.`
+          `Linklist not found! \nNote: The linklist must be available under "window.model.system.linklists['${newValue}']" to set it using his handle.`,
         );
       }
     }
@@ -195,7 +195,7 @@ export class ShopifyLinklistComponent extends Component {
 
   protected onNewPageReady(
     viewId: string,
-    currentStatus: State /*, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean */
+    currentStatus: State /*, prevStatus: State, container: HTMLElement, newPageRawHTML: string, dataset: any, isFirstPageLoad: boolean */,
   ) {
     const url = currentStatus.url;
     if (this.scope.collapseOnNewPage) {
