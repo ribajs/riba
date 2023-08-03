@@ -6,7 +6,7 @@ interface Scope {
   items2: AccordionItem[];
 }
 
-export class As5accordionExampleComponent extends Component {
+export class Bs5AccordionExampleComponent extends Component {
   public static tagName = "bs5-accordion-example";
 
   protected autobind = true;
@@ -33,7 +33,7 @@ export class As5accordionExampleComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
-    super.init(As5accordionExampleComponent.observedAttributes);
+    super.init(Bs5AccordionExampleComponent.observedAttributes);
   }
 
   protected requiredAttributes(): string[] {

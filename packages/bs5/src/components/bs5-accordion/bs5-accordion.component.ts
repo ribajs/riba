@@ -12,6 +12,8 @@ import {
   AccordionItem,
 } from "../../types/index.js";
 
+import template from "./bs5-accordion.component.html?raw";
+
 const handleize = handleizeFormatter.read as FormatterFn;
 
 interface Scope extends ScopeBase {
@@ -28,6 +30,7 @@ export class Bs5AccordionComponent extends TemplatesComponent {
   public static tagName = "bs5-accordion";
 
   protected autobind = true;
+  public _debug = true;
 
   protected templateAttributes = [
     {
@@ -55,18 +58,23 @@ export class Bs5AccordionComponent extends TemplatesComponent {
     ];
   }
 
+  protected connectedCallback() {
+    super.connectedCallback();
+    this.init(Bs5AccordionComponent.observedAttributes);
+  }
+
+  protected requiredAttributes(): string[] {
+    return [];
+  }
+
   public scope: Scope = {
     items: [],
-    toggle: this.toggle,
-    show: this.show,
-    hide: this.hide,
+    toggle: this.toggle.bind(this),
+    show: this.show.bind(this),
+    hide: this.hide.bind(this),
     collapseIconSize: 16,
     showOnlyOne: true,
   };
-
-  constructor() {
-    super();
-  }
 
   public hide(item: AccordionItem, index: number) {
     const target = this.querySelector<HTMLElement>(`[data-index="${index}"]`);
@@ -182,54 +190,9 @@ export class Bs5AccordionComponent extends TemplatesComponent {
     }, 200);
   }
 
-  protected connectedCallback() {
-    super.connectedCallback();
-    this.init(Bs5AccordionComponent.observedAttributes);
-  }
-
-  protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes).then((view) => {
-      return view;
-    });
-  }
-
-  protected async beforeBind() {
-    return await super.beforeBind();
-  }
-
-  protected async afterBind() {
-    return await super.afterBind();
-  }
-
-  protected requiredAttributes(): string[] {
-    return [];
-  }
-
-  protected parsedAttributeChangedCallback(
-    attributeName: string,
-    oldValue: any,
-    newValue: any,
-    namespace: string | null
-  ) {
-    super.parsedAttributeChangedCallback(
-      attributeName,
-      oldValue,
-      newValue,
-      namespace
-    );
-  }
-
-  // deconstruction
-  protected disconnectedCallback() {
-    super.disconnectedCallback();
-  }
-
   protected async template() {
     // Only set the component template if there no childs or the childs are templates
     if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
-      const { default: template } = await import(
-        "./bs5-accordion.component.html?raw"
-      );
       return template;
     } else {
       return null;
