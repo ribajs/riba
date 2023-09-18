@@ -27,6 +27,7 @@
     "@types/node": "^18.17.1",
     "@yarnpkg/esbuild-plugin-pnp": "^3.0.0-rc.15",
     "@yarnpkg/pnpify": "^4.0.0-rc.48",
+    "esbuild": "^0.19.3",
     "find-root": "^1.1.0",
     "typescript": "5.1.6"
   },
