@@ -7628,25 +7628,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/webpack-serve@workspace:infra/webpack-serve":
-  version: 0.0.0-use.local
-  resolution: "@ribajs/webpack-serve@workspace:infra/webpack-serve"
-  dependencies:
-    "@ribajs/webpack-config": "workspace:^"
-    "@tsconfig/node16": "npm:^16.1.1"
-    "@types/node": "npm:^18.17.17"
-    "@types/yargs": "npm:^17.0.24"
-    get-port: "npm:^7.0.0"
-    pkg-dir: "npm:^7.0.0"
-    typescript: "npm:5.2.2"
-    webpack: "npm:^5.88.2"
-    webpack-dev-server: "npm:^4.15.1"
-    yargs: "npm:^17.7.2"
-  bin:
-    webpack-serve: dist/cjs/index.js
-  languageName: unknown
-  linkType: soft
-
 "@rollup/plugin-babel@npm:^6.0.3":
   version: 6.0.3
   resolution: "@rollup/plugin-babel@npm:6.0.3"
@@ -7762,13 +7743,6 @@ __metadata:
   version: 14.1.0
   resolution: "@tsconfig/node14@npm:14.1.0"
   checksum: 8342dc30edbfaed11d1659b1a9819779bb69df210974a9e8a337b0624b1d9f5026f37e2dcc1d555adb3e4246a0ec35896b3ae5fe3fc69f3382d3bc11069cecc1
-  languageName: node
-  linkType: hard
-
-"@tsconfig/node16@npm:^16.1.1":
-  version: 16.1.1
-  resolution: "@tsconfig/node16@npm:16.1.1"
-  checksum: 26d83db06866083b543e73eda33585464362fd0835229b9a5b1185f0353b9b5db9ca4f66a4be53d4ec5d4c219be42b0a7582f8bcc7268f2f77b1c643375e490f
   languageName: node
   linkType: hard
 
@@ -8480,15 +8454,6 @@ __metadata:
   version: 21.0.0
   resolution: "@types/yargs-parser@npm:21.0.0"
   checksum: c4caec730c1ee09466588389ba4ac83d85a01423c539b9565bb5b5a084bff3f4e47bfb7c06e963c0ef8d4929cf6fca0bc2923a33ef16727cdba60e95c8cdd0d0
-  languageName: node
-  linkType: hard
-
-"@types/yargs@npm:^17.0.24":
-  version: 17.0.24
-  resolution: "@types/yargs@npm:17.0.24"
-  dependencies:
-    "@types/yargs-parser": "npm:*"
-  checksum: 03d9a985cb9331b2194a52d57a66aad88bf46aa32b3968a71cc6f39fb05c74f0709f0dd3aa9c0b29099cfe670343e3b1bd2ac6df2abfab596ede4453a616f63f
   languageName: node
   linkType: hard
 
@@ -14423,13 +14388,6 @@ __metadata:
   version: 0.1.0
   resolution: "get-package-type@npm:0.1.0"
   checksum: bba0811116d11e56d702682ddef7c73ba3481f114590e705fc549f4d868972263896af313c57a25c076e3c0d567e11d919a64ba1b30c879be985fc9d44f96148
-  languageName: node
-  linkType: hard
-
-"get-port@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "get-port@npm:7.0.0"
-  checksum: e9087f62d086bbb70f20c0a208e7cac552679c1426e29e0607eb1b8907a5cc4509337d5971b7f635385cd2a773a14cd21b7d9c3254a2eb5ebeaf5f8fde19fb07
   languageName: node
   linkType: hard
 
