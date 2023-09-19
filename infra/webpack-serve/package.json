@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/webpack-serve",
-  "version": "2.0.0-rc.4",
+  "version": "2.0.0-rc.5",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -27,16 +27,16 @@
   },
   "dependencies": {
     "@ribajs/webpack-config": "workspace:^",
-    "@types/node": "^18.17.1",
+    "@types/node": "^18.17.17",
     "@types/yargs": "^17.0.24",
     "get-port": "^7.0.0",
     "pkg-dir": "^7.0.0",
-    "typescript": "5.1.6",
+    "typescript": "5.2.2",
     "webpack": "^5.88.2",
     "webpack-dev-server": "^4.15.1",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@tsconfig/node16": "^16.1.0"
+    "@tsconfig/node16": "^16.1.1"
   }
 }

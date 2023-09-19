@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/iconset",
   "description": "Iconset for Riba.js",
-  "version": "2.0.0-rc.4",
+  "version": "2.0.0-rc.5",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -55,8 +55,8 @@
     "/dist"
   ],
   "devDependencies": {
-    "@babel/runtime-corejs3": "^7.22.6",
-    "core-js": "^3.32.0",
+    "@babel/runtime-corejs3": "^7.22.15",
+    "core-js": "^3.32.2",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-debug": "^4.0.0",
