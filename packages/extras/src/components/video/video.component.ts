@@ -11,7 +11,22 @@ export class VideoComponent extends Component {
   public _debug = false;
 
   static get observedAttributes(): string[] {
-    return ["video-src", "autoplay-on-min-buffer", "autoplay-media-query"];
+    return [
+      "video-src",
+      "autoplay-on-min-buffer",
+      "autoplay-media-query",
+      "muted",
+      "volume",
+      "loop",
+      "controls",
+      "currentTime",
+      "autoplay",
+      "height",
+      "width",
+      "poster",
+      "preload",
+      "disablePictureInPicture",
+    ];
   }
 
   public get muted() {
@@ -383,6 +398,43 @@ export class VideoComponent extends Component {
     if (attributeName === "videoSrc") {
       this.setVideoSource();
     }
+    switch (attributeName) {
+      case "videoSrc":
+        this.setVideoSource();
+        break;
+      case "controls":
+        this.controls = !!newValue;
+        break;
+      case "muted":
+        this.muted = !!newValue;
+        break;
+      case "volume":
+        this.volume = newValue;
+        break;
+      case "loop":
+        this.loop = !!newValue;
+        break;
+      case "autoplay":
+        this.autoplay = !!newValue;
+        break;
+      case "height":
+        this.height = newValue;
+        break;
+      case "width":
+        this.width = newValue;
+        break;
+      case "poster":
+        this.poster = newValue;
+        break;
+      case "preload":
+        this.preload = newValue;
+        break;
+      case "disablePictureInPicture":
+        this.disablePictureInPicture = !!newValue;
+        break;
+      default:
+        break;
+    }
   }
 
   protected addEventListeners() {
@@ -468,6 +520,7 @@ export class VideoComponent extends Component {
   protected async afterBind() {
     // Workaround for Firefox
     this.video.load();
+    await super.afterBind();
   }
 
   /**

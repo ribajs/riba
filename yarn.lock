@@ -31,15 +31,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/cli@npm:^7.22.15":
-  version: 7.22.15
-  resolution: "@babel/cli@npm:7.22.15"
+"@babel/cli@npm:^7.23.0":
+  version: 7.23.0
+  resolution: "@babel/cli@npm:7.23.0"
   dependencies:
     "@jridgewell/trace-mapping": "npm:^0.3.17"
     "@nicolo-ribaudo/chokidar-2": "npm:2.1.8-no-fsevents.3"
     chokidar: "npm:^3.4.0"
     commander: "npm:^4.0.1"
-    convert-source-map: "npm:^1.1.0"
+    convert-source-map: "npm:^2.0.0"
     fs-readdir-recursive: "npm:^1.1.0"
     glob: "npm:^7.2.0"
     make-dir: "npm:^2.1.0"
@@ -54,7 +54,7 @@ __metadata:
   bin:
     babel: ./bin/babel.js
     babel-external-helpers: ./bin/babel-external-helpers.js
-  checksum: 07b41032c50542dc570d16241a2649a2b928a12790745af540ec7ca01913b35e6bda75b529aa1337665f7e202e71b5f062525f73bb8ed5c51abdfdc89f77ed1f
+  checksum: a08dab5b18e839562f8a9664b09b5b30ef43a4a81ab54c2a3ad6810d2e6d382fd5b8b8ec33841e84692e18df3927c0792018a896ca107c970f3fea75f9043417
   languageName: node
   linkType: hard
 
@@ -137,26 +137,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.22.20":
-  version: 7.22.20
-  resolution: "@babel/core@npm:7.22.20"
+"@babel/core@npm:^7.23.0":
+  version: 7.23.0
+  resolution: "@babel/core@npm:7.23.0"
   dependencies:
     "@ampproject/remapping": "npm:^2.2.0"
     "@babel/code-frame": "npm:^7.22.13"
-    "@babel/generator": "npm:^7.22.15"
+    "@babel/generator": "npm:^7.23.0"
     "@babel/helper-compilation-targets": "npm:^7.22.15"
-    "@babel/helper-module-transforms": "npm:^7.22.20"
-    "@babel/helpers": "npm:^7.22.15"
-    "@babel/parser": "npm:^7.22.16"
+    "@babel/helper-module-transforms": "npm:^7.23.0"
+    "@babel/helpers": "npm:^7.23.0"
+    "@babel/parser": "npm:^7.23.0"
     "@babel/template": "npm:^7.22.15"
-    "@babel/traverse": "npm:^7.22.20"
-    "@babel/types": "npm:^7.22.19"
-    convert-source-map: "npm:^1.7.0"
+    "@babel/traverse": "npm:^7.23.0"
+    "@babel/types": "npm:^7.23.0"
+    convert-source-map: "npm:^2.0.0"
     debug: "npm:^4.1.0"
     gensync: "npm:^1.0.0-beta.2"
     json5: "npm:^2.2.3"
     semver: "npm:^6.3.1"
-  checksum: 76c50fccfbbf780914fc4f93defa4ad9d66fef50fcec828503f68f5bc0f0293d66e35c36d081db383d56ced80db9b9b96ca32c33744765a77786cc0d9ae16e73
+  checksum: dd8f988e9ea82b449aaeb3f0c510e39839d9af61ca99391c7d7d06cd1005f21b93cc8d18ee1f3b929a2a37fbda1ee4b0d9304574f02cc365dc327edc6d0348ef
   languageName: node
   linkType: hard
 
@@ -172,18 +172,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/generator@npm:^7.22.15":
-  version: 7.22.15
-  resolution: "@babel/generator@npm:7.22.15"
-  dependencies:
-    "@babel/types": "npm:^7.22.15"
-    "@jridgewell/gen-mapping": "npm:^0.3.2"
-    "@jridgewell/trace-mapping": "npm:^0.3.17"
-    jsesc: "npm:^2.5.1"
-  checksum: edf46f581c9c644e7476937cbfedf2c9b8643dda52b4554495272bced725810c0bcd4572ad6dccd4fbd56ac8bd3f5af8877ed3046f02b9fc1d4f985bd35e6360
-  languageName: node
-  linkType: hard
-
 "@babel/generator@npm:^7.22.5":
   version: 7.22.5
   resolution: "@babel/generator@npm:7.22.5"
@@ -193,6 +181,18 @@ __metadata:
     "@jridgewell/trace-mapping": "npm:^0.3.17"
     jsesc: "npm:^2.5.1"
   checksum: 56849bc15d130fe8b31f5c4cccda00aaa6005cb1a2b40cdf7754cf4905d804e41468a25b5b95f07059820926873039066ed1cb82f92cf7bf76a72c853274d1f7
+  languageName: node
+  linkType: hard
+
+"@babel/generator@npm:^7.23.0":
+  version: 7.23.0
+  resolution: "@babel/generator@npm:7.23.0"
+  dependencies:
+    "@babel/types": "npm:^7.23.0"
+    "@jridgewell/gen-mapping": "npm:^0.3.2"
+    "@jridgewell/trace-mapping": "npm:^0.3.17"
+    jsesc: "npm:^2.5.1"
+  checksum: bd1598bd356756065d90ce26968dd464ac2b915c67623f6f071fb487da5f9eb454031a380e20e7c9a7ce5c4a49d23be6cb9efde404952b0b3f3c0c3a9b73d68a
   languageName: node
   linkType: hard
 
@@ -418,6 +418,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-function-name@npm:^7.23.0":
+  version: 7.23.0
+  resolution: "@babel/helper-function-name@npm:7.23.0"
+  dependencies:
+    "@babel/template": "npm:^7.22.15"
+    "@babel/types": "npm:^7.23.0"
+  checksum: 7b2ae024cd7a09f19817daf99e0153b3bf2bc4ab344e197e8d13623d5e36117ed0b110914bc248faa64e8ccd3e97971ec7b41cc6fd6163a2b980220c58dcdf6d
+  languageName: node
+  linkType: hard
+
 "@babel/helper-hoist-variables@npm:^7.18.6":
   version: 7.18.6
   resolution: "@babel/helper-hoist-variables@npm:7.18.6"
@@ -506,7 +516,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-module-transforms@npm:^7.22.15, @babel/helper-module-transforms@npm:^7.22.20":
+"@babel/helper-module-transforms@npm:^7.22.15":
   version: 7.22.20
   resolution: "@babel/helper-module-transforms@npm:7.22.20"
   dependencies:
@@ -549,6 +559,21 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0
   checksum: 80244f45e3f665305f8cf9412ee2efe44d1d30c201f869ceb0e87f9cddbbff06ebfed1dbe122a40875404867b747e7df73c0825c93765c108bcf2e86d2ef8b9b
+  languageName: node
+  linkType: hard
+
+"@babel/helper-module-transforms@npm:^7.23.0":
+  version: 7.23.0
+  resolution: "@babel/helper-module-transforms@npm:7.23.0"
+  dependencies:
+    "@babel/helper-environment-visitor": "npm:^7.22.20"
+    "@babel/helper-module-imports": "npm:^7.22.15"
+    "@babel/helper-simple-access": "npm:^7.22.5"
+    "@babel/helper-split-export-declaration": "npm:^7.22.6"
+    "@babel/helper-validator-identifier": "npm:^7.22.20"
+  peerDependencies:
+    "@babel/core": ^7.0.0
+  checksum: d72fe444f7b6c5aadaac8f393298d603eedd48e5dead67273a48e5c83a677cbccbd8a12a06c5bf5d97924666083279158a4bd0e799d28b86cbbfacba9e41f598
   languageName: node
   linkType: hard
 
@@ -805,14 +830,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helpers@npm:^7.22.15":
-  version: 7.22.15
-  resolution: "@babel/helpers@npm:7.22.15"
+"@babel/helpers@npm:^7.23.0":
+  version: 7.23.1
+  resolution: "@babel/helpers@npm:7.23.1"
   dependencies:
     "@babel/template": "npm:^7.22.15"
-    "@babel/traverse": "npm:^7.22.15"
-    "@babel/types": "npm:^7.22.15"
-  checksum: ed7344bee94a4c8712b5fe69d2f8fd6e921283ae13028bf8dbce7c14ee687d732d7f091e7f24b238035034d1fdff6254340c89dcc7368e15af1d92df7554dc2e
+    "@babel/traverse": "npm:^7.23.0"
+    "@babel/types": "npm:^7.23.0"
+  checksum: f0802d1bd88fe752c32e3f6f54c3873b926ab8ada22cf1df23ec0829f4836a65ad3625d4a29cefb59786060439c538de6be6a690e069a05c00c3802de8e52fea
   languageName: node
   linkType: hard
 
@@ -858,7 +883,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.22.15, @babel/parser@npm:^7.22.16":
+"@babel/parser@npm:^7.22.15":
   version: 7.22.16
   resolution: "@babel/parser@npm:7.22.16"
   bin:
@@ -873,6 +898,15 @@ __metadata:
   bin:
     parser: ./bin/babel-parser.js
   checksum: 46525855c9290e455a548336bfbb4dddb5ced0f213e982fa50f459995c747da3ff196b8603b093ad39a498d66069ca3cc1111c47a6424b521831ca02f706ccbf
+  languageName: node
+  linkType: hard
+
+"@babel/parser@npm:^7.23.0":
+  version: 7.23.0
+  resolution: "@babel/parser@npm:7.23.0"
+  bin:
+    parser: ./bin/babel-parser.js
+  checksum: 201641e068f8cca1ff12b141fcba32d7ccbabc586961bd1b85ae89d9695867f84d57fc2e1176dc4981fd28e5e97ca0e7c32cd688bd5eabb641a302abc0cb5040
   languageName: node
   linkType: hard
 
@@ -1507,6 +1541,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-transform-modules-commonjs@npm:^7.23.0":
+  version: 7.23.0
+  resolution: "@babel/plugin-transform-modules-commonjs@npm:7.23.0"
+  dependencies:
+    "@babel/helper-module-transforms": "npm:^7.23.0"
+    "@babel/helper-plugin-utils": "npm:^7.22.5"
+    "@babel/helper-simple-access": "npm:^7.22.5"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 65085c8f2578b0c272b3969b78e54430ea3217fca8de7a21ded845a74ddf2d97aee284559da102d826fcb8aed5a79d09536a6e4610d868f539d7bc382eb319ff
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-transform-modules-systemjs@npm:^7.22.11":
   version: 7.22.11
   resolution: "@babel/plugin-transform-modules-systemjs@npm:7.22.11"
@@ -2030,18 +2077,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-typescript@npm:^7.22.15":
-  version: 7.22.15
-  resolution: "@babel/preset-typescript@npm:7.22.15"
+"@babel/preset-typescript@npm:^7.23.0":
+  version: 7.23.0
+  resolution: "@babel/preset-typescript@npm:7.23.0"
   dependencies:
     "@babel/helper-plugin-utils": "npm:^7.22.5"
     "@babel/helper-validator-option": "npm:^7.22.15"
     "@babel/plugin-syntax-jsx": "npm:^7.22.5"
-    "@babel/plugin-transform-modules-commonjs": "npm:^7.22.15"
+    "@babel/plugin-transform-modules-commonjs": "npm:^7.23.0"
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
   peerDependencies:
     "@babel/core": ^7.0.0-0
-  checksum: a31c262a0af103405c05303cbd4528b4eae5e143b93efd6bfa634cfb3a96ea9e395bbf4b95f63ebf9a9cbd94f0cf1f377c3d1c68f6921d6ed67bec9fbe7654bd
+  checksum: 2885746804e801280f2344a6e1f55c37c27f865c1f8f4ca0edfeb41a2a3264a4688ca1f97dd542e3cfb8c8acaaa1ce0f2b681f519883c5d8a16ab48e0e5b2d31
   languageName: node
   linkType: hard
 
@@ -2052,13 +2099,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime-corejs3@npm:^7.22.15":
-  version: 7.22.15
-  resolution: "@babel/runtime-corejs3@npm:7.22.15"
+"@babel/runtime-corejs3@npm:^7.23.1":
+  version: 7.23.1
+  resolution: "@babel/runtime-corejs3@npm:7.23.1"
   dependencies:
     core-js-pure: "npm:^3.30.2"
     regenerator-runtime: "npm:^0.14.0"
-  checksum: cfeb25fbb45eec76e2209ecdff73173fb6a7031875bce528a1d93e5cac4201b618a6a7e5486ee3189062cce4a3867f34faaa5c609f6cf5b6840fb76ceaaf9f7d
+  checksum: 35677294c7c100894d4ac68c3148c02e85faf7c56e727399bcc2176a0ca7f01d93b79deb3402077058736fad06e112d949d7dfcc5d419e8537749510eece1dd1
   languageName: node
   linkType: hard
 
@@ -2071,12 +2118,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.22.15":
-  version: 7.22.15
-  resolution: "@babel/runtime@npm:7.22.15"
+"@babel/runtime@npm:^7.23.1":
+  version: 7.23.1
+  resolution: "@babel/runtime@npm:7.23.1"
   dependencies:
     regenerator-runtime: "npm:^0.14.0"
-  checksum: 9670da63b77ea6d8234117c55a6d9888be5cf220b91a5954d7faefe7a537e06fa8992e11d36b7cff2ab0ef5301fe6effb3d41bec8b4e0bae10d386b7c377568b
+  checksum: a9fdd322ae1f5d5e3446b6181745300f863164a30acb35ee296c6989cf0ecfd57598a7a6ef209b414575cabe81ef17756412052b3d85fcaf8729332b5b70c45f
   languageName: node
   linkType: hard
 
@@ -2140,24 +2187,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.22.15, @babel/traverse@npm:^7.22.20":
-  version: 7.22.20
-  resolution: "@babel/traverse@npm:7.22.20"
-  dependencies:
-    "@babel/code-frame": "npm:^7.22.13"
-    "@babel/generator": "npm:^7.22.15"
-    "@babel/helper-environment-visitor": "npm:^7.22.20"
-    "@babel/helper-function-name": "npm:^7.22.5"
-    "@babel/helper-hoist-variables": "npm:^7.22.5"
-    "@babel/helper-split-export-declaration": "npm:^7.22.6"
-    "@babel/parser": "npm:^7.22.16"
-    "@babel/types": "npm:^7.22.19"
-    debug: "npm:^4.1.0"
-    globals: "npm:^11.1.0"
-  checksum: 3155a1039645ded44b44c14edc91223c45a19b7717cb10115104a784a85f3e648d5f1db4141b55b9533298e24723829ecc0821c8ac333d3f3ea919883f0cf9b5
-  languageName: node
-  linkType: hard
-
 "@babel/traverse@npm:^7.22.5":
   version: 7.22.5
   resolution: "@babel/traverse@npm:7.22.5"
@@ -2173,6 +2202,24 @@ __metadata:
     debug: "npm:^4.1.0"
     globals: "npm:^11.1.0"
   checksum: 2dad5f816da92c6fd2a2dc40db390b30ff95e5f370bea2d26d488b1dcf588b952d6c271f786a118ed5de03948c3c1236a88852f0ab307ab23df3e125507ff1ac
+  languageName: node
+  linkType: hard
+
+"@babel/traverse@npm:^7.23.0":
+  version: 7.23.0
+  resolution: "@babel/traverse@npm:7.23.0"
+  dependencies:
+    "@babel/code-frame": "npm:^7.22.13"
+    "@babel/generator": "npm:^7.23.0"
+    "@babel/helper-environment-visitor": "npm:^7.22.20"
+    "@babel/helper-function-name": "npm:^7.23.0"
+    "@babel/helper-hoist-variables": "npm:^7.22.5"
+    "@babel/helper-split-export-declaration": "npm:^7.22.6"
+    "@babel/parser": "npm:^7.23.0"
+    "@babel/types": "npm:^7.23.0"
+    debug: "npm:^4.1.0"
+    globals: "npm:^11.1.0"
+  checksum: dfa970f2e3dfc2d443f092f5a80752d44c6f38705162d1b5b69ebd8a6ff657351ff269a888556be5d921b3392c6c031c33d2bc52e2fba442f602a5a21d769ed4
   languageName: node
   linkType: hard
 
@@ -2206,6 +2253,17 @@ __metadata:
     "@babel/helper-validator-identifier": "npm:^7.22.5"
     to-fast-properties: "npm:^2.0.0"
   checksum: 7f7edffe7e13dbd26a182677575ca7451bc234ce43b93dc49d27325306748628019e7753e6b5619ae462ea0d7e5ce2c0cc24092d53b592642ea89542037748b5
+  languageName: node
+  linkType: hard
+
+"@babel/types@npm:^7.23.0":
+  version: 7.23.0
+  resolution: "@babel/types@npm:7.23.0"
+  dependencies:
+    "@babel/helper-string-parser": "npm:^7.22.5"
+    "@babel/helper-validator-identifier": "npm:^7.22.20"
+    to-fast-properties: "npm:^2.0.0"
+  checksum: ca5b896a26c91c5672254725c4c892a35567d2122afc47bd5331d1611a7f9230c19fc9ef591a5a6f80bf0d80737e104a9ac205c96447c74bee01d4319db58001
   languageName: node
   linkType: hard
 
@@ -2949,10 +3007,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:8.49.0":
-  version: 8.49.0
-  resolution: "@eslint/js@npm:8.49.0"
-  checksum: 544acf1150629596eda78f1340220299151e59325a0af5bb38cdedf983d07f0ad0ec57a1e9d2c5e19d374f9bb37720ae8537856ad8199818aea55958b1ae7854
+"@eslint/js@npm:8.50.0":
+  version: 8.50.0
+  resolution: "@eslint/js@npm:8.50.0"
+  checksum: 1600a84ea1635cb46ae9f9cbc7c4cb054e54b8032707531b3b812d6096e46c54c449e8ecec7eb99725c3aa6da1ebbd4a60ca4fda925200395d5839ded09a0da8
   languageName: node
   linkType: hard
 
@@ -3029,6 +3087,20 @@ __metadata:
   version: 1.2.1
   resolution: "@humanwhocodes/object-schema@npm:1.2.1"
   checksum: b48a8f87fcd5fdc4ac60a31a8bf710d19cc64556050575e6a35a4a48a8543cf8cde1598a65640ff2cdfbfd165b38f9db4fa3782bea7848eb585cc3db824002e6
+  languageName: node
+  linkType: hard
+
+"@isaacs/cliui@npm:^8.0.2":
+  version: 8.0.2
+  resolution: "@isaacs/cliui@npm:8.0.2"
+  dependencies:
+    string-width: "npm:^5.1.2"
+    string-width-cjs: "npm:string-width@^4.2.0"
+    strip-ansi: "npm:^7.0.1"
+    strip-ansi-cjs: "npm:strip-ansi@^6.0.1"
+    wrap-ansi: "npm:^8.1.0"
+    wrap-ansi-cjs: "npm:wrap-ansi@^7.0.0"
+  checksum: e9ed5fd27c3aec1095e3a16e0c0cf148d1fee55a38665c35f7b3f86a9b5d00d042ddaabc98e8a1cb7463b9378c15f22a94eb35e99469c201453eb8375191f243
   languageName: node
   linkType: hard
 
@@ -3503,9 +3575,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reduxjs/toolkit@npm:^1.9.5":
-  version: 1.9.5
-  resolution: "@reduxjs/toolkit@npm:1.9.5"
+"@reduxjs/toolkit@npm:^1.9.6":
+  version: 1.9.6
+  resolution: "@reduxjs/toolkit@npm:1.9.6"
   dependencies:
     immer: "npm:^9.0.21"
     redux: "npm:^4.2.1"
@@ -3519,7 +3591,7 @@ __metadata:
       optional: true
     react-redux:
       optional: true
-  checksum: ac24173de599b830232da5e040ea2b898c34cc803cb219e537ce15c5b914c85dfdb97f8f7015ea4e8cc9110430e2a081766b0dcbc1e71f99639b8bec136d3499
+  checksum: 633fa0a217cd7fe7dc0a0e2e7c6da6342d844b82090da3459eef0cff2cee7a4f89795a4e8edb23ebb3ce96dfd27a52912f37267b2e52d44f65baaacdeaf74d44
   languageName: node
   linkType: hard
 
@@ -3527,15 +3599,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/accessibility@workspace:packages/accessibility"
   dependencies:
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/core": "workspace:^"
     "@ribajs/events": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
-    "@types/eslint": "npm:^8.44.2"
-    "@types/node": "npm:^18.17.17"
-    eslint: "npm:^8.49.0"
+    "@types/eslint": "npm:^8.44.3"
+    "@types/node": "npm:^18.18.0"
+    eslint: "npm:^8.50.0"
     gamecontroller.js: "workspace:^"
     typescript: "npm:5.2.2"
   languageName: unknown
@@ -3545,8 +3617,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/artcodestudio@workspace:packages/artcodestudio"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/plugin-proposal-optional-chaining": "npm:^7.21.0"
@@ -3555,9 +3627,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -3565,15 +3637,15 @@ __metadata:
     "@ribajs/types": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@types/node": "npm:^18.17.17"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@types/node": "npm:^18.18.0"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -3590,8 +3662,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/babel-config@workspace:infra/babel-config"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/plugin-proposal-optional-chaining": "npm:^7.21.0"
@@ -3601,10 +3673,10 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
-    "@babel/types": "npm:^7.22.19"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
+    "@babel/types": "npm:^7.23.0"
     babel-jest: "npm:^29.7.0"
     babel-plugin-array-includes: "npm:^2.0.3"
     prettier: "npm:^3.0.3"
@@ -3618,8 +3690,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/bs4@workspace:packages/bs4"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/plugin-proposal-optional-chaining": "npm:^7.21.0"
@@ -3628,9 +3700,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/cache": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -3641,15 +3713,15 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@sphinxxxx/color-conversion": "npm:^2.2.2"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     bootstrap: "npm:^4.6.2"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -3667,17 +3739,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/bs5-photoswipe@workspace:packages/bs5-photoswipe"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/plugin-syntax-dynamic-import": "npm:^7.8.3"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/cache": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -3687,12 +3759,12 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -3710,8 +3782,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/bs5@workspace:packages/bs5"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/plugin-proposal-optional-chaining": "npm:^7.21.0"
@@ -3720,9 +3792,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@popperjs/core": "npm:^2.11.8"
     "@ribajs/cache": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -3736,15 +3808,15 @@ __metadata:
     "@sphinxxxx/color-conversion": "npm:^2.2.2"
     "@types/bootstrap": "npm:^5.2.7"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -3761,14 +3833,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/cache@workspace:packages/cache"
   dependencies:
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
-    eslint: "npm:^8.49.0"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     idb-keyval: "npm:^6.2.1"
@@ -3782,8 +3854,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/content-slider@workspace:packages/content-slider"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -3792,9 +3864,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -3803,13 +3875,13 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -3826,8 +3898,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/core@workspace:packages/core"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/plugin-proposal-optional-chaining": "npm:^7.21.0"
@@ -3836,9 +3908,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@jest/globals": "npm:^29.7.0"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/events": "workspace:^"
@@ -3850,12 +3922,12 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@types/core-js": "npm:^2.5.6"
     "@types/jest": "npm:^29.5.5"
-    "@types/node": "npm:^18.17.17"
+    "@types/node": "npm:^18.18.0"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -3875,8 +3947,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-accessibility-gamepad@workspace:demos/accessibility-gamepad"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -3887,9 +3959,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/accessibility": "workspace:^"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -3898,9 +3970,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -3908,7 +3980,7 @@ __metadata:
     babelify: "npm:^10.0.0"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -3922,7 +3994,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -3936,8 +4008,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-accessibility-keyboard@workspace:demos/accessibility-keyboard"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -3948,9 +4020,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/accessibility": "workspace:^"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -3959,9 +4031,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -3969,7 +4041,7 @@ __metadata:
     babelify: "npm:^10.0.0"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -3983,7 +4055,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -3997,8 +4069,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-dropdown@workspace:demos/bs4-dropdown"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4009,9 +4081,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4021,9 +4093,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4032,7 +4104,7 @@ __metadata:
     bootstrap: "npm:^4.6.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -4046,7 +4118,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -4060,8 +4132,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-form@workspace:demos/bs4-form"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4072,9 +4144,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4086,9 +4158,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4097,7 +4169,7 @@ __metadata:
     bootstrap: "npm:^4.6.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -4111,7 +4183,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -4125,8 +4197,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-notifications@workspace:demos/bs4-notifications"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4137,9 +4209,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4151,9 +4223,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4163,7 +4235,7 @@ __metadata:
     copy-webpack-plugin: "npm:^11.0.0"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -4176,7 +4248,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -4190,8 +4262,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-slideshow@workspace:demos/bs4-slideshow"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4202,9 +4274,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4215,9 +4287,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4226,7 +4298,7 @@ __metadata:
     bootstrap: "npm:^4.6.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -4239,7 +4311,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -4253,8 +4325,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-tabs-attr@workspace:demos/bs4-tabs-attr"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4265,9 +4337,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4276,8 +4348,8 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4287,7 +4359,7 @@ __metadata:
     copy-webpack-plugin: "npm:^11.0.0"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:^5.5.3"
     inspectpack: "npm:^4.7.1"
@@ -4297,7 +4369,7 @@ __metadata:
     postcss-loader: "npm:^7.3.3"
     postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^9.1.4"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     terser-webpack-plugin: "npm:^5.3.9"
@@ -4313,8 +4385,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-tabs-tpl@workspace:demos/bs4-tabs-tpl"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4325,9 +4397,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4336,8 +4408,8 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4346,7 +4418,7 @@ __metadata:
     bootstrap: "npm:^4.6.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:^5.5.3"
     inspectpack: "npm:^4.7.1"
@@ -4356,7 +4428,7 @@ __metadata:
     postcss-loader: "npm:^7.3.3"
     postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^9.1.4"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     ts-jest: "npm:^29.1.1"
@@ -4371,8 +4443,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-tagged-image@workspace:demos/bs4-tagged-image"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4383,9 +4455,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4397,10 +4469,10 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@types/node": "npm:^18.17.17"
-    "@types/webpack-env": "npm:^1.18.1"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@types/node": "npm:^18.18.0"
+    "@types/webpack-env": "npm:^1.18.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
@@ -4408,7 +4480,7 @@ __metadata:
     bootstrap: "npm:^4.6.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     file-loader: "npm:^6.2.0"
@@ -4423,7 +4495,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     style-loader: "npm:^3.3.3"
@@ -4440,8 +4512,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs4-toggle-button-sidebar@workspace:demos/bs4-toggle-button-sidebar"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4452,9 +4524,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4465,9 +4537,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4476,7 +4548,7 @@ __metadata:
     bootstrap: "npm:^4.6.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -4490,7 +4562,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -4504,8 +4576,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-accordion@workspace:demos/bs5-accordion"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4516,9 +4588,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4528,9 +4600,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4539,7 +4611,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -4553,7 +4625,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -4567,8 +4639,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-dropdown@workspace:demos/bs5-dropdown"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4579,9 +4651,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4592,9 +4664,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4603,7 +4675,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -4617,7 +4689,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -4631,8 +4703,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-form@workspace:demos/bs5-form"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4643,9 +4715,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4656,9 +4728,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4667,7 +4739,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -4681,7 +4753,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -4695,8 +4767,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-notifications@workspace:demos/bs5-notifications"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4707,9 +4779,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4721,9 +4793,9 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4733,7 +4805,7 @@ __metadata:
     concurrently: "npm:^8.2.1"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -4747,7 +4819,7 @@ __metadata:
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
     rollup-plugin-pug: "npm:^1.1.1"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -4759,8 +4831,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-photoswipe@workspace:demos/bs5-photoswipe"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4771,9 +4843,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/bs5-photoswipe": "workspace:^"
@@ -4787,9 +4859,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4798,7 +4870,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -4811,7 +4883,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     terser-webpack-plugin: "npm:^5.3.9"
@@ -4827,8 +4899,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-responsive-components@workspace:demos/bs5-responsive-components"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4839,9 +4911,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4852,9 +4924,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4863,7 +4935,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -4877,7 +4949,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -4891,8 +4963,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-slider@workspace:demos/bs5-slider"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4903,9 +4975,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4916,9 +4988,9 @@ __metadata:
     "@ribajs/types": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4928,7 +5000,7 @@ __metadata:
     concurrently: "npm:^8.2.1"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -4942,7 +5014,7 @@ __metadata:
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
     rollup-plugin-pug: "npm:^1.1.1"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -4954,8 +5026,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-slideshow@workspace:demos/bs5-slideshow"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -4966,9 +5038,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -4979,9 +5051,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -4990,7 +5062,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -5003,7 +5075,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -5017,8 +5089,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-tagged-image@workspace:demos/bs5-tagged-image"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5029,9 +5101,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -5043,10 +5115,10 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@types/node": "npm:^18.17.17"
-    "@types/webpack-env": "npm:^1.18.1"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@types/node": "npm:^18.18.0"
+    "@types/webpack-env": "npm:^1.18.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
@@ -5054,7 +5126,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     file-loader: "npm:^6.2.0"
@@ -5069,7 +5141,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     style-loader: "npm:^3.3.3"
@@ -5086,8 +5158,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-theme@workspace:demos/bs5-theme"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5098,9 +5170,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -5111,9 +5183,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -5122,7 +5194,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -5136,7 +5208,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -5150,8 +5222,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-bs5-toggle-button-sidebar@workspace:demos/bs5-toggle-button-sidebar"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5162,9 +5234,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -5175,9 +5247,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -5186,7 +5258,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -5200,7 +5272,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -5214,8 +5286,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-content-slider@workspace:demos/content-slider"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5226,9 +5298,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/content-slider": "workspace:^"
@@ -5241,8 +5313,8 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
@@ -5250,7 +5322,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     file-loader: "npm:^6.2.0"
@@ -5264,7 +5336,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     ts-jest: "npm:^29.1.1"
@@ -5279,8 +5351,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-core-components@workspace:demos/core-components"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5291,9 +5363,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -5301,9 +5373,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@webpack-cli/serve": "npm:^2.0.5"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
@@ -5312,7 +5384,7 @@ __metadata:
     babelify: "npm:^10.0.0"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -5325,7 +5397,7 @@ __metadata:
     postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     terser-webpack-plugin: "npm:^5.3.9"
@@ -5341,8 +5413,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-core-each-item@workspace:demos/core-each-item"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5353,9 +5425,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -5363,9 +5435,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@webpack-cli/serve": "npm:^2.0.5"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
@@ -5374,7 +5446,7 @@ __metadata:
     babelify: "npm:^10.0.0"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -5387,7 +5459,7 @@ __metadata:
     postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     terser-webpack-plugin: "npm:^5.3.9"
@@ -5403,8 +5475,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-empty-template@workspace:demos/empty-template"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5415,9 +5487,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/empty-template": "workspace:^"
@@ -5426,9 +5498,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -5436,7 +5508,7 @@ __metadata:
     babelify: "npm:^10.0.0"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -5450,7 +5522,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -5464,8 +5536,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-extras-game-loop@workspace:demos/extras-game-loop"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5476,9 +5548,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -5487,8 +5559,8 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -5496,7 +5568,7 @@ __metadata:
     babelify: "npm:^10.0.0"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:^5.5.3"
     inspectpack: "npm:^4.7.1"
@@ -5506,7 +5578,7 @@ __metadata:
     postcss-loader: "npm:^7.3.3"
     postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^9.1.4"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     terser-webpack-plugin: "npm:^5.3.9"
@@ -5522,8 +5594,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-extras-scroll-events@workspace:demos/extras-scroll-events"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5534,9 +5606,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -5546,8 +5618,8 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -5556,7 +5628,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:^5.5.3"
     inspectpack: "npm:^4.7.1"
@@ -5581,8 +5653,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-extras-touch-events@workspace:demos/extras-touch-events"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5593,9 +5665,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -5605,8 +5677,8 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -5615,7 +5687,7 @@ __metadata:
     bootstrap: "npm:5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -5628,7 +5700,7 @@ __metadata:
     postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     terser-webpack-plugin: "npm:^5.3.9"
@@ -5644,8 +5716,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-fuse-search@workspace:demos/fuse-search"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5656,9 +5728,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -5669,9 +5741,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -5680,7 +5752,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -5694,7 +5766,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -5708,8 +5780,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-i18n-static@workspace:demos/i18n-static"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5720,9 +5792,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -5731,8 +5803,8 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -5741,7 +5813,7 @@ __metadata:
     bootstrap: "npm:5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -5754,7 +5826,7 @@ __metadata:
     postcss-modules: "npm:^6.0.0"
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     terser-webpack-plugin: "npm:^5.3.9"
@@ -5770,8 +5842,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-iconset@workspace:demos/iconset"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5782,9 +5854,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -5795,9 +5867,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -5806,7 +5878,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -5820,7 +5892,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -5834,8 +5906,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-jsx@workspace:demos/jsx"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5846,9 +5918,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -5860,9 +5932,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -5871,7 +5943,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -5885,7 +5957,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -5899,8 +5971,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-leaflet-map@workspace:demos/leaflet-map"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5911,9 +5983,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -5924,8 +5996,8 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
@@ -5933,7 +6005,7 @@ __metadata:
     bootstrap: "npm:5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     file-loader: "npm:^6.2.0"
@@ -5949,7 +6021,7 @@ __metadata:
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
     resolve-url-loader: "npm:^5.0.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     terser-webpack-plugin: "npm:^5.3.9"
@@ -5965,8 +6037,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-lottie@workspace:demos/lottie"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -5977,9 +6049,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -5989,9 +6061,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -5999,7 +6071,7 @@ __metadata:
     babelify: "npm:^10.0.0"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -6013,7 +6085,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -6027,8 +6099,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-luxon@workspace:demos/luxon"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -6039,9 +6111,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -6052,8 +6124,8 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
@@ -6061,7 +6133,7 @@ __metadata:
     bootstrap: "npm:5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     file-loader: "npm:^6.2.0"
@@ -6075,7 +6147,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     terser-webpack-plugin: "npm:^5.3.9"
     ts-jest: "npm:^29.1.1"
@@ -6090,8 +6162,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-moment@workspace:demos/moment"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -6102,9 +6174,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -6114,8 +6186,8 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
@@ -6123,7 +6195,7 @@ __metadata:
     bootstrap: "npm:5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     file-loader: "npm:^6.2.0"
@@ -6137,7 +6209,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     terser-webpack-plugin: "npm:^5.3.9"
     ts-jest: "npm:^29.1.1"
@@ -6152,8 +6224,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-router-view@workspace:demos/router-view"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -6164,9 +6236,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -6177,8 +6249,8 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
@@ -6186,7 +6258,7 @@ __metadata:
     bootstrap: "npm:5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     file-loader: "npm:^6.2.0"
@@ -6200,7 +6272,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     terser-webpack-plugin: "npm:^5.3.9"
     ts-jest: "npm:^29.1.1"
@@ -6225,7 +6297,7 @@ __metadata:
     "@types/jest": "npm:^29.5.5"
     bootstrap: "npm:5.3.2"
     concurrently: "npm:^8.2.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     inspectpack: "npm:^4.7.1"
@@ -6234,7 +6306,7 @@ __metadata:
     monaco-editor: "npm:0.43.0"
     prettier: "npm:^3.0.3"
     rollup-plugin-pug: "npm:^1.1.1"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     serve: "npm:^14.2.1"
     ts-jest: "npm:^29.1.1"
     typescript: "npm:5.2.2"
@@ -6246,8 +6318,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-rv-photoswipe@workspace:demos/rv-photoswipe"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -6258,9 +6330,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -6273,9 +6345,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -6284,7 +6356,7 @@ __metadata:
     bootstrap: "npm:^4.6.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -6297,7 +6369,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     terser-webpack-plugin: "npm:^5.3.9"
@@ -6313,8 +6385,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-rv-video@workspace:demos/rv-video"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -6325,9 +6397,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -6339,8 +6411,8 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
@@ -6348,7 +6420,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     file-loader: "npm:^6.2.0"
@@ -6362,7 +6434,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     terser-webpack-plugin: "npm:^5.3.9"
@@ -6378,8 +6450,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/doc@workspace:infra/doc"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/plugin-proposal-optional-chaining": "npm:^7.21.0"
@@ -6389,10 +6461,10 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
-    "@babel/types": "npm:^7.22.19"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
+    "@babel/types": "npm:^7.23.0"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -6410,11 +6482,11 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
-    "@types/debug": "npm:^4.1.8"
-    "@types/node": "npm:^18.17.17"
-    "@types/prismjs": "npm:^1.26.0"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@types/debug": "npm:^4.1.9"
+    "@types/node": "npm:^18.18.0"
+    "@types/prismjs": "npm:^1.26.1"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     abbrev: "npm:^2.0.0"
     babel-loader: "npm:^9.1.3"
@@ -6428,7 +6500,7 @@ __metadata:
     css-flip: "npm:^0.5.0"
     css-loader: "npm:^6.8.1"
     debug: "npm:^4.3.4"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     extract-loader: "npm:^5.1.0"
@@ -6456,7 +6528,7 @@ __metadata:
     prismjs: "npm:^1.29.0"
     pug-cli: "npm:^1.0.0-alpha6"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     style-loader: "npm:^3.3.3"
     terser-webpack-plugin: "npm:^5.3.9"
@@ -6472,15 +6544,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/empty-template@workspace:packages/empty-template"
   dependencies:
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/core": "workspace:^"
     "@ribajs/jsx": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
-    "@types/eslint": "npm:^8.44.2"
-    "@types/node": "npm:^18.17.17"
-    eslint: "npm:^8.49.0"
+    "@types/eslint": "npm:^8.44.3"
+    "@types/node": "npm:^18.18.0"
+    eslint: "npm:^8.50.0"
     typescript: "npm:5.2.2"
   languageName: unknown
   linkType: soft
@@ -6494,7 +6566,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@tsconfig/node14": "npm:^14.1.0"
     "@types/find-root": "npm:^1.1.2"
-    "@types/node": "npm:^18.17.17"
+    "@types/node": "npm:^18.18.0"
     "@yarnpkg/esbuild-plugin-pnp": "npm:^3.0.0-rc.15"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     esbuild: "npm:^0.19.3"
@@ -6507,12 +6579,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/eslint-config@workspace:infra/eslint-config"
   dependencies:
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
-    eslint: "npm:^8.49.0"
+    "@typescript-eslint/parser": "npm:^6.7.3"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
-    eslint-import-resolver-typescript: "npm:^3.6.0"
+    eslint-import-resolver-typescript: "npm:^3.6.1"
     eslint-plugin-import: "npm:^2.28.1"
     eslint-plugin-prettier: "npm:^5.0.0"
     prettier: "npm:^3.0.3"
@@ -6524,13 +6596,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/events@workspace:packages/events"
   dependencies:
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/tsconfig": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@types/node": "npm:^18.17.17"
+    "@types/node": "npm:^18.18.0"
     babel-jest: "npm:^29.7.0"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     jest: "npm:^29.7.0"
     jest-config: "npm:^29.7.0"
     jest-extended: "npm:^4.0.1"
@@ -6543,29 +6615,29 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/extras@workspace:packages/extras"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/plugin-syntax-dynamic-import": "npm:^7.8.3"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/events": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     ev-emitter: "npm:^2.1.2"
@@ -6584,15 +6656,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/fuse@workspace:packages/fuse"
   dependencies:
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/core": "workspace:^"
     "@ribajs/jsx": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
-    "@types/eslint": "npm:^8.44.2"
-    "@types/node": "npm:^18.17.17"
-    eslint: "npm:^8.49.0"
+    "@types/eslint": "npm:^8.44.3"
+    "@types/node": "npm:^18.18.0"
+    eslint: "npm:^8.50.0"
     fuse.js: "npm:^6.6.2"
     typescript: "npm:5.2.2"
   languageName: unknown
@@ -6602,12 +6674,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/history@workspace:packages/history"
   dependencies:
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     typescript: "npm:5.2.2"
   languageName: unknown
   linkType: soft
@@ -6616,15 +6688,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/i18n@workspace:packages/i18n"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -6633,12 +6705,12 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     prettier: "npm:^3.0.3"
@@ -6652,7 +6724,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/iconset@workspace:packages/iconset"
   dependencies:
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     core-js: "npm:^3.32.2"
     gulp: "npm:^4.0.2"
     gulp-clean: "npm:^0.4.0"
@@ -6667,17 +6739,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/jquery@workspace:packages/jquery"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/plugin-syntax-dynamic-import": "npm:^7.8.3"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@jest/globals": "npm:^29.7.0"
     "@ribajs/cache": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -6686,12 +6758,12 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@types/jest": "npm:^29.5.5"
     "@types/jquery": "npm:^3.5.19"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -6710,14 +6782,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/jsx@workspace:packages/jsx"
   dependencies:
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/core": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
-    "@types/eslint": "npm:^8.44.2"
-    "@types/node": "npm:^18.17.17"
-    eslint: "npm:^8.49.0"
+    "@types/eslint": "npm:^8.44.3"
+    "@types/node": "npm:^18.18.0"
+    eslint: "npm:^8.50.0"
     typescript: "npm:5.2.2"
   languageName: unknown
   linkType: soft
@@ -6726,8 +6798,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/leaflet-map@workspace:packages/leaflet-map"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -6736,9 +6808,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -6747,14 +6819,14 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@types/leaflet": "npm:^1.9.4"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@types/leaflet": "npm:^1.9.6"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -6772,17 +6844,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/lottie@workspace:packages/lottie"
   dependencies:
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/core": "workspace:^"
     "@ribajs/jsx": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
-    "@types/eslint": "npm:^8.44.2"
-    "@types/node": "npm:^18.17.17"
-    eslint: "npm:^8.49.0"
+    "@types/eslint": "npm:^8.44.3"
+    "@types/node": "npm:^18.18.0"
+    eslint: "npm:^8.50.0"
     lottie-web: "npm:^5.12.2"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     typescript: "npm:5.2.2"
   languageName: unknown
   linkType: soft
@@ -6791,8 +6863,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/luxon@workspace:packages/luxon"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -6800,20 +6872,20 @@ __metadata:
     "@babel/plugin-transform-runtime": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@types/jest": "npm:^29.5.5"
     "@types/luxon": "npm:^1.27.1"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -6831,17 +6903,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/masonry@workspace:packages/masonry"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/plugin-syntax-dynamic-import": "npm:^7.8.3"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/events": "workspace:^"
@@ -6850,12 +6922,12 @@ __metadata:
     "@types/imagesloaded": "npm:^4.1.2"
     "@types/jest": "npm:^29.5.5"
     "@types/masonry-layout": "npm:^4.2.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -6873,8 +6945,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/moment@workspace:packages/moment"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -6886,21 +6958,21 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@jest/globals": "npm:^29.7.0"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -6919,8 +6991,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/monaco-editor@workspace:packages/monaco-editor"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -6929,21 +7001,21 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@monaco-editor/loader": "npm:^1.3.3"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -7017,17 +7089,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/octobercms@workspace:packages/octobercms"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/plugin-syntax-dynamic-import": "npm:^7.8.3"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -7037,14 +7109,14 @@ __metadata:
     "@tsconfig/node14": "npm:^14.1.0"
     "@types/jest": "npm:^29.5.5"
     "@types/jquery": "npm:^3.5.19"
-    "@types/node": "npm:^18.17.17"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@types/node": "npm:^18.18.0"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -7061,17 +7133,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/photoswipe@workspace:packages/photoswipe"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/plugin-syntax-dynamic-import": "npm:^7.8.3"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/cache": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -7080,12 +7152,12 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -7103,8 +7175,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/podcast-example@workspace:demos/podcast"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -7115,9 +7187,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -7127,9 +7199,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -7138,7 +7210,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -7152,7 +7224,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -7166,8 +7238,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/podcast-fixed-player-example@workspace:demos/podcast-fixed-player"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
@@ -7178,9 +7250,9 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/babel-config": "workspace:^"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
@@ -7190,9 +7262,9 @@ __metadata:
     "@ribajs/utils": "workspace:^"
     "@ribajs/webpack-config": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
@@ -7201,7 +7273,7 @@ __metadata:
     bootstrap: "npm:^5.3.2"
     core-js: "npm:^3.32.2"
     css-loader: "npm:^6.8.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     html-loader: "npm:^4.2.0"
@@ -7215,7 +7287,7 @@ __metadata:
     postcss-preset-env: "npm:^9.1.4"
     prettier: "npm:^3.0.3"
     pug-loader: "npm:^2.4.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     serve: "npm:^14.2.1"
     typescript: "npm:5.2.2"
@@ -7229,17 +7301,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/podcast@workspace:packages/podcast"
   dependencies:
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
-    "@reduxjs/toolkit": "npm:^1.9.5"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
+    "@reduxjs/toolkit": "npm:^1.9.6"
     "@ribajs/bs5": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/events": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
-    "@types/node": "npm:^18.17.17"
+    "@types/node": "npm:^18.18.0"
     concurrently: "npm:^8.2.1"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     typescript: "npm:5.2.2"
   languageName: unknown
   linkType: soft
@@ -7302,15 +7374,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/router@workspace:packages/router"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/cache": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -7320,14 +7392,14 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
-    "@typescript-eslint/typescript-estree": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
+    "@typescript-eslint/typescript-estree": "npm:^6.7.3"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     eslint-visitor-keys: "npm:^3.4.3"
@@ -7344,15 +7416,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/shopify-easdk@workspace:packages/shopify-easdk"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/cache": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -7361,12 +7433,12 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     prettier: "npm:^3.0.3"
@@ -7380,8 +7452,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/shopify-nest@workspace:packages/shopify-nest"
   dependencies:
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/bs4": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/events": "workspace:^"
@@ -7390,10 +7462,10 @@ __metadata:
     "@ribajs/shopify-tda": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
-    "@types/debug": "npm:^4.1.8"
-    "@types/node": "npm:^18.17.17"
+    "@types/debug": "npm:^4.1.9"
+    "@types/node": "npm:^18.18.0"
     debug: "npm:^4.3.4"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     monaco-editor: "npm:^0.43.0"
     typescript: "npm:5.2.2"
   languageName: unknown
@@ -7403,15 +7475,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/shopify-tda@workspace:packages/shopify-tda"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/cache": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -7422,13 +7494,13 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@types/node": "npm:^18.17.17"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@types/node": "npm:^18.18.0"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     prettier: "npm:^3.0.3"
@@ -7443,15 +7515,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/shopify@workspace:packages/shopify"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/cache": "workspace:^"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
@@ -7463,25 +7535,25 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@tsconfig/node14": "npm:^14.1.0"
-    "@types/debug": "npm:^4.1.8"
+    "@types/debug": "npm:^4.1.9"
     "@types/jest": "npm:^29.5.5"
-    "@types/lodash": "npm:^4.14.198"
-    "@types/node": "npm:^18.17.17"
+    "@types/lodash": "npm:^4.14.199"
+    "@types/node": "npm:^18.18.0"
     "@types/prettier": "npm:^3.0.0"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
     debug: "npm:^4.3.4"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     graceful-fs: "npm:^4.2.11"
     jest: "npm:^29.7.0"
     jest-extended: "npm:^4.0.1"
     prettier: "npm:^3.0.3"
-    terser: "npm:^5.19.4"
+    terser: "npm:^5.20.0"
     ts-jest: "npm:^29.1.1"
     typescript: "npm:5.2.2"
     webpack: "npm:^5.88.2"
@@ -7496,33 +7568,33 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/ssr@workspace:packages/ssr"
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-export-default-from": "npm:^7.22.17"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/plugin-syntax-dynamic-import": "npm:^7.8.3"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/events": "workspace:^"
     "@ribajs/jsx": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
-    "@types/express": "npm:^4.17.17"
+    "@types/express": "npm:^4.17.18"
     "@types/imagesloaded": "npm:^4.1.2"
     "@types/jest": "npm:^29.5.5"
     "@types/masonry-layout": "npm:^4.2.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -7539,12 +7611,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/strapi@workspace:packages/strapi"
   dependencies:
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/core": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
-    "@types/node": "npm:^18.17.17"
+    "@types/node": "npm:^18.18.0"
   languageName: unknown
   linkType: soft
 
@@ -7566,14 +7638,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/utils@workspace:packages/utils"
   dependencies:
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@types/jest": "npm:^29.5.5"
-    "@types/node": "npm:^18.17.17"
+    "@types/node": "npm:^18.18.0"
     babel-jest: "npm:^29.7.0"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     typescript: "npm:5.2.2"
   languageName: unknown
   linkType: soft
@@ -7582,16 +7654,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/webpack-config@workspace:infra/webpack-config"
   dependencies:
-    "@babel/core": "npm:^7.22.20"
+    "@babel/core": "npm:^7.23.0"
     "@graphql-tools/webpack-loader": "npm:^7.0.0"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/npm-package": "workspace:^"
     "@ribajs/postcss-config": "workspace:^"
     "@types/find-root": "npm:^1.1.2"
     "@types/html-webpack-plugin": "npm:^3.2.7"
-    "@types/webpack": "npm:^5.28.2"
-    "@types/webpack-node-externals": "npm:^3.0.1"
-    "@types/webpackbar": "npm:^4.0.3"
+    "@types/webpack": "npm:^5.28.3"
+    "@types/webpack-node-externals": "npm:^3.0.2"
+    "@types/webpackbar": "npm:^4.0.4"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-loader: "npm:^9.1.3"
     copy-webpack-plugin: "npm:^11.0.0"
@@ -7599,7 +7671,7 @@ __metadata:
     file-loader: "npm:^6.2.0"
     find-root: "npm:^1.1.0"
     fork-ts-checker-webpack-plugin: "npm:^8.0.0"
-    glob: "npm:^10.3.4"
+    glob: "npm:^10.3.9"
     graphql: "npm:^16.8.1"
     html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:^5.5.3"
@@ -7614,7 +7686,7 @@ __metadata:
     raw-loader: "npm:^4.0.2"
     resolve-typescript-plugin: "npm:^2.0.1"
     resolve-url-loader: "npm:^5.0.0"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     sass-loader: "npm:^13.3.2"
     style-loader: "npm:^3.3.3"
     terser-webpack-plugin: "npm:^5.3.9"
@@ -7879,12 +7951,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/debug@npm:^4.1.8":
-  version: 4.1.8
-  resolution: "@types/debug@npm:4.1.8"
+"@types/debug@npm:^4.1.9":
+  version: 4.1.9
+  resolution: "@types/debug@npm:4.1.9"
   dependencies:
     "@types/ms": "npm:*"
-  checksum: a9a9bb40a199e9724aa944e139a7659173a9b274798ea7efbc277cb084bc37d32fc4c00877c3496fac4fed70a23243d284adb75c00b5fdabb38a22154d18e5df
+  checksum: e88ee8b19d106f33eb0d3bc58bacff9702e98d821fd1ebd1de8942e6b97419e19a1ccf39370f1764a1dc66f79fd4619f3412e1be6eeb9f0b76412f5ffe4ead93
   languageName: node
   linkType: hard
 
@@ -7915,13 +7987,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:^8.44.2":
-  version: 8.44.2
-  resolution: "@types/eslint@npm:8.44.2"
+"@types/eslint@npm:^8.44.3":
+  version: 8.44.3
+  resolution: "@types/eslint@npm:8.44.3"
   dependencies:
     "@types/estree": "npm:*"
     "@types/json-schema": "npm:*"
-  checksum: 9fe07d4fba1ab9d53d0da404c5774c056deb4bb37a3712a11d35f40ec4389d5d8cc46f19387cf79a3054754e1b71f5dbb796ee6f7411449e9f2399aff8a94def
+  checksum: 53796ff6009512775490403647577946ff924dbef5339898e361e1b29527492e5738cbd67d94202d6ebd6d45e7ac5c5da1c95fe710f16476e2dda3316d1970f6
   languageName: node
   linkType: hard
 
@@ -7950,7 +8022,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:*, @types/express@npm:^4.17.13, @types/express@npm:^4.17.17":
+"@types/express@npm:*, @types/express@npm:^4.17.13":
   version: 4.17.17
   resolution: "@types/express@npm:4.17.17"
   dependencies:
@@ -7959,6 +8031,18 @@ __metadata:
     "@types/qs": "npm:*"
     "@types/serve-static": "npm:*"
   checksum: e2959a5fecdc53f8a524891a16e66dfc330ee0519e89c2579893179db686e10cfa6079a68e0fb8fd00eedbcaf3eabfd10916461939f3bc02ef671d848532c37e
+  languageName: node
+  linkType: hard
+
+"@types/express@npm:^4.17.18":
+  version: 4.17.18
+  resolution: "@types/express@npm:4.17.18"
+  dependencies:
+    "@types/body-parser": "npm:*"
+    "@types/express-serve-static-core": "npm:^4.17.33"
+    "@types/qs": "npm:*"
+    "@types/serve-static": "npm:*"
+  checksum: b344988a35d3cae7b29e984f010ac9124de5e61fe2104c0fc541db6ba8fc4433c69d505537429d157400572c258b47afca4bd668b58de101ae879c868b81bcb1
   languageName: node
   linkType: hard
 
@@ -8133,19 +8217,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/leaflet@npm:^1.9.4":
-  version: 1.9.4
-  resolution: "@types/leaflet@npm:1.9.4"
+"@types/leaflet@npm:^1.9.6":
+  version: 1.9.6
+  resolution: "@types/leaflet@npm:1.9.6"
   dependencies:
     "@types/geojson": "npm:*"
-  checksum: 4a1b9e22da7ce1cb05646488199bb43fed07beb5e8c60b01bd8b6be3b9b41281bcbc9fd8079310bbe49d4866c95b9814401d9932a12b872bcc300f9ec1a6e973
+  checksum: dafb135373efc7b1c848aa52570b948c21a283bc5c05e6492e6a2d1af946a50fc3fa4a52bd7888ed5e5a7bcab155fa12beb0e63f21885344c04a7b92dcc2eb0d
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.198":
-  version: 4.14.198
-  resolution: "@types/lodash@npm:4.14.198"
-  checksum: 2bd7e82245cf0c66169ed074a2e625da644335a29f65c0c37d501cf66d09d8a0e92408e9e0ce4ee5133343e5b27267e6a132ca38a9ded837d4341be8a3cf8008
+"@types/lodash@npm:^4.14.199":
+  version: 4.14.199
+  resolution: "@types/lodash@npm:4.14.199"
+  checksum: 340aabe9b023553d64e47f2af7f2010814c1178ce3a2b256e8dd54c444578d5e6e937d70c7117ee1fac5c0fc429b592ab9f6d69a966f0a1222ebcbbe6d516c4a
   languageName: node
   linkType: hard
 
@@ -8186,10 +8270,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.17.15, @types/node@npm:^18.17.17":
+"@types/node@npm:^18.17.15":
   version: 18.17.17
   resolution: "@types/node@npm:18.17.17"
   checksum: 84caf3a68860cecbda54993438507c6647a41e682fe35e32c1592557d5eab24ee130d27b1ed3ac7bec3fab09d503b1f9fd0f1d6af157d028e59db90a42b5d6ee
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^18.18.0":
+  version: 18.18.0
+  resolution: "@types/node@npm:18.18.0"
+  checksum: fa4b5db454feb4add61b01686a464539561fe683bd21bb8278f0a2f1b9528a34911bf5ade5fc0cfcdd79de0d0af4776aa8325a8f83d7647a567199b18d87ee67
   languageName: node
   linkType: hard
 
@@ -8209,10 +8300,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prismjs@npm:^1.26.0":
-  version: 1.26.0
-  resolution: "@types/prismjs@npm:1.26.0"
-  checksum: 61b46e490acd46abba6c7c8c491247ba0c94f65f36f2eb1b8a80b0afc7961c7f9f2b386bd51daf114d61758e59957fe196a285f5e34bd88e46b4794b3e2a597d
+"@types/prismjs@npm:^1.26.1":
+  version: 1.26.1
+  resolution: "@types/prismjs@npm:1.26.1"
+  checksum: 83086d4de54a1a333e2bef6ab9f34eb9cd9f2e8598150f9f965d9ecd8eeac0d7705b577035ef9786aeb3906b3295afb0d2a6a3e33bebe88217338515b23fdf0f
   languageName: node
   linkType: hard
 
@@ -8378,20 +8469,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack-env@npm:^1.18.1":
-  version: 1.18.1
-  resolution: "@types/webpack-env@npm:1.18.1"
-  checksum: 10a00618f7214502a8788951feda87f8f081caefd49ea6ddd5a5f378491e9c4004163b559f469db35346ddccfc5d71d5d25f0b83abb5a48ea2769de1c17d60c0
+"@types/webpack-env@npm:^1.18.2":
+  version: 1.18.2
+  resolution: "@types/webpack-env@npm:1.18.2"
+  checksum: 8ddd69069a03e0961910a0492b919252528c929a44ca5a097289de3bedda3c5464617cf1abcde2005f56ab08e0f8f7e91b94d2d178fa1d8d55301b0eb99185e4
   languageName: node
   linkType: hard
 
-"@types/webpack-node-externals@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@types/webpack-node-externals@npm:3.0.1"
+"@types/webpack-node-externals@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@types/webpack-node-externals@npm:3.0.2"
   dependencies:
     "@types/node": "npm:*"
     webpack: "npm:^5"
-  checksum: e6df4db2e0a564e8b62c68985b3607d3b29634e7d7098ff061073da4790d80bf1083eb9bd2a9946e4307287ebfc5d73a6d581e6108097453fba7173283716d2d
+  checksum: c68d60207df80a4e8a0e599f6cc81cd9753727172dc38a8006056949fdf95ac5a12d927508bab003f50dcfbe8c89f835993bc106efe35a7e912113d2871b716c
   languageName: node
   linkType: hard
 
@@ -8420,24 +8511,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack@npm:^5.28.2":
-  version: 5.28.2
-  resolution: "@types/webpack@npm:5.28.2"
+"@types/webpack@npm:^5.28.3":
+  version: 5.28.3
+  resolution: "@types/webpack@npm:5.28.3"
   dependencies:
     "@types/node": "npm:*"
     tapable: "npm:^2.2.0"
     webpack: "npm:^5"
-  checksum: 0b147aaaaa8992417a5ed65af83eb0df9b5247c38ab482f3c844495935a29c474cb21bc865ca36052c353034f40d14c8d232f0c831fdc1a6956baa985d7b1135
+  checksum: 8452528f7ff61eb5e53d9d1dc08c05c648af2d850e14debf49141859b72798ea2d91f2892f849d7fa97e208fef7ae82960eea24b1019cb072b4713b515e74bfc
   languageName: node
   linkType: hard
 
-"@types/webpackbar@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "@types/webpackbar@npm:4.0.3"
+"@types/webpackbar@npm:^4.0.4":
+  version: 4.0.4
+  resolution: "@types/webpackbar@npm:4.0.4"
   dependencies:
     "@types/node": "npm:*"
     "@types/webpack": "npm:^4"
-  checksum: ff73dc5e4d16ed6e4bde1afc4c1c4f4a33619111e5cc6e5b0cc186567c7118d6b7aeb37d6070d7c103e8533ba763ccc986bc7704329b499f9ef0f985625c8676
+  checksum: 82c692496374cbfda565a5f3ac16e8f6dc7eed08427ade131a79a4f586bb1260b4ddda06328986c6bc1d2a27013624a9cedfc538f71e66b5bca8604d7a0a6ba4
   languageName: node
   linkType: hard
 
@@ -8466,15 +8557,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^6.7.2":
-  version: 6.7.2
-  resolution: "@typescript-eslint/eslint-plugin@npm:6.7.2"
+"@typescript-eslint/eslint-plugin@npm:^6.7.3":
+  version: 6.7.3
+  resolution: "@typescript-eslint/eslint-plugin@npm:6.7.3"
   dependencies:
     "@eslint-community/regexpp": "npm:^4.5.1"
-    "@typescript-eslint/scope-manager": "npm:6.7.2"
-    "@typescript-eslint/type-utils": "npm:6.7.2"
-    "@typescript-eslint/utils": "npm:6.7.2"
-    "@typescript-eslint/visitor-keys": "npm:6.7.2"
+    "@typescript-eslint/scope-manager": "npm:6.7.3"
+    "@typescript-eslint/type-utils": "npm:6.7.3"
+    "@typescript-eslint/utils": "npm:6.7.3"
+    "@typescript-eslint/visitor-keys": "npm:6.7.3"
     debug: "npm:^4.3.4"
     graphemer: "npm:^1.4.0"
     ignore: "npm:^5.2.4"
@@ -8487,7 +8578,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 036d982538a754f60df059cef83be90cc1c72b8bda4ea12a678683deb348c390678c7e401236cacb9cbcc366a53bcb170c4116c4da8120fc12d05594732fd3d5
+  checksum: 173e950f505aa848b9e6b828ed4e7eb4c4c8b93224d9a9e295c52e9d4680ff4fa99fcb82ae28a9e850e11f5fb6c80bf56ad54b078c843a96142d919b340d113e
   languageName: node
   linkType: hard
 
@@ -8502,21 +8593,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^6.7.2":
-  version: 6.7.2
-  resolution: "@typescript-eslint/parser@npm:6.7.2"
+"@typescript-eslint/parser@npm:^6.7.3":
+  version: 6.7.3
+  resolution: "@typescript-eslint/parser@npm:6.7.3"
   dependencies:
-    "@typescript-eslint/scope-manager": "npm:6.7.2"
-    "@typescript-eslint/types": "npm:6.7.2"
-    "@typescript-eslint/typescript-estree": "npm:6.7.2"
-    "@typescript-eslint/visitor-keys": "npm:6.7.2"
+    "@typescript-eslint/scope-manager": "npm:6.7.3"
+    "@typescript-eslint/types": "npm:6.7.3"
+    "@typescript-eslint/typescript-estree": "npm:6.7.3"
+    "@typescript-eslint/visitor-keys": "npm:6.7.3"
     debug: "npm:^4.3.4"
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: f8ff2e56f56ae5c04a3d7890e13d961cb16739f6fa1f06d05eb6e5412f0b2652969f34efceac7625e7f261492a13f5f97246dd1db24fb7806c797532cee6e1fe
+  checksum: 29c5d9f6bed712a5d3dbc861efd584987cded3cd19e165ff7a5be7c84cb960e276bed1cc992217ee4fcc04d6ab744cc27463f4abc30cc0473f573b47632578c9
   languageName: node
   linkType: hard
 
@@ -8530,22 +8621,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/scope-manager@npm:6.7.2":
-  version: 6.7.2
-  resolution: "@typescript-eslint/scope-manager@npm:6.7.2"
+"@typescript-eslint/scope-manager@npm:6.7.3":
+  version: 6.7.3
+  resolution: "@typescript-eslint/scope-manager@npm:6.7.3"
   dependencies:
-    "@typescript-eslint/types": "npm:6.7.2"
-    "@typescript-eslint/visitor-keys": "npm:6.7.2"
-  checksum: e992aaf2918e672651bfc80b328703d07d0855217995d42a44aaa1351b94a9a0db2717efa4ef15f7008a294b7df90a45217fca0bfff79fd21092d15c54e59198
+    "@typescript-eslint/types": "npm:6.7.3"
+    "@typescript-eslint/visitor-keys": "npm:6.7.3"
+  checksum: 60f40be68d49d990fbd00065a0d431e422a21810e33f18b63e2064eabc7bd90410e322514eacb759e40e348cb553b7aa8aa735ca560bed4b1f2c98f3b3631df8
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:6.7.2":
-  version: 6.7.2
-  resolution: "@typescript-eslint/type-utils@npm:6.7.2"
+"@typescript-eslint/type-utils@npm:6.7.3":
+  version: 6.7.3
+  resolution: "@typescript-eslint/type-utils@npm:6.7.3"
   dependencies:
-    "@typescript-eslint/typescript-estree": "npm:6.7.2"
-    "@typescript-eslint/utils": "npm:6.7.2"
+    "@typescript-eslint/typescript-estree": "npm:6.7.3"
+    "@typescript-eslint/utils": "npm:6.7.3"
     debug: "npm:^4.3.4"
     ts-api-utils: "npm:^1.0.1"
   peerDependencies:
@@ -8553,7 +8644,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 4fedab3943a34cdf823e299053f621c91266ee0ee80bab8e85b560b37171da0e9059a38ee7bff9e0de3a6bbe41c5565789de994febd81c7341b14d755ff0ab2c
+  checksum: 38b2bd308bbeb275e7a3bf28c231a9ee19394328b3f9c0a03abe1d722169c4cfa2c66df23d204628d92f78901ea3ac6fd10429ac7f8183401cc881f0908878b2
   languageName: node
   linkType: hard
 
@@ -8564,10 +8655,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:6.7.2":
-  version: 6.7.2
-  resolution: "@typescript-eslint/types@npm:6.7.2"
-  checksum: 67486633c07b10f4def4f50a6aa555a389bc7ddd15f3a633ab119b775830ce03cdca08720a95ef059cb716cdf6318d27891fa66b36c6d9c22ad57148e8557179
+"@typescript-eslint/types@npm:6.7.3":
+  version: 6.7.3
+  resolution: "@typescript-eslint/types@npm:6.7.3"
+  checksum: 61a1396e78998ffa79a1c8fc58efdacbc482927c080684eea2777f08e9aed61d8c62262550fe8aae030e673987e7537a8b15244637814ac1f733ac6200c497e1
   languageName: node
   linkType: hard
 
@@ -8589,12 +8680,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/typescript-estree@npm:6.7.2, @typescript-eslint/typescript-estree@npm:^6.7.2":
-  version: 6.7.2
-  resolution: "@typescript-eslint/typescript-estree@npm:6.7.2"
+"@typescript-eslint/typescript-estree@npm:6.7.3, @typescript-eslint/typescript-estree@npm:^6.7.3":
+  version: 6.7.3
+  resolution: "@typescript-eslint/typescript-estree@npm:6.7.3"
   dependencies:
-    "@typescript-eslint/types": "npm:6.7.2"
-    "@typescript-eslint/visitor-keys": "npm:6.7.2"
+    "@typescript-eslint/types": "npm:6.7.3"
+    "@typescript-eslint/visitor-keys": "npm:6.7.3"
     debug: "npm:^4.3.4"
     globby: "npm:^11.1.0"
     is-glob: "npm:^4.0.3"
@@ -8603,7 +8694,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 6e4b41989f37647dc05c3dc683453b0b796b97e55b6b8dd8d758371f1e728635cc72eb60c187f41a6ab1d44dea3d599ad274282411285c17fb235886c9eda41e
+  checksum: 1dd6f554e9b8ef8e46e33dc6534a2f1c86830bf899c87d0252cffa08f4fce1b13155fde37ded5eb561246cf8a61bcf1d8e7cc9948e717ee3901f9a92b0c0f4e0
   languageName: node
   linkType: hard
 
@@ -8625,20 +8716,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:6.7.2":
-  version: 6.7.2
-  resolution: "@typescript-eslint/utils@npm:6.7.2"
+"@typescript-eslint/utils@npm:6.7.3":
+  version: 6.7.3
+  resolution: "@typescript-eslint/utils@npm:6.7.3"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.4.0"
     "@types/json-schema": "npm:^7.0.12"
     "@types/semver": "npm:^7.5.0"
-    "@typescript-eslint/scope-manager": "npm:6.7.2"
-    "@typescript-eslint/types": "npm:6.7.2"
-    "@typescript-eslint/typescript-estree": "npm:6.7.2"
+    "@typescript-eslint/scope-manager": "npm:6.7.3"
+    "@typescript-eslint/types": "npm:6.7.3"
+    "@typescript-eslint/typescript-estree": "npm:6.7.3"
     semver: "npm:^7.5.4"
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0
-  checksum: 407b679012f6ddf15e2c1e5907a9e2d3b61030b8a15de159b836af294e45470b846c8061f7f299a6065f61d6d426aecfc10eb895bceec92d5612cb2378ae21d9
+  checksum: 47c908940e4dbc2546265eba923b4ad10d14a3712cd1ed403c654c43764e87619b3d46244402b19fd47fdc76c897c9f43048eb0e57d4d1ac7953d41c8330d07a
   languageName: node
   linkType: hard
 
@@ -8652,13 +8743,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/visitor-keys@npm:6.7.2":
-  version: 6.7.2
-  resolution: "@typescript-eslint/visitor-keys@npm:6.7.2"
+"@typescript-eslint/visitor-keys@npm:6.7.3":
+  version: 6.7.3
+  resolution: "@typescript-eslint/visitor-keys@npm:6.7.3"
   dependencies:
-    "@typescript-eslint/types": "npm:6.7.2"
+    "@typescript-eslint/types": "npm:6.7.3"
     eslint-visitor-keys: "npm:^3.4.1"
-  checksum: 926e3b828e7183bc399800d2cae82afe836f948f7ffbf390ec31b310085f4ea1b2b19f1d628de2ec30eff0f31928c7d1545b3f942319c1fbc5dbd7212cd1e7c1
+  checksum: cfe8a5fe5db7e57f5df3771189c0c4e2cd91e6f1924d1f12521541c9817d75e8c4e93382052ada592cb70fb50c524bd9aa0c05c5240ecfd19757408f38588386
   languageName: node
   linkType: hard
 
@@ -11451,7 +11542,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cliui@npm:^7.0.2, cliui@npm:^7.0.4":
+"cliui@npm:^7.0.2":
   version: 7.0.4
   resolution: "cliui@npm:7.0.4"
   dependencies:
@@ -11835,7 +11926,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"convert-source-map@npm:^1.1.0, convert-source-map@npm:^1.5.0, convert-source-map@npm:^1.5.1, convert-source-map@npm:^1.6.0, convert-source-map@npm:^1.7.0":
+"convert-source-map@npm:^1.5.0, convert-source-map@npm:^1.5.1, convert-source-map@npm:^1.6.0, convert-source-map@npm:^1.7.0":
   version: 1.9.0
   resolution: "convert-source-map@npm:1.9.0"
   checksum: dc55a1f28ddd0e9485ef13565f8f756b342f9a46c4ae18b843fe3c30c675d058d6a4823eff86d472f187b176f0adf51ea7b69ea38be34be4a63cbbf91b0593c8
@@ -13240,9 +13331,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-import-resolver-typescript@npm:^3.6.0":
-  version: 3.6.0
-  resolution: "eslint-import-resolver-typescript@npm:3.6.0"
+"eslint-import-resolver-typescript@npm:^3.6.1":
+  version: 3.6.1
+  resolution: "eslint-import-resolver-typescript@npm:3.6.1"
   dependencies:
     debug: "npm:^4.3.4"
     enhanced-resolve: "npm:^5.12.0"
@@ -13254,7 +13345,7 @@ __metadata:
   peerDependencies:
     eslint: "*"
     eslint-plugin-import: "*"
-  checksum: 37ba363dd66631033a729c2ab54256ad071bc5b1e903c96665d26ff5a8d598661c2e7984f445c5972164dbca44d70d374d592bfe45d2a2f40a155a1a91cc3908
+  checksum: 261df24721a7c5e37ee598b63e7e12c54e3d20c9ae5de6dbc132cecced023cb967c481007eef73252da108ac7eabb2e859853ff2e2d5776699a2954466ca716f
   languageName: node
   linkType: hard
 
@@ -13369,14 +13460,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.49.0":
-  version: 8.49.0
-  resolution: "eslint@npm:8.49.0"
+"eslint@npm:^8.50.0":
+  version: 8.50.0
+  resolution: "eslint@npm:8.50.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.2.0"
     "@eslint-community/regexpp": "npm:^4.6.1"
     "@eslint/eslintrc": "npm:^2.1.2"
-    "@eslint/js": "npm:8.49.0"
+    "@eslint/js": "npm:8.50.0"
     "@humanwhocodes/config-array": "npm:^0.11.11"
     "@humanwhocodes/module-importer": "npm:^1.0.1"
     "@nodelib/fs.walk": "npm:^1.2.8"
@@ -13412,7 +13503,7 @@ __metadata:
     text-table: "npm:^0.2.0"
   bin:
     eslint: bin/eslint.js
-  checksum: 5ec661eefe4638bff52e9c92dee30138a7b38086ec0099f0b51dfa3a9999dda913d89d3cd9cb5b1c3dd0f2ddc7dce333cd91d4cbbde7014b52c054db9a52fc4c
+  checksum: 181f26677a80f21431e68a469470485467a5c847d14d8822c1041efc52905772816546ca4e3fc87b963b7b267d8faf960322df16a30a57044161a32199b0dcfa
   languageName: node
   linkType: hard
 
@@ -14285,10 +14376,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "gamecontroller.js@workspace:vendor/gamecontroller.js"
   dependencies:
-    "@babel/core": "npm:^7.22.20"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
-    "@babel/preset-typescript": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.0"
     babel-loader: "npm:^9.1.3"
     http-server: "npm:^14.1.1"
     jest: "npm:^29.7.0"
@@ -14513,18 +14604,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^10.3.4":
-  version: 10.3.4
-  resolution: "glob@npm:10.3.4"
+"glob@npm:^10.3.9":
+  version: 10.3.9
+  resolution: "glob@npm:10.3.9"
   dependencies:
     foreground-child: "npm:^3.1.0"
-    jackspeak: "npm:^2.0.3"
+    jackspeak: "npm:^2.3.5"
     minimatch: "npm:^9.0.1"
     minipass: "npm:^5.0.0 || ^6.0.2 || ^7.0.0"
     path-scurry: "npm:^1.10.1"
   bin:
-    glob: dist/cjs/src/bin.js
-  checksum: 6375721bcd0c615fe4c1d61faaf9eb93e15d428f26bac6e85739221a84659b42601b2a085b20915142c0eb3d8a7155914884ff80f145d8c9f2397c8b771b8b60
+    glob: dist/esm/bin.mjs
+  checksum: e5c3c1b2079a30969267cb271f5cd6654c1e1a4774b88fc75f6ddb3fb15ece02b4a8c9ff913a6fd83beebd7972b8268d80d65387684be3ca0121bc9490027efa
   languageName: node
   linkType: hard
 
@@ -16135,16 +16226,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jackspeak@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "jackspeak@npm:2.0.3"
+"jackspeak@npm:^2.3.5":
+  version: 2.3.5
+  resolution: "jackspeak@npm:2.3.5"
   dependencies:
+    "@isaacs/cliui": "npm:^8.0.2"
     "@pkgjs/parseargs": "npm:^0.11.0"
-    cliui: "npm:^7.0.4"
   dependenciesMeta:
     "@pkgjs/parseargs":
       optional: true
-  checksum: c51730064687fa343033cedcf4c8516a4c6ef8c834ed8120471396751b969b145864389d7b976afafea46d863dd5c7a67da1a7964995bdbdd24b627af3a4a9f5
+  checksum: 59b7920db32f8fc4ebbb8ad86ed94e8d5db6fc667b2058e15972d6869718916451e0120dcb77f0e9c677630d420bdcb3d4989872d6f3a74f37c09b69122b5706
   languageName: node
   linkType: hard
 
@@ -20677,8 +20768,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ribajs@workspace:."
   dependencies:
-    "@babel/cli": "npm:^7.22.15"
-    "@babel/core": "npm:^7.22.20"
+    "@babel/cli": "npm:^7.23.0"
+    "@babel/core": "npm:^7.23.0"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/plugin-proposal-optional-chaining": "npm:^7.21.0"
@@ -20688,10 +20779,10 @@ __metadata:
     "@babel/plugin-transform-typescript": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.20"
     "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.22.15"
-    "@babel/runtime": "npm:^7.22.15"
-    "@babel/runtime-corejs3": "npm:^7.22.15"
-    "@babel/types": "npm:^7.22.19"
+    "@babel/preset-typescript": "npm:^7.23.0"
+    "@babel/runtime": "npm:^7.23.1"
+    "@babel/runtime-corejs3": "npm:^7.23.1"
+    "@babel/types": "npm:^7.23.0"
     "@jest/globals": "npm:^29.7.0"
     "@popperjs/core": "npm:^2.11.8"
     "@ribajs/babel-config": "workspace:^"
@@ -20701,20 +20792,20 @@ __metadata:
     "@rollup/plugin-babel": "npm:^6.0.3"
     "@types/core-js": "npm:^2.5.6"
     "@types/jest": "npm:^29.5.5"
-    "@typescript-eslint/eslint-plugin": "npm:^6.7.2"
+    "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
     "@typescript-eslint/experimental-utils": "npm:^5.62.0"
-    "@typescript-eslint/parser": "npm:^6.7.2"
+    "@typescript-eslint/parser": "npm:^6.7.3"
     "@yarnpkg/pnpify": "npm:^4.0.0-rc.51"
     babel-jest: "npm:^29.7.0"
     babel-loader: "npm:^9.1.3"
     babel-plugin-array-includes: "npm:^2.0.3"
     core-js: "npm:^3.32.2"
-    eslint: "npm:^8.49.0"
+    eslint: "npm:^8.50.0"
     eslint-config-prettier: "npm:^9.0.0"
-    eslint-import-resolver-typescript: "npm:^3.6.0"
+    eslint-import-resolver-typescript: "npm:^3.6.1"
     eslint-plugin-import: "npm:^2.28.1"
     eslint-plugin-prettier: "npm:^5.0.0"
-    glob: "npm:^10.3.4"
+    glob: "npm:^10.3.9"
     jest: "npm:^29.7.0"
     jest-config: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
@@ -20724,7 +20815,7 @@ __metadata:
     prettier: "npm:^3.0.3"
     pug: "npm:^3.0.2"
     reflect-metadata: "npm:^0.1.13"
-    sass: "npm:^1.67.0"
+    sass: "npm:^1.68.0"
     source-map-support: "npm:^0.5.21"
     ts-jest: "npm:^29.1.1"
     typescript: "npm:5.2.2"
@@ -20898,16 +20989,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.67.0":
-  version: 1.67.0
-  resolution: "sass@npm:1.67.0"
+"sass@npm:^1.68.0":
+  version: 1.68.0
+  resolution: "sass@npm:1.68.0"
   dependencies:
     chokidar: "npm:>=3.0.0 <4.0.0"
     immutable: "npm:^4.0.0"
     source-map-js: "npm:>=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: b855d4d8c42deba59fd567add01aaed2bf20466afd7766d9cb6bc97f569c5d0289eef558a247bfcc3dfecd3667011107692a0cf2cf8c7e832c477ebb9369af6c
+  checksum: 27f68968fdc126bd538c395a924cb424af69f9caae6e15e90ca26572a2d9e21883ff1a7b5a540c202981b8960e7982535b482b831fd18b28423d919d07da8397
   languageName: node
   linkType: hard
 
@@ -21657,6 +21748,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"string-width-cjs@npm:string-width@^4.2.0, string-width@npm:^1.0.2 || 2 || 3 || 4, string-width@npm:^4.1.0, string-width@npm:^4.2.0, string-width@npm:^4.2.3":
+  version: 4.2.3
+  resolution: "string-width@npm:4.2.3"
+  dependencies:
+    emoji-regex: "npm:^8.0.0"
+    is-fullwidth-code-point: "npm:^3.0.0"
+    strip-ansi: "npm:^6.0.1"
+  checksum: e52c10dc3fbfcd6c3a15f159f54a90024241d0f149cf8aed2982a2d801d2e64df0bf1dc351cf8e95c3319323f9f220c16e740b06faecd53e2462df1d2b5443fb
+  languageName: node
+  linkType: hard
+
 "string-width@npm:^1.0.1, string-width@npm:^1.0.2":
   version: 1.0.2
   resolution: "string-width@npm:1.0.2"
@@ -21665,17 +21767,6 @@ __metadata:
     is-fullwidth-code-point: "npm:^1.0.0"
     strip-ansi: "npm:^3.0.0"
   checksum: 5c79439e95bc3bd7233a332c5f5926ab2ee90b23816ed4faa380ce3b2576d7800b0a5bb15ae88ed28737acc7ea06a518c2eef39142dd727adad0e45c776cd37e
-  languageName: node
-  linkType: hard
-
-"string-width@npm:^1.0.2 || 2 || 3 || 4, string-width@npm:^4.1.0, string-width@npm:^4.2.0, string-width@npm:^4.2.3":
-  version: 4.2.3
-  resolution: "string-width@npm:4.2.3"
-  dependencies:
-    emoji-regex: "npm:^8.0.0"
-    is-fullwidth-code-point: "npm:^3.0.0"
-    strip-ansi: "npm:^6.0.1"
-  checksum: e52c10dc3fbfcd6c3a15f159f54a90024241d0f149cf8aed2982a2d801d2e64df0bf1dc351cf8e95c3319323f9f220c16e740b06faecd53e2462df1d2b5443fb
   languageName: node
   linkType: hard
 
@@ -21759,21 +21850,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1, strip-ansi@npm:^6.0.0, strip-ansi@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "strip-ansi@npm:6.0.1"
+  dependencies:
+    ansi-regex: "npm:^5.0.1"
+  checksum: ae3b5436d34fadeb6096367626ce987057713c566e1e7768818797e00ac5d62023d0f198c4e681eae9e20701721980b26a64a8f5b91238869592a9c6800719a2
+  languageName: node
+  linkType: hard
+
 "strip-ansi@npm:^3.0.0, strip-ansi@npm:^3.0.1":
   version: 3.0.1
   resolution: "strip-ansi@npm:3.0.1"
   dependencies:
     ansi-regex: "npm:^2.0.0"
   checksum: 9b974de611ce5075c70629c00fa98c46144043db92ae17748fb780f706f7a789e9989fd10597b7c2053ae8d1513fd707816a91f1879b2f71e6ac0b6a863db465
-  languageName: node
-  linkType: hard
-
-"strip-ansi@npm:^6.0.0, strip-ansi@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "strip-ansi@npm:6.0.1"
-  dependencies:
-    ansi-regex: "npm:^5.0.1"
-  checksum: ae3b5436d34fadeb6096367626ce987057713c566e1e7768818797e00ac5d62023d0f198c4e681eae9e20701721980b26a64a8f5b91238869592a9c6800719a2
   languageName: node
   linkType: hard
 
@@ -22055,9 +22146,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"terser@npm:^5.19.4":
-  version: 5.19.4
-  resolution: "terser@npm:5.19.4"
+"terser@npm:^5.20.0":
+  version: 5.20.0
+  resolution: "terser@npm:5.20.0"
   dependencies:
     "@jridgewell/source-map": "npm:^0.3.3"
     acorn: "npm:^8.8.2"
@@ -22065,7 +22156,7 @@ __metadata:
     source-map-support: "npm:~0.5.20"
   bin:
     terser: bin/terser
-  checksum: 8439034db1f4827bb475ae284a122bdaebdd484cb368d64d5bc1d799081c58f47525621a619b7ec6cdded3a43ae8f9a0ac93702c68e827a13a475a562558787c
+  checksum: 5e8bb597bcd26fa8ba4c95f49044155a6dba6e8aa3cfc5d942c2624b58ad1c1011a7bdf91e49acbd7afb80f811b243dde68a11cc085ca5faf0bfa1cde28665f7
   languageName: node
   linkType: hard
 
@@ -23527,17 +23618,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wrap-ansi@npm:^2.0.0":
-  version: 2.1.0
-  resolution: "wrap-ansi@npm:2.1.0"
-  dependencies:
-    string-width: "npm:^1.0.1"
-    strip-ansi: "npm:^3.0.1"
-  checksum: cf66d33f62f2edf0aac52685da98194e47ddf4ceb81d9f98f294b46ffbbf8662caa72a905b343aeab8d6a16cade982be5fc45df99235b07f781ebf68f051ca98
-  languageName: node
-  linkType: hard
-
-"wrap-ansi@npm:^7.0.0":
+"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0, wrap-ansi@npm:^7.0.0":
   version: 7.0.0
   resolution: "wrap-ansi@npm:7.0.0"
   dependencies:
@@ -23548,7 +23629,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wrap-ansi@npm:^8.0.1":
+"wrap-ansi@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "wrap-ansi@npm:2.1.0"
+  dependencies:
+    string-width: "npm:^1.0.1"
+    strip-ansi: "npm:^3.0.1"
+  checksum: cf66d33f62f2edf0aac52685da98194e47ddf4ceb81d9f98f294b46ffbbf8662caa72a905b343aeab8d6a16cade982be5fc45df99235b07f781ebf68f051ca98
+  languageName: node
+  linkType: hard
+
+"wrap-ansi@npm:^8.0.1, wrap-ansi@npm:^8.1.0":
   version: 8.1.0
   resolution: "wrap-ansi@npm:8.1.0"
   dependencies:

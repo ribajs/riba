@@ -30,7 +30,7 @@ export class Bs5AccordionComponent extends TemplatesComponent {
   public static tagName = "bs5-accordion";
 
   protected autobind = true;
-  public _debug = true;
+  public _debug = false;
 
   protected templateAttributes = [
     {

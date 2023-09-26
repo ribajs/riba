@@ -138,7 +138,6 @@
   "editor.formatOnSaveMode": "modifications",
   "typescript.format.enable": false,
   "eslint.format.enable": true,
-  "eslint.packageManager": "yarn",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
@@ -148,6 +147,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.formatOnSave": false
   }
 }

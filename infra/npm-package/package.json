@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/npm-package",
   "description": "Check if an npm package is installed",
-  "version": "2.0.0-rc.5",
+  "version": "2.0.0-rc.6",
   "type": "commonjs",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],

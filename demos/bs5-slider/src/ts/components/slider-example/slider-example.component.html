@@ -1,6 +1,12 @@
 <div class="container-fluid">
   <div class="row">
+    <div class="col-12 mb-5">
+      <h2 class="text-center">bs5-slider demo</h2>
+    </div>
+
     <section class="col-12 mb-5">
+      <h2 class="text-center">With default settings</h2>
+
       <bs5-slider rv-parent>
 
         <!-- Slides -->
@@ -63,8 +69,8 @@
         <!-- Indicators -->
         <ol rv-if="indicators" class="slider-indicators" rv-add-class="indicatorsPositionClass">
           <li rv-each-slide="items" rv-class-active="slide.active" rv-on-click="goTo | args slide.index">
-            <rv-icon rv-hide="slide.active" rv-src="indicatorInactiveIconSrc" size="16"></rv-icon>
-            <rv-icon rv-show="slide.active" rv-src="indicatorActiveIconSrc" size="16"></rv-icon>
+            <bs5-icon rv-hide="slide.active" rv-src="indicatorInactiveIconSrc" size="16"></bs5-icon>
+            <bs5-icon rv-show="slide.active" rv-src="indicatorActiveIconSrc" size="16"></bs5-icon>
           </li>
         </ol>
 
@@ -76,6 +82,8 @@
 <div class="container-fluid">
   <div class="row">
     <section class="col-12 mb-5">
+      <h2 class="text-center">With custom settings</h2>
+
       <bs5-slider rv-parent columns="2" slides-to-scroll="1" sticky="true" drag="true" infinite="true">
 
         <!-- Slides -->
@@ -138,12 +146,76 @@
         <!-- Indicators -->
         <ol rv-if="indicators" class="slider-indicators" rv-add-class="indicatorsPositionClass">
           <li rv-each-slide="items" rv-class-active="slide.active" rv-on-click="goTo | args slide.index">
-            <rv-icon rv-hide="slide.active" rv-src="$parent.iconCircleEmpty" size="16"></rv-icon>
-            <rv-icon rv-show="slide.active" rv-src="$parent.iconCircleSelected" size="16"></rv-icon>
+            <bs5-icon rv-hide="slide.active" rv-src="$parent.iconCircleEmpty" size="16"></bs5-icon>
+            <bs5-icon rv-show="slide.active" rv-src="$parent.iconCircleSelected" size="16"></bs5-icon>
           </li>
         </ol>
 
       </bs5-slider>
     </section>
+    <section class="col-12 mb-5">
+      <h2 class="text-center">With video and autoplay</h2>
+
+      <bs5-slider rv-parent>
+
+        <!-- Slides -->
+        <div class="row slider-row m-5">
+
+          <bs5-slide-video class="slide col-12 p-0 ratio ratio-16x9" autoplay="true"
+            rv-style-flex="slideItemStyle.flex">
+            <rv-video muted="true" controls="true" playsinline="playsinline" preload="metadata" class="w-100">
+              <video class="w-100" rv-class-loading="loading" alt="Video from https://samplelib.com/sample-mp4.html">
+                <source src="https://download.samplelib.com/mp4/sample-5s.mp4">
+              </video>
+            </rv-video>
+          </bs5-slide-video>
+
+          <bs5-slide-video class="slide col-12 p-0 ratio ratio-16x9" autoplay="true"
+            rv-style-flex="slideItemStyle.flex">
+            <rv-video muted="true" controls="true" playsinline="playsinline" preload="metadata" class="w-100">
+              <video class="w-100" rv-class-loading="loading" alt="Video from https://samplelib.com/sample-mp4.html">
+                <source src="https://download.samplelib.com/mp4/sample-15s.mp4">
+              </video>
+            </rv-video>
+          </bs5-slide-video>
+
+          <div class="slide col-12 p-0" rv-style-flex="slideItemStyle.flex">
+            <img lazyload="lazy" class="img-fluid w-100" src="https://picsum.photos/1920/1080?random=1"
+              alt="Static Random Image from https://picsum.photos/">
+          </div>
+        </div>
+
+        <!-- Control left -->
+        <span rv-show="showControls" class="slider-controls slider-control-prev" rv-add-class="controlsPositionClass">
+          <button class="btn btn-link" rv-enabled="enablePrevControl"
+            class="transition-all flex justify-center items-center w-10 h-10 text-foreground p-0" aria-hidden="true"
+            role="button" rv-on-click="prev">
+            <bs5-icon class="text-body" rv-src="$parent.iconArrowCarrot" size="32" direction="left"></bs5-icon>
+          </button>
+          <span class="visually-hidden">Previous</span>
+        </span>
+
+        <!-- Control right -->
+        <span rv-show="showControls" class="slider-controls slider-control-next" rv-add-class="controlsPositionClass">
+          <button class="btn btn-link" rv-enabled="enableNextControl"
+            class="transition-all flex justify-center items-center w-10 h-10 text-foreground p-0" aria-hidden="true"
+            role="button" data-slide="next" rv-on-click="next">
+            <bs5-icon class="text-body" rv-src="$parent.iconArrowCarrot" size="32" direction="right"></bs5-icon>
+          </button>
+          <span class="visually-hidden">Next</span>
+        </span>
+
+
+        <!-- Indicators -->
+        <ol rv-if="indicators" class="slider-indicators" rv-add-class="indicatorsPositionClass">
+          <li rv-each-slide="items" rv-class-active="slide.active" rv-on-click="goTo | args slide.index">
+            <bs5-icon rv-hide="slide.active" rv-src="indicatorInactiveIconSrc" size="16"></bs5-icon>
+            <bs5-icon rv-show="slide.active" rv-src="indicatorActiveIconSrc" size="16"></bs5-icon>
+          </li>
+        </ol>
+
+      </bs5-slider>
+    </section>
+
   </div>
 </div>

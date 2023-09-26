@@ -56,6 +56,35 @@ export class Bs5SlideVideoComponent extends Component {
     }
   }
 
+  async waitForUserInteraction() {
+    return new Promise((resolve) => {
+      const removeEventListeners = () => {
+        document.removeEventListener("click", clickHandler);
+        document.removeEventListener("scroll", scrollHandler);
+        document.removeEventListener("mousemove", mouseMoveHandler);
+      };
+
+      const clickHandler = () => {
+        removeEventListeners();
+        resolve("click");
+      };
+
+      const scrollHandler = () => {
+        removeEventListeners();
+        resolve("scroll");
+      };
+
+      const mouseMoveHandler = () => {
+        removeEventListeners();
+        resolve("mousemove");
+      };
+
+      document.addEventListener("click", clickHandler);
+      document.addEventListener("scroll", scrollHandler);
+      document.addEventListener("mousemove", mouseMoveHandler);
+    });
+  }
+
   protected addEventListeners() {
     this.slider?.addEventListener(
       Bs5SliderComponent.EVENTS.scrollended,
@@ -77,7 +106,13 @@ export class Bs5SlideVideoComponent extends Component {
 
   protected async afterBind(): Promise<void> {
     if (this.scope.autoplay) {
-      this.playIfActive();
+      if (this.slideEl?.classList.contains("active")) {
+        const event = await this.waitForUserInteraction();
+        console.debug("[Bs5SlideVideoComponent] event", event);
+        if (this.slideEl?.classList.contains("active")) {
+          this.playIfActive();
+        }
+      }
     }
     await super.beforeBind();
   }

@@ -1,6 +1,6 @@
 import "@ribajs/types";
 import { coreModule, Riba } from "@ribajs/core";
-import { extrasModule } from "@ribajs/extras";
+import { extrasModule, VideoComponent } from "@ribajs/extras";
 import { bs5Module } from "@ribajs/bs5";
 import { SliderDemoModule } from "./slider.module.js";
 
@@ -12,5 +12,7 @@ riba.module.register(coreModule.init());
 riba.module.register(extrasModule.init());
 riba.module.register(bs5Module.init());
 riba.module.register(SliderDemoModule.init());
+
+riba.module.component.register(VideoComponent);
 
 riba.bind(document.body, model);

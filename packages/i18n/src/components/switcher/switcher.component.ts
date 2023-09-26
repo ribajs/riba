@@ -12,7 +12,7 @@ export interface Scope extends ScopeBase {
 export class I18nSwitcherComponent extends Component {
   public static tagName = "i18n-switcher";
 
-  public _debug = true;
+  public _debug = false;
 
   static get observedAttributes(): string[] {
     return [];

@@ -69,7 +69,7 @@ export class MonacoEditorComponent extends Component {
 
   protected autobind = true;
 
-  public _debug = true;
+  public _debug = false;
 
   protected editor?: editor.IStandaloneCodeEditor;
 

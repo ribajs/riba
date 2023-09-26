@@ -35,7 +35,7 @@ export class Bs5TaggedImageComponent extends Component {
   public static tagName = "bs5-tagged-image";
 
   protected autobind = true;
-  public _debug = true;
+  public _debug = false;
 
   static get observedAttributes(): string[] {
     return ["tags", "options", "debug"];

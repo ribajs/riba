@@ -17,3 +17,5 @@ infra/schematics/**
 **/*.js
 
 *.md
+
+*.html

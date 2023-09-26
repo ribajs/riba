@@ -35,7 +35,7 @@ export class Bs4TaggedImageComponent extends Component {
   public static tagName = "bs4-tagged-image";
 
   protected autobind = true;
-  public _debug = true;
+  public _debug = false;
 
   static get observedAttributes(): string[] {
     return ["tags", "options", "debug"];
