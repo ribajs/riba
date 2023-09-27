@@ -154,7 +154,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
-    "glob": "^10.3.9",
+    "glob": "^10.3.10",
     "pug": "^3.0.2"
   },
   "packageManager": "yarn@4.0.0-rc.51"
