@@ -6890,7 +6890,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.7.0"
     jest-extended: "npm:^4.0.1"
-    luxon: "npm:^1.28.1"
+    luxon: "npm:^3.4.3"
     prettier: "npm:^3.0.3"
     ts-jest: "npm:^29.1.1"
     typescript: "npm:5.2.2"
@@ -6919,7 +6919,7 @@ __metadata:
     "@ribajs/events": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
-    "@types/imagesloaded": "npm:^4.1.2"
+    "@types/imagesloaded": "npm:^4.1.3"
     "@types/jest": "npm:^29.5.5"
     "@types/masonry-layout": "npm:^4.2.5"
     "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
@@ -7586,7 +7586,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/express": "npm:^4.17.18"
-    "@types/imagesloaded": "npm:^4.1.2"
+    "@types/imagesloaded": "npm:^4.1.3"
     "@types/jest": "npm:^29.5.5"
     "@types/masonry-layout": "npm:^4.2.5"
     "@typescript-eslint/eslint-plugin": "npm:^6.7.3"
@@ -7630,7 +7630,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/types@workspace:infra/types"
   dependencies:
-    "@types/resize-observer-browser": "npm:^0.1.7"
+    "@types/resize-observer-browser": "npm:^0.1.8"
   languageName: unknown
   linkType: soft
 
@@ -8114,12 +8114,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/imagesloaded@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "@types/imagesloaded@npm:4.1.2"
+"@types/imagesloaded@npm:^4.1.3":
+  version: 4.1.3
+  resolution: "@types/imagesloaded@npm:4.1.3"
   dependencies:
     "@types/jquery": "npm:*"
-  checksum: c2f757a17fc1d922a927b6c48051cfc341b5b4430ec8c8e85580d3963fd1ba26f353476655a1edb5a27880887fbd87b73ce6c50254806eacdfb9a9eb6bf7f7bb
+  checksum: 541a0449b4bf92621ef41783aaf1ba1b08e89599f99b2ad4dc4f164d2e3752ce6baadf923fe4a1b711a9f40119ae5b78caaf3db4c0416e10039b52c490f1c63a
   languageName: node
   linkType: hard
 
@@ -8335,10 +8335,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/resize-observer-browser@npm:^0.1.7":
-  version: 0.1.7
-  resolution: "@types/resize-observer-browser@npm:0.1.7"
-  checksum: 0377eaac8bb7a17b983b49a156006032380b459bfebefc54a5aa2f7f8a9786d2b60723e8837c61ef733330b478f4f26293e9edbdc8006238e4f80c878c56c988
+"@types/resize-observer-browser@npm:^0.1.8":
+  version: 0.1.8
+  resolution: "@types/resize-observer-browser@npm:0.1.8"
+  checksum: b621e82a4f448c64de88562c5ee368174058de79ba65f9d21e707767daa2ef5134f065a037200a4e3ffcc5580b5319b4e45541555d3d614272e98d136fc029ca
   languageName: node
   linkType: hard
 
@@ -17469,10 +17469,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"luxon@npm:^1.28.1":
-  version: 1.28.1
-  resolution: "luxon@npm:1.28.1"
-  checksum: dfba84bb3cd72f359c77115d374937c31eccdfa6b383284b6848c075f85e02269d4d9a717608944f2c11c4ca5d3df0fc18197ce4ca21313ddd72619b39ee034c
+"luxon@npm:^3.4.3":
+  version: 3.4.3
+  resolution: "luxon@npm:3.4.3"
+  checksum: b155c9961cf45dadae763b0ec2f5a38d81a2197714154c1dece3ed3a553f1984a34138c1856f248863c998cb623796b27de96b7f7286acdeae68220451e24540
   languageName: node
   linkType: hard
 

@@ -9,9 +9,8 @@ export const LuxonDurationNumberingSystemFormatter: Formatter = {
   /**
    * @see https://moment.github.io/luxon/docs/class/src/duration.js~Duration.html#instance-get-numberingSystem
    * @param target Interval
-   * @returns string
    */
-  read(target: Duration): string {
+  read(target: Duration) {
     return target.numberingSystem;
   },
 };

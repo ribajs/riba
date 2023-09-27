@@ -9,9 +9,8 @@ export const LuxonDaysInMonthFormatter: Formatter = {
   /**
    * @see https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-get-daysInMonth
    * @param target can be a Luxon DateTime object
-   * @returns number
    */
-  read(target: DateTime): number {
+  read(target: DateTime) {
     return target.daysInMonth;
   },
 };

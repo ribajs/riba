@@ -9,9 +9,8 @@ export const LuxonOffsetNameLongFormatter: Formatter = {
   /**
    * @see https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-get-offsetNameLong
    * @param target can be a Luxon DateTime object
-   * @returns string
    */
-  read(target: DateTime): string {
+  read(target: DateTime) {
     return target.offsetNameLong;
   },
 };

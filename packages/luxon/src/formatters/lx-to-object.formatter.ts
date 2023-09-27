@@ -1,5 +1,5 @@
 import { Formatter } from "@ribajs/core";
-import { DateTime, DateObject } from "luxon";
+import { DateTime } from "luxon";
 
 /**
  * Returns a JavaScript object with this DateTime's year, month, day, and so on.
@@ -12,7 +12,7 @@ export const LuxonToObjectFormatter: Formatter = {
    * @param opts *
    * @returns Object
    */
-  read(target: DateTime, includeConfig?: boolean): DateObject {
+  read(target: DateTime, includeConfig?: boolean) {
     return target.toObject({ includeConfig });
   },
 };

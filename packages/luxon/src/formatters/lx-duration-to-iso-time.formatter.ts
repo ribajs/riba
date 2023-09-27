@@ -10,9 +10,8 @@ export const LuxonDurationToISOTimeFormatter: Formatter = {
    * @see https://moment.github.io/luxon/docs/class/src/duration.js~Duration.html#instance-method-toISOTime
    * @param target Duration
    * @param opts ToISOTimeDurationOptions | undefined
-   * @returns string
    */
-  read(target: Duration, opts?: ToISOTimeDurationOptions): string {
+  read(target: Duration, opts?: ToISOTimeDurationOptions) {
     return target.toISOTime(opts);
   },
 };

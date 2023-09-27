@@ -1,5 +1,5 @@
 import { Formatter } from "@ribajs/core";
-import { Duration, DurationToFormatOptions } from "luxon";
+import { Duration } from "luxon";
 
 /**
  * Returns a string representation of this Duration formatted according to the specified format string.
@@ -13,7 +13,11 @@ export const LuxonDurationToFormatFormatter: Formatter = {
    * @param opts DurationToFormatOptions | undefined
    * @returns string
    */
-  read(target: Duration, fmt: string, opts?: DurationToFormatOptions): string {
+  read(
+    target: Duration,
+    fmt: string,
+    opts?: { floor?: boolean | undefined },
+  ): string {
     return target.toFormat(fmt, opts);
   },
 };

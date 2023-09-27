@@ -1,5 +1,5 @@
 import { Formatter } from "@ribajs/core";
-import { DateTime, DateObject } from "luxon";
+import { DateTime, DateObjectUnits, DateTimeJSOptions } from "luxon";
 
 /**
  * Gets a luxon date from an object.
@@ -8,10 +8,10 @@ import { DateTime, DateObject } from "luxon";
 export const LuxonFromObjectFormatter: Formatter = {
   name: "lx-from-object",
   /**
-   * @param object DateObject | undefined
+   * @param object DateTimeJSOptions | undefined
    * @returns DateTime
    */
-  read(object: DateObject): DateTime {
-    return DateTime.fromObject(object);
+  read(obj: DateObjectUnits, opts?: DateTimeJSOptions): DateTime {
+    return DateTime.fromObject(obj, opts);
   },
 };

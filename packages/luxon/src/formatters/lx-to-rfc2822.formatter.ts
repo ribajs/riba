@@ -9,9 +9,9 @@ export const LuxonToRFC2822Formatter: Formatter = {
   /**
    * @see https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toRFC2822
    * @param target can be a Luxon DateTime object
-   * @returns string
+   * @returns string | null
    */
-  read(target: DateTime): string {
+  read(target: DateTime) {
     return target.toRFC2822();
   },
 };

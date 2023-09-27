@@ -1,5 +1,5 @@
 import { Formatter } from "@ribajs/core";
-import { DateTime, DurationInput } from "luxon";
+import { DateTime, DurationLike } from "luxon";
 
 /**
  * Subtract a period of time to this DateTime and return the resulting DateTime See plus
@@ -12,7 +12,7 @@ export const LuxonMinusFormatter: Formatter = {
    * @param duration Duration | Object | number
    * @returns DateTime
    */
-  read(target: DateTime, duration: DurationInput): DateTime {
+  read(target: DateTime, duration: DurationLike): DateTime {
     return target.minus(duration);
   },
 };

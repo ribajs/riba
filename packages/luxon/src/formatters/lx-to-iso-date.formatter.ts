@@ -10,9 +10,8 @@ export const LuxonToISODateFormatter: Formatter = {
    * @see https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toISODate
    * @param target can be a Luxon DateTime object
    * @param opts Object
-   * @returns string
    */
-  read(target: DateTime, opts?: ToISODateOptions): string {
+  read(target: DateTime, opts?: ToISODateOptions) {
     return target.toISODate(opts);
   },
 };

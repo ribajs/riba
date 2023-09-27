@@ -1,5 +1,5 @@
 import { Formatter } from "@ribajs/core";
-import { DateTime, DurationObjectUnits } from "luxon";
+import { DateTime, DateTimeUnit } from "luxon";
 
 /**
  * "Set" this DateTime to the beginning of a unit of time.
@@ -12,7 +12,7 @@ export const LuxonStartOfFormatter: Formatter = {
    * @param unit string
    * @returns DateTime
    */
-  read(target: DateTime, unit: keyof DurationObjectUnits): DateTime {
+  read(target: DateTime, unit: DateTimeUnit): DateTime {
     return target.startOf(unit);
   },
 };

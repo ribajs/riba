@@ -1,5 +1,5 @@
 import { Formatter } from "@ribajs/core";
-import { Duration, DurationObject } from "luxon";
+import { Duration, DurationObjectUnits } from "luxon";
 
 /**
  * Returns a JavaScript object with this Duration's values.
@@ -9,10 +9,9 @@ export const LuxonDurationToObjectFormatter: Formatter = {
   /**
    * @see https://moment.github.io/luxon/docs/class/src/duration.js~Duration.html#instance-method-toObject
    * @param target Duration
-   * @param opts any
    * @returns Object
    */
-  read(target: Duration, includeConfig?: boolean): DurationObject {
-    return target.toObject(includeConfig ? { includeConfig } : undefined);
+  read(target: Duration): DurationObjectUnits {
+    return target.toObject();
   },
 };

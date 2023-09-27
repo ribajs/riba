@@ -9,9 +9,8 @@ export const LuxonDurationToISOFormatter: Formatter = {
   /**
    * @see https://moment.github.io/luxon/docs/class/src/duration.js~Duration.html#instance-method-toISO
    * @param target Duration
-   * @returns string
    */
-  read(target: Duration): string {
+  read(target: Duration) {
     return target.toISO();
   },
 };

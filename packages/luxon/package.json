@@ -80,7 +80,7 @@
   "dependencies": {
     "@ribajs/core": "workspace:^",
     "@types/luxon": "^3.3.2",
-    "luxon": "^1.28.1"
+    "luxon": "^3.4.3"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

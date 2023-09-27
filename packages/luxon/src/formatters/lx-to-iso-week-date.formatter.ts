@@ -9,9 +9,8 @@ export const LuxonToISOWeekDateFormatter: Formatter = {
   /**
    * @see https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toISOWeekDate
    * @param target can be a Luxon DateTime object
-   * @returns string
    */
-  read(target: DateTime): string {
+  read(target: DateTime) {
     return target.toISOWeekDate();
   },
 };

@@ -12,10 +12,7 @@ export const LuxonResolvedLocaleOptsFormatter: Formatter = {
    * @param opts Intl.DateTimeFormatOptions & LocaleOptions
    * @returns Intl.ResolvedDateTimeFormatOptions
    */
-  read(
-    target: DateTime,
-    opts: Intl.DateTimeFormatOptions & LocaleOptions,
-  ): Intl.ResolvedDateTimeFormatOptions {
-    return target.resolvedLocaleOpts(opts);
+  read(target: DateTime, opts: Intl.DateTimeFormatOptions & LocaleOptions) {
+    return target.resolvedLocaleOptions(opts);
   },
 };

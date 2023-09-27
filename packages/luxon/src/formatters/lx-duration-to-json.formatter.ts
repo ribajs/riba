@@ -9,9 +9,8 @@ export const LuxonDurationToJSONFormatter: Formatter = {
   /**
    * @see https://moment.github.io/luxon/docs/class/src/duration.js~Duration.html#instance-method-toJSON
    * @param target Duration
-   * @returns string
    */
-  read(target: Duration): string {
+  read(target: Duration) {
     return target.toJSON();
   },
 };

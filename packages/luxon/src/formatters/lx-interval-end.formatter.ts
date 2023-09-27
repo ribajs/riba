@@ -1,5 +1,5 @@
 import { Formatter } from "@ribajs/core";
-import { Interval, DateTime } from "luxon";
+import { Interval } from "luxon";
 
 /**
  * Returns the end of the Interval
@@ -9,9 +9,8 @@ export const LuxonIntervalEndFormatter: Formatter = {
   /**
    * @see https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-get-end
    * @param target Interval
-   * @returns DateTime
    */
-  read(target: Interval): DateTime {
+  read(target: Interval) {
     return target.end;
   },
 };

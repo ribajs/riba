@@ -10,9 +10,9 @@ export const LuxonToSQLTimeFormatter: Formatter = {
    * @see https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-toSQLTime
    * @param target can be a Luxon DateTime object
    * @param opts ToSQLOptions | undefined
-   * @returns string
+   * @returns string | null
    */
-  read(target: DateTime, opts?: ToSQLOptions): string {
+  read(target: DateTime, opts?: ToSQLOptions) {
     return target.toSQLTime(opts);
   },
 };

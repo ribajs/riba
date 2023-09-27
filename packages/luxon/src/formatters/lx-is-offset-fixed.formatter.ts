@@ -9,9 +9,8 @@ export const LuxonIsOffsetFixedFormatter: Formatter = {
   /**
    * @see https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-get-isOffsetFixed
    * @param target can be a Luxon DateTime object
-   * @returns boolean
    */
-  read(target: DateTime): boolean {
+  read(target: DateTime) {
     return target.isOffsetFixed;
   },
 };
