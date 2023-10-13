@@ -1,7 +1,7 @@
 {
   "name": "ribajs",
   "description": "Declarative data binding + template solution.",
-  "version": "2.0.0-rc.7",
+  "version": "2.0.0-rc.8",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -43,7 +43,7 @@
     "test:migrate": "ts-jest config:migrate jest.config.cjs",
     "lint": "yarn run lint:ext && yarn workspaces foreach -v -p -W run lint",
     "lint:ext": "node lint-file-extension.cjs",
-    "build": "yarn workspaces foreach -v -p -W run build",
+    "build": "yarn workspaces foreach -v -p -W --jobs 5 run build",
     "clean": "yarn workspaces foreach -v -p -W run clean",
     "bump:prerelease": "yarn workspaces foreach -v version prerelease",
     "bump:patch": "yarn workspaces foreach -v version patch",

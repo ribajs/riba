@@ -145,8 +145,8 @@ export abstract class BasicComponent extends HTMLElement {
     return this.requiredAttributes().every((requiredAttribute) => {
       requiredAttribute = camelCase(requiredAttribute);
 
-      if(this.scope.hasOwnProperty(requiredAttribute)) {
-        if(Array.isArray(this.scope[requiredAttribute])) {
+      if (this.scope.hasOwnProperty(requiredAttribute)) {
+        if (Array.isArray(this.scope[requiredAttribute])) {
           return this.scope[requiredAttribute].length > 0;
         } else if (typeof this.scope[requiredAttribute] === "object") {
           return Object.keys(this.scope[requiredAttribute]).length > 0;

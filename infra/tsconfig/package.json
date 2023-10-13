@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/tsconfig",
   "description": "Shared TypeScript config for Riba.js projects",
-  "version": "2.0.0-rc.7",
+  "version": "2.0.0-rc.8",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "url": "https://github.com/ribajs/riba/tree/master/infra/tsconfig",
   "main": "tsconfig.json",
