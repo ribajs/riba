@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/demo-bs5-responsive-components",
-  "version": "2.0.0-rc.8",
+  "version": "2.0.0-rc.9",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"

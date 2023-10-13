@@ -1,7 +1,7 @@
 {
   "name": "ribajs",
   "description": "Declarative data binding + template solution.",
-  "version": "2.0.0-rc.8",
+  "version": "2.0.0-rc.9",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -43,14 +43,16 @@
     "test:migrate": "ts-jest config:migrate jest.config.cjs",
     "lint": "yarn run lint:ext && yarn workspaces foreach -v -p -W run lint",
     "lint:ext": "node lint-file-extension.cjs",
-    "build": "yarn workspaces foreach -v -p -W --jobs 5 run build",
+    "build": "yarn build:all",
+    "build:all": "yarn workspaces foreach -v -p -W --jobs 5 run build",
+    "build:libs": "yarn workspaces foreach -v -p -W --no-private --jobs 5 run build",
     "clean": "yarn workspaces foreach -v -p -W run clean",
     "bump:prerelease": "yarn workspaces foreach -v version prerelease",
     "bump:patch": "yarn workspaces foreach -v version patch",
     "bump:minor": "yarn workspaces foreach -v version minor",
     "bump:major": "yarn workspaces foreach -v version major",
-    "publish:next": "yarn run build && yarn workspaces foreach -v -W --no-private npm publish --tolerate-republish --tag next --access public",
-    "publish:latest": "yarn run build && yarn workspaces foreach -v -W --no-private npm publish --tolerate-republish --tag latest --access public"
+    "publish:next": "yarn workspaces foreach -v -W --no-private npm publish --tolerate-republish --tag next --access public",
+    "publish:latest": "yarn workspaces foreach -v -W --no-private npm publish --tolerate-republish --tag latest --access public"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.0",
