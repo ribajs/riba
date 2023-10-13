@@ -144,10 +144,17 @@ export abstract class BasicComponent extends HTMLElement {
   protected checkRequiredAttributes() {
     return this.requiredAttributes().every((requiredAttribute) => {
       requiredAttribute = camelCase(requiredAttribute);
-      return (
-        this.scope.hasOwnProperty(requiredAttribute) &&
-        typeof this.scope[requiredAttribute] !== "undefined"
-      );
+
+      if(this.scope.hasOwnProperty(requiredAttribute)) {
+        if(Array.isArray(this.scope[requiredAttribute])) {
+          return this.scope[requiredAttribute].length > 0;
+        } else if (typeof this.scope[requiredAttribute] === "object") {
+          return Object.keys(this.scope[requiredAttribute]).length > 0;
+        } else {
+          return typeof this.scope[requiredAttribute] !== "undefined";
+        }
+      }
+      return false;
     });
   }
 
