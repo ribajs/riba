@@ -13,9 +13,9 @@
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.23.1",
-    "@babel/runtime-corejs3": "^7.23.1",
+    "@babel/runtime": "^7.23.2",
+    "@babel/runtime-corejs3": "^7.23.2",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^20.8.2"
+    "@types/node": "^20.8.5"
   }
 }

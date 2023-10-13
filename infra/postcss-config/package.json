@@ -41,7 +41,7 @@
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@ribajs/npm-package": "workspace:^",
     "postcss": "^8.4.31",
-    "postcss-preset-env": "^9.1.4"
+    "postcss-preset-env": "^9.2.0"
   },
   "optionalDependencies": {
     "@ribajs/bs4": "workspace:^",
