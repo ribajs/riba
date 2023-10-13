@@ -146,12 +146,18 @@ export abstract class BasicComponent extends HTMLElement {
       requiredAttribute = camelCase(requiredAttribute);
 
       if (this.scope.hasOwnProperty(requiredAttribute)) {
+        if (
+          this.scope[requiredAttribute] === null ||
+          typeof this.scope[requiredAttribute] === "undefined"
+        ) {
+          return false;
+        }
         if (Array.isArray(this.scope[requiredAttribute])) {
           return this.scope[requiredAttribute].length > 0;
         } else if (typeof this.scope[requiredAttribute] === "object") {
           return Object.keys(this.scope[requiredAttribute]).length > 0;
         } else {
-          return typeof this.scope[requiredAttribute] !== "undefined";
+          return true;
         }
       }
       return false;
