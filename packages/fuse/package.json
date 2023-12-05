@@ -16,18 +16,18 @@
     "@ribajs/core": "workspace:^",
     "@ribajs/jsx": "workspace:^",
     "@ribajs/utils": "workspace:^",
-    "fuse.js": "^6.6.2"
+    "fuse.js": "^7.0.0"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.23.2",
-    "@babel/runtime-corejs3": "^7.23.2",
+    "@babel/runtime": "^7.23.5",
+    "@babel/runtime-corejs3": "^7.23.5",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/eslint": "^8.44.4",
-    "@types/node": "^20.8.5",
-    "eslint": "^8.51.0",
-    "typescript": "5.2.2"
+    "@types/eslint": "^8.44.8",
+    "@types/node": "^20.10.3",
+    "eslint": "^8.55.0",
+    "typescript": "5.3.2"
   }
 }

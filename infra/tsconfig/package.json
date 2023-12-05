@@ -4,11 +4,6 @@
   "version": "2.0.0-rc.9",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "url": "https://github.com/ribajs/riba/tree/master/infra/tsconfig",
-  "main": "tsconfig.json",
-  "exports": {
-    ".": "./tsconfig.json",
-    "./tsconfig.json": "./tsconfig.json"
-  },
   "files": [
     "LICENSE",
     "README.md",

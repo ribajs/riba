@@ -21,4 +21,4 @@ jobs:
           yarn install
       - name: Build each package
         run: |
-          yarn run build
+          yarn run build:all

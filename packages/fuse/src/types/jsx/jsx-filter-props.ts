@@ -1,10 +1,10 @@
 import type { JsxHtmlGlobalProps } from "@ribajs/jsx";
-import type Fuse from "fuse.js";
+import type { Expression, IFuseOptions } from "fuse.js";
 
 export type JsxFuseSearchProps<T = any, F = any> = JsxHtmlGlobalProps & {
   [key in "items" | "rv-items" | "rv-co-items"]?: string | T[];
 } & {
-  options?: string | Fuse.IFuseOptions<F>;
+  options?: string | IFuseOptions<F>;
   limit?: number;
-  "search-pattern"?: string | Fuse.Expression;
+  "search-pattern"?: string | Expression;
 };
