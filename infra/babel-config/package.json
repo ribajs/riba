@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/babel-config",
-  "version": "2.0.0-rc.9",
+  "version": "2.0.0-rc.10",
   "type": "commonjs",
   "description": "Default babel config used in Riba.js projects",
   "author": "Pascal Garber <pascal@artandcode.studio",
@@ -34,6 +34,6 @@
     "@babel/types": "^7.23.5",
     "babel-jest": "^29.7.0",
     "babel-plugin-array-includes": "^2.0.3",
-    "prettier": "^3.1.0"
+    "prettier": "^3.1.1"
   }
 }

@@ -1,5 +1,5 @@
 import { Formatter } from "@ribajs/core";
-import { DateTime, Interval } from "luxon";
+import { DateTime } from "luxon";
 
 /**
  * Return an Interval spanning between this DateTime and another DateTime
@@ -10,9 +10,8 @@ export const LuxonUntilFormatter: Formatter = {
    * @see https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#instance-method-until
    * @param target can be a Luxon DateTime object
    * @param otherDateTime DateTime
-   * @returns Interval
    */
-  read(target: DateTime, otherDateTime: DateTime): Interval {
+  read(target: DateTime, otherDateTime: DateTime) {
     return target.until(otherDateTime);
   },
 };

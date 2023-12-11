@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/shopify-nest",
-  "version": "2.0.0-rc.9",
+  "version": "2.0.0-rc.10",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -25,7 +25,7 @@
     "@ribajs/utils": "workspace:^",
     "@types/debug": "^4.1.12",
     "debug": "^4.3.4",
-    "monaco-editor": "^0.44.0"
+    "monaco-editor": "^0.45.0"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -34,8 +34,8 @@
     "@babel/runtime": "^7.23.5",
     "@babel/runtime-corejs3": "^7.23.5",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^20.10.3",
+    "@types/node": "^20.10.4",
     "eslint": "^8.55.0",
-    "typescript": "5.3.2"
+    "typescript": "5.3.3"
   }
 }

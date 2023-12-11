@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/demo-bs5-notifications",
-  "version": "2.0.0-rc.9",
+  "version": "2.0.0-rc.10",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -45,7 +45,7 @@
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/postcss-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/jest": "^29.5.10",
+    "@types/jest": "^29.5.11",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/experimental-utils": "^5.62.0",
     "@typescript-eslint/parser": "^6.13.2",
@@ -55,7 +55,7 @@
     "babel-plugin-array-includes": "^2.0.3",
     "babelify": "^10.0.0",
     "concurrently": "^8.2.2",
-    "core-js": "^3.33.3",
+    "core-js": "^3.34.0",
     "css-loader": "^6.8.1",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
@@ -68,14 +68,14 @@
     "postcss-loader": "^7.3.3",
     "postcss-modules": "^6.0.0",
     "postcss-preset-env": "^9.3.0",
-    "prettier": "^3.1.0",
+    "prettier": "^3.1.1",
     "pug-loader": "^2.4.0",
     "rollup-plugin-pug": "^1.1.1",
     "sass": "^1.69.5",
     "sass-loader": "^13.3.2",
     "serve": "^14.2.1",
-    "typescript": "5.3.2",
-    "vite": "^5.0.5"
+    "typescript": "5.3.3",
+    "vite": "^5.0.7"
   },
   "dependencies": {
     "@ribajs/bs5": "workspace:^",

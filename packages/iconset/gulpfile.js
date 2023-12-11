@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const gulp = require("gulp");
-const svgmin = require("gulp-svgmin");
-const exec = require("gulp-exec");
-const clean = require("gulp-clean");
-const debug = require("gulp-debug");
-const filelist = require("gulp-filelist");
+import gulp from "gulp";
+import svgmin from "gulp-svgmin";
+import exec from "gulp-exec";
+import clean from "gulp-clean";
+import debug from "gulp-debug";
+import filelist from "gulp-filelist";
 
 const svgSource = "src/svg/*.svg";
 

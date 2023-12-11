@@ -1,13 +1,15 @@
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import {
-  Bs4ShareComponent,
-  Scope as Bs4ShareScope,
-} from "@ribajs/bs4/src/components/bs4-share/bs4-share.component.js";
+  Bs5ShareComponent,
+  Scope as Bs5ShareScope,
+} from "@ribajs/bs5/src/components/bs5-share/bs5-share.component.js";
 import labelTemplate from "./share.label.html?raw";
 import { I18nService } from "../../services/index.js";
 import { LocalesService } from "../../types/index.js";
 
-interface Scope extends Bs4ShareScope {
+import template from "@ribajs/5/src/components/bs5-share/bs5-share.component.html?raw";
+
+interface Scope extends Bs5ShareScope {
   textI18n?: string;
   labelI18n?: string;
   serviceLabelI18n?: string;
@@ -28,14 +30,16 @@ declare global {
 /**
  * Component to share the a link (i18n version)
  */
-export class I18nShareComponent extends Bs4ShareComponent {
+export class I18nShareComponent extends Bs5ShareComponent {
   public static tagName = "i18n-share";
 
   public _debug = false;
 
+  public scope: Scope;
+
   static get observedAttributes(): string[] {
     return [
-      ...Bs4ShareComponent.observedAttributes,
+      ...Bs5ShareComponent.observedAttributes,
       "text-i18n",
       "label-i18n",
       "service-label-i18n",
@@ -43,8 +47,6 @@ export class I18nShareComponent extends Bs4ShareComponent {
   }
 
   protected localesService?: LocalesService;
-
-  public scope: Scope = super.scope;
 
   constructor() {
     super();
@@ -54,8 +56,18 @@ export class I18nShareComponent extends Bs4ShareComponent {
 
   protected connectedCallback() {
     super.connectedCallback();
-    this.init(Bs4ShareComponent.observedAttributes);
+    this.init(Bs5ShareComponent.observedAttributes);
     this.addEventListeners();
+  }
+
+  protected getScopeDefaults(): Scope {
+    const defaults = super.getScopeDefaults();
+    return {
+      ...defaults,
+      textI18n: "",
+      labelI18n: "",
+      serviceLabelI18n: "",
+    };
   }
 
   protected async initI18n() {
@@ -65,7 +77,7 @@ export class I18nShareComponent extends Bs4ShareComponent {
         async (langcode: string) => {
           return resolve(langcode);
         },
-        this,
+        this
       );
       if (this.localesService?.ready) {
         const langcode = this.localesService?.getLangcode();
@@ -76,7 +88,7 @@ export class I18nShareComponent extends Bs4ShareComponent {
           async (langcode: string) => {
             return resolve(langcode);
           },
-          this,
+          this
         );
       }
     });
@@ -113,7 +125,7 @@ export class I18nShareComponent extends Bs4ShareComponent {
         shareItem.label =
           (await this.i18n(
             langcode,
-            this.scope.serviceLabelI18n + "." + shareItem.id,
+            this.scope.serviceLabelI18n + "." + shareItem.id
           )) || shareItem.label;
       }
     }
@@ -130,10 +142,6 @@ export class I18nShareComponent extends Bs4ShareComponent {
       this.scope.labelTemplate = this.innerHTML;
       this.debug("Custom label template: ", this.scope.labelTemplate);
     }
-
-    const { default: template } = await import(
-      "@ribajs/bs4/src/components/bs4-share/bs4-share.component.html?raw"
-    );
 
     return template;
   }
