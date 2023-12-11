@@ -7,7 +7,7 @@ import labelTemplate from "./share.label.html?raw";
 import { I18nService } from "../../services/index.js";
 import { LocalesService } from "../../types/index.js";
 
-import template from "@ribajs/5/src/components/bs5-share/bs5-share.component.html?raw";
+import template from "@ribajs/bs5/src/components/bs5-share/bs5-share.component.html?raw";
 
 interface Scope extends Bs5ShareScope {
   textI18n?: string;
