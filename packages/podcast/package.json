@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/podcast",
-  "version": "2.0.0-rc.10",
+  "version": "2.0.0-rc.11",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -23,19 +23,19 @@
     "clean": "rm -rf ./dist"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.0.1",
+    "@reduxjs/toolkit": "^2.1.0",
     "@ribajs/bs5": "workspace:^",
     "@ribajs/core": "workspace:^",
     "@ribajs/events": "workspace:^",
     "@ribajs/utils": "workspace:^"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.23.5",
-    "@babel/runtime-corejs3": "^7.23.5",
+    "@babel/runtime": "^7.23.9",
+    "@babel/runtime-corejs3": "^7.23.9",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^20.10.4",
+    "@types/node": "^20.11.10",
     "concurrently": "^8.2.2",
-    "eslint": "^8.55.0",
+    "eslint": "^8.56.0",
     "typescript": "5.3.3"
   }
 }
