@@ -1,6 +1,9 @@
 [submodule "infra/doc"]
 	path = infra/doc
 	url = https://github.com/ribajs/doc.git
+	branch = main
 [submodule "vendor/gamecontroller.js"]
 	path = vendor/gamecontroller.js
 	url = https://github.com/PixelRPG/gamecontroller.js.git
+	branch = main
+
