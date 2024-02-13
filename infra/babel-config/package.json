@@ -34,6 +34,6 @@
     "@babel/types": "^7.23.9",
     "babel-jest": "^29.7.0",
     "babel-plugin-array-includes": "^2.0.3",
-    "prettier": "^3.2.4"
+    "prettier": "^3.2.5"
   }
 }

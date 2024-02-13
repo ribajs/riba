@@ -23,7 +23,7 @@
     "clean": "rm -rf ./dist"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.1.0",
+    "@reduxjs/toolkit": "^2.2.0",
     "@ribajs/bs5": "workspace:^",
     "@ribajs/core": "workspace:^",
     "@ribajs/events": "workspace:^",
@@ -33,7 +33,7 @@
     "@babel/runtime": "^7.23.9",
     "@babel/runtime-corejs3": "^7.23.9",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^20.11.10",
+    "@types/node": "^20.11.17",
     "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
     "typescript": "5.3.3"

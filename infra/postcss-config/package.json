@@ -40,7 +40,7 @@
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@ribajs/npm-package": "workspace:^",
-    "postcss": "^8.4.33",
+    "postcss": "^8.4.35",
     "postcss-preset-env": "^9.3.0"
   },
   "optionalDependencies": {
