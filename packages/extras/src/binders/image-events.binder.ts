@@ -21,7 +21,7 @@ import imagesLoaded from "imagesloaded";
  *
  * TODO: Not working if src attribute changes?
  */
-export class ImageEventsBinder extends Binder<string, HTMLElement> {
+export class ImageEventsBinder extends Binder<any, HTMLElement> {
   static key = "image-events";
 
   private events?: ImagesLoaded.ImagesLoaded;
@@ -29,12 +29,12 @@ export class ImageEventsBinder extends Binder<string, HTMLElement> {
   private _onEvent(
     customEventName: string,
     load: ImagesLoaded.ImagesLoaded,
-    image?: ImagesLoaded.LoadingImage,
+    image?: ImagesLoaded.LoadingImage
   ) {
     this.el.dispatchEvent(
       new CustomEvent(customEventName, {
         detail: { load, image },
-      }),
+      })
     );
   }
 
@@ -43,7 +43,9 @@ export class ImageEventsBinder extends Binder<string, HTMLElement> {
   private onFail = this._onEvent.bind(this, "load-fail");
   private onProgress = this._onEvent.bind(this, "load-progress");
 
-  bind(el: HTMLImageElement) {
+  bind(el: HTMLElement) {
+    this.unbind();
+
     this.events = imagesLoaded(el);
 
     // Forward the events as native events
@@ -62,8 +64,8 @@ export class ImageEventsBinder extends Binder<string, HTMLElement> {
     }
   }
 
-  routine() {
-    // nothing yet
+  routine(el: HTMLElement) {
+    this.bind(el);
     this.events?.check();
   }
 }
