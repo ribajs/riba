@@ -65,7 +65,7 @@ export class ImageEventsBinder extends Binder<any, HTMLElement> {
   }
 
   routine(el: HTMLElement) {
-    this.bind(el);
+    // this.bind(el);
     this.events?.check();
   }
 }
