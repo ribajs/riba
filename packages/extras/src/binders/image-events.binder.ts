@@ -14,12 +14,10 @@ import imagesLoaded from "imagesloaded";
  *
  * @example
  * ```html
- *  <div class="product-images" rv-image-events rv-on-load-done="onImageLoaded">
+ *  <div class="product-images" rv-image-events="productImage" rv-on-load-done="onImageLoaded">
  *    <img loading="lazy" rv-src="productImage" rv-alt="product.title">
  *  </div>
  * ```
- *
- * TODO: Not working if src attribute changes?
  */
 export class ImageEventsBinder extends Binder<any, HTMLElement> {
   static key = "image-events";

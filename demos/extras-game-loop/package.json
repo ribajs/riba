@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/demo-extras-game-loop",
-  "version": "2.0.0-rc.12",
+  "version": "2.0.0-rc.13",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
