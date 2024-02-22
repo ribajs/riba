@@ -15,6 +15,9 @@ export const endsWithFormatter: Formatter = {
       console.warn("[endsWithFormatter] Value must be of type string");
       return str;
     }
-    return str.endsWith(checkStart);
+    if (str.endsWith(checkStart)) {
+      return str;
+    }
+    return false;
   },
 };

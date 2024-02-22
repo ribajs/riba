@@ -13,7 +13,10 @@ export const containsFormatter = {
   name: "contains",
   read(value: string | any | any[], attr: string | number, search: string) {
     if (isString(value)) {
-      return value.indexOf(attr) > -1;
+      if (value.indexOf(attr) > -1) {
+        return value;
+      }
+      return false;
     } else if (Array.isArray(value)) {
       if (!isNumber(attr)) {
         console.warn(
@@ -24,15 +27,24 @@ export const containsFormatter = {
       attr = Number(attr);
       if (isDefined(attr)) {
         if (isDefined(search)) {
-          return value[attr] === search;
+          if (value[attr] === search) {
+            return value;
+          }
+          return false;
         } else {
-          return value.includes(attr);
+          if (value.includes(attr)) {
+            return value;
+          }
+          return false;
         }
       }
     } else if (isObject(value)) {
       if (isDefined(attr)) {
         if (isDefined(search)) {
-          return value[attr] === search;
+          if (value[attr] === search) {
+            return value;
+          }
+          return false;
         } else {
           if (!isString(attr)) {
             console.warn(
@@ -40,8 +52,10 @@ export const containsFormatter = {
                 typeof attr,
             );
           }
-
-          return Object.keys(value).includes(String(attr));
+          if (Object.keys(value).includes(String(attr))) {
+            return value;
+          }
+          return false;
         }
       }
     }

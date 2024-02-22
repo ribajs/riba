@@ -15,6 +15,9 @@ export const startsWithFormatter: Formatter = {
       console.warn("[startsWithFormatter] Value must be of type string");
       return str;
     }
-    return str.startsWith(checkStart);
+    if (str.startsWith(checkStart)) {
+      return str;
+    }
+    return false;
   },
 };
