@@ -27,12 +27,12 @@ export class ImageEventsBinder extends Binder<any, HTMLElement> {
   private _onEvent(
     customEventName: string,
     load: ImagesLoaded.ImagesLoaded,
-    image?: ImagesLoaded.LoadingImage
+    image?: ImagesLoaded.LoadingImage,
   ) {
     this.el.dispatchEvent(
       new CustomEvent(customEventName, {
         detail: { load, image },
-      })
+      }),
     );
   }
 

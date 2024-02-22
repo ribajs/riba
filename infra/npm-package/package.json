@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/npm-package",
   "description": "Check if an npm package is installed",
-  "version": "2.0.0-rc.13",
+  "version": "2.0.0-rc.14",
   "type": "commonjs",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
@@ -52,7 +52,7 @@
     "@ribajs/shopify": "workspace:^",
     "@ribajs/shopify-easdk": "workspace:^",
     "@ribajs/shopify-tda": "workspace:^",
-    "bootstrap": "^5.3.2",
+    "bootstrap": "^5.3.3",
     "leaflet": "^1.9.4"
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/postcss-config",
   "description": "Default PostCSS configuration for Riba.js projects",
-  "version": "2.0.0-rc.13",
+  "version": "2.0.0-rc.14",
   "type": "commonjs",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
@@ -41,7 +41,7 @@
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@ribajs/npm-package": "workspace:^",
     "postcss": "^8.4.35",
-    "postcss-preset-env": "^9.3.0"
+    "postcss-preset-env": "^9.4.0"
   },
   "optionalDependencies": {
     "@ribajs/bs4": "workspace:^",
