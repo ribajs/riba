@@ -35,7 +35,7 @@
     "@babel/runtime-corejs3": "^7.24.4",
     "@ribajs/tsconfig": "workspace:^",
     "@types/node": "^20.12.5",
-    "eslint": "^9.0.0",
+    "eslint": "^8.x.x",
     "typescript": "5.3.3"
   }
 }

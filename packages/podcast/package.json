@@ -35,7 +35,7 @@
     "@ribajs/tsconfig": "workspace:^",
     "@types/node": "^20.12.5",
     "concurrently": "^8.2.2",
-    "eslint": "^9.0.0",
+    "eslint": "^8.x.x",
     "typescript": "5.3.3"
   }
 }
