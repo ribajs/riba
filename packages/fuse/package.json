@@ -22,12 +22,12 @@
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.23.9",
-    "@babel/runtime-corejs3": "^7.23.9",
+    "@babel/runtime": "^7.24.4",
+    "@babel/runtime-corejs3": "^7.24.4",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/eslint": "^8.56.2",
-    "@types/node": "^20.11.19",
-    "eslint": "^8.56.0",
+    "@types/eslint": "^8.56.7",
+    "@types/node": "^20.12.5",
+    "eslint": "^9.0.0",
     "typescript": "5.3.3"
   }
 }
