@@ -79,3 +79,7 @@ lerna-debug.log*
 
 # Typescript
 *.tsbuildinfo 
+
+# Vite
+*.timestamp-*.mjs
+
