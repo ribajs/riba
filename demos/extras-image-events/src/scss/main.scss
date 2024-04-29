@@ -1,0 +1,27 @@
+// Original Bootstrap 5 Styles
+@import 'bootstrap/scss/bootstrap';
+// Bootstrap style extensions from @ribajs/bs5
+@import '@ribajs/bs5/src/index';
+@import '../ts/components/index';
+
+
+body {
+  background-color: #3498db;
+  color: $light;
+}
+
+h2 {
+  margin-bottom: 2em;
+}
+
+body {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-height: 100vh;
+  max-width: 100vw;
+  width: 100%;
+  height: 100%;
+}

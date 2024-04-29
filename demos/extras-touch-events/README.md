@@ -4,5 +4,5 @@
 git clone --recurse-submodules https://github.com/ribajs/riba.git
 cd riba/demos/extras-touch-events
 yarn install
-yarn run start
+yarn start
 ```

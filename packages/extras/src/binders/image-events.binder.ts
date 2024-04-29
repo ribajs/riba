@@ -1,4 +1,5 @@
 import { Binder } from "@ribajs/core";
+import type { ImageEventDetail } from "../types/index.js";
 import imagesLoaded from "imagesloaded";
 
 /**
@@ -23,6 +24,7 @@ export class ImageEventsBinder extends Binder<any, HTMLElement> {
   static key = "image-events";
 
   private events?: ImagesLoaded.ImagesLoaded;
+  priority = 9000;
 
   private _onEvent(
     customEventName: string,
@@ -30,8 +32,8 @@ export class ImageEventsBinder extends Binder<any, HTMLElement> {
     image?: ImagesLoaded.LoadingImage,
   ) {
     this.el.dispatchEvent(
-      new CustomEvent(customEventName, {
-        detail: { load, image },
+      new CustomEvent<ImageEventDetail>(customEventName, {
+        detail: { load, image } as ImageEventDetail,
       }),
     );
   }
@@ -42,8 +44,6 @@ export class ImageEventsBinder extends Binder<any, HTMLElement> {
   private onProgress = this._onEvent.bind(this, "load-progress");
 
   bind(el: HTMLElement) {
-    this.unbind();
-
     this.events = imagesLoaded(el);
 
     // Forward the events as native events
@@ -59,11 +59,18 @@ export class ImageEventsBinder extends Binder<any, HTMLElement> {
       this.events?.off("done", this.onDone);
       this.events?.off("fail", this.onFail);
       this.events?.off("progress", this.onProgress);
+      this.events = undefined;
     }
   }
 
   routine() {
-    // this.bind(el);
+    // this.unbind();
+    // requestAnimationFrame(() => {
+
+    // });
+
+    console.debug("routine", this.el.getAttribute("src"));
+    // this.bind(this.el);
     this.events?.check();
   }
 }

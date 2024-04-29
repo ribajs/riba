@@ -4,5 +4,5 @@
 git clone --recurse-submodules https://github.com/ribajs/riba.git
 cd riba/demos/bs5-slider
 yarn install
-yarn run start
+yarn start
 ```

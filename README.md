@@ -12,12 +12,12 @@ We are using yarn to build and release Riba, so to test the demos please use yar
 
 ## Demos
 
-For the different modules there are some demos, to start one of the demos go into the directory and execute it with `yarn run start`: 
+For the different modules there are some demos, to start one of the demos go into the directory and execute it with `yarn start`: 
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git
 cd riba/demos/core-each-item # replace core-each-item with a demo of your choice
-yarn run start
+yarn start
 ```
 
 ## Examples
