@@ -71,8 +71,7 @@
     "@ribajs/core": "workspace:^",
     "@ribajs/events": "workspace:^",
     "@ribajs/utils": "workspace:^",
-    "ev-emitter": "^2.1.2",
-    "imagesloaded": "github:JumpLink/imagesloaded"
+    "ev-emitter": "^2.1.2"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

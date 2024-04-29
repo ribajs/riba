@@ -1,5 +1,4 @@
 import { Component } from "@ribajs/core";
-import { ImageEvent } from "@ribajs/extras";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
 export class ExtrasImageEventsExampleComponent extends Component {
@@ -19,22 +18,23 @@ export class ExtrasImageEventsExampleComponent extends Component {
     super();
   }
 
-  public log(eventName: string, event: ImageEvent) {
+  public log(eventName: string, event: Event) {
     console.info(eventName, event);
     if (this.consoleElement) {
       let html = `<p class="log"><span class="name">${eventName}</span>`;
-      const detail = event.detail;
-      if (detail.image?.isLoaded !== undefined) {
-        html += `<span class="detail">(isLoaded: ${detail.image?.isLoaded})</span>`;
-      }
       html +=
         '<span class="time">' + new Date().toLocaleTimeString() + "</span></p>";
       this.consoleElement.insertAdjacentHTML("afterbegin", html);
     }
   }
 
+  protected getRandomImage() {
+    const rand = Math.floor(Math.random() * 1000) + 1;
+    return `https://picsum.photos/5000/1000?random=${rand}`;
+  }
+
   public changeImage() {
-    this.scope.imageSource = `https://picsum.photos/5000/1000?random=${Math.random()}`;
+    this.scope.imageSource = this.getRandomImage();
   }
 
   protected connectedCallback() {

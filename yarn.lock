@@ -6766,7 +6766,6 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-prettier: "npm:^5.1.3"
     ev-emitter: "npm:^2.1.2"
-    imagesloaded: "github:JumpLink/imagesloaded"
     jest: "npm:^29.7.0"
     jest-extended: "npm:^4.0.2"
     prettier: "npm:^3.2.5"
@@ -15909,15 +15908,6 @@ __metadata:
   version: 5.2.4
   resolution: "ignore@npm:5.2.4"
   checksum: 10/4f7caf5d2005da21a382d4bd1d2aa741a3bed51de185c8562dd7f899a81a620ac4fd0619b06f7029a38ae79e4e4c134399db3bd0192c703c3ef54bb82df3086c
-  languageName: node
-  linkType: hard
-
-"imagesloaded@github:JumpLink/imagesloaded":
-  version: 5.0.0
-  resolution: "imagesloaded@https://github.com/JumpLink/imagesloaded.git#commit=af6386897e1bf2d030d48387e90f5d373cb9b263"
-  dependencies:
-    ev-emitter: "npm:^2.1.2"
-  checksum: 10/245261eab8858050af387ed6032f3e8ead392d261e9f1591aa4ed7cdb219d47da24c9b2ba5070807958674984239456b5a103163ef924f801541c2c538f0f6ee
   languageName: node
   linkType: hard
 

@@ -1,6 +1,4 @@
 export * from "./base-event-detail.js";
-export * from "./image-event-detail.js";
-export * from "./image-event.js";
 export * from "./media-ready-state.js";
 export * from "./module-options.js";
 export * from "./position.js";

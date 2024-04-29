@@ -1,15 +1,9 @@
 <div class="row flex-column flex-md-row d-flex flex-nowrap h-100">
   <div
     class="col d-flex justify-content-center align-items-center bg-light text-dark touch-zone"
-    rv-image-events="imageSource"
-    rv-on-load-always="log | args 'load-always'"
-    rv-on-load-progress="log | args 'load-progress'"
-    rv-on-load-done="log | args 'load-done'"
-    rv-on-load-fail="log | args 'load-fail'"
-
   >
     <div class="d-flex flex-column gap-2">
-      <img rv-element="imageEl" class="img-fluid" rv-src="imageSource" alt="Random placeholder image" />
+      <img class="img-fluid" rv-src="imageSource" alt="Random placeholder image" rv-on-load="log | args 'load'" rv-on-error="log | args 'error'" rv-on-binder-changed="log | args 'changed'" />
       <button class="btn btn-primary mx-auto" rv-on-click="changeImage">Change Image</button>
     </div>
   </div>

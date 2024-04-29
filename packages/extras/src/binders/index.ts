@@ -1,5 +1,4 @@
 export * from "./data-scroll-position-y.binder.js";
-export * from "./image-events.binder.js";
 export * from "./touch-events.binder.js";
 export * from "./scroll-events.binder.js";
 export * from "./scroll-position-angle.binder.js";

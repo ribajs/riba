@@ -6,10 +6,10 @@ import { setAttribute } from "@ribajs/utils";
  * Sets the attribute on the element. If no binder above is matched it will fall
  * back to using this binder.
  */
-export class AttributeBinder extends Binder<any, HTMLElement> {
+export class AttributeBinder<T = any, E = HTMLElement> extends Binder<T, E> {
   static key = "attr-*";
 
-  routine(el: HTMLElement, newValue: any) {
+  routine(el: E, newValue: T) {
     if (!this.type) {
       throw new Error("Can't set attribute of " + this.type);
     }
@@ -18,7 +18,7 @@ export class AttributeBinder extends Binder<any, HTMLElement> {
       newValue: newValueFormatted,
       oldValue,
       changed,
-    } = setAttribute(el, this.type, newValue);
+    } = setAttribute(el as HTMLElement, this.type, newValue);
 
     // If this is a source element, the parent a video element and the attribute is the `src`, start loading the video
     if (
@@ -32,10 +32,10 @@ export class AttributeBinder extends Binder<any, HTMLElement> {
     }
 
     if (changed) {
-      el.dispatchEvent(
+      (el as HTMLElement).dispatchEvent(
         new CustomEvent("binder-changed", {
           detail: { name: this.type, newValue: newValueFormatted, oldValue },
-        } as BinderAttributeChangedEvent),
+        } as BinderAttributeChangedEvent)
       );
     }
   }
