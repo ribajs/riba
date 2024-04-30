@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/events",
-  "version": "2.0.0-rc.14",
+  "version": "2.0.0-rc.15",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -34,6 +34,6 @@
     "jest-config": "^29.7.0",
     "jest-extended": "^4.0.2",
     "ts-jest": "^29.1.2",
-    "typescript": "5.3.3"
+    "typescript": "5.4.5"
   }
 }

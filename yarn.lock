@@ -3830,7 +3830,7 @@ __metadata:
     "@types/node": "npm:^20.12.7"
     eslint: "npm:^8.57.0"
     gamecontroller.js: "workspace:^"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -3873,7 +3873,7 @@ __metadata:
     jest-extended: "npm:^4.0.2"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -3950,7 +3950,7 @@ __metadata:
     popper.js: "npm:^1.16.1"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -3993,7 +3993,7 @@ __metadata:
     photoswipe: "npm:^5.4.3"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -4044,7 +4044,7 @@ __metadata:
     jest-extended: "npm:^4.0.2"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -4067,7 +4067,7 @@ __metadata:
     idb-keyval: "npm:^6.2.1"
     keshi: "npm:^2.0.7"
     prettier: "npm:^3.2.5"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -4109,7 +4109,7 @@ __metadata:
     jest-extended: "npm:^4.0.2"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -4157,7 +4157,7 @@ __metadata:
     prettier: "npm:^3.2.5"
     source-map-support: "npm:^0.5.21"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-glob-entry: "npm:^2.1.1"
@@ -4218,7 +4218,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -4279,7 +4279,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -4342,7 +4342,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -4407,7 +4407,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -4472,7 +4472,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -4535,7 +4535,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -4595,7 +4595,7 @@ __metadata:
     serve: "npm:^14.2.3"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -4653,7 +4653,7 @@ __metadata:
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -4722,7 +4722,7 @@ __metadata:
     style-loader: "npm:^4.0.0"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -4786,7 +4786,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -4849,7 +4849,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -4913,7 +4913,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -4977,7 +4977,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -5043,7 +5043,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     vite: "npm:^5.2.10"
   languageName: unknown
   linkType: soft
@@ -5109,7 +5109,7 @@ __metadata:
     serve: "npm:^14.2.3"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -5173,7 +5173,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -5238,7 +5238,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     vite: "npm:^5.2.10"
   languageName: unknown
   linkType: soft
@@ -5299,7 +5299,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -5368,7 +5368,7 @@ __metadata:
     style-loader: "npm:^4.0.0"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -5432,7 +5432,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -5496,7 +5496,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -5561,7 +5561,7 @@ __metadata:
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -5623,7 +5623,7 @@ __metadata:
     serve: "npm:^14.2.3"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -5685,7 +5685,7 @@ __metadata:
     serve: "npm:^14.2.3"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -5746,7 +5746,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -5804,7 +5804,7 @@ __metadata:
     serve: "npm:^14.2.3"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -5869,7 +5869,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     vite: "npm:^5.2.10"
   languageName: unknown
   linkType: soft
@@ -5926,7 +5926,7 @@ __metadata:
     serve: "npm:^14.2.3"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -5989,7 +5989,7 @@ __metadata:
     serve: "npm:^14.2.3"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -6053,7 +6053,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -6087,7 +6087,7 @@ __metadata:
     sass: "npm:^1.75.0"
     serve: "npm:^14.2.3"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     vite: "npm:^5.2.10"
   languageName: unknown
   linkType: soft
@@ -6149,7 +6149,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -6214,7 +6214,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -6280,7 +6280,7 @@ __metadata:
     serve: "npm:^14.2.3"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -6342,7 +6342,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -6405,7 +6405,7 @@ __metadata:
     sass-loader: "npm:^14.2.1"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -6467,7 +6467,7 @@ __metadata:
     sass-loader: "npm:^14.2.1"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -6530,7 +6530,7 @@ __metadata:
     sass-loader: "npm:^14.2.1"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -6563,7 +6563,7 @@ __metadata:
     sass: "npm:^1.75.0"
     serve: "npm:^14.2.3"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     vite: "npm:^5.2.10"
   languageName: unknown
   linkType: soft
@@ -6628,7 +6628,7 @@ __metadata:
     serve: "npm:^14.2.3"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -6693,7 +6693,7 @@ __metadata:
     serve: "npm:^14.2.3"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -6787,7 +6787,7 @@ __metadata:
     style-loader: "npm:^4.0.0"
     terser-webpack-plugin: "npm:^5.3.10"
     ts-loader: "npm:^9.5.1"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-stream: "npm:^7.0.0"
@@ -6807,7 +6807,7 @@ __metadata:
     "@types/eslint": "npm:^8.56.10"
     "@types/node": "npm:^20.12.7"
     eslint: "npm:^8.57.0"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -6825,7 +6825,7 @@ __metadata:
     "@yarnpkg/pnpify": "npm:^4.0.1"
     esbuild: "npm:^0.20.2"
     find-root: "npm:^1.1.0"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -6842,7 +6842,7 @@ __metadata:
     eslint-plugin-import: "npm:^2.29.1"
     eslint-plugin-prettier: "npm:^5.1.3"
     prettier: "npm:^3.2.5"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -6861,7 +6861,7 @@ __metadata:
     jest-config: "npm:^29.7.0"
     jest-extended: "npm:^4.0.2"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -6899,7 +6899,7 @@ __metadata:
     jest-extended: "npm:^4.0.2"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -6919,7 +6919,7 @@ __metadata:
     "@types/node": "npm:^20.12.7"
     eslint: "npm:^8.57.0"
     fuse.js: "npm:^7.0.0"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -6933,7 +6933,7 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@types/jest": "npm:^29.5.12"
     eslint: "npm:^8.57.0"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -6967,7 +6967,7 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-prettier: "npm:^5.1.3"
     prettier: "npm:^3.2.5"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -7025,7 +7025,7 @@ __metadata:
     jquery: "npm:^3.7.1"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -7043,7 +7043,7 @@ __metadata:
     "@types/eslint": "npm:^8.56.10"
     "@types/node": "npm:^20.12.7"
     eslint: "npm:^8.57.0"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -7087,7 +7087,7 @@ __metadata:
     leaflet: "npm:^1.9.4"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -7108,7 +7108,7 @@ __metadata:
     eslint: "npm:^8.57.0"
     lottie-web: "npm:^5.12.2"
     sass: "npm:^1.75.0"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -7146,7 +7146,7 @@ __metadata:
     luxon: "npm:^3.4.4"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -7188,7 +7188,7 @@ __metadata:
     masonry-layout: "npm:^4.2.2"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -7234,7 +7234,7 @@ __metadata:
     moment: "npm:^2.30.1"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -7276,7 +7276,7 @@ __metadata:
     monaco-editor: "npm:0.48.0"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -7376,7 +7376,7 @@ __metadata:
     jest-extended: "npm:^4.0.2"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -7418,7 +7418,7 @@ __metadata:
     photoswipe: "npm:^5.4.3"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -7480,7 +7480,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -7543,7 +7543,7 @@ __metadata:
     sass: "npm:^1.75.0"
     sass-loader: "npm:^14.2.1"
     serve: "npm:^14.2.3"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-server: "npm:^5.0.4"
@@ -7565,7 +7565,7 @@ __metadata:
     "@types/node": "npm:^20.12.7"
     concurrently: "npm:^8.2.2"
     eslint: "npm:^8.57.0"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -7659,7 +7659,7 @@ __metadata:
     prettier: "npm:^3.2.5"
     regexpp: "npm:^3.2.0"
     tsutils: "npm:^3.21.0"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -7695,7 +7695,7 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-prettier: "npm:^5.1.3"
     prettier: "npm:^3.2.5"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -7720,7 +7720,7 @@ __metadata:
     debug: "npm:^4.3.4"
     eslint: "npm:^8.57.0"
     monaco-editor: "npm:^0.48.0"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -7758,7 +7758,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.1.3"
     prettier: "npm:^3.2.5"
     socket.io-client: "npm:4.7.5"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -7808,7 +7808,7 @@ __metadata:
     prettier: "npm:^3.2.5"
     terser: "npm:^5.31.0"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   dependenciesMeta:
@@ -7854,7 +7854,7 @@ __metadata:
     jest-extended: "npm:^4.0.2"
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -7899,7 +7899,7 @@ __metadata:
     "@types/node": "npm:^20.12.7"
     babel-jest: "npm:^29.7.0"
     eslint: "npm:^8.57.0"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -7943,7 +7943,7 @@ __metadata:
     sass-loader: "npm:^14.2.1"
     style-loader: "npm:^4.0.0"
     terser-webpack-plugin: "npm:^5.3.10"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack-dev-server: "npm:^5.0.4"
     webpack-manifest-plugin: "npm:^5.0.0"
     webpack-node-externals: "npm:^3.0.0"
@@ -14962,7 +14962,7 @@ __metadata:
     http-server: "npm:^14.1.1"
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
@@ -21680,7 +21680,7 @@ __metadata:
     sass: "npm:^1.75.0"
     source-map-support: "npm:^0.5.21"
     ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
+    typescript: "npm:5.4.5"
     webpack-glob-entry: "npm:^2.1.1"
   dependenciesMeta:
     prettier:
@@ -23626,23 +23626,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.3.3":
-  version: 5.3.3
-  resolution: "typescript@npm:5.3.3"
+"typescript@npm:5.4.5":
+  version: 5.4.5
+  resolution: "typescript@npm:5.4.5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/6e4e6a14a50c222b3d14d4ea2f729e79f972fa536ac1522b91202a9a65af3605c2928c4a790a4a50aa13694d461c479ba92cedaeb1e7b190aadaa4e4b96b8e18
+  checksum: 10/d04a9e27e6d83861f2126665aa8d84847e8ebabcea9125b9ebc30370b98cb38b5dff2508d74e2326a744938191a83a69aa9fddab41f193ffa43eabfdf3f190a5
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>":
-  version: 5.3.3
-  resolution: "typescript@patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"
+"typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>":
+  version: 5.4.5
+  resolution: "typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/c93786fcc9a70718ba1e3819bab56064ead5817004d1b8186f8ca66165f3a2d0100fee91fa64c840dcd45f994ca5d615d8e1f566d39a7470fc1e014dbb4cf15d
+  checksum: 10/760f7d92fb383dbf7dee2443bf902f4365db2117f96f875cf809167f6103d55064de973db9f78fe8f31ec08fff52b2c969aee0d310939c0a3798ec75d0bca2e1
   languageName: node
   linkType: hard
 

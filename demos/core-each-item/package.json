@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/demo-core-each-item",
-  "version": "2.0.0-rc.14",
+  "version": "2.0.0-rc.15",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -70,7 +70,7 @@
     "serve": "^14.2.3",
     "terser-webpack-plugin": "^5.3.10",
     "ts-jest": "^29.1.2",
-    "typescript": "5.3.3",
+    "typescript": "5.4.5",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4"
