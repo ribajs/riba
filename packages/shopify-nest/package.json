@@ -25,17 +25,17 @@
     "@ribajs/utils": "workspace:^",
     "@types/debug": "^4.1.12",
     "debug": "^4.3.4",
-    "monaco-editor": "^0.47.0"
+    "monaco-editor": "^0.48.0"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.24.4",
-    "@babel/runtime-corejs3": "^7.24.4",
+    "@babel/runtime": "^7.24.5",
+    "@babel/runtime-corejs3": "^7.24.5",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^20.12.5",
-    "eslint": "^8.x.x",
+    "@types/node": "^20.12.7",
+    "eslint": "^8.57.0",
     "typescript": "5.3.3"
   }
 }

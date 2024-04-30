@@ -30,12 +30,12 @@
     "@ribajs/utils": "workspace:^"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.24.4",
-    "@babel/runtime-corejs3": "^7.24.4",
+    "@babel/runtime": "^7.24.5",
+    "@babel/runtime-corejs3": "^7.24.5",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^20.12.5",
+    "@types/node": "^20.12.7",
     "concurrently": "^8.2.2",
-    "eslint": "^8.x.x",
+    "eslint": "^8.57.0",
     "typescript": "5.3.3"
   }
 }
