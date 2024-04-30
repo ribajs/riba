@@ -1,4 +1,4 @@
-import { Binder, BinderAttributeChangedEvent } from "@ribajs/core";
+import { Binder, EventBinderChanged } from "@ribajs/core";
 import { extend } from "@ribajs/utils/src/type.js";
 import { I18nService } from "../services/i18n.service.js";
 import {
@@ -113,8 +113,8 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
       });
   }
 
-  private _onAttributeChanged(data: BinderAttributeChangedEvent) {
-    if (data.detail.name.startsWith("data-")) {
+  private _onAttributeChanged(data: EventBinderChanged) {
+    if (data.detail.name?.startsWith("data-")) {
       const varName = data.detail.name.slice(5);
       const newVar: any = {};
       newVar[varName] = data.detail.newValue;
@@ -179,7 +179,7 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
         this.initOnReady(
           currentLangcode,
           currentLangcode !== initialLangcode ||
-            !options.localesService.doNotTranslateDefaultLanguage,
+            !options.localesService.doNotTranslateDefaultLanguage
         );
       } else {
         this.i18n?.event.on("ready", this.initOnReady, this);
@@ -198,7 +198,7 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
   unbind() {
     this.el.removeEventListener(
       "binder-changed" as any,
-      this.onAttributeChanged,
+      this.onAttributeChanged
     );
     this.i18n?.event.off("changed", this.onLanguageChanged, this);
   }

@@ -1,6 +1,7 @@
 import { Binder } from "../binder.js";
-import { BinderAttributeChangedEvent } from "../types/index.js";
 import { setAttribute } from "@ribajs/utils";
+
+import type { EventBinderChangedDetail } from "../types/index.js";
 
 /**
  * Sets the attribute on the element. If no binder above is matched it will fall
@@ -33,9 +34,9 @@ export class AttributeBinder<T = any, E = HTMLElement> extends Binder<T, E> {
 
     if (changed) {
       (el as HTMLElement).dispatchEvent(
-        new CustomEvent("binder-changed", {
+        new CustomEvent<EventBinderChangedDetail>("binder-changed", {
           detail: { name: this.type, newValue: newValueFormatted, oldValue },
-        } as BinderAttributeChangedEvent),
+        })
       );
     }
   }
