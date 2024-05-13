@@ -251,7 +251,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
 
         if (!formatter) {
           const error = new Error(
-            `[${this.name}] No formatters with id "${id}" found!`
+            `[${this.name}] No formatters with id "${id}" found!`,
           );
           console.error(error, "html element: ", this.el);
           throw error;

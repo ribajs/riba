@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/demo-rv-monaco-editor",
-  "version": "2.0.0-rc.16",
+  "version": "2.0.0-rc.17",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -40,11 +40,11 @@
     "jest-extended": "^4.0.2",
     "prettier": "^3.2.5",
     "rollup-plugin-pug": "^1.1.1",
-    "sass": "^1.75.0",
+    "sass": "^1.77.1",
     "serve": "^14.2.3",
     "ts-jest": "^29.1.2",
     "typescript": "5.4.5",
-    "vite": "^5.2.10"
+    "vite": "^5.2.11"
   },
   "dependencies": {
     "@ribajs/core": "workspace:^",

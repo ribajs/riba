@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/jquery",
   "description": "JQuery module for Riba.js",
-  "version": "2.0.0-rc.16",
+  "version": "2.0.0-rc.17",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -72,7 +72,7 @@
     "@ribajs/cache": "workspace:^",
     "@ribajs/core": "workspace:^",
     "@ribajs/utils": "workspace:^",
-    "@types/jquery": "^3.5.29",
+    "@types/jquery": "^3.5.30",
     "jquery": "^3.7.1"
   },
   "bugs": {
