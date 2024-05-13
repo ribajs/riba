@@ -250,9 +250,11 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
         const formatter = this.view.options.formatters[id];
 
         if (!formatter) {
-          throw new Error(
-            `[${this.name}] No formatters with id "${id}" found!`,
+          const error = new Error(
+            `[${this.name}] No formatters with id "${id}" found!`
           );
+          console.error(error, "html element: ", this.el);
+          throw error;
         }
 
         const processedArgs = this.parseFormatterArguments(args, index);
