@@ -27,10 +27,15 @@ export class LocalesRestService extends LocalesService {
 
   constructor(
     protected url: string,
-    doNotTranslateDefaultLanguage = false,
+    doNotRetranslateDefaultLanguage = false,
     showMissingTranslation = false,
+    autoDetectLangcode = false,
   ) {
-    super(doNotTranslateDefaultLanguage, showMissingTranslation);
+    super(
+      doNotRetranslateDefaultLanguage,
+      showMissingTranslation,
+      autoDetectLangcode,
+    );
 
     this.url = url;
 

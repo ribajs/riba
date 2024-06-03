@@ -9,8 +9,6 @@ export abstract class LocalesService {
 
   public event = new EventDispatcher("i18n");
 
-  public showMissingTranslation = false;
-
   protected _ready = false;
 
   /**
@@ -24,12 +22,10 @@ export abstract class LocalesService {
   protected abstract initialLangcode?: string;
 
   constructor(
-    public doNotTranslateDefaultLanguage: boolean,
-    showMissingTranslation: boolean,
-  ) {
-    this.doNotTranslateDefaultLanguage = doNotTranslateDefaultLanguage;
-    this.showMissingTranslation = showMissingTranslation;
-  }
+    public doNotRetranslateDefaultLanguage: boolean,
+    public showMissingTranslation: boolean,
+    public autoDetectLangcode: boolean,
+  ) {}
 
   /**
    * Get translation by properties, e.g. `de.form.newsletter_label`
@@ -241,10 +237,12 @@ export abstract class LocalesService {
             browserLangFound = true;
           }
         }
-        // only switch language if the browser language is not the default language (if doNotTranslateDefaultLanguage is true)
+        // only switch language if the browser language is not the default language (if doNotRetranslateDefaultLanguage is true)
         if (
-          !this.doNotTranslateDefaultLanguage ||
-          (browserLangFound && browserLangcode !== this.currentLangcode)
+          this.autoDetectLangcode &&
+          !this.doNotRetranslateDefaultLanguage &&
+          browserLangFound &&
+          browserLangcode !== this.currentLangcode
         ) {
           this.setLangcode(browserLangcode, true);
         }
@@ -255,7 +253,7 @@ export abstract class LocalesService {
         // If the current langcode is not the initial langcode then translation is needed
         const translationNeeded =
           this.currentLangcode !== this.initialLangcode ||
-          !this.doNotTranslateDefaultLanguage;
+          !this.doNotRetranslateDefaultLanguage;
         this.event.trigger("ready", this.currentLangcode, translationNeeded);
       })
       .catch((error) => {

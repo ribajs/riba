@@ -22,10 +22,15 @@ export class LocalesStaticService extends LocalesService {
   constructor(
     protected locales: any,
     protected id?: string,
-    doNotTranslateDefaultLanguage = false,
+    doNotRetranslateDefaultLanguage = false,
     showMissingTranslation = false,
+    autoDetectLangcode = false,
   ) {
-    super(doNotTranslateDefaultLanguage, showMissingTranslation);
+    super(
+      doNotRetranslateDefaultLanguage,
+      showMissingTranslation,
+      autoDetectLangcode,
+    );
     if (!id) {
       id = "main";
     }
