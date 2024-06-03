@@ -8,7 +8,7 @@ export class LocalesService extends LocalesRestService {
   }
   protected constructor(
     baseUrl = BASE_HOST_URL,
-    doNotTranslateDefaultLanguage = false,
+    doNotRetranslateDefaultLanguage = false,
     showMissingTranslation = false,
   ) {
     let url = `${baseUrl}/shopify/api/themes/${
@@ -17,7 +17,7 @@ export class LocalesService extends LocalesRestService {
     if ((window as any).Shopify.shop) {
       url += `?shop=${(window as any).Shopify.shop}`;
     }
-    super(url, doNotTranslateDefaultLanguage, showMissingTranslation);
+    super(url, doNotRetranslateDefaultLanguage, showMissingTranslation);
     if (LocalesService.instance) {
       return LocalesService.instance;
     }
@@ -26,7 +26,7 @@ export class LocalesService extends LocalesRestService {
 
   public static getSingleton(
     baseUrl = BASE_HOST_URL,
-    doNotTranslateDefaultLanguage = false,
+    doNotRetranslateDefaultLanguage = false,
     showMissingTranslation = false,
   ) {
     if (LocalesService.instance) {
@@ -34,7 +34,7 @@ export class LocalesService extends LocalesRestService {
     }
     LocalesService.instance = new LocalesService(
       baseUrl,
-      doNotTranslateDefaultLanguage,
+      doNotRetranslateDefaultLanguage,
       showMissingTranslation,
     );
     return LocalesService.instance;
