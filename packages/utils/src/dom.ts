@@ -100,7 +100,7 @@ export const getInputValue = (
     | HTMLOptionsCollection,
 ) => {
   const results: string[] = [];
-  if ((el as HTMLSelectElement).type === "checkbox") {
+  if ((el as HTMLInputElement).type === "checkbox") {
     return (el as HTMLInputElement).checked;
   } else if ((el as HTMLSelectElement).type === "select-multiple") {
     const options: HTMLOptionsCollection = (el as HTMLSelectElement).options;

@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/demo-i18n-static",
-  "version": "2.0.0-rc.18",
+  "version": "2.0.0-rc.19",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -23,8 +23,8 @@
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
     "@types/jest": "^29.5.12",
-    "@typescript-eslint/eslint-plugin": "^7.11.0",
-    "@typescript-eslint/parser": "^7.11.0",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.14.1",
     "@yarnpkg/pnpify": "^4.1.0",
     "bootstrap": "5.3.3",
     "eslint": "^8.57.0",
@@ -33,14 +33,14 @@
     "jest": "^29.7.0",
     "jest-extended": "^4.0.2",
     "postcss-modules": "^6.0.0",
-    "postcss-preset-env": "^9.5.14",
-    "prettier": "^3.3.0",
+    "postcss-preset-env": "^9.5.15",
+    "prettier": "^3.3.2",
     "rollup-plugin-pug": "^1.1.1",
-    "sass": "^1.77.4",
+    "sass": "^1.77.6",
     "serve": "^14.2.3",
-    "ts-jest": "^29.1.4",
-    "typescript": "5.4.5",
-    "vite": "^5.2.12"
+    "ts-jest": "^29.1.5",
+    "typescript": "5.5.2",
+    "vite": "^5.3.2"
   },
   "dependencies": {
     "@ribajs/core": "workspace:^",

@@ -11,22 +11,22 @@ import {
  */
 export const containsFormatter = {
   name: "contains",
-  read(value: string | any | any[], attr: string | number, search: string) {
+  read(value: string | any | any[], attr: string | number, search?: string) {
     if (isString(value)) {
-      if (value.indexOf(attr) > -1) {
+      if (value.indexOf(attr.toString()) > -1) {
         return value;
       }
       return false;
     } else if (Array.isArray(value)) {
-      if (!isNumber(attr)) {
-        console.warn(
-          "[containsFormatter] The second parameter must be of type number for arrays but is " +
-            typeof attr,
-        );
-      }
-      attr = Number(attr);
       if (isDefined(attr)) {
         if (isDefined(search)) {
+          if (!isNumber(attr)) {
+            console.warn(
+              "[containsFormatter] The second parameter must be of type number if a search is defined but is " +
+                typeof attr,
+            );
+          }
+          attr = Number(attr);
           if (value[attr] === search) {
             return value;
           }

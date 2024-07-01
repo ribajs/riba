@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { resolve, dirname } from "path";
 declare const rootPath: string;
 declare const findDir: (searchPaths: string[]) => string | null;
