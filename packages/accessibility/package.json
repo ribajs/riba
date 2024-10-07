@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/accessibility",
-  "version": "2.0.0-rc.19",
+  "version": "2.0.0-rc.20",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -20,13 +20,13 @@
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.24.7",
-    "@babel/runtime-corejs3": "^7.24.7",
+    "@babel/runtime": "^7.25.7",
+    "@babel/runtime-corejs3": "^7.25.7",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/eslint": "^8.56.10",
-    "@types/node": "^20.14.9",
-    "eslint": "^8.57.0",
+    "@types/eslint": "^8.56.12",
+    "@types/node": "^20.16.10",
+    "eslint": "^8.57.1",
     "gamecontroller.js": "workspace:^",
-    "typescript": "5.5.2"
+    "typescript": "5.6.2"
   }
 }
