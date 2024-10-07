@@ -18,8 +18,8 @@ const isWebWorker =
   !isNode &&
   "undefined" !== typeof WorkerGlobalScope &&
   "function" === typeof importScripts &&
-  navigator instanceof WorkerNavigator;
-typeof self === "object" &&
+  navigator instanceof WorkerNavigator &&
+  typeof self === "object" &&
   (self as any).constructor &&
   (self as any).constructor.name === "DedicatedWorkerGlobalScope";
 

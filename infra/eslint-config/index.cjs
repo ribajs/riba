@@ -45,6 +45,7 @@ module.exports = {
     // }],
     // Do not throw error on .js extension for .ts files
     // 'import/no-unresolved': 'off'
+    "@typescript-eslint/no-empty-object-type": "off",
   },
   ignorePatterns: ["**/*.spec.ts", "node_modules/"],
   parserOptions: {

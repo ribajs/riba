@@ -3,7 +3,7 @@ import gulp from "gulp";
 import svgmin from "gulp-svgmin";
 import exec from "gulp-exec";
 import clean from "gulp-clean";
-import debug from "gulp-debug";
+// import debug from "gulp-debug";
 import filelist from "gulp-filelist";
 
 const svgSource = "src/svg/*.svg";
@@ -16,7 +16,7 @@ gulp.task("build:svg", () => {
   return (
     gulp
       .src(svgSource)
-      .pipe(debug())
+      // .pipe(debug())
       // TODO: Wait for MR: https://github.com/ben-eb/gulp-svgmin/issues/125
       .pipe(
         svgmin((file) => {

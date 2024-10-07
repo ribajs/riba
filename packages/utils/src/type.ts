@@ -117,7 +117,8 @@ export const fromBase64 = (base64?: string | null) => {
   let encoded: any;
   try {
     encoded = decodeURIComponent(maybeDecodedUri);
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_error) {
     encoded = maybeDecodedUri;
   }
 
@@ -135,7 +136,8 @@ export const isJson = (str?: string | null) => {
   try {
     const val = JSON.parse(str);
     return Array.isArray(val) || typeof val === "object" ? true : false;
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_error) {
     return false;
   }
 };

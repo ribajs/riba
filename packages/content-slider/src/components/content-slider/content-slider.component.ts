@@ -166,7 +166,6 @@ export class ContentSliderComponent extends TemplatesComponent {
 
     const contentInfoOffsetEl = this.querySelector<HTMLElement>(".controls");
     if (contentInfoOffsetEl) {
-      contentInfoOffsetEl.classList.add;
       this.addClasses(contentInfoOffsetEl, this.scope.activeColumnClasses);
     }
 

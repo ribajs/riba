@@ -34,7 +34,8 @@ async function fromURL(url: string): Promise<Record<string, any>> {
     const result: any = await fetch(srcUrl.toString());
 
     json = await result.json();
-  } catch (err) {
+  } catch (_error) {
+    console.error(_error);
     throw new Error(
       `An error occurred while trying to load the Lottie file from URL`,
     );
@@ -112,7 +113,7 @@ export class LottiePlayerComponent extends Component {
   // private _ro: ResizeObserver | undefined = undefined;
   private _lottie?: any;
 
-  private _prevState?: any;
+  private _prevState?: PlayerState;
 
   private _counter = 1;
 
@@ -488,7 +489,9 @@ export class LottiePlayerComponent extends Component {
   }
 
   private _onInputMouseup() {
-    this._prevState === PlayerState.Playing && this.play();
+    if (this._prevState === PlayerState.Playing) {
+      this.play();
+    }
   }
 
   /**
