@@ -23,7 +23,7 @@ export class ShopifyService {
     num: number,
     precision = 2,
     thousands = ",",
-    decimal = "."
+    decimal = ".",
   ): string {
     if (!isNumber(num) || num === null) {
       return "0";
@@ -35,7 +35,7 @@ export class ShopifyService {
     const parts = numStr.split(".");
     const dollars = parts[0].replace(
       /(\d)(?=(\d\d\d)+(?!\d))/g,
-      "$1" + thousands
+      "$1" + thousands,
     );
     const cents = parts[1] ? decimal + parts[1] : "";
 
