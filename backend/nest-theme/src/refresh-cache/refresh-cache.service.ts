@@ -21,7 +21,7 @@ export class RefreshCacheService implements OnApplicationBootstrap {
   async onApplicationBootstrap(): Promise<void> {
     setTimeout(async () => {
       await this.refresh(process.env.NEST_REMOTE_URL);
-    }, 3000);
+    }, 300000);
   }
 
   private isInternalLink(link: string, host: string) {
@@ -121,6 +121,8 @@ export class RefreshCacheService implements OnApplicationBootstrap {
     const startPath = this.theme.cache.refresh?.startPath || '/';
     try {
       await this.deepRefresh([startPath], host);
+    } catch (error) {
+      this.log.error(error);
     } finally {
       RefreshCacheService.isRunning = false;
     }

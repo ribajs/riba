@@ -16,7 +16,7 @@ export class RefreshCacheService {
   onApplicationBootstrap() {
     setTimeout(async () => {
       await this.refresh(Deno.env.get("ALOSAUR_REMOTE_URL"));
-    }, 3000);
+    }, 30000);
   }
 
   private isInternalLink(link: string, host: string) {
@@ -118,6 +118,8 @@ export class RefreshCacheService {
     const startPath = this.theme.cache.refresh?.startPath || "/";
     try {
       await this.deepRefresh([startPath], host);
+    } catch (error) {
+      this.log.error(error);
     } finally {
       RefreshCacheService.isRunning = false;
     }

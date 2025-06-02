@@ -26,7 +26,7 @@ let RefreshCacheService = RefreshCacheService_1 = class RefreshCacheService {
     async onApplicationBootstrap() {
         setTimeout(async () => {
             await this.refresh(process.env.NEST_REMOTE_URL);
-        }, 3000);
+        }, 300000);
     }
     isInternalLink(link, host) {
         if (link.startsWith('tel:') ||
@@ -109,8 +109,9 @@ let RefreshCacheService = RefreshCacheService_1 = class RefreshCacheService {
         const startPath = this.theme.cache.refresh?.startPath || '/';
         try {
             await this.deepRefresh([startPath], host);
-        }
-        finally {
+        } catch (error) {
+            this.log.error(error);
+        } finally {
             RefreshCacheService_1.isRunning = false;
         }
         this.log.log('refresh done');
