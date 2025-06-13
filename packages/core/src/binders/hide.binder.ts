@@ -8,7 +8,7 @@ export class HideBinder extends Binder<boolean, HTMLElement> {
   routine(el: HTMLElement, value: boolean) {
     el.style.display = value ? "none" : "";
     if (value) {
-      el.setAttribute("hidden", "true");
+      el.setAttribute("hidden", "");
     } else {
       el.removeAttribute("hidden");
     }
