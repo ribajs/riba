@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 /* eslint-disable no-undef */
 import { resolve, dirname, basename, extname } from "path";
 import findRoot from "find-root";

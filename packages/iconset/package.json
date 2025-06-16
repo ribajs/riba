@@ -35,19 +35,7 @@
     "Browser"
   ],
   "scripts": {
-    "build": "yarn run build:svg && yarn run build:filelist:svg",
-    "build:svg": "yarn run clean:svg && gulp build:svg --gulpfile gulpfile.js",
-    "build:filelist": "gulp build:filelist --gulpfile gulpfile.js",
-    "build:filelist:svg": "gulp build:filelist:svg --gulpfile gulpfile.js",
-    "build:filelist:png": "gulp build:filelist:png --gulpfile gulpfile.js",
-    "build:png": "gulp build:png --gulpfile gulpfile.js",
-    "build:png:8": "gulp build:png:8 --gulpfile gulpfile.js",
-    "build:png:16": "gulp build:png:16 --gulpfile gulpfile.js",
-    "build:png:32": "gulp build:png:32 --gulpfile gulpfile.js",
-    "build:png:64": "gulp build:png:64 --gulpfile gulpfile.js",
-    "build:png:128": "gulp build:png:128 --gulpfile gulpfile.js",
-    "build:png:256": "gulp build:png:256 --gulpfile gulpfile.js",
-    "clean:svg": "gulp clean:svg --gulpfile gulpfile.js",
+    "build": "node build.mjs",
     "clean": "echo 'Do not clean the iconset by default because we want to hold the build image files in the repo'"
   },
   "files": [
@@ -55,14 +43,9 @@
     "/dist"
   ],
   "devDependencies": {
-    "@babel/runtime-corejs3": "^7.26.0",
-    "core-js": "^3.39.0",
-    "gulp": "^4.0.2",
-    "gulp-clean": "^0.4.0",
-    "gulp-debug": "^5.0.1",
-    "gulp-exec": "^5.0.0",
-    "gulp-filelist": "^2.0.5",
-    "gulp-svgmin": "^4.1.0"
+    "glob": "^11.0.3",
+    "sharp": "^0.34.2",
+    "svgo": "^3.3.2"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

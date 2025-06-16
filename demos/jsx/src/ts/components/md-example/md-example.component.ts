@@ -5,7 +5,6 @@ import type { JsxHtmlGlobalProps } from "@ribajs/jsx/src/index.js";
 export type MdExampleProps = JsxHtmlGlobalProps;
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     // This extends the IntrinsicElements interface defined in @ribajs/jsx
     interface IntrinsicElements {

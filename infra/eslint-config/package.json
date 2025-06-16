@@ -2,13 +2,13 @@
   "name": "@ribajs/eslint-config",
   "description": "Default ESLint configuration for Riba.js projects",
   "version": "2.0.0-rc.21",
-  "type": "commonjs",
+  "type": "module",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "contributors": [],
   "url": "https://github.com/ribajs/riba/tree/master/infra/eslint",
-  "main": "index.cjs",
-  "module": "index.cjs",
-  "source": "index.cjs",
+  "main": "index.mjs",
+  "module": "index.mjs",
+  "source": "index.mjs",
   "files": [
     "LICENSE",
     "README.md",
@@ -34,16 +34,16 @@
     "prettier"
   ],
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.13.0",
+    "@typescript-eslint/eslint-plugin": "^8.34.0",
     "@typescript-eslint/experimental-utils": "^5.62.0",
-    "@typescript-eslint/parser": "^8.13.0",
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-import-resolver-typescript": "^3.6.3",
+    "@typescript-eslint/parser": "^8.34.0",
+    "eslint": "^9.29.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-import-resolver-typescript": "^4.4.3",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "prettier": "^3.3.3",
-    "typescript": "5.6.3"
+    "eslint-plugin-prettier": "^5.4.1",
+    "prettier": "^3.5.3",
+    "typescript": "5.8.3"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

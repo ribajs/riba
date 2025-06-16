@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 /* eslint-disable no-undef */
 const { getDependencies } = require("./dependencies.cjs");
 const { getBaseConfig } = require("./base-config.cjs");

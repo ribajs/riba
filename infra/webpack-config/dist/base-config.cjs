@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 const { resolve, rootPath, findDir, findFile } = require("./path.cjs");
 const { logger } = require("./logger.cjs");
 const { colors } = require("./colors.cjs");
@@ -104,47 +104,6 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
 
     if (config.scssIndexPath) {
       logger.debug("Set config.scssIndexPath to: " + config.scssIndexPath);
-    }
-  }
-
-  // ESLint path and Fork Ts Checker
-  {
-    config.forkTsCheckerConfig = config.forkTsCheckerConfig || {};
-    // Disable eslint with config.forkTsCheckerConfig.eslint = false;
-    if (typeof config.forkTsCheckerConfig.eslint === "undefined") {
-      const eslintConfigPath = findFile(rootPath, [
-        ".eslintrc.js",
-        ".eslintrc.cjs",
-        "../.eslintrc.js",
-        "../.eslintrc.cjs",
-        "../../.eslintrc.js",
-        "../../.eslintrc.cjs",
-      ]);
-
-      const eslintConfig = {
-        files: config.tsSourceDir + "/**/*.{ts,tsx,js,jsx}",
-        options: {},
-      };
-
-      if (eslintConfigPath) {
-        logger.debug(
-          "Enable ESLint because a eslint config file was found in " +
-          eslintConfigPath
-        );
-        const _options = require(eslintConfigPath);
-        delete _options.root;
-        if (Array.isArray(_options.extends) && _options.extends["@ribajs"]) {
-          delete _options.extends;
-          const _ribaOptions = require("@ribajs/eslint-config");
-
-          eslintConfig.options = { ..._ribaOptions, _options };
-        }
-      } else {
-        logger.debug("Use default Riba ESLint config");
-        eslintConfig.options = require("@ribajs/eslint-config");
-      }
-      // Wait for fix https://github.com/yarnpkg/berry/issues/3578
-      // config.forkTsCheckerConfig.eslint = eslintConfig;
     }
   }
 
@@ -452,10 +411,10 @@ module.exports.getBaseConfig = (config = {}, env = {}) => {
 
       config.styles.build = false;
 
-      config.forkTsCheckerConfig.typescript =
-        config.forkTsCheckerConfig.typescript || {};
+      // config.forkTsCheckerConfig.typescript =
+      //   config.forkTsCheckerConfig.typescript || {};
 
-      config.forkTsCheckerConfig.typescript.configFile = "tsconfig.ssr.json";
+      // config.forkTsCheckerConfig.typescript.configFile = "tsconfig.ssr.json";
 
       // https://github.com/nuxt/nuxt.js/blob/dev/packages/webpack/src/config/base.js#L435
       config.webpackbar = config.webpackbar || {

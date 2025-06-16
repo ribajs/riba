@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 import { Config } from "./types";
 import webpack from "webpack";
@@ -10,9 +9,6 @@ export const getDependencies = (config: Partial<Config> = {}) => {
 
   // https://github.com/nuxt-contrib/webpackbar
   config.WebpackbarPlugin = config.WebpackbarPlugin || require("webpackbar");
-
-  config.ForkTsCheckerPlugin =
-    config.ForkTsCheckerPlugin || require("fork-ts-checker-webpack-plugin");
 
   config.CssExtractPlugin =
     config.CssExtractPlugin || require("mini-css-extract-plugin");

@@ -1,6 +1,3 @@
-/* eslint-disable no-var */
-/* eslint-disable @typescript-eslint/no-empty-interface */
-/* eslint-disable @typescript-eslint/no-namespace */
 /**
  * Custom JSX module designed specifically for Ribajs's needs.
  * When overriding a default TypeDoc theme output, your implementation must create valid {@link Element}

@@ -35,7 +35,6 @@ export const LuxonToMomentCalendarFormatter: Formatter = {
         minute: "2-digit",
       });
       if (Math.abs(daysDiff) <= 2) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         return target.toRelativeCalendar(options)! + " " + hourMinute;
       }
       return (

@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
-/* eslint-disable @typescript-eslint/no-namespace */
-
 import type {
   JsxBs5AccordionProps,
   JsxBs5CollapseProps,

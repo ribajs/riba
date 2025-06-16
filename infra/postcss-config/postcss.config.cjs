@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 const { isAvailable, ribaPackages } = require("@ribajs/npm-package");
 
 const getPurgecssContent = (content) => {

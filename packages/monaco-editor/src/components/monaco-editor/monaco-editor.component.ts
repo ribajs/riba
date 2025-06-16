@@ -191,7 +191,7 @@ export class MonacoEditorComponent extends Component {
       },
     });
 
-    this.editor.onDidChangeModelContent((/*event*/) => {
+    this.editor?.onDidChangeModelContent((/*event*/) => {
       if (this.editor) {
         this.scope.dataValue = this.editor.getValue();
         if (this.scope.dataValue) {
