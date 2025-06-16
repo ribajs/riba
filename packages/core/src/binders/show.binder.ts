@@ -10,7 +10,7 @@ export class ShowBinder extends Binder<boolean, HTMLElement> {
     if (value) {
       el.removeAttribute("hidden");
     } else {
-      el.setAttribute("hidden", "true");
+      el.setAttribute("hidden", "");
     }
   }
 }
