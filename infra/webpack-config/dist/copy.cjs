@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 /* eslint-disable no-undef */
 const { isAvailable, ribaPackages } = require("@ribajs/npm-package");
 const path = require("path");

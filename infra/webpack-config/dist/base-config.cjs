@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 const { resolve, rootPath, findDir, findFile } = require("./path.cjs");
 const { logger } = require("./logger.cjs");
 const { colors } = require("./colors.cjs");

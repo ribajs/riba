@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 /* eslint-disable no-undef */
 import { resolve, dirname } from "path";
 import pkgDir from "find-root";

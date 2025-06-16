@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dirname = exports.resolve = exports.findFile = exports.findDir = exports.rootPath = void 0;
 /* eslint-disable no-case-declarations */
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 /* eslint-disable no-undef */
 const path_1 = require("path");
 Object.defineProperty(exports, "resolve", { enumerable: true, get: function () { return path_1.resolve; } });

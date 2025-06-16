@@ -16,10 +16,8 @@ export default [
     languageOptions: {
       parser: parserTypescript,
       parserOptions: {
-        ecmaVersion: 2020,
+        ecmaVersion: "latest",
         sourceType: "module",
-        ecmaFeatures: { jsx: true },
-        // project: "./tsconfig.json", // Uncomment if you want type-aware linting
       },
     },
     plugins: {
@@ -41,9 +39,8 @@ export default [
   {
     files: ["**/*.js", "**/*.jsx", "**/*.mjs", "**/*.cjs"],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: "latest",
       sourceType: "module",
-      ecmaFeatures: { jsx: true },
     },
     plugins: {
       prettier: prettierPlugin,

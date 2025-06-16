@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 const { getStyleLoaderRule } = require("./style.cjs");
 const { basename } = require("path");
 const { logger } = require("./logger.cjs");
