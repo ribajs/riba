@@ -3542,12 +3542,12 @@ __metadata:
     "@babel/runtime-corejs3": "npm:^7.27.6"
     "@ribajs/core": "workspace:^"
     "@ribajs/events": "workspace:^"
+    "@ribajs/gamecontroller.js": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/utils": "workspace:^"
     "@types/eslint": "npm:^9.6.1"
     "@types/node": "npm:^24.0.3"
     eslint: "npm:^9.29.0"
-    gamecontroller.js: "workspace:^"
     typescript: "npm:5.8.3"
   languageName: unknown
   linkType: soft
@@ -6638,6 +6638,24 @@ __metadata:
     eslint: "npm:^9.29.0"
     fuse.js: "npm:^7.1.0"
     typescript: "npm:5.8.3"
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/gamecontroller.js@workspace:^, @ribajs/gamecontroller.js@workspace:vendor/gamecontroller.js":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/gamecontroller.js@workspace:vendor/gamecontroller.js"
+  dependencies:
+    "@babel/core": "npm:^7.27.4"
+    "@babel/plugin-transform-typescript": "npm:^7.27.1"
+    "@babel/preset-env": "npm:^7.27.2"
+    "@babel/preset-typescript": "npm:^7.27.1"
+    babel-loader: "npm:^10.0.0"
+    http-server: "npm:^14.1.1"
+    jest: "npm:^29.7.0"
+    jest-environment-jsdom: "npm:^30.0.0"
+    typescript: "npm:5.8.3"
+    webpack: "npm:^5.99.9"
+    webpack-cli: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
@@ -13664,24 +13682,6 @@ __metadata:
   checksum: 10/9f9105e54372897a46cb3e04074f0db5bd0a428320d4618276a57e6142d7502235a556f05cf87aa3c5d6d9c6fdfa06b901b78379c48aa0951672ccbc4a1bfe70
   languageName: node
   linkType: hard
-
-"gamecontroller.js@workspace:^, gamecontroller.js@workspace:vendor/gamecontroller.js":
-  version: 0.0.0-use.local
-  resolution: "gamecontroller.js@workspace:vendor/gamecontroller.js"
-  dependencies:
-    "@babel/core": "npm:^7.27.4"
-    "@babel/plugin-transform-typescript": "npm:^7.27.1"
-    "@babel/preset-env": "npm:^7.27.2"
-    "@babel/preset-typescript": "npm:^7.27.1"
-    babel-loader: "npm:^10.0.0"
-    http-server: "npm:^14.1.1"
-    jest: "npm:^29.7.0"
-    jest-environment-jsdom: "npm:^30.0.0"
-    typescript: "npm:5.8.3"
-    webpack: "npm:^5.99.9"
-    webpack-cli: "npm:^6.0.1"
-  languageName: unknown
-  linkType: soft
 
 "gen-pug-source-map@npm:^1.0.0":
   version: 1.0.0

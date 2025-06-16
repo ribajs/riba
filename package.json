@@ -1,7 +1,7 @@
 {
   "name": "ribajs",
   "description": "Declarative data binding + template solution.",
-  "version": "2.0.0-rc.21",
+  "version": "2.0.0-rc.23",
   "type": "module",
   "engines": {
     "node": ">=20.0.0 || >=22.0.0"
@@ -47,9 +47,9 @@
     "build:libs": "yarn workspaces foreach -v -p -W --no-private --jobs 5 run build",
     "clean": "yarn workspaces foreach -v -p -W run clean",
     "bump:prerelease": "yarn workspaces foreach -v version prerelease",
-    "bump:patch": "yarn workspaces foreach -v version patch",
-    "bump:minor": "yarn workspaces foreach -v version minor",
-    "bump:major": "yarn workspaces foreach -v version major",
+    "bump:patch": "yarn workspaces foreach -v --all version patch",
+    "bump:minor": "yarn workspaces foreach -v --all version minor",
+    "bump:major": "yarn workspaces foreach -v --all version major",
     "publish:next": "yarn workspaces foreach -v -W --no-private npm publish --tolerate-republish --tag next --access public",
     "publish:latest": "yarn workspaces foreach -v -W --no-private npm publish --tolerate-republish --tag latest --access public"
   },
