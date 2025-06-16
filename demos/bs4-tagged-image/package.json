@@ -47,7 +47,7 @@
     "@ribajs/types": "workspace:^",
     "@ribajs/webpack-config": "workspace:^",
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.0.2",
+    "@types/node": "^24.0.3",
     "@types/webpack-env": "^1.18.8",
     "@typescript-eslint/eslint-plugin": "^8.34.0",
     "@typescript-eslint/parser": "^8.34.0",

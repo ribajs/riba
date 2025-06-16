@@ -67,7 +67,7 @@
     "@ribajs/types": "workspace:^",
     "@types/core-js": "^2.5.8",
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.0.2",
+    "@types/node": "^24.0.3",
     "babel-jest": "^30.0.0",
     "babel-loader": "^10.0.0",
     "babel-plugin-array-includes": "^2.0.3",

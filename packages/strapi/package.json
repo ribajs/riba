@@ -16,6 +16,6 @@
     "@babel/runtime": "^7.27.6",
     "@babel/runtime-corejs3": "^7.27.6",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^24.0.2"
+    "@types/node": "^24.0.3"
   }
 }
