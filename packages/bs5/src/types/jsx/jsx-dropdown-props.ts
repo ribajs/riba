@@ -1,6 +1,5 @@
 import type { JsxHtmlGlobalProps } from "@ribajs/jsx";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface JsxBs5DropdownProps extends JsxHtmlGlobalProps {
   /**
    * Offset of the dropdown relative to its target. You can pass a string

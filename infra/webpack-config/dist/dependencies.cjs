@@ -11,8 +11,6 @@ const getDependencies = (config = {}) => {
     config.TerserPlugin = config.TerserPlugin || require("terser-webpack-plugin");
     // https://github.com/nuxt-contrib/webpackbar
     config.WebpackbarPlugin = config.WebpackbarPlugin || require("webpackbar");
-    config.ForkTsCheckerPlugin =
-        config.ForkTsCheckerPlugin || require("fork-ts-checker-webpack-plugin");
     config.CssExtractPlugin =
         config.CssExtractPlugin || require("mini-css-extract-plugin");
     config.babelLoaderPath =

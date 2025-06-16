@@ -386,12 +386,12 @@ describe("riba.Binder", () => {
 
       valueInput.value = "bobby";
       binding.publish();
-      expect(adapter.set).toBeCalledWith(model, "name", "bobby:50:male");
+      expect(adapter.set).toHaveBeenCalledWith(model, "name", "bobby:50:male");
 
       expect(valueInput.value).toEqual("bobby");
 
       binding.set("andy:50:male");
-      expect(binding.routine).toBeCalledWith(valueInput, "andy");
+      expect(binding.routine).toHaveBeenCalledWith(valueInput, "andy");
     });
 
     it(`should resolve formatter arguments correctly with multiple formatters`, () => {
@@ -441,12 +441,12 @@ describe("riba.Binder", () => {
 
       valueInput.value = "bobby";
       binding.publish();
-      expect(adapter.set).toBeCalledWith(model, "name", "{[(BOBBY)]}");
+      expect(adapter.set).toHaveBeenCalledWith(model, "name", "{[(BOBBY)]}");
 
       expect(valueInput.value).toEqual("bobby");
 
       binding.set("{[(ANDY)]}");
-      expect(binding.routine).toBeCalledWith(valueInput, "andy");
+      expect(binding.routine).toHaveBeenCalledWith(valueInput, "andy");
     });
 
     it(`should not fail or format if the specified binding function doesn't exist`, () => {
@@ -463,10 +463,10 @@ describe("riba.Binder", () => {
 
       valueInput.value = "charles";
       binding.publish();
-      expect(adapter.set).toBeCalledWith(model, "name", "charles");
+      expect(adapter.set).toHaveBeenCalledWith(model, "name", "charles");
 
       binding.set("fred");
-      expect(binding.routine).toBeCalledWith(valueInput, "fred");
+      expect(binding.routine).toHaveBeenCalledWith(valueInput, "fred");
     });
 
     it(`should apply read binders left to right, and write binders right to left`, () => {
@@ -493,14 +493,14 @@ describe("riba.Binder", () => {
       jest.spyOn(binding, "routine");
 
       binding.set("fred");
-      expect(binding.routine).toBeCalledWith(
+      expect(binding.routine).toHaveBeenCalledWith(
         valueInput,
         "fred is awesome totally"
       );
 
       valueInput.value = "fred";
       binding.publish();
-      expect(adapter.set).toBeCalledWith(
+      expect(adapter.set).toHaveBeenCalledWith(
         model,
         "name",
         "fred totally is awesome"

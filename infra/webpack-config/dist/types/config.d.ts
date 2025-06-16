@@ -1,7 +1,6 @@
 import type { DefinePlugin } from "webpack";
 import type TerserPlugin from "terser-webpack-plugin";
 import type WebpackbarPlugin from "terser-webpack-plugin";
-import type ForkTsCheckerPlugin from "fork-ts-checker-webpack-plugin";
 import type CssExtractPlugin from "mini-css-extract-plugin";
 import type HtmlWebpackPlugin from "html-webpack-plugin";
 import type NodeExternalsPlugin from "webpack-node-externals";
@@ -31,7 +30,6 @@ export interface Config {
     DefinePlugin: typeof DefinePlugin;
     TerserPlugin: typeof TerserPlugin;
     WebpackbarPlugin: typeof WebpackbarPlugin;
-    ForkTsCheckerPlugin: typeof ForkTsCheckerPlugin;
     CssExtractPlugin: typeof CssExtractPlugin;
     HtmlWebpackPlugin: typeof HtmlWebpackPlugin;
     nodeExternalsPlugin: typeof NodeExternalsPlugin;

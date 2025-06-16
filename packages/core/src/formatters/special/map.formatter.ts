@@ -1,5 +1,3 @@
-/* eslint-disable prefer-spread */
-/* eslint-disable prefer-rest-params */
 import { Formatter } from "@ribajs/core";
 
 /**

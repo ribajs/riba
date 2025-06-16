@@ -521,11 +521,12 @@ class Pjax {
    */
   public forceGoTo(url: Location | string) {
     console.warn("forceGoTo", url);
-    if (url && (url as Location).href) {
-      window.location = url as Location;
-    }
     if (typeof url === "string") {
       window.location.href = url;
+    } else if (url && (url as Location).href) {
+      window.location.href = (url as Location).href;
+    } else {
+      throw new Error("Invalid url");
     }
   }
 

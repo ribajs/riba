@@ -32,7 +32,7 @@ module.exports.getConfig = (config = {}, env = {}) => {
     // typescript and javascript
     {
       test: /\.(tsx?)|\.(js)$/,
-      exclude: [/node_modules\/(?!@ribajs)/, /(bower_components)/],
+      exclude: [/node_modules\/(?!@ribajs)/, /(bower_components)/, /eslint.config.(js|cjs|mjs)/],
       loader: config.babelLoaderPath,
     }
   );
@@ -158,13 +158,6 @@ module.exports.getConfig = (config = {}, env = {}) => {
 
   if (config.styles.build === true) {
     config.rules.push(getStyleLoaderRule(config));
-  }
-
-  // TS Fork Checker
-  if (config.forkTsCheckerConfig && config.ForkTsCheckerPlugin) {
-    config.plugins.push(
-      new config.ForkTsCheckerPlugin(config.forkTsCheckerConfig)
-    );
   }
 
   // Define plugin

@@ -29,7 +29,6 @@ export class WrapperService {
   public static inIframe() {
     try {
       return window.self !== window.top;
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_error) {
       return true;
     }

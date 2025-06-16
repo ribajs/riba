@@ -3,7 +3,7 @@
 import { PriorityQueue } from "./priority-queue.service.js";
 
 export class PQueue {
-  public queue = new PriorityQueue(); // eslint-disable-line new-cap
+  public queue = new PriorityQueue();
 
   private _carryoverConcurrencyCount: number;
   private _isIntervalIgnored: boolean;
@@ -78,12 +78,12 @@ export class PQueue {
     this._intervalEnd = 0;
     this._timeoutId = null;
 
-    this.queue = new options.queueClass(); // eslint-disable-line new-cap
+    this.queue = new options.queueClass();
     this._pendingCount = 0;
     this._concurrency = options.concurrency;
     this._isPaused = options.autoStart === false;
-    this._resolveEmpty = () => {}; // eslint-disable-line
-    this._resolveIdle = () => {}; // eslint-disable-line
+    this._resolveEmpty = () => {};
+    this._resolveIdle = () => {};
   }
 
   public add(fn: any, options?: any): Promise<any> {
@@ -124,7 +124,7 @@ export class PQueue {
     }
 
     this._isPaused = false;
-    while (this._tryToStartAnother()) {} // eslint-disable-line
+    while (this._tryToStartAnother()) {}
   }
 
   public pause() {
@@ -183,11 +183,11 @@ export class PQueue {
 
   private _resolvePromises() {
     this._resolveEmpty();
-    this._resolveEmpty = () => {}; // eslint-disable-line
+    this._resolveEmpty = () => {};
 
     if (this._pendingCount === 0) {
       this._resolveIdle();
-      this._resolveIdle = () => {}; // eslint-disable-line
+      this._resolveIdle = () => {};
     }
   }
 
@@ -267,7 +267,7 @@ export class PQueue {
     this._intervalCount = this._carryoverConcurrencyCount
       ? this._pendingCount
       : 0;
-    while (this._tryToStartAnother()) {} // eslint-disable-line
+    while (this._tryToStartAnother()) {}
   }
 
   get size() {
