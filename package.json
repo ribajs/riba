@@ -43,13 +43,13 @@
     "build:all": "yarn workspaces foreach -v -W --jobs 5 run build",
     "build:libs": "yarn workspaces foreach -v -p -W --no-private --jobs 5 run build",
     "clean": "yarn workspaces foreach -v -p -W run clean",
-    "bump:prerelease": "yarn workspaces foreach -v version prerelease",
+    "bump:prerelease": "yarn workspaces foreach -v --all version prerelease",
     "bump:patch": "yarn workspaces foreach -v --all version patch",
     "bump:minor": "yarn workspaces foreach -v --all version minor",
     "bump:major": "yarn workspaces foreach -v --all version major",
     "publish:next": "yarn workspaces foreach -v -W --no-private npm publish --tolerate-republish --tag next --access public",
     "publish:latest": "yarn workspaces foreach -v -W --no-private npm publish --tolerate-republish --tag latest --access public",
-    "check:all": "yarn workspaces foreach -v -p -j 5 run check"
+    "check:all": "yarn workspaces foreach -v -p -A -j 5 run check"
   },
   "devDependencies": {
     "@ribajs/eslint-config": "workspace:^",
@@ -100,7 +100,6 @@
     "@ribajs/iconset": "workspace:^",
     "@ribajs/jquery": "workspace:^",
     "@ribajs/moment": "workspace:^",
-    "@ribajs/photoswipe": "workspace:^",
     "@ribajs/router": "workspace:^",
     "@ribajs/shopify": "workspace:^",
     "@ribajs/shopify-easdk": "workspace:^",
