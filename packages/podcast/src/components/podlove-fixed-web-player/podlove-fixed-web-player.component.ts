@@ -55,14 +55,14 @@ export class PodloveFixedWebPlayerComponent extends Component {
   }
 
   protected async initWebPlayer() {
-    const webPlayerEl = document.getElementById(
-      this.scope.playerId,
+    const webPlayerEl = this.querySelector(
+      "podlove-web-player",
     ) as PodloveWebPlayerComponent | null;
     this.player = webPlayerEl || undefined;
 
     if (!this.player) {
       console.error(
-        `Web player element not found by id "${this.scope.playerId}"!`,
+        `Web player element not found inside podlove-fixed-web-player!`,
       );
       return;
     }

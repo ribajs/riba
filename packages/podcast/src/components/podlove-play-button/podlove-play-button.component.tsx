@@ -1,7 +1,11 @@
 import { Component, TemplateFunction } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { waitForProp } from "@ribajs/utils/src/control.js";
-import { requestPlay, selectEpisode } from "../../mixins/actions.mixins.js";
+import {
+  requestPlay,
+  requestPause,
+  selectEpisode,
+} from "../../mixins/actions.mixins.js";
 import {
   getEpisodeConfig,
   getPlayerConfig,
@@ -16,11 +20,13 @@ import type { PodloveWebPlayerComponent } from "../podlove-web-player/podlove-we
 // import TEMPLATE from "./podlove-play-button.component.template.js";
 
 const PLAY_ICON = `<svg width="25" height="25" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" background="currentColor" aria-hidden="true"><path d="M6 5.76341C6 5.19411 6.60936 4.83238 7.10914 5.10498L18.5429 11.3416C19.064 11.6258 19.064 12.3742 18.5429 12.6584L7.10914 18.895C6.60936 19.1676 6 18.8059 6 18.2366V5.76341Z" rv-style-fill="styles.play.color"></path></svg>`;
+const PAUSE_ICON = `<svg width="25" height="25" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" rv-style-fill="styles.play.color"></rect><rect x="14" y="5" width="4" height="14" rx="1" rv-style-fill="styles.play.color"></rect></svg>`;
 
 export class PodlovePlayButtonComponent extends Component {
   public static tagName = "podlove-play-button";
 
   protected player?: PodloveWebPlayerComponent;
+  protected playing = false;
   public _debug = false;
 
   static get observedAttributes() {
@@ -131,13 +137,45 @@ export class PodlovePlayButtonComponent extends Component {
       return;
     }
 
+    // Wait for the store to become available and subscribe to state changes
+    const store = await waitForProp<PodloveWebPlayerStore>(
+      "store",
+      this.player,
+      100,
+    );
+    this.store = store;
+    this.subscribeToStore();
+
     return this.player;
+  }
+
+  protected subscribeToStore() {
+    if (!this.store) return;
+    this.store.subscribe(() => {
+      const { lastAction } = this.store!.getState();
+      if (lastAction?.type === "PLAYER_REQUEST_PLAY") {
+        this.playing = true;
+        this.scope.icons.play = PAUSE_ICON;
+      } else if (
+        lastAction?.type === "PLAYER_REQUEST_PAUSE" ||
+        lastAction?.type === "PLAYER_BACKEND_END"
+      ) {
+        this.playing = false;
+        this.scope.icons.play = PLAY_ICON;
+      }
+    });
   }
 
   public async play() {
     this.debug("play", this.player);
-    const index = this.getEpisodePlaylistIndex();
-    await this.selectEpisode(index);
+    if (this.playing) {
+      if (this.store) {
+        this.store.dispatch(requestPause());
+      }
+    } else {
+      const index = this.getEpisodePlaylistIndex();
+      await this.selectEpisode(index);
+    }
   }
 
   protected getEpisodePlaylistIndex() {
