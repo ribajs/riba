@@ -1,0 +1,62 @@
+{% assign img_tag = '<' | append: 'img' %}
+{% if template contains 'product' %}
+  {% comment %}
+    Product
+  {% endcomment %}
+  <meta property="og:type" content="product" />
+  <meta property="og:title" content="{{ product.title | strip_html | escape }}" />
+  {% for image in product.images %}
+    <meta property="og:image" content="http:{{ image | img_url: 'grande' }}" />
+    <meta property="og:image:secure_url" content="https:{{ image | img_url: 'grande' }}" />
+  {% endfor %}
+  <meta property="og:price:amount" content="{{ product.price | money_without_currency }}" />
+  <meta property="og:price:currency" content="{{ shop.currency }}" />
+{% elsif template contains 'article' %}
+  {% comment %}
+    Blog-Article
+  {% endcomment %}
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{{ article.title | strip_html | escape }}" />  
+  {% if article.image %}
+    <meta property="og:image" content="http:{{ article.image | img_url: 'grande' }}" />
+    <meta property="og:image:secure_url" content="https:{{ article.image | img_url: 'grande' }}" />
+  {% endif %}
+  {% if article.content contains img_tag %}
+    {% assign src = article.content | split: 'src="' %}
+    {% assign src = src[1] | split: '"' | first | remove: 'https:' | remove: 'http:' %}
+    {% if src %}
+      <meta property="og:image" content="http:{{ src }}" />
+      <meta property="og:image:secure_url" content="https:{{ src }}" />
+    {% endif %}
+  {% endif %}
+{% elsif template contains 'index' %}
+  {% comment %}
+    Home
+  {% endcomment %}
+  {% if content_for_index contains img_tag %}
+    {% assign src = content_for_index | split: 'src="' %}
+    {% assign src = src[1] | split: '"' | first | remove: 'https:' | remove: 'http:' %}
+    {% if src %}
+      <meta property="og:image" content="http:{{ src }}" />
+      <meta property="og:image:secure_url" content="https:{{ src }}" />
+    {% endif %}
+  {% endif %}
+  <meta property="og:title" content="{% include 'utils-get-title' %}" />
+  <meta property="og:type" content="website" />
+{% else %}
+  {% comment %}
+    Other page
+  {% endcomment %}
+  {% if settings.use_logo %}
+    <meta property="og:image" content="http:{{ 'logo.png' | asset_url }}" />
+    <meta property="og:image:secure_url" content="https:{{ 'logo.png' | asset_url }}" />
+  {% endif %}  
+  <meta property="og:title" content="{% include 'utils-get-title' %}" />
+  <meta property="og:type" content="website" />
+{% endif %}
+
+{% if page_description %}
+  <meta property="og:description" content="{{ page_description }}" />
+{% endif %}
+<meta property="og:url" content="{{ canonical_url }}" />
+<meta property="og:site_name" content="{{ shop.name }}" />

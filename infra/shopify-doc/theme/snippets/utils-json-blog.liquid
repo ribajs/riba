@@ -1,0 +1,25 @@
+{% capture blogJsonString %}
+  {
+    {% if blog %}
+      "all_tags": {% render 'utils-json-tags', tags: blog.all_tags %},
+      {% if full %}
+        "articles": [
+          {% for article in blog.articles %}
+            {% render 'utils-json-article' %}{% if forloop.last != true %},{% endif %}
+            {% comment %} {{article.handle | json}} {% endcomment %}
+          {% endfor %}
+        ],
+      {% endif %}
+      "articles_count": {{blog.articles_count | json}},
+      "comments_enabled": {{blog.comments_enabled? | json}},
+      "handle": {{blog.handle | json}},
+      "id": {{blog.id | json}},
+      "moderated": {{blog.moderated? | json}},
+      "next_article": {{blog.next_article  | json}},
+      "previous_article": {{blog.previous_article | json}},
+      "tags": {% render 'utils-json-tags', tags: blog.tags %},
+      "title": {{blog.title  | json}},
+      "url": {{blog.url | json}}
+    {% endif %}
+  }
+{% endcapture %}{{ blogJsonString | strip_newlines | strip | replace: "'", "&#39;" }}

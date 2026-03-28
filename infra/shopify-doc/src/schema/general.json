@@ -1,0 +1,11 @@
+{
+  "name": "General",
+  "settings": [
+    {
+        "type": "checkbox",
+        "id": "debug",
+        "label": "Enable debug mode",
+        "default": false
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{% assign result = -1 %}
+
+{% for i in (0..9)%}
+  {% assign compare = string | slice: i %}
+  {% if compare == char %}
+    {% assign result = i %}
+  {% endif %}
+{% endfor %}

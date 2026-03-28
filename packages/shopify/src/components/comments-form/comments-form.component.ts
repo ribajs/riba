@@ -129,9 +129,8 @@ export class ShopifyCommentsFormComponent extends Component {
     if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./comments-form.component.html?raw"
-      );
+      const { default: template } =
+        await import("./comments-form.component.html?raw");
       return template;
     }
   }

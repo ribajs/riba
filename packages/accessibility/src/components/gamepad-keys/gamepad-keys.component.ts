@@ -174,9 +174,8 @@ export class GamepadKeysComponent extends Component {
 
   protected async template() {
     if (!hasChildNodesTrim(this)) {
-      const { default: template } = await import(
-        "./gamepad-keys.component.pug"
-      );
+      const { default: template } =
+        await import("./gamepad-keys.component.pug");
       return template(this.scope);
     } else {
       return null;

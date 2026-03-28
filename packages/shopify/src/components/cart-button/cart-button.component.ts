@@ -98,9 +98,8 @@ export class ShopifyCartButtonComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./cart-button.component.html?raw"
-      );
+      const { default: template } =
+        await import("./cart-button.component.html?raw");
       return template;
     }
   }

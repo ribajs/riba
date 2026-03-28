@@ -1,0 +1,13 @@
+{
+  {% if page %}
+    "type": "{{page}}",
+    "author": {{page.author | json}},
+    "content": {{page.content | json}},
+    "handle": {{page.handle | json}},
+    "id": {{page.id | json}},
+    "published_at": {{page.published_at | json}},
+    "template_suffix": {{page.template_suffix | json}},
+    "title": {{page.title | json}},
+    "url": {{page.url | json}}
+  {% endif %}
+}

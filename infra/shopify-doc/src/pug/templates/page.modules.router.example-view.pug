@@ -1,0 +1,8 @@
+extends ../_extends/generated-page.pug
+
+block content
+
+  #example-view-container(data-info="This text was passed over the data attribute and was automatically passed to the model / scope")
+    - var containerHTML = '<div id="example-view-container" data-info="This text was passed over the data attribute and was automatically passed to the model / scope">\r\t<p>\r\t\tThis is a new site, a part of this site has the content of\r\t\t<pre class="language-html"><code>[Recursion]</code></pre>\r\t</p>\r</div>';
+    p This is a new site, a part of this site has the content of #[pre.language-html #[code=containerHTML]].
+    p There is also a info text passed as a data attribute on the container: "{dataset.info}"

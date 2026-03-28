@@ -1,12 +1,11 @@
-import * as PhotoSwipe from "photoswipe";
-
-/**
- * Extra properties that the Default UI accepts.
- */
-export interface Item extends PhotoSwipe.Item {
-  /**
-   * The caption for this item.
-   */
+export interface Item {
+  src?: string;
+  msrc?: string;
+  w?: number;
+  h?: number;
+  width?: number;
+  height?: number;
   title?: string;
   element?: HTMLImageElement;
+  [key: string]: any;
 }

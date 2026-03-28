@@ -233,9 +233,8 @@ export class ShopifyLoginFormComponent extends Component {
     if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./login-form.component.html?raw"
-      );
+      const { default: template } =
+        await import("./login-form.component.html?raw");
       return template;
     }
   }

@@ -22,9 +22,8 @@ export class NavigableGroupComponent extends Component {
 
   protected async template() {
     if (!hasChildNodesTrim(this)) {
-      const { default: template } = await import(
-        "./navigable-group.component.pug"
-      );
+      const { default: template } =
+        await import("./navigable-group.component.pug");
       return template(this.scope);
     } else {
       return null;

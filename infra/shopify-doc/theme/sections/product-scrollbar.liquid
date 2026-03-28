@@ -1,0 +1,53 @@
+<shopify-product-scrollbar class="d-block container-fluid">
+  {% assign collection = collections[section.settings.collection] %}
+  <div class="row flex-nowrap scrollbar-invisible scrollbar-x-auto" rv-scrollbar-draggable="" rv-on-scroll="onScroll">
+    <div class="col-3"></div>
+    {% for product in collection.products %}
+      {% comment %} 900x1600 = 9x16 * 100 {% endcomment %}
+      <div rv-on-tap="onProductTap" rv-on-mouseenter="onProductMouseenter" data-url="{{ product.url }}" data-title="{{ product.title }}" class="col-6 px-0 embed-responsive embed-responsive-3by4 lazy cursor-pointer">
+        <img lazyload="lazy" class="embed-responsive-item" src="{{ product.featured_image | img_url: '1200x800', scale: 2 }}" alt="{{image.alt}}" />
+      </div>
+    {% endfor %}
+    <div class="col-3"></div>
+  </div>
+  <div class="row my-4">
+    <div class="col-12 text-center">
+      <span rv-html="title"></span>
+      <span rv-hide="title">
+        {% if section.settings.title %}
+          {{section.settings.title}}
+        {% else %}
+          {{collection.title}}
+        {% endif %}
+      </span> 
+    </div>
+  </div>
+</shopify-product-scrollbar>
+
+{% schema %}
+  {
+    "name": "Products Scrollbar",
+    "class": "product-scrollbar",
+    "max_blocks": 10,
+    "settings": [
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+    ],
+    "blocks": [],
+    "presets": [
+      {
+        "category": "Custom Content",
+        "name": "Products Scrollbar",
+        "blocks": []
+      }
+    ]
+  }
+{% endschema %}

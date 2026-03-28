@@ -123,9 +123,8 @@ export class PodloveFixedWebPlayerComponent extends Component {
 
   protected async template() {
     if (!hasChildNodesTrim(this)) {
-      const { default: template } = await import(
-        "./podlove-fixed-web-player.component.template.js"
-      );
+      const { default: template } =
+        await import("./podlove-fixed-web-player.component.template.js");
       return template;
     } else {
       return null;

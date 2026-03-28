@@ -107,9 +107,8 @@ export class ShopifyContactFormComponent extends Component {
     if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./contact-form.component.html?raw"
-      );
+      const { default: template } =
+        await import("./contact-form.component.html?raw");
       return template;
     }
   }

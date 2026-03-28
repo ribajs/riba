@@ -1,0 +1,40 @@
+- title: Guide
+  url: guide.html
+  links: []
+- title: Modules
+  url: "#collapse"
+  collapseable: true
+  links:
+    - title: Core
+      url: "#collapse"
+      collapseable: true
+      links:
+        - title: Install
+          url: core.html
+        - title: Binders
+          url: core-binders.html
+        - title: Formatters
+          url: core-formatters.html
+        - title: Components
+          url: core-components.html
+    - title: Router
+      url: router.html
+      links: []
+    - title: I18n
+      url: i18n.html
+      links: []
+    - title: Iconset
+      url: iconset.html
+      links: []
+    - title: jQuery
+      url: jquery.html
+      links: []
+    - title: Bootstrap 4
+      url: bs4.html
+      links: []
+    - title: Extras
+      url: extras.html
+      links: []
+    - title: OctoberCMS
+      url: octobercms.html
+      links: []

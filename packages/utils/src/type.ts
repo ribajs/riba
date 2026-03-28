@@ -25,11 +25,28 @@ export const jsonStringify = (
   space = 2,
   replaceSingleQuote = true,
 ) => {
-  const result = JSON.stringify(object, null, space);
-  if (replaceSingleQuote && result) {
-    return result.replace(/'/g, `&#39;`);
+  try {
+    const seen = new WeakSet();
+    const result = JSON.stringify(
+      object,
+      (_key, value) => {
+        if (typeof value === "object" && value !== null) {
+          if (seen.has(value)) {
+            return undefined;
+          }
+          seen.add(value);
+        }
+        return value;
+      },
+      space,
+    );
+    if (replaceSingleQuote && result) {
+      return result.replace(/'/g, `&#39;`);
+    }
+    return result;
+  } catch (error) {
+    return String(object);
   }
-  return result;
 };
 
 /**

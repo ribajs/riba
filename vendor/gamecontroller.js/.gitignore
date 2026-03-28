@@ -1,0 +1,6 @@
+.DS_Store
+.github/*
+!.github/workflows
+node_modules
+coverage
+dist

@@ -1,8 +1,8 @@
 // Original Bootstrap 5 Styles
-@import '~bootstrap/scss/bootstrap';
-@import '~@ribajs/core/src/index';
+@import 'bootstrap/scss/bootstrap';
+@import '@ribajs/core/src/index';
 // Bootstrap style extensions from @ribajs/bs5
-@import '~@ribajs/bs5/src/index';
+@import '@ribajs/bs5/src/index';
 @import '../ts/components/index';
 
 

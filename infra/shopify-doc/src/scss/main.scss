@@ -1,0 +1,34 @@
+@import 'charset';
+@import 'custom-variables';
+@import 'variables';
+// Bootstrap 5 Styles
+@import 'bootstrap/scss/bootstrap';
+
+// Bootstrap style extensions from @ribajs/bs5
+@import '@ribajs/bs5/src/index';
+
+// vendors
+@import 'vendors/prism';
+
+// bootstrap overwrites
+@import 'colors';
+@import 'navbar';
+@import 'typo';
+
+// other
+@import 'development';
+@import 'fonts';
+
+// component style overwrites
+@import 'components/index';
+
+
+// templates
+@import 'templates/index';
+
+// examples
+@import 'examples/index';
+
+// components, binders and sections
+@import '../ts/components/index';
+@import '../ts/binders/index';

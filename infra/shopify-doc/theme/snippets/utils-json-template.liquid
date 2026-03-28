@@ -1,0 +1,8 @@
+{
+  {% if template %}
+    "template": "{{ template }}",
+    "directory": {{template.directory | json}},
+    "name": {{template.name | json}},
+    "suffix": {{template.suffix | json}}
+  {% endif %}
+}

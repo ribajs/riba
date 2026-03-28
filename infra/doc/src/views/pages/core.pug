@@ -1,0 +1,19 @@
+extends ../layouts/page
+
+block append head
+  - pageTitle = "Core Module"
+
+block title
+  | Core Module
+
+block page-content
+
+  section.my-5
+    include:markdown-it(html) ../../../../../packages/core/README.md
+
+  section.my-5#submodules
+    h2 Submodules
+    ul
+      li: a(href="core-binders.html") Binders
+      li: a(href="core-formatters.html") Formatters
+      li: a(href="core-components.html") Components

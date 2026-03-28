@@ -68,9 +68,8 @@ export class Bs5ScrollspyComponent extends Bs5ContentsComponent {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./bs5-scrollspy.component.html?raw"
-      );
+      const { default: template } =
+        await import("./bs5-scrollspy.component.html?raw");
       return template;
     }
   }

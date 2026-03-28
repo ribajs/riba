@@ -1,0 +1,14 @@
+.container.py-5.page(class='{{template|handleize}}', id='page-content-{{page.handle}}')
+  .row.pt-5
+    .col-12
+      .row
+        .col-12
+          h1.page-title
+            | {{ page.title }}
+            block title
+          .rte
+            | {{ page.content }}
+          .content
+            bs4-contents.d-block.d-lg-none.top-contents(header-parent-selector="#main-container", headers-start="2", headers-depth="4", scroll-offset="80")
+            block content
+            bs4-scrollspy.d-none.d-lg-block.py-3.side-scrollspy.scrollbar-primary-on-hover.scrollbar-y-auto.scrollbar-x-hidden(rv-scrollbar-draggable header-parent-selector="#main-container", headers-start="2", headers-depth="4", offset="200" offset-bottom="80", scroll-offset="80")

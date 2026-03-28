@@ -1,4 +1,3 @@
-import "./types/photoswipe/index.d.js";
 export * from "./services/index.js";
 export * from "./binders/index.js";
 export * from "./components/index.js";

@@ -1,5 +1,8 @@
 {
   "name": "@ribajs/tsconfig",
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
   "description": "Shared TypeScript config for Riba.js projects",
   "version": "2.0.0-rc.23",
   "author": "Pascal Garber <pascal@artandcode.studio>",

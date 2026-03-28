@@ -1,0 +1,2 @@
+### Configurable
+From the event handlers to the template delimiters, the attribute prefixes to the preloading of data. It's all configurable and tunable at the application level as well as locally to individual views.

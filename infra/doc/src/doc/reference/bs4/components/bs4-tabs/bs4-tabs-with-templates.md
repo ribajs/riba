@@ -1,0 +1,1 @@
+Sometimes it is useful to define the tabs via templates, for example if the html content of the tabs are too complex.

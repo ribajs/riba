@@ -2,23 +2,24 @@ name: Build
 on:
   pull_request:
   push:
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          submodules: true
+        uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
       - name: Install dependencies
         run: |
           yarn --version
           yarn install
+      - name: Type check all packages
+        run: |
+          yarn run check:all
       - name: Build each package
         run: |
           yarn run build:all

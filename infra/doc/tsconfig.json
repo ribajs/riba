@@ -1,0 +1,10 @@
+{
+  "extends": "@ribajs/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "dist",
+    "types": ["node"]
+  },
+  "exclude": ["node_modules", "**/*.d.ts"],
+  "include": ["src/**/*.ts"]
+}

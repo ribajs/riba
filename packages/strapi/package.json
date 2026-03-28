@@ -3,7 +3,10 @@
   "version": "2.0.0-rc.23",
   "type": "module",
   "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "check": "tsc --noEmit"
   },
   "dependencies": {
     "@ribajs/core": "workspace:^",
@@ -13,9 +16,7 @@
   "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.27.6",
-    "@babel/runtime-corejs3": "^7.27.6",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^24.0.3"
+    "@types/node": "^24.12.0"
   }
 }

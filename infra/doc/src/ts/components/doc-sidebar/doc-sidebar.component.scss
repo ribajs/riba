@@ -1,0 +1,22 @@
+doc-sidebar {
+  .nav-link {
+    color: $white;
+    &.active {
+      color: var(--bs-primary);
+      cursor: default;
+    }
+  }
+  .nav.flex-column {
+    .nav-item-level-0 {
+      > .nav-link {
+        font-weight: bold;
+      }
+    }
+    .nav-item-level-1 {
+      padding-left: 0.5rem;
+    }
+    .nav-item-level-2 {
+      padding-left: 0.5rem;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+extends ../_extends/generated-page.pug
+
+block content
+  //- section.my-5#icon
+  //-   h2 Icon
+  //-   include:markdown-it(html) ../../../doc/reference/iconset/icon.md
+  rv-icon-preview(asset-path="{{ 'placeholder.svg' | asset_url | remove: 'placeholder.svg' }}")

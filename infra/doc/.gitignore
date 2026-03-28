@@ -1,0 +1,3 @@
+_site/
+# Generated HTML files from Pug plugin (compiled into src/ at build time)
+src/*.html

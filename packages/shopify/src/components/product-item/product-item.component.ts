@@ -296,9 +296,8 @@ export class ShopifyProductItemComponent extends Component {
     if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./product-item.component.html?raw"
-      );
+      const { default: template } =
+        await import("./product-item.component.html?raw");
       return template;
     }
   }

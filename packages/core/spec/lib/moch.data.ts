@@ -1,81 +1,63 @@
-import { ObserverSyncCallback } from "../../src/types/index.js";
-import { Observer } from "../../src/observer.js";
-
-export interface Change {
-  [key: string]: Observer[];
-}
-
 export class Data {
-  private attributes: { [key: string]: any };
-
-  private change: Change;
-
-  constructor(attributes: { [key: string]: any }) {
-    this.attributes = attributes || {};
-    this.change = {};
-  }
-
-  public on(key: string, callback: Observer) {
-    if (this.hasCallback(key, callback)) {
-      return;
+    attributes;
+    change;
+    constructor(attributes) {
+        this.attributes = attributes || {};
+        this.change = {};
     }
-    this.change[key] = this.change[key] || [];
-    this.change[key].push(callback);
-  }
-
-  public hasCallback(key: string, callback: ObserverSyncCallback) {
-    return this.indexOf(this.change[key], callback) !== -1;
-  }
-
-  public off(key: string, callback: ObserverSyncCallback) {
-    const index = this.indexOf(this.change[key], callback);
-    if (index !== -1) {
-      this.change[key].splice(index, 1);
-    }
-  }
-
-  public set(attributes: { [key: string]: any }) {
-    let old;
-    let key;
-
-    for (key in attributes) {
-      if (this.attributes[key]) {
-        old = this.attributes[key];
-        this.attributes[key] = attributes[key];
-        if (this.get(key) !== old) {
-          this.alertCallbacks(key);
+    on(key, callback) {
+        if (this.hasCallback(key, callback)) {
+            return;
         }
-      }
+        this.change[key] = this.change[key] || [];
+        this.change[key].push(callback);
     }
-  }
-
-  public get(key: string) {
-    return this.attributes[key];
-  }
-
-  public alertCallbacks(key: string) {
-    if (!this.change[key]) {
-      return;
+    hasCallback(key, callback) {
+        return this.indexOf(this.change[key], callback) !== -1;
     }
-
-    for (const i in this.change[key]) {
-      if (this.change[key][i]) {
-        this.change[key][i].sync();
-      }
+    off(key, callback) {
+        const index = this.indexOf(this.change[key], callback);
+        if (index !== -1) {
+            this.change[key].splice(index, 1);
+        }
     }
-  }
-
-  private indexOf<Type>(array: Array<Type>, value: Type) {
-    array = array || [];
-    if (array.indexOf) {
-      return array.indexOf(value);
+    set(attributes) {
+        let old;
+        let key;
+        for (key in attributes) {
+            if (this.attributes[key]) {
+                old = this.attributes[key];
+                this.attributes[key] = attributes[key];
+                if (this.get(key) !== old) {
+                    this.alertCallbacks(key);
+                }
+            }
+        }
     }
-
-    for (let i = 0; i < array.length; i++) {
-      if (array[i] === value) {
-        return i;
-      }
+    get(key) {
+        return this.attributes[key];
     }
-    return -1;
-  }
+    alertCallbacks(key) {
+        if (!this.change[key]) {
+            return;
+        }
+        for (const i in this.change[key]) {
+            if (this.change[key][i]) {
+                this.change[key][i].sync();
+            }
+        }
+    }
+    indexOf(array, value) {
+        array = array || [];
+        if (array.indexOf) {
+            return array.indexOf(value);
+        }
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] === value) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9jaC5kYXRhLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9jaC5kYXRhLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQU9BLE1BQU0sT0FBTyxJQUFJO0lBQ1AsVUFBVSxDQUF5QjtJQUVuQyxNQUFNLENBQVM7SUFFdkIsWUFBWSxVQUFrQztRQUM1QyxJQUFJLENBQUMsVUFBVSxHQUFHLFVBQVUsSUFBSSxFQUFFLENBQUM7UUFDbkMsSUFBSSxDQUFDLE1BQU0sR0FBRyxFQUFFLENBQUM7SUFDbkIsQ0FBQztJQUVNLEVBQUUsQ0FBQyxHQUFXLEVBQUUsUUFBa0I7UUFDdkMsSUFBSSxJQUFJLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRSxRQUFRLENBQUMsRUFBRSxDQUFDO1lBQ3BDLE9BQU87UUFDVCxDQUFDO1FBQ0QsSUFBSSxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsR0FBRyxJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxJQUFJLEVBQUUsQ0FBQztRQUMxQyxJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQztJQUNsQyxDQUFDO0lBRU0sV0FBVyxDQUFDLEdBQVcsRUFBRSxRQUE4QjtRQUM1RCxPQUFPLElBQUksQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsRUFBRSxRQUFRLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQztJQUN6RCxDQUFDO0lBRU0sR0FBRyxDQUFDLEdBQVcsRUFBRSxRQUE4QjtRQUNwRCxNQUFNLEtBQUssR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLEVBQUUsUUFBUSxDQUFDLENBQUM7UUFDdkQsSUFBSSxLQUFLLEtBQUssQ0FBQyxDQUFDLEVBQUUsQ0FBQztZQUNqQixJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxLQUFLLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFDcEMsQ0FBQztJQUNILENBQUM7SUFFTSxHQUFHLENBQUMsVUFBa0M7UUFDM0MsSUFBSSxHQUFHLENBQUM7UUFDUixJQUFJLEdBQUcsQ0FBQztRQUVSLEtBQUssR0FBRyxJQUFJLFVBQVUsRUFBRSxDQUFDO1lBQ3ZCLElBQUksSUFBSSxDQUFDLFVBQVUsQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDO2dCQUN6QixHQUFHLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxHQUFHLENBQUMsQ0FBQztnQkFDM0IsSUFBSSxDQUFDLFVBQVUsQ0FBQyxHQUFHLENBQUMsR0FBRyxVQUFVLENBQUMsR0FBRyxDQUFDLENBQUM7Z0JBQ3ZDLElBQUksSUFBSSxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsS0FBSyxHQUFHLEVBQUUsQ0FBQztvQkFDMUIsSUFBSSxDQUFDLGNBQWMsQ0FBQyxHQUFHLENBQUMsQ0FBQztnQkFDM0IsQ0FBQztZQUNILENBQUM7UUFDSCxDQUFDO0lBQ0gsQ0FBQztJQUVNLEdBQUcsQ0FBQyxHQUFXO1FBQ3BCLE9BQU8sSUFBSSxDQUFDLFVBQVUsQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUM5QixDQUFDO0lBRU0sY0FBYyxDQUFDLEdBQVc7UUFDL0IsSUFBSSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQztZQUN0QixPQUFPO1FBQ1QsQ0FBQztRQUVELEtBQUssTUFBTSxDQUFDLElBQUksSUFBSSxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDO1lBQ2pDLElBQUksSUFBSSxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO2dCQUN4QixJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksRUFBRSxDQUFDO1lBQzdCLENBQUM7UUFDSCxDQUFDO0lBQ0gsQ0FBQztJQUVPLE9BQU8sQ0FBTyxLQUFrQixFQUFFLEtBQVc7UUFDbkQsS0FBSyxHQUFHLEtBQUssSUFBSSxFQUFFLENBQUM7UUFDcEIsSUFBSSxLQUFLLENBQUMsT0FBTyxFQUFFLENBQUM7WUFDbEIsT0FBTyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQzlCLENBQUM7UUFFRCxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsS0FBSyxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRSxDQUFDO1lBQ3RDLElBQUksS0FBSyxDQUFDLENBQUMsQ0FBQyxLQUFLLEtBQUssRUFBRSxDQUFDO2dCQUN2QixPQUFPLENBQUMsQ0FBQztZQUNYLENBQUM7UUFDSCxDQUFDO1FBQ0QsT0FBTyxDQUFDLENBQUMsQ0FBQztJQUNaLENBQUM7Q0FDRiJ9

@@ -1,0 +1,22 @@
+shopify-linklist {
+  .nav-link {
+    color: $white;
+    &.active {
+      color: theme-color('primary');
+      cursor: default;
+    }
+  }
+  .nav.flex-column {
+    .nav-item-level-0 {
+      > .nav-link {
+        @extend .font-weight-bold;
+      }
+    }
+    .nav-item-level-1 {
+      @extend .pl-2;
+    }
+    .nav-item-level-2 {
+      @extend .pl-2;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{% comment %}
+  Product data wish is not defined in the default product data using the shopify ajax api or json filter
+{% endcomment %}
+{% capture productExtrasJsonString %}
+{
+  {% if product %}
+    "handle": {{ product.handle | json }},
+    "variants": {
+      {% for variant in product.variants %}
+        "{{variant.id}}": {
+          "incoming": {{ variant.incoming | json }},
+          "next_incoming_date": {{ variant.next_incoming_date |json }}
+        }{% if forloop.last != true %},{% endif %}
+      {% endfor %}
+    },
+    "metafields": {
+      "c_f": {{ product.metafields.c_f | json }},
+      "global": {{ product.metafields.global | json }}
+    }
+    {% if collection.previous_product %}
+      ,"previous_product":"{{collection.previous_product}}"
+    {% endif %}
+    {% if collection.next_product %}
+      ,"next_product":"{{collection.next_product}}"
+    {% endif %}
+  {% endif %}
+}
+{% endcapture %}{{ productExtrasJsonString | strip_newlines | strip | replace: "'", "&#39;" }}

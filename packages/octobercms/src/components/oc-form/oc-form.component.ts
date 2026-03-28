@@ -1,13 +1,13 @@
-import { Bs4FormComponent } from "@ribajs/bs4";
+import { Bs5FormComponent } from "@ribajs/bs5";
 import { OcFormComponentScope as Scope } from "../../types/index.js";
 
-export class OcFormComponent extends Bs4FormComponent {
+export class OcFormComponent extends Bs5FormComponent {
   public static tagName = "oc-form";
 
   public _debug = false;
 
   static get observedAttributes(): string[] {
-    return [...Bs4FormComponent.observedAttributes, "october-handler"];
+    return [...Bs5FormComponent.observedAttributes, "october-handler"];
   }
 
   protected requiredAttributes(): string[] {

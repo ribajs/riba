@@ -1,0 +1,42 @@
+{
+	"name": "@ribajs/gamecontroller.js",
+	"version": "2.0.0-rc.23",
+	"type": "module",
+	"description": "A JavaScript library that lets you handle, configure, and use gamepad and controllers on a browser, using the Gamepad API",
+	"main": "src/index.ts",
+	"module": "src/index.ts",
+	"source": "src/index.ts",
+	"scripts": {
+		"build": "yarn run build:esm && yarn run build:types",
+		"build:types": "tsc --declaration true --emitDeclarationOnly --outDir dist/types",
+		"build:esm": "tsc --declaration false --outDir dist/esm",
+		"test": "jest --coverage",
+		"check": "tsc --noEmit"
+	},
+	"devDependencies": {
+		"@ribajs/tsconfig": "workspace:^",
+		"jest": "^30.3.0",
+		"jest-environment-jsdom": "^30.3.0",
+		"typescript": "^6.0.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ribajs/riba.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ribajs/riba/issues"
+	},
+	"homepage": "https://github.com/ribajs/riba",
+	"author": "Alvaro Montoro (original), PixelRPG/ribajs (fork maintainer)",
+	"license": "MIT",
+	"keywords": [
+		"game control",
+		"gamepad",
+		"game controller",
+		"controller",
+		"gaming",
+		"web api",
+		"html5 api",
+		"gamepad api"
+	]
+}

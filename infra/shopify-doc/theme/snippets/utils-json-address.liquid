@@ -1,0 +1,29 @@
+{% comment %}
+  It is not allowed to convert a address to a json string like `{{ 'checkout.shipping_address' | json }}`,
+  but it is still possible with this snippet.
+
+  See docu for address object: https://shopify.dev/docs/liquid/reference/objects/address
+
+  Usage:
+  `{% render 'utils-json-address', address: checkout.shipping_address %}`
+{% endcomment %}
+{%- capture jsonAddress -%}
+  {
+    "address1": {{ address.address1 | json }},
+    "address2": {{ address.address2 | json }},
+    "city": {{ address.city | json }},
+    "company": {{ address.company | json }},
+    "country": {{ address.country | json }},
+    "country_code": {{ address.country_code | json }},
+    "first_name": {{ address.first_name | json }},
+    "last_name": {{ address.last_name | json }},
+    "name": {{ address.name | json }},
+    "phone": {{ address.phone | json }},
+    "province": {{ address.province | json }},
+    "province_code": {{ address.province_code | json }},
+    "street": {{ address.street | json }},
+    "url": {{ address.url | json }},
+    "zip": {{ address.zip | json }}
+  }
+{%- endcapture -%}
+{{ jsonAddress | strip_newlines | strip | replace: "'", "&#39;" }}

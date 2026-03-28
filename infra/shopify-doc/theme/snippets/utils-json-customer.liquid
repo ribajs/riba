@@ -1,0 +1,48 @@
+{% comment %}
+    The customer object
+    The `customer` object contains information about a customer who has a [customer account](https://help.shopify.com/en/manual/customers/customer-accounts).
+    @see https://help.shopify.com/en/themes/liquid/objects/customer
+{% endcomment %}
+{
+    {% if customer %}
+
+        {% comment %} Returns `true` if the customer accepts marketing, returns `false` if the customer does not. {% endcomment %}
+        accepts_marketing: {{ customer.foobar | json }},
+        {% comment %} Returns an array of all addresses associated with a customer. See customer_address for a full list of available attributes. {% endcomment %}
+        "addresses": [
+            {% for address in customer.addresses %}
+                {{ address | json }}{% if forloop.last != true %},{% endif %}
+            {% endfor %}
+        ],
+        {% comment %} Returns the number of addresses associated with a customer. {% endcomment %}
+        "addresses_count": {{ customer.addresses_count | json }},
+        {% comment %} Returns the default customer_address. {% endcomment %}
+        default_address: {{ customer.default_address | json }},
+        {% comment %} Returns the email address of the customer. {% endcomment %}
+        "email": {{ customer.email | json }},
+        {% comment %} Returns the first name of the customer. {% endcomment %}
+        "first_name": {{ customer.first_name | json }},
+        {% comment %}
+        * Returns `true` if the email associated with an order is also tied to a customer account.
+        * Returns `false` if it is not. Helpful in email templates.
+        * In a theme, customer.has_account will always return true. In the checkout, it can return true or false.
+        *{% endcomment %}
+        "has_account": {{ customer.has_account | json }},
+        {% comment %} Returns the id of the customer. {% endcomment %}
+        "id": {{ customer.id | json }},
+        {% comment %} Returns the last name of the customer. {% endcomment %}
+        "last_name": {{ customer.last_name | json }},
+        {% comment %} Returns the last order placed by the customer, not including test orders. {% endcomment %}
+        {% comment %} "last_order":{{ customer.last_order | json }}, json not allowed for this object {% endcomment %}
+        {% comment %} Returns the full name of the customer. {% endcomment %}
+        "name": {{ customer.name | json }},
+        {% comment %} Returns an array of all orders placed by the customer. {% endcomment %}
+        {% comment %} "orders": {{ customer.orders | json }}, json not allowed for this object {% endcomment %}
+        {% comment %} Returns the total number of orders a customer has placed. {% endcomment %}
+        "orders_count": {{ customer.orders_count | json }},
+        {% comment %} Returns the list of tags associated with the customer. {% endcomment %}
+        "tags": {{ customer.tags | json }},
+        {% comment %} Returns the total amount spent on all orders. {% endcomment %}
+        "total_spent": {{ customer.total_spent | json }}
+    {% endif %}
+}

@@ -1,0 +1,2 @@
+### Flexible
+Riba.js is completely agnostic about your model / controller layer and works well with existing libraries that employ an event-driven model such as [Backbone.js](https://backbonejs.org/) and [Stapes.js](http://hay.github.io/stapes/). It also ships with built-in support for plain JavaScript objects, so you can use Riba.js right away without needing a separate model or observables library.

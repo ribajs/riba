@@ -1,0 +1,9 @@
+{
+  "name": "Home",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Home"
+    }
+  ]
+}

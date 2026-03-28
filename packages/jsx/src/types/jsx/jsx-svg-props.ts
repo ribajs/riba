@@ -136,9 +136,7 @@ export interface JsxSvgPresentationProps {
  * Reference: https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg
  */
 export interface JsxSvgElementProps
-  extends JsxSvgCoreProps,
-    JsxSvgStyleProps,
-    JsxSvgPresentationProps {
+  extends JsxSvgCoreProps, JsxSvgStyleProps, JsxSvgPresentationProps {
   height?: string | number;
   preserveAspectRatio?: `${
     | "none"
@@ -166,7 +164,8 @@ export interface JsxUseElementProps {
  * Reference: https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path
  */
 export interface JsxPathElementProps
-  extends JsxSvgCoreProps,
+  extends
+    JsxSvgCoreProps,
     JsxSvgStyleProps,
     JsxSvgConditionalProcessingProps,
     JsxSvgPresentationProps {

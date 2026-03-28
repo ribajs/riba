@@ -212,16 +212,14 @@ export class LottiePlayerComponent extends Component {
   }
 
   protected async importLottie() {
-    const { default: lottie } = await import(
-      "lottie-web/build/player/lottie.js"
-    );
+    const { default: lottie } =
+      await import("lottie-web/build/player/lottie.js");
     return lottie;
   }
 
   protected async importLottieLight() {
-    const { default: lottieLite } = await import(
-      "lottie-web/build/player/lottie_light.js"
-    );
+    const { default: lottieLite } =
+      await import("lottie-web/build/player/lottie_light.js");
     return lottieLite;
   }
 

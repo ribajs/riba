@@ -1,0 +1,181 @@
+<h3 class="title" rv-i18n-html="">
+  {{section.settings.de_title}}
+  <template lang="de">{{section.settings.de_title}}</template>
+  <template lang="en">{{section.settings.en_title}}</template>
+</h3>
+
+<div class="content-top" rv-i18n-html="">
+  {{section.settings.de_content_top_html}}
+  <template lang="de">{{section.settings.de_content_top_html}}</template>
+  <template lang="en">{{section.settings.en_content_top_html}}</template>
+</div>
+{% for block in section.blocks %}
+  <span class="browser-name">- {{block.settings.title}} /</span>
+
+  {% assign releases = block.settings.releases | prepend: 'releases.' | t %}
+  <span class="browser-release" rv-i18n-text="'{{block.settings.releases}}' | prepend 'sections.browser-support.releases.'">
+    {% if releases contains 'translation missing' %}
+      {{block.settings.releases}}
+    {% else %}
+      {{releases}}
+    {% endif %}
+  </span>
+
+  {% assign platform = block.settings.platform | prepend: 'platforms.' | t %}
+  <span class="browser-platform" rv-i18n-text="'{{block.settings.platform}}' | prepend 'sections.browser-support.platforms.'">
+    {% if platform contains 'translation missing' %}
+      {{block.settings.platform}}
+    {% else %}
+      {{platform}}
+    {% endif %}
+  </span><br />
+{% endfor %}
+<div class="content-bottom mt-3" rv-i18n-html="">
+  {{section.settings.de_content_bottom_html}}
+  <template lang="de">{{section.settings.de_content_bottom_html}}</template>
+  <template lang="en">{{section.settings.en_content_bottom_html}}</template>
+</div>
+
+{% schema %}
+  {
+    "name": "Browser support",
+    "class": "browser-support",
+    "settings": [
+      {
+        "id": "de_title",
+        "type": "text",
+        "label": "Title (DE)"
+      },
+      {
+        "id": "en_title",
+        "type": "text",
+        "label": "Title (EN)"
+      },
+      {
+        "id": "de_content_top_html",
+        "type": "richtext",
+        "label": "Content top (DE)",
+        "default": "<p>Die technische Umsetzung digitaler Projekte wird bedingt für verschiedene aktuelle Webbrowser unternommen.</p>"
+      },
+      {
+        "id": "en_content_top_html",
+        "type": "richtext",
+        "label": "Content top (EN)",
+        "default": "<p>The technical implementation of digital projects is conditionally undertaken for various current web browsers.</p>"
+      },
+      {
+        "id": "de_content_bottom_html",
+        "type": "richtext",
+        "label": "Content bottom (DE)",
+        "default": "<p>Um Unterstützung älterer Versionen kann nach Absprache erweitert werden. Des Weiteren weisen wir daraufhin, dass es unter Internet Explorer 11 Darstellungsprobleme geben kann, da der Browser selbst nicht mehr fortlaufend weiterentwickelt wird und einige moderne Funktionen nicht zur Verfügung stehen. Microsoft empfiehlt auf seinen Nachfolger Microsoft Edge zu wechseln.</p>"
+      },
+      {
+        "id": "en_content_bottom_html",
+        "type": "richtext",
+        "label": "Content bottom (EN)",
+        "default": "<p>To support older versions can be extended by appointment. Furthermore, we point out that there may be display problems in Internet Explorer 11 because the browser itself is no longer being developed further and some modern functions are not available. Microsoft recommends that you switch to the successor Microsoft Edge.</p>"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "browser",
+        "name": "Browser",
+        "settings": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Browser"
+          },
+          {
+            "type":      "select",
+            "id":        "releases",
+            "label":     "Releases",
+            "options": [
+              {
+                "value": "latest",
+                "label": "Latest release"
+              },
+              {
+                "value": "latest-two",
+                "label": "Latest two releases"
+              },
+              {
+                "value": "latest-three",
+                "label": "Latest three releases"
+              },
+              {
+                "value": "ie-11",
+                "label": "IE 11 only"
+              }
+            ]
+          },
+          {
+            "type":      "select",
+            "id":        "platform",
+            "label":     "Platform",
+            "options": [
+              {
+                "value": "mac",
+                "label": "for Mac"
+              },
+              {
+                "value": "mac-pc",
+                "label": "for Mac and PC"
+              },
+              {
+                "value": "pc",
+                "label": "for PC"
+              },
+              {
+                "value": "android",
+                "label": "for Android"
+              },
+              {
+                "value": "ios",
+                "label": "for iOS"
+              },
+              {
+                "value": "android-ios",
+                "label": "for Android and iOS"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "locales": {
+      "en": {
+        "releases": {
+          "latest": "latest release",
+          "latest-two": "latest two releases",
+          "latest-three": "latest three releases",
+          "ie-11": "with restrictions only version 11"
+        },
+        "platforms": {
+          "mac": "for Mac",
+          "mac-pc": "for Mac and PC",
+          "pc": "for PC",
+          "android": "for Android",
+          "ios": "for iOS",
+          "android-ios": "for Android and iOS"
+        }
+      },
+      "de": {
+        "releases": {
+          "latest": "die letzten zwei Versionen",
+          "latest-two": "die letzten zwei Versionen",
+          "latest-three": "die letzten drei Versionen",
+          "ie-11": "mit Einschränkungen nur Version 11"
+        },
+        "platforms": {
+          "mac": "für Mac",
+          "mac-pc": "für Mac und PC",
+          "pc": "für PC",
+          "android": "für Android",
+          "ios": "für iOS",
+          "android-ios": "für Android und iOS"
+        }
+      }
+    }
+  }
+{% endschema %}

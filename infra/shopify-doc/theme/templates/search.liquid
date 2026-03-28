@@ -1,0 +1,79 @@
+{% comment %}
+The search.liquid template is not a required template.
+That search.liquid template is included in the current theme to make it easier for you 
+to customize your /search page.
+Whether you are using your own template for the search page or not,
+the {{ content_for_header }} tag in theme.liquid will always output the following on the /search page:
+<link rel="stylesheet" href="//cdn.shopify.com/s/global/search.css" type="text/css" />
+So the /search page is always styled by a globally-hosted stylesheet called search.css.
+You may override and complement that CSS in your theme's stylesheet.
+We are using a div#searchresults below so that the styles defined in search.css get
+applied to the elements on this page; the 'searchresults' id is used in the CSS
+selectors inside search.css.
+{% endcomment %}
+
+<div class="container-fluid pt-5">
+  
+  <div class="row pt-5 mt-5">
+    <form action="/search" method="get" class="col-auto mx-auto" role="search">
+
+      <div class="form-row align-items-center">
+        <div class="col-auto">
+          <input name="q" type="search" class="form-control form-control-primary" id="search-field" placeholder="Search" value="{{ search.terms | escape }}" />
+        </div>
+        <div class="col-auto">
+          <input type="submit" class="btn btn-primary" id="search-submit" value="Start" />
+        </div>
+      </div>
+    
+    </form>
+  </div>  
+
+  <div id="searchresults" class="row">
+    
+    {% if search.performed %}
+
+      <div class="col-12">
+    
+        {% paginate search.results by 48 %}            
+            <div class="row">
+              {% assign all_length = search.results | size %}
+              {% assign article_length = 0 %}
+              {% assign page_length = 0 %}
+              {% assign product_length = 0 %}
+              {% for product in search.results %}
+                {% if product.object_type == 'article' %}
+                  {% comment %}
+                    ARTICLE
+                  {% endcomment %}
+                  <a class="col-12 mx-auto text-center pt-5" href="{{ product.url }}">Story: {{ product.title }}</a>
+                  {% assign article_length = article_length | plus: 1 %}
+                  {% elsif product.object_type == 'page' %}
+                  {% comment %}
+                    PAGE
+                  {% endcomment %}
+                    <a class="col-12 mx-auto text-center pt-5" href="{{ product.url }}">Page: {{ product.title }}</a>
+                  {% assign page_length = page_length | plus: 1 %}
+                  {% else %}
+                  {% comment %}
+                    PRODUCT
+                  {% endcomment %}
+                  {% assign product_length = product_length | plus: 1 %}
+                    {% include 'product-collection-grid-item-col-ratio-3-4' with product, collection, colClass: 'col-12 col-md-6' %}
+                {% endif %}
+              {% endfor %}
+              {% if all_length == 0 %}  
+                <p class="col-12 text-center py-2">No results found for your search "{{ search.terms }}".</p>
+              {% else %}
+            </div>
+          {% endif %}    
+          
+          {% include 'pagination' %}
+        
+        {% endpaginate %}  
+
+      </div>
+    {% endif %}  
+
+  </div>
+</div>

@@ -1,0 +1,38 @@
+{% capture articleJsonString %}
+  {
+    {% if article %}
+      "author": {{ article.author | json }},
+      "comments": [
+        {% for comment in article.comments %}
+          {{ comments | json }}{% if forloop.last != true %},{% endif %}
+        {% endfor %}
+      ],
+      "comments_count": {{ article.comments_count | json }},
+      "comments_enabled": {{ article.comments_enabled? | json }},
+      "comment_post_url": {{ article.comment_post_url | json }},
+      {% if full %}
+        "content": {{ article.content | escape | json }},
+      {% endif %}
+      "created_at": {{ article.created_at | json }},
+      {% if full %}
+        "excerpt": {{ article.excerpt | escape | json }},
+      {% else %}
+        "excerpt": {{ article.excerpt | escape | truncate: 200 | json }},
+      {% endif %}
+      {% if full %}
+        "excerpt_or_content": {{ article.excerpt_or_content | strip_html | escape | json }},
+      {% else %}
+        "excerpt_or_content": {{ article.excerpt_or_content | strip_html | escape | truncate: 200 | json }},
+      {% endif %}
+      "handle": {{ article.handle | json }},
+      "id": {{ article.id | json }},
+      "image": {{ article.image | json }},
+      "moderated": {{ article.moderated? | json }},
+      "published_at": {{ article.published_at | json }},
+      "tags": {% render 'utils-json-tags', tags: article.tags %},
+      "title": {{ article.title | json }},
+      "url": {{ article.url | json }},
+      "user": {{ article.user | json }}
+    {% endif %}
+  }
+{% endcapture %}{{ articleJsonString | strip_newlines | strip | replace: "'", "&#39;" }}

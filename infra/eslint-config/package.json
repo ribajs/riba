@@ -1,5 +1,8 @@
 {
   "name": "@ribajs/eslint-config",
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
   "description": "Default ESLint configuration for Riba.js projects",
   "version": "2.0.0-rc.23",
   "type": "module",
@@ -34,16 +37,16 @@
     "prettier"
   ],
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.34.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.2",
     "@typescript-eslint/experimental-utils": "^5.62.0",
-    "@typescript-eslint/parser": "^8.34.0",
-    "eslint": "^9.29.0",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-import-resolver-typescript": "^4.4.3",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.4.1",
-    "prettier": "^3.5.3",
-    "typescript": "5.8.3"
+    "@typescript-eslint/parser": "^8.57.2",
+    "eslint": "^10.1.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.1",
+    "typescript": "6.0.2"
   },
   "bugs": {
     "url": "https://github.com/ribajs/riba/issues"

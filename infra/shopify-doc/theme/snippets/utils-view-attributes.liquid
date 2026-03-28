@@ -1,0 +1,102 @@
+{% if template == blank %}
+  {% assign template = 'no-barba' %}
+{% endif %}
+
+data-title="{% render 'utils-get-title' %}"
+data-namespace="{% render 'utils-get-namespace' %}"
+data-template='{% render 'utils-json-template' %}'
+
+
+{% comment %} Handle {% endcomment %}
+{% if page %}
+  data-handle={{ page.handle | json }}
+{% elsif collection %}
+  data-handle={{ collection.handle | json }}
+{% elsif article %}
+  data-handle={{article.handle | json }}
+{% elsif blog %}
+  data-handle={{ blog.handle | json }}
+{% elsif product %}
+  data-handle={{ product.handle | json }}
+{% endif %}
+
+{% if parseSeo %}
+  data-seo-page-title={{ page_title | json }}
+  data-seo-page_description={{ page_description | json }}
+{% endif %}
+
+{% if parsePage and page %}
+  data-page='{% render 'utils-json-page' %}'
+{% endif %}
+
+{% if parseCollection and collection %}
+  data-collection-handle={{collection.handle | json }}
+  data-collection-title={{collection.title | json }}
+  data-collection-url="{{collection.url }}"
+
+  {% comment %}
+    Paginate informations needed for the show all products function
+  {% endcomment %}
+  data-paginate-pages-current-index="{{ current_page }}"
+
+  {% paginate collection.products by settings.products_per_page %}
+
+    data-collection-products-count={{collection.products | size | json }}
+
+    {% if paginate.previous.is_link %}
+      data-paginate-previous-url="{{ paginate.previous.url }}"
+    {% endif %}
+
+    {% if paginate.next.is_link %}
+      data-paginate-next-url="{{ paginate.next.url }}"
+    {% endif %}
+
+    {% for part in paginate.parts %}
+
+      {% comment %}
+        The count of pagination pages is in the url of the last part.url
+        e.g if the url is "/collections/all?page=11" the length of pages is 11
+        part.url is unset if this is the current page
+        {% endcomment %}
+      {% if forloop.last %}
+        {% assign string_to_remove = '/collections/' | append: collection.handle | append: '?page=' %}
+        {% assign calced_current_page = part.url | remove: string_to_remove %}
+        {% if calced_current_page == blank %}
+          {% assign calced_current_page = current_page %}
+        {% endif %}
+        data-paginate-pages-length="{{ calced_current_page }}"
+      {% endif %}
+
+      
+    {% endfor %}
+
+  {% endpaginate %}
+
+{% endif %}
+
+{% if paginate_hash %}
+  data-paginate-hash="{{paginate_hash}}"
+{% endif %}
+
+{% if parseSeach and search %}
+  data-search-results-count="{{search.results_count}}"
+  {% if search.results_count == 1 %}
+    data-search-result-url={{search.results[0].url}}
+  {% endif %}
+{% endif %}
+
+
+{% comment %}
+Use the Shopify Ajax API to get the cart 
+{% if cart %}
+  data-cart={{cart | json}}
+{% endif %}
+{% endcomment %}
+
+{% if parseBlog and blog %}
+  data-blog='{% render 'utils-json-blog' with blog %}'
+{% endif %}
+
+{% if parseArticle and article %}
+  data-article='{% render 'utils-json-article' with article %}'
+{% endif %}
