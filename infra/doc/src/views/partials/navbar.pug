@@ -6,10 +6,11 @@ bs5-navbar.navbar.navbar-dark.navbar-main.fixed-top.bg-primary
         bs5-toggle-button(target-id="main-sidebar")
           ul.nav.d-flex
             li.nav-item.d-flex.align-items-center
-              .nav-link.pb-0(rv-hide="isActive" rv-on-click="toggle")
-                span.navbar-toggler-icon
-              .nav-link.pb-0(rv-show="isActive" rv-on-click="toggle")
-                span.navbar-toggler-icon
+              .nav-link.py-0.px-2(rv-hide="isActive" rv-on-click="toggle" style="cursor:pointer;font-size:24px;line-height:1")
+                span &#9776;
+            li.nav-item.d-flex.align-items-center
+              .nav-link.py-0.px-2(rv-show="isActive" rv-on-click="toggle" style="cursor:pointer;font-size:24px;line-height:1")
+                span &#10005;
         a.navbar-brand(href="index.html" rv-route="index.html") Riba
       //- Right: main menu links
       .col-auto.d-flex.align-items-center
