@@ -1,72 +1,59 @@
-import {
-  Bs5TabsComponent,
-  Tab,
-  Scope as OriginalScope,
-} from "@ribajs/bs5/src/components/bs5-tabs/bs5-tabs.component.js";
+import { Component, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-
 import { escapeHtml } from "@ribajs/utils/src/type.js";
-
 import * as Prism from "prismjs";
 
-export interface Scope extends OriginalScope {
-  sum?: ExampleTabsComponent["sum"];
+export interface Tab {
+  title: string;
+  handle: string;
+  content: string;
+  type: string;
+  active: boolean;
 }
 
-export class ExampleTabsComponent extends Bs5TabsComponent {
+export interface Scope extends ScopeBase {
+  items: Tab[];
+  handle: string;
+  activate: ExampleTabsComponent["activate"];
+}
+
+/**
+ * Standalone tab component for documentation examples.
+ * Extends Component directly to avoid the async race conditions
+ * in the TemplatesComponent -> Bs5TabsComponent inheritance chain.
+ */
+export class ExampleTabsComponent extends Component {
   public static tagName = "rv-example-tabs";
 
   protected autobind = true;
 
-  protected templateAttributes = [
-    {
-      name: "title",
-      required: true,
-    },
-    {
-      name: "handle",
-      required: false,
-    },
-    {
-      name: "type",
-      required: false,
-    },
-    {
-      name: "active",
-      required: false,
-    },
-    {
-      name: "index",
-      required: false,
-    },
-  ];
-
-  static get observedAttributes() {
-    return ["option-tabs-auto-height", "handle"];
+  static get observedAttributes(): string[] {
+    return ["handle"];
   }
+
+  public scope: Scope = {
+    items: [],
+    handle: "",
+    activate: this.activate.bind(this),
+  };
 
   constructor() {
     super();
-    // sum is used for examples
-    (this.scope as any).sum = this.sum;
   }
 
   /**
-   * Method used in examples
-   * @param a
-   * @param b
+   * Activate a tab by setting it as active and deactivating all others.
    */
-  public sum(a: number, b: number) {
-    (this.scope as any).result = Number(a) + Number(b);
-    return (this.scope as any).result;
-  }
-
   public activate(tab: Tab) {
-    super.activate(tab);
+    for (const item of this.scope.items) {
+      item.active = false;
+    }
+    tab.active = true;
+
     if (tab.type === "realtime-result") {
-      // Get content of preview tab and insert this as the source tab content
       const previewElement = this.querySelector(".tab-content-preview");
       if (previewElement) {
+        // Build-time trusted template content from demos
         tab.content = `<pre class="language-html"><code class="language-html">${escapeHtml(
           previewElement.innerHTML.trim(),
         )}</code></pre>`;
@@ -75,15 +62,66 @@ export class ExampleTabsComponent extends Bs5TabsComponent {
     }
   }
 
-  protected async bindIfReady() {
-    return super.bindIfReady();
-  }
-
   protected connectedCallback() {
     super.connectedCallback();
-    this.initTabs();
-    this.activateFirstTab();
-    this.init(Bs5TabsComponent.observedAttributes);
+    this.extractTemplates();
+    this.init(ExampleTabsComponent.observedAttributes);
+  }
+
+  /**
+   * Extract <template> children into scope.items, then remove them from DOM.
+   * Handles both regular templates (type="source"/"preview"/"info")
+   * and "single-html-file" templates that auto-generate Source/Preview/Rendered tabs.
+   */
+  private extractTemplates() {
+    const templates = this.querySelectorAll<HTMLTemplateElement>("template");
+
+    for (let i = 0; i < templates.length; i++) {
+      const tpl = templates[i];
+      const type = tpl.getAttribute("type") || "source";
+      const title = tpl.getAttribute("title") || type;
+
+      if (type === "single-html-file") {
+        const sourceCode = this.removeIndentsOfSource(tpl.innerHTML);
+
+        this.scope.items.push({
+          title: "Source",
+          handle: "source",
+          type: "source",
+          // Build-time demo source code, escaped for display
+          content: `<pre class="language-html"><code class="language-html">${escapeHtml(sourceCode)}</code></pre>`,
+          active: this.scope.items.length === 0,
+        });
+
+        this.scope.items.push({
+          title: "Preview",
+          handle: "preview",
+          type: "preview",
+          content: sourceCode,
+          active: false,
+        });
+
+        this.scope.items.push({
+          title: "Rendered",
+          handle: "rendered",
+          type: "realtime-result",
+          content: "",
+          active: false,
+        });
+      } else {
+        const handle = this.handleize(title);
+        this.scope.items.push({
+          title,
+          handle,
+          type,
+          content: tpl.innerHTML,
+          active: this.scope.items.length === 0,
+        });
+      }
+    }
+
+    // Remove processed templates from DOM
+    templates.forEach((tpl) => tpl.remove());
   }
 
   protected async afterBind() {
@@ -91,24 +129,39 @@ export class ExampleTabsComponent extends Bs5TabsComponent {
     await super.afterBind();
   }
 
-  protected countOfFirstWhitespaces(str: string) {
+  protected async template() {
+    if (this.scope.items.length === 0) {
+      return null;
+    }
+    if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
+      const { default: template } = await import(
+        "./example-tabs.component.html?raw"
+      );
+      return template;
+    }
+    return null;
+  }
+
+  private handleize(str: string): string {
+    return str
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+  }
+
+  private countOfFirstWhitespaces(str: string): number {
     const match = str.match(/^([\s]+)/s);
     return match ? match[0].length : 0;
   }
 
-  /**
-   * Removes the first indents of a source string based on the first indents until the first character was found
-   * @param source
-   */
-  protected removeIndentsOfSource(source: string) {
+  private removeIndentsOfSource(source: string): string {
     const lines = source.split(/\r?\n/);
     let firstLineIndents = this.countOfFirstWhitespaces(lines[0]);
-    // If the first lines contains only whitespaces
-    while (firstLineIndents === lines[0].length) {
+    while (lines.length > 0 && firstLineIndents === lines[0].length) {
       lines.shift();
+      if (lines.length === 0) break;
       firstLineIndents = this.countOfFirstWhitespaces(lines[0]);
     }
-
     if (firstLineIndents !== 0) {
       for (let i = 0; i < lines.length; i++) {
         const currentIndents = this.countOfFirstWhitespaces(lines[i]);
@@ -117,52 +170,14 @@ export class ExampleTabsComponent extends Bs5TabsComponent {
         }
       }
     }
-
     return lines.join("\n").trim();
   }
 
-  protected addItemsByTemplate() {
-    const templates = this.querySelectorAll<HTMLTemplateElement>("template");
-    for (let index = 0; index < templates.length; index++) {
-      const tpl = templates[index];
-      const type = tpl.getAttribute("type");
-      if (type === "single-html-file") {
-        const sourceTemplate = document.createElement("template");
-        const sourceCode = this.removeIndentsOfSource(tpl.innerHTML);
-        sourceTemplate.setAttribute("title", "Source");
-        sourceTemplate.setAttribute("type", "source");
-        sourceTemplate.innerHTML = `<pre class="language-html"><code class="language-html">${escapeHtml(
-          sourceCode,
-        )}</code></pre>`;
-        this.addItemByTemplate(sourceTemplate, index);
-
-        const previewTemplate = document.createElement("template");
-        previewTemplate.setAttribute("title", "Preview");
-        previewTemplate.setAttribute("type", "preview");
-        previewTemplate.innerHTML = sourceCode;
-        this.addItemByTemplate(previewTemplate, index + 1);
-
-        const resultTemplate = document.createElement("template");
-        resultTemplate.setAttribute("title", "Rendered");
-        resultTemplate.setAttribute("type", "realtime-result");
-        resultTemplate.innerHTML = "";
-        this.addItemByTemplate(resultTemplate, index + 2);
-      } else {
-        this.addItemByTemplate(tpl, index);
-      }
-    }
-    this.templateReady = true;
-  }
-
-  protected async template() {
-    // Only set the component template if there no childs or the childs are templates
-    if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
-      const { default: template } = await import(
-        "./example-tabs.component.html?raw"
-      );
-      return template;
-    } else {
-      return null;
-    }
+  /**
+   * Check if all child nodes are template elements.
+   */
+  protected hasOnlyTemplateChilds(): boolean {
+    const children = Array.from(this.children);
+    return children.length > 0 && children.every((c) => c.tagName === "TEMPLATE");
   }
 }

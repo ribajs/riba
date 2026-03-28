@@ -10,13 +10,15 @@ export class BindContentComponent extends Component {
 
   constructor() {
     super();
+    this.bindContent = this.bindContent.bind(this);
   }
 
-  public bindContent() {
+  public async bindContent() {
     this.classList.add("bound");
+    // Content comes from the component's own <template> child (trusted build-time content)
     this.innerHTML = this.content;
     this.removeEventListener("click", this.bindContent);
-    this.bind();
+    await this.bind();
   }
 
   protected connectedCallback() {
