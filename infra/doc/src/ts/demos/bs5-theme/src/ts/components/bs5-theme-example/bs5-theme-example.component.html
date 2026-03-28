@@ -1,0 +1,75 @@
+<div class="mt-5">
+  <bs5-sidebar
+    class="bg-theme text-tl-dark text-td-light d-flex justify-content-center align-items-center"
+    id="left-sidebar"
+    container-selector="#main-container"
+    position="left"
+    rv-bs5-co-xs-auto-hide="true"
+    rv-bs5-co-xl-auto-hide="false"
+    rv-bs5-co-xs-auto-show="false"
+    rv-bs5-co-xl-auto-show="true"
+    rv-bs5-co-xs-mode="'overlap'"
+    rv-bs5-co-xl-mode="'side'"
+  >
+    <h1>Left</h1>
+  </bs5-sidebar>
+
+  <bs5-navbar class="navbar navbar-top fixed-top navbar-theme bg-theme">
+    <div class="container-fluid d-block">
+      <div class="row justify-content-start">
+        <div class="col-12 d-flex align-items-center justify-content-between">
+          <!-- Left -->
+          <bs5-toggle-button target-id="left-sidebar">
+            <ul class="nav">
+              <li class="nav-item d-flex align-items-center">
+                <bs5-icon src="/iconset/svg/icon_menu.svg" size="32" rv-hide="isActive" rv-on-click="toggle"></bs5-icon>
+              </li>
+              <li class="nav-item d-flex align-items-center">
+                <bs5-icon src="/iconset/svg/icon_close.svg" size="32" rv-show="isActive" rv-on-click="toggle">
+                </bs5-icon>
+              </li>
+            </ul>
+          </bs5-toggle-button>
+          <!-- Right -->
+          <div class="d-flex flex-row align-items-center">
+            <bs5-theme-button class="mx-3" mode="icon"></bs5-theme-button>
+            <bs5-theme-button mode="dropdown"></bs5-theme-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </bs5-navbar>
+
+  <div id="main-container" class="py-5">
+    <div class="container-fluid">
+      <div class="row">
+        <section class="col-12 mb-5 text-center">
+          <h1>
+            Switch your OS or this site to
+            <span class="d-tl-none"> Light Mode</span>
+            <span class="d-td-none"> Dark Mode</span>
+          </h1>
+        </section>
+        <section class="col-12 mb-5">
+          <form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>

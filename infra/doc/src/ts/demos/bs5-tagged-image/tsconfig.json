@@ -1,0 +1,12 @@
+{
+  "extends": "@ribajs/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "types": ["webpack-env"]
+  },
+  "exclude": [
+    "node_modules",
+    "dist/**/*.d.ts",
+  ]
+}

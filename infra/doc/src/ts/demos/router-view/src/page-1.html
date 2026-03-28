@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Router View Example - Page 1</title>
+  </head>
+  <body>
+    <rv-nav></rv-nav>
+    <router-view>
+      <page-1-page>
+        <div class="container my-5">
+          <div class="row">
+            <div class="col-12">
+              <h1>You are on page 1</h1>
+              <bs4-dropdown class="dropdown">
+                <a rv-on-click="toggle" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false">
+                  Dropdown link
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                </div>
+              </bs4-dropdown>
+            </div>
+          </div>
+        </div>
+      </page-1-page>
+    </router-view>
+  </body>
+</html>

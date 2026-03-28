@@ -47,7 +47,7 @@
     "pug": "^3.0.3",
     "sass": "^1.98.0",
     "typescript": "^6.0.2",
-    "vite": "^7.3.1",
+    "vite": "^8.0.3",
     "vite-plugin-static-copy": "^3.2.0"
   }
 }

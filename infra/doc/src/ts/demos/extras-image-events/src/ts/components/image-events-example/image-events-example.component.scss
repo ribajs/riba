@@ -1,0 +1,34 @@
+rv-extras-image-events-example {
+  display: block;
+  height: 100%;
+  width: 100%;
+  .console {
+    overflow: auto;
+    max-height: 100%;
+    .log {
+      margin: 0;
+      @extend .small !optional;
+      @extend .d-flex !optional;
+      @extend .justify-content-between !optional;
+      .name {
+        @extend .text-info !optional;
+        min-width: 80px;
+      }
+      .detail {
+        @extend .text-warning !optional;
+      }
+      .time {
+        @extend .text-success !optional;
+      }
+      .no-data {
+        @extend .text-danger !optional;
+      }
+      // Hide no-data if it is not the only child
+      &:not(:only-child) {
+        .no-data {
+          @extend .d-none !optional;
+        }
+      }
+    }
+  }
+}

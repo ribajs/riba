@@ -15,6 +15,20 @@ ready(async () => {
   await import("prismjs/components/prism-typescript");
   await import("prismjs/components/prism-scss");
 
+  // Demo example components
+  const { EachItemExampleComponent } = await import(
+    "./demos/core-each-item/src/ts/components/each-item-example/each-item-example.component.js"
+  );
+  const { I18nStaticExampleComponent } = await import(
+    "./demos/i18n-static/src/ts/components/i18n-static-example/i18n-static-example.component.js"
+  );
+  const { TouchEventsExampleComponent } = await import(
+    "./demos/extras-touch-events/src/ts/components/touch-events-example/touch-events-example.component.js"
+  );
+  const { ExtrasScrollEventsExampleComponent } = await import(
+    "./demos/extras-scroll-events/src/ts/components/extras-scroll-events-example/extras-scroll-events-example.component.js"
+  );
+
   const riba = new Riba();
   const dispatcher = new EventDispatcher("main");
   const model: any = {};
@@ -29,6 +43,14 @@ ready(async () => {
   );
   riba.module.register(bs5Module.init());
   riba.module.register(DocModule.init());
+
+  // Register demo example components
+  riba.module.component.registerAll({
+    EachItemExampleComponent,
+    I18nStaticExampleComponent,
+    TouchEventsExampleComponent,
+    ExtrasScrollEventsExampleComponent,
+  });
 
   dispatcher.on(
     "newPageReady",

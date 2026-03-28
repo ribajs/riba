@@ -1,0 +1,15 @@
+<div class="row flex-column flex-md-row d-flex flex-nowrap h-100">
+  <div
+    class="col d-flex justify-content-center align-items-center bg-light text-dark touch-zone"
+  >
+    <div class="d-flex flex-column gap-2">
+      <img class="img-fluid" rv-src="imageSource" alt="Random placeholder image" rv-on-load="log | args 'load'" rv-on-error="log | args 'error'" rv-on-binder-changed="log | args 'changed'" />
+      <button class="btn btn-primary mx-auto" rv-on-click="changeImage">Change Image</button>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4 col-xl-4 bg-dark text-light py-3 h-100 console">
+    <p class="log">
+      <span class="no-data">Wait for image events...</span>
+    </p>
+  </div>
+</div>

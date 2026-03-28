@@ -1,0 +1,26 @@
+// Original Bootstrap 5 Styles
+@import 'bootstrap/scss/bootstrap';
+
+// Bootstrap style extensions from Riba.js modules
+@import '@ribajs/leaflet-map/src/index';
+
+// @import './binders/index';
+@import '../ts/components/index';
+// @import './formatters/index';
+
+
+body {
+  background-color: #6634db;
+  color: $light;
+  height: 100%;
+  width: 100%;
+}
+html {
+  height: 100%;
+  width: 100%;
+  min-height: 300px;
+}
+
+h2 {
+  margin-bottom: 2em;
+}
