@@ -8,7 +8,7 @@
 !packages/events/dist/
 !packages/podcast/dist/
 /demos/*/dist
-/demos/*/public
+/demos/*/public/iconset
 node_modules/
 /.cache
 

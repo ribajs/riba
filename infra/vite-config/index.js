@@ -99,6 +99,7 @@ export function ribaViteConfig(options = {}) {
 
   return defineConfig({
     root,
+    publicDir: resolve(cwd, "public"),
     plugins,
     assetsInclude: ["**/*.svg"],
     esbuild: {

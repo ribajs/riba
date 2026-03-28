@@ -1,14 +1,11 @@
 import { bs5Module } from "@ribajs/bs5";
 import { coreModule, Riba } from "@ribajs/core";
 import { IconsetModule } from "./iconset.module.js";
-
-declare global {
-  const ICONSET: string[];
-}
+import ICONSET from "@ribajs/iconset";
 
 const riba = new Riba();
 const model = {
-  ICONSET: ICONSET,
+  ICONSET,
 };
 
 // Register modules

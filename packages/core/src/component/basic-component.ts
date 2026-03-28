@@ -85,8 +85,11 @@ export abstract class BasicComponent extends HTMLElement {
   }
 
   protected async init(observedAttributes: string[]) {
-    this.loadAttributes(observedAttributes);
+    // getPassedObservedAttributes must run first so that observedAttributesToCheck
+    // is populated before loadAttributes triggers attributeChangedCallback calls.
+    // Otherwise the empty dict causes ready() to return true prematurely.
     this.getPassedObservedAttributes(observedAttributes);
+    this.loadAttributes(observedAttributes);
     return;
   }
 
@@ -113,7 +116,10 @@ export abstract class BasicComponent extends HTMLElement {
     const oa2c = this.observedAttributesToCheck;
     for (const observedAttribute of observedAttributes) {
       if (!oa2c[observedAttribute]) {
-        oa2c[observedAttribute] = { passed: false, initialized: false };
+        oa2c[observedAttribute] = {
+          passed: this.attributeIsPassed(observedAttribute),
+          initialized: false,
+        };
       } else {
         if (!oa2c[observedAttribute].passed) {
           oa2c[observedAttribute].passed =
