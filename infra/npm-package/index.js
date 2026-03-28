@@ -37,7 +37,6 @@ export const ribaPackages = [
   "@ribajs/leaflet-map",
   "@ribajs/moment",
   "@ribajs/octobercms",
-  "@ribajs/photoswipe",
   "@ribajs/shopify",
   "@ribajs/shopify-easdk",
   "@ribajs/shopify-tda",

@@ -17,7 +17,6 @@ undecided:
   - "@ribajs/moment"
   - "@ribajs/octobercms"
   - "@ribajs/pdf"
-  - "@ribajs/photoswipe"
   - "@ribajs/router"
   - "@ribajs/shopify"
   - "@ribajs/shopify-easdk"

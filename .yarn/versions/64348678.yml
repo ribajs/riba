@@ -46,7 +46,6 @@ undecided:
   - "@ribajs/monaco-editor"
   - "@ribajs/octobercms"
   - "@ribajs/pdf"
-  - "@ribajs/photoswipe"
   - "@ribajs/router"
   - "@ribajs/shopify"
   - "@ribajs/shopify-easdk"

@@ -92,7 +92,6 @@
     "@ribajs/history": "workspace:^",
     "@ribajs/i18n": "workspace:^",
     "@ribajs/iconset": "workspace:^",
-    "@ribajs/photoswipe": "workspace:^",
     "@ribajs/router": "workspace:^",
     "@ribajs/shopify": "workspace:^",
     "@ribajs/shopify-tda": "workspace:^",
