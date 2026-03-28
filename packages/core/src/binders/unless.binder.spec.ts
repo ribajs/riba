@@ -136,7 +136,7 @@ describe("unless", () => {
       },
     };
 
-    const resetRootScope = jest.fn(() => {
+    const resetRootScope = vi.fn(() => {
       model.scope.error = {};
       return;
     });

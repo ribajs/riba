@@ -41,7 +41,7 @@ describe("riba.formatters", () => {
       const el = document.createElement("div");
       el.setAttribute("rv-text", "obj.str | toBase64");
       riba.bind(el, model);
-      expect(isBase64(el.textContent)).toBeTrue();
+      expect(isBase64(el.textContent)).toBe(true);
       expect(parseType(el.textContent).value).toEqual(model.obj?.str);
     });
 
@@ -49,7 +49,7 @@ describe("riba.formatters", () => {
       const el = document.createElement("div");
       el.setAttribute("rv-text", "obj.str | toBase64 | parse");
       riba.bind(el, model);
-      expect(isBase64(el.textContent)).toBeFalse();
+      expect(isBase64(el.textContent)).toBe(false);
       expect(el.textContent).toEqual(model.obj?.str);
     });
 
@@ -57,7 +57,7 @@ describe("riba.formatters", () => {
       const el = document.createElement("div");
       el.setAttribute("rv-text", "obj.num | toBase64");
       riba.bind(el, model);
-      expect(isBase64(el.textContent)).toBeTrue();
+      expect(isBase64(el.textContent)).toBe(true);
       expect(parseType(el.textContent).value).toEqual(model.obj?.num);
     });
 
@@ -65,7 +65,7 @@ describe("riba.formatters", () => {
       const el = document.createElement("div");
       el.setAttribute("rv-text", "obj.num | toBase64 | parse");
       riba.bind(el, model);
-      expect(isBase64(el.textContent)).toBeFalse();
+      expect(isBase64(el.textContent)).toBe(false);
       expect(Number(el.textContent)).toEqual(model.obj?.num);
     });
 
@@ -73,7 +73,7 @@ describe("riba.formatters", () => {
       const el = document.createElement("div");
       el.setAttribute("rv-text", "obj.bol | toBase64");
       riba.bind(el, model);
-      expect(isBase64(el.textContent)).toBeTrue();
+      expect(isBase64(el.textContent)).toBe(true);
       expect(parseType(el.textContent).value).toEqual(model.obj?.bol);
     });
 
@@ -81,7 +81,7 @@ describe("riba.formatters", () => {
       const el = document.createElement("div");
       el.setAttribute("rv-text", "obj.bol | toBase64 | parse");
       riba.bind(el, model);
-      expect(isBase64(el.textContent)).toBeFalse();
+      expect(isBase64(el.textContent)).toBe(false);
       expect(Boolean(el.textContent)).toEqual(model.obj?.bol);
     });
 
@@ -92,7 +92,7 @@ describe("riba.formatters", () => {
       const el = document.createElement("div");
       el.setAttribute("rv-text", "obj | toBase64");
       riba.bind(el, model);
-      expect(isBase64(el.textContent)).toBeTrue();
+      expect(isBase64(el.textContent)).toBe(true);
       expect(parseType(el.textContent).value).toEqual(model.obj);
     });
   });

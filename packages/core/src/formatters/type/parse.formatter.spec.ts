@@ -50,7 +50,7 @@ describe("riba.formatters", () => {
       const el = document.createElement("div");
       el.setAttribute("rv-assign-bol", "bolStr | parse");
       riba.bind(el, model);
-      expect(model.bol).toBeTrue();
+      expect(model.bol).toBe(true);
     });
 
     it("A json string of a string array should be parsed to a string array", () => {

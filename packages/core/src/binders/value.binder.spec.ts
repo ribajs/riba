@@ -171,7 +171,7 @@ describe("riba.binders", () => {
 
     it("sets the element's value to zero when a zero value is passed", () => {
       const view = riba.bind(fragment, model);
-      expect(view.bindings).toBeArrayOfSize(1);
+      expect(view.bindings).toHaveLength(1);
       const valueBinder = view.bindings[0] as ValueBinder;
       expect(valueBinder.name).toEqual("value");
       valueBinder.routine(input, 0);
@@ -232,7 +232,7 @@ describe("riba.binders", () => {
       it("sets the correct option on a select-multiple element", () => {
         const view = riba.bind(fragment, model);
         const valueBinder = view.bindings[0] as ValueBinder;
-        expect(view.bindings).toBeArrayOfSize(1);
+        expect(view.bindings).toHaveLength(1);
         expect(valueBinder).toBeDefined();
         expect(valueBinder.name).toEqual("value");
         valueBinder.routine(groupedMultipleSelectEl, ["a", "c"]);
