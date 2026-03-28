@@ -52,6 +52,17 @@ ready(async () => {
     ExtrasScrollEventsExampleComponent,
   });
 
+  // Pre-register custom elements so they are upgraded immediately
+  // when inserted via innerHTML (e.g. by BindContentComponent).
+  // Without this, customElements.define() only happens during View.build()
+  // which is too late for components nested inside rv-bind-content.
+  const allComponents = { ...riba.components };
+  for (const [tagName, ComponentClass] of Object.entries(allComponents)) {
+    if (!customElements.get(tagName)) {
+      customElements.define(tagName, ComponentClass as CustomElementConstructor);
+    }
+  }
+
   dispatcher.on(
     "newPageReady",
     (
