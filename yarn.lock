@@ -4476,6 +4476,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ribajs/vite-config@workspace:infra/vite-config"
   dependencies:
+    "@ribajs/iconset": "workspace:^"
     rollup-plugin-pug: "npm:^1.1.1"
     vite: "npm:^8.0.3"
   languageName: unknown

@@ -14,6 +14,7 @@
     "url": "git+https://github.com/ribajs/riba.git"
   },
   "dependencies": {
+    "@ribajs/iconset": "workspace:^",
     "rollup-plugin-pug": "^1.1.1",
     "vite": "^8.0.3"
   }

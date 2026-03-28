@@ -1,4 +1,4 @@
-doc-sidebar {
+.sidebar-menu {
   .nav-link {
     color: $white;
     &.active {
@@ -6,7 +6,7 @@ doc-sidebar {
       cursor: default;
     }
   }
-  .nav.flex-column {
+  &.flex-column {
     .nav-item-level-0 {
       > .nav-link {
         font-weight: bold;

@@ -157,17 +157,10 @@ export class DocSidebarComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
 
-    // Parse navigation data from attribute
-    const navDataAttr = this.getAttribute("navigation");
-    if (navDataAttr) {
-      try {
-        const navData = JSON.parse(navDataAttr);
-        this.scope.linklist.links = this.transformNavData(
-          Array.isArray(navData) ? navData : [],
-        );
-      } catch (e) {
-        console.error("Failed to parse navigation data:", e);
-      }
+    // Load navigation data from global variable (set by layout template)
+    const navData = (window as any).__DOC_NAV__;
+    if (Array.isArray(navData)) {
+      this.scope.linklist.links = this.transformNavData(navData);
     }
 
     // Auto-expand section containing current page
@@ -176,7 +169,9 @@ export class DocSidebarComponent extends Component {
       this.showByChildUrl(currentPath);
     }
 
-    // Listen for page changes
+    this.init(DocSidebarComponent.observedAttributes);
+
+    // Listen for page changes (after init so component is ready)
     this.dispatcher.on(
       "newPageReady",
       (_viewId: string, currentStatus: any) => {
@@ -189,8 +184,6 @@ export class DocSidebarComponent extends Component {
         }
       },
     );
-
-    this.init(DocSidebarComponent.observedAttributes);
   }
 
   protected async template() {

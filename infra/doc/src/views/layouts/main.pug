@@ -6,11 +6,10 @@ html(lang='en')
     title= site.title + (typeof pageTitle !== 'undefined' && pageTitle ? ' - ' + pageTitle : '')
     meta(name='description' content=site.description)
     block head
-  body
-    script.
-      window.__DOC_NAV__ = !{JSON.stringify(navigation)};
+  body(id=typeof bodyId !== 'undefined' ? bodyId : '')
     bs5-sidebar#main-sidebar(container-selector="#main-container" force-hide-on-location-pathnames="['/']")
-      doc-sidebar.d-flex.align-items-center.my-5(vertical="true" pills="false")
+      .d-flex.align-items-center.my-5
+        include ../partials/sidebar
     #main-container
       #layout-top
         include ../partials/navbar

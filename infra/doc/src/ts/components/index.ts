@@ -3,4 +3,4 @@ export { ExampleTabsComponent } from "./example-tabs/example-tabs.component.js";
 export { FileTreeComponent } from "./file-tree/file-tree.component.js";
 export { IconPreviewComponent } from "./icon-preview/icon-preview.component.js";
 export { LoremIpsumComponent } from "./lorem-ipsum/lorem-ipsum.component.js";
-export { DocSidebarComponent } from "./doc-sidebar/doc-sidebar.component.js";
+// doc-sidebar is rendered statically in Pug templates, no Riba component needed

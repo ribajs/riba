@@ -4,7 +4,7 @@ $bs4-scrollspy-line-width: 2px;
 $bs4-scrollspy-width: 200px;
 $bs4-scrollspy-dot-left: $bs4-scrollspy-line-left - ($bs4-scrollspy-dot-size - ($bs4-scrollspy-line-width / 2));
 
-bs4-scrollspy.side-scrollspy {
+bs4-scrollspy.side-scrollspy, bs5-scrollspy.side-scrollspy {
   position: fixed;
   right: 0;
   top: 64px;
