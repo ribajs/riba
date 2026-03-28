@@ -74,6 +74,9 @@ ready(async () => {
       dataset: any,
     ) => {
       Prism.highlightAll();
+      // Restore body scroll after page navigation
+      // (sidebar may leave overflow:hidden on body when open during navigation)
+      document.body.style.overflow = "";
     },
   );
 

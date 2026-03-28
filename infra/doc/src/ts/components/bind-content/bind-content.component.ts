@@ -13,12 +13,14 @@ export class BindContentComponent extends Component {
     this.bindContent = this.bindContent.bind(this);
   }
 
-  public async bindContent() {
+  public bindContent() {
     this.classList.add("bound");
     // Content comes from the component's own <template> child (trusted build-time content)
     this.innerHTML = this.content;
     this.removeEventListener("click", this.bindContent);
-    await this.bind();
+    // No need to call this.bind() here - custom elements inside the content
+    // (like rv-example-tabs) are pre-registered and handle their own lifecycle
+    // via connectedCallback() when inserted into the DOM.
   }
 
   protected connectedCallback() {
