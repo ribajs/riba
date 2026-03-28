@@ -9,7 +9,7 @@ bs4-scrollspy.side-scrollspy, bs5-scrollspy.side-scrollspy {
   right: 0;
   top: 64px;
   width: $bs4-scrollspy-width + 50px;
-  height: calc(100vw - 64px);
+  height: calc(100vh - 64px);
   .nav-item {
     > ul.list-scrollspy {
       display: none;

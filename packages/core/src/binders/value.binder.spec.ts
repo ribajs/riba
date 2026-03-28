@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { Riba } from "../riba.js";
 import { dotAdapter } from "../adapters/dot.adapter.js";
 import { ValueBinder } from "./value.binder.js";
@@ -25,13 +25,13 @@ describe("riba.binders", () => {
     it("unbinds the same bound function", () => {
       let boundFn: EventListenerOrEventListenerObject;
 
-      jest.spyOn(el, "addEventListener").mockImplementation((event, fn) => {
+      vi.spyOn(el, "addEventListener").mockImplementation((event, fn) => {
         boundFn = fn;
       });
 
       const view = riba.bind(fragment, model);
 
-      jest.spyOn(el, "removeEventListener").mockImplementation((event, fn) => {
+      vi.spyOn(el, "removeEventListener").mockImplementation((event, fn) => {
         expect(fn).toEqual(boundFn);
       });
 

@@ -36,9 +36,8 @@
   ],
   "scripts": {
     "reinstall": "YARN_CHECKSUM_BEHAVIOR=update yarn install && yarn dlx @yarnpkg/sdks vscode",
-    "test": "jest --config=jest.config.js",
-    "test:watch": "jest --config=jest.config.js --watch",
-    "test:clear": "jest --config=jest.config.js --clearCache",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "yarn run lint:ext && yarn workspaces foreach -v -p -W run lint",
     "lint:ext": "node lint-file-extension.js",
     "build:all": "yarn workspaces foreach -v -W --jobs 5 run build",
@@ -53,11 +52,9 @@
     "check:all": "yarn workspaces foreach -v -p -j 5 run check"
   },
   "devDependencies": {
-    "@jest/globals": "^30.3.0",
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
     "@ribajs/types": "workspace:^",
-    "@types/jest": "^30.0.0",
     "@typescript-eslint/eslint-plugin": "^8.57.2",
     "@typescript-eslint/parser": "^8.57.2",
     "@yarnpkg/pnpify": "^4.1.6",
@@ -66,16 +63,11 @@
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.5",
-    "jest": "^30.3.0",
-    "jest-config": "^30.3.0",
-    "jest-environment-jsdom": "^30.3.0",
-    "jest-extended": "^7.0.0",
-    "jest-ts-webcompat-resolver": "^1.0.1",
-    "jest-util": "^30.3.0",
+    "jsdom": "^26.1.0",
     "prettier": "^3.8.1",
     "sass": "^1.98.0",
-    "ts-jest": "^29.4.6",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "vitest": "^3.2.4"
   },
   "workspaces": [
     "packages/*",
