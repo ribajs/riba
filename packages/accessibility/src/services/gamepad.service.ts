@@ -1,6 +1,6 @@
 import { AccessibilityModuleOptions } from "../types/index.js";
-import { isGamepadSupported, gameControl } from "gamecontroller.js";
-import type { GameControl } from "gamecontroller.js";
+import { isGamepadSupported, gameControl } from "@ribajs/gamecontroller.js";
+import type { GameControl } from "@ribajs/gamecontroller.js";
 export class GamepadService {
   protected _options: AccessibilityModuleOptions;
   protected _control: typeof gameControl;
