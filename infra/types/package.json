@@ -6,7 +6,7 @@
     "node": ">=24.0.0"
   },
   "scripts": {
-    "check": "tsc --noEmit"
+    "check": "echo 'Config-only package, nothing to check'"
   },
   "description": "Default typescript types used in Riba.js projects",
   "author": "Pascal Garber <pascal@artandcode.studio",

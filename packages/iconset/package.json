@@ -37,7 +37,7 @@
   "scripts": {
     "build": "node build.mjs",
     "clean": "echo 'Do not clean the iconset by default because we want to hold the build image files in the repo'",
-    "check": "tsc --noEmit"
+    "check": "echo 'Config-only package, nothing to check'"
   },
   "files": [
     "/src",

@@ -29,7 +29,7 @@
     "watch:pug:snippets": "yarn run build:dev:pug:snippets --watch",
     "watch:pug:templates": "yarn run build:dev:pug:templates --watch",
     "watch:pug:layout": "yarn run build:dev:pug:layout --watch",
-    "check": "tsc --noEmit"
+    "check": "yarn run sync:demos && tsc --noEmit"
   },
   "repository": {
     "type": "git",

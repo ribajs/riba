@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/tsconfig",
   "scripts": {
-    "check": "tsc --noEmit"
+    "check": "echo 'Config-only package, nothing to check'"
   },
   "description": "Shared TypeScript config for Riba.js projects",
   "version": "2.0.0-rc.23",

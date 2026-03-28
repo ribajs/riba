@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": ".",
-    "types": ["jest", "jest-extended"]
+    "types": []
   },
   "exclude": [
     "node_modules",

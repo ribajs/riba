@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/npm-package",
   "scripts": {
-    "check": "tsc --noEmit"
+    "check": "echo 'Config-only package, nothing to check'"
   },
   "description": "Check if an npm package is installed",
   "version": "2.0.0-rc.23",

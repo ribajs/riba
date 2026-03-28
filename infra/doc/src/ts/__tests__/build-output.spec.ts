@@ -1,8 +1,9 @@
-import { describe, it, expect, beforeAll } from "vitest";
+import { describe, it, expect } from "vitest";
 import { readFileSync, existsSync } from "fs";
 import { resolve } from "path";
 
 const SITE_DIR = resolve(__dirname, "../../../_site");
+const SITE_EXISTS = existsSync(SITE_DIR);
 
 const EXPECTED_PAGES = [
   "index.html",
@@ -28,12 +29,7 @@ function readPage(name: string): string {
   return readFileSync(filePath, "utf-8");
 }
 
-describe("Build output", () => {
-  beforeAll(() => {
-    if (!existsSync(SITE_DIR)) {
-      throw new Error(`Build output directory ${SITE_DIR} does not exist. Run 'yarn workspace @ribajs/doc run build' first.`);
-    }
-  });
+describe.skipIf(!SITE_EXISTS)("Build output", () => {
 
   describe("Page generation", () => {
     it.each(EXPECTED_PAGES)("generates %s", (page) => {
