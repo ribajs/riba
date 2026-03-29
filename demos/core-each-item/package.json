@@ -6,7 +6,7 @@
     "node": ">=24.0.0"
   },
   "description": "",
-  "exports": "./src/main.ts",
+  "main": "./src/main.ts",
   "private": true,
   "scripts": {
     "build": "vite build --mode production",

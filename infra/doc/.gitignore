@@ -1,3 +1,5 @@
 _site/
 # Generated HTML files from Pug plugin (compiled into src/ at build time)
 src/*.html
+# Synced demo files (now resolved via workspace dependencies)
+src/ts/demos/

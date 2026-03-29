@@ -34,8 +34,6 @@ jobs:
         cache: "yarn"
     - name: Install dependencies
       run: yarn install
-    - name: Sync demos
-      run: yarn workspace @ribajs/doc run sync:demos
     - name: Build documentation
       run: yarn workspace @ribajs/doc run build
     - name: Setup Pages

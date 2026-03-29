@@ -3,7 +3,6 @@ import dns from 'dns'
 import { resolve } from 'path'
 import { readFileSync, existsSync, readdirSync } from 'fs'
 import { docPagesPlugin } from './vite-plugin-doc-pages.js'
-import { demoAssetsPlugin } from './vite-plugin-demo-assets.js'
 
 const __dirname = new URL('.', import.meta.url).pathname;
 dns.setDefaultResultOrder('verbatim')
@@ -66,9 +65,6 @@ export default defineConfig(({ command, mode }) => {
         pagesDir: resolve(basedir, 'views/pages'),
         basedir: resolve(basedir, 'views'),
         contentDir: resolve(basedir, 'content'),
-      }),
-      demoAssetsPlugin({
-        demosDir: resolve(basedir, 'ts/demos'),
       }),
       iconsetAssetsPlugin(),
     ],

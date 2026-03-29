@@ -17,16 +17,16 @@ ready(async () => {
 
   // Demo example components
   const { EachItemExampleComponent } = await import(
-    "./demos/core-each-item/src/ts/components/each-item-example/each-item-example.component.js"
+    "@ribajs/demo-core-each-item/src/ts/components/each-item-example/each-item-example.component.js"
   );
   const { I18nStaticExampleComponent } = await import(
-    "./demos/i18n-static/src/ts/components/i18n-static-example/i18n-static-example.component.js"
+    "@ribajs/demo-i18n-static/src/ts/components/i18n-static-example/i18n-static-example.component.js"
   );
   const { TouchEventsExampleComponent } = await import(
-    "./demos/extras-touch-events/src/ts/components/touch-events-example/touch-events-example.component.js"
+    "@ribajs/demo-extras-touch-events/src/ts/components/touch-events-example/touch-events-example.component.js"
   );
   const { ExtrasScrollEventsExampleComponent } = await import(
-    "./demos/extras-scroll-events/src/ts/components/extras-scroll-events-example/extras-scroll-events-example.component.js"
+    "@ribajs/demo-extras-scroll-events/src/ts/components/extras-scroll-events-example/extras-scroll-events-example.component.js"
   );
 
   const riba = new Riba();
