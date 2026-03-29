@@ -1,6 +1,7 @@
 import { readFileSync, mkdirSync, writeFileSync, existsSync, readdirSync } from 'fs';
 import { resolve, dirname, join } from 'path';
 import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
 import yaml from 'js-yaml';
 import pug from 'pug';
 import { marked } from 'marked';
@@ -70,10 +71,15 @@ function loadLocals(contentDir, projectRoot) {
   // Load icon list from @ribajs/iconset if available
   let icons = [];
   try {
-    const iconsetPath = require.resolve('@ribajs/iconset/dist/svg.json', { paths: [projectRoot] });
+    const esmRequire = createRequire(import.meta.url);
+    const iconsetPath = esmRequire.resolve('@ribajs/iconset/dist/svg.json');
     icons = JSON.parse(readFileSync(iconsetPath, 'utf8'));
   } catch {
-    // iconset not available, skip
+    // Fallback: direct monorepo path
+    const fallbackPath = resolve(projectRoot, 'packages/iconset/dist/svg.json');
+    if (existsSync(fallbackPath)) {
+      icons = JSON.parse(readFileSync(fallbackPath, 'utf8'));
+    }
   }
 
   // Load riba package version

@@ -104,9 +104,9 @@ export class IconPreviewComponent extends Component {
 
       this.scope.example = escapeHtml(
         `
-        <bs4-icon color="danger" src="/assets/${
+        <bs5-icon color="danger" src="/iconset/${
           this.scope.name + ".svg"
-        }" size="32" direction="up"></bs4-icon>
+        }" size="32" direction="up"></bs5-icon>
       `.trim(),
       );
     }

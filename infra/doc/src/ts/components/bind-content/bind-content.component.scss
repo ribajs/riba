@@ -1,6 +1,7 @@
 rv-bind-content {
+  display: block;
+
   &:not(.bound) {
-    display: block;
     overflow: hidden;
     position: relative;
     min-width: 100%;

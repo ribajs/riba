@@ -1,5 +1,4 @@
 import { Component, ScopeBase } from "@ribajs/core";
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import { escapeHtml } from "@ribajs/utils/src/type.js";
 import * as Prism from "prismjs";
 
@@ -133,13 +132,10 @@ export class ExampleTabsComponent extends Component {
     if (this.scope.items.length === 0) {
       return null;
     }
-    if (!hasChildNodesTrim(this) || this.hasOnlyTemplateChilds()) {
-      const { default: template } = await import(
-        "./example-tabs.component.html?raw"
-      );
-      return template;
-    }
-    return null;
+    const { default: template } = await import(
+      "./example-tabs.component.html?raw"
+    );
+    return template;
   }
 
   private handleize(str: string): string {
@@ -173,11 +169,4 @@ export class ExampleTabsComponent extends Component {
     return lines.join("\n").trim();
   }
 
-  /**
-   * Check if all child nodes are template elements.
-   */
-  protected hasOnlyTemplateChilds(): boolean {
-    const children = Array.from(this.children);
-    return children.length > 0 && children.every((c) => c.tagName === "TEMPLATE");
-  }
 }

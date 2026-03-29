@@ -2,7 +2,7 @@ Assign a value in your model, sets or overwrites a value by his property name (n
 
 <rv-bind-content class="pt-3">
   <template>
-    <rv-example-tabs class="pt-3" handle="bs4-icon">
+    <rv-example-tabs class="pt-3" handle="example">
       <template type="single-html-file">
         <div rv-assign-new-value="'Hello World'">{newValue}!</div>
       </template>

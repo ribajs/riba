@@ -3,7 +3,7 @@ This formatter corresponds to the `||` expression: `a || b`.
 
 <rv-bind-content class="pt-3">
 <template>
-<rv-example-tabs class="pt-3" handle="bs4-icon">
+<rv-example-tabs class="pt-3" handle="example">
 <template type="single-html-file">
 <div rv-if="false | or true">Show me!</div>
 <div rv-if="true | or false">Show me, too!</div>

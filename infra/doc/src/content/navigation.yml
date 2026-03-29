@@ -29,8 +29,8 @@
     - title: jQuery
       url: jquery.html
       links: []
-    - title: Bootstrap 4
-      url: bs4.html
+    - title: Bootstrap 5
+      url: bs5.html
       links: []
     - title: Extras
       url: extras.html

@@ -12,7 +12,7 @@ const EXPECTED_PAGES = [
   "core-binders.html",
   "core-formatters.html",
   "core-components.html",
-  "bs4.html",
+  "bs5.html",
   "extras.html",
   "i18n.html",
   "router.html",
@@ -83,7 +83,7 @@ describe.skipIf(!SITE_EXISTS)("Build output", () => {
         "I18n",
         "Iconset",
         "jQuery",
-        "Bootstrap 4",
+        "Bootstrap 5",
         "Extras",
         "OctoberCMS",
       ];

@@ -23,7 +23,7 @@ const IGNORED_FILES = new Set([
   'core-binders.html',
   'core-formatters.html',
   'core-components.html',
-  'bs4.html',
+  'bs5.html',
   'extras.html',
   'i18n.html',
   'router.html',
