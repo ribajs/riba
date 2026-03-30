@@ -8,3 +8,13 @@
 .navbar-toggler {
     border: none;
 }
+
+.navbar-main {
+  min-height: 64px;
+
+  bs5-toggle-button {
+    display: flex;
+    align-items: center;
+    height: 64px;
+  }
+}
