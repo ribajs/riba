@@ -3,10 +3,10 @@ The build-scss-and-yml gulp task can be used to generate theme settings for octo
 To include the task in your october project, export the gulp task `build-scss-and-yml` to your gulpfile's exports:
 
 ```ts
-require('@ribajs/octobercms/dist/yaml');
-var gulp = require("gulp");
+import '@ribajs/octobercms/dist/yaml';
+import gulp from 'gulp';
 
-exports.default = gulp.series("build-scss-and-yml");`
+export default gulp.series('build-scss-and-yml');
 ```
 
 \

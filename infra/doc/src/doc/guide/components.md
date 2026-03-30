@@ -22,21 +22,16 @@ This will create a new directory with a new component (and a `.spec.ts` file for
 
 A component object must define a `template` function, which returns the template for the component (this can be an HTML string or the actual element). It must also define an `initialize` function, which returns the scope object to bind the view with (this will likely be a controller / viewmodel / presenter).
 
-```javascript
-import {
-  Component,
-  Debug,
-} from '@ribajs/core';
-import { hasChildNodesTrim } from "@ribajs/utils/src/dom";
+```typescript
+import { Component } from '@ribajs/core';
+import { hasChildNodesTrim } from '@ribajs/utils/src/dom';
 
 interface Scope {
   description?: string;
 }
 
 export class TodoItemComponent extends Component {
-
-  public static tagName: string = 'rv-todo-item';
-
+  public static tagName = 'rv-todo-item';
   protected autobind = true;
 
   static get observedAttributes() {
@@ -44,57 +39,30 @@ export class TodoItemComponent extends Component {
   }
 
   public scope: Scope = {
-    hello: undefined,
+    description: undefined,
   };
 
-  constructor() {
-    super(element);
+  protected connectedCallback() {
+    super.connectedCallback();
     this.init(TodoItemComponent.observedAttributes);
-  }
-
-  protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes)
-    .then((view) => {
-      return view;
-    });
-  }
-
-  protected async beforeBind() {
-    await super.beforeBind();
-  }
-
-  protected async afterBind() {
-    await super.afterBind();
   }
 
   protected requiredAttributes() {
     return [];
   }
 
-  protected parsedAttributeChangedCallback(attributeName: string, oldValue: any, newValue: any, namespace: string | null) {
-    super.parsedAttributeChangedCallback(attributeName, oldValue, newValue, namespace);
-  }
-
-  // deconstructor
-  protected disconnectedCallback() {
-    super.disconnectedCallback();
-  }
-
   protected async template() {
-    // Only set the component template if there no childs already
     if (this.el && hasChildNodesTrim(this.el)) {
       return null;
     } else {
-      const { default: template } = await import(
-        './todo-item.component.html'
-      );
+      const { default: template } = await import('./todo-item.component.html?raw');
       return template;
     }
   }
 }
 ```
 
-To use the component inside of a template, simply use an element with the same tag name as the component's `tagName`. Unlike on binders, the attributes on the element will not evaluated as keypaths, the reason for this is that custom elements are internally regists with the native browser `customElements.define('rv-todo-item', TodoItemComponent);` method and no external values can be passed over it.
+To use the component inside of a template, simply use an element with the same tag name as the component's `tagName`. Unlike on binders, the attributes on the element will not evaluated as keypaths, the reason for this is that custom elements are internally registered with the native browser `customElements.define('rv-todo-item', TodoItemComponent);` method and no external values can be passed over it.
 
 ```html
 <rv-todo-item description="Buy cat food"></rv-todo-item>

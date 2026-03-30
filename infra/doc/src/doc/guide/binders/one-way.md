@@ -13,17 +13,17 @@ Than you can change the implementation like this:
 ```typescript
 import { Binder } from '@ribajs/core';
 
-export const ColorBinder: BinderDeprecated<string> = {
-  name: 'color',
+export class ColorBinder extends Binder<string, HTMLElement> {
+  static key = 'color';
   routine(el: HTMLElement, value: string) {
     el.style.color = value;
-  },
-};
+  }
+}
 ```
 
-If you use Riba CLI to generate the binder, you usually do not need to register the binder yourself because the CLI updates the `./src/binders/index.ts` for you. 
+If you use Riba CLI to generate the binder, you usually do not need to register the binder yourself because the CLI updates the `./src/binders/index.ts` for you.
 
-Alternatively, you can register the binder by calling `riba.module.binder.regist` with your new binder.
+Alternatively, you can register the binder by calling `riba.module.binder.register` with your new binder.
 
 ```typescript
 import { Riba } from '@ribajs/core';

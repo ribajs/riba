@@ -10,7 +10,9 @@
 }
 
 .navbar-main {
-  min-height: 64px;
+  height: 64px;
+  padding-top: 0;
+  padding-bottom: 0;
 
   bs5-toggle-button {
     display: flex;

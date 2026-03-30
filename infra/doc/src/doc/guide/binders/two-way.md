@@ -4,29 +4,29 @@ In order to update the model when the user interacts with the DOM, you need to t
 
 ```typescript
 import { Binder } from '@ribajs/core';
-import $ from 'jquery';
 
-export const toggleBinder: BinderDeprecated<string> = {
-  bind(el) {
-    adapter = this.config.adapters[this.key.interface]
-    model = this.model
-    keypath = this.keypath
+export class ToggleBinder extends Binder<boolean, HTMLElement> {
+  static key = 'toggle';
+  private clickHandler?: () => void;
 
-    this.callback = function() {
-      value = adapter.read(model, keypath)
-      adapter.publish(model, keypath, !value)
-    }
-
-    $(el).on('click', this.callback)
-  },
-
-  unbind(el) {
-    $(el).off('click', this.callback)
-  },
-
-  routine(el, value) {
-    $(el)[value ? 'addClass' : 'removeClass']('enabled')
+  bind(el: HTMLElement) {
+    const adapter = this.config.adapters[this.key.interface];
+    this.clickHandler = () => {
+      const value = adapter.read(this.model, this.keypath);
+      adapter.publish(this.model, this.keypath, !value);
+    };
+    el.addEventListener('click', this.clickHandler);
   }
-};
+
+  unbind(el: HTMLElement) {
+    if (this.clickHandler) {
+      el.removeEventListener('click', this.clickHandler);
+    }
+  }
+
+  routine(el: HTMLElement, value: boolean) {
+    el.classList.toggle('enabled', value);
+  }
+}
 ```
 

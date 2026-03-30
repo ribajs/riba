@@ -2,9 +2,9 @@
 npm install --save @ribajs/i18n
 ```
 
-### Regist
+### Register
 
-To regist the module import `import i18nModule from '@ribajs/i18n';` and any `LocalesService` in your `main.ts` file and regist the module with `riba.module.register(i18nModule.init({localesService}));`:
+To register the module import `import i18nModule from '@ribajs/i18n';` and any `LocalesService` in your `main.ts` file and register the module with `riba.module.register(i18nModule.init({localesService}));`:
 
 ```ts
 import { coreModule, Riba } from '@ribajs/core';

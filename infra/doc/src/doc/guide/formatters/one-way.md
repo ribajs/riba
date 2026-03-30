@@ -23,20 +23,20 @@ export const dateFormatter: Formatter = {
 
 If you use Riba CLI to generate the formatter, you usually do not need to register the formatter yourself because the CLI updates the `./src/formatters/index.ts` for you. 
 
-Alternatively, you can register the formatter by calling `riba.module.binder.regist` with your new formatter.
+Alternatively, you can register the formatter by calling `riba.module.formatter.register` with your new formatter.
 
 ```typescript
 import { Riba } from '@ribajs/core';
-import { colorBinder } from './formatters/date.formatter';
+import { dateFormatter } from './formatters/date.formatter';
 
 const riba = new Riba();
 riba.module.formatter.register(dateFormatter);
 ```
 
 
-*You can also register multiple formatters at once by calling `riba.module.binder.registerAll`, this is useful when importing multiple formatters like `import * as formatters from './formatters';`*
+*You can also register multiple formatters at once by calling `riba.module.formatter.registerAll`, this is useful when importing multiple formatters like `import * as formatters from './formatters';`*
 
-After you have regist your formatter, formatters are applied by piping them to binding declarations using `|` as a delimiter.
+After you have registered your formatter, formatters are applied by piping them to binding declarations using `|` as a delimiter.
 
 ```html
 <span rv-text="event.startDate | date"></span>

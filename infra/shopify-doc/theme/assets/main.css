@@ -13475,8 +13475,8 @@ bs4-scrollspy.side-scrollspy ul.list-scrollspy-level-3 li .nav-link {
 
 bs4-sidebar#main-sidebar {
   width: 250px;
-  top: 64px;
-  height: calc(100vh - 64px);
+  top: 63px;
+  height: calc(100vh - 63px);
   background-color: #343a40;
 }
 bs4-sidebar#example-sidebar {
