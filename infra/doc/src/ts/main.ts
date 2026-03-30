@@ -74,16 +74,26 @@ ready(async () => {
       dataset: any,
       isFirstPageLoad: boolean,
     ) => {
+      const path = window.location.pathname;
+      const isIndex =
+        path === "/" ||
+        path.endsWith("/index.html") ||
+        path.endsWith("/index");
+
       if (!isFirstPageLoad) {
         // Sync body id so CSS selectors like body:not(#index) work
         // correctly after SPA navigation. Only the index page uses
         // body#index (to hide sidebar margins).
-        const path = window.location.pathname;
-        const isIndex =
-          path === "/" ||
-          path.endsWith("/index.html") ||
-          path.endsWith("/index");
         document.body.id = isIndex ? "index" : "";
+      }
+
+      // force-hide-on-location-pathnames only matches '/' exactly, but static
+      // deployments use '/index.html' or '/subpath/index.html'. Hide the
+      // sidebar programmatically so it never auto-shows on the index page
+      // regardless of deployment path.
+      if (isIndex) {
+        const sidebar = document.getElementById("main-sidebar") as any;
+        sidebar?.hide?.();
       }
 
       Prism.highlightAll();
