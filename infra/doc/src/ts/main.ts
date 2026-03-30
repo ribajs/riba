@@ -72,7 +72,20 @@ ready(async () => {
       container: HTMLElement,
       newPageRawHTML: string,
       dataset: any,
+      isFirstPageLoad: boolean,
     ) => {
+      if (!isFirstPageLoad) {
+        // Sync body id so CSS selectors like body:not(#index) work
+        // correctly after SPA navigation. Only the index page uses
+        // body#index (to hide sidebar margins).
+        const path = window.location.pathname;
+        const isIndex =
+          path === "/" ||
+          path.endsWith("/index.html") ||
+          path.endsWith("/index");
+        document.body.id = isIndex ? "index" : "";
+      }
+
       Prism.highlightAll();
       // Restore body scroll after page navigation
       // (sidebar may leave overflow:hidden on body when open during navigation)

@@ -7,7 +7,6 @@ import template from "./icon-preview.component.html?raw";
 import * as Prism from "prismjs";
 
 interface Scope extends ScopeBase {
-  assetPath: string;
   name: string;
   src: string;
   sizes: number[];
@@ -22,11 +21,10 @@ export class IconPreviewComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes() {
-    return ["asset-path"];
+    return [];
   }
 
   public scope: Scope = {
-    assetPath: "",
     name: "",
     src: "",
     sizes: [96, 88, 80, 72, 64, 56, 48, 40, 32, 24, 16, 8],
@@ -67,6 +65,10 @@ export class IconPreviewComponent extends Component {
       throw new Error('Query url parameter "name" is required!');
     }
     this.scope.name = name;
+    this.scope.src = `./iconset/${name}.svg`;
+    this.scope.example = escapeHtml(
+      `<bs5-icon color="danger" src="./iconset/${name}.svg" size="32" direction="up"></bs5-icon>`,
+    );
   }
 
   protected connectedCallback() {
@@ -83,37 +85,8 @@ export class IconPreviewComponent extends Component {
     await super.afterBind();
   }
 
-  protected parsedAttributeChangedCallback(
-    attributeName: string,
-    oldValue: any,
-    newValue: any,
-    namespace: string | null,
-  ) {
-    super.parsedAttributeChangedCallback(
-      attributeName,
-      oldValue,
-      newValue,
-      namespace,
-    );
-    if (attributeName === "assetPath") {
-      const urlParts = this.scope.assetPath.split("?");
-      this.scope.assetPath = urlParts[0];
-      const cacheQueryParam = urlParts[1];
-      this.scope.src = this.scope.assetPath +=
-        "iconset_" + this.scope.name + ".svg?" + cacheQueryParam;
-
-      this.scope.example = escapeHtml(
-        `
-        <bs5-icon color="danger" src="/iconset/${
-          this.scope.name + ".svg"
-        }" size="32" direction="up"></bs5-icon>
-      `.trim(),
-      );
-    }
-  }
-
   protected requiredAttributes() {
-    return ["assetPath", "src"];
+    return [];
   }
 
   protected template() {
