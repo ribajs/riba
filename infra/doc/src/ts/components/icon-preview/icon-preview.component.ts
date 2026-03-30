@@ -1,12 +1,12 @@
 import { Component, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import { escapeHtml } from "@ribajs/utils/src/type.js";
 
 import template from "./icon-preview.component.html?raw";
 
 import * as Prism from "prismjs";
 
 interface Scope extends ScopeBase {
+  hasName: boolean;
   name: string;
   src: string;
   sizes: number[];
@@ -25,6 +25,7 @@ export class IconPreviewComponent extends Component {
   }
 
   public scope: Scope = {
+    hasName: false,
     name: "",
     src: "",
     sizes: [96, 88, 80, 72, 64, 56, 48, 40, 32, 24, 16, 8],
@@ -54,21 +55,11 @@ export class IconPreviewComponent extends Component {
       "down",
       "down-left",
     ],
-    example: "string",
+    example: "",
   };
 
   constructor() {
     super();
-    const urlParams = new URLSearchParams(window.location.search);
-    const name = urlParams.get("name");
-    if (!name) {
-      throw new Error('Query url parameter "name" is required!');
-    }
-    this.scope.name = name;
-    this.scope.src = `./iconset/${name}.svg`;
-    this.scope.example = escapeHtml(
-      `<bs5-icon color="danger" src="./iconset/${name}.svg" size="32" direction="up"></bs5-icon>`,
-    );
   }
 
   protected connectedCallback() {
@@ -76,13 +67,28 @@ export class IconPreviewComponent extends Component {
     this.init(IconPreviewComponent.observedAttributes);
   }
 
-  protected async init(observedAttributes: string[]) {
-    return super.init(observedAttributes);
+  protected async beforeBind() {
+    this.syncIconFromLocation();
+    await super.beforeBind();
   }
 
   protected async afterBind() {
-    Prism.highlightAll();
     await super.afterBind();
+    const codeEl = this.querySelector(
+      "#example code.language-html",
+    ) as HTMLElement | null;
+    if (codeEl && this.scope.example) {
+      codeEl.textContent = this.scope.example;
+    }
+    Prism.highlightAll();
+  }
+
+  /** Read ?name= from the URL right before the inner view binds (SPA-safe). */
+  private syncIconFromLocation() {
+    const name = new URLSearchParams(window.location.search).get("name")?.trim();
+    if (name) {
+      this.setIconName(name);
+    }
   }
 
   protected requiredAttributes() {
@@ -90,11 +96,14 @@ export class IconPreviewComponent extends Component {
   }
 
   protected template() {
-    // Only set the component template if there no childs already
-    if (hasChildNodesTrim(this)) {
-      return null;
-    } else {
-      return template;
-    }
+    // Only set the component template if there are no child nodes yet.
+    return hasChildNodesTrim(this) ? null : template;
+  }
+
+  private setIconName(name: string) {
+    this.scope.hasName = true;
+    this.scope.name = name;
+    this.scope.src = `./iconset/${name}.svg`;
+    this.scope.example = `<bs5-icon color="danger" src="./iconset/${name}.svg" size="32" direction="up"></bs5-icon>`;
   }
 }

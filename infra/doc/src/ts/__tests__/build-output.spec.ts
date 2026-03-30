@@ -16,6 +16,7 @@ const EXPECTED_PAGES = [
   "extras.html",
   "i18n.html",
   "router.html",
+  "icon.html",
   "iconset.html",
   "jquery.html",
   "octobercms.html",

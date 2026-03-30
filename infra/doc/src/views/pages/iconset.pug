@@ -15,7 +15,7 @@ block page-content
     if icons && icons.length
       each icon in icons
         section.col-4.col-md-3.col-xl-2.py-2
-          .row
+          a.row.text-reset.text-decoration-none(href="icon.html?name=" + encodeURIComponent(icon) title=icon)
             .col-auto.mx-auto.d-flex.align-items-center
               bs5-icon.m-1(src="./iconset/" + icon + ".svg" size="32" color="black")
             .col-12.mx-auto.text-center

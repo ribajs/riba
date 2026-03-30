@@ -27,6 +27,7 @@ const IGNORED_FILES = new Set([
   'extras.html',
   'i18n.html',
   'router.html',
+  'icon.html',
   'jquery.html',
   'iconset.html',
   'octobercms.html',
