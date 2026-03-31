@@ -4,9 +4,7 @@ import { loadScript } from "@ribajs/utils";
 import { getPlayerConfig } from "../../mixins/config.mixins.js";
 import {
   DEFAULT_MAIN_PLAYER_ID,
-  DEFAULT_POLYFILLS_URL,
   DEFAULT_WEB_PLAYER_URL,
-  DEFAULT_POLYFILLS_SCRIPT_ID,
   DEFAULT_WEB_PLAYER_SCRIPT_ID,
   LOADING_CLASS,
   READY_CLASS,
@@ -67,20 +65,6 @@ export class PodloveWebPlayerComponent extends Component {
     } else {
       this.classList.remove(LOADING_CLASS);
       this.classList.add(READY_CLASS);
-    }
-  }
-
-  protected async maybeLoadPolyfills() {
-    // Legacy Browsers Polyfill
-    const modernBrowser = "fetch" in window && "assign" in Object;
-
-    if (!modernBrowser) {
-      await loadScript(
-        DEFAULT_POLYFILLS_URL,
-        DEFAULT_POLYFILLS_SCRIPT_ID,
-        true,
-        true,
-      );
     }
   }
 
@@ -154,7 +138,6 @@ export class PodloveWebPlayerComponent extends Component {
   protected async afterBind() {
     await super.afterBind();
     this.setId();
-    await this.maybeLoadPolyfills();
     await this.loadPlayer();
   }
 

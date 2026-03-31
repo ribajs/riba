@@ -1,0 +1,25 @@
+nav.nav.sidebar-menu.w-100.flex-column
+  each link in navigation
+    .nav-item.nav-item-level-0
+      if link.collapseable
+        .nav-link.cursor-pointer.dropdown-toggle(data-bs-toggle="collapse" data-bs-target="#sidebar-collapse-" + link.title.toLowerCase().replace(/\s+/g, '-'))
+          span= link.title
+      else
+        a.nav-link(href=link.url rv-route-class-active=link.url)
+          span= link.title
+      if link.links && link.links.length
+        .collapse.show(id="sidebar-collapse-" + link.title.toLowerCase().replace(/\s+/g, '-'))
+          each sublink in link.links
+            .nav-item.nav-item-level-1
+              if sublink.collapseable
+                .nav-link.cursor-pointer.dropdown-toggle(data-bs-toggle="collapse" data-bs-target="#sidebar-collapse-" + sublink.title.toLowerCase().replace(/\s+/g, '-'))
+                  span= sublink.title
+              else
+                a.nav-link(href=sublink.url rv-route-class-active=sublink.url)
+                  span= sublink.title
+              if sublink.links && sublink.links.length
+                .collapse.show(id="sidebar-collapse-" + sublink.title.toLowerCase().replace(/\s+/g, '-'))
+                  each subsublink in sublink.links
+                    .nav-item.nav-item-level-2
+                      a.nav-link(href=subsublink.url rv-route-class-active=subsublink.url)
+                        span= subsublink.title

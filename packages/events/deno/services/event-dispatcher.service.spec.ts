@@ -10,9 +10,9 @@ describe("riba.core", () => {
     });
 
     it("The event dispatcher should call a simple function on all event listeners if trigger function is called", () => {
-      let listener1 = jest.fn();
-      let listener2 = jest.fn();
-      let listener3 = jest.fn();
+      let listener1 = vi.fn();
+      let listener2 = vi.fn();
+      let listener3 = vi.fn();
       eventDispatcher.on("test1", listener1);
       eventDispatcher.on("test2", listener1);
       eventDispatcher.on("test2", listener2);
@@ -38,7 +38,7 @@ describe("riba.core", () => {
       let obj3 = {
         value: 3,
       };
-      const handler = jest.fn(function (this: { name: string }) {
+      const handler = vi.fn(function (this: { name: string }) {
         return (this as any).value;
       });
       eventDispatcher.on("test1", handler, obj1);

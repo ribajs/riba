@@ -4,11 +4,8 @@
 /infra/*/dist/
 !infra/webpack-serve/dist/
 /packages/*/dist/
-!packages/iconset/dist/
-!packages/events/dist/
-!packages/podcast/dist/
 /demos/*/dist
-/demos/*/public
+/demos/*/public/iconset
 node_modules/
 /.cache
 
@@ -82,4 +79,3 @@ lerna-debug.log*
 
 # Vite
 *.timestamp-*.mjs
-

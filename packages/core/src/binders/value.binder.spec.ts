@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { Riba } from "../riba.js";
 import { dotAdapter } from "../adapters/dot.adapter.js";
 import { ValueBinder } from "./value.binder.js";
@@ -25,13 +25,13 @@ describe("riba.binders", () => {
     it("unbinds the same bound function", () => {
       let boundFn: EventListenerOrEventListenerObject;
 
-      jest.spyOn(el, "addEventListener").mockImplementation((event, fn) => {
+      vi.spyOn(el, "addEventListener").mockImplementation((event, fn) => {
         boundFn = fn;
       });
 
       const view = riba.bind(fragment, model);
 
-      jest.spyOn(el, "removeEventListener").mockImplementation((event, fn) => {
+      vi.spyOn(el, "removeEventListener").mockImplementation((event, fn) => {
         expect(fn).toEqual(boundFn);
       });
 
@@ -171,7 +171,7 @@ describe("riba.binders", () => {
 
     it("sets the element's value to zero when a zero value is passed", () => {
       const view = riba.bind(fragment, model);
-      expect(view.bindings).toBeArrayOfSize(1);
+      expect(view.bindings).toHaveLength(1);
       const valueBinder = view.bindings[0] as ValueBinder;
       expect(valueBinder.name).toEqual("value");
       valueBinder.routine(input, 0);
@@ -232,7 +232,7 @@ describe("riba.binders", () => {
       it("sets the correct option on a select-multiple element", () => {
         const view = riba.bind(fragment, model);
         const valueBinder = view.bindings[0] as ValueBinder;
-        expect(view.bindings).toBeArrayOfSize(1);
+        expect(view.bindings).toHaveLength(1);
         expect(valueBinder).toBeDefined();
         expect(valueBinder.name).toEqual("value");
         valueBinder.routine(groupedMultipleSelectEl, ["a", "c"]);

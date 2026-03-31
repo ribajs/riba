@@ -1,0 +1,13 @@
+extends ../layouts/page
+
+block append head
+  - pageTitle = "Core Components"
+
+block title
+  | Core Components
+
+block page-content
+
+  section.my-5#video-component
+    h2 rv-video
+    include:markdown-it(html) ../../doc/reference/core/components/video.md

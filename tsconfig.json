@@ -2,11 +2,12 @@
   "extends": "@ribajs/tsconfig/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "types": ["jest", "jest-extended"]
+    "rootDir": ".",
+    "types": []
   },
   "exclude": [
     "node_modules",
-    "**/*.d.ts",
+    "dist/**/*.d.ts",
     "infra/schematics/"
   ]
 }

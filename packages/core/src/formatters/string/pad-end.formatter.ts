@@ -6,7 +6,7 @@ import { Formatter } from "../../types/index.js";
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd
  */
 export const padEndFormatter: Formatter = {
-  name: "padEnd",
+  name: "pad-end",
   /**
    *
    * The padEnd formatters pads the current string with a given string (repeated, if needed) so that the resulting string reaches a given length.

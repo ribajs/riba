@@ -3,7 +3,7 @@
  * @see https://help.shopify.com/themes/liquid/filters/math-filters#divided_by
  */
 export const dividedByFormatter = {
-  name: "dividedBy",
+  name: "divided-by",
   read(a: string | number, b: string | number) {
     return Number(a) / Number(b);
   },

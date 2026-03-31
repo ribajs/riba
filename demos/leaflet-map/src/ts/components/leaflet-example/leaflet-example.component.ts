@@ -36,9 +36,8 @@ export class LeafletExampleComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./leaflet-example.component.html?raw"
-      );
+      const { default: template } =
+        await import("./leaflet-example.component.html?raw");
       return template;
     }
   }

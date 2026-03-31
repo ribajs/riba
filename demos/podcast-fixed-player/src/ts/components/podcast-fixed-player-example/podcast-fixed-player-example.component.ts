@@ -33,9 +33,8 @@ export class PodcastFixedPlayerExampleComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./podcast-fixed-player-example.component.pug"
-      );
+      const { default: template } =
+        await import("./podcast-fixed-player-example.component.pug");
       return template(this.scope);
     }
   }

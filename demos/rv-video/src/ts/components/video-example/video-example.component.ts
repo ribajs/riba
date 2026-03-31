@@ -59,9 +59,8 @@ export class VideoExampleComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./video-example.component.pug"
-      );
+      const { default: template } =
+        await import("./video-example.component.pug");
       return template(this.scope);
     }
   }

@@ -7,7 +7,7 @@ import {
 import { isNumber, extend, hasChildNodesTrim } from "@ribajs/utils";
 import Debug from "debug";
 
-import { DropdownService } from "@ribajs/bs4";
+import { Dropdown } from "@ribajs/bs5";
 
 import pugTemplate from "./api-explorer.component.pug";
 
@@ -189,7 +189,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   }
 
   public selectApi(api: APIListItem) {
-    DropdownService.closeAll();
+    Dropdown.hideAllComponents();
     if (api.freestyle) {
       // Generate the url before the new api is selected if the user want's to go back to freestyle without losing the current url
       this.generateUrlOfParams();
@@ -212,7 +212,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     param.ready = true;
     self.checkPreviousParamsReady();
     self.loadParamsValues();
-    DropdownService.closeAll();
+    Dropdown.hideAllComponents();
   }
 
   public selectApiQueryValue(
@@ -223,7 +223,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
     self.debug("selectApiQueryValue", query, value);
     query.value = value;
     query.ready = true;
-    DropdownService.closeAll();
+    Dropdown.hideAllComponents();
   }
 
   protected initLocales() {

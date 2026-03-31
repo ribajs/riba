@@ -1,0 +1,9 @@
+{
+	"extends": "@ribajs/tsconfig/tsconfig.json",
+	"compilerOptions": {
+		"outDir": "dist/esm",
+		"rootDir": "src"
+	},
+	"include": ["src/**/*"],
+	"exclude": ["dist", "node_modules", "tests", "examples"]
+}

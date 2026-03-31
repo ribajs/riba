@@ -21,6 +21,8 @@ export abstract class Component extends BasicComponent {
   protected _binds = false;
   /** true when binding is done */
   protected _bound = false;
+  /** true when bindIfReady is in progress (prevents concurrent execution) */
+  private _bindIfReadyInProgress = false;
   /** true when component is connected to the dom */
   protected _connected = false;
   /** true when component is disconnected from the dom */
@@ -104,16 +106,31 @@ export abstract class Component extends BasicComponent {
    */
   protected async bindIfReady() {
     /**
+     * Prevent concurrent execution. During element upgrade, attributeChangedCallback
+     * fires multiple times before connectedCallback. Without this guard, a second call
+     * can skip loadTemplate (templateLoaded is set synchronously) and reach bind/afterBind
+     * before the async template import has completed and set innerHTML.
+     */
+    if (this._bindIfReadyInProgress || this._binds || this._bound) {
+      return;
+    }
+    /**
      * After all required and passed attributes are set we load the template and bind the component
      */
     if (this.ready()) {
-      await this.beforeTemplate();
-      const template = await this.loadTemplate();
-      await this.afterTemplate(template);
-      if (this.autobind) {
-        await this.bind();
+      this._bindIfReadyInProgress = true;
+      try {
+        await this.beforeTemplate();
+        const template = await this.loadTemplate();
+        await this.afterTemplate(template);
+        if (this.autobind) {
+          await this.bind();
+        }
+        await this.onReady();
+      } catch (error) {
+        this._bindIfReadyInProgress = false;
+        throw error;
       }
-      await this.onReady();
       return;
     }
     this.debug(

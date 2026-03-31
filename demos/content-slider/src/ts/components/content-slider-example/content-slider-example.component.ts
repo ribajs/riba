@@ -30,9 +30,8 @@ export class ContentSliderExampleComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./content-slider-example.component.html?raw"
-      );
+      const { default: template } =
+        await import("./content-slider-example.component.html?raw");
       return template;
     }
   }

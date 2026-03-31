@@ -13,7 +13,7 @@ const DEFAULT_PRECISION = 2;
  * The number will always be rounded after the DIN 1333 (1.55 => 1.6 and -1.55 => -1.6)
  */
 export const numberFormatFormatter: Formatter = {
-  name: "numberFormat",
+  name: "number-format",
   /**
    * Returns a formatted version of the target as string.
    * The number will always be rounded after the DIN 1333 (1.55 => 1.6 and -1.55 => -1.6)

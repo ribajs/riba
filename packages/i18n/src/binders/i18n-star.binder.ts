@@ -178,7 +178,7 @@ export class I18nStarBinder extends Binder<string, HTMLInputElement> {
 
         this.initOnReady(
           currentLangcode,
-          currentLangcode !== initialLangcode &&
+          currentLangcode !== initialLangcode ||
             !options.localesService.doNotRetranslateDefaultLanguage,
         );
       } else {

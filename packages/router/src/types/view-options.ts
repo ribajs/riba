@@ -2,6 +2,11 @@ import type { Transition } from "./transition.js";
 
 export interface RouterViewOptions {
   id?: string;
+  /**
+   * Optional CSS selector for the PJAX page container (queried on `document` or parsed HTML).
+   * Defaults to the first element child of this `router-view`.
+   */
+  containerSelector?: string;
   action: "replace" | "append";
   scrollToTop: boolean;
   listenAllLinks: boolean;

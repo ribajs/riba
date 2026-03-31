@@ -30,7 +30,7 @@ describe("riba.binders", () => {
   describe("on-*", () => {
     it("on-click: Watch's the click event", () => {
       element.className = "foobar remove-me";
-      model.onClick = jest.fn();
+      model.onClick = vi.fn();
       element.setAttribute("rv-on-click", "onClick");
       riba.bind(document.body, model);
 
@@ -41,9 +41,9 @@ describe("riba.binders", () => {
 
     it("on-change: Watch's the change event", () => {
       element.className = "foobar remove-me";
-      model.onChange = jest.fn();
-      model.onFocus = jest.fn();
-      model.onFocusout = jest.fn();
+      model.onChange = vi.fn();
+      model.onFocus = vi.fn();
+      model.onFocusout = vi.fn();
       model.value = "test";
       element.setAttribute("rv-on-change", "onChange");
       element.setAttribute("rv-on-focus", "onFocus");

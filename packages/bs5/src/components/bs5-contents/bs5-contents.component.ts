@@ -173,9 +173,8 @@ export class Bs5ContentsComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./bs5-contents.component.html?raw"
-      );
+      const { default: template } =
+        await import("./bs5-contents.component.html?raw");
       return template;
     }
   }

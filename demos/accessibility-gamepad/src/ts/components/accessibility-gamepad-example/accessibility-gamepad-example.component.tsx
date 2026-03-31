@@ -25,9 +25,8 @@ export class AccessibilityGamepadExampleComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const template = await import(
-        "./accessibility-gamepad-example.component.pug"
-      );
+      const template =
+        await import("./accessibility-gamepad-example.component.pug");
       return template.default(this.scope);
     }
   }

@@ -1,6 +1,0 @@
-{
-  "extends": "@ribajs/tsconfig/tsconfig.json",
-  "compilerOptions": {
-    "outDir": "dist"
-  }
-}

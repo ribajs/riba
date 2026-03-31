@@ -4,6 +4,13 @@
 
 - Switched from npm to yarn 2
 - Switched from webpack 4 to webpack 5
+- Modernization baseline: first-party packages now target modern evergreen browsers only
+- Removed legacy custom-element fallback claims from documentation
+- Removed obsolete adapter docs references to `Object.observe` and IE-specific support guidance
+- Removed legacy runtime branches in utils (`attachEvent`, script `readyState`, `createTextRange`)
+- Removed Podlove legacy polyfill loader from podcast web player integration
+- Removed stale `build:browser` script from `@ribajs/core` and obsolete `@types/core-js` dependency
+- Aligned `infra/doc` Node engine declaration with workspace baseline (`>=24.0.0`)
 
 ### Core
 

@@ -303,6 +303,22 @@ class Pjax {
   }
 
   /**
+   * Return the latest url stored in this view history.
+   * Falls back to the current browser url if history is not initialized yet.
+   */
+  public getCurrentStatusUrl() {
+    try {
+      const status = this.history.currentStatus();
+      if (status && status.url) {
+        return normalizeUrl(status.url).url;
+      }
+    } catch (error) {
+      // History may not be initialized yet, fallback below.
+    }
+    return normalizeUrl(this.getCurrentUrl()).url;
+  }
+
+  /**
    * Change the URL with push state and trigger the state change
    */
   public goTo(url: string, newTab = false) {
@@ -639,9 +655,12 @@ class Pjax {
 
     const transitionResult = transition.init(oldContainer, newContainerPromise);
 
-    this.onNewContainerLoaded(await newContainerPromise);
-
+    const newContainer = await newContainerPromise;
     await transitionResult;
+
+    // Fire after the transition removed the old DOM so components that scan
+    // document (e.g. TOC / scrollspy) do not see duplicate headings.
+    this.onNewContainerLoaded(newContainer);
     this.onTransitionEnd();
   }
 

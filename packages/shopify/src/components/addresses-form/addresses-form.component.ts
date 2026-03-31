@@ -161,9 +161,8 @@ export class ShopifyAddressesComponent extends Component {
     if (this && hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./addresses-form.component.html?raw"
-      );
+      const { default: template } =
+        await import("./addresses-form.component.html?raw");
       return template;
     }
   }

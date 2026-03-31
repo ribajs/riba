@@ -6,7 +6,7 @@ import { Formatter } from "../../types/index.js";
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
  */
 export const padStartFormatter: Formatter = {
-  name: "padStart",
+  name: "pad-start",
   /**
    * The padStart formatter pads the current string with another string (multiple times, if needed) until the resulting string reaches the given length.
    * The padding is applied from the start of the current string.

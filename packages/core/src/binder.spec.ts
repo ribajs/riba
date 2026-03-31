@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { Riba, View, Binder } from "./index.js";
 import { Data } from "../spec/lib/moch.data.js";
 import { dotAdapter } from "./adapters/index.js";
@@ -158,11 +158,82 @@ describe("riba.Binder", () => {
         `and 'others formatters' with 'pi||pes'`,
       ]);
     });
+
+    it("cleans formatter subscriptions on unbind", () => {
+      let cleanupCalls = 0;
+      const cleanupFormatter = {
+        name: "cleanup-test",
+        read: (value: string, context: any) => {
+          context?.addCleanup(() => {
+            cleanupCalls++;
+          }, "subscription");
+          return value;
+        },
+      } as Formatter;
+      riba.module.formatter.register(cleanupFormatter);
+
+      const cleanupEl = document.createElement("div");
+      cleanupEl.setAttribute("data-text", "obj.name | cleanup-test");
+      const cleanupView = riba.bind(cleanupEl, { obj: { name: "test" } });
+      const cleanupBinding = cleanupView.bindings[0] as TextBinder;
+
+      // Re-sync replaces the old cleanup and calls it once.
+      cleanupBinding.sync();
+      expect(cleanupCalls).toBe(1);
+
+      cleanupBinding._unbind();
+      expect(cleanupCalls).toBe(2);
+    });
+
+    it("supports formatter-triggered invalidation without model changes", async () => {
+      let suffix = "a";
+      const listeners = new Set<() => void>();
+      const emitter = {
+        on(_eventName: string, callback: () => void) {
+          listeners.add(callback);
+        },
+        off(_eventName: string, callback: () => void) {
+          listeners.delete(callback);
+        },
+        emit() {
+          listeners.forEach((listener) => listener());
+        },
+      };
+
+      const reactiveFormatter = {
+        name: "reactive-test",
+        read: (value: string, context: any) => {
+          if (context) {
+            context.on(
+              emitter,
+              "changed",
+              () => context.invalidate(),
+              "changed-subscription",
+            );
+          }
+          return `${value}-${suffix}`;
+        },
+      } as Formatter;
+      riba.module.formatter.register(reactiveFormatter);
+
+      const reactiveEl = document.createElement("div");
+      reactiveEl.setAttribute("data-text", "obj.name | reactive-test");
+      const reactiveView = riba.bind(reactiveEl, { obj: { name: "test" } });
+      expect(reactiveEl.textContent).toBe("test-a");
+
+      suffix = "b";
+      emitter.emit();
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      expect(reactiveEl.textContent).toBe("test-b");
+
+      reactiveView.unbind();
+      expect(listeners.size).toBe(0);
+    });
   });
 
   describe("bind()", () => {
     it("subscribes to the model for changes via the adapter", () => {
-      jest.spyOn(adapter, "observe");
+      vi.spyOn(adapter, "observe");
       binding._bind();
       expect(adapter.observe).toHaveBeenCalledWith(model, "name", binding);
     });
@@ -175,7 +246,7 @@ describe("riba.Binder", () => {
       binding.bind = () => {
         return;
       };
-      jest.spyOn(binding, "bind" as any);
+      vi.spyOn(binding, "bind" as any);
 
       binding._bind();
       expect(binding.bind).toHaveBeenCalled();
@@ -187,7 +258,7 @@ describe("riba.Binder", () => {
       });
 
       it("sets the initial value", () => {
-        jest.spyOn(binding, "set");
+        vi.spyOn(binding, "set");
         binding._bind();
         expect(binding.set).toHaveBeenCalledWith("test");
       });
@@ -217,7 +288,7 @@ describe("riba.Binder", () => {
       });
 
       it(`calls the binder's unbind method`, () => {
-        jest.spyOn(binding, "unbind" as any);
+        vi.spyOn(binding, "unbind" as any);
         binding._unbind();
         expect(binding.unbind).toHaveBeenCalled();
       });
@@ -226,7 +297,7 @@ describe("riba.Binder", () => {
 
   describe("set()", () => {
     it("performs the binding routine with the supplied value", () => {
-      routineFn = jest.spyOn(binding, "routine");
+      routineFn = vi.spyOn(binding, "routine");
 
       binding.set("sweater");
       expect(routineFn).toHaveBeenCalledWith(el, "sweater");
@@ -236,7 +307,7 @@ describe("riba.Binder", () => {
       if (!view.options.formatters) {
         throw new Error("formatters are undefined!");
       }
-      routineFn = jest.spyOn(binding, "routine");
+      routineFn = vi.spyOn(binding, "routine");
       view.options.formatters.awesome = {
         name: "awesome",
         read(value: string) {
@@ -266,7 +337,7 @@ describe("riba.Binder", () => {
 
       numberInput.value = "42";
 
-      jest.spyOn(adapter, "set");
+      vi.spyOn(adapter, "set");
       binding.publish();
       expect(adapter.set).toHaveBeenCalledWith(model, "num", "42");
     });
@@ -282,7 +353,7 @@ describe("riba.Binder", () => {
 
       riba.module.formatter.register(awesomeFormatter, "awesome");
 
-      routineFn = jest.spyOn(binding, "routine");
+      routineFn = vi.spyOn(binding, "routine");
 
       if (!binding.formatters) {
         throw new Error("Formatters not set!");
@@ -321,7 +392,7 @@ describe("riba.Binder", () => {
         read: (value: string) => value + " is awesome",
       };
 
-      jest.spyOn(binding, "routine");
+      vi.spyOn(binding, "routine");
 
       valueInput = document.createElement("input");
       valueInput.setAttribute("type", "text");
@@ -331,7 +402,7 @@ describe("riba.Binder", () => {
       binding = view.bindings[0] as ValueBinder;
       model = binding.model;
 
-      jest.spyOn(binding, "routine");
+      vi.spyOn(binding, "routine");
 
       valueInput.value = "charles";
       binding.publish();
@@ -379,7 +450,7 @@ describe("riba.Binder", () => {
       });
 
       binding = view.bindings[0] as ValueBinder;
-      jest.spyOn(binding, "routine");
+      vi.spyOn(binding, "routine");
       model = binding.model;
 
       expect(binding.name).toEqual("value");
@@ -437,7 +508,7 @@ describe("riba.Binder", () => {
       binding = view.bindings[0] as TextBinder;
       model = binding.model;
 
-      jest.spyOn(binding, "routine");
+      vi.spyOn(binding, "routine");
 
       valueInput.value = "bobby";
       binding.publish();
@@ -459,7 +530,7 @@ describe("riba.Binder", () => {
       binding = view.bindings[0] as TextBinder;
       model = binding.model;
 
-      jest.spyOn(binding, "routine");
+      vi.spyOn(binding, "routine");
 
       valueInput.value = "charles";
       binding.publish();
@@ -490,7 +561,7 @@ describe("riba.Binder", () => {
       binding = view.bindings[0] as TextBinder;
       model = binding.model;
 
-      jest.spyOn(binding, "routine");
+      vi.spyOn(binding, "routine");
 
       binding.set("fred");
       expect(binding.routine).toHaveBeenCalledWith(
@@ -533,7 +604,7 @@ describe("riba.Binder", () => {
 
       view = riba.bind(valueInput, { obj: { name: "nothing" } });
       binding = view.bindings[0] as ValueBinder;
-      jest.spyOn(binding, "routine");
+      vi.spyOn(binding, "routine");
 
       expect(binding.name).toEqual("value");
       model = binding.model;
@@ -766,21 +837,21 @@ describe("Functional", () => {
     });
 
     describe("Priority", () => {
-      let mockA: any; // TODO: jest.Mock<any, any>;
-      let mockB: any; // TODO: jest.Mock<any, any>;
-      let mockC: any; // TODO: jest.Mock<any, any>;
-      let mockD: any; // TODO: jest.Mock<any, any>;
-      let mockE: any; // TODO: jest.Mock<any, any>;
-      let mockF: any; // TODO: jest.Mock<any, any>;
-      let mockG: any; // TODO: jest.Mock<any, any>;
+      let mockA: any; // TODO: vi.Mock<any, any>;
+      let mockB: any; // TODO: vi.Mock<any, any>;
+      let mockC: any; // TODO: vi.Mock<any, any>;
+      let mockD: any; // TODO: vi.Mock<any, any>;
+      let mockE: any; // TODO: vi.Mock<any, any>;
+      let mockF: any; // TODO: vi.Mock<any, any>;
+      let mockG: any; // TODO: vi.Mock<any, any>;
       beforeEach(() => {
-        mockA = jest.fn();
-        mockB = jest.fn();
-        mockC = jest.fn();
-        mockD = jest.fn();
-        mockE = jest.fn();
-        mockF = jest.fn();
-        mockG = jest.fn();
+        mockA = vi.fn();
+        mockB = vi.fn();
+        mockC = vi.fn();
+        mockD = vi.fn();
+        mockE = vi.fn();
+        mockF = vi.fn();
+        mockG = vi.fn();
 
         class ABinder extends Binder<any, any> {
           static key = "a";

@@ -1,39 +1,35 @@
 {
   "name": "@ribajs/events",
-  "version": "2.0.0-rc.21",
+  "version": "2.0.0-rc.23",
   "type": "module",
   "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix",
-    "build": "yarn run lint && yarn run build:esm && yarn run build:cjs && yarn run build:types",
     "build:types": "tsc --project ./tsconfig.json --declaration true --emitDeclarationOnly --outDir dist/types",
     "build:esm": "tsc --project ./tsconfig.json --declaration false --module esnext --outDir dist/esm",
-    "build:cjs": "tsc --project ./tsconfig.json --declaration false --module commonjs --outDir dist/cjs",
-    "clean": "rm -rf ./dist ./lib"
+    "clean": "rm -rf ./dist ./lib",
+    "check": "tsc --noEmit"
   },
   "files": [
     "/src",
     "/dist"
   ],
-  "main": "dist/cjs/index.js",
-  "browser": "dist/esm/index.js",
-  "types": "dist/types/index.d.ts",
-  "module": "dist/esm/index.js",
+  "main": "src/index.ts",
+  "browser": "src/index.ts",
+  "types": "src/index.ts",
+  "module": "src/index.ts",
   "source": "src/index.ts",
   "devDependencies": {
-    "@babel/runtime": "^7.27.6",
-    "@babel/runtime-corejs3": "^7.27.6",
     "@ribajs/tsconfig": "workspace:^",
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.0.3",
-    "babel-jest": "^30.0.0",
-    "eslint": "^9.29.0",
-    "jest": "^30.0.0",
-    "jest-config": "^30.0.0",
-    "jest-extended": "^6.0.0",
-    "ts-jest": "^29.4.0",
-    "typescript": "5.8.3"
+    "@types/node": "^24.12.0",
+    "eslint": "^10.1.0",
+    "jest": "^30.3.0",
+    "jest-config": "^30.3.0",
+    "jest-extended": "^7.0.0",
+    "ts-jest": "^29.4.6",
+    "typescript": "6.0.2"
   }
 }

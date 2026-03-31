@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { Riba, ValueBinder, dotAdapter } from "@ribajs/core";
 import { OnEventBinder } from "./on-event.binder.js";
 
@@ -30,7 +30,7 @@ describe("riba.binders", () => {
   describe("on-*", () => {
     it("on-click: Watch's the click event", () => {
       element.className = "foobar remove-me";
-      model.onClick = jest.fn();
+      model.onClick = vi.fn();
       element.setAttribute("rv-on-click", "onClick");
       riba.bind(fragment, model);
 
@@ -42,14 +42,14 @@ describe("riba.binders", () => {
     it("on-change: Watch's the change event", () => {
       element.className = "foobar remove-me";
 
-      model.onChange = jest.fn();
-      jest.spyOn(model, 'onChange');
+      model.onChange = vi.fn();
+      vi.spyOn(model, 'onChange');
 
-      model.onFocus = jest.fn();
-      jest.spyOn(model, 'onFocus');
+      model.onFocus = vi.fn();
+      vi.spyOn(model, 'onFocus');
 
-      model.onFocusout = jest.fn();
-      jest.spyOn(model, 'onFocusout');
+      model.onFocusout = vi.fn();
+      vi.spyOn(model, 'onFocusout');
 
       model.value = "test";
       element.setAttribute("rv-on-change", "onChange");

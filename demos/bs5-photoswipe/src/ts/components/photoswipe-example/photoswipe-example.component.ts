@@ -43,9 +43,8 @@ export class PhotoswipeExampleComponent extends Component {
       // this.debug('Do not use template, because element has child nodes');
       return null;
     } else {
-      const { default: template } = await import(
-        "./photoswipe-example.component.html?raw"
-      );
+      const { default: template } =
+        await import("./photoswipe-example.component.html?raw");
       return template;
     }
   }

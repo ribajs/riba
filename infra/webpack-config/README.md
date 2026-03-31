@@ -1,1 +1,0 @@
-# @ribajs/webpack-config

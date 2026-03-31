@@ -137,7 +137,7 @@ export class HttpService {
   ): Promise<HttpServiceResponse<T>> {
     if (!fetch) {
       throw new Error(
-        "Your browser does not support the fetch API, use xhr instead or install a polyfill.",
+        "The fetch API is required. Riba targets modern browsers with native fetch support.",
       );
     }
 

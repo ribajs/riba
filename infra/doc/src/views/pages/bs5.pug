@@ -1,0 +1,73 @@
+extends ../layouts/page
+
+block append head
+  - pageTitle = "Bootstrap 5 Module"
+
+block title
+  | Bootstrap 5 Module
+
+block page-content
+
+  section.my-5#binders
+    h2 Binders
+
+    section#scroll-to-on-event.my-5
+      h3 scroll-to-on-[event]
+      section
+        include:markdown-it(html) ../../doc/reference/bs5/binders/scroll-to-on-[event].md
+
+    section#tooltip-binder.my-5
+      h3 bs5-tooltip
+      section
+        include:markdown-it(html) ../../doc/reference/bs5/binders/bs5-tooltip.md
+
+  section#components.my-5
+    h2 Components
+
+    section#bs5-icon.my-5
+      h3 bs5-icon
+      section
+        include:markdown-it(html) ../../doc/reference/bs5/components/bs5-icon.md
+
+    section#bs5-accordion.my-5
+      h3 bs5-accordion
+      section
+        include:markdown-it(html) ../../doc/reference/bs5/components/bs5-accordion.md
+
+    section#bs5-contents.my-5
+      h3 bs5-contents
+      section
+        include:markdown-it(html) ../../doc/reference/bs5/components/bs5-contents.md
+
+    section#bs5-tabs.my-5
+      h3 bs5-tabs
+      section
+        include:markdown-it(html) ../../doc/reference/bs5/components/bs5-tabs/bs5-tabs-with-attributes.md
+
+      section.mt-5
+        include:markdown-it(html) ../../doc/reference/bs5/components/bs5-tabs/bs5-tabs-with-templates.md
+
+    section#bs5-toggle-button.my-5
+      h3 bs5-toggle-button
+      section
+        include:markdown-it(html) ../../doc/reference/bs5/components/bs5-toggle-button.md
+
+    section#bs5-sidebar.my-5
+      h3 bs5-sidebar
+      section
+        include:markdown-it(html) ../../doc/reference/bs5/components/bs5-sidebar.md
+
+    section#bs5-navbar.my-5
+      h3 bs5-navbar
+      section
+        include:markdown-it(html) ../../doc/reference/bs5/components/bs5-navbar.md
+
+    section#bs5-dropdown.my-5
+      h3 bs5-dropdown
+      section
+        include:markdown-it(html) ../../doc/reference/bs5/components/bs5-dropdown.md
+
+    section#bs5-slideshow.my-5
+      h3 bs5-slideshow
+      section
+        include:markdown-it(html) ../../doc/reference/bs5/components/bs5-slideshow.md

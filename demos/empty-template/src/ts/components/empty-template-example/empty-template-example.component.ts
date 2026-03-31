@@ -25,9 +25,8 @@ export class EmptyTemplateExampleComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./empty-template-example.component.pug"
-      );
+      const { default: template } =
+        await import("./empty-template-example.component.pug");
       return template(this.scope);
     }
   }

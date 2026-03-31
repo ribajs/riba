@@ -1,0 +1,22 @@
+.content {
+  table {
+    @include media-breakpoint-down(sm) {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      width: 100%;
+    }
+    @extend .scrollbar-primary;
+    @extend .table;
+    @extend .table-borderless;
+    // @extend .table-sm;
+    // @extend .table-dark;
+    @extend .table-hover;
+    thead {
+      th {
+        background-color: $primary;
+        color: $white;
+      }
+    }
+  }
+}

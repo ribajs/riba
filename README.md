@@ -10,6 +10,12 @@ You found the documentation source files on [github.com/ribajs/doc](https://gith
 
 We are using yarn to build and release Riba, so to test the demos please use yarn instead of npm.
 
+## Browser Support Policy
+
+Riba targets modern evergreen browsers. The repository baseline follows [`.browserslistrc`](./.browserslistrc), and Internet Explorer is not supported.
+
+Legacy browser fallbacks are being removed from first-party packages. If your application still targets legacy environments, provide polyfills and compatibility layers in your own app runtime.
+
 ## Demos
 
 For the different modules there are some demos, to start one of the demos go into the directory and execute it with `yarn start`: 

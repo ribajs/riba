@@ -446,12 +446,6 @@ export const selectAll = (element: HTMLInputElement) => {
       }
     }
 
-    if ((document as any).body.createTextRange) {
-      const range: any = (document.body as any).createTextRange(); // Creates TextRange object
-      range.moveToElementText(element); // sets Range
-      range.select(); // make selection.
-    }
-
     if (document.execCommand) {
       document.execCommand("selectAll", false, undefined);
     }
@@ -459,8 +453,7 @@ export const selectAll = (element: HTMLInputElement) => {
 };
 
 /**
- * Cross-browser Document Ready check
- * @see https://www.competa.com/blog/cross-browser-document-ready-with-vanilla-javascript/
+ * Document ready check for modern browsers
  * @param callback
  */
 export const ready = (callback: () => void) => {
@@ -490,19 +483,11 @@ export const ready = (callback: () => void) => {
 
     if (document.readyState !== "loading") {
       callback();
-      if ((document as any).attachEvent) {
-        (document as any).detachEvent("onreadystatechange", checkReady);
-      }
       document.removeEventListener("DOMContentLoaded", checkReady);
     }
   };
 
-  if ((document as any).attachEvent) {
-    (document as any).attachEvent("onreadystatechange", checkReady);
-  }
-  if (document.addEventListener) {
-    document.addEventListener("DOMContentLoaded", checkReady);
-  }
+  document.addEventListener("DOMContentLoaded", checkReady);
   checkReady();
 };
 
@@ -534,21 +519,6 @@ export const loadScript = async (
       head.appendChild(script);
     }
 
-    // IE
-    if ((script as any).readyState) {
-      (script as any).onreadystatechange = function () {
-        if (
-          (script as any).readyState === "loaded" ||
-          (script as any).readyState === "complete"
-        ) {
-          (script as any).onreadystatechange = null;
-          script?.setAttribute("loaded", "true");
-          resolve(script as HTMLScriptElement);
-        }
-      };
-    }
-
-    // Other browsers
     script.addEventListener("load", () => {
       script?.setAttribute("loaded", "true");
       resolve(script as HTMLScriptElement);

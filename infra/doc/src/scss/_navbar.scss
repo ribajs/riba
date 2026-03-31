@@ -1,0 +1,22 @@
+.navbar-brand {
+    border: 2px solid;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    @extend .px-3;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-main {
+  height: 64px;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  bs5-toggle-button {
+    display: flex;
+    align-items: center;
+    height: 64px;
+  }
+}

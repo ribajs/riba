@@ -1,9 +1,36 @@
-[submodule "infra/doc"]
-	path = infra/doc
-	url = https://github.com/ribajs/doc.git
-	branch = main
-[submodule "vendor/gamecontroller.js"]
-	path = vendor/gamecontroller.js
-	url = https://github.com/PixelRPG/gamecontroller.js.git
-	branch = main
-
+[submodule "refs/gymnasium-otterndorf-website"]
+	path = refs/gymnasium-otterndorf-website
+	url = git@github.com:ArtCodeStudio/gymnasium-otterndorf-website.git
+[submodule "refs/strandhus-october-theme"]
+	path = refs/strandhus-october-theme
+	url = git@github.com:ArtCodeStudio/strandhus-october-theme.git
+[submodule "refs/mahlzeit-october-theme"]
+	path = refs/mahlzeit-october-theme
+	url = git@github.com:ArtCodeStudio/mahlzeit-october-theme.git
+[submodule "refs/wattlandfluss-october-theme"]
+	path = refs/wattlandfluss-october-theme
+	url = git@github.com:ArtCodeStudio/wattlandfluss-october-theme.git
+[submodule "refs/lodges-october-theme"]
+	path = refs/lodges-october-theme
+	url = git@github.com:ArtCodeStudio/lodges-october-theme.git
+[submodule "refs/nvc-october-theme"]
+	path = refs/nvc-october-theme
+	url = git@github.com:ArtCodeStudio/nvc-october-theme.git
+[submodule "refs/mac-october-theme"]
+	path = refs/mac-october-theme
+	url = git@github.com:ArtCodeStudio/mac-october-theme.git
+[submodule "refs/freifunk-october-theme"]
+	path = refs/freifunk-october-theme
+	url = git@github.com:ArtCodeStudio/freifunk-october-theme.git
+[submodule "refs/das-frittierwerk"]
+	path = refs/das-frittierwerk
+	url = git@github.com:ArtCodeStudio/das-frittierwerk.git
+[submodule "refs/markus-morische-rechtsanwalt-website"]
+	path = refs/markus-morische-rechtsanwalt-website
+	url = https://github.com/ArtCodeStudio/markus-morische-rechtsanwalt-website
+[submodule "refs/jumplink.github.io"]
+	path = refs/jumplink.github.io
+	url = git@github.com:JumpLink/jumplink.github.io.git
+[submodule "refs/seeberger-shopify-theme"]
+	path = refs/seeberger-shopify-theme
+	url = ssh://git@gitlab.pluspol-networks.de:2222/seeberger/seeberger-shopify-shop/main.git

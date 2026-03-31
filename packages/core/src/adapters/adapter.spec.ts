@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { Riba } from "../riba.js";
 import { Adapter, ObserverSyncCallback } from "../types/index.js";
 import { dotAdapter } from "../adapters/dot.adapter.js";
@@ -58,7 +58,7 @@ describe("Functional", () => {
 
   describe("Adapter", () => {
     it("should read the initial value", () => {
-      jest.spyOn(data, "get");
+      vi.spyOn(data, "get");
       el.setAttribute("data-text", "data:foo");
       riba.bind(el, bindData);
       if (data === null) {
@@ -69,7 +69,7 @@ describe("Functional", () => {
 
     it("should read the initial value unless preloadData is false", () => {
       riba.configure({ preloadData: false });
-      jest.spyOn(data, "get");
+      vi.spyOn(data, "get");
       el.setAttribute("data-value", "data:foo");
       riba.bind(el, bindData);
       if (data === null) {
@@ -79,7 +79,7 @@ describe("Functional", () => {
     });
 
     it("should subscribe to updates", () => {
-      jest.spyOn(data, "on");
+      vi.spyOn(data, "on");
       el.setAttribute("data-value", "data:foo");
       riba.bind(el, bindData);
       if (data === null) {

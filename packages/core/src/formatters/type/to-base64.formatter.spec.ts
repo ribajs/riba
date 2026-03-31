@@ -39,49 +39,49 @@ describe("riba.formatters", () => {
 
     it("A normal string should be encoded to a base64 string and should be encoded back", () => {
       const el = document.createElement("div");
-      el.setAttribute("rv-text", "obj.str | toBase64");
+      el.setAttribute("rv-text", "obj.str | to-base64");
       riba.bind(el, model);
-      expect(isBase64(el.textContent)).toBeTrue();
+      expect(isBase64(el.textContent)).toBe(true);
       expect(parseType(el.textContent).value).toEqual(model.obj?.str);
     });
 
     it("A normal string should be encoded to a base64 string and should be encoded back using the parse formatter", () => {
       const el = document.createElement("div");
-      el.setAttribute("rv-text", "obj.str | toBase64 | parse");
+      el.setAttribute("rv-text", "obj.str | to-base64 | parse");
       riba.bind(el, model);
-      expect(isBase64(el.textContent)).toBeFalse();
+      expect(isBase64(el.textContent)).toBe(false);
       expect(el.textContent).toEqual(model.obj?.str);
     });
 
     it("A number should be encoded to a base64 string and should be encoded back", () => {
       const el = document.createElement("div");
-      el.setAttribute("rv-text", "obj.num | toBase64");
+      el.setAttribute("rv-text", "obj.num | to-base64");
       riba.bind(el, model);
-      expect(isBase64(el.textContent)).toBeTrue();
+      expect(isBase64(el.textContent)).toBe(true);
       expect(parseType(el.textContent).value).toEqual(model.obj?.num);
     });
 
     it("A number should be encoded to a base64 string and should be encoded back using the parse formatter", () => {
       const el = document.createElement("div");
-      el.setAttribute("rv-text", "obj.num | toBase64 | parse");
+      el.setAttribute("rv-text", "obj.num | to-base64 | parse");
       riba.bind(el, model);
-      expect(isBase64(el.textContent)).toBeFalse();
+      expect(isBase64(el.textContent)).toBe(false);
       expect(Number(el.textContent)).toEqual(model.obj?.num);
     });
 
     it("A boolean should be encoded to a base64 string and should be encoded back", () => {
       const el = document.createElement("div");
-      el.setAttribute("rv-text", "obj.bol | toBase64");
+      el.setAttribute("rv-text", "obj.bol | to-base64");
       riba.bind(el, model);
-      expect(isBase64(el.textContent)).toBeTrue();
+      expect(isBase64(el.textContent)).toBe(true);
       expect(parseType(el.textContent).value).toEqual(model.obj?.bol);
     });
 
     it("A boolean should be encoded to a base64 string and should be encoded back using the parse formatter", () => {
       const el = document.createElement("div");
-      el.setAttribute("rv-text", "obj.bol | toBase64 | parse");
+      el.setAttribute("rv-text", "obj.bol | to-base64 | parse");
       riba.bind(el, model);
-      expect(isBase64(el.textContent)).toBeFalse();
+      expect(isBase64(el.textContent)).toBe(false);
       expect(Boolean(el.textContent)).toEqual(model.obj?.bol);
     });
 
@@ -90,9 +90,9 @@ describe("riba.formatters", () => {
         throw new Error("beforeEach was not called correctly!");
       }
       const el = document.createElement("div");
-      el.setAttribute("rv-text", "obj | toBase64");
+      el.setAttribute("rv-text", "obj | to-base64");
       riba.bind(el, model);
-      expect(isBase64(el.textContent)).toBeTrue();
+      expect(isBase64(el.textContent)).toBe(true);
       expect(parseType(el.textContent).value).toEqual(model.obj);
     });
   });

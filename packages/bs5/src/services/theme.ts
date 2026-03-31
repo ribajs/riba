@@ -50,8 +50,8 @@ export class ThemeService {
     // To watch for changes
     window
       .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (e: MediaQueryListEvent) => {
-        this.triggerChange(e);
+      .addEventListener("change", () => {
+        this.set(this.current);
       });
   }
 

@@ -30,9 +30,8 @@ export class MomentExampleComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./moment-example.component.html?raw"
-      );
+      const { default: template } =
+        await import("./moment-example.component.html?raw");
       return template;
     }
   }

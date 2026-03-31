@@ -1,0 +1,31 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    title= site.title + (typeof pageTitle !== 'undefined' && pageTitle ? ' - ' + pageTitle : '')
+    meta(name='description' content=site.description)
+    include ../partials/favicons
+    block head
+  body(id=typeof bodyId !== 'undefined' ? bodyId : '')
+    bs5-sidebar#main-sidebar(
+      container-selector="#main-container"
+      position="left"
+      force-hide-on-location-pathnames="['/', '/index.html', '/index']"
+      rv-bs5-co-xs-auto-hide="true"
+      rv-bs5-co-xl-auto-hide="false"
+      rv-bs5-co-xs-auto-show="false"
+      rv-bs5-co-xl-auto-show="true"
+      rv-bs5-co-xs-mode="'overlap'"
+      rv-bs5-co-xl-mode="'side'"
+    )
+      .d-flex.align-items-center.my-5
+        include ../partials/sidebar
+    #main-container
+      #layout-top
+        include ../partials/navbar
+      router-view#main(listen-all-links="true")
+        block content
+      #layout-bottom.pb-2.pb-lg-0
+        include ../partials/footer
+    script(src='./ts/main.ts' type='module')

@@ -1,11 +1,10 @@
 import { Component, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
-import fullscreenTemplate from "./bs5-photoswipe.fullscreen.component.html?raw";
 import { EventDispatcher } from "@ribajs/events";
 
 import PhotoSwipe from "photoswipe";
-import { PhotoSwipeUI } from "../../services/photoswipe-ui.service.js";
-import { Options, Item } from "../../types/index.js";
+import "photoswipe/style.css";
+import { Item } from "../../types/index.js";
 
 interface Scope extends ScopeBase {
   // Properties
@@ -85,23 +84,13 @@ export class PhotoswipeComponent extends Component {
 
   protected routerEvents = new EventDispatcher("main");
 
-  protected pswp?: PhotoSwipe<Options, PhotoSwipeUI>;
+  protected pswp?: PhotoSwipe;
 
   protected pswpElement: HTMLElement | null = null;
 
   protected images: HTMLImageElement[] = [];
 
-  protected options: Options = {
-    // optionName: 'option value'
-    getThumbBoundsFn: this.getThumbBoundsFn.bind(this),
-
-    // Buttons/elements
-    captionEl: false, // We have or own logic here
-    counterEl: false, // We have or own logic here
-    preloaderEl: true,
-
-    closeElClasses: [], // 'item', 'caption', 'zoom-wrap', 'ui', 'top-bar'
-  };
+  protected options: Record<string, any> = {};
 
   static get observedAttributes(): string[] {
     return [
@@ -234,17 +223,6 @@ export class PhotoswipeComponent extends Component {
     return super.init(observedAttributes);
   }
 
-  protected getThumbBoundsFn(index: number) {
-    if (!this.images) {
-      return { x: 0, y: 0, w: 0 };
-    }
-    const image = this.images[index];
-    const pageYScroll =
-      window.pageYOffset || document.documentElement.scrollTop;
-    const rect = image.getBoundingClientRect();
-    return { x: rect.left, y: rect.top + pageYScroll, w: rect.width };
-  }
-
   protected async beforeBind() {
     // this.debug("beforeBind", this.scope);
     return await super.beforeBind();
@@ -276,10 +254,9 @@ export class PhotoswipeComponent extends Component {
    * (after content changed)
    */
   protected onAfterChange() {
-    this.scope.currItem = this.pswp?.currItem;
-    // this.debug("onAfterChange", this.scope.currItem);
+    this.scope.currItem = this.pswp?.currSlide?.data as Item | undefined;
     setTimeout(() => {
-      this.scope.isZoomAllowed = this.isZoomAllowed();
+      this.scope.isZoomAllowed = true;
     }, 0);
   }
 
@@ -360,7 +337,6 @@ export class PhotoswipeComponent extends Component {
    */
   protected onClose() {
     // this.debug("onClose");
-    this.pswp?.ui?.getFullscreenAPI()?.exit();
     this.closeShare();
     this.scope.isZoomAllowed = false;
   }
@@ -427,26 +403,24 @@ export class PhotoswipeComponent extends Component {
   }
 
   public toggleZoom() {
-    this.pswp?.toggleDesktopZoom();
-    this.scope.zoomLevel = this.pswp?.getZoomLevel() || 1;
+    if (this.pswp?.currSlide) {
+      this.pswp.currSlide.toggleZoom();
+    }
+    this.scope.zoomLevel = this.pswp?.currSlide?.currZoomLevel || 1;
     this.scope.isZoomed = this.scope.zoomLevel < 1;
     // this.debug("toggleZoom", this.scope.zoomLevel);
   }
 
   public toggleFullscreen() {
-    const fullscreenAPI = this.pswp?.ui?.getFullscreenAPI();
-    if (!fullscreenAPI) {
-      console.error("fullscreenAPI not found");
-      return;
-    }
-    if (fullscreenAPI.isFullscreen()) {
-      fullscreenAPI.exit();
+    const el = this.pswp?.element;
+    if (!el) return;
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
       this.scope.isFullscreen = false;
     } else {
-      fullscreenAPI.enter();
+      el.requestFullscreen();
       this.scope.isFullscreen = true;
     }
-    (this.pswp?.ui as any).updateFullscreen();
   }
 
   public openWithoutAnimation(item: Item) {
@@ -462,12 +436,6 @@ export class PhotoswipeComponent extends Component {
 
   public open(item: Item) {
     this.debug("open", item, this.scope.items);
-    if (!this.pswpElement) {
-      console.error(
-        `Element with selector "${this.scope.fullscreenContainerSelector}" not found`,
-      );
-      return;
-    }
     const index = this.scope.items.indexOf(item);
     if (index >= 0) {
       this.options.index = index;
@@ -479,17 +447,15 @@ export class PhotoswipeComponent extends Component {
         this.scope.items[index].msrc = item.element.currentSrc;
       }
 
-      this.pswp = new PhotoSwipe<Options, PhotoSwipeUI>(
-        this.pswpElement,
-        PhotoSwipeUI,
-        this.scope.items,
-        this.options,
-      );
+      this.pswp = new PhotoSwipe({
+        dataSource: this.scope.items,
+        index,
+      });
       this.addPswpEventListeners();
       this.pswp.init();
 
-      this.scope.isZoomAllowed = this.isZoomAllowed();
-      this.scope.currItem = this.pswp?.currItem;
+      this.scope.isZoomAllowed = true;
+      this.scope.currItem = this.pswp?.currSlide?.data as Item | undefined;
 
       this.debug("isZoomAllowed", this.scope.isZoomAllowed);
 
@@ -500,32 +466,22 @@ export class PhotoswipeComponent extends Component {
   }
 
   protected addPswpEventListeners() {
-    this.pswp?.listen("beforeChange", this.onBeforeChange.bind(this));
-    this.pswp?.listen("afterChange", this.onAfterChange.bind(this));
-    this.pswp?.listen("imageLoadComplete", this.onImageLoadComplete.bind(this));
-    this.pswp?.listen("resize", this.onResize.bind(this));
-    this.pswp?.listen("gettingData", this.onGettingData.bind(this));
-    this.pswp?.listen("mouseUsed", this.onMouseUsed.bind(this));
-    this.pswp?.listen("mouseUsed", this.onMouseUsed.bind(this));
-    this.pswp?.listen("initialZoomIn", this.onInitialZoomIn.bind(this));
-    this.pswp?.listen("initialZoomInEnd", this.onInitialZoomInEnd.bind(this));
-    this.pswp?.listen("initialZoomOut", this.onInitialZoomOut.bind(this));
-    this.pswp?.listen("initialZoomOutEnd", this.onInitialZoomOutEnd.bind(this));
-    this.pswp?.listen(
-      "parseVerticalMargin",
-      this.onParseVerticalMargin.bind(this),
-    );
-    this.pswp?.listen("onUnbindEvents", this.onUnbindEvents.bind(this));
-    this.pswp?.listen("close", this.onClose.bind(this));
-    this.pswp?.listen("destroy", this.onDestroy.bind(this));
-    this.pswp?.listen(
-      "updateScrollOffset",
-      this.onUpdateScrollOffset.bind(this),
-    );
+    // PhotoSwipe v5 uses .on() instead of v4's .listen()
+    this.pswp?.on("change", () => {
+      this.onBeforeChange();
+      this.onAfterChange();
+    });
+    this.pswp?.on("resize", () => this.onResize());
+    this.pswp?.on("openingAnimationStart", () => this.onInitialZoomIn());
+    this.pswp?.on("openingAnimationEnd", () => this.onInitialZoomInEnd());
+    this.pswp?.on("closingAnimationStart", () => this.onInitialZoomOut());
+    this.pswp?.on("closingAnimationEnd", () => this.onInitialZoomOutEnd());
+    this.pswp?.on("close", () => this.onClose());
+    this.pswp?.on("destroy", () => this.onDestroy());
   }
 
   protected isZoomAllowed() {
-    return !!this.pswpElement?.classList.contains("pswp--zoom-allowed");
+    return true;
   }
 
   protected removeEventListeners() {
@@ -592,6 +548,8 @@ export class PhotoswipeComponent extends Component {
         msrc: this.images[i].currentSrc || this.images[i].src || src,
         w: Number(width),
         h: Number(height),
+        width: Number(width),
+        height: Number(height),
         title,
         element: this.images[i],
         index: i,
@@ -600,9 +558,7 @@ export class PhotoswipeComponent extends Component {
   }
 
   protected initFullscreenTemplate() {
-    this.pswpElement = this.querySelector<HTMLElement>(
-      this.scope.fullscreenContainerSelector,
-    );
+    // PhotoSwipe v5 creates its own overlay, no container element needed
   }
 
   protected checkHash() {
@@ -659,14 +615,13 @@ export class PhotoswipeComponent extends Component {
   }
 
   protected async template() {
-    // Only set the component template if there no child's already: `<bs5-photoswipe> any child's here.. <bs5-photoswipe/>`
+    // PhotoSwipe v5 creates its own overlay - no fullscreen template needed
     if (hasChildNodesTrim(this)) {
-      return (this as HTMLElement).innerHTML + fullscreenTemplate;
+      return (this as HTMLElement).innerHTML;
     } else {
-      const { default: template } = await import(
-        "./bs5-photoswipe.component.html?raw"
-      );
-      return template + fullscreenTemplate;
+      const { default: template } =
+        await import("./bs5-photoswipe.component.html?raw");
+      return template;
     }
   }
 }

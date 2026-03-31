@@ -1,41 +1,37 @@
 {
   "name": "@ribajs/podcast",
-  "version": "2.0.0-rc.21",
+  "version": "2.0.0-rc.23",
   "type": "module",
   "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+    "node": ">=24.0.0"
   },
-  "main": "dist/cjs/index.js",
-  "browser": "dist/esm/index.js",
-  "types": "dist/types/index.d.ts",
-  "module": "dist/esm/index.js",
+  "main": "src/index.ts",
+  "browser": "src/index.ts",
+  "types": "src/index.ts",
+  "module": "src/index.ts",
   "source": "src/index.ts",
   "scripts": {
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix",
-    "build": "yarn run lint &&  yarn run build:types && yarn run build:esm && yarn run build:cjs",
     "build:types": "tsc --project ./tsconfig.json --declaration true --emitDeclarationOnly --outDir dist/types",
     "build:esm": "tsc --project ./tsconfig.json --declaration false --module esnext --outDir dist/esm",
-    "build:cjs": "tsc --project ./tsconfig.json --declaration false --module commonjs --outDir dist/cjs",
-    "watch": "concurrently 'npm:watch:types' 'npm:watch:esm' 'npm:watch:cjs'",
+    "watch": "concurrently 'npm:watch:types' 'npm:watch:esm'",
     "watch:types": "yarn run build:types -- --watch",
     "watch:esm": "yarn run build:esm -- --watch",
-    "watch:cjs": "yarn run build:cjs -- --watch",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "check": "tsc --noEmit"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.8.2",
+    "@reduxjs/toolkit": "^2.11.2",
     "@ribajs/bs5": "workspace:^",
     "@ribajs/core": "workspace:^",
     "@ribajs/events": "workspace:^",
     "@ribajs/utils": "workspace:^"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.27.6",
-    "@babel/runtime-corejs3": "^7.27.6",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^24.0.3",
-    "concurrently": "^9.1.2",
-    "eslint": "^9.29.0",
-    "typescript": "5.8.3"
+    "@types/node": "^24.12.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^10.1.0",
+    "typescript": "6.0.2"
   }
 }

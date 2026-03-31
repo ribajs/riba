@@ -1,5 +1,5 @@
-import type { Scope as Bs4FormScope } from "@ribajs/bs4/src/components/bs4-form/bs4-form.component.js";
+import type { Scope as Bs5FormScope } from "@ribajs/bs5/src/components/bs5-form/bs5-form.component.js";
 
-export interface OcFormComponentScope extends Bs4FormScope {
+export interface OcFormComponentScope extends Bs5FormScope {
   octoberHandler: string;
 }

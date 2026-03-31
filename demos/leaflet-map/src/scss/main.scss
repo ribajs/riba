@@ -1,8 +1,8 @@
 // Original Bootstrap 5 Styles
-@import '~bootstrap/scss/bootstrap';
+@import 'bootstrap/scss/bootstrap';
 
 // Bootstrap style extensions from Riba.js modules
-@import '~@ribajs/leaflet-map/src/index';
+@import '@ribajs/leaflet-map/src/index';
 
 // @import './binders/index';
 @import '../ts/components/index';

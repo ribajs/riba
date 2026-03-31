@@ -18,6 +18,8 @@ export class RouterViewComponent extends Component {
   protected wrapper: HTMLElement | null = null;
   protected pjax: Pjax | null = null;
   protected prefetch: Prefetch | null = null;
+  /** Skip scroll side effects for the first transitionCompleted event on init. */
+  protected skipNextTransitionCompletedScroll = false;
 
   static get observedAttributes(): (keyof JsxRouterViewProps)[] {
     return [
@@ -73,6 +75,9 @@ export class RouterViewComponent extends Component {
   }
 
   protected getContainerSelector() {
+    if (this.scope.containerSelector) {
+      return this.scope.containerSelector;
+    }
     if (this.scope.id === "main") {
       return `${RouterViewComponent.tagName} > *:first-child`;
     } else {
@@ -132,6 +137,7 @@ export class RouterViewComponent extends Component {
 
     // Ignore rest on first page requests
     if (isInit) {
+      this.skipNextTransitionCompletedScroll = true;
       return;
     }
 
@@ -159,6 +165,11 @@ export class RouterViewComponent extends Component {
     }
 
     this.setTransitionClass("complete");
+
+    if (this.skipNextTransitionCompletedScroll) {
+      this.skipNextTransitionCompletedScroll = false;
+      return;
+    }
 
     if (this.scope.scrollToAnchorHash) {
       let scrollToElement: HTMLElement | null = null;
@@ -217,6 +228,17 @@ export class RouterViewComponent extends Component {
 
   protected async beforeBind() {
     await super.beforeBind();
+    // Keep main view defaults as-is, but default nested views to no auto-scroll
+    // unless explicitly configured via attributes.
+    if (this.scope.id !== "main" && !this.hasAttribute("scroll-to-top")) {
+      this.scope.scrollToTop = false;
+    }
+    if (
+      this.scope.id !== "main" &&
+      !this.hasAttribute("scroll-to-anchor-hash")
+    ) {
+      this.scope.scrollToAnchorHash = false;
+    }
     this.addEventListeners();
     this.initAndStartPjax();
   }

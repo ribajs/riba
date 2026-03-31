@@ -1,6 +1,5 @@
 import { BaseTransition } from "./BaseTransition.js";
 import { Transition } from "../../types/transition.js";
-import { scrollToPosition } from "@ribajs/utils";
 
 /**
  * Basic Transition object, wait for the new Container to be ready,
@@ -25,10 +24,6 @@ export class FadeTransition extends BaseTransition implements Transition {
     if (this.oldContainer) {
       this.oldContainer.style.transition = `opacity ${this.durationMs}ms`;
       this.oldContainer.style.opacity = "0";
-    }
-
-    if (this.scrollToTop) {
-      await scrollToPosition(window, "start", "vertical", "smooth");
     }
 
     const newContainer = await this.newContainerLoading;

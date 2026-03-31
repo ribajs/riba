@@ -1,7 +1,10 @@
 {
   "name": "@ribajs/tsconfig",
+  "scripts": {
+    "check": "echo 'Config-only package, nothing to check'"
+  },
   "description": "Shared TypeScript config for Riba.js projects",
-  "version": "2.0.0-rc.21",
+  "version": "2.0.0-rc.23",
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "url": "https://github.com/ribajs/riba/tree/master/infra/tsconfig",
   "files": [

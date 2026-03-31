@@ -1,0 +1,19 @@
+bs5-navbar.navbar.navbar-dark.navbar-main.fixed-top.bg-primary
+  .container-fluid.d-block.px-0
+    .row.justify-content-between.gx-0
+      //- Left: sidebar toggle + brand
+      .col-auto.d-flex.align-items-center.px-0
+        bs5-toggle-button(target-id="main-sidebar")
+          ul.nav.d-flex
+            li.nav-item.d-flex.align-items-center
+              .nav-link.py-0.px-2(rv-hide="isActive" rv-on-click="toggle" style="cursor:pointer")
+                bs5-icon(src="./iconset/icon_menu.svg" size="32" color="white")
+            li.nav-item.d-flex.align-items-center
+              .nav-link.py-0.px-2(rv-show="isActive" rv-on-click="toggle" style="cursor:pointer")
+                bs5-icon(src="./iconset/icon_close.svg" size="32" color="white")
+        a.navbar-brand(href="index.html" rv-route="index.html") Riba
+      //- Right: main menu links
+      .col-auto.d-flex.align-items-center
+        ul.nav.d-none.d-md-flex
+          li.nav-item
+            a.nav-link(href=site.repository target="_blank") Github

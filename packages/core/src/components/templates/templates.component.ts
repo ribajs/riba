@@ -26,7 +26,6 @@ export abstract class TemplatesComponent extends Component {
     this.addItemsByTemplate();
     super.connectedCallback();
     this.removeTemplates();
-    this.bindIfReady();
   }
 
   protected ready() {

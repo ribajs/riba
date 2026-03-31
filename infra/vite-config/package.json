@@ -1,0 +1,21 @@
+{
+  "name": "@ribajs/vite-config",
+  "scripts": {
+    "check": "echo 'Config-only package, nothing to check'"
+  },
+  "description": "Shared Vite configuration for Riba.js projects",
+  "version": "2.0.0-rc.23",
+  "type": "module",
+  "main": "index.js",
+  "exports": "./index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ribajs/riba.git"
+  },
+  "dependencies": {
+    "@ribajs/iconset": "workspace:^",
+    "rollup-plugin-pug": "^1.1.1",
+    "vite": "^8.0.3"
+  }
+}

@@ -1,6 +1,5 @@
 /**
- * Simplified version of https://github.com/YuzuJS/setImmediate
- * TODO Port tests
+ * Lightweight scheduling helper for modern browsers.
  */
 
 interface Task {
@@ -10,38 +9,18 @@ interface Task {
 
 let nextHandle = 1; // Spec says greater than zero
 const tasksByHandle: { [key: string]: Task } = {};
-let currentlyRunningATask = false;
-const messagePrefix = "setImmediate$" + Math.random() + "$";
-
-const onGlobalMessage = function (event: MessageEvent) {
-  if (
-    event.source === window &&
-    typeof event.data === "string" &&
-    event.data.indexOf(messagePrefix) === 0
-  ) {
-    runIfPresent(+event.data.slice(messagePrefix.length));
-  }
-};
-
-if (window) {
-  window.addEventListener("message", onGlobalMessage, false);
-}
-
-function registerImmediate(handle: number) {
-  window.postMessage(messagePrefix + handle, "*");
-}
 
 function _setImmediate(callback: (...args: any) => any, ...args: any[]) {
-  console.debug("Use setImmediate polyfill");
   // Callback can either be a function or a string
   if (typeof callback !== "function") {
     callback = new Function("" + callback) as (...args: any) => any;
   }
   // Store and register the task
   const task = { callback: callback, args };
-  tasksByHandle[nextHandle] = task;
-  registerImmediate(nextHandle);
-  return nextHandle++;
+  const handle = nextHandle++;
+  tasksByHandle[handle] = task;
+  setTimeout(() => runIfPresent(handle), 0);
+  return handle;
 }
 
 function _clearImmediate(handle: number) {
@@ -54,23 +33,13 @@ function run(task: Task) {
   callback(...args);
 }
 
-function runIfPresent(handle: any) {
-  // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
-  // So if we're currently running a task, we'll need to delay this invocation.
-  if (currentlyRunningATask) {
-    // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
-    // "too much recursion" error.
-    setTimeout(runIfPresent, 0, handle);
-  } else {
-    const task = tasksByHandle[handle];
-    if (task) {
-      currentlyRunningATask = true;
-      try {
-        run(task);
-      } finally {
-        _clearImmediate(handle);
-        currentlyRunningATask = false;
-      }
+function runIfPresent(handle: number) {
+  const task = tasksByHandle[handle];
+  if (task) {
+    try {
+      run(task);
+    } finally {
+      _clearImmediate(handle);
     }
   }
 }

@@ -1,0 +1,43 @@
+rv-file-tree {
+  display: block;
+  background: #272822;
+  border-radius: 0.3em;
+  margin: 40px 0;
+  padding: 16px 32px;
+
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 1em;
+  text-align: left;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 2.3;
+  tab-size: 4;
+  hyphens: none;
+
+  .item {
+    display: block;
+    color: #f8f8f2;
+  }
+  .children {
+    padding-left: 30px;
+    position: relative;
+    overflow: hidden;
+    .item {
+      position: relative;
+      &:before {
+        content: "";
+        left: -18px;
+        bottom: 16px;
+        width: 16px;
+        height: 9999px;
+        position: absolute;
+        border-width: 0 0 1px 1px;
+        border-style: solid;
+        border-color: #dbdbdb;
+        border-radius: 0 0 0 3px;
+      }
+    }
+  }
+}
