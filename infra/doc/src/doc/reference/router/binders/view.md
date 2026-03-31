@@ -1,37 +1,46 @@
-This binder is the heart of the router module. If you want to develop a **single-page application** then the main content should use this binder to dynamically exchange its content. This binder is what the `barba-wrapper` and `barba-container` are in barba.js (see [barba install documentation](https://barba.js.org/v1/installation.html)). As a bigger example this site also uses this binder to dynamically load its content. Your application can also have multiple view binders, only the ids need to be different. In the example below we also use an additional view binder (next to our main view binder) to demonstrate the functionality.
+`router-view` is the heart of the router module. If you want to develop a **single-page application**, the main content should use this component to dynamically exchange its content. Conceptually, this is similar to a transition wrapper/container pattern as used by PJAX-like routing solutions. As a bigger example this site also uses this component to dynamically load its content. Your application can also have multiple views; only the ids need to be different.
   
-The binder attribute value accepts an object or json string with the following available options:
+The component attributes map to the following options:
 
-| Option name           | Type             | Default                  | Description                                                                              |
-| --------------------- | ---------------- | ------------------------ |:-----------------------------------------------------------------------------------------|
-| viewId                | `string`  | `'main'`                           | The id of the view, must be unique and is only needed with multiple view binders, should be set via the `id` attribute |
-| containerSelector     | `string`  | `[data-namespace]` if viewId is `'main'` otherwise `#${viewId} > *:first-child`                         | Selector of the container child, here the HTML content is replace         |
-| action                | `string`  | `'replace'`                                | Replaces the old container content with the new one                       |
-| scrollToTop           | `boolean` |`true` if viewId is `'main'` otherwise `false` | Auto scrolls to the top of the page when the new page is loading       |
-| listenAllLinks        | `boolean` |`true` if viewId is `'main'` otherwise `false` | Loads the content of all links, even without the `route` binder        |
-| listenPopstate |`boolean` |`true` if viewId is `'main'` otherwise `false`| Responds to the browsers go back button and loads the content of the previous page |
-| scrollToAnchorHash    | `boolean` |`true` if viewId is `'main'` otherwise `false` | Auto scrolls to the anchor id passed by the url hash value             |
-| datasetToModel |`boolean` |`true` if viewId is `'main'` otherwise `false` | Binds the values passed as data attributes to the model / scope of this binder |
-| parseTitle            | `boolean` |`true` if viewId is `'main'` otherwise `false` | Parses the `<title></title>` and replace the tab name                  |
-| changeBrowserUrl      | `boolean` |`true` if viewId is `'main'` otherwise `false` | Changes the browser URL when the new page is loading                   |
-| prefetchLinks| `boolean` |`true` if listenAllLinks is `true` otherwise `false`| Loads the content of the url on mouse over to speed up the page loading|
-| transition            | `Transition` | `HideShowTransition`                       | The transition object e.g. for animations                              |
+| Option name           | Type         | Default                              | Description |
+| --------------------- | ------------ | ------------------------------------ | :---------- |
+| id                    | `string`     | `'main'`                             | The view id. Must be unique when using multiple views. |
+| containerSelector     | `string`     | auto-derived from `id`               | Defaults to `router-view > *:first-child` for `main`, otherwise `router-view#<id> > *:first-child`. |
+| action                | `string`     | `'replace'`                          | Replaces the old container content with the new one. |
+| scrollToTop           | `boolean`    | `true` for `main`, else `false`      | Auto-scroll to top after route transition. |
+| listenAllLinks        | `boolean`    | `true`                               | Loads content of links globally, even without `rv-route`. |
+| listenPopstate        | `boolean`    | `true`                               | Handles browser back/forward navigation. |
+| scrollToAnchorHash    | `boolean`    | `true` for `main`, else `false`      | Scrolls to URL hash target after transition. |
+| scrollToAnchorOffset  | `number`     | `RouterService.options.scrollToAnchorOffset` | Offset for hash scrolling. |
+| datasetToRootScope    | `boolean`    | `true`                               | Binds container `data-*` values to `$root.dataset`. |
+| parseTitle            | `boolean`    | `true`                               | Parses `<title>` and updates the tab title. |
+| changeBrowserUrl      | `boolean`    | `true`                               | Updates browser URL during navigation. |
+| prefetchLinks         | `boolean`    | `true`                               | Prefetches on hover/touchstart to speed up page loading. |
+| transition            | `Transition` | `HideShowTransition`                 | Transition object for page swap behavior. |
 
 <rv-bind-content class="pt-3">
   <template>
     <rv-example-tabs class="pt-3" handle="view-binder">
       <template type="single-html-file">
-        <div
+        <router-view
           id="example-view"
-          rv-view="{'containerSelector': '#example-view-container', 'datasetToModel': true, 'changeBrowserUrl': false}"
+          scroll-to-top="false"
+          scroll-to-anchor-hash="false"
+          change-browser-url="false"
+          prefetch-links="false"
         >
           <div id="example-view-container">
             <p>
-              This is the content of the element with the rv-view binder.
+              This is the content of the element with the router-view component.
             </p>
-            <button rv-route="{'url': 'iconset.html', 'viewId': 'example-view'}" class="btn btn-danger m-3">Click to load a page</button>
+            <button
+              rv-route="{'url': 'router-view-example-target.html', 'viewId': 'example-view'}"
+              class="btn btn-danger m-3"
+            >
+              Click to load a page
+            </button>
           </div>
-        </div>
+        </router-view>
       </template>
     </rv-example-tabs>
   </template>

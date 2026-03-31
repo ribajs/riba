@@ -20,10 +20,28 @@ export class RouteBinder extends Binder<string, HTMLAnchorElement> {
     newTabOnExtern: true,
   };
 
+  private isSameRouteForView(pjax?: Pjax) {
+    if (!this.options.url) {
+      return false;
+    }
+
+    // Keep existing optimization for the main view.
+    if (this.options.viewId === "main") {
+      return onRoute(this.options.url, true);
+    }
+
+    // For nested views, compare against this view's own pjax state.
+    if (!pjax) {
+      return false;
+    }
+
+    return pjax.getCurrentStatusUrl() === normalizeUrl(this.options.url).url;
+  }
+
   private _onClick(event: Event) {
     // console.log(this.options.url);
     const pjax = Pjax.getInstance(this.options.viewId);
-    if (onRoute(this.options.url, true)) {
+    if (this.isSameRouteForView(pjax)) {
       console.info("already on this site, do nothing");
       event.stopPropagation();
       event.preventDefault();

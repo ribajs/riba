@@ -1,4 +1,4 @@
-Loads a link and injects the content insite the view container, in addition, the link is pre-loaded on a mouse over.
+Loads a link and injects the content inside the selected view container. The target is prefetched on mouseover and touchstart.
 This binder is like a normal link in barba.js but allows a bit more control.
 
 <rv-bind-content class="pt-3">
@@ -6,7 +6,7 @@ This binder is like a normal link in barba.js but allows a bit more control.
     <rv-example-tabs class="pt-3" handle="route-binder">
       <template type="single-html-file">
         <a rv-route="'iconset.html'" href="iconset.html" class="m-3">Click to open Iconset</a>
-        <button rv-route="'guide.html'" class="btn btn-primary m-3">Click to open Guide</button>
+        <a rv-route="'guide.html'" href="guide.html" class="btn btn-primary m-3">Click to open Guide</a>
       </template>
     </rv-example-tabs>
   </template>
@@ -14,20 +14,24 @@ This binder is like a normal link in barba.js but allows a bit more control.
 
 Instead of the URL you can also pass some options to the binder as a object (by keypath) or as a json string
 
-| Option name           | Default          | Description                                                                              |
-| --------------------- | ---------------- |:-----------------------------------------------------------------------------------------|
-| url                   |                  | The url you want to load on a click                                                      |
-| viewId                | `'main'`         | The id of the view in which the content should be replaced                               |
-| removeAfterActivation | `false`          | If you wish to remove the element from the DOM after activation                          |
+| Option name           | Default  | Description |
+| --------------------- | -------- | :---------- |
+| url                   |          | The url you want to load on click. |
+| viewId                | `'main'` | The id of the view in which the content should be replaced. |
+| removeAfterActivation | `false`  | Remove the element from the DOM after activation. |
+| newTab                | `false`  | Open the route in a new tab. |
+| newTabOnExtern        | `true`   | Open external urls in a new tab by default. |
 
 <rv-bind-content class="pt-3">
   <template>
     <rv-example-tabs class="pt-3" handle="route-binder">
       <template type="single-html-file">
-        <a rv-route="{'viewId': 'example-view', 'removeAfterActivation': false}" href="iconset.html" class="btn btn-danger m-3">Click to load a page insite of the view binder example below</a>
+        <a rv-route="{'viewId': 'example-view', 'removeAfterActivation': false}" href="iconset.html" class="btn btn-danger m-3">Click to load a page inside the view example below</a>
         <p class="m-3"><em>Before you click on this button, make sure that the preview of the view binder example below is open.</em></p>
         <a rv-route="" href="iconset.html" target="_blank" class="btn btn-success m-3">Click to open the page in a new tab.</a>
       </template>
     </rv-example-tabs>
   </template>
 </rv-bind-content>
+
+If a route points to the same url as the active route of the targeted view, the click is ignored intentionally (`already on this site, do nothing`).

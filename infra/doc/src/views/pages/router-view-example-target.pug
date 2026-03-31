@@ -1,0 +1,18 @@
+extends ../layouts/main
+
+block append head
+  - pageTitle = "Router View Example Target"
+  - bodyId = "router-view-example-target"
+
+block content
+  router-view#example-view
+    .container.py-5
+      .row
+        .col-12
+          h1.h4.mb-3 Nested View Target
+          p.mb-4
+            | This content is loaded only inside the nested router view demo container.
+          a.btn.btn-outline-primary(
+            rv-route="{'url': 'router.html', 'viewId': 'example-view'}"
+            href="router.html"
+          ) Back to Router Docs

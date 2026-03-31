@@ -6,7 +6,7 @@ export class ParentRouteClassStarBinder extends Binder<
   string,
   HTMLAnchorElement | HTMLInputElement
 > {
-  static class = "parent-route-class-*";
+  static key = "parent-route-class-*";
 
   private dispatcher = new EventDispatcher("main");
 
