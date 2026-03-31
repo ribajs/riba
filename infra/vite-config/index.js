@@ -110,7 +110,12 @@ export function ribaViteConfig(options = {}) {
       preprocessorOptions: {
         scss: {
           api: "modern-compiler",
-          silenceDeprecations: ["import"],
+          silenceDeprecations: [
+            "import",
+            "global-builtin",
+            "color-functions",
+            "if-function",
+          ],
         },
       },
     },
