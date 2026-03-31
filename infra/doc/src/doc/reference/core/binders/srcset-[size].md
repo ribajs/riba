@@ -5,12 +5,12 @@ Sets an url with size to the `srcset` attribute
 <rv-example-tabs handle="srcset-size" class="pt-3">
 <template type="single-html-file">
 <img
-  rv-srcset-468w="'//placehold.it/468x'"
-  rv-srcset-648w="'//placehold.it/648x'"
-  rv-srcset-1068w="'//placehold.it/1068x'"
+  rv-srcset-468w="'https://placehold.co/468x'"
+  rv-srcset-648w="'https://placehold.co/648x'"
+  rv-srcset-1068w="'https://placehold.co/1068x'"
   sizes="(max-width: 767px) 468px, (max-width: 991px) 648px, (min-width: 992px) 1068px"
   class="img-fluid"
-  src="//placehold.it/100x"
+  src="https://placehold.co/100x"
 />
 </template>
 </rv-example-tabs>

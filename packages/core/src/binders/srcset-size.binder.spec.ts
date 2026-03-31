@@ -18,9 +18,9 @@ describe("riba.binders", () => {
     el = document.createElement("div");
     fragment.appendChild(el);
     model = {
-      small: "//placehold.it/100x",
-      middle: "//placehold.it/200x",
-      big: "//placehold.it/300x",
+      small: "https://placehold.co/100x",
+      middle: "https://placehold.co/200x",
+      big: "https://placehold.co/300x",
     };
   });
 
@@ -41,14 +41,14 @@ describe("riba.binders", () => {
       riba.bind(fragment, model);
 
       expect(el.getAttribute("srcset")).toEqual(
-        "//placehold.it/100x 100w, //placehold.it/200x 200w, //placehold.it/300x 300w"
+        "https://placehold.co/100x 100w, https://placehold.co/200x 200w, https://placehold.co/300x 300w"
       );
 
       // Removes url for size
       model.middle = "";
 
       expect(el.getAttribute("srcset")).toEqual(
-        "//placehold.it/100x 100w, //placehold.it/300x 300w"
+        "https://placehold.co/100x 100w, https://placehold.co/300x 300w"
       );
     });
   });
