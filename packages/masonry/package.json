@@ -7,7 +7,6 @@
   },
   "scripts": {
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
-    "build": "tsc",
     "clean": "rm -rf ./dist ./lib",
     "check": "tsc --noEmit"
   },

@@ -78,7 +78,7 @@ Events: Component:{constructor,connected,beforeBind,afterBind,disconnected} | Co
 
 ## Commands
 
-yarn install | yarn build:all | yarn build:libs | yarn test | yarn test:watch | yarn format | yarn clean | yarn check:all
+yarn install | yarn build | yarn build:libs | yarn test | yarn test:watch | yarn format | yarn clean | yarn check:all
 Per-package: cd packages/<pkg> && yarn build
 
 ## Conventions

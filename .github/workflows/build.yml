@@ -6,6 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,6 +21,6 @@ jobs:
       - name: Type check all packages
         run: |
           yarn run check:all
-      - name: Build each package
+      - name: Build configured workspaces
         run: |
-          yarn run build:all
+          yarn run build

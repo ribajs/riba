@@ -7,7 +7,6 @@
   },
   "scripts": {
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix",
-    "build": "yarn run lint && yarn run build:esm && yarn run build:types",
     "build:types": "tsc --project ./tsconfig.json --declaration true --emitDeclarationOnly --outDir dist/types",
     "build:esm": "tsc --project ./tsconfig.json --declaration false --module esnext --outDir dist/esm",
     "clean": "rm -rf ./dist ./lib",
