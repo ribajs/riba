@@ -12,6 +12,11 @@
   "homepage": "https://ribajs.com/",
   "main": "dist/svg.json",
   "module": "dist/svg.json",
+  "exports": {
+    ".": "./dist/svg.json",
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
   "license": "MIT",
   "licenses": [
     {
