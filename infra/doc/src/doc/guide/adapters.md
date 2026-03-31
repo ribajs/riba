@@ -1,11 +1,21 @@
-riba is agnostic about the objects that it can subscribe to. This makes it very flexible as it can adapt to work with virtually any library or framework, but it also means that you need to tell riba *how* to subscribe to those objects. This is where adapters come in to play. This feature is driven by the observer pattern.
+Riba can observe different object models through adapters. In practice, most
+projects use the built-in `.` adapter for plain JavaScript objects.
 
-Each adapter is defined to a unique interface (a single character) which is used to separate the keys in a keypath. The interfaces used in a keypath determine which adapter to use for each intermediary key.
+Custom adapters are an advanced extension point. Use them when you need to bind
+to external model APIs (for example event-driven stores) that do not expose
+plain object properties directly.
+
+Each adapter is registered under a unique interface (a single character). The
+interfaces used in a keypath determine which adapter is used for each
+intermediate key.
 
 ```
 user.address:city
 ```
 
-The above keypath will use the `.` adapter to access the `address` key on the `user` object, and the `:` adapter to access the `city` key on the `address` object. If you can imagine for a second that `address` is just a normal property on the user object pointing to a Backbone model, but `city` is actually an attribute on that Backbone model, you can see how this kind of notation is actually very succint and expressive.
+The above keypath uses the `.` adapter to access `address` on `user`, and the
+`:` adapter to access `city` on `address`. This is useful when traversing mixed
+model types in one keypath.
 
-riba comes with a default `.` adapter based on custom property getter and setter
+Riba ships with a default `.` adapter based on custom property getters and
+setters.

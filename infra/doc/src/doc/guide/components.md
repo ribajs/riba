@@ -2,7 +2,7 @@ Components let you define reusable views that can be used within any of your tem
 
 ### Based on Custom Elements
 
-Unlike [Rivets.js components](https://rivetsjs.com/docs/guide/#components), components in Riba.js follow the [Custom Elements specification](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements).
+Unlike [Rivets.js components](https://web.archive.org/web/20200216073406/http://rivetsjs.com/docs/guide/#components), components in Riba.js follow the [Custom Elements specification](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements).
 
 #### Browser support
 

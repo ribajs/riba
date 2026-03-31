@@ -1,6 +1,10 @@
 Adapters are defined on `riba.adapters` with the interface as the property name and the adapter object as the value. An adapter is just an object that responds to `observe`, `unobserve`, `get` and `set`.
 
-The following `:` adapter works for Backbone.js models / Stapes.js modules.
+For most projects, the built-in `.` adapter is enough. Create a custom adapter
+only if your model API requires custom observe/get/set behavior.
+
+The following `:` adapter is an example for event-driven model APIs (such as
+Backbone.js models / Stapes.js modules).
 
 ```javascript
 riba.adapters[':'] = {
