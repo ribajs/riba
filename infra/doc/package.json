@@ -16,7 +16,7 @@
     "check": "tsc --noEmit"
   },
   "engines": {
-    "node": ">=24"
+    "node": ">=24.0.0"
   },
   "author": "Pascal Garber <pascal@artandcode.studio>",
   "license": "MIT",

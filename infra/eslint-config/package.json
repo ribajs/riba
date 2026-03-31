@@ -15,7 +15,7 @@
   "files": [
     "LICENSE",
     "README.md",
-    "index.js"
+    "index.mjs"
   ],
   "license": "MIT",
   "licenses": [
@@ -38,7 +38,6 @@
   ],
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^8.57.2",
-    "@typescript-eslint/experimental-utils": "^5.62.0",
     "@typescript-eslint/parser": "^8.57.2",
     "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",

@@ -10,16 +10,16 @@ To install Riba and the Riba Shopify module:
 npm install --save @ribajs/core @ribajs/utils @ribajs/shopify
 ```
 
-### Babel
+### Tooling (TypeScript + modern bundler)
 
 ```bash
-yarn add -D @babel/core @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread @babel/plugin-proposal-optional-chaining @babel/plugin-syntax-export-default-from @babel/plugin-transform-runtime @babel/preset-env @babel/preset-typescript @babel/runtime-corejs3 babel-plugin-array-includes
+yarn add -D typescript vite @ribajs/tsconfig
 ```
 
 ### ESLint and Prettier
 
 ```bash
-yarn add -D eslint prettier eslint-config-prettier eslint-plugin-prettier @typescript-eslint/eslint-plugin @typescript-eslint/experimental-utils @typescript-eslint/parser @typescript-eslint/typescript-estree
+yarn add -D eslint prettier eslint-config-prettier eslint-plugin-prettier @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
 If you use Visual Studio code it is recommended to install the following plugins:
@@ -27,27 +27,13 @@ If you use Visual Studio code it is recommended to install the following plugins
 * [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 * [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
-These two plugins automatically use the .eslintrc.js from thisk repository, the first plugin shows you possible errors, the second one formats your code automatically when you save it.
+These two plugins help you run linting and formatting directly in the editor.
 
-### Webpack, Yarn PnP and TypeScript
+## Register Riba
 
-```bash
-yarn add -D webpack webpack-cli webpack-stream typescript @yarnpkg/pnpify html-loader babel-loader
-```
+To register the module, create a `src/ts/main.ts`, import `shopifyModule` from `@ribajs/shopify`, then register it with `riba.module.register(shopifyModule.init());`:
 
-Add webpack to `resolutions` in your package.json to be sure to use the latest Webpack v4 version:
-
-```json
-"resolutions": {
-  "webpack": "^4.42.1"
-}
-```
-
-## Regist Riba
-
-To regist the module create a `src/ts/main.ts` and insert `import shopifyModule from '@ribajs/shopify';`, than you can regist the module with `riba.module.register(shopifyModule.init());`:
-
-The main.ts could look like this:
+`main.ts` could look like this:
 
 ```ts
 import { Riba, coreModule } from '@ribajs/core';

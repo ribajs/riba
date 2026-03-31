@@ -40,7 +40,6 @@
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
     "build": "yarn run build:ts",
     "build:ts": "tsc",
-    "build:browser": "yarn run webpack:browser",
     "clean": "rm -rf ./dist ./lib",
     "check": "tsc --noEmit"
   },
@@ -53,7 +52,6 @@
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
     "@ribajs/types": "workspace:^",
-    "@types/core-js": "^2.5.8",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.12.0",
     "eslint": "^10.1.0",

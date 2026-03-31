@@ -2,13 +2,12 @@ Components let you define reusable views that can be used within any of your tem
 
 ### Based on Custom Elements
 
-Unlike [Rivets.js components](http://rivetsjs.com/docs/guide/#components) in Riba.js components following the [custom elements specification](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements).
+Unlike [Rivets.js components](https://rivetsjs.com/docs/guide/#components), components in Riba.js follow the [Custom Elements specification](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements).
 
-#### Backward Compatible
+#### Browser support
 
-The components in Riba are having a additional small fallback implementation which makes it work also on browser that does not support custom elements. The fallback implementation has the advantage, that no large polyfills are needed.
-
-Usually, custom elements require the ES2015 class syntax but in Riba.js we found a way that custom elements also working with the prototype class syntax. Therefore you can convert your Riba project (e.g. with Babel) also for old browsers and your custom elements are still working with modern browsers.
+Riba components require native `customElements` support and are intended for modern evergreen browsers.
+Legacy-browser fallback implementations are not part of the maintained first-party runtime anymore.
 
 ### Create a New Component
 
@@ -20,7 +19,7 @@ riba generate component todo-item
 
 This will create a new directory with a new component (and a `.spec.ts` file for tests) in your `./src/ts/component` directory and updates your `./src/ts/components/index.ts` file.
 
-A component object must define a `template` function, which returns the template for the component (this can be an HTML string or the actual element). It must also define an `initialize` function, which returns the scope object to bind the view with (this will likely be a controller / viewmodel / presenter).
+A component class typically defines `observedAttributes`, a `scope`, and a `template` function, which returns the template for the component (this can be an HTML string or the actual element). The component is initialized in lifecycle callbacks (for example via `connectedCallback` and `init(...)`).
 
 ```typescript
 import { Component } from '@ribajs/core';
