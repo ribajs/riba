@@ -23,7 +23,11 @@ function wrapDeprecatedFormatterAlias(
 ): Formatter {
   const wrap = (fn: FormatterFn | undefined): FormatterFn | undefined => {
     if (!fn) return fn;
-    const wrapped: FormatterFn = function (this: unknown, val: any, ...args: any[]) {
+    const wrapped: FormatterFn = function (
+      this: unknown,
+      val: any,
+      ...args: any[]
+    ) {
       warnFormatterDeprecationOnce(legacyId, canonicalId);
       return fn.call(this, val, ...args);
     };
@@ -70,7 +74,10 @@ export class FormatterService extends ModuleElementService {
     // Back-compat: kebab-case is canonical; register camelCase alias with deprecation.
     if (name.includes("-")) {
       const legacyId = camelCase(name);
-      if (legacyId !== name && !Object.prototype.hasOwnProperty.call(this.elements, legacyId)) {
+      if (
+        legacyId !== name &&
+        !Object.prototype.hasOwnProperty.call(this.elements, legacyId)
+      ) {
         this.elements[legacyId] = wrapDeprecatedFormatterAlias(
           formatter,
           legacyId,

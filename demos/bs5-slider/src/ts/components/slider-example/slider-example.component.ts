@@ -38,9 +38,8 @@ export class SliderExampleComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./slider-example.component.html?raw"
-      );
+      const { default: template } =
+        await import("./slider-example.component.html?raw");
       return template;
     }
   }

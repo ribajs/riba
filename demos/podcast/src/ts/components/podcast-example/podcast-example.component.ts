@@ -33,9 +33,8 @@ export class PodcastExampleComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./podcast-example.component.pug"
-      );
+      const { default: template } =
+        await import("./podcast-example.component.pug");
       return template(this.scope);
     }
   }

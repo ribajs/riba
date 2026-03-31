@@ -19,6 +19,7 @@ export class I18nSwitcherComponent extends Component {
   }
 
   protected localesService?: LocalesService;
+  protected initializedLocales = false;
 
   public scope: Scope = {
     langcodes: [],
@@ -41,6 +42,8 @@ export class I18nSwitcherComponent extends Component {
   }
 
   protected disconnectedCallback() {
+    this.localesService?.event.off("ready", this.onLocalesReady, this);
+    this.localesService?.event.off("changed", this.onLanguageChanged, this);
     super.disconnectedCallback();
   }
 
@@ -59,12 +62,7 @@ export class I18nSwitcherComponent extends Component {
         return await this.initLocales(langcode);
       }
     } else {
-      this.localesService?.event.on(
-        "ready",
-        async (langcode: string /*, translationNeeded: boolean*/) => {
-          await this.initLocales(langcode);
-        },
-      );
+      this.localesService?.event.on("ready", this.onLocalesReady, this);
     }
   }
 
@@ -107,9 +105,28 @@ export class I18nSwitcherComponent extends Component {
     }
   }
 
+  protected onLocalesReady = async (
+    langcode: string /*, translationNeeded: boolean*/,
+  ) => {
+    await this.initLocales(langcode);
+  };
+
+  protected onLanguageChanged = (
+    changedLangcode: string /*, initial: boolean*/,
+  ) => {
+    // Activate localcode and disable the other
+    this.scope.langcodes.forEach((langCode) => {
+      langCode.active = langCode.code === changedLangcode;
+    });
+  };
+
   protected async initLocales(langcode: string) {
+    if (!this.localesService) {
+      throw new Error("LocalesService not defined!");
+    }
+
     // set available langcodes
-    const langcodes = await this.localesService?.getAvailableLangcodes();
+    const langcodes = await this.localesService.getAvailableLangcodes();
 
     if (!langcodes) {
       throw new Error("No lancodes found!");
@@ -121,16 +138,11 @@ export class I18nSwitcherComponent extends Component {
       langCode.active = langCode.code === langcode;
     });
 
-    this.localesService?.event.on(
-      "changed",
-      (changedLangcode: string /*, initial: boolean*/) => {
-        // Activate localcode and disable the other
-        this.scope.langcodes.forEach((langCode) => {
-          langCode.active = langCode.code === changedLangcode;
-        });
-      },
-      this,
-    );
+    if (!this.initializedLocales) {
+      this.localesService.event.on("changed", this.onLanguageChanged, this);
+      this.initializedLocales = true;
+    }
+    this.localesService.event.off("ready", this.onLocalesReady, this);
 
     this.scope.ready = true;
     return this.scope.langcodes;

@@ -58,9 +58,8 @@ export class ExtrasGameLoopExampleComponent extends Component {
   }
 
   protected async template() {
-    const { default: template } = await import(
-      "./extras-game-loop-example.component.html?raw"
-    );
+    const { default: template } =
+      await import("./extras-game-loop-example.component.html?raw");
     return template;
   }
 }

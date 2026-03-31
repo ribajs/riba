@@ -85,9 +85,8 @@ export class ShopifyTdaInstagramComponent extends Component {
     if (this && this.hasChildNodes()) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./instagram.component.html?raw"
-      );
+      const { default: template } =
+        await import("./instagram.component.html?raw");
       return template;
     }
   }

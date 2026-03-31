@@ -1,4 +1,4 @@
-import { Formatter } from "@ribajs/core";
+import { Formatter, FormatterContext } from "@ribajs/core";
 import { I18nService } from "../services/i18n.service.js";
 import { LocalesService } from "../types/locales-service.js";
 
@@ -28,37 +28,40 @@ export const tFormatter: Formatter = {
   name: "t",
   read(
     translateMePathString: string,
-    langcode: string /*, ...vars: string[]*/,
+    langcodeOrContext?: string | FormatterContext /*, ...vars: string[]*/,
+    contextArg?: FormatterContext,
   ) {
     const localesService = I18nService.options.localesService;
-    return new Promise((resolve, reject) => {
-      localesService.event.on("changed", () => {
-        translate(translateMePathString, localesService, langcode)
-          .then((locale) => {
-            resolve(locale as any);
-          })
-          .catch((error: Error) => {
-            reject(error);
-          });
-      });
+    const isFormatterContext = (
+      value?: string | FormatterContext,
+    ): value is FormatterContext => {
+      return !!value && typeof value === "object" && "invalidate" in value;
+    };
+    const context = isFormatterContext(langcodeOrContext)
+      ? langcodeOrContext
+      : contextArg;
+    const langcode =
+      typeof langcodeOrContext === "string" ? langcodeOrContext : undefined;
 
-      localesService.event.on("ready", () => {
-        translate(translateMePathString, localesService, langcode)
-          .then((locale) => {
-            resolve(locale as any);
-          })
-          .catch((error: Error) => {
-            reject(error);
-          });
-      });
-
-      if (localesService.ready) {
-        translate(translateMePathString, localesService, langcode).then(
-          (locale) => {
-            resolve(locale);
-          },
-        );
+    if (context) {
+      const invalidate = () => context.invalidate();
+      context.on(localesService.event, "changed", invalidate, "changed");
+      if (!localesService.ready) {
+        const onReady = () => {
+          invalidate();
+          localesService.event.off("ready", onReady);
+        };
+        localesService.event.on("ready", onReady);
+        context.addCleanup(() => {
+          localesService.event.off("ready", onReady);
+        }, "ready");
       }
-    });
+    }
+
+    if (!localesService.ready) {
+      return "";
+    }
+
+    return translate(translateMePathString, localesService, langcode);
   },
 };

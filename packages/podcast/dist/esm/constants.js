@@ -1,9 +1,0 @@
-export const DEFAULT_MAIN_PLAYER_ID = "main-podcast-player";
-export const DEFAULT_POLYFILLS_URL = "//cdn.podlove.org/web-player/5.x/polyfills.js";
-export const DEFAULT_POLYFILLS_SCRIPT_ID = "podlove-web-player-polyfills-5-x";
-export const DEFAULT_WEB_PLAYER_URL = "//cdn.podlove.org/web-player/5.x/embed.js";
-export const DEFAULT_WEB_PLAYER_SCRIPT_ID = "podlove-web-player-5-x";
-export const LOADING_CLASS = "podlove-web-player-loading";
-export const READY_CLASS = "podlove-web-player-ready";
-export const HAS_PLAYED_CLASS = "podlove-web-player-played";
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uc3RhbnRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL2NvbnN0YW50cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsTUFBTSxzQkFBc0IsR0FBRyxxQkFBcUIsQ0FBQztBQUM1RCxNQUFNLENBQUMsTUFBTSxxQkFBcUIsR0FDaEMsK0NBQStDLENBQUM7QUFDbEQsTUFBTSxDQUFDLE1BQU0sMkJBQTJCLEdBQUcsa0NBQWtDLENBQUM7QUFDOUUsTUFBTSxDQUFDLE1BQU0sc0JBQXNCLEdBQ2pDLDJDQUEyQyxDQUFDO0FBQzlDLE1BQU0sQ0FBQyxNQUFNLDRCQUE0QixHQUFHLHdCQUF3QixDQUFDO0FBQ3JFLE1BQU0sQ0FBQyxNQUFNLGFBQWEsR0FBRyw0QkFBNEIsQ0FBQztBQUMxRCxNQUFNLENBQUMsTUFBTSxXQUFXLEdBQUcsMEJBQTBCLENBQUM7QUFDdEQsTUFBTSxDQUFDLE1BQU0sZ0JBQWdCLEdBQUcsMkJBQTJCLENBQUMifQ==

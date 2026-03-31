@@ -2,6 +2,8 @@ import { parseType, PRIMITIVE, KEYPATH } from "@ribajs/utils";
 import { Observer } from "./observer.js";
 import type {
   FormatterObservers,
+  FormatterContext,
+  FormatterEventTarget,
   eventHandlerFunction,
   ObserverSyncCallback,
   Bindable,
@@ -13,9 +15,10 @@ import { getInputValue } from "@ribajs/utils/src/dom.js";
 /**
  * A single binding between a model attribute and a DOM element.
  */
-export abstract class Binder<T = any, E = HTMLUnknownElement>
-  implements Bindable<E>
-{
+export abstract class Binder<
+  T = any,
+  E = HTMLUnknownElement,
+> implements Bindable<E> {
   /**
    * The name of the binder to access the binder by
    */
@@ -77,6 +80,9 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
   public type: string | null;
   public formatters: string[] | null;
   public formatterObservers: FormatterObservers = {};
+  protected formatterCleanups: Record<string, () => void> = {};
+  protected isBindingActive = false;
+  protected formatterInvalidateScheduled = false;
   public keypath?: string;
 
   /**
@@ -199,6 +205,52 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
       });
   }
 
+  protected createFormatterContext(
+    formatterId: string,
+    formatterIndex: number,
+  ): FormatterContext {
+    const scopePrefix = `${formatterId}:${formatterIndex}`;
+
+    const replaceCleanup = (key: string, cleanup: () => void) => {
+      const prev = this.formatterCleanups[key];
+      if (prev) {
+        prev();
+      }
+      this.formatterCleanups[key] = cleanup;
+    };
+
+    return {
+      invalidate: () => {
+        if (!this.isBindingActive || this.formatterInvalidateScheduled) {
+          return;
+        }
+        this.formatterInvalidateScheduled = true;
+        queueMicrotask(() => {
+          this.formatterInvalidateScheduled = false;
+          if (this.isBindingActive) {
+            this.sync();
+          }
+        });
+      },
+      addCleanup: (cleanup: () => void, key = "default") => {
+        const fullKey = `${scopePrefix}:${key}`;
+        replaceCleanup(fullKey, cleanup);
+      },
+      on: (
+        target: FormatterEventTarget,
+        eventName: string,
+        callback: (...args: any[]) => void,
+        key = `${eventName}-subscription`,
+      ) => {
+        target.on(eventName, callback);
+        const fullKey = `${scopePrefix}:${key}`;
+        replaceCleanup(fullKey, () => {
+          target.off(eventName, callback);
+        });
+      },
+    };
+  }
+
   /**
    * Applies all the current formatters to the supplied value and returns the
    * formatted value.
@@ -257,10 +309,18 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
         }
 
         const processedArgs = this.parseFormatterArguments(args, index);
+        const context = this.createFormatterContext(id, index);
 
         // get formatter read funcion
         if (formatter && typeof formatter.read === "function") {
-          result = formatter.read.apply(this.model, [result, ...processedArgs]);
+          const shouldPassContext =
+            formatter.read.length > 1 + processedArgs.length;
+          result = formatter.read.apply(
+            this.model,
+            shouldPassContext
+              ? [result, ...processedArgs, context]
+              : [result, ...processedArgs],
+          );
         }
 
         // If result is a promise, and this is not the last formatter in the chain
@@ -375,9 +435,17 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
 
           const formatter = this.view.options.formatters[id];
           const processedArgs = this.parseFormatterArguments(args, index);
+          const context = this.createFormatterContext(id, index);
 
           if (formatter && typeof formatter.publish === "function") {
-            result = formatter.publish(result, ...processedArgs);
+            const shouldPassContext =
+              formatter.publish.length > 1 + processedArgs.length;
+            result = formatter.publish.apply(
+              this.model,
+              shouldPassContext
+                ? [result, ...processedArgs, context]
+                : [result, ...processedArgs],
+            );
           }
           return result;
         },
@@ -394,6 +462,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
    * to the model.
    */
   public _bind() {
+    this.isBindingActive = true;
     this.parseTarget();
 
     if (this.bind) {
@@ -412,6 +481,7 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
    * Unsubscribes from the model and the element.
    */
   public _unbind() {
+    this.isBindingActive = false;
     if (this.unbind) {
       this.unbind(this.el);
     }
@@ -429,6 +499,11 @@ export abstract class Binder<T = any, E = HTMLUnknownElement>
     });
 
     this.formatterObservers = {};
+
+    Object.keys(this.formatterCleanups).forEach((key) => {
+      this.formatterCleanups[key]();
+      delete this.formatterCleanups[key];
+    });
   }
 
   /**

@@ -17,8 +17,8 @@ jobs:
         run: |
           yarn --version
           yarn install
-      - name: Lint source files
+      - name: Format source files
         run: |
-          yarn run lint
+          yarn run format
         env:
           NODE_OPTIONS: '--max-old-space-size=4096'

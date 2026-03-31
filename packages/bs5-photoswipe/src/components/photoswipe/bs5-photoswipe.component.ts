@@ -619,9 +619,8 @@ export class PhotoswipeComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return (this as HTMLElement).innerHTML;
     } else {
-      const { default: template } = await import(
-        "./bs5-photoswipe.component.html?raw"
-      );
+      const { default: template } =
+        await import("./bs5-photoswipe.component.html?raw");
       return template;
     }
   }

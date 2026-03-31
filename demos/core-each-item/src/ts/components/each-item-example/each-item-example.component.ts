@@ -68,9 +68,8 @@ export class EachItemExampleComponent extends Component {
   }
 
   protected async template() {
-    const { default: template } = await import(
-      "./each-item-example.component.html?raw"
-    );
+    const { default: template } =
+      await import("./each-item-example.component.html?raw");
     return template;
   }
 }

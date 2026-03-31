@@ -158,6 +158,77 @@ describe("riba.Binder", () => {
         `and 'others formatters' with 'pi||pes'`,
       ]);
     });
+
+    it("cleans formatter subscriptions on unbind", () => {
+      let cleanupCalls = 0;
+      const cleanupFormatter = {
+        name: "cleanup-test",
+        read: (value: string, context: any) => {
+          context?.addCleanup(() => {
+            cleanupCalls++;
+          }, "subscription");
+          return value;
+        },
+      } as Formatter;
+      riba.module.formatter.register(cleanupFormatter);
+
+      const cleanupEl = document.createElement("div");
+      cleanupEl.setAttribute("data-text", "obj.name | cleanup-test");
+      const cleanupView = riba.bind(cleanupEl, { obj: { name: "test" } });
+      const cleanupBinding = cleanupView.bindings[0] as TextBinder;
+
+      // Re-sync replaces the old cleanup and calls it once.
+      cleanupBinding.sync();
+      expect(cleanupCalls).toBe(1);
+
+      cleanupBinding._unbind();
+      expect(cleanupCalls).toBe(2);
+    });
+
+    it("supports formatter-triggered invalidation without model changes", async () => {
+      let suffix = "a";
+      const listeners = new Set<() => void>();
+      const emitter = {
+        on(_eventName: string, callback: () => void) {
+          listeners.add(callback);
+        },
+        off(_eventName: string, callback: () => void) {
+          listeners.delete(callback);
+        },
+        emit() {
+          listeners.forEach((listener) => listener());
+        },
+      };
+
+      const reactiveFormatter = {
+        name: "reactive-test",
+        read: (value: string, context: any) => {
+          if (context) {
+            context.on(
+              emitter,
+              "changed",
+              () => context.invalidate(),
+              "changed-subscription",
+            );
+          }
+          return `${value}-${suffix}`;
+        },
+      } as Formatter;
+      riba.module.formatter.register(reactiveFormatter);
+
+      const reactiveEl = document.createElement("div");
+      reactiveEl.setAttribute("data-text", "obj.name | reactive-test");
+      const reactiveView = riba.bind(reactiveEl, { obj: { name: "test" } });
+      expect(reactiveEl.textContent).toBe("test-a");
+
+      suffix = "b";
+      emitter.emit();
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      expect(reactiveEl.textContent).toBe("test-b");
+
+      reactiveView.unbind();
+      expect(listeners.size).toBe(0);
+    });
   });
 
   describe("bind()", () => {

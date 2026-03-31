@@ -29,9 +29,8 @@ export class Bs5ThemeExampleComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./bs5-theme-example.component.html?raw"
-      );
+      const { default: template } =
+        await import("./bs5-theme-example.component.html?raw");
       return template;
     }
   }

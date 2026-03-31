@@ -31,9 +31,8 @@ export class I18nStaticExampleComponent extends Component {
   }
 
   protected async template() {
-    const { default: template } = await import(
-      "./i18n-static-example.component.html?raw"
-    );
+    const { default: template } =
+      await import("./i18n-static-example.component.html?raw");
     return template;
   }
 }

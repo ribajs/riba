@@ -1,5 +1,5 @@
 
-This formatter resolves a translation key path, but it only reacts indirectly to language changes (via internal `ready` / `changed` subscriptions). Prefer the **`i18n-*` binders** (`rv-i18n-text`, `rv-i18n-html`, …) for elements that should update when the language changes.
+This formatter resolves a translation key path and now re-renders when the active language changes. For element content/attributes, the **`i18n-*` binders** (`rv-i18n-text`, `rv-i18n-html`, …) are still recommended because they are more explicit and support rich translation templates directly.
 
 In **mustache** text nodes, Riba’s default delimiters are a **single** `{` and `}` (see `Riba.templateDelimiters`). That differs from Liquid/Shopify, which use `{{` and `}}` — do not copy that syntax here.
 

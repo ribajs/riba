@@ -29,9 +29,8 @@ export class Bs5ToggleButtonSidebarExampleComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./bs5-toggle-button-sidebar-example.component.html?raw"
-      );
+      const { default: template } =
+        await import("./bs5-toggle-button-sidebar-example.component.html?raw");
       return template;
     }
   }

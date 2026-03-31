@@ -59,9 +59,8 @@ export class AccessibilityGamepadExampleComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./accessibility-keyboard-example.component.pug"
-      );
+      const { default: template } =
+        await import("./accessibility-keyboard-example.component.pug");
       return template(this.scope);
     }
   }

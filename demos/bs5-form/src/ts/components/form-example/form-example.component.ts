@@ -29,9 +29,8 @@ export class FormExampleComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./form-example.component.html?raw"
-      );
+      const { default: template } =
+        await import("./form-example.component.html?raw");
       return template;
     }
   }
