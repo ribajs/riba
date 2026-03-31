@@ -8,7 +8,7 @@ Greatest common divisor (GCD) useful to calculate a ratio.
   <div rv-assign-gcd="width | gcd height">
     Dimensions: {width} x {height}<br />
     Gcd: {gcd}<br />
-    Aspect: <span rv-text="width | dividedBy gcd"></span>:<span rv-text="height | dividedBy gcd"></span>
+    Aspect: <span rv-text="width | divided-by gcd"></span>:<span rv-text="height | divided-by gcd"></span>
   </div>
 </div>
 </template>

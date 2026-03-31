@@ -5,7 +5,7 @@ Returns true if value index is the last index of the array and returns false if 
 <rv-example-tabs class="pt-3" handle="example">
 <template type="single-html-file">
 <ul rv-assign-sweets="['cracker', 'muffin', 'cake']">
-  <li rv-each-sweetness="sweets" rv-class-font-weight-bold="sweets | isLast %sweetness%">{sweetness}</li>
+  <li rv-each-sweetness="sweets" rv-class-font-weight-bold="sweets | is-last %sweetness%">{sweetness}</li>
 </ul>
 </template>
 </rv-example-tabs>

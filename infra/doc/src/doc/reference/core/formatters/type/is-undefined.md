@@ -4,13 +4,13 @@ Checks if value is undefined
 <template>
 <rv-example-tabs class="pt-3" handle="is-boolean-formatter">
 <template type="single-html-file">
-<div rv-text="[] | isUndefined"></div>
-<div rv-text="{} | isUndefined"></div>
-<div rv-text="'abc' | isUndefined"></div>
-<div rv-text="true | isUndefined"></div>
-<div rv-text="1 | isUndefined"></div>
-<div rv-text="0 | isUndefined"></div>
-<div rv-text="undefined | isUndefined"></div>
+<div rv-text="[] | is-undefined"></div>
+<div rv-text="{} | is-undefined"></div>
+<div rv-text="'abc' | is-undefined"></div>
+<div rv-text="true | is-undefined"></div>
+<div rv-text="1 | is-undefined"></div>
+<div rv-text="0 | is-undefined"></div>
+<div rv-text="undefined | is-undefined"></div>
 </template>
 </rv-example-tabs>
 </template>

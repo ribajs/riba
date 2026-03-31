@@ -4,8 +4,8 @@ Parses a value to string
 <template>
 <rv-example-tabs class="pt-3" handle="json-formatter">
 <template type="single-html-file">
-<div rv-text="1000 | toString | isString"></div>
-<div rv-text="1000 | isString"></div>
+<div rv-text="1000 | to-string | is-string"></div>
+<div rv-text="1000 | is-string"></div>
 </template>
 </rv-example-tabs>
 </template>

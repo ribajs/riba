@@ -1,4 +1,4 @@
-Use this component to switch to another available language, this component does not have its own template, so you neet to set this as child elements of this component by yourself.
+Use this component to switch to another available language. It does not ship with a template: add your own markup as children (e.g. buttons bound to `langcodes`).
 
 #### Types
 
@@ -13,14 +13,14 @@ export interface Langcode {
 
 | Name                             | Arguments          |  Description                                                           |
 | -------------------------------- |:------------------:| ---------------------------------------------------------------------- |
-| switch                           | langcode: Langcode | Triggeres the toggle event                                             |
-| toggle                           |                    | Toggle to another language (only useful for two supported languages)   |
+| switch                           | langcode: Langcode | Activates the given language (`Langcode.code`) if it is not already active |
+| toggle                           |                    | Switches to the other language (only useful when exactly two languages exist) |
 
 #### Template properties
 
 | Name                             | Type          |  Description                                                                               |
 | -------------------------------- |:-------------:|------------------------------------------------------------------------------------------- |
-| langcodes                        | `Langcode[]`  | Array of founded langcodes from your locales object                                        |
+| langcodes                        | `Langcode[]`  | Language codes from your locales object (with `active` set for the current one)          |
 | ready                            | `boolean`     | Is `true` if the locales are initialized                                                   |
 
 <rv-bind-content class="pt-3">

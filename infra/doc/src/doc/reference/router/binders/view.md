@@ -29,7 +29,7 @@ The binder attribute value accepts an object or json string with the following a
             <p>
               This is the content of the element with the rv-view binder.
             </p>
-            <button rv-route="{'url': '/pages/router-example-view-page', 'viewId': 'example-view'}" class="btn btn-danger m-3">Click to load a page</button>
+            <button rv-route="{'url': 'iconset.html', 'viewId': 'example-view'}" class="btn btn-danger m-3">Click to load a page</button>
           </div>
         </div>
       </template>

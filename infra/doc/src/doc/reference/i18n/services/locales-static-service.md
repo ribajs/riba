@@ -1,9 +1,11 @@
 The LocalesStaticService can be used to integrate and define the translations directly in the source code:
 
+The root object must use **language codes** (`de`, `en`, …) as keys. Do not wrap translations in an extra property such as `locales`; otherwise lookups like `examples.newsletter.title` resolve to `en.locales.examples…` and fail.
+
 ```typescript
 import { LocalesStaticService } from '@ribajs/i18n';
 
-// Your static locales
+// Your static locales — top-level keys are language codes
 const locales = {
   de: {
     examples: {

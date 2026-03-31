@@ -1,17 +1,24 @@
-To subscribe events from the i18n module create a new instance of the `EventDispatcher` with `'i18n'` as his namespace:
+Events are emitted on the **`LocalesService` instance** you pass to `i18nModule.init({ localesService })`, via `localesService.event` (an `EventDispatcher` with namespace `'i18n'`). You can subscribe with the same namespace:
 
 ```typescript
-import { EventDispatcher } from '@ribajs/core';
-const event = new EventDispatcher('i18n');
-event.on('changed', () => {
-  console.debug('The language was changed');
+import { EventDispatcher } from "@ribajs/events";
+
+const event = new EventDispatcher("i18n");
+event.on("changed", (langcode: string, initial: boolean) => {
+  console.debug("The language was changed", langcode, initial);
 });
-event.on('ready', () => {
-  console.debug('All locales are loaded and initialized and the module is ready to use');
+event.on("ready", (currentLangcode: string, translationNeeded: boolean) => {
+  console.debug(
+    "Locales are initialized; module is ready",
+    currentLangcode,
+    translationNeeded,
+  );
 });
 ```
 
-| Name                | Arguments                             | Description                                                                              |
-| ------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------- |
-| changed             | `langcode`, `initial`                 | The language was changed                                                                 |
-| ready               | `currentLangcode`, `translationNeeded`| All locales are loaded and initialized and the module is ready to use.                   |
+Alternatively, use `localesService.event.on(...)` on your registered service (same dispatcher instance as `new EventDispatcher('i18n')`).
+
+| Name    | Arguments                              | Description                                                                 |
+| ------- | -------------------------------------- | --------------------------------------------------------------------------- |
+| changed | `langcode`, `initial`                  | The active language was changed.                                            |
+| ready   | `currentLangcode`, `translationNeeded` | Locales finished loading and initialization; safe to translate.             |

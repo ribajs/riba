@@ -30,7 +30,7 @@ If the type is not known, the translation is instead set as an attribute with th
 
 <rv-bind-content class="pt-3">
   <template>
-    <rv-example-tabs class="pt-3" handle="i18n-html">
+    <rv-example-tabs class="pt-3" handle="i18n-value">
       <template type="single-html-file">
         <input type="text" rv-i18n-value="'examples.newsletter.input_value'" />
       </template>
@@ -42,7 +42,7 @@ If the type is not known, the translation is instead set as an attribute with th
 
 <rv-bind-content class="pt-3">
   <template>
-    <rv-example-tabs class="pt-3" handle="i18n-html">
+    <rv-example-tabs class="pt-3" handle="i18n-placeholder">
       <template type="single-html-file">
         <input type="text" rv-i18n-placeholder="'examples.newsletter.placeholder_last_name'" />
       </template>

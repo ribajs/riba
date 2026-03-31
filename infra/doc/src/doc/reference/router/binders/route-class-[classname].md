@@ -4,8 +4,8 @@ Tests the url with the current location, if the url is equal to the current loca
   <template>
     <rv-example-tabs class="pt-3" handle="route-class-classname">
       <template type="single-html-file">
-        <a href="/pages/router" class="nav-link" rv-route-class-active="'/pages/router'">Router</a>
-        <a href="/pages/core" class="nav-link" rv-route-class-active="'/pages/core'">Core</a>
+        <a href="router.html" class="nav-link" rv-route-class-active="'router.html'">Router</a>
+        <a href="core.html" class="nav-link" rv-route-class-active="'core.html'">Core</a>
       </template>
     </rv-example-tabs>
   </template>

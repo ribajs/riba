@@ -39,7 +39,7 @@ Props: `static tagName` (kebab-case) | `static observedAttributes` | `scope` (vi
 
 ## Binders
 
-Syntax: `rv-[binder]="keypath | formatter | formatter('arg')"` + `{{ expr }}` mustache in text nodes
+Syntax: `rv-[binder]="keypath | formatter | formatter('arg')"` + `{ expr }` mustache in text nodes (default delimiters `{` / `}`, not Liquid `{{` / `}}`)
 Priority: higher=first | Block binders (rv-if,rv-each-*) prevent child parsing | Star binders: wildcard params
 
 rv-text|textContent | rv-html|innerHTML | rv-value|two-way input | rv-if|conditional block | rv-show|display toggle

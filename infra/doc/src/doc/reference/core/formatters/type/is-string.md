@@ -4,13 +4,13 @@ Checks if value is a string
 <template>
 <rv-example-tabs class="pt-3" handle="is-number-formatter">
 <template type="single-html-file">
-<div rv-text="[] | isString"></div>
-<div rv-text="{} | isString"></div>
-<div rv-text="'abc' | isString"></div>
-<div rv-text="true | isString"></div>
-<div rv-text="1 | isString"></div>
-<div rv-text="0 | isString"></div>
-<div rv-text="undefined | isString"></div>
+<div rv-text="[] | is-string"></div>
+<div rv-text="{} | is-string"></div>
+<div rv-text="'abc' | is-string"></div>
+<div rv-text="true | is-string"></div>
+<div rv-text="1 | is-string"></div>
+<div rv-text="0 | is-string"></div>
+<div rv-text="undefined | is-string"></div>
 </template>
 </rv-example-tabs>
 </template>

@@ -73,20 +73,20 @@
 
 <h4>asDays</h4>
 <p>
-    <code>{ exampleDuration | asDays | numberFormat } days</code><br />
-    <span>{ exampleDuration | asDays | numberFormat } days</span>
+    <code>{ exampleDuration | asDays | number-format } days</code><br />
+    <span>{ exampleDuration | asDays | number-format } days</span>
 </p>
 
 <h4>asMonths</h4>
 <p>
-    <code>{ exampleDuration | asMonths | numberFormat } months</code><br />
-    <span>{ exampleDuration | asMonths | numberFormat } months</span>
+    <code>{ exampleDuration | asMonths | number-format } months</code><br />
+    <span>{ exampleDuration | asMonths | number-format } months</span>
 </p>
 
 <h4>asYears</h4>
 <p>
-    <code>{ exampleDuration | asYears | numberFormat } years</code><br />
-    <span>{ exampleDuration | asYears | numberFormat } years</span>
+    <code>{ exampleDuration | asYears | number-format } years</code><br />
+    <span>{ exampleDuration | asYears | number-format } years</span>
 </p>
 
 <h4>years, months, weeks, days, hours, minutes, seconds and milliseconds</h4>
@@ -144,23 +144,23 @@
 <moment-timer rv-time="futureDate | toISOString" countdown-years="true">
     <div class="time-container" rv-if="countdownRunning">
         <div class="time-block" rv-if="countdownYears">
-            <span class="time">{ remainingYears | numberFormat 0 "," "" 2 }</span>
+            <span class="time">{ remainingYears | number-format 0 "," "" 2 }</span>
             <span class="legend">Years</span>
         </div>
         <div class="time-block" rv-if="countdownDays">
-            <span class="time">{ remainingDays | numberFormat 0 "," "" 2 }</span>
+            <span class="time">{ remainingDays | number-format 0 "," "" 2 }</span>
             <span class="legend">Days</span>
         </div>
         <div class="time-block" rv-if="countdownHours">
-            <span class="time">{ remainingHours | numberFormat 0 "," "" 2 }</span>
+            <span class="time">{ remainingHours | number-format 0 "," "" 2 }</span>
             <span class="legend">Hours</span>
         </div>
         <div class="time-block" rv-if="countdownMinutes">
-            <span class="time">{ remainingMinutes | numberFormat 0 "," "" 2 }</span>
+            <span class="time">{ remainingMinutes | number-format 0 "," "" 2 }</span>
             <span class="legend">Minutes</span>
         </div>
         <div class="time-block" rv-if="countdownSeconds">
-            <span class="time">{ remainingSeconds | numberFormat 0 "," "" 2 }</span>
+            <span class="time">{ remainingSeconds | number-format 0 "," "" 2 }</span>
             <span class="legend">Seconds</span>
         </div>
     </div>

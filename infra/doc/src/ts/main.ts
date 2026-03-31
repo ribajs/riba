@@ -9,6 +9,7 @@ ready(async () => {
   const { bs5Module } = await import("@ribajs/bs5");
   const { EventDispatcher } = await import("@ribajs/events");
   const { DocModule } = await import("./doc.module.js");
+  const { docI18nLocales } = await import("./doc-i18n-locales.js");
 
   const Prism = await import("prismjs");
   await import("prismjs/components/prism-javascript");
@@ -33,12 +34,20 @@ ready(async () => {
   const dispatcher = new EventDispatcher("main");
   const model: any = {};
 
+  const isIndexPath = (path: string) =>
+    path === "/" || path.endsWith("/index.html") || path.endsWith("/index");
+
+  const hideSidebarOnIndexPath = () => {
+    const sidebar = document.getElementById("main-sidebar") as any;
+    sidebar?.hide?.();
+  };
+
   riba.module.register(coreModule.init());
   riba.module.register(extrasModule.init());
   riba.module.register(routerModule.init());
   riba.module.register(
     i18nModule.init({
-      localesService: new LocalesStaticService({ locales: {} }),
+      localesService: new LocalesStaticService(docI18nLocales),
     }),
   );
   riba.module.register(bs5Module.init());
@@ -75,10 +84,7 @@ ready(async () => {
       isFirstPageLoad: boolean,
     ) => {
       const path = window.location.pathname;
-      const isIndex =
-        path === "/" ||
-        path.endsWith("/index.html") ||
-        path.endsWith("/index");
+      const isIndex = isIndexPath(path);
 
       if (!isFirstPageLoad) {
         // Sync body id so CSS selectors like body:not(#index) work
@@ -92,8 +98,7 @@ ready(async () => {
       // sidebar programmatically so it never auto-shows on the index page
       // regardless of deployment path.
       if (isIndex) {
-        const sidebar = document.getElementById("main-sidebar") as any;
-        sidebar?.hide?.();
+        hideSidebarOnIndexPath();
       }
 
       Prism.highlightAll();
@@ -104,4 +109,12 @@ ready(async () => {
   );
 
   riba.bind(document.body, model);
+
+  // Ensure sidebar is hidden on first load for index URLs (e.g. /index.html),
+  // even if no router page-change event has fired yet.
+  if (isIndexPath(window.location.pathname)) {
+    requestAnimationFrame(() => {
+      hideSidebarOnIndexPath();
+    });
+  }
 });

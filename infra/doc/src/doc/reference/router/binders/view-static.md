@@ -12,7 +12,7 @@ Loads the content of the url with pjax and replaces this with the inner html of 
   <template>
     <rv-example-tabs class="pt-3" handle="view-static-binder">
       <template type="single-html-file">
-        <div rv-view-static="{'url': '/pages/iconset'}" class="m-3"></div>
+        <div rv-view-static="{'url': 'iconset.html'}" class="m-3"></div>
       </template>
     </rv-example-tabs>
   </template>

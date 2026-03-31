@@ -1,52 +1,10 @@
-The `ALocalesService` is a abstract class extended from all locales services, a static LocalesService could look like this:
+The abstract class **`LocalesService`** (`packages/i18n/src/types/locales-service.ts`) is the base for all locale backends. Implementations included in `@ribajs/i18n`:
 
-```typescript
-import { ALocalesService } from '@ribajs/i18n';
+| Class                 | Purpose                                      |
+| --------------------- | -------------------------------------------- |
+| `LocalesStaticService`  | In-memory object (`de` / `en` / … as keys) |
+| `LocalesRestService`    | Load JSON from a URL via `HttpService`      |
 
-export class MyStaticLocalesService extends ALocalesService {
+To implement your own backend, extend `LocalesService` and implement `protected async getAll(): Promise<any>` so it returns the same shape as the static service (top-level keys = language codes). Call `super(doNotRetranslateDefaultLanguage, showMissingTranslation, autoDetectLangcode)` with the three boolean flags expected by the base constructor, then invoke the initialization flow (see `LocalesStaticService` / `LocalesRestService` in the source tree for full patterns).
 
-  public static instances: {
-    [id: string]: MyStaticLocalesService;
-  } = {};
-
-  public static getInstance(id: string = 'main') {
-    return MyStaticLocalesService.instances[id];
-  }
-
-  /**
-   * The current setted langcode
-   */
-  protected currentLangcode?: string;
-
-  /**
-   * The default theme langcode before any language was choosed
-   */
-  protected initalLangcode?: string;
-
-  constructor(staticLocales: any, protected id?: string, doNotRetranslateDefaultLanguage: boolean = false, showMissingTranslation: boolean = false) {
-    super(doNotRetranslateDefaultLanguage, showMissingTranslation);
-    if (!id) {
-      id = 'main';
-    }
-
-    // Sets the static translations
-    this.locales = staticLocales;
-
-    // Return the singleton if available
-    if (MyStaticLocalesService.instances[id]) {
-      return MyStaticLocalesService.instances[id];
-    }
-
-    this.init();
-    MyStaticLocalesService.instances[id] = this;
-  }
-
-  /**
-   * Get object with all translations
-   * @param themeID
-   */
-  protected async getAll(themeID?: number) {
-    return this.locales;
-  }
-}
-```
+The former name **ALocalesService** is outdated; the exported abstract type is **`LocalesService`**.

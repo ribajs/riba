@@ -5,8 +5,8 @@ This binder is like a normal link in barba.js but allows a bit more control.
   <template>
     <rv-example-tabs class="pt-3" handle="route-binder">
       <template type="single-html-file">
-        <a rv-route="'/pages/iconset'" href="/pages/iconset" class="m-3">Click to open Iconset</a>
-        <button rv-route="'/pages/guide'" class="btn btn-primary m-3">Click to open Guide</button>
+        <a rv-route="'iconset.html'" href="iconset.html" class="m-3">Click to open Iconset</a>
+        <button rv-route="'guide.html'" class="btn btn-primary m-3">Click to open Guide</button>
       </template>
     </rv-example-tabs>
   </template>
@@ -24,9 +24,9 @@ Instead of the URL you can also pass some options to the binder as a object (by 
   <template>
     <rv-example-tabs class="pt-3" handle="route-binder">
       <template type="single-html-file">
-        <a rv-route="{'viewId': 'example-view', 'removeAfterActivation': false}" href="/pages/router-example-view-page" class="btn btn-danger m-3">Click to load a page insite of the view binder example below</a>
+        <a rv-route="{'viewId': 'example-view', 'removeAfterActivation': false}" href="iconset.html" class="btn btn-danger m-3">Click to load a page insite of the view binder example below</a>
         <p class="m-3"><em>Before you click on this button, make sure that the preview of the view binder example below is open.</em></p>
-        <a rv-route="" href="/pages/router-example-view-page" target="_blank" class="btn btn-success m-3">Click to open the page in a new tab.</a>
+        <a rv-route="" href="iconset.html" target="_blank" class="btn btn-success m-3">Click to open the page in a new tab.</a>
       </template>
     </rv-example-tabs>
   </template>
