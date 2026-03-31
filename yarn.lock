@@ -2439,7 +2439,6 @@ __metadata:
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/types": "workspace:^"
     "@ribajs/utils": "workspace:^"
-    "@types/core-js": "npm:^2.5.8"
     "@types/jest": "npm:^30.0.0"
     "@types/node": "npm:^24.12.0"
     eslint: "npm:^10.1.0"
@@ -3558,7 +3557,6 @@ __metadata:
   resolution: "@ribajs/eslint-config@workspace:infra/eslint-config"
   dependencies:
     "@typescript-eslint/eslint-plugin": "npm:^8.57.2"
-    "@typescript-eslint/experimental-utils": "npm:^5.62.0"
     "@typescript-eslint/parser": "npm:^8.57.2"
     eslint: "npm:^10.1.0"
     eslint-config-prettier: "npm:^10.1.8"
@@ -4758,13 +4756,6 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10/7eb1bc5342a9604facd57598a6c62621e244822442976c443efb84ff745246b10d06e8b309b6e80130026a396f19bf6793b7cecd7380169f369dac3bfc46fb99
-  languageName: node
-  linkType: hard
-
-"@types/core-js@npm:^2.5.8":
-  version: 2.5.8
-  resolution: "@types/core-js@npm:2.5.8"
-  checksum: 10/58c4b86102b13b778d3631d38913c788ef7f688d99fbd741f6241a9cedc7e986e670011bdccd58b32e28e97b9c0fa6fffedef6ba0f670a005b321788a5a01a65
   languageName: node
   linkType: hard
 
