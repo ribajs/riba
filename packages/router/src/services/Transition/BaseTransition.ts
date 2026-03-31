@@ -50,7 +50,28 @@ export abstract class BaseTransition implements Transition {
     }
 
     if (this.action === "replace") {
-      this.oldContainer.remove();
+      /**
+       * `router-view` may have multiple direct children (e.g. layout slots). PJAX still tracks a
+       * single "container" node for parsing, but the new page is appended; removing only
+       * `oldContainer` leaves stale siblings. Clear every sibling of the new container inside
+       * the shared parent so the outlet matches a full page swap.
+       */
+      if (
+        this.newContainer &&
+        this.newContainer.parentNode &&
+        this.oldContainer.parentNode === this.newContainer.parentNode
+      ) {
+        const parent = this.newContainer.parentElement;
+        if (parent) {
+          for (const node of Array.from(parent.childNodes)) {
+            if (node !== this.newContainer) {
+              node.remove();
+            }
+          }
+        }
+      } else {
+        this.oldContainer.remove();
+      }
     }
 
     if (!this.newContainer) {

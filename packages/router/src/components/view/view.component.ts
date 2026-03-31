@@ -73,6 +73,9 @@ export class RouterViewComponent extends Component {
   }
 
   protected getContainerSelector() {
+    if (this.scope.containerSelector) {
+      return this.scope.containerSelector;
+    }
     if (this.scope.id === "main") {
       return `${RouterViewComponent.tagName} > *:first-child`;
     } else {
