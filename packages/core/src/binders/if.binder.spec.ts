@@ -114,6 +114,31 @@ describe("if", () => {
     expect(el.contains(nestedEl)).toBeFalsy();
   });
 
+  it("toggles rapidly without losing state", () => {
+    riba.bind(fragment, model);
+
+    model.data.count = 10;
+    model.data.show = false;
+    model.data.show = true;
+    model.data.show = false;
+    model.data.show = true;
+
+    expect(fragment.childNodes).toHaveLength(2);
+    expect((fragment.childNodes[1] as Element).innerHTML).toEqual("10");
+  });
+
+  it("binds child elements when condition becomes true", () => {
+    model.data.show = false;
+    riba.bind(fragment, model);
+
+    expect(fragment.childNodes).toHaveLength(1); // only comment
+
+    model.data.show = true;
+    model.data.count = 42;
+    expect(fragment.childNodes).toHaveLength(2);
+    expect((fragment.childNodes[1] as Element).innerHTML).toEqual("42");
+  });
+
   it("does not throw when root scope is reset", () => {
     el.setAttribute("rv-if", "scope.error.errors");
     el.innerHTML = "<div>{scope.error.errors.email}</div>";

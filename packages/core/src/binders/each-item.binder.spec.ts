@@ -124,6 +124,49 @@ describe("each-*", () => {
     expect((fragment.childNodes[4] as any)._key).toBe(3);
   });
 
+  it("handles replacing the entire array", () => {
+    riba.bind(fragment, model);
+    expect(fragment.childNodes.length).toBe(4); // 3 items + comment
+
+    model.items = [{ val: "a" }, { val: "b" }];
+    expect(fragment.childNodes.length).toBe(3); // 2 items + comment
+    expect(fragment.childNodes[1].textContent).toBe("a");
+    expect(fragment.childNodes[2].textContent).toBe("b");
+  });
+
+  it("handles setting to empty array", () => {
+    riba.bind(fragment, model);
+    expect(fragment.childNodes.length).toBe(4);
+
+    model.items = [];
+    expect(fragment.childNodes.length).toBe(1); // only comment placeholder
+  });
+
+  it("handles going from empty to populated", () => {
+    model.items = [];
+    riba.bind(fragment, model);
+    expect(fragment.childNodes.length).toBe(1);
+
+    model.items.push({ val: "new" });
+    expect(fragment.childNodes.length).toBe(2);
+    expect(fragment.childNodes[1].textContent).toBe("new");
+  });
+
+  it("lets you sort items", () => {
+    riba.bind(fragment, model);
+    model.items.sort((a: any, b: any) => b.val - a.val);
+    expect(fragment.childNodes[1].textContent).toBe("2");
+    expect(fragment.childNodes[2].textContent).toBe("1");
+    expect(fragment.childNodes[3].textContent).toBe("0");
+  });
+
+  it("lets you reverse items", () => {
+    riba.bind(fragment, model);
+    model.items.reverse();
+    expect(fragment.childNodes[1].textContent).toBe("2");
+    expect(fragment.childNodes[3].textContent).toBe("0");
+  });
+
   it("lets you push an item after unbind/bind", () => {
     const view = riba.bind(fragment, model);
     const originalLength = model.items.length;

@@ -33,6 +33,14 @@ export default defineConfig({
         baseURL: "http://localhost:5181",
       },
     },
+    {
+      name: "router-basic",
+      testMatch: "router-basic/**/*.spec.ts",
+      use: {
+        ...devices["Desktop Chrome"],
+        baseURL: "http://localhost:5184",
+      },
+    },
   ],
   webServer: [
     {
@@ -46,6 +54,13 @@ export default defineConfig({
       command: "yarn vite --port 5182 --strictPort",
       cwd: "demos/router-svg-transition",
       port: 5182,
+      reuseExistingServer: true,
+      timeout: 60_000,
+    },
+    {
+      command: "yarn vite --port 5184 --strictPort",
+      cwd: "demos/router-view",
+      port: 5184,
       reuseExistingServer: true,
       timeout: 60_000,
     },
