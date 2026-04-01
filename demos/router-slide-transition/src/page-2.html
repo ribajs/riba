@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Router Slide Transition - Page 2</title>
+    <link rel="stylesheet" href="./scss/main.scss" />
+  </head>
+  <body>
+    <router-view>
+      <main class="stage" data-namespace="page-2">
+        <section class="slide-page">
+          <h1>Page 2</h1>
+          <p>Each page is server-rendered HTML and PJAX-swapped in router-view.</p>
+          <div class="slide-controls">
+            <a href="./page-1.html" data-direction="prev">Prev</a>
+            <a href="./page-3.html" data-direction="next">Next</a>
+          </div>
+        </section>
+      </main>
+    </router-view>
+    <script type="module" src="./ts/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+router-view {
+  display: block;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+router-view > .stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+}
+
+.stage {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.slide-page {
+  width: min(960px, 92vw);
+  min-height: 60vh;
+  border-radius: 1rem;
+  padding: 3rem;
+  background: linear-gradient(130deg, #22253b, #121421);
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.45);
+}
+
+.slide-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.slide-controls a {
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+}
+
+.slide-controls a:hover {
+  border-color: #fff;
+}

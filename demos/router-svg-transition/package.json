@@ -1,0 +1,57 @@
+{
+  "name": "@ribajs/demo-router-svg-transition",
+  "version": "2.0.0-rc.23",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "private": true,
+  "description": "Router SVG transition demo inspired by Barba.js examples",
+  "main": "./src/ts/main.ts",
+  "module": "src/ts/main.ts",
+  "source": "src/ts/main.ts",
+  "exports": {
+    ".": "./src/ts/index.ts",
+    "./scss": "./src/scss/_svg.scss",
+    "./scss/svg": "./src/scss/_svg.scss"
+  },
+  "scripts": {
+    "build": "vite build --mode production",
+    "build:dev": "vite build --mode development",
+    "start": "vite",
+    "start:dev": "vite",
+    "serve": "serve dist",
+    "clear": "rm -rf ./dist",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
+    "check": "tsc --noEmit"
+  },
+  "files": [
+    "src"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@ribajs/eslint-config": "workspace:^",
+    "@ribajs/tsconfig": "workspace:^",
+    "@ribajs/types": "workspace:^",
+    "@ribajs/vite-config": "workspace:^",
+    "@typescript-eslint/eslint-plugin": "^8.57.2",
+    "@typescript-eslint/parser": "^8.57.2",
+    "@yarnpkg/pnpify": "^4.1.6",
+    "eslint": "^10.1.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "postcss-modules": "^6.0.1",
+    "postcss-preset-env": "^11.2.0",
+    "prettier": "^3.8.1",
+    "sass": "^1.98.0",
+    "serve": "^14.2.6",
+    "typescript": "6.0.2",
+    "vite": "^8.0.3"
+  },
+  "dependencies": {
+    "@ribajs/core": "workspace:^",
+    "@ribajs/router": "workspace:^",
+    "animejs": "^4.3.6",
+    "bootstrap": "5.3.8"
+  }
+}

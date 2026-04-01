@@ -1,0 +1,81 @@
+router-view {
+  position: relative;
+}
+
+router-view.is-animating > * {
+  position: absolute;
+  width: 100%;
+  will-change: transform;
+}
+
+.site {
+  position: relative;
+  height: 200vh;
+  overflow: hidden;
+}
+
+[class*="site--"] {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+[class*="site--"][class*="--green"] {
+  color: #a8e6cf;
+  background-color: rgba(#a8e6cf, 0.15);
+}
+
+.site__header,
+.site__main {
+  padding: 1rem;
+}
+
+.main {
+  width: 70%;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+.intro {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.shape-outer {
+  position: relative;
+  z-index: 10;
+  margin-top: -0.5rem;
+  pointer-events: none;
+}
+
+.shape {
+  display: block;
+  transform-origin: 50% 0;
+  fill: #2a2f4d;
+  will-change: transform;
+}
+
+.picture {
+  height: 40vh;
+  background: linear-gradient(135deg, #2a2f4d, #1a1d2e);
+}
+
+.back {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+}
+
+a.link {
+  color: #f7f8fc;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
