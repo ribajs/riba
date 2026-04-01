@@ -8,6 +8,7 @@ export interface Tab {
   content: string;
   type: string;
   active: boolean;
+  standaloneUrl?: string;
 }
 
 export interface Scope extends ScopeBase {
@@ -27,7 +28,7 @@ export class ExampleTabsComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes(): string[] {
-    return ["handle"];
+    return ["handle", "demo-url", "standalone-url"];
   }
 
   public scope: Scope = {
@@ -106,6 +107,42 @@ export class ExampleTabsComponent extends Component {
           type: "realtime-result",
           content: "",
           active: false,
+        });
+      } else if (type === "demo") {
+        const demoUrl =
+          tpl.getAttribute("demo-url") || this.getAttribute("demo-url") || "";
+        const standaloneUrl =
+          tpl.getAttribute("standalone-url") ||
+          this.getAttribute("standalone-url") ||
+          demoUrl;
+        const containerSelector =
+          tpl.getAttribute("container-selector") || "[data-namespace]";
+
+        const fallbackMarkup = `<div rv-view-static="{'url': '${demoUrl}', 'containerSelector': '${containerSelector}'}"></div>`;
+        const sourceCode = this.removeIndentsOfSource(
+          tpl.innerHTML.trim() || fallbackMarkup,
+        );
+
+        this.scope.items.push({
+          title: "Source",
+          handle: "source",
+          type: "source",
+          content: `<pre class="language-html"><code class="language-html">${escapeHtml(sourceCode)}</code></pre>`,
+          active: this.scope.items.length === 0,
+          standaloneUrl,
+        });
+
+        this.scope.items.push({
+          title: title === "demo" ? "Preview" : title,
+          handle: "preview",
+          type: "preview",
+          content:
+            sourceCode +
+            (standaloneUrl
+              ? `<p class="mt-3 mb-0"><a class="btn btn-sm btn-outline-primary" href="${standaloneUrl}" target="_blank" rel="noopener">Open standalone demo</a></p>`
+              : ""),
+          active: false,
+          standaloneUrl,
         });
       } else {
         const handle = this.handleize(title);

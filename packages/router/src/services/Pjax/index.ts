@@ -16,11 +16,26 @@ import {
 
 import { BaseCache } from "@ribajs/cache";
 import { HideShowTransition } from "../Transition/index.js";
-import { Transition, Response, PjaxOptions } from "../../types/index.js";
+import {
+  Transition,
+  Response,
+  PjaxOptions,
+  TransitionData,
+  TransitionDefinition,
+  PageData,
+  Trigger,
+} from "../../types/index.js";
 import { Dom } from "./Dom.js";
 import { HistoryManager } from "@ribajs/history";
-import { ROUTE_ERROR_CLASS, IGNORE_CLASS_LINK } from "../../constants.js";
+import {
+  ROUTE_ERROR_CLASS,
+  IGNORE_CLASS_LINK,
+  IGNORE_CLASS_LINK_LEGACY,
+} from "../../constants.js";
 import { RouterService } from "../../services/index.js";
+import { TransitionStore } from "../Transition/TransitionStore.js";
+import { TransitionRunner } from "../Transition/TransitionRunner.js";
+import { routerHooks } from "../Hooks.js";
 
 export interface PjaxInstances {
   [key: string]: Pjax;
@@ -101,12 +116,13 @@ class Pjax {
 
     if (evt) {
       // Middle click, cmd click, ctrl click or prefetch load event
+      const mouseEvt = evt as MouseEvent;
       if (
-        (evt && (evt as any).which && (evt as any).which > 1) ||
-        (evt as any).metaKey ||
-        (evt as any).ctrlKey ||
-        (evt as any).shiftKey ||
-        (evt as any).altKey
+        mouseEvt.button > 0 ||
+        mouseEvt.metaKey ||
+        mouseEvt.ctrlKey ||
+        mouseEvt.shiftKey ||
+        mouseEvt.altKey
       ) {
         return false;
       }
@@ -129,7 +145,10 @@ class Pjax {
         return false;
       }
 
-      if (element.classList.contains(IGNORE_CLASS_LINK)) {
+      if (
+        element.classList.contains(IGNORE_CLASS_LINK) ||
+        element.classList.contains(IGNORE_CLASS_LINK_LEGACY)
+      ) {
         return false;
       }
     }
@@ -193,6 +212,16 @@ class Pjax {
 
   protected transition?: Transition;
 
+  protected transitionDefinitions: TransitionDefinition[] = [];
+
+  protected transitionStore = new TransitionStore();
+
+  protected transitionRunner = new TransitionRunner();
+
+  protected currentTrigger?: Trigger;
+
+  protected currentEvent?: Event;
+
   protected wrapper?: HTMLElement;
 
   protected viewId = "main";
@@ -219,6 +248,8 @@ class Pjax {
     parseTitle = true,
     changeBrowserUrl = true,
     prefetchLinks = true,
+    transition,
+    transitions = RouterService.options.transitions || [],
     scrollToTop = true,
     scrollToAnchorOffset = RouterService.options.scrollToAnchorOffset,
   }: PjaxOptions) {
@@ -244,7 +275,11 @@ class Pjax {
     }
 
     instance.transition =
-      instance.transition || new HideShowTransition(action, scrollToTop);
+      instance.transition ||
+      transition ||
+      new HideShowTransition(action, scrollToTop);
+    instance.transitionDefinitions = transitions;
+    instance.transitionStore.setTransitions(instance.transitionDefinitions);
     instance.wrapper = instance.wrapper || wrapper;
     instance.containerSelector =
       instance.containerSelector || containerSelector;
@@ -338,6 +373,9 @@ class Pjax {
       if (this.changeBrowserUrl) {
         window.history.pushState(null, "", url);
       }
+      // Preserve trigger/event when navigation was initiated from onLinkClick.
+      // Fallback to "barba" only for direct programmatic goTo calls.
+      this.currentTrigger = this.currentTrigger ?? "barba";
       return this.onStateChange(undefined, url);
     } else {
       // fallback
@@ -351,6 +389,61 @@ class Pjax {
   public getTransition(): Transition {
     // User customizable
     return this.transition || new HideShowTransition();
+  }
+
+  public getTransitionDefinition(
+    data: TransitionData,
+    options: { once?: boolean; self?: boolean } = {},
+  ): TransitionDefinition | undefined {
+    return this.transitionStore.resolve(data, options);
+  }
+
+  protected toUrlData(url: string) {
+    const parsed = new URL(url, window.location.origin);
+    const query: Record<string, string | string[]> = {};
+    for (const [key, value] of parsed.searchParams.entries()) {
+      if (!(key in query)) {
+        query[key] = value;
+      } else if (Array.isArray(query[key])) {
+        (query[key] as string[]).push(value);
+      } else {
+        query[key] = [query[key] as string, value];
+      }
+    }
+    return {
+      href: parsed.href,
+      path: parsed.pathname,
+      hash: parsed.hash,
+      query,
+    };
+  }
+
+  protected getRouteName(container?: HTMLElement) {
+    if (!container) {
+      return undefined;
+    }
+    return (
+      container.dataset.route ||
+      container.dataset.routeName ||
+      container.getAttribute("data-route") ||
+      undefined
+    );
+  }
+
+  protected buildPageData(
+    container: HTMLElement | undefined,
+    url: string,
+    html?: string,
+  ): PageData {
+    return {
+      container,
+      namespace: container ? Dom.getNamespace(container) : undefined,
+      route: {
+        name: this.getRouteName(container),
+      },
+      url: this.toUrlData(url),
+      html,
+    };
   }
 
   public prefetchLink(href: string) {
@@ -570,11 +663,6 @@ class Pjax {
       );
     }
 
-    // Already managed by the rv-route binder
-    if (el.classList.contains("route") || el.hasAttribute("rv-route")) {
-      return false;
-    }
-
     return this.onLinkClick(evt, el as HTMLAnchorElement, href);
   }
 
@@ -618,6 +706,8 @@ class Pjax {
 
       this.dispatcher.trigger("linkClicked", el, evt);
 
+      this.currentTrigger = el;
+      this.currentEvent = evt;
       this.goTo(url, newTab);
     }
   }
@@ -649,19 +739,76 @@ class Pjax {
     const oldContainer = Dom.getContainer(document, this.containerSelector);
     const newContainerPromise = this.loadCached(newUrl);
 
-    const transition = this.getTransition();
-
     this.transitionProgress = true;
 
-    const transitionResult = transition.init(oldContainer, newContainerPromise);
+    if (event && event.type === "popstate") {
+      this.currentTrigger = "popstate";
+      this.currentEvent = event;
+    }
 
-    const newContainer = await newContainerPromise;
-    await transitionResult;
+    const currentData = this.buildPageData(
+      oldContainer,
+      oldUrl,
+      oldContainer.innerHTML,
+    );
+    const transitionSeed: TransitionData = {
+      current: currentData,
+      next: this.buildPageData(undefined, newUrl),
+      trigger: this.currentTrigger,
+      event: this.currentEvent,
+    };
+
+    const transitionDefinition = this.getTransitionDefinition(transitionSeed, {
+      self:
+        currentData.url.path === transitionSeed.next.url.path &&
+        currentData.url.hash === transitionSeed.next.url.hash,
+    });
+
+    if (transitionDefinition) {
+      const newContainer = await newContainerPromise;
+      const transitionData: TransitionData = {
+        ...transitionSeed,
+        next: this.buildPageData(newContainer, newUrl, newContainer.innerHTML),
+      };
+      await this.transitionRunner.runPage({
+        data: transitionData,
+        transition: transitionDefinition,
+        finalize: async () => {
+          if (
+            newContainer.parentNode &&
+            oldContainer.parentNode === newContainer.parentNode
+          ) {
+            const parent = newContainer.parentElement;
+            if (parent) {
+              for (const node of Array.from(parent.childNodes)) {
+                if (node !== newContainer) {
+                  node.remove();
+                }
+              }
+            }
+          } else {
+            oldContainer.remove();
+          }
+          newContainer.style.visibility = "visible";
+        },
+      });
+      this.onNewContainerLoaded(newContainer);
+    } else {
+      const transition = this.getTransition();
+      const transitionResult = transition.init(
+        oldContainer,
+        newContainerPromise,
+      );
+      const newContainer = await newContainerPromise;
+      await transitionResult;
+      this.onNewContainerLoaded(newContainer);
+    }
 
     // Fire after the transition removed the old DOM so components that scan
     // document (e.g. TOC / scrollspy) do not see duplicate headings.
-    this.onNewContainerLoaded(newContainer);
     this.onTransitionEnd();
+    this.currentTrigger = undefined;
+    this.currentEvent = undefined;
   }
 
   /**
@@ -739,6 +886,33 @@ class Pjax {
     );
 
     const dataset = getDataset(initialResponse.container);
+    const initialUrl = normalizeUrl(window.location.href).url;
+    const initialData: TransitionData = {
+      current: this.buildPageData(undefined, initialUrl),
+      next: this.buildPageData(
+        initialResponse.container,
+        initialUrl,
+        initialResponse.container.innerHTML,
+      ),
+      trigger: "barba",
+    };
+    const onceTransition = this.getTransitionDefinition(initialData, {
+      once: true,
+    });
+
+    routerHooks
+      .do("ready", initialData, onceTransition)
+      .then(async () => {
+        if (onceTransition) {
+          await this.transitionRunner.runOnce({
+            data: initialData,
+            transition: onceTransition,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
     this.dispatcher.trigger(
       "newPageReady",

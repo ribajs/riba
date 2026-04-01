@@ -4,4 +4,7 @@ export * from "./pjax-options.js";
 export * from "./response.js";
 export * from "./route-options.js";
 export * from "./transition.js";
+export * from "./transition-data.js";
+export * from "./transition-definition.js";
+export * from "./hook-name.js";
 export * from "./view-options.js";

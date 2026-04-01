@@ -4,6 +4,7 @@ export class BindContentComponent extends Component {
   public static tagName = "rv-bind-content";
 
   protected content = "";
+  protected isBound = false;
 
   public scope = {};
   protected autobind = false;
@@ -14,6 +15,10 @@ export class BindContentComponent extends Component {
   }
 
   public bindContent() {
+    if (this.isBound) {
+      return;
+    }
+    this.isBound = true;
     this.classList.add("bound");
     // Content comes from the component's own <template> child (trusted build-time content)
     this.innerHTML = this.content;
@@ -24,6 +29,9 @@ export class BindContentComponent extends Component {
   }
 
   protected connectedCallback() {
+    if (this.isBound) {
+      return;
+    }
     this.addEventListener("click", this.bindContent);
     this.init([]);
   }

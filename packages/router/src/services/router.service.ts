@@ -1,11 +1,20 @@
 import { RouterModuleOptions } from "../types/index.js";
 import { HideShowTransition } from "./Transition/HideShowTransition.js";
 
+const DEFAULT_OPTIONS: RouterModuleOptions = {
+  defaultTransition: new HideShowTransition(),
+  transitions: [],
+  scrollToAnchorOffset: 0,
+};
+
 export class RouterService {
   protected static _options: RouterModuleOptions;
   public static instance?: RouterService;
 
-  public static get options() {
+  public static get options(): RouterModuleOptions {
+    if (!this._options) {
+      return DEFAULT_OPTIONS;
+    }
     return this._options;
   }
 
@@ -30,6 +39,7 @@ export class RouterService {
     }
     options.defaultTransition =
       options.defaultTransition ?? new HideShowTransition();
+    options.transitions = options.transitions ?? [];
     options.scrollToAnchorOffset = options.scrollToAnchorOffset ?? 0;
     this._options = options as RouterModuleOptions;
     this.instance = new this();

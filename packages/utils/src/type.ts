@@ -377,6 +377,8 @@ export const handleize = (str: string) => {
   str = withoutMultiWhitespace(str);
   str = withoutSpecialChars(str, true);
   str = replaceUmlautChars(str);
+  str = withoutMultiWhitespace(str);
+  str = str.trim();
   str = str.replace(/ /g, "-");
   return str;
 };

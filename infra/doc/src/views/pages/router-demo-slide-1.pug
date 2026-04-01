@@ -1,0 +1,30 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    title Router Demo Slide Page 1
+  body
+    router-view#demo-slide-view(
+      listen-all-links="false"
+      scroll-to-top="false"
+      scroll-to-anchor-hash="false"
+      change-browser-url="false"
+      prefetch-links="false"
+    )
+      section.stage(data-namespace="demo-slide-1")
+        article.slide-page
+          h3.mb-2 Slide Page 1
+          p.mb-0 Navigation uses `rv-route` + `viewId` to stay inside the demo.
+          .slide-controls
+            a(
+              rv-route="{'url': 'router-demo-slide.html', 'viewId': 'demo-slide-view'}"
+              href="router-demo-slide.html"
+              data-direction="prev"
+            ) Prev
+            a(
+              rv-route="{'url': 'router-demo-slide-2.html', 'viewId': 'demo-slide-view'}"
+              href="router-demo-slide-2.html"
+              data-direction="next"
+            ) Next
+    script(src="./ts/main.ts" type="module")

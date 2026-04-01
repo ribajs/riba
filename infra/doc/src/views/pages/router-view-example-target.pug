@@ -5,7 +5,14 @@ block append head
   - bodyId = "router-view-example-target"
 
 block content
-  router-view#example-view
+  router-view#example-view(
+    listen-all-links="false"
+    listen-popstate="false"
+    scroll-to-top="false"
+    scroll-to-anchor-hash="false"
+    change-browser-url="false"
+    prefetch-links="false"
+  )
     .container.py-5
       .row
         .col-12
@@ -13,6 +20,6 @@ block content
           p.mb-4
             | This content is loaded only inside the nested router view demo container.
           a.btn.btn-outline-primary(
-            rv-route="{'url': 'router.html', 'viewId': 'example-view'}"
-            href="router.html"
+            rv-route="{'url': 'router-components.html', 'viewId': 'example-view'}"
+            href="router-components.html"
           ) Back to Router Docs

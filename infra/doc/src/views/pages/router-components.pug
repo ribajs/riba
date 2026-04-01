@@ -1,0 +1,20 @@
+extends ../layouts/page
+
+block append head
+  - pageTitle = "Router Components"
+
+block title
+  | Router Components
+
+block page-content
+  section.my-5#view-binder
+    h2 router-view
+    include:markdown-it(html) ../../doc/reference/router/binders/view.md
+
+  section.my-5#view-static-binder
+    h2 rv-view-static
+    include:markdown-it(html) ../../doc/reference/router/binders/view-static.md
+
+  section.my-5#load-script-component
+    h2 router-load-script
+    include:markdown-it(html) ../../doc/reference/router/components/load-script.md

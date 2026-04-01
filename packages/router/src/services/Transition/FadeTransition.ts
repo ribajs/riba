@@ -1,5 +1,6 @@
 import { BaseTransition } from "./BaseTransition.js";
 import { Transition } from "../../types/transition.js";
+import type { TransitionDefinition } from "../../types/transition-definition.js";
 
 /**
  * Basic Transition object, wait for the new Container to be ready,
@@ -41,5 +42,37 @@ export class FadeTransition extends BaseTransition implements Transition {
   public async finish(newContainer: HTMLElement) {
     newContainer.style.opacity = "1";
     return this.done();
+  }
+
+  public static asDefinition(durationMs = 200): TransitionDefinition {
+    const fadeOut = (el: HTMLElement): Promise<void> =>
+      el
+        .animate([{ opacity: 1 }, { opacity: 0 }], {
+          duration: durationMs,
+          fill: "forwards",
+        })
+        .finished.then(() => undefined);
+
+    const fadeIn = (el: HTMLElement): Promise<void> =>
+      el
+        .animate([{ opacity: 0 }, { opacity: 1 }], {
+          duration: durationMs,
+          fill: "forwards",
+        })
+        .finished.then(() => undefined);
+
+    return {
+      name: "fade",
+      leave: ({ current }) => {
+        if (current.container) {
+          return fadeOut(current.container);
+        }
+      },
+      enter: ({ next }) => {
+        if (next.container) {
+          return fadeIn(next.container);
+        }
+      },
+    };
   }
 }

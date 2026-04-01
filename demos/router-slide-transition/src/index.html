@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Router Slide Transition - Home</title>
+    <link rel="stylesheet" href="./scss/main.scss" />
+  </head>
+  <body>
+    <router-view>
+      <main class="stage" data-namespace="home">
+        <section class="slide-page">
+          <h1>Slide Transition Demo</h1>
+          <p>
+            Inspired by Thierry Michel's Barba.js slideshow transition. Use the
+            navigation controls to move between pages.
+          </p>
+          <div class="slide-controls">
+            <a href="./page-3.html" data-direction="prev">Prev</a>
+            <a href="./page-1.html" data-direction="next">Next</a>
+          </div>
+        </section>
+      </main>
+    </router-view>
+    <script type="module" src="./ts/main.ts"></script>
+  </body>
+</html>

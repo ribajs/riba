@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Router Slide Transition - Page 1</title>
+    <link rel="stylesheet" href="./scss/main.scss" />
+  </head>
+  <body>
+    <router-view>
+      <main class="stage" data-namespace="page-1">
+        <section class="slide-page">
+          <h1>Page 1</h1>
+          <p>Directional transitions are resolved via trigger dataset rules.</p>
+          <div class="slide-controls">
+            <a href="./index.html" data-direction="prev">Prev</a>
+            <a href="./page-2.html" data-direction="next">Next</a>
+          </div>
+        </section>
+      </main>
+    </router-view>
+    <script type="module" src="./ts/main.ts"></script>
+  </body>
+</html>

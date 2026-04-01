@@ -17,6 +17,7 @@ The component attributes map to the following options:
 | changeBrowserUrl      | `boolean`    | `true`                               | Updates browser URL during navigation. |
 | prefetchLinks         | `boolean`    | `true`                               | Prefetches on hover/touchstart to speed up page loading. |
 | transition            | `Transition` | `HideShowTransition`                 | Transition object for page swap behavior. |
+| transitions           | `TransitionDefinition[]` | `[]`                     | Declarative transition list with rule-based selection. |
 
 <rv-bind-content class="pt-3">
   <template>
@@ -24,6 +25,8 @@ The component attributes map to the following options:
       <template type="single-html-file">
         <router-view
           id="example-view"
+          listen-all-links="false"
+          listen-popstate="false"
           scroll-to-top="false"
           scroll-to-anchor-hash="false"
           change-browser-url="false"

@@ -25,7 +25,7 @@ abstract class BaseView {
 
   /**
    * Init the view.
-   * P.S. Is suggested to init the view before starting Barba.Pjax.start(),
+   * P.S. Is suggested to init the view before starting the router Pjax instance,
    * in this way .onEnter() and .onEnterCompleted() will be fired for the current
    * container when the page is loaded.
    */

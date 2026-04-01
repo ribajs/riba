@@ -23,6 +23,8 @@ lerna-debug.log*
 # Tests
 /coverage
 /.nyc_output
+/playwright-report/
+/test-results/
 
 # IDEs and editors
 /.idea

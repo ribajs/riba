@@ -2251,6 +2251,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@playwright/test@npm:^1.59.0":
+  version: 1.59.0
+  resolution: "@playwright/test@npm:1.59.0"
+  dependencies:
+    playwright: "npm:1.59.0"
+  bin:
+    playwright: cli.js
+  checksum: 10/4a756c257fa9c0edec4ba202edf10e2fab8cf69cd7b5255229977c616390d7cadb03fedf586281693f9886b0e56b197f3810526aca0acbeccb58c1dc1d767dde
+  languageName: node
+  linkType: hard
+
 "@popperjs/core@npm:^2.11.8, @popperjs/core@npm:^2.9.2":
   version: 2.11.8
   resolution: "@popperjs/core@npm:2.11.8"
@@ -3405,6 +3416,34 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/demo-router-slide-transition@workspace:^, @ribajs/demo-router-slide-transition@workspace:demos/router-slide-transition":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-router-slide-transition@workspace:demos/router-slide-transition"
+  dependencies:
+    "@ribajs/core": "workspace:^"
+    "@ribajs/eslint-config": "workspace:^"
+    "@ribajs/router": "workspace:^"
+    "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/types": "workspace:^"
+    "@ribajs/vite-config": "workspace:^"
+    "@typescript-eslint/eslint-plugin": "npm:^8.57.2"
+    "@typescript-eslint/parser": "npm:^8.57.2"
+    "@yarnpkg/pnpify": "npm:^4.1.6"
+    animejs: "npm:^4.3.6"
+    bootstrap: "npm:5.3.8"
+    eslint: "npm:^10.1.0"
+    eslint-config-prettier: "npm:^10.1.8"
+    eslint-plugin-prettier: "npm:^5.5.5"
+    postcss-modules: "npm:^6.0.1"
+    postcss-preset-env: "npm:^11.2.0"
+    prettier: "npm:^3.8.1"
+    sass: "npm:^1.98.0"
+    serve: "npm:^14.2.6"
+    typescript: "npm:6.0.2"
+    vite: "npm:^8.0.3"
+  languageName: unknown
+  linkType: soft
+
 "@ribajs/demo-router-view@workspace:demos/router-view":
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-router-view@workspace:demos/router-view"
@@ -3512,6 +3551,7 @@ __metadata:
     "@ribajs/demo-extras-scroll-events": "workspace:^"
     "@ribajs/demo-extras-touch-events": "workspace:^"
     "@ribajs/demo-i18n-static": "workspace:^"
+    "@ribajs/demo-router-slide-transition": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/events": "workspace:^"
     "@ribajs/extras": "workspace:^"
@@ -5788,6 +5828,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"animejs@npm:^4.3.6":
+  version: 4.3.6
+  resolution: "animejs@npm:4.3.6"
+  checksum: 10/804c1f96093a476b53cf905d3e7fa64eb88ffcdf9eca916c7b3663ee8758c9bb684a4ec15cd99429b17ff06c23fa00475f48f447b2fcf7a39e842637f017774e
+  languageName: node
+  linkType: hard
+
 "ansi-align@npm:^3.0.1":
   version: 3.0.1
   resolution: "ansi-align@npm:3.0.1"
@@ -8041,12 +8088,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fsevents@npm:2.3.2":
+  version: 2.3.2
+  resolution: "fsevents@npm:2.3.2"
+  dependencies:
+    node-gyp: "npm:latest"
+  checksum: 10/6b5b6f5692372446ff81cf9501c76e3e0459a4852b3b5f1fc72c103198c125a6b8c72f5f166bdd76ffb2fca261e7f6ee5565daf80dca6e571e55bcc589cc1256
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
 "fsevents@npm:^2.3.3, fsevents@npm:~2.3.2, fsevents@npm:~2.3.3":
   version: 2.3.3
   resolution: "fsevents@npm:2.3.3"
   dependencies:
     node-gyp: "npm:latest"
   checksum: 10/4c1ade961ded57cdbfbb5cac5106ec17bc8bccd62e16343c569a0ceeca83b9dfef87550b4dc5cbb89642da412b20c5071f304c8c464b80415446e8e155a038c0
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
+"fsevents@patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>":
+  version: 2.3.2
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
+  dependencies:
+    node-gyp: "npm:latest"
   conditions: os=darwin
   languageName: node
   linkType: hard
@@ -10765,6 +10831,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"playwright-core@npm:1.59.0":
+  version: 1.59.0
+  resolution: "playwright-core@npm:1.59.0"
+  bin:
+    playwright-core: cli.js
+  checksum: 10/6df95346fc9512915e75fba3752c67e5acb18832801b9496d6cfea32500d3a6dab1056c75789e9a26cabfbefceb21241ca45351af5ad3f02b45afb2af91698d7
+  languageName: node
+  linkType: hard
+
+"playwright@npm:1.59.0":
+  version: 1.59.0
+  resolution: "playwright@npm:1.59.0"
+  dependencies:
+    fsevents: "npm:2.3.2"
+    playwright-core: "npm:1.59.0"
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    playwright: cli.js
+  checksum: 10/2415646868de2f1e20be5c52d17738f4347c3d9fda4b166034d790897dde42374eb715fdd94e60536c6b19bd17f6361c213093e70158d602fd496eb81cd01888
+  languageName: node
+  linkType: hard
+
 "possible-typed-array-names@npm:^1.0.0":
   version: 1.1.0
   resolution: "possible-typed-array-names@npm:1.1.0"
@@ -11829,6 +11919,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ribajs@workspace:."
   dependencies:
+    "@playwright/test": "npm:^1.59.0"
     "@popperjs/core": "npm:^2.11.8"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
@@ -11847,6 +11938,7 @@ __metadata:
     pug: "npm:^3.0.4"
     sass: "npm:^1.98.0"
     typescript: "npm:^6.0.2"
+    vite: "npm:^8.0.3"
     vitest: "npm:^3.2.4"
   dependenciesMeta:
     prettier:

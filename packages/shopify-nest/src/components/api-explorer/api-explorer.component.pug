@@ -7,7 +7,7 @@
           .row
             .col-12
               .dropdown
-                button.btn.btn-outline-light.w-100.text-truncate.dropdown-toggle(rv-bs4-dropdown="")
+                button.btn.btn-outline-light.w-100.text-truncate.dropdown-toggle(rv-bs5-dropdown="")
                   span(rv-text="currentSelectApi.label | or currentSelectApi.url")
                 .dropdown-menu.dropdown-menu-dark.scrollbar-y-auto.scrollbar-primary
                   div(rv-each-api="apiList")
@@ -21,7 +21,7 @@
               p.text-primary.pt-3(rv-i18n-text="currentSelectApi.short_desc")
             //- Roles
             .col-12
-              span.badge.badge-primary.mx-1(rv-each-role="currentSelectApi.roles" rv-i18n-text="'components.apiExplorer.roles.' | append role | append '.label'", rv-bs4-tooltip="'components.apiExplorer.roles.' | append role | append '.info' | t langcode")
+              span.badge.badge-primary.mx-1(rv-each-role="currentSelectApi.roles" rv-i18n-text="'components.apiExplorer.roles.' | append role | append '.label'", rv-bs5-tooltip="'components.apiExplorer.roles.' | append role | append '.info' | t langcode")
             //- Queries
             .col-12.pt-3(rv-show="currentQueries | size | gt 0")
               p.text-primary(rv-i18n-text="'components.apiExplorer.query.title'")
@@ -43,7 +43,7 @@
                   span: | /
                   //- Dynamic param
                   .dropdown(rv-show="param.dynamic")
-                    button.btn.btn-sm.py-0.btn-outline-light.dropdown-toggle.dropdown-api-param.text-truncate(rv-bs4-dropdown="" rv-enabled="param.dependenciesResolved | and param.values.length" rv-text="param.value | or param.name")
+                    button.btn.btn-sm.py-0.btn-outline-light.dropdown-toggle.dropdown-api-param.text-truncate(rv-bs5-dropdown="" rv-enabled="param.dependenciesResolved | and param.values.length" rv-text="param.value | or param.name")
                     .dropdown-menu.dropdown-menu-dark.scrollbar-y-auto.scrollbar-primary
                       div(rv-each-value="param.values")
                         .dropdown-item.cursor-pointer(rv-on-click="selectApiParamValue | args self param value")
@@ -56,7 +56,7 @@
                   span(rv-show="%query% | gt 0"): | &amp;
                   span: | {query.name}=
                   span.dropdown(rv-show="query.type | eq 'dropdown'")
-                    button.btn.btn-sm.py-0.btn-outline-light.dropdown-toggle.dropdown-api-query.text-truncate(rv-bs4-dropdown="" rv-enabled="query.dependenciesResolved | and query.values.length" rv-text="query.value | or query.name")
+                    button.btn.btn-sm.py-0.btn-outline-light.dropdown-toggle.dropdown-api-query.text-truncate(rv-bs5-dropdown="" rv-enabled="query.dependenciesResolved | and query.values.length" rv-text="query.value | or query.name")
                     .dropdown-menu.dropdown-menu-dark.scrollbar-y-auto.scrollbar-primary
                       div(rv-each-value="query.values")
                         .dropdown-item.cursor-pointer(rv-on-click="selectApiQueryValue | args self query value")

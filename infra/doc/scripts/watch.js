@@ -27,6 +27,13 @@ const IGNORED_FILES = new Set([
   'extras.html',
   'i18n.html',
   'router.html',
+  'router-lifecycle.html',
+  'router-transitions.html',
+  'router-hooks.html',
+  'router-strategies.html',
+  'router-recipes.html',
+  'router-binders.html',
+  'router-components.html',
   'router-view-example-target.html',
   'icon.html',
   'jquery.html',
@@ -38,6 +45,9 @@ function isIgnored(filename) {
   if (!filename) return true;
   if (filename.includes('node_modules')) return true;
   const base = filename.split(/[/\\]/).pop();
+  // Generated HTML pages written to src/ by the Pug plugin.
+  // Ignoring all root-level .html prevents self-triggering rebuild loops.
+  if (base && base.endsWith('.html')) return true;
   return IGNORED_FILES.has(base);
 }
 

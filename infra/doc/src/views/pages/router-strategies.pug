@@ -1,0 +1,11 @@
+extends ../layouts/page
+
+block append head
+  - pageTitle = "Router Strategies"
+
+block title
+  | Router Strategies
+
+block page-content
+  section.my-5
+    include:markdown-it(html) ../../doc/reference/router/strategies.md

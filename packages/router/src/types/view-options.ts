@@ -1,4 +1,5 @@
 import type { Transition } from "./transition.js";
+import type { TransitionDefinition } from "./transition-definition.js";
 
 export interface RouterViewOptions {
   id?: string;
@@ -19,5 +20,6 @@ export interface RouterViewOptions {
   changeBrowserUrl: boolean;
   prefetchLinks: boolean;
   transition: Transition;
+  transitions?: TransitionDefinition[];
   disable?: boolean;
 }

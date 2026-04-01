@@ -12,7 +12,7 @@ class BaseCache<T = any> {
   }
 
   /**
-   * Set a key and value data, mainly Barba is going to save promises
+   * Set a key and value data, mainly used to save response promises
    *
    */
   public set(key: string, val: T) {

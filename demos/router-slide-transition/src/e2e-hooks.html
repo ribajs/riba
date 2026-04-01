@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hook Order - Home</title>
+  </head>
+  <body>
+    <ol id="hooks-list"></ol>
+    <router-view>
+      <main data-namespace="home">
+        <h1>Home</h1>
+        <a id="link-default" href="./e2e-hooks-page.html">Navigate (default)</a>
+        <a id="link-sync" href="./e2e-hooks-page.html" data-sync="true">Navigate (sync)</a>
+      </main>
+    </router-view>
+    <script type="module" src="./ts/e2e-hooks-main.ts"></script>
+  </body>
+</html>

@@ -10,6 +10,9 @@ ready(async () => {
   const { EventDispatcher } = await import("@ribajs/events");
   const { DocModule } = await import("./doc.module.js");
   const { docI18nLocales } = await import("./doc-i18n-locales.js");
+  const { createSlideTransitions } = await import(
+    "@ribajs/demo-router-slide-transition",
+  );
 
   const Prism = await import("prismjs");
   await import("prismjs/components/prism-javascript");
@@ -33,6 +36,11 @@ ready(async () => {
   const riba = new Riba();
   const dispatcher = new EventDispatcher("main");
   const model: any = {};
+  const slideDemoTransitions = createSlideTransitions({
+    isMatchingNamespace: (namespace) =>
+      !!namespace && namespace.startsWith("demo-slide-"),
+    namePrefix: "doc-demo-slide",
+  });
 
   const isIndexPath = (path: string) =>
     path === "/" || path.endsWith("/index.html") || path.endsWith("/index");
@@ -44,7 +52,11 @@ ready(async () => {
 
   riba.module.register(coreModule.init());
   riba.module.register(extrasModule.init());
-  riba.module.register(routerModule.init());
+  riba.module.register(
+    routerModule.init({
+      transitions: [...slideDemoTransitions],
+    }),
+  );
   riba.module.register(
     i18nModule.init({
       localesService: new LocalesStaticService(docI18nLocales),

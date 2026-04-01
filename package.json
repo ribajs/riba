@@ -49,9 +49,13 @@
     "bump:major": "yarn workspaces foreach -v --all version major",
     "publish:next": "yarn workspaces foreach -v -W --no-private npm publish --tolerate-republish --tag next --access public",
     "publish:latest": "yarn workspaces foreach -v -W --no-private npm publish --tolerate-republish --tag latest --access public",
-    "check:all": "yarn workspaces foreach -v -p -A -j 5 run check"
+    "check:all": "yarn workspaces foreach -v -p -A -j 5 run check",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.0",
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
     "@ribajs/types": "workspace:^",
@@ -67,6 +71,7 @@
     "prettier": "^3.8.1",
     "sass": "^1.98.0",
     "typescript": "^6.0.2",
+    "vite": "^8.0.3",
     "vitest": "^3.2.4"
   },
   "workspaces": [

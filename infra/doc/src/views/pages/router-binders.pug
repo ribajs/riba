@@ -1,0 +1,28 @@
+extends ../layouts/page
+
+block append head
+  - pageTitle = "Router Binders"
+
+block title
+  | Router Binders
+
+block page-content
+  section.my-5#route-binder
+    h2 rv-route
+    include:markdown-it(html) ../../doc/reference/router/binders/route.md
+
+  section.my-5#route-class-binder
+    h2 rv-route-class-*
+    include:markdown-it(html) ../../doc/reference/router/binders/route-class-[classname].md
+
+  section.my-5#parent-route-class-binder
+    h2 rv-parent-route-class-*
+    include:markdown-it(html) ../../doc/reference/router/binders/parent-route-class-[classname].md
+
+  section.my-5#route-preload-binder
+    h2 rv-route-preload
+    include:markdown-it(html) ../../doc/reference/router/binders/route-preload.md
+
+  section.my-5#route-back-on-binder
+    h2 rv-route-back-on-*
+    include:markdown-it(html) ../../doc/reference/router/binders/route-back-on-star.md
