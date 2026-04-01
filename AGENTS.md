@@ -76,9 +76,19 @@ Key: coreModule,routerModule,bs5Module,i18nModule,extrasModule
 LifecycleService(singleton) tracks component binding state
 Events: Component:{constructor,connected,beforeBind,afterBind,disconnected} | ComponentLifecycle:allBound
 
+## Testing
+
+Tests define how the API **should** behave, not how it **currently** behaves. They serve two purposes:
+1. **Bug detection** — a failing test means the implementation is wrong, not the test
+2. **API documentation** — tests describe the intended contract for consumers
+
+When a test fails, fix the implementation first. Only adjust the test if the original expectation was based on a misunderstanding of the API's purpose. Never silently adapt tests to match buggy behavior.
+
+Unit: Vitest + jsdom (`yarn test`) | E2E: Playwright + Chromium (`yarn test:e2e`)
+
 ## Commands
 
-yarn install | yarn build | yarn build:libs | yarn test | yarn test:watch | yarn format | yarn clean | yarn check:all
+yarn install | yarn build | yarn build:libs | yarn test | yarn test:watch | yarn test:e2e | yarn test:e2e:ui | yarn format | yarn clean | yarn check:all
 Per-package: cd packages/<pkg> && yarn build
 
 ## Conventions
