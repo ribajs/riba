@@ -52,7 +52,6 @@ No failing cases were produced by the migrated router suite. Known visual issues
 
 1. **Demo behavior/config issues** (higher priority)
    - `demos/router-slide-transition`: visual direction and motion parity tuning.
-   - `demos/router-svg-transition`: smooth morph fidelity and overlay click-through.
 2. **Potential framework behavior mismatch** (medium priority)
    - Transition data availability timing (`next.namespace` during early resolve) is now guarded by tests, but UX parity may still require router-level sequencing refinements.
 3. **Docs embed/runtime integration** (medium priority)
@@ -61,6 +60,5 @@ No failing cases were produced by the migrated router suite. Known visual issues
 ## Prioritized Next Fix List
 
 1. Refine slide demo direction choreography to mirror Barba reference timings.
-2. Improve SVG demo morph interpolation and pointer-event layering to restore smooth back navigation clicks.
 3. Add browser E2E checks for embedded docs demos to prevent regressions that unit tests cannot detect.
 

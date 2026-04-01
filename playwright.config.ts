@@ -17,14 +17,6 @@ export default defineConfig({
       },
     },
     {
-      name: "router-svg-transition",
-      testMatch: "router-svg-transition/**/*.spec.ts",
-      use: {
-        ...devices["Desktop Chrome"],
-        baseURL: "http://localhost:5182",
-      },
-    },
-    {
       name: "hook-order",
       testMatch: "hook-order/**/*.spec.ts",
       use: {
@@ -47,13 +39,6 @@ export default defineConfig({
       command: "yarn vite --port 5181 --strictPort",
       cwd: "demos/router-slide-transition",
       port: 5181,
-      reuseExistingServer: true,
-      timeout: 60_000,
-    },
-    {
-      command: "yarn vite --port 5182 --strictPort",
-      cwd: "demos/router-svg-transition",
-      port: 5182,
       reuseExistingServer: true,
       timeout: 60_000,
     },

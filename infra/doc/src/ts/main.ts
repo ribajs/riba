@@ -13,7 +13,6 @@ ready(async () => {
   const { createSlideTransitions } = await import(
     "@ribajs/demo-router-slide-transition",
   );
-  const { createSvgTransitions } = await import("@ribajs/demo-router-svg-transition");
 
   const Prism = await import("prismjs");
   await import("prismjs/components/prism-javascript");
@@ -42,12 +41,6 @@ ready(async () => {
       !!namespace && namespace.startsWith("demo-slide-"),
     namePrefix: "doc-demo-slide",
   });
-  const svgDemoTransitions = createSvgTransitions({
-    isMatchingNamespace: (namespace) => !!namespace && namespace.startsWith("demo-svg-"),
-    namePrefix: "doc-demo-svg",
-    homeNamespace: "demo-svg-home",
-    pageNamespace: "demo-svg-page",
-  });
 
   const isIndexPath = (path: string) =>
     path === "/" || path.endsWith("/index.html") || path.endsWith("/index");
@@ -61,7 +54,7 @@ ready(async () => {
   riba.module.register(extrasModule.init());
   riba.module.register(
     routerModule.init({
-      transitions: [...slideDemoTransitions, ...svgDemoTransitions],
+      transitions: [...slideDemoTransitions],
     }),
   );
   riba.module.register(

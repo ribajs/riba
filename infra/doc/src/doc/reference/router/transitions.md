@@ -113,32 +113,3 @@ Credits:
   </template>
 </rv-bind-content>
 
-### SVG transition demo
-
-Credits:
-
-- Inspired by Thierry Michel's Barba.js example:
-  https://codepen.io/thierrymichel/project/editor/ZrzBBK
-
-<rv-bind-content class="pt-3">
-  <template>
-    <rv-example-tabs
-      class="pt-3"
-      handle="router-svg-demo"
-      demo-url="router-demo-svg.html"
-      standalone-url="router-demo-svg.html"
-    >
-      <template
-        type="demo"
-        title="Live Demo"
-        demo-url="router-demo-svg.html"
-        standalone-url="router-demo-svg.html"
-        container-selector="router-view#demo-svg-view"
-      >
-        <div
-          rv-view-static="{'url': 'router-demo-svg.html', 'containerSelector': 'router-view#demo-svg-view'}"
-        ></div>
-      </template>
-    </rv-example-tabs>
-  </template>
-</rv-bind-content>

@@ -3444,34 +3444,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ribajs/demo-router-svg-transition@workspace:^, @ribajs/demo-router-svg-transition@workspace:demos/router-svg-transition":
-  version: 0.0.0-use.local
-  resolution: "@ribajs/demo-router-svg-transition@workspace:demos/router-svg-transition"
-  dependencies:
-    "@ribajs/core": "workspace:^"
-    "@ribajs/eslint-config": "workspace:^"
-    "@ribajs/router": "workspace:^"
-    "@ribajs/tsconfig": "workspace:^"
-    "@ribajs/types": "workspace:^"
-    "@ribajs/vite-config": "workspace:^"
-    "@typescript-eslint/eslint-plugin": "npm:^8.57.2"
-    "@typescript-eslint/parser": "npm:^8.57.2"
-    "@yarnpkg/pnpify": "npm:^4.1.6"
-    animejs: "npm:^4.3.6"
-    bootstrap: "npm:5.3.8"
-    eslint: "npm:^10.1.0"
-    eslint-config-prettier: "npm:^10.1.8"
-    eslint-plugin-prettier: "npm:^5.5.5"
-    postcss-modules: "npm:^6.0.1"
-    postcss-preset-env: "npm:^11.2.0"
-    prettier: "npm:^3.8.1"
-    sass: "npm:^1.98.0"
-    serve: "npm:^14.2.6"
-    typescript: "npm:6.0.2"
-    vite: "npm:^8.0.3"
-  languageName: unknown
-  linkType: soft
-
 "@ribajs/demo-router-view@workspace:demos/router-view":
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-router-view@workspace:demos/router-view"
@@ -3580,7 +3552,6 @@ __metadata:
     "@ribajs/demo-extras-touch-events": "workspace:^"
     "@ribajs/demo-i18n-static": "workspace:^"
     "@ribajs/demo-router-slide-transition": "workspace:^"
-    "@ribajs/demo-router-svg-transition": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
     "@ribajs/events": "workspace:^"
     "@ribajs/extras": "workspace:^"
