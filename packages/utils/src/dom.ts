@@ -662,9 +662,9 @@ export const getElementIndex = (el: Element | null) => {
     return -1;
   }
   let i = 0;
-  do {
+  while (el.previousElementSibling) {
     i++;
-    el = (el as HTMLElement).previousElementSibling;
-  } while (el);
+    el = el.previousElementSibling;
+  }
   return i;
 };
