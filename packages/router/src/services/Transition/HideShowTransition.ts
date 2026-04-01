@@ -1,5 +1,6 @@
 import { BaseTransition } from "./BaseTransition.js";
 import { Transition } from "../../types/transition.js";
+import type { TransitionDefinition } from "../../types/transition-definition.js";
 
 /**
  * Basic Transition object, wait for the new Container to be ready,
@@ -39,5 +40,16 @@ export class HideShowTransition extends BaseTransition implements Transition {
 
   public async finish() {
     return this.done();
+  }
+
+  public static asDefinition(): TransitionDefinition {
+    return {
+      name: "hide-show",
+      leave: ({ current }) => {
+        if (current.container) {
+          current.container.style.display = "none";
+        }
+      },
+    };
   }
 }

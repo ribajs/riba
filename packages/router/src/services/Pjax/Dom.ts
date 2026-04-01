@@ -99,7 +99,7 @@ class Dom {
   ): HTMLElement {
     if (!element) {
       throw new Error(
-        "Barba.js: [getContainer] No element to get container from, maybe the DOM is not ready!",
+        "Router: [getContainer] No element to get container from, maybe the DOM is not ready!",
       );
     }
 

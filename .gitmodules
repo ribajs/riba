@@ -34,3 +34,6 @@
 [submodule "refs/seeberger-shopify-theme"]
 	path = refs/seeberger-shopify-theme
 	url = ssh://git@gitlab.pluspol-networks.de:2222/seeberger/seeberger-shopify-shop/main.git
+[submodule "refs/barba"]
+	path = refs/barba
+	url = git@github.com:barbajs/barba.git

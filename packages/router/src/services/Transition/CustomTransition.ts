@@ -1,5 +1,6 @@
 import { BaseTransition } from "./BaseTransition.js";
 import { Transition } from "../../types/transition.js";
+import type { TransitionDefinition } from "../../types/transition-definition.js";
 
 declare global {
   // tslint:disable: interface-name
@@ -27,6 +28,15 @@ class CustomTransition extends BaseTransition implements Transition {
   public async finish() {
     document.body.scrollTop = 0;
     return this.done();
+  }
+
+  public static asDefinition(): TransitionDefinition {
+    return {
+      name: "custom",
+      afterEnter: () => {
+        document.body.scrollTop = 0;
+      },
+    };
   }
 }
 

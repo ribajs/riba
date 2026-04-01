@@ -1,4 +1,5 @@
 import { Transition } from "./transition.js";
+import type { TransitionDefinition } from "./transition-definition.js";
 
 export interface PjaxOptions {
   id: string;
@@ -7,7 +8,8 @@ export interface PjaxOptions {
   containerSelector: string;
   listenAllLinks: boolean;
   listenPopstate: boolean;
-  transition: Transition;
+  transition?: Transition;
+  transitions?: TransitionDefinition[];
   parseTitle: boolean;
   changeBrowserUrl: boolean;
   prefetchLinks: boolean;

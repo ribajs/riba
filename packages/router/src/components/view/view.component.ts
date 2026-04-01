@@ -51,6 +51,7 @@ export class RouterViewComponent extends Component {
     changeBrowserUrl: true,
     prefetchLinks: true,
     transition: RouterService.options.defaultTransition,
+    transitions: RouterService.options.transitions,
   };
 
   constructor() {
@@ -99,6 +100,7 @@ export class RouterViewComponent extends Component {
       listenAllLinks: !!this.scope.listenAllLinks,
       listenPopstate: !!this.scope.listenPopstate,
       transition: this.scope.transition,
+      transitions: this.scope.transitions,
       parseTitle: !!this.scope.parseTitle,
       changeBrowserUrl: !!this.scope.changeBrowserUrl,
       prefetchLinks: !!this.scope.prefetchLinks,
