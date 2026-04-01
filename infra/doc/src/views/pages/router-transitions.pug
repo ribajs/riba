@@ -1,0 +1,11 @@
+extends ../layouts/page
+
+block append head
+  - pageTitle = "Router Transitions"
+
+block title
+  | Router Transitions
+
+block page-content
+  section.my-5
+    include:markdown-it(html) ../../doc/reference/router/transitions.md

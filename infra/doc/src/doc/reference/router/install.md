@@ -2,33 +2,60 @@
 npm install --save @ribajs/router
 ```
 
-### Register
+## Register module
 
-To register the module include `import routerModule from '@ribajs/router';` in your `main.ts` file and register the module with `riba.module.register(routerModule.init());`:
+Register the router module next to your core module:
 
 ```ts
-import { Riba } from '@ribajs/core';
-import { ready } from '@ribajs/utils/src/dom';
-import routerModule from '@ribajs/router';
+import { Riba, coreModule } from "@ribajs/core";
+import { routerModule } from "@ribajs/router";
+
 const riba = new Riba();
 const model = {};
+
+riba.module.register(coreModule.init());
 riba.module.register(routerModule.init());
-ready(() => {
-  riba.bind(document.body, model);
-});
+
+riba.bind(document.body, model);
 ```
 
-### Templates
+## Configure transitions (optional)
 
-So that the module works all templates (which can be called via the router module) must match the following schema:
+You can keep the default transition or provide declarative transitions:
+
+```ts
+riba.module.register(
+  routerModule.init({
+    transitions: [
+      {
+        name: "fade",
+        leave: ({ current }) => {
+          current.container?.animate(
+            [{ opacity: 1 }, { opacity: 0 }],
+            { duration: 200, fill: "forwards" },
+          ).finished;
+        },
+        enter: ({ next }) => {
+          next.container?.animate(
+            [{ opacity: 0 }, { opacity: 1 }],
+            { duration: 200, fill: "forwards" },
+          ).finished;
+        },
+      },
+    ],
+  }),
+);
+```
+
+## Required markup
 
 ```html
-<!-- here your normal doctype, head and body structure -->
-<div id="main" rv-view="">
-  <div data-namespace="index">
-    ...
-  </div>
-</div>
+<router-view id="main">
+  <main data-namespace="home">
+    <!-- content swapped by router -->
+  </main>
+</router-view>
 ```
 
-The value of `data-namespace` can (and should) be different on each template. By default, all data attributes are automatically assigned to the template's riba model.
+Use unique `data-namespace` values per page whenever possible. They are used for
+transition rules and hooks.

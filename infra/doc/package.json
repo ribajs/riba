@@ -28,6 +28,8 @@
     "@ribajs/demo-extras-scroll-events": "workspace:^",
     "@ribajs/demo-extras-touch-events": "workspace:^",
     "@ribajs/demo-i18n-static": "workspace:^",
+    "@ribajs/demo-router-slide-transition": "workspace:^",
+    "@ribajs/demo-router-svg-transition": "workspace:^",
     "@ribajs/events": "workspace:^",
     "@ribajs/extras": "workspace:^",
     "@ribajs/history": "workspace:^",

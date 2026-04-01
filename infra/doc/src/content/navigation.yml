@@ -18,8 +18,25 @@
         - title: Components
           url: core-components.html
     - title: Router
-      url: router.html
-      links: []
+      url: "#collapse"
+      collapseable: true
+      links:
+        - title: Getting Started
+          url: router.html
+        - title: Lifecycle
+          url: router-lifecycle.html
+        - title: Transitions
+          url: router-transitions.html
+        - title: Hooks
+          url: router-hooks.html
+        - title: Strategies
+          url: router-strategies.html
+        - title: Recipes
+          url: router-recipes.html
+        - title: Binders
+          url: router-binders.html
+        - title: Components
+          url: router-components.html
     - title: I18n
       url: i18n.html
       links: []

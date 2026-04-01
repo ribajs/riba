@@ -26,8 +26,8 @@ Instead of the URL you can also pass some options to the binder as a object (by 
   <template>
     <rv-example-tabs class="pt-3" handle="route-binder">
       <template type="single-html-file">
-        <a rv-route="{'viewId': 'example-view', 'removeAfterActivation': false}" href="iconset.html" class="btn btn-danger m-3">Click to load a page inside the view example below</a>
-        <p class="m-3"><em>Before you click on this button, make sure that the preview of the view binder example below is open.</em></p>
+        <a rv-route="{'viewId': 'example-view', 'removeAfterActivation': false}" href="iconset.html" class="btn btn-danger m-3">Click to load a page inside the dedicated view example</a>
+        <p class="m-3"><em>This button targets <code>viewId: 'example-view'</code>. Open the <strong>Router Components</strong> page and activate the <code>router-view</code> preview to see it in action.</em></p>
         <a rv-route="" href="iconset.html" target="_blank" class="btn btn-success m-3">Click to open the page in a new tab.</a>
       </template>
     </rv-example-tabs>

@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    title Router Demo SVG
+  body
+    router-view#demo-svg-view(
+      listen-all-links="false"
+      scroll-to-top="false"
+      scroll-to-anchor-hash="false"
+      change-browser-url="false"
+      prefetch-links="false"
+    )
+      section.intro(data-namespace="demo-svg-home")
+        .content
+          h3.mb-2 SVG Morph Transition
+          p.mb-3 Inspired by Barba.js transitions, adapted for Riba docs.
+          a.link(
+            rv-route="{'url': 'router-demo-svg-page.html', 'viewId': 'demo-svg-view'}"
+            href="router-demo-svg-page.html"
+          ) Click here to enter
+        .shape-outer
+          svg.shape(width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1440 800")
+            path(
+              d="M -44,-50 C -52.71,28.52 15.86,8.186 184,14.69 383.3,22.39 462.5,12.58 638,14 835.5,15.6 987,6.4 1194,13.86 1661,30.68 1652,-36.74 1582,-140.1 1512,-243.5 15.88,-589.5 -44,-50 Z"
+              data-path-id="M -44,-50 C -137.1,117.4 67.86,445.5 236,452 435.3,459.7 500.5,242.6 676,244 873.5,245.6 957,522.4 1154,594 1593,753.7 1793,226.3 1582,-126 1371,-478.3 219.8,-524.2 -44,-50 Z"
+            )
+    script(src="./ts/main.ts" type="module")
