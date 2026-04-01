@@ -170,8 +170,8 @@ describe("String Formatters", () => {
       expect(handleizeFormatter.read!("Hello World")).toBe("hello-world");
     });
 
-    it("removes special characters", () => {
-      expect(handleizeFormatter.read!("100% M & Ms!!!")).toBe("100-m--ms");
+    it("removes special characters and collapses whitespace", () => {
+      expect(handleizeFormatter.read!("100% M & Ms!!!")).toBe("100-m-ms");
     });
 
     it("returns an empty string for a falsy input", () => {

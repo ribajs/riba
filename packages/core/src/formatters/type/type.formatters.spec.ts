@@ -121,11 +121,11 @@ describe("type formatters", () => {
   });
 
   describe("is-object", () => {
-    it("returns true for objects", () => {
+    it("returns true for plain objects", () => {
       expect(isObjectFormatter.read({})).toBe(true);
     });
-    it("returns true for arrays (uses isObject which includes arrays)", () => {
-      expect(isObjectFormatter.read([])).toBe(true);
+    it("returns false for arrays", () => {
+      expect(isObjectFormatter.read([])).toBe(false);
     });
     it("returns false for null", () => {
       expect(isObjectFormatter.read(null)).toBe(false);

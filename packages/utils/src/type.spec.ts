@@ -232,7 +232,7 @@ describe("type utilities", () => {
 
   describe("handleize", () => {
     it("converts to handle format", () => {
-      expect(handleize("100% M & Ms!!!")).toBe("100-m--ms");
+      expect(handleize("100% M & Ms!!!")).toBe("100-m-ms");
     });
     it("lowercases and trims", () => {
       expect(handleize("  Hello World  ")).toBe("hello-world");
