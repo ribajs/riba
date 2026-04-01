@@ -9,7 +9,6 @@ import {
   isBoolean,
   isString,
   isJson,
-  isBase64,
   couldBeJson,
   parseType,
   parseJsonString,

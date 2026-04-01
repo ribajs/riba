@@ -123,7 +123,8 @@ describe("DOM utilities", () => {
 
   describe("htmlToElement", () => {
     it("creates a single element from HTML string", () => {
-      const el = htmlToElement("<p>Hello</p>");
+      const el = htmlToElement("<p>Hello</p>") as HTMLElement;
+      expect(el).not.toBeNull();
       expect(el.tagName).toBe("P");
       expect(el.textContent).toBe("Hello");
     });
