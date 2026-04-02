@@ -1,0 +1,201 @@
+<h1 class="text-3xl font-bold mb-8">TW Dropdown &amp; Navbar Demo</h1>
+
+<!-- Navbar -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Navbar</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">A responsive navbar with collapsible mobile menu.</p>
+  <tw-navbar class="block rounded-lg border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900">
+    <nav class="px-4 py-3">
+      <div class="flex items-center justify-between">
+        <a href="#" class="text-xl font-bold text-gray-900 dark:text-white">Riba.js</a>
+        <button
+          data-dropdown-trigger
+          rv-on-click="toggle"
+          class="inline-flex items-center rounded-md p-2 text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 md:hidden dark:text-gray-400 dark:hover:bg-gray-800"
+          type="button"
+          aria-label="Toggle navigation"
+        >
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <div class="hidden md:flex md:items-center md:space-x-6">
+          <a href="#" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">Home</a>
+          <a href="#" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">About</a>
+          <a href="#" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">Docs</a>
+          <a href="#" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">Contact</a>
+        </div>
+      </div>
+      <div data-navbar-collapse class="mt-3 space-y-2 md:hidden">
+        <a href="#" class="block rounded px-3 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Home</a>
+        <a href="#" class="block rounded px-3 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">About</a>
+        <a href="#" class="block rounded px-3 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Docs</a>
+        <a href="#" class="block rounded px-3 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Contact</a>
+      </div>
+    </nav>
+  </tw-navbar>
+</section>
+
+<!-- Basic Dropdown -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Basic Dropdown</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">A simple dropdown menu with default bottom-start placement.</p>
+  <tw-dropdown class="relative inline-block">
+    <button
+      data-dropdown-trigger
+      class="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      type="button"
+    >
+      Options
+      <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+    <ul data-dropdown-menu role="menu" class="hidden mt-2 w-48 rounded-md border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-800">
+      <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Edit</a></li>
+      <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Duplicate</a></li>
+      <li><hr class="my-1 border-gray-200 dark:border-gray-700" /></li>
+      <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Archive</a></li>
+      <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:text-red-400 dark:hover:bg-gray-700">Delete</a></li>
+    </ul>
+  </tw-dropdown>
+</section>
+
+<!-- Dropdown Placements -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Dropdown Placements</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">Dropdowns can be positioned in different directions using the <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded">placement</code> attribute.</p>
+  <div class="flex flex-wrap gap-4">
+    <tw-dropdown placement="bottom-start" class="relative inline-block">
+      <button
+        data-dropdown-trigger
+        class="inline-flex items-center rounded-md bg-gray-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500"
+        type="button"
+      >
+        Bottom Start
+      </button>
+      <ul data-dropdown-menu role="menu" class="hidden mt-2 w-44 rounded-md border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-800">
+        <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Item A</a></li>
+        <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Item B</a></li>
+        <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Item C</a></li>
+      </ul>
+    </tw-dropdown>
+
+    <tw-dropdown placement="bottom-end" class="relative inline-block">
+      <button
+        data-dropdown-trigger
+        class="inline-flex items-center rounded-md bg-gray-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500"
+        type="button"
+      >
+        Bottom End
+      </button>
+      <ul data-dropdown-menu role="menu" class="hidden mt-2 w-44 rounded-md border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-800">
+        <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Item A</a></li>
+        <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Item B</a></li>
+        <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Item C</a></li>
+      </ul>
+    </tw-dropdown>
+
+    <tw-dropdown placement="top-start" class="relative inline-block">
+      <button
+        data-dropdown-trigger
+        class="inline-flex items-center rounded-md bg-gray-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500"
+        type="button"
+      >
+        Top Start
+      </button>
+      <ul data-dropdown-menu role="menu" class="hidden mb-2 w-44 rounded-md border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-800">
+        <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Item A</a></li>
+        <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Item B</a></li>
+        <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Item C</a></li>
+      </ul>
+    </tw-dropdown>
+
+    <tw-dropdown placement="right-start" class="relative inline-block">
+      <button
+        data-dropdown-trigger
+        class="inline-flex items-center rounded-md bg-gray-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500"
+        type="button"
+      >
+        Right Start
+      </button>
+      <ul data-dropdown-menu role="menu" class="hidden ml-2 w-44 rounded-md border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-800">
+        <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Item A</a></li>
+        <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Item B</a></li>
+        <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Item C</a></li>
+      </ul>
+    </tw-dropdown>
+  </div>
+</section>
+
+<!-- Dropdown with Keyboard Navigation -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Dropdown with Keyboard Navigation</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">This dropdown supports keyboard navigation. Click the button then use <tw-kbd size="sm">Arrow Down</tw-kbd> / <tw-kbd size="sm">Arrow Up</tw-kbd> to navigate, <tw-kbd size="sm">Enter</tw-kbd> to select, and <tw-kbd size="sm">Escape</tw-kbd> to close.</p>
+  <tw-dropdown class="relative inline-block">
+    <button
+      data-dropdown-trigger
+      class="inline-flex items-center rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+      type="button"
+    >
+      Account Menu
+      <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+    <ul data-dropdown-menu role="menu" class="hidden mt-2 w-56 rounded-md border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-800">
+      <li class="px-4 py-2 text-xs font-semibold uppercase text-gray-400 dark:text-gray-500">Signed in as user@example.com</li>
+      <li><hr class="my-1 border-gray-200 dark:border-gray-700" /></li>
+      <li><a href="#" role="menuitem" tabindex="0" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:bg-gray-700">Profile</a></li>
+      <li><a href="#" role="menuitem" tabindex="0" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:bg-gray-700">Settings</a></li>
+      <li><a href="#" role="menuitem" tabindex="0" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:bg-gray-700">Notifications</a></li>
+      <li><hr class="my-1 border-gray-200 dark:border-gray-700" /></li>
+      <li><a href="#" role="menuitem" tabindex="0" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-red-400 dark:hover:bg-gray-700 dark:focus:bg-gray-700">Sign out</a></li>
+    </ul>
+  </tw-dropdown>
+</section>
+
+<!-- Styled Dropdown -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Styled Dropdown with Icons</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">A dropdown with icon-decorated menu items.</p>
+  <tw-dropdown class="relative inline-block">
+    <button
+      data-dropdown-trigger
+      class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+      type="button"
+    >
+      Actions
+      <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+    <ul data-dropdown-menu role="menu" class="hidden mt-2 w-56 rounded-md border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-800">
+      <li>
+        <a href="#" role="menuitem" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">
+          <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+          Edit
+        </a>
+      </li>
+      <li>
+        <a href="#" role="menuitem" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">
+          <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+          Duplicate
+        </a>
+      </li>
+      <li><hr class="my-1 border-gray-200 dark:border-gray-700" /></li>
+      <li>
+        <a href="#" role="menuitem" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">
+          <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" /></svg>
+          Archive
+        </a>
+      </li>
+      <li>
+        <a href="#" role="menuitem" class="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:text-red-400 dark:hover:bg-gray-700">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+          Delete
+        </a>
+      </li>
+    </ul>
+  </tw-dropdown>
+</section>

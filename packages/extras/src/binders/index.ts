@@ -5,3 +5,6 @@ export * from "./scroll-position-angle.binder.js";
 export * from "./scrollbar-autoscroll.binder.js";
 export * from "./scrollbar-draggable.binder.js";
 export * from "./sync-element-property.binder.js";
+export * from "./scroll-to-on-event.binder.js";
+export * from "./toggle-attribute.binder.js";
+export * from "./toggle-class.binder.js";

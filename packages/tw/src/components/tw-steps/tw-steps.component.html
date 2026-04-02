@@ -1,0 +1,123 @@
+<!-- Horizontal orientation -->
+<div rv-if="orientation | eq 'horizontal'" class="flex w-full items-start">
+  <div rv-each-item="items" class="flex flex-1 flex-col items-center">
+    <!-- Connector + Circle row -->
+    <div class="flex w-full items-center">
+      <!-- Left connector -->
+      <div
+        class="h-0.5 flex-1"
+        rv-class-bg-green-500="item.state | eq 'completed'"
+        rv-class-bg-blue-500="item.state | eq 'current'"
+        rv-class-bg-gray-300="item.state | eq 'upcoming'"
+        rv-class-dark:bg-gray-600="item.state | eq 'upcoming'"
+        rv-if="item.index | gt 0"
+      ></div>
+      <div rv-if="item.index | eq 0" class="flex-1"></div>
+
+      <!-- Circle -->
+      <div
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold transition-colors"
+        rv-class-bg-green-500="item.state | eq 'completed'"
+        rv-class-text-white="item.state | eq 'completed'"
+        rv-class-bg-blue-500="item.state | eq 'current'"
+        rv-class-text-white="item.state | eq 'current'"
+        rv-class-bg-gray-200="item.state | eq 'upcoming'"
+        rv-class-text-gray-500="item.state | eq 'upcoming'"
+        rv-class-dark:bg-gray-600="item.state | eq 'upcoming'"
+        rv-class-dark:text-gray-400="item.state | eq 'upcoming'"
+        rv-on-click="goToStep | args item"
+      >
+        <!-- Checkmark for completed -->
+        <svg rv-if="item.state | eq 'completed'" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <!-- Number for current/upcoming -->
+        <span rv-if="item.state | eq 'completed' | not" rv-text="item.index | plus 1"></span>
+      </div>
+
+      <!-- Right connector -->
+      <div
+        class="h-0.5 flex-1"
+        rv-class-bg-green-500="item.state | eq 'completed'"
+        rv-class-bg-gray-300="item.state | eq 'completed' | not"
+        rv-class-dark:bg-gray-600="item.state | eq 'completed' | not"
+        rv-if="item.index | lt items.length | minus 1"
+      ></div>
+      <div rv-if="item.index | lt items.length | minus 1 | not" class="flex-1"></div>
+    </div>
+
+    <!-- Label -->
+    <span
+      class="mt-2 text-center text-sm font-medium"
+      rv-class-text-green-600="item.state | eq 'completed'"
+      rv-class-dark:text-green-400="item.state | eq 'completed'"
+      rv-class-text-blue-600="item.state | eq 'current'"
+      rv-class-dark:text-blue-400="item.state | eq 'current'"
+      rv-class-text-gray-500="item.state | eq 'upcoming'"
+      rv-class-dark:text-gray-400="item.state | eq 'upcoming'"
+      rv-text="item.label"
+    ></span>
+
+    <!-- Description -->
+    <span
+      rv-if="item.description"
+      class="mt-1 text-center text-xs text-gray-400 dark:text-gray-500"
+      rv-text="item.description"
+    ></span>
+  </div>
+</div>
+
+<!-- Vertical orientation -->
+<div rv-if="orientation | eq 'vertical'" class="flex flex-col">
+  <div rv-each-item="items" class="flex">
+    <!-- Circle + vertical connector column -->
+    <div class="flex flex-col items-center">
+      <!-- Circle -->
+      <div
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold transition-colors"
+        rv-class-bg-green-500="item.state | eq 'completed'"
+        rv-class-text-white="item.state | eq 'completed'"
+        rv-class-bg-blue-500="item.state | eq 'current'"
+        rv-class-text-white="item.state | eq 'current'"
+        rv-class-bg-gray-200="item.state | eq 'upcoming'"
+        rv-class-text-gray-500="item.state | eq 'upcoming'"
+        rv-class-dark:bg-gray-600="item.state | eq 'upcoming'"
+        rv-class-dark:text-gray-400="item.state | eq 'upcoming'"
+        rv-on-click="goToStep | args item"
+      >
+        <svg rv-if="item.state | eq 'completed'" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span rv-if="item.state | eq 'completed' | not" rv-text="item.index | plus 1"></span>
+      </div>
+
+      <!-- Vertical connector -->
+      <div
+        class="w-0.5 flex-1"
+        rv-class-bg-green-500="item.state | eq 'completed'"
+        rv-class-bg-gray-300="item.state | eq 'completed' | not"
+        rv-class-dark:bg-gray-600="item.state | eq 'completed' | not"
+        rv-if="item.index | lt items.length | minus 1"
+      ></div>
+    </div>
+
+    <!-- Label + description column -->
+    <div class="ml-4 pb-8">
+      <span
+        class="text-sm font-medium"
+        rv-class-text-green-600="item.state | eq 'completed'"
+        rv-class-dark:text-green-400="item.state | eq 'completed'"
+        rv-class-text-blue-600="item.state | eq 'current'"
+        rv-class-dark:text-blue-400="item.state | eq 'current'"
+        rv-class-text-gray-500="item.state | eq 'upcoming'"
+        rv-class-dark:text-gray-400="item.state | eq 'upcoming'"
+        rv-text="item.label"
+      ></span>
+      <p
+        rv-if="item.description"
+        class="mt-1 text-xs text-gray-400 dark:text-gray-500"
+        rv-text="item.description"
+      ></p>
+    </div>
+  </div>
+</div>

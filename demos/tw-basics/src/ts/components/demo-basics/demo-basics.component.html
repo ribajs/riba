@@ -1,0 +1,182 @@
+<h1 class="text-3xl font-bold mb-8">Tailwind Basics Demo</h1>
+
+<!-- Alerts -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Alerts</h2>
+  <div class="space-y-3">
+    <tw-alert type="info" title="Info" message="This is an informational alert." icon="true" dismissible="true"></tw-alert>
+    <tw-alert type="success" title="Success" message="Operation completed successfully!" icon="true" dismissible="true"></tw-alert>
+    <tw-alert type="warning" title="Warning" message="Please review your input carefully." icon="true"></tw-alert>
+    <tw-alert type="error" title="Error" message="Something went wrong. Please try again." icon="true" dismissible="true"></tw-alert>
+  </div>
+</section>
+
+<!-- Badges -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Badges</h2>
+  <div class="flex flex-wrap gap-3 mb-4">
+    <tw-badge type="default">Default</tw-badge>
+    <tw-badge type="info">Info</tw-badge>
+    <tw-badge type="success">Success</tw-badge>
+    <tw-badge type="warning">Warning</tw-badge>
+    <tw-badge type="error">Error</tw-badge>
+  </div>
+  <h3 class="text-lg font-medium mb-2">Outline Badges</h3>
+  <div class="flex flex-wrap gap-3 mb-4">
+    <tw-badge type="default" outline="true">Default</tw-badge>
+    <tw-badge type="info" outline="true">Info</tw-badge>
+    <tw-badge type="success" outline="true">Success</tw-badge>
+    <tw-badge type="warning" outline="true">Warning</tw-badge>
+    <tw-badge type="error" outline="true">Error</tw-badge>
+  </div>
+  <h3 class="text-lg font-medium mb-2">Badge Sizes</h3>
+  <div class="flex flex-wrap items-center gap-3">
+    <tw-badge type="info" size="sm">Small</tw-badge>
+    <tw-badge type="info" size="md">Medium</tw-badge>
+    <tw-badge type="info" size="lg">Large</tw-badge>
+  </div>
+</section>
+
+<!-- Avatars -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Avatars</h2>
+  <h3 class="text-lg font-medium mb-2">Sizes</h3>
+  <div class="flex items-end gap-4 mb-4">
+    <tw-avatar size="xs" placeholder="XS"></tw-avatar>
+    <tw-avatar size="sm" placeholder="SM"></tw-avatar>
+    <tw-avatar size="md" placeholder="MD"></tw-avatar>
+    <tw-avatar size="lg" placeholder="LG"></tw-avatar>
+    <tw-avatar size="xl" placeholder="XL"></tw-avatar>
+  </div>
+  <h3 class="text-lg font-medium mb-2">With Status</h3>
+  <div class="flex items-end gap-4 mb-4">
+    <tw-avatar size="lg" placeholder="Online" status="online"></tw-avatar>
+    <tw-avatar size="lg" placeholder="Offline" status="offline"></tw-avatar>
+    <tw-avatar size="lg" placeholder="Busy" status="busy"></tw-avatar>
+    <tw-avatar size="lg" placeholder="Away" status="away"></tw-avatar>
+  </div>
+  <h3 class="text-lg font-medium mb-2">With Image</h3>
+  <div class="flex items-end gap-4">
+    <tw-avatar size="md" src="https://i.pravatar.cc/80?img=1" alt="User 1"></tw-avatar>
+    <tw-avatar size="lg" src="https://i.pravatar.cc/112?img=2" alt="User 2" status="online"></tw-avatar>
+    <tw-avatar size="xl" src="https://i.pravatar.cc/160?img=3" alt="User 3" status="busy"></tw-avatar>
+  </div>
+</section>
+
+<!-- Cards -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Cards</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <tw-card title="Basic Card" image-src="https://picsum.photos/seed/card1/400/200" image-alt="Sample image">
+      <p class="text-gray-600 dark:text-gray-400">This is a basic card with an image and some body text content.</p>
+    </tw-card>
+    <tw-card title="Compact Card" compact="true">
+      <p class="text-gray-600 dark:text-gray-400">A compact card without an image. Useful for dense layouts.</p>
+    </tw-card>
+    <tw-card title="Another Card" image-src="https://picsum.photos/seed/card2/400/200" image-alt="Another image">
+      <p class="text-gray-600 dark:text-gray-400">Cards can contain any content, including other components.</p>
+    </tw-card>
+  </div>
+</section>
+
+<!-- Kbd -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Keyboard Keys</h2>
+  <div class="space-y-3">
+    <p class="text-gray-700 dark:text-gray-300">
+      Press <tw-kbd size="sm">Ctrl</tw-kbd> + <tw-kbd size="sm">C</tw-kbd> to copy.
+    </p>
+    <p class="text-gray-700 dark:text-gray-300">
+      Press <tw-kbd>Ctrl</tw-kbd> + <tw-kbd>Shift</tw-kbd> + <tw-kbd>I</tw-kbd> to open DevTools.
+    </p>
+    <p class="text-gray-700 dark:text-gray-300">
+      Press <tw-kbd size="lg">Enter</tw-kbd> to submit the form.
+    </p>
+  </div>
+</section>
+
+<!-- Skeleton -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Skeleton Loading</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div>
+      <h3 class="text-lg font-medium mb-2">Text Lines</h3>
+      <tw-skeleton type="text" lines="4"></tw-skeleton>
+    </div>
+    <div>
+      <h3 class="text-lg font-medium mb-2">Circle</h3>
+      <tw-skeleton type="circle" width="80px" height="80px"></tw-skeleton>
+    </div>
+    <div>
+      <h3 class="text-lg font-medium mb-2">Rectangle</h3>
+      <tw-skeleton type="rect" width="100%" height="120px"></tw-skeleton>
+    </div>
+  </div>
+  <div class="mt-4">
+    <h3 class="text-lg font-medium mb-2">Card Skeleton</h3>
+    <tw-skeleton type="card"></tw-skeleton>
+  </div>
+</section>
+
+<!-- Progress -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Progress Bars</h2>
+  <div class="space-y-4">
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Default (25%)</p>
+      <tw-progress value="25" max="100" show-label="true"></tw-progress>
+    </div>
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Success (50%)</p>
+      <tw-progress value="50" max="100" type="success" show-label="true"></tw-progress>
+    </div>
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Warning (75%)</p>
+      <tw-progress value="75" max="100" type="warning" show-label="true"></tw-progress>
+    </div>
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Error (90%)</p>
+      <tw-progress value="90" max="100" type="error" show-label="true"></tw-progress>
+    </div>
+    <h3 class="text-lg font-medium mb-2">Sizes</h3>
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Extra Small</p>
+      <tw-progress value="60" max="100" size="xs"></tw-progress>
+    </div>
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Small</p>
+      <tw-progress value="60" max="100" size="sm"></tw-progress>
+    </div>
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Medium</p>
+      <tw-progress value="60" max="100" size="md"></tw-progress>
+    </div>
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Large</p>
+      <tw-progress value="60" max="100" size="lg" show-label="true"></tw-progress>
+    </div>
+  </div>
+</section>
+
+<!-- Rating -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Rating</h2>
+  <div class="space-y-4">
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Interactive (click to rate)</p>
+      <tw-rating value="3" max="5" size="lg"></tw-rating>
+    </div>
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Read-only (4.5 out of 5)</p>
+      <tw-rating value="4.5" max="5" readonly="true" size="md"></tw-rating>
+    </div>
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Small rating</p>
+      <tw-rating value="2" max="5" size="sm"></tw-rating>
+    </div>
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Extra large rating (out of 10)</p>
+      <tw-rating value="7" max="10" size="xl" readonly="true"></tw-rating>
+    </div>
+  </div>
+</section>

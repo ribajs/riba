@@ -1,0 +1,60 @@
+<h1 class="text-3xl font-bold mb-8">TW Accordion &amp; Collapse Demo</h1>
+
+<!-- Accordion -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Accordion</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">An accordion with three items. Only one item can be open at a time.</p>
+  <tw-accordion show-only-one="true">
+    <template title="What is Riba?">
+      <p>Riba.js is a TypeScript declarative data-binding and Web Components framework. It evolved from Rivets.js and tinybind, offering a modern approach to building reactive user interfaces with custom elements and template binding.</p>
+    </template>
+    <template title="What is Tailwind?">
+      <p>Tailwind CSS is a utility-first CSS framework that provides low-level utility classes to build custom designs. Instead of pre-designed components, it gives you building blocks to create any design directly in your markup.</p>
+    </template>
+    <template title="How do they work together?">
+      <p>The <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded">@ribajs/tw</code> module brings Tailwind-styled UI components into the Riba.js ecosystem. It provides ready-to-use Web Components like accordions, dropdowns, forms, and more &mdash; all styled with Tailwind CSS utility classes and powered by Riba.js data binding.</p>
+    </template>
+  </tw-accordion>
+</section>
+
+<!-- Accordion (multiple open) -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Accordion (Multiple Open)</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">An accordion that allows multiple items to be open simultaneously.</p>
+  <tw-accordion show-only-one="false">
+    <template title="First Section" show="true">
+      <p>This section is open by default. You can open other sections without closing this one.</p>
+    </template>
+    <template title="Second Section">
+      <p>Open this alongside the first section to see multiple panels expanded at once.</p>
+    </template>
+    <template title="Third Section">
+      <p>All three sections can be open at the same time when <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded">show-only-one</code> is set to <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded">false</code>.</p>
+    </template>
+  </tw-accordion>
+</section>
+
+<!-- Standalone Collapse -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Standalone Collapse</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">A standalone collapsible section, independent of any accordion group.</p>
+  <div class="space-y-4">
+    <tw-collapse title="Click to toggle details" content="This is a standalone collapse component. It works independently and can be used anywhere you need expandable/collapsible content. The transition is smooth and animated."></tw-collapse>
+    <tw-collapse title="Another collapsible section" collapsed="false" content="This collapse starts in the expanded state because the collapsed attribute is set to false. Click the button above to collapse it."></tw-collapse>
+  </div>
+</section>
+
+<!-- Collapse with rich content -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Collapse with Rich Content</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">A collapse component can contain any HTML content.</p>
+  <tw-collapse title="Show feature list">
+    <ul class="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300">
+      <li>Smooth animated transitions</li>
+      <li>Keyboard accessible</li>
+      <li>ARIA attributes for screen readers</li>
+      <li>Works standalone or inside an accordion</li>
+      <li>Customizable via Tailwind classes</li>
+    </ul>
+  </tw-collapse>
+</section>

@@ -1,0 +1,66 @@
+<h1 class="text-3xl font-bold mb-8">TW Notifications Demo</h1>
+
+<!-- Notification Container -->
+<tw-notification-container channel-name="toast"></tw-notification-container>
+
+<!-- Toast Buttons -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Toast Notifications</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">
+    Click the buttons below to trigger toast notifications. They appear in the bottom-right corner and auto-dismiss after a timeout.
+  </p>
+  <div class="flex flex-wrap gap-3">
+    <button
+      rv-on-click="showInfoToast"
+      class="rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+    >
+      Show Info Toast
+    </button>
+    <button
+      rv-on-click="showSuccessToast"
+      class="rounded-md bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+    >
+      Show Success Toast
+    </button>
+    <button
+      rv-on-click="showWarningToast"
+      class="rounded-md bg-yellow-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
+    >
+      Show Warning Toast
+    </button>
+    <button
+      rv-on-click="showErrorToast"
+      class="rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+    >
+      Show Error Toast (no auto-dismiss)
+    </button>
+  </div>
+</section>
+
+<!-- Modal Button -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Modal Notification</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">
+    Click the button below to open a modal dialog notification.
+  </p>
+  <button
+    rv-on-click="showModal"
+    class="rounded-md bg-purple-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+  >
+    Show Modal
+  </button>
+</section>
+
+<!-- Static Alerts -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Inline Alerts</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">
+    Static alert components embedded directly in the page.
+  </p>
+  <div class="space-y-3">
+    <tw-alert type="info" title="Information" message="This is a static info alert displayed inline." icon="true" dismissible="true"></tw-alert>
+    <tw-alert type="success" title="Success" message="Your changes have been saved successfully." icon="true" dismissible="true"></tw-alert>
+    <tw-alert type="warning" title="Warning" message="Your session will expire in 5 minutes." icon="true" dismissible="true"></tw-alert>
+    <tw-alert type="error" title="Error" message="Failed to connect to the server. Please check your network." icon="true" dismissible="true"></tw-alert>
+  </div>
+</section>

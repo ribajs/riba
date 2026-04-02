@@ -1,0 +1,27 @@
+<div class="divide-y divide-gray-200 rounded-lg border border-gray-200 dark:divide-gray-700 dark:border-gray-700">
+  <div rv-each-item="items" class="tw-accordion-item">
+    <div class="tw-accordion-header">
+      <button
+        type="button"
+        class="flex w-full items-center justify-between px-4 py-3 text-left font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 dark:text-white dark:hover:bg-gray-800"
+        rv-on-click="toggle | args item %item%"
+        rv-aria-expanded="item.show"
+      >
+        <span rv-html="item.title"></span>
+        <svg
+          class="h-4 w-4 shrink-0 transition-transform duration-200"
+          rv-class-rotate-180="item.show"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+    </div>
+    <div class="overflow-hidden" rv-data-index="%item%" style="transition: max-height 0.3s ease">
+      <div class="px-4 py-3 text-gray-700 dark:text-gray-300" rv-template="item.content"></div>
+    </div>
+  </div>
+</div>

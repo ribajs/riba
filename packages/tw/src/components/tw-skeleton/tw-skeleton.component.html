@@ -1,0 +1,39 @@
+<div role="status" class="animate-pulse" aria-label="Loading...">
+  <!-- Text skeleton -->
+  <div rv-if="type | eq 'text'">
+    <div
+      rv-each-line="lineArray"
+      class="mb-2.5 h-3 rounded-full bg-gray-200 dark:bg-gray-700"
+      rv-style-width="width"
+      rv-style-height="height"
+    ></div>
+  </div>
+
+  <!-- Circle skeleton -->
+  <div
+    rv-if="type | eq 'circle'"
+    class="rounded-full bg-gray-200 dark:bg-gray-700"
+    rv-style-width="width | default 'w-12'"
+    rv-style-height="height | default 'h-12'"
+    style="width: 48px; height: 48px;"
+  ></div>
+
+  <!-- Rectangle skeleton -->
+  <div
+    rv-if="type | eq 'rect'"
+    class="rounded-lg bg-gray-200 dark:bg-gray-700"
+    rv-style-width="width"
+    rv-style-height="height"
+    style="height: 120px;"
+  ></div>
+
+  <!-- Card skeleton -->
+  <div rv-if="type | eq 'card'" class="w-full rounded-lg border border-gray-200 p-4 shadow dark:border-gray-700">
+    <div class="mb-4 h-36 w-full rounded-lg bg-gray-200 dark:bg-gray-700"></div>
+    <div class="mb-2.5 h-4 w-3/4 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+    <div class="mb-2.5 h-3 w-full rounded-full bg-gray-200 dark:bg-gray-700"></div>
+    <div class="h-3 w-5/6 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+  </div>
+
+  <span class="sr-only">Loading...</span>
+</div>

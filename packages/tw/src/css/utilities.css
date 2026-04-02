@@ -1,0 +1,17 @@
+/* ── Custom styles for @ribajs/tw components ── */
+
+/* Hide scrollbar while keeping scroll functionality */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Prevent drag ghost images (used by slideshow/slider drag mode) */
+.drag-none {
+  -webkit-user-drag: none;
+  user-drag: none;
+  user-select: none;
+}

@@ -1066,7 +1066,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emnapi/core@npm:^1.4.3":
+"@emnapi/core@npm:^1.4.3, @emnapi/core@npm:^1.8.1":
   version: 1.9.1
   resolution: "@emnapi/core@npm:1.9.1"
   dependencies:
@@ -1076,7 +1076,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emnapi/runtime@npm:^1.4.3, @emnapi/runtime@npm:^1.7.0":
+"@emnapi/runtime@npm:^1.4.3, @emnapi/runtime@npm:^1.7.0, @emnapi/runtime@npm:^1.8.1":
   version: 1.9.1
   resolution: "@emnapi/runtime@npm:1.9.1"
   dependencies:
@@ -1085,7 +1085,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emnapi/wasi-threads@npm:1.2.0":
+"@emnapi/wasi-threads@npm:1.2.0, @emnapi/wasi-threads@npm:^1.1.0":
   version: 1.2.0
   resolution: "@emnapi/wasi-threads@npm:1.2.0"
   dependencies:
@@ -1337,6 +1337,32 @@ __metadata:
     "@eslint/core": "npm:^1.1.1"
     levn: "npm:^0.4.1"
   checksum: 10/8af22d94720b2474a992a80c5be7584baf75821386d25c34966b359fbc1e3a319989df721404c48c08b20e115683d6d0b344793dc354f5916c2d867c6c0aa04e
+  languageName: node
+  linkType: hard
+
+"@floating-ui/core@npm:^1.7.5":
+  version: 1.7.5
+  resolution: "@floating-ui/core@npm:1.7.5"
+  dependencies:
+    "@floating-ui/utils": "npm:^0.2.11"
+  checksum: 10/fecdc9b3ce93f02bf78a6114b93730a4cb9fa8234c62f9a949016186297a039c9f9cd3c5c81ff74b93ebddf0b32048c4af7a528afe7904b75423ed2e7491b888
+  languageName: node
+  linkType: hard
+
+"@floating-ui/dom@npm:^1.7.0":
+  version: 1.7.6
+  resolution: "@floating-ui/dom@npm:1.7.6"
+  dependencies:
+    "@floating-ui/core": "npm:^1.7.5"
+    "@floating-ui/utils": "npm:^0.2.11"
+  checksum: 10/84dff2ffdf85c8b92d7edafc543c55869abbeaeb3007fa983159467e050153b507a0f5fe8e84f88c3f28c35a82de9df9c20a6eef5560cbba3afae19141444ff2
+  languageName: node
+  linkType: hard
+
+"@floating-ui/utils@npm:^0.2.11":
+  version: 0.2.11
+  resolution: "@floating-ui/utils@npm:0.2.11"
+  checksum: 10/72150138ba1c274d757a1da85233202fa9fdfd2272ec1fb0883eb0ffdf138863af81573049ed2c20b98adb4b7ae2236065541ce14037fe328955089831a678d5
   languageName: node
   linkType: hard
 
@@ -3540,6 +3566,184 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/demo-tw-accordion@workspace:demos/tw-accordion":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-tw-accordion@workspace:demos/tw-accordion"
+  dependencies:
+    "@ribajs/core": "workspace:^"
+    "@ribajs/eslint-config": "workspace:^"
+    "@ribajs/extras": "workspace:^"
+    "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/tw": "workspace:^"
+    "@ribajs/utils": "workspace:^"
+    "@ribajs/vite-config": "workspace:^"
+    "@tailwindcss/vite": "npm:^4.2.0"
+    eslint: "npm:^10.1.0"
+    serve: "npm:^14.2.6"
+    tailwindcss: "npm:^4.2.0"
+    typescript: "npm:6.0.2"
+    vite: "npm:^8.0.3"
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/demo-tw-basics@workspace:demos/tw-basics":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-tw-basics@workspace:demos/tw-basics"
+  dependencies:
+    "@ribajs/core": "workspace:^"
+    "@ribajs/eslint-config": "workspace:^"
+    "@ribajs/extras": "workspace:^"
+    "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/tw": "workspace:^"
+    "@ribajs/utils": "workspace:^"
+    "@ribajs/vite-config": "workspace:^"
+    "@tailwindcss/vite": "npm:^4.2.0"
+    eslint: "npm:^10.1.0"
+    serve: "npm:^14.2.6"
+    tailwindcss: "npm:^4.2.0"
+    typescript: "npm:6.0.2"
+    vite: "npm:^8.0.3"
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/demo-tw-dropdown@workspace:demos/tw-dropdown":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-tw-dropdown@workspace:demos/tw-dropdown"
+  dependencies:
+    "@ribajs/core": "workspace:^"
+    "@ribajs/eslint-config": "workspace:^"
+    "@ribajs/extras": "workspace:^"
+    "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/tw": "workspace:^"
+    "@ribajs/utils": "workspace:^"
+    "@ribajs/vite-config": "workspace:^"
+    "@tailwindcss/vite": "npm:^4.2.0"
+    eslint: "npm:^10.1.0"
+    serve: "npm:^14.2.6"
+    tailwindcss: "npm:^4.2.0"
+    typescript: "npm:6.0.2"
+    vite: "npm:^8.0.3"
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/demo-tw-form@workspace:demos/tw-form":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-tw-form@workspace:demos/tw-form"
+  dependencies:
+    "@ribajs/core": "workspace:^"
+    "@ribajs/eslint-config": "workspace:^"
+    "@ribajs/extras": "workspace:^"
+    "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/tw": "workspace:^"
+    "@ribajs/utils": "workspace:^"
+    "@ribajs/vite-config": "workspace:^"
+    "@tailwindcss/vite": "npm:^4.2.0"
+    eslint: "npm:^10.1.0"
+    serve: "npm:^14.2.6"
+    tailwindcss: "npm:^4.2.0"
+    typescript: "npm:6.0.2"
+    vite: "npm:^8.0.3"
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/demo-tw-notifications@workspace:demos/tw-notifications":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-tw-notifications@workspace:demos/tw-notifications"
+  dependencies:
+    "@ribajs/core": "workspace:^"
+    "@ribajs/eslint-config": "workspace:^"
+    "@ribajs/events": "workspace:^"
+    "@ribajs/extras": "workspace:^"
+    "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/tw": "workspace:^"
+    "@ribajs/utils": "workspace:^"
+    "@ribajs/vite-config": "workspace:^"
+    "@tailwindcss/vite": "npm:^4.2.0"
+    eslint: "npm:^10.1.0"
+    serve: "npm:^14.2.6"
+    tailwindcss: "npm:^4.2.0"
+    typescript: "npm:6.0.2"
+    vite: "npm:^8.0.3"
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/demo-tw-sidebar@workspace:demos/tw-sidebar":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-tw-sidebar@workspace:demos/tw-sidebar"
+  dependencies:
+    "@ribajs/core": "workspace:^"
+    "@ribajs/eslint-config": "workspace:^"
+    "@ribajs/extras": "workspace:^"
+    "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/tw": "workspace:^"
+    "@ribajs/utils": "workspace:^"
+    "@ribajs/vite-config": "workspace:^"
+    "@tailwindcss/vite": "npm:^4.2.0"
+    eslint: "npm:^10.1.0"
+    serve: "npm:^14.2.6"
+    tailwindcss: "npm:^4.2.0"
+    typescript: "npm:6.0.2"
+    vite: "npm:^8.0.3"
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/demo-tw-slideshow@workspace:demos/tw-slideshow":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-tw-slideshow@workspace:demos/tw-slideshow"
+  dependencies:
+    "@ribajs/core": "workspace:^"
+    "@ribajs/extras": "workspace:^"
+    "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/tw": "workspace:^"
+    "@ribajs/utils": "workspace:^"
+    "@ribajs/vite-config": "workspace:^"
+    "@tailwindcss/vite": "npm:^4.2.0"
+    tailwindcss: "npm:^4.2.0"
+    typescript: "npm:6.0.2"
+    vite: "npm:^8.0.3"
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/demo-tw-tabs@workspace:demos/tw-tabs":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-tw-tabs@workspace:demos/tw-tabs"
+  dependencies:
+    "@ribajs/core": "workspace:^"
+    "@ribajs/eslint-config": "workspace:^"
+    "@ribajs/extras": "workspace:^"
+    "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/tw": "workspace:^"
+    "@ribajs/utils": "workspace:^"
+    "@ribajs/vite-config": "workspace:^"
+    "@tailwindcss/vite": "npm:^4.2.0"
+    eslint: "npm:^10.1.0"
+    serve: "npm:^14.2.6"
+    tailwindcss: "npm:^4.2.0"
+    typescript: "npm:6.0.2"
+    vite: "npm:^8.0.3"
+  languageName: unknown
+  linkType: soft
+
+"@ribajs/demo-tw-theme@workspace:demos/tw-theme":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-tw-theme@workspace:demos/tw-theme"
+  dependencies:
+    "@ribajs/core": "workspace:^"
+    "@ribajs/eslint-config": "workspace:^"
+    "@ribajs/extras": "workspace:^"
+    "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/tw": "workspace:^"
+    "@ribajs/utils": "workspace:^"
+    "@ribajs/vite-config": "workspace:^"
+    "@tailwindcss/vite": "npm:^4.2.0"
+    eslint: "npm:^10.1.0"
+    serve: "npm:^14.2.6"
+    tailwindcss: "npm:^4.2.0"
+    typescript: "npm:6.0.2"
+    vite: "npm:^8.0.3"
+  languageName: unknown
+  linkType: soft
+
 "@ribajs/doc@workspace:infra/doc":
   version: 0.0.0-use.local
   resolution: "@ribajs/doc@workspace:infra/doc"
@@ -4287,6 +4491,31 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/tw@workspace:^, @ribajs/tw@workspace:packages/tw":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/tw@workspace:packages/tw"
+  dependencies:
+    "@floating-ui/dom": "npm:^1.7.0"
+    "@ribajs/core": "workspace:^"
+    "@ribajs/eslint-config": "workspace:^"
+    "@ribajs/events": "workspace:^"
+    "@ribajs/extras": "workspace:^"
+    "@ribajs/jsx": "workspace:^"
+    "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/types": "workspace:^"
+    "@ribajs/utils": "workspace:^"
+    "@types/jest": "npm:^30.0.0"
+    "@typescript-eslint/eslint-plugin": "npm:^8.57.2"
+    "@typescript-eslint/parser": "npm:^8.57.2"
+    "@yarnpkg/pnpify": "npm:^4.1.6"
+    eslint: "npm:^10.1.0"
+    eslint-config-prettier: "npm:^10.1.8"
+    eslint-plugin-prettier: "npm:^5.5.5"
+    prettier: "npm:^3.8.1"
+    typescript: "npm:6.0.2"
+  languageName: unknown
+  linkType: soft
+
 "@ribajs/types@workspace:^, @ribajs/types@workspace:infra/types":
   version: 0.0.0-use.local
   resolution: "@ribajs/types@workspace:infra/types"
@@ -4680,6 +4909,170 @@ __metadata:
   dependencies:
     defer-to-connect: "npm:^2.0.0"
   checksum: 10/c29df3bcec6fc3bdec2b17981d89d9c9fc9bd7d0c9bcfe92821dc533f4440bc890ccde79971838b4ceed1921d456973c4180d7175ee1d0023ad0562240a58d95
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/node@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@tailwindcss/node@npm:4.2.2"
+  dependencies:
+    "@jridgewell/remapping": "npm:^2.3.5"
+    enhanced-resolve: "npm:^5.19.0"
+    jiti: "npm:^2.6.1"
+    lightningcss: "npm:1.32.0"
+    magic-string: "npm:^0.30.21"
+    source-map-js: "npm:^1.2.1"
+    tailwindcss: "npm:4.2.2"
+  checksum: 10/7c3eaa66e644ad6d369a869f6755b9880032e22103fd90ff0bbc538c2177f149a400c90064ca0cfadb82ff1c30651f19931d3af80ec3532e06be0139cdbf8620
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/oxide-android-arm64@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@tailwindcss/oxide-android-arm64@npm:4.2.2"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/oxide-darwin-arm64@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@tailwindcss/oxide-darwin-arm64@npm:4.2.2"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/oxide-darwin-x64@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@tailwindcss/oxide-darwin-x64@npm:4.2.2"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/oxide-freebsd-x64@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@tailwindcss/oxide-freebsd-x64@npm:4.2.2"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/oxide-linux-arm-gnueabihf@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@tailwindcss/oxide-linux-arm-gnueabihf@npm:4.2.2"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/oxide-linux-arm64-gnu@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@tailwindcss/oxide-linux-arm64-gnu@npm:4.2.2"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/oxide-linux-arm64-musl@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@tailwindcss/oxide-linux-arm64-musl@npm:4.2.2"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/oxide-linux-x64-gnu@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@tailwindcss/oxide-linux-x64-gnu@npm:4.2.2"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/oxide-linux-x64-musl@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@tailwindcss/oxide-linux-x64-musl@npm:4.2.2"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/oxide-wasm32-wasi@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@tailwindcss/oxide-wasm32-wasi@npm:4.2.2"
+  dependencies:
+    "@emnapi/core": "npm:^1.8.1"
+    "@emnapi/runtime": "npm:^1.8.1"
+    "@emnapi/wasi-threads": "npm:^1.1.0"
+    "@napi-rs/wasm-runtime": "npm:^1.1.1"
+    "@tybys/wasm-util": "npm:^0.10.1"
+    tslib: "npm:^2.8.1"
+  conditions: cpu=wasm32
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/oxide-win32-arm64-msvc@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@tailwindcss/oxide-win32-arm64-msvc@npm:4.2.2"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/oxide-win32-x64-msvc@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@tailwindcss/oxide-win32-x64-msvc@npm:4.2.2"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/oxide@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@tailwindcss/oxide@npm:4.2.2"
+  dependencies:
+    "@tailwindcss/oxide-android-arm64": "npm:4.2.2"
+    "@tailwindcss/oxide-darwin-arm64": "npm:4.2.2"
+    "@tailwindcss/oxide-darwin-x64": "npm:4.2.2"
+    "@tailwindcss/oxide-freebsd-x64": "npm:4.2.2"
+    "@tailwindcss/oxide-linux-arm-gnueabihf": "npm:4.2.2"
+    "@tailwindcss/oxide-linux-arm64-gnu": "npm:4.2.2"
+    "@tailwindcss/oxide-linux-arm64-musl": "npm:4.2.2"
+    "@tailwindcss/oxide-linux-x64-gnu": "npm:4.2.2"
+    "@tailwindcss/oxide-linux-x64-musl": "npm:4.2.2"
+    "@tailwindcss/oxide-wasm32-wasi": "npm:4.2.2"
+    "@tailwindcss/oxide-win32-arm64-msvc": "npm:4.2.2"
+    "@tailwindcss/oxide-win32-x64-msvc": "npm:4.2.2"
+  dependenciesMeta:
+    "@tailwindcss/oxide-android-arm64":
+      optional: true
+    "@tailwindcss/oxide-darwin-arm64":
+      optional: true
+    "@tailwindcss/oxide-darwin-x64":
+      optional: true
+    "@tailwindcss/oxide-freebsd-x64":
+      optional: true
+    "@tailwindcss/oxide-linux-arm-gnueabihf":
+      optional: true
+    "@tailwindcss/oxide-linux-arm64-gnu":
+      optional: true
+    "@tailwindcss/oxide-linux-arm64-musl":
+      optional: true
+    "@tailwindcss/oxide-linux-x64-gnu":
+      optional: true
+    "@tailwindcss/oxide-linux-x64-musl":
+      optional: true
+    "@tailwindcss/oxide-wasm32-wasi":
+      optional: true
+    "@tailwindcss/oxide-win32-arm64-msvc":
+      optional: true
+    "@tailwindcss/oxide-win32-x64-msvc":
+      optional: true
+  checksum: 10/acc2399cfc7e9b60457ab0a7eaaea17d5496c9cc02f49a5b04d51d7c54062c644872ac1168062e780b2fab8f3a9027394989bbe786416ac828ace4938a8e8f37
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/vite@npm:^4.2.0":
+  version: 4.2.2
+  resolution: "@tailwindcss/vite@npm:4.2.2"
+  dependencies:
+    "@tailwindcss/node": "npm:4.2.2"
+    "@tailwindcss/oxide": "npm:4.2.2"
+    tailwindcss: "npm:4.2.2"
+  peerDependencies:
+    vite: ^5.2.0 || ^6 || ^7 || ^8
+  checksum: 10/b0881d1101a6e75d1ceb33a595073bc553b2c53d37c453e3d27b8b3a5113113d860f92ad108dd1d5f3727e9a68144346389714a940a46dbb4140d393a1b6d39f
   languageName: node
   linkType: hard
 
@@ -7283,6 +7676,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"enhanced-resolve@npm:^5.19.0":
+  version: 5.20.1
+  resolution: "enhanced-resolve@npm:5.20.1"
+  dependencies:
+    graceful-fs: "npm:^4.2.4"
+    tapable: "npm:^2.3.0"
+  checksum: 10/588afc56de97334e5742faebcf8177a504da08ea817d399f9901f35d8e9e5e6fa86b4c2ce95a99081f947764e09c9991cc0fc0ba5751bae455c329643a709187
+  languageName: node
+  linkType: hard
+
 "entities@npm:^4.2.0":
   version: 4.5.0
   resolution: "entities@npm:4.5.0"
@@ -8390,7 +8793,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graceful-fs@npm:^4.2.11, graceful-fs@npm:^4.2.6":
+"graceful-fs@npm:^4.2.11, graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6":
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
   checksum: 10/bf152d0ed1dc159239db1ba1f74fdbc40cb02f626770dcd5815c427ce0688c2635a06ed69af364396da4636d0408fcf7d4afdf7881724c3307e46aff30ca49e2
@@ -9579,6 +9982,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jiti@npm:^2.6.1":
+  version: 2.6.1
+  resolution: "jiti@npm:2.6.1"
+  bin:
+    jiti: lib/jiti-cli.mjs
+  checksum: 10/8cd72c5fd03a0502564c3f46c49761090f6dadead21fa191b73535724f095ad86c2fa89ee6fe4bc3515337e8d406cc8fb2d37b73fa0c99a34584bac35cd4a4de
+  languageName: node
+  linkType: hard
+
 "jquery@npm:^4.0.0":
   version: 4.0.0
   resolution: "jquery@npm:4.0.0"
@@ -9872,7 +10284,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lightningcss@npm:^1.32.0":
+"lightningcss@npm:1.32.0, lightningcss@npm:^1.32.0":
   version: 1.32.0
   resolution: "lightningcss@npm:1.32.0"
   dependencies:
@@ -10037,7 +10449,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.30.17":
+"magic-string@npm:^0.30.17, magic-string@npm:^0.30.21":
   version: 0.30.21
   resolution: "magic-string@npm:0.30.21"
   dependencies:
@@ -12871,6 +13283,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tailwindcss@npm:4.2.2, tailwindcss@npm:^4.2.0":
+  version: 4.2.2
+  resolution: "tailwindcss@npm:4.2.2"
+  checksum: 10/f468b441d32b7278e7e2639b0f95f59fb8a52678e8c3a027f636ec51006ed32f68aeb2e66eaf81b958b234745d2ccae4757e4ba5dda23c5e158065060f90aa78
+  languageName: node
+  linkType: hard
+
+"tapable@npm:^2.3.0":
+  version: 2.3.2
+  resolution: "tapable@npm:2.3.2"
+  checksum: 10/fd3affe2e34efb3970883f934b1828f10b48dffb1eb71a52b7f955bfdd88bf80e94ec388704d95334f72ddf77e34d813b19e1f4bf56897d20252fa025d44bede
+  languageName: node
+  linkType: hard
+
 "tar@npm:^7.5.3, tar@npm:^7.5.4":
   version: 7.5.13
   resolution: "tar@npm:7.5.13"
@@ -13118,7 +13544,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.1.0, tslib@npm:^2.4.0":
+"tslib@npm:^2.1.0, tslib@npm:^2.4.0, tslib@npm:^2.8.1":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7

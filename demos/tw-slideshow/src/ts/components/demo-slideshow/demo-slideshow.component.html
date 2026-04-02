@@ -1,0 +1,88 @@
+<div class="max-w-6xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-8 text-gray-900 dark:text-white">Tailwind Slideshow Demo</h1>
+
+  <!-- Basic Slideshow -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Basic Slideshow</h2>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">A slideshow with 4 images, prev/next controls, indicator dots, and desktop drag-scroll enabled.</p>
+    <tw-slideshow controls="true" indicators="true" sticky="true" drag="true">
+      <div class="slideshow-row flex overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none">
+        <div class="slide relative shrink-0 w-full snap-start">
+          <img loading="lazy" class="w-full h-80 object-cover rounded-lg" src="https://picsum.photos/1200/480?random=1" alt="Slide 1">
+          <div class="absolute bottom-4 left-4 rounded bg-black/50 px-4 py-2 text-white">
+            <h3 class="text-lg font-semibold">First Slide</h3>
+            <p class="text-sm">A basic slideshow with controls and indicators</p>
+          </div>
+        </div>
+        <div class="slide relative shrink-0 w-full snap-start">
+          <img loading="lazy" class="w-full h-80 object-cover rounded-lg" src="https://picsum.photos/1200/480?random=2" alt="Slide 2">
+          <div class="absolute bottom-4 left-4 rounded bg-black/50 px-4 py-2 text-white">
+            <h3 class="text-lg font-semibold">Second Slide</h3>
+            <p class="text-sm">Navigate with arrows or indicators</p>
+          </div>
+        </div>
+        <div class="slide relative shrink-0 w-full snap-start">
+          <img loading="lazy" class="w-full h-80 object-cover rounded-lg" src="https://picsum.photos/1200/480?random=3" alt="Slide 3">
+        </div>
+        <div class="slide relative shrink-0 w-full snap-start">
+          <img loading="lazy" class="w-full h-80 object-cover rounded-lg" src="https://picsum.photos/1200/480?random=4" alt="Slide 4">
+        </div>
+      </div>
+    </tw-slideshow>
+  </section>
+
+  <!-- Carousel with Autoplay -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Carousel with Autoplay</h2>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">A multi-column carousel that auto-advances every 3 seconds.</p>
+    <tw-carousel autoplay="true" autoplay-interval="3000" controls="true" indicators="true" columns="3">
+      <div class="slideshow-row flex overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none gap-4">
+        <div class="slide shrink-0 snap-start" style="flex: 0 0 33.333%">
+          <img loading="lazy" class="w-full h-48 object-cover rounded-lg" src="https://picsum.photos/600/300?random=10" alt="Carousel 1">
+        </div>
+        <div class="slide shrink-0 snap-start" style="flex: 0 0 33.333%">
+          <img loading="lazy" class="w-full h-48 object-cover rounded-lg" src="https://picsum.photos/600/300?random=11" alt="Carousel 2">
+        </div>
+        <div class="slide shrink-0 snap-start" style="flex: 0 0 33.333%">
+          <img loading="lazy" class="w-full h-48 object-cover rounded-lg" src="https://picsum.photos/600/300?random=12" alt="Carousel 3">
+        </div>
+        <div class="slide shrink-0 snap-start" style="flex: 0 0 33.333%">
+          <img loading="lazy" class="w-full h-48 object-cover rounded-lg" src="https://picsum.photos/600/300?random=13" alt="Carousel 4">
+        </div>
+        <div class="slide shrink-0 snap-start" style="flex: 0 0 33.333%">
+          <img loading="lazy" class="w-full h-48 object-cover rounded-lg" src="https://picsum.photos/600/300?random=14" alt="Carousel 5">
+        </div>
+        <div class="slide shrink-0 snap-start" style="flex: 0 0 33.333%">
+          <img loading="lazy" class="w-full h-48 object-cover rounded-lg" src="https://picsum.photos/600/300?random=15" alt="Carousel 6">
+        </div>
+      </div>
+    </tw-carousel>
+  </section>
+
+  <!-- Slideshow with Video Slide -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Slideshow with Video Slide</h2>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">A slideshow containing a video that auto-plays when its slide is active.</p>
+    <tw-slideshow controls="true" indicators="true" sticky="true">
+      <div class="slideshow-row flex overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none">
+        <div class="slide relative shrink-0 w-full snap-start">
+          <img loading="lazy" class="w-full h-96 object-cover rounded-lg" src="https://picsum.photos/1200/600?random=20" alt="Before video">
+        </div>
+        <div class="slide relative shrink-0 w-full snap-start">
+          <tw-slide-video
+            src="https://www.w3schools.com/html/mov_bbb.mp4"
+            type="video/mp4"
+            autoplay-on-active="true"
+            muted="true"
+            loop="true"
+            controls="true"
+            class="block h-96 w-full"
+          ></tw-slide-video>
+        </div>
+        <div class="slide relative shrink-0 w-full snap-start">
+          <img loading="lazy" class="w-full h-96 object-cover rounded-lg" src="https://picsum.photos/1200/600?random=21" alt="After video">
+        </div>
+      </div>
+    </tw-slideshow>
+  </section>
+</div>

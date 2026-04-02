@@ -1,0 +1,46 @@
+<div class="slideshow-inner relative overflow-hidden w-full">
+  <!-- Slides container -->
+  <div class="slideshow-row flex overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none" rv-style="slideItemStyle">
+
+    <!-- Slides from template -->
+    <div rv-if="slideTemplate" rv-each-item="items" class="slide shrink-0 snap-start" rv-class-active="item.active" rv-data-index="item.index" rv-template="slideTemplate">
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div rv-if="showControls" class="slideshow-controls absolute inset-0 flex items-center justify-between pointer-events-none z-10" rv-class="controlsPositionClass">
+    <button
+      class="slideshow-control-prev pointer-events-auto flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors disabled:opacity-30 disabled:cursor-not-allowed ml-2"
+      rv-on-click="prev"
+      rv-disabled="enablePrevControl | not"
+      aria-label="Previous slide"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+    <button
+      class="slideshow-control-next pointer-events-auto flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors disabled:opacity-30 disabled:cursor-not-allowed mr-2"
+      rv-on-click="next"
+      rv-disabled="enableNextControl | not"
+      aria-label="Next slide"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Indicators -->
+  <div rv-if="showIndicators" class="slideshow-indicators absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10" rv-class="indicatorsPositionClass">
+    <button
+      rv-each-item="items"
+      class="w-2.5 h-2.5 rounded-full transition-colors border border-white/60"
+      rv-class-bg-white="item.active"
+      rv-class-bg-white/40="item.active | not"
+      rv-on-click="goTo"
+      rv-data-index="item.index"
+      aria-label="Go to slide"
+    ></button>
+  </div>
+</div>

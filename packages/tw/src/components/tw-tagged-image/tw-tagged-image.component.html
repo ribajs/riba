@@ -1,0 +1,52 @@
+<div class="relative inline-block overflow-hidden">
+  <img
+    rv-src="src"
+    rv-alt="alt"
+    class="block h-auto max-w-full"
+    rv-on-load="updatePositions"
+  />
+
+  <!-- Tag pins -->
+  <div
+    rv-each-tag="tags"
+    class="absolute -translate-x-1/2 -translate-y-1/2 transform"
+    rv-style-left="tag.left"
+    rv-style-top="tag.top"
+  >
+    <!-- Pin button -->
+    <button
+      type="button"
+      class="group relative flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg ring-2 ring-white transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:ring-gray-800"
+      rv-on-click="toggleTag | args tag"
+      rv-title="tag.label"
+    >
+      <span class="text-xs font-bold" rv-text="tag.index | plus 1"></span>
+      <!-- Pulse animation ring -->
+      <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-40"></span>
+    </button>
+
+    <!-- Popover -->
+    <div
+      rv-if="tag.open"
+      class="absolute bottom-full left-1/2 z-20 mb-3 w-56 -translate-x-1/2 transform"
+    >
+      <div class="rounded-lg bg-white p-3 shadow-xl ring-1 ring-black/5 dark:bg-gray-800 dark:ring-gray-700">
+        <div class="flex items-start justify-between">
+          <h4 class="text-sm font-semibold text-gray-900 dark:text-white" rv-text="tag.label"></h4>
+          <button
+            type="button"
+            class="ml-2 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none dark:text-gray-500 dark:hover:text-gray-400"
+            rv-on-click="closeTag | args tag"
+          >
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div rv-if="tag.content" class="mt-1 text-xs text-gray-600 dark:text-gray-400" rv-template="tag.content"></div>
+      </div>
+      <!-- Arrow -->
+      <div class="absolute left-1/2 -bottom-1.5 h-3 w-3 -translate-x-1/2 rotate-45 transform bg-white shadow ring-1 ring-black/5 dark:bg-gray-800 dark:ring-gray-700"></div>
+    </div>
+  </div>
+</div>

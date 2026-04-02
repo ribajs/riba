@@ -1,0 +1,24 @@
+<div class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+  <img
+    rv-if="imageSrc"
+    rv-src="imageSrc"
+    rv-alt="imageAlt"
+    class="w-full object-cover"
+  />
+  <div
+    class="p-5"
+    rv-class-p-3="compact"
+    rv-class-p-5="compact | not"
+  >
+    <h5
+      rv-if="title"
+      class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+      rv-class-text-lg="compact"
+      rv-class-text-xl="compact | not"
+      rv-text="title"
+    ></h5>
+    <div class="text-gray-700 dark:text-gray-400">
+      <slot></slot>
+    </div>
+  </div>
+</div>

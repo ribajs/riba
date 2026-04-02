@@ -1,0 +1,32 @@
+<div class="border-b border-gray-200 dark:border-gray-700">
+  <nav class="-mb-px flex space-x-4 overflow-x-auto" role="tablist" aria-orientation="horizontal">
+    <button
+      rv-each-tab="items"
+      type="button"
+      role="tab"
+      class="whitespace-nowrap border-b-2 px-4 py-2 text-sm font-medium transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+      rv-class-border-blue-500="tab.active"
+      rv-class-text-blue-600="tab.active"
+      rv-class-border-transparent="tab.active | not"
+      rv-class-text-gray-500="tab.active | not"
+      rv-class-hover:text-gray-700="tab.active | not"
+      rv-class-hover:border-gray-300="tab.active | not"
+      rv-id="'tab-title-' | append tab.handle"
+      rv-aria-controls="'tab-content-' | append tab.handle"
+      rv-aria-selected="tab.active"
+      rv-on-click="activate | args tab"
+      rv-html="tab.title"
+    ></button>
+  </nav>
+</div>
+<div class="tw-tab-content mt-4">
+  <div
+    rv-each-tab="items"
+    role="tabpanel"
+    class="tw-tab-pane text-gray-700 dark:text-gray-300"
+    rv-if="tab.active"
+    rv-id="'tab-content-' | append tab.handle"
+    rv-aria-labelledby="'tab-title-' | append tab.handle"
+    rv-template="tab.content"
+  ></div>
+</div>
