@@ -55,24 +55,24 @@
     "test:e2e:headed": "playwright test --headed"
   },
   "devDependencies": {
-    "@playwright/test": "^1.59.0",
+    "@playwright/test": "^1.59.1",
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
     "@ribajs/types": "workspace:^",
-    "@typescript-eslint/eslint-plugin": "^8.57.2",
-    "@typescript-eslint/parser": "^8.57.2",
+    "@typescript-eslint/eslint-plugin": "^8.58.1",
+    "@typescript-eslint/parser": "^8.58.1",
     "@yarnpkg/pnpify": "^4.1.6",
-    "eslint": "^10.1.0",
+    "eslint": "^10.2.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.5",
-    "jsdom": "^26.1.0",
-    "prettier": "^3.8.1",
-    "sass": "^1.98.0",
+    "jsdom": "^29.0.2",
+    "prettier": "^3.8.2",
+    "sass": "^1.99.0",
     "typescript": "^6.0.2",
-    "vite": "^8.0.3",
-    "vitest": "^3.2.4"
+    "vite": "^8.0.8",
+    "vitest": "^4.1.4"
   },
   "workspaces": [
     "packages/*",

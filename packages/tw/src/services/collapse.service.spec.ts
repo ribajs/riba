@@ -39,7 +39,7 @@ describe("CollapseService", () => {
       const collapse = new CollapseService(el, { show: false });
       expect(collapse.isShown).toBe(false);
       expect(el.classList.contains("hidden")).toBe(true);
-      expect(el.style.maxHeight).toBe("0");
+      expect(el.style.maxHeight).toBe("0px");
       expect(el.style.overflow).toBe("hidden");
     });
   });
@@ -96,7 +96,7 @@ describe("CollapseService", () => {
     it("sets maxHeight to 0", () => {
       const collapse = new CollapseService(el, { show: true });
       collapse.hide();
-      expect(el.style.maxHeight).toBe("0");
+      expect(el.style.maxHeight).toBe("0px");
     });
 
     it("sets isShown to false", () => {
@@ -187,7 +187,7 @@ describe("CollapseService", () => {
     it("clears maxHeight and overflow styles", () => {
       const collapse = new CollapseService(el, { show: false });
       // After constructor, styles are set
-      expect(el.style.maxHeight).toBe("0");
+      expect(el.style.maxHeight).toBe("0px");
       expect(el.style.overflow).toBe("hidden");
 
       collapse.dispose();

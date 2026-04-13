@@ -26,9 +26,9 @@
   "devDependencies": {
     "@ribajs/tsconfig": "workspace:^",
     "@types/eslint": "^9.6.1",
-    "@types/node": "^24.12.0",
-    "eslint": "^10.1.0",
-    "sass": "^1.98.0",
+    "@types/node": "^24.12.2",
+    "eslint": "^10.2.0",
+    "sass": "^1.99.0",
     "typescript": "6.0.2"
   }
 }
