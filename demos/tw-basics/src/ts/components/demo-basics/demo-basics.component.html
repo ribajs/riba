@@ -6,7 +6,7 @@
   <div class="space-y-3">
     <tw-alert type="info" title="Info" message="This is an informational alert." icon="true" dismissible="true"></tw-alert>
     <tw-alert type="success" title="Success" message="Operation completed successfully!" icon="true" dismissible="true"></tw-alert>
-    <tw-alert type="warning" title="Warning" message="Please review your input carefully." icon="true"></tw-alert>
+    <tw-alert type="warning" title="Warning" message="Please review your input carefully." icon="true" dismissible="true"></tw-alert>
     <tw-alert type="error" title="Error" message="Something went wrong. Please try again." icon="true" dismissible="true"></tw-alert>
   </div>
 </section>
@@ -178,5 +178,151 @@
       <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Extra large rating (out of 10)</p>
       <tw-rating value="7" max="10" size="xl" readonly="true"></tw-rating>
     </div>
+  </div>
+</section>
+
+<!-- Breadcrumbs -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Breadcrumbs</h2>
+  <div class="space-y-4">
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Default separator</p>
+      <tw-breadcrumb>
+        <template label="Home" href="#"></template>
+        <template label="Products" href="#"></template>
+        <template label="Electronics" href="#"></template>
+        <template label="Laptops" active="true"></template>
+      </tw-breadcrumb>
+    </div>
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Custom separator</p>
+      <tw-breadcrumb separator="›">
+        <template label="Dashboard" href="#"></template>
+        <template label="Settings" href="#"></template>
+        <template label="Profile" active="true"></template>
+      </tw-breadcrumb>
+    </div>
+  </div>
+</section>
+
+<!-- Buttons -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Animated Buttons</h2>
+  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Click a button to see the animation.</p>
+  <div class="flex flex-wrap gap-3">
+    <tw-button>
+      <button class="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700">
+        Pulse on Click
+      </button>
+    </tw-button>
+    <tw-button animation-class="animate-bounce">
+      <button class="rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-700">
+        Bounce on Click
+      </button>
+    </tw-button>
+    <tw-button animation-class="animate-spin">
+      <button class="rounded-md bg-purple-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-700">
+        Spin on Click
+      </button>
+    </tw-button>
+  </div>
+</section>
+
+<!-- Tooltips -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Tooltips</h2>
+  <div class="flex flex-wrap items-center gap-8 py-8">
+    <tw-tooltip content="Tooltip on top" position="top">
+      <button class="rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 dark:bg-gray-700 dark:text-gray-300">Top</button>
+    </tw-tooltip>
+    <tw-tooltip content="Tooltip on bottom" position="bottom">
+      <button class="rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 dark:bg-gray-700 dark:text-gray-300">Bottom</button>
+    </tw-tooltip>
+    <tw-tooltip content="Tooltip on left" position="left">
+      <button class="rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 dark:bg-gray-700 dark:text-gray-300">Left</button>
+    </tw-tooltip>
+    <tw-tooltip content="Tooltip on right" position="right">
+      <button class="rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 dark:bg-gray-700 dark:text-gray-300">Right</button>
+    </tw-tooltip>
+  </div>
+</section>
+
+<!-- Swap -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Swap Animations</h2>
+  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Click to toggle between two states with different animations.</p>
+  <div class="flex flex-wrap items-center gap-8">
+    <div class="text-center">
+      <p class="text-sm text-gray-500 mb-2">Rotate</p>
+      <tw-swap animation="rotate">
+        <div data-swap-on class="text-3xl">&#9728;&#65039;</div>
+        <div data-swap-off class="text-3xl">&#127769;</div>
+      </tw-swap>
+    </div>
+    <div class="text-center">
+      <p class="text-sm text-gray-500 mb-2">Flip</p>
+      <tw-swap animation="flip">
+        <div data-swap-on class="text-3xl">&#128077;</div>
+        <div data-swap-off class="text-3xl">&#128078;</div>
+      </tw-swap>
+    </div>
+    <div class="text-center">
+      <p class="text-sm text-gray-500 mb-2">Fade</p>
+      <tw-swap animation="fade">
+        <div data-swap-on class="text-3xl">&#128276;</div>
+        <div data-swap-off class="text-3xl">&#128277;</div>
+      </tw-swap>
+    </div>
+  </div>
+</section>
+
+<!-- Pagination -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Pagination</h2>
+  <div class="space-y-6">
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">10 pages, max 5 visible</p>
+      <tw-pagination total-pages="10" current-page="1" max-visible="5"></tw-pagination>
+    </div>
+    <div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">20 pages, starting on page 8</p>
+      <tw-pagination total-pages="20" current-page="8" max-visible="7"></tw-pagination>
+    </div>
+  </div>
+</section>
+
+<!-- Colorpicker -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Color Picker</h2>
+  <div class="flex flex-wrap gap-6">
+    <tw-colorpicker value="#3b82f6" label="Brand Primary"></tw-colorpicker>
+    <tw-colorpicker value="#10b981" label="Success Color"></tw-colorpicker>
+    <tw-colorpicker value="#ef4444" label="Danger Color"></tw-colorpicker>
+  </div>
+</section>
+
+<!-- Collapse -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Collapse</h2>
+  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Standalone collapsible sections (independent from Accordion).</p>
+  <div class="space-y-3">
+    <tw-collapse class="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+      <button class="flex w-full items-center justify-between bg-gray-50 px-4 py-3 text-left text-sm font-medium text-gray-900 hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700" rv-on-click="toggle">
+        <span>Click to expand details</span>
+        <svg class="h-5 w-5 shrink-0 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+      </button>
+      <div class="tw-collapse-content border-t border-gray-200 px-4 py-3 text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400">
+        This content is collapsible. It can contain any HTML including other components, images, or forms.
+      </div>
+    </tw-collapse>
+    <tw-collapse class="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+      <button class="flex w-full items-center justify-between bg-gray-50 px-4 py-3 text-left text-sm font-medium text-gray-900 hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700" rv-on-click="toggle">
+        <span>Another collapsible section</span>
+        <svg class="h-5 w-5 shrink-0 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+      </button>
+      <div class="tw-collapse-content border-t border-gray-200 px-4 py-3 text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400">
+        Each collapse section operates independently. Opening one does not close the others (unlike an accordion).
+      </div>
+    </tw-collapse>
   </div>
 </section>

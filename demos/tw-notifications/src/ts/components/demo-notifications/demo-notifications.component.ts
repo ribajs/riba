@@ -35,7 +35,8 @@ export class DemoNotificationsComponent extends Component {
 
   public showInfoToast() {
     this.toastChannel.trigger("show-notification", {
-      type: "toast",
+      kind: "toast",
+      type: "info",
       title: "Info",
       message: "This is an informational toast notification.",
       timeout: 5000,
@@ -44,7 +45,8 @@ export class DemoNotificationsComponent extends Component {
 
   public showSuccessToast() {
     this.toastChannel.trigger("show-notification", {
-      type: "toast",
+      kind: "toast",
+      type: "success",
       title: "Success",
       message: "The operation completed successfully!",
       timeout: 5000,
@@ -53,7 +55,8 @@ export class DemoNotificationsComponent extends Component {
 
   public showWarningToast() {
     this.toastChannel.trigger("show-notification", {
-      type: "toast",
+      kind: "toast",
+      type: "warning",
       title: "Warning",
       message: "Please review your input before proceeding.",
       timeout: 7000,
@@ -62,7 +65,8 @@ export class DemoNotificationsComponent extends Component {
 
   public showErrorToast() {
     this.toastChannel.trigger("show-notification", {
-      type: "toast",
+      kind: "toast",
+      type: "error",
       title: "Error",
       message: "Something went wrong. Please try again later.",
       timeout: 0,
@@ -71,7 +75,7 @@ export class DemoNotificationsComponent extends Component {
 
   public showModal() {
     this.toastChannel.trigger("show-notification", {
-      type: "modal",
+      kind: "modal",
       title: "Confirm Action",
       message:
         "Are you sure you want to proceed? This action cannot be undone.",
