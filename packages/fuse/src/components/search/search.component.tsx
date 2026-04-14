@@ -36,7 +36,7 @@ export class FuseSearchComponent<T = any> extends Component {
       console.warn("fuse is not ready! Did you forget to call initFuse?");
       return [];
     }
-    this.scope.results = this.fuse?.search<T>(this.scope.searchPattern) || [];
+    this.scope.results = this.fuse?.search(this.scope.searchPattern) || [];
     console.debug("on search", this.scope.searchPattern, this.scope.results);
   }
 
