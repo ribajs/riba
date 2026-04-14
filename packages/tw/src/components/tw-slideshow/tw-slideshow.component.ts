@@ -829,15 +829,31 @@ export class TwSlideshowComponent extends Component {
     if (this.scope.infinite) {
       this.scope.enableNextControl = true;
       this.scope.enablePrevControl = true;
-      return;
+    } else {
+      this.scope.enableNextControl =
+        isScrollable &&
+        this.scope.nextIndex !== -1 &&
+        this.scope.nextIndex <= this.scope.items.length - 1;
+      this.scope.enablePrevControl =
+        isScrollable &&
+        this.scope.prevIndex !== -1 &&
+        this.scope.prevIndex >= 0;
     }
 
-    this.scope.enableNextControl =
-      isScrollable &&
-      this.scope.nextIndex !== -1 &&
-      this.scope.nextIndex <= this.scope.items.length - 1;
-    this.scope.enablePrevControl =
-      isScrollable && this.scope.prevIndex !== -1 && this.scope.prevIndex >= 0;
+    this.syncPassthroughControls();
+  }
+
+  /**
+   * Hook for pass-through mode: keeps the injected DOM buttons in sync with
+   * the current enable*Control state. No-op unless `injectControls()` has run.
+   */
+  protected syncPassthroughControls() {
+    if (this._passthroughPrevBtn) {
+      this._passthroughPrevBtn.disabled = !this.scope.enablePrevControl;
+    }
+    if (this._passthroughNextBtn) {
+      this._passthroughNextBtn.disabled = !this.scope.enableNextControl;
+    }
   }
 
   protected updateIndicators() {
@@ -1009,17 +1025,8 @@ export class TwSlideshowComponent extends Component {
     this._passthroughPrevBtn = prevBtn;
     this._passthroughNextBtn = nextBtn;
 
-    // Hook into updateControls to sync disabled state
-    const origUpdateControls = this.updateControls.bind(this);
-    this.updateControls = () => {
-      origUpdateControls();
-      if (this._passthroughPrevBtn) {
-        this._passthroughPrevBtn.disabled = !this.scope.enablePrevControl;
-      }
-      if (this._passthroughNextBtn) {
-        this._passthroughNextBtn.disabled = !this.scope.enableNextControl;
-      }
-    };
+    // Apply initial enabled state (subsequent updates happen via updateControls)
+    this.syncPassthroughControls();
   }
 
   /**
