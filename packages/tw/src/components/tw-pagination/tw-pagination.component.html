@@ -14,15 +14,7 @@
   <button
     rv-each-page="pages"
     class="inline-flex items-center border-t border-b border-r border-gray-300 px-3 py-2 text-sm font-medium transition-colors dark:border-gray-600"
-    rv-class-bg-blue-600="page.isCurrent"
-    rv-class-text-white="page.isCurrent"
-    rv-class-bg-white="page.isCurrent | not"
-    rv-class-text-gray-700="page.isCurrent | not"
-    rv-class-hover:bg-gray-50="page.isCurrent | not"
-    rv-class-dark:bg-gray-800="page.isCurrent | not"
-    rv-class-dark:text-gray-300="page.isCurrent | not"
-    rv-class-dark:hover:bg-gray-700="page.isCurrent | not"
-    rv-class-cursor-default="page.isEllipsis"
+    rv-add-class="page.pageClass"
     rv-disabled="page.isEllipsis"
     rv-on-click="goToPage | args page"
   >

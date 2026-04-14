@@ -5,6 +5,21 @@ export interface PaginationPage {
   number: number;
   isEllipsis: boolean;
   isCurrent: boolean;
+  pageClass: string;
+}
+
+const ACTIVE_PAGE_CLASS = "bg-blue-600 text-white";
+const INACTIVE_PAGE_CLASS =
+  "bg-white text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700";
+const ELLIPSIS_PAGE_CLASS =
+  "bg-white text-gray-700 cursor-default dark:bg-gray-800 dark:text-gray-300";
+
+function pageClassFor(page: {
+  isEllipsis: boolean;
+  isCurrent: boolean;
+}): string {
+  if (page.isEllipsis) return ELLIPSIS_PAGE_CLASS;
+  return page.isCurrent ? ACTIVE_PAGE_CLASS : INACTIVE_PAGE_CLASS;
 }
 
 export interface Scope extends ScopeBase {
@@ -92,62 +107,58 @@ export class TwPaginationComponent extends Component {
     const total = this.scope.totalPages;
     const current = this.scope.currentPage;
     const maxVisible = this.scope.maxVisible;
-    const pages: PaginationPage[] = [];
+    const raw: Array<Omit<PaginationPage, "pageClass">> = [];
 
     if (total <= maxVisible) {
       for (let i = 1; i <= total; i++) {
-        pages.push({ number: i, isEllipsis: false, isCurrent: i === current });
+        raw.push({ number: i, isEllipsis: false, isCurrent: i === current });
       }
-      return pages;
-    }
+    } else {
+      // Always show first page
+      raw.push({ number: 1, isEllipsis: false, isCurrent: current === 1 });
 
-    // Always show first page
-    pages.push({ number: 1, isEllipsis: false, isCurrent: current === 1 });
+      const halfVisible = Math.floor((maxVisible - 2) / 2);
+      let start = Math.max(2, current - halfVisible);
+      let end = Math.min(total - 1, current + halfVisible);
 
-    const halfVisible = Math.floor((maxVisible - 2) / 2);
-    let start = Math.max(2, current - halfVisible);
-    let end = Math.min(total - 1, current + halfVisible);
-
-    // Adjust range to fill maxVisible - 2 slots (excluding first and last)
-    const slotsAvailable = maxVisible - 2;
-    if (end - start + 1 < slotsAvailable) {
-      if (start === 2) {
-        end = Math.min(total - 1, start + slotsAvailable - 1);
-      } else {
-        start = Math.max(2, end - slotsAvailable + 1);
+      // Adjust range to fill maxVisible - 2 slots (excluding first and last)
+      const slotsAvailable = maxVisible - 2;
+      if (end - start + 1 < slotsAvailable) {
+        if (start === 2) {
+          end = Math.min(total - 1, start + slotsAvailable - 1);
+        } else {
+          start = Math.max(2, end - slotsAvailable + 1);
+        }
       }
+
+      if (start > 2) {
+        raw.push({ number: -1, isEllipsis: true, isCurrent: false });
+      }
+
+      for (let i = start; i <= end; i++) {
+        raw.push({ number: i, isEllipsis: false, isCurrent: i === current });
+      }
+
+      if (end < total - 1) {
+        raw.push({ number: -1, isEllipsis: true, isCurrent: false });
+      }
+
+      // Always show last page
+      raw.push({
+        number: total,
+        isEllipsis: false,
+        isCurrent: current === total,
+      });
     }
 
-    if (start > 2) {
-      pages.push({ number: -1, isEllipsis: true, isCurrent: false });
-    }
-
-    for (let i = start; i <= end; i++) {
-      pages.push({ number: i, isEllipsis: false, isCurrent: i === current });
-    }
-
-    if (end < total - 1) {
-      pages.push({ number: -1, isEllipsis: true, isCurrent: false });
-    }
-
-    // Always show last page
-    pages.push({ number: total, isEllipsis: false, isCurrent: current === total });
-
-    return pages;
+    return raw.map((p) => ({ ...p, pageClass: pageClassFor(p) }));
   }
 
   protected updatePages() {
-    const newPages = this.computePages();
-    // Mutate in place when length matches so rv-each child views update reactively
-    if (this.scope.pages.length === newPages.length) {
-      for (let i = 0; i < newPages.length; i++) {
-        this.scope.pages[i].number = newPages[i].number;
-        this.scope.pages[i].isEllipsis = newPages[i].isEllipsis;
-        this.scope.pages[i].isCurrent = newPages[i].isCurrent;
-      }
-    } else {
-      this.scope.pages = newPages;
-    }
+    // Replace the array wholesale so rv-each re-renders reactively.
+    // In-place property mutations on items inside rv-each don't always
+    // propagate to child views — see CLAUDE.md note on rv-each.
+    this.scope.pages = this.computePages();
     this.scope.hasPrev = this.scope.currentPage > 1;
     this.scope.hasNext = this.scope.currentPage < this.scope.totalPages;
   }

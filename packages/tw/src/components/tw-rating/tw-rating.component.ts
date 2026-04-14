@@ -47,18 +47,10 @@ export class TwRatingComponent extends Component {
   }
 
   public setRating(star: Star) {
-    console.log("[tw-rating] setRating called with:", star);
-    console.log("[tw-rating] star type:", typeof star, "star.index:", star?.index);
-    if (this.scope.readonly) {
-      console.log("[tw-rating] readonly, skipping");
-      return;
-    }
-    const oldValue = this.scope.value;
+    if (this.scope.readonly) return;
     this.scope.value = star.index + 1;
-    console.log("[tw-rating] value changed:", oldValue, "->", this.scope.value);
     this.scope.hoverValue = 0;
     this.updateStars();
-    console.log("[tw-rating] stars after update:", JSON.stringify(this.scope.stars));
     this.dispatchEvent(
       new CustomEvent("rating-changed", {
         detail: { value: this.scope.value },
@@ -68,14 +60,12 @@ export class TwRatingComponent extends Component {
   }
 
   public onHover(star: Star) {
-    console.log("[tw-rating] onHover called with:", star);
     if (this.scope.readonly) return;
     this.scope.hoverValue = star.index + 1;
     this.updateStars();
   }
 
   public onLeave() {
-    console.log("[tw-rating] onLeave");
     if (this.scope.readonly) return;
     this.scope.hoverValue = 0;
     this.updateStars();
@@ -110,22 +100,10 @@ export class TwRatingComponent extends Component {
   }
 
   protected updateStars() {
-    const displayValue = this.scope.hoverValue || this.scope.value;
-    const max = this.scope.max;
-
-    // If stars array doesn't exist yet or size changed, create it
-    if (this.scope.stars.length !== max) {
-      this.scope.stars = this.computeStars();
-    } else {
-      // Mutate existing star objects so rv-each child views
-      // detect property changes via their observers
-      for (let i = 0; i < max; i++) {
-        const filled = i < Math.floor(displayValue);
-        const half = !filled && i < displayValue && displayValue - i >= 0.5;
-        this.scope.stars[i].filled = filled;
-        this.scope.stars[i].half = half;
-      }
-    }
+    // Replace the array wholesale so rv-each re-renders reactively.
+    // In-place property mutations on items inside rv-each don't always
+    // propagate to child views — see CLAUDE.md note on rv-each.
+    this.scope.stars = this.computeStars();
     this.scope.sizeClass = this.getSizeClass();
   }
 
