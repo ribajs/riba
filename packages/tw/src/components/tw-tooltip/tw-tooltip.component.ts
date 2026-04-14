@@ -7,7 +7,7 @@ export interface Scope extends ScopeBase {
   position: TooltipPosition;
 }
 
-export class TwTooltipComponentComponent extends Component {
+export class TwTooltipComponent extends Component {
   public static tagName = "tw-tooltip";
 
   protected autobind = true;
@@ -59,7 +59,7 @@ export class TwTooltipComponentComponent extends Component {
   }
 
   protected injectStyles() {
-    const styleId = "tw-tooltip-component-styles";
+    const styleId = "tw-tooltip-styles";
     if (document.getElementById(styleId)) {
       return;
     }
@@ -192,7 +192,7 @@ export class TwTooltipComponentComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.injectStyles();
-    this.init(TwTooltipComponentComponent.observedAttributes);
+    this.init(TwTooltipComponent.observedAttributes);
   }
 
   protected async afterBind() {

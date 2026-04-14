@@ -38,4 +38,4 @@ export { TwStepsComponent } from "./tw-steps/tw-steps.component.js";
 export { TwProgressComponent } from "./tw-progress/tw-progress.component.js";
 export { TwRatingComponent } from "./tw-rating/tw-rating.component.js";
 export { TwSwapComponent } from "./tw-swap/tw-swap.component.js";
-export { TwTooltipComponentComponent } from "./tw-tooltip-component/tw-tooltip-component.component.js";
+export { TwTooltipComponent } from "./tw-tooltip/tw-tooltip.component.js";
