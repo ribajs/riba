@@ -1,5 +1,11 @@
 /* ── Custom styles for @ribajs/tw components ── */
 
+/* Scan all tw component templates and TS files so consumers of this
+   stylesheet only need to @import it, without adding their own @source
+   directives with brittle relative paths. */
+@source "../**/*.html";
+@source "../**/*.ts";
+
 /* Dynamic utility classes used in component TS files via rv-class bindings. */
 /* @source inline ensures Tailwind generates these even if the file scanner misses them. */
 @source inline("h-1 h-2 h-3 h-4 h-6 h-8 h-10 h-14 h-20 w-3 w-4 w-6 w-8 w-10 w-14 w-20 h-1.5 w-1.5 h-2.5 w-2.5 h-3.5 w-3.5 text-xs text-sm text-lg text-xl bg-blue-500 bg-blue-600 bg-green-400 bg-green-500 bg-yellow-400 bg-yellow-500 bg-red-400 bg-red-500 bg-gray-400 dark:bg-blue-400 dark:bg-green-400 dark:bg-yellow-400 dark:bg-red-400");
