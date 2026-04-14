@@ -3593,6 +3593,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ribajs/demo-tw-interactive@workspace:demos/tw-interactive":
+  version: 0.0.0-use.local
+  resolution: "@ribajs/demo-tw-interactive@workspace:demos/tw-interactive"
+  dependencies:
+    "@ribajs/core": "workspace:^"
+    "@ribajs/eslint-config": "workspace:^"
+    "@ribajs/extras": "workspace:^"
+    "@ribajs/tsconfig": "workspace:^"
+    "@ribajs/tw": "workspace:^"
+    "@ribajs/utils": "workspace:^"
+    "@ribajs/vite-config": "workspace:^"
+    "@tailwindcss/vite": "npm:^4.2.2"
+    eslint: "npm:^10.2.0"
+    serve: "npm:^14.2.6"
+    tailwindcss: "npm:^4.2.2"
+    typescript: "npm:6.0.2"
+    vite: "npm:^8.0.8"
+  languageName: unknown
+  linkType: soft
+
 "@ribajs/demo-tw-notifications@workspace:demos/tw-notifications":
   version: 0.0.0-use.local
   resolution: "@ribajs/demo-tw-notifications@workspace:demos/tw-notifications"
