@@ -45,6 +45,7 @@ export class DropdownService {
     if (this._isShown) return;
 
     this.trigger.dispatchEvent(new CustomEvent("tw.dropdown.show"));
+    this.menu.classList.remove("hidden");
     this.menu.style.display = "";
 
     // Position with Floating UI
@@ -74,6 +75,7 @@ export class DropdownService {
 
     this.trigger.dispatchEvent(new CustomEvent("tw.dropdown.hide"));
 
+    this.menu.classList.add("hidden");
     this.menu.style.display = "none";
     this.cleanup?.();
     this.cleanup = undefined;
@@ -95,10 +97,7 @@ export class DropdownService {
 
   protected _onDocumentClick(event: MouseEvent) {
     const target = event.target as Node;
-    if (
-      !this.trigger.contains(target) &&
-      !this.menu.contains(target)
-    ) {
+    if (!this.trigger.contains(target) && !this.menu.contains(target)) {
       this.hide();
     }
   }
@@ -119,16 +118,12 @@ export class DropdownService {
       );
       if (items.length === 0) return;
 
-      const currentIndex = items.indexOf(
-        document.activeElement as HTMLElement,
-      );
+      const currentIndex = items.indexOf(document.activeElement as HTMLElement);
       let nextIndex: number;
       if (event.key === "ArrowDown") {
-        nextIndex =
-          currentIndex < items.length - 1 ? currentIndex + 1 : 0;
+        nextIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0;
       } else {
-        nextIndex =
-          currentIndex > 0 ? currentIndex - 1 : items.length - 1;
+        nextIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
       }
       items[nextIndex].focus();
     }

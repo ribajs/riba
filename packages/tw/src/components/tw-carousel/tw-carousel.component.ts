@@ -105,7 +105,21 @@ export class TwCarouselComponent extends TwSlideshowComponent {
     if (this.autoplayEnabled) {
       this.startAutoplay();
     }
+    this.addEventListener("mouseenter", this.onMouseEnter);
+    this.addEventListener("mouseleave", this.onMouseLeave);
   }
+
+  protected onMouseEnter = () => {
+    if (this.autoplayEnabled) {
+      this.stopAutoplay();
+    }
+  };
+
+  protected onMouseLeave = () => {
+    if (this.autoplayEnabled) {
+      this.startAutoplay();
+    }
+  };
 
   protected startAutoplay() {
     this.stopAutoplay();
@@ -125,6 +139,8 @@ export class TwCarouselComponent extends TwSlideshowComponent {
 
   protected override disconnectedCallback() {
     this.stopAutoplay();
+    this.removeEventListener("mouseenter", this.onMouseEnter);
+    this.removeEventListener("mouseleave", this.onMouseLeave);
     super.disconnectedCallback();
   }
 

@@ -65,6 +65,9 @@ export class TwTaggedImageComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
+    // Parse <tag> children BEFORE init() triggers template loading which replaces them
+    this.parseChildTags();
+    this.initTags();
     this.init(TwTaggedImageComponent.observedAttributes);
   }
 
@@ -92,8 +95,6 @@ export class TwTaggedImageComponent extends Component {
 
   protected async beforeBind() {
     await super.beforeBind();
-    this.parseChildTags();
-    this.initTags();
   }
 
   protected async afterBind() {
@@ -161,7 +162,7 @@ export class TwTaggedImageComponent extends Component {
     }
   }
 
-  public toggleTag(event: Event, el: HTMLElement, tag: ImageTag) {
+  public toggleTag(tag: ImageTag) {
     // Close other tags first
     for (const t of this.scope.tags) {
       if (t !== tag) {
@@ -171,7 +172,7 @@ export class TwTaggedImageComponent extends Component {
     tag.open = !tag.open;
   }
 
-  public closeTag(event: Event, el: HTMLElement, tag: ImageTag) {
+  public closeTag(tag: ImageTag) {
     tag.open = false;
   }
 

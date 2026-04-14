@@ -55,43 +55,54 @@ export class TwSwapComponent extends Component {
     }
 
     const animation = this.scope.animation;
-
-    if (this.scope.active) {
-      // Show ON element, hide OFF element
-      this.onEl.style.display = "";
-      this.offEl.style.display = "none";
-
-      // Apply animation classes
-      this.onEl.classList.remove("tw-swap-out");
-      this.onEl.classList.add("tw-swap-in");
-      this.offEl.classList.remove("tw-swap-in");
-      this.offEl.classList.add("tw-swap-out");
-    } else {
-      // Show OFF element, hide ON element
-      this.offEl.style.display = "";
-      this.onEl.style.display = "none";
-
-      this.offEl.classList.remove("tw-swap-out");
-      this.offEl.classList.add("tw-swap-in");
-      this.onEl.classList.remove("tw-swap-in");
-      this.onEl.classList.add("tw-swap-out");
-    }
-
-    // Set animation type attribute for CSS
     this.setAttribute("data-animation", animation);
+
+    const showEl = this.scope.active ? this.onEl : this.offEl;
+    const hideEl = this.scope.active ? this.offEl : this.onEl;
+
+    // Position both absolutely so they overlap
+    showEl.style.position = "relative";
+    showEl.style.opacity = "1";
+    showEl.style.pointerEvents = "";
+    hideEl.style.position = "absolute";
+    hideEl.style.opacity = "0";
+    hideEl.style.pointerEvents = "none";
+
+    // Apply animation transforms
+    switch (animation) {
+      case "rotate":
+        showEl.style.transform = "rotate(0deg)";
+        hideEl.style.transform = "rotate(180deg)";
+        break;
+      case "flip":
+        showEl.style.transform = "scaleY(1)";
+        hideEl.style.transform = "scaleY(0)";
+        break;
+      case "fade":
+      default:
+        showEl.style.transform = "";
+        hideEl.style.transform = "";
+        break;
+    }
   }
 
   protected setupStyles() {
     this.style.display = "inline-flex";
+    this.style.alignItems = "center";
+    this.style.justifyContent = "center";
     this.style.position = "relative";
     this.style.cursor = "pointer";
 
-    // Set up transition styles on children
+    const transition = "transform 0.3s ease, opacity 0.3s ease";
     if (this.onEl) {
-      this.onEl.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+      this.onEl.style.transition = transition;
+      this.onEl.style.top = "0";
+      this.onEl.style.left = "0";
     }
     if (this.offEl) {
-      this.offEl.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+      this.offEl.style.transition = transition;
+      this.offEl.style.top = "0";
+      this.offEl.style.left = "0";
     }
   }
 

@@ -15,6 +15,7 @@ export interface Scope extends ScopeBase {
   animated: boolean;
   barColorClass: string;
   barHeightClass: string;
+  barClass: string;
 }
 
 export class TwProgressComponent extends Component {
@@ -37,6 +38,7 @@ export class TwProgressComponent extends Component {
     animated: false,
     barColorClass: "bg-blue-600 dark:bg-blue-500",
     barHeightClass: "h-4",
+    barClass: "bg-blue-600 dark:bg-blue-500 h-4",
   };
 
   constructor() {
@@ -80,6 +82,7 @@ export class TwProgressComponent extends Component {
     this.scope.percentage = this.computePercentage();
     this.scope.barColorClass = this.getColorClass();
     this.scope.barHeightClass = this.getHeightClass();
+    this.scope.barClass = `${this.scope.barColorClass} ${this.scope.barHeightClass}`;
   }
 
   protected connectedCallback() {

@@ -1,22 +1,22 @@
 <div
-  class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black/5 dark:bg-gray-800 dark:ring-white/10"
+  class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg shadow-lg ring-1"
+  rv-add-class="containerClass"
   role="alert"
   aria-live="assertive"
   aria-atomic="true"
 >
   <div class="p-4">
     <div class="flex items-start">
-      <div rv-if="iconUrl" class="shrink-0">
-        <tw-icon rv-src="iconUrl" size="20" class="text-gray-400"></tw-icon>
-      </div>
-      <div class="ml-3 w-0 flex-1 pt-0.5" rv-class-ml-0="iconUrl | not">
-        <p rv-if="toast.title" class="text-sm font-medium text-gray-900 dark:text-white" rv-text="toast.title"></p>
-        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400" rv-template="toast.message"></p>
+      <div rv-if="iconSvg" class="shrink-0" rv-html="iconSvg"></div>
+      <div class="ml-3 w-0 flex-1 pt-0.5" rv-class-ml-0="iconSvg | not">
+        <p rv-if="toast.title" class="text-sm font-medium" rv-add-class="titleClass" rv-text="toast.title"></p>
+        <p class="mt-1 text-sm" rv-add-class="messageClass" rv-template="toast.message"></p>
       </div>
       <div class="ml-4 flex shrink-0">
         <button
           type="button"
-          class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-gray-800 dark:text-gray-500 dark:hover:text-gray-400"
+          class="inline-flex rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2"
+          rv-add-class="closeButtonClass"
           rv-on-click="dismiss"
         >
           <span class="sr-only">Close</span>

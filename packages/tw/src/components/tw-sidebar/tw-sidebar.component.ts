@@ -67,6 +67,7 @@ export class TwSidebarComponent extends Component {
 
   public events?: EventDispatcher;
   protected routerEvents = new EventDispatcher("main");
+  protected backdropEl?: HTMLElement;
 
   protected defaults: Scope = {
     containerSelector: undefined,
@@ -174,11 +175,72 @@ export class TwSidebarComponent extends Component {
     }
   }
 
+  protected showBackdrop() {
+    if (this.backdropEl) return;
+    const el = document.createElement("div");
+    el.className =
+      "fixed inset-0 z-40 bg-black/50 transition-opacity duration-200 ease-in-out";
+    el.style.opacity = "0";
+    el.addEventListener("click", () => this.hide());
+    document.body.appendChild(el);
+    this.backdropEl = el;
+    // Double RAF ensures the initial opacity:0 is committed before we animate to 1
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        el.style.opacity = "1";
+      });
+    });
+  }
+
+  protected hideBackdrop() {
+    if (!this.backdropEl) return;
+    const el = this.backdropEl;
+    this.backdropEl = undefined;
+    el.style.opacity = "0";
+    const onEnd = () => {
+      el.removeEventListener("transitionend", onEnd);
+      el.remove();
+    };
+    el.addEventListener("transitionend", onEnd);
+    // Fallback in case transitionend doesn't fire (e.g. element was never visible)
+    setTimeout(() => {
+      if (el.parentNode) {
+        el.removeEventListener("transitionend", onEnd);
+        el.remove();
+      }
+    }, 300);
+  }
+
+  protected initCloseButton() {
+    if (this.querySelector("[data-sidebar-close]")) return;
+    const closeBtn = document.createElement("button");
+    closeBtn.setAttribute("data-sidebar-close", "");
+    closeBtn.setAttribute("type", "button");
+    closeBtn.setAttribute("aria-label", "Close sidebar");
+    closeBtn.className =
+      "absolute top-3 right-3 rounded-md p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200";
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "h-5 w-5");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("stroke-width", "1.5");
+    svg.setAttribute("stroke", "currentColor");
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("stroke-linecap", "round");
+    path.setAttribute("stroke-linejoin", "round");
+    path.setAttribute("d", "M6 18 18 6M6 6l12 12");
+    svg.appendChild(path);
+    closeBtn.appendChild(svg);
+    closeBtn.addEventListener("click", () => this.hide());
+    this.insertBefore(closeBtn, this.firstChild);
+  }
+
   protected onHidden() {
     const translateX = this.scope.position === "left" ? "-100%" : "100%";
     this.style.transform = `translateX(${translateX})`;
     this.style.width = this.scope.width;
     this.setContainersStyle(this.scope.state);
+    this.hideBackdrop();
     if (this.scope.preventScrollingOnOverlap) {
       this.allowScrolling();
     }
@@ -188,6 +250,7 @@ export class TwSidebarComponent extends Component {
     this.style.transform = "translateX(0)";
     this.style.width = this.scope.width;
     this.setContainersStyle(state);
+    this.hideBackdrop();
     if (this.scope.preventScrollingOnOverlap) {
       this.allowScrolling();
     }
@@ -197,6 +260,7 @@ export class TwSidebarComponent extends Component {
     this.style.transform = "translateX(0)";
     this.style.width = this.scope.width;
     this.setContainersStyle(state);
+    this.showBackdrop();
     if (this.scope.preventScrollingOnOverlap) {
       this.preventScrolling();
     }
@@ -300,8 +364,34 @@ export class TwSidebarComponent extends Component {
     currStyle.transition = "margin 0.3s ease";
   }
 
+  protected initHostStyles() {
+    // The component uses template() => null, so we must style the host element
+    this.style.position = "fixed";
+    this.style.top = "0";
+    this.style.height = "100%";
+    this.style.zIndex = "50";
+    this.style.display = "flex";
+    this.style.flexDirection = "column";
+    this.style.overflowY = "auto";
+    this.style.padding = "1rem";
+    this.style.paddingTop = "2.5rem";
+    this.style.transition = "transform 0.3s ease-in-out";
+    this.style.backgroundColor = "var(--tw-sidebar-bg, white)";
+    this.style.boxShadow =
+      "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)";
+    if (this.scope.position === "left") {
+      this.style.left = "0";
+      this.style.right = "";
+    } else {
+      this.style.right = "0";
+      this.style.left = "";
+    }
+  }
+
   protected async beforeBind() {
     await super.beforeBind();
+    this.initHostStyles();
+    this.initCloseButton();
     this.scope.oldState = this.getShowMode();
     this.initRouterEventDispatcher();
     return this.onEnvironmentChanges();
@@ -340,6 +430,10 @@ export class TwSidebarComponent extends Component {
         this.onStateChange();
         this.setContainersStyle(this.scope.state);
         break;
+      case "position":
+        this.initHostStyles();
+        this.onStateChange();
+        break;
       case "mode":
         this.onStateChange();
         this.setContainersStyle(this.scope.state);
@@ -356,6 +450,7 @@ export class TwSidebarComponent extends Component {
   protected disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListeners();
+    this.hideBackdrop();
   }
 
   protected template(): ReturnType<TemplateFunction> {

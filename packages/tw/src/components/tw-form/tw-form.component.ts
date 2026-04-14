@@ -200,6 +200,7 @@ export class TwFormComponent extends Component {
 
     // Remove validation styling
     this.formEl.classList.remove("tw-was-validated");
+    this.clearValidationErrors();
 
     this.dispatchEvent(new CustomEvent("form-reset"));
   }
@@ -278,6 +279,10 @@ export class TwFormComponent extends Component {
     }
     const invalidElements =
       this.formEl.querySelectorAll<HTMLElement>(":invalid");
+
+    // Show validation messages on all invalid elements
+    this.showValidationErrors(invalidElements);
+
     if (invalidElements && invalidElements.length) {
       const invalidElement = invalidElements[0];
       if (this.scope.scrollToInvalidElement) {
@@ -293,6 +298,70 @@ export class TwFormComponent extends Component {
         detail: { elements: invalidElements },
       }),
     );
+  }
+
+  protected showValidationErrors(invalidElements: NodeListOf<HTMLElement>) {
+    // Clear previous error messages
+    this.clearValidationErrors();
+
+    invalidElements.forEach((el) => {
+      const input = el as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+      if (!input.validationMessage) return;
+
+      // Add red border
+      input.classList.add(
+        "!border-red-500",
+        "!ring-red-500",
+        "!focus:border-red-500",
+        "!focus:ring-red-500",
+      );
+
+      // Create error message element
+      const errorEl = document.createElement("p");
+      errorEl.className =
+        "mt-1 text-sm text-red-600 dark:text-red-400 tw-validation-error";
+      errorEl.textContent = input.validationMessage;
+
+      // Insert after the input (or after its parent if wrapped in a label)
+      const insertAfter = input.closest("label") || input;
+      insertAfter.parentNode?.insertBefore(errorEl, insertAfter.nextSibling);
+
+      // Clear error on input change
+      const clearOnInput = () => {
+        input.classList.remove(
+          "!border-red-500",
+          "!ring-red-500",
+          "!focus:border-red-500",
+          "!focus:ring-red-500",
+        );
+        errorEl.remove();
+        input.removeEventListener("input", clearOnInput);
+        input.removeEventListener("change", clearOnInput);
+      };
+      input.addEventListener("input", clearOnInput);
+      input.addEventListener("change", clearOnInput);
+    });
+  }
+
+  protected clearValidationErrors() {
+    if (!this.formEl) return;
+    // Remove all previous error messages
+    this.formEl
+      .querySelectorAll(".tw-validation-error")
+      .forEach((el) => el.remove());
+    // Remove red border classes from all inputs
+    this.formEl
+      .querySelectorAll(
+        ".\\!border-red-500",
+      )
+      .forEach((el) => {
+        el.classList.remove(
+          "!border-red-500",
+          "!ring-red-500",
+          "!focus:border-red-500",
+          "!focus:ring-red-500",
+        );
+      });
   }
 
   protected scrollToElement(element: HTMLElement) {
@@ -355,6 +424,12 @@ export class TwFormComponent extends Component {
     if (formEl) {
       this.formEl = formEl;
       this.formEl.setAttribute("novalidate", "");
+      this.formEl.addEventListener("submit", (event: Event) => {
+        this.onSubmit(event, event.target as HTMLButtonElement);
+      });
+      this.formEl.addEventListener("reset", (event: Event) => {
+        this.onReset(event);
+      });
     } else {
       console.warn("tw-form without a <form> child found");
     }

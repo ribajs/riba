@@ -365,6 +365,19 @@ export class TwSliderComponent extends Component {
     this.addEventListeners();
   }
 
+  protected onKeyDown = (event: KeyboardEvent) => {
+    const isHorizontal = this.scope.angle === "horizontal";
+    const prevKey = isHorizontal ? "ArrowLeft" : "ArrowUp";
+    const nextKey = isHorizontal ? "ArrowRight" : "ArrowDown";
+    if (event.key === prevKey) {
+      event.preventDefault();
+      this.prev();
+    } else if (event.key === nextKey) {
+      event.preventDefault();
+      this.next();
+    }
+  };
+
   protected addEventListeners() {
     this.routerEvents.on("newPageReady", this.onViewChanges);
 
@@ -390,6 +403,14 @@ export class TwSliderComponent extends Component {
       this.onScrollEnd as EventListener,
       { passive: true },
     );
+
+    // Keyboard navigation — make the inner focusable and listen for arrow keys
+    if (this.sliderInner) {
+      if (!this.sliderInner.hasAttribute("tabindex")) {
+        this.sliderInner.setAttribute("tabindex", "0");
+      }
+      this.sliderInner.addEventListener("keydown", this.onKeyDown);
+    }
   }
 
   protected removeEventListeners() {
@@ -412,6 +433,7 @@ export class TwSliderComponent extends Component {
       TwSliderComponent.EVENTS.scrollended,
       this.onScrollEnd as EventListener,
     );
+    this.sliderInner?.removeEventListener("keydown", this.onKeyDown);
   }
 
   protected initAll() {
@@ -427,10 +449,145 @@ export class TwSliderComponent extends Component {
   }
 
   protected async afterBind() {
+    if (this._usePassthrough) {
+      this.disableDesktopDragscroll();
+      this.wrapInSliderInner();
+      this.injectControls();
+      this.injectIndicators();
+    }
     this.initAll();
     this.updateItems();
+    if (this.scope.drag) {
+      this.enableDesktopDragscroll();
+    }
     this.classList.add(`${TwSliderComponent.tagName}-ready`);
     await super.afterBind();
+  }
+
+  /** Whether we're using pass-through mode (consumer provided slide children) */
+  protected _usePassthrough = false;
+
+  /**
+   * In pass-through mode, wrap existing content in a .slider-inner container
+   * so controls/indicators can be positioned correctly.
+   */
+  protected wrapInSliderInner() {
+    if (this.querySelector(".slider-inner")) return;
+    const wrapper = document.createElement("div");
+    wrapper.className = "slider-inner relative overflow-hidden w-full";
+    while (this.firstChild) {
+      wrapper.appendChild(this.firstChild);
+    }
+    this.appendChild(wrapper);
+  }
+
+  protected createChevronSvg(direction: "left" | "right"): SVGElement {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "w-4 h-4");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("stroke-linecap", "round");
+    path.setAttribute("stroke-linejoin", "round");
+    path.setAttribute("stroke-width", "2");
+    path.setAttribute(
+      "d",
+      direction === "left" ? "M15 19l-7-7 7-7" : "M9 5l7 7-7 7",
+    );
+    svg.appendChild(path);
+    return svg;
+  }
+
+  protected _passthroughPrevBtn?: HTMLButtonElement;
+  protected _passthroughNextBtn?: HTMLButtonElement;
+
+  protected injectControls() {
+    if (!this.scope.controls) return;
+    const inner = this.querySelector(".slider-inner");
+    if (!inner || inner.querySelector(".slider-controls")) return;
+
+    const controlsDiv = document.createElement("div");
+    controlsDiv.className =
+      "slider-controls absolute inset-0 flex items-center justify-between pointer-events-none z-10";
+
+    const prevBtn = document.createElement("button");
+    prevBtn.className =
+      "slider-control-prev pointer-events-auto flex items-center justify-center w-8 h-8 rounded-full bg-gray-800/60 text-white hover:bg-gray-800/80 transition-colors disabled:opacity-30 disabled:cursor-not-allowed ml-1";
+    prevBtn.setAttribute("aria-label", "Previous");
+    prevBtn.appendChild(this.createChevronSvg("left"));
+    prevBtn.addEventListener("click", () => this.prev());
+
+    const nextBtn = document.createElement("button");
+    nextBtn.className =
+      "slider-control-next pointer-events-auto flex items-center justify-center w-8 h-8 rounded-full bg-gray-800/60 text-white hover:bg-gray-800/80 transition-colors disabled:opacity-30 disabled:cursor-not-allowed mr-1";
+    nextBtn.setAttribute("aria-label", "Next");
+    nextBtn.appendChild(this.createChevronSvg("right"));
+    nextBtn.addEventListener("click", () => this.next());
+
+    controlsDiv.appendChild(prevBtn);
+    controlsDiv.appendChild(nextBtn);
+    inner.appendChild(controlsDiv);
+
+    this._passthroughPrevBtn = prevBtn;
+    this._passthroughNextBtn = nextBtn;
+
+    // Hook into updateControls to sync disabled state
+    const origUpdateControls = this.updateControls.bind(this);
+    this.updateControls = () => {
+      origUpdateControls();
+      if (this._passthroughPrevBtn) {
+        this._passthroughPrevBtn.disabled = !this.scope.enablePrevControl;
+      }
+      if (this._passthroughNextBtn) {
+        this._passthroughNextBtn.disabled = !this.scope.enableNextControl;
+      }
+    };
+  }
+
+  protected injectIndicators() {
+    if (!this.scope.indicators) return;
+    const inner = this.querySelector(".slider-inner");
+    if (!inner || inner.querySelector(".slider-indicators")) return;
+
+    const indicatorsDiv = document.createElement("div");
+    indicatorsDiv.className =
+      "slider-indicators flex justify-center gap-1.5 mt-3";
+
+    inner.appendChild(indicatorsDiv);
+
+    const origUpdateIndicators = this.updateIndicators.bind(this);
+    this.updateIndicators = () => {
+      origUpdateIndicators();
+      this.renderPassthroughIndicators(indicatorsDiv);
+    };
+  }
+
+  protected renderPassthroughIndicators(container: HTMLElement) {
+    if (!this.scope.showIndicators) {
+      container.style.display = "none";
+      return;
+    }
+    container.style.display = "";
+
+    while (container.children.length > this.scope.items.length) {
+      container.lastChild?.remove();
+    }
+    while (container.children.length < this.scope.items.length) {
+      const dot = document.createElement("button");
+      dot.className =
+        "w-2 h-2 rounded-full transition-colors";
+      dot.setAttribute("aria-label", "Go to item");
+      const idx = container.children.length;
+      dot.addEventListener("click", () => this.goTo(idx));
+      container.appendChild(dot);
+    }
+
+    Array.from(container.children).forEach((dot, i) => {
+      const isActive = this.scope.activeSlides.includes(i);
+      dot.classList.toggle("bg-gray-800", isActive);
+      dot.classList.toggle("bg-gray-300", !isActive);
+    });
   }
 
   protected async afterAllBind() {
@@ -447,6 +604,24 @@ export class TwSliderComponent extends Component {
     this.scrollEventsService = new ScrollEventsService(this.sliderInner);
   }
 
+  protected preventDragstart = (e: Event) => e.preventDefault();
+
+  protected onDragMouseDown = () => {
+    // Disable scroll-snap and smooth scrolling during drag so that
+    // rapid programmatic scrollLeft changes apply immediately.
+    if (this.sliderInner) {
+      this.sliderInner.style.scrollSnapType = "none";
+      this.sliderInner.style.scrollBehavior = "auto";
+    }
+  };
+
+  protected onDragMouseUp = () => {
+    if (this.sliderInner) {
+      this.sliderInner.style.scrollSnapType = "";
+      this.sliderInner.style.scrollBehavior = "";
+    }
+  };
+
   protected enableDesktopDragscroll() {
     if (!this.dragscrollService) {
       if (!this.sliderInner) {
@@ -458,6 +633,18 @@ export class TwSliderComponent extends Component {
         dragscrollOptions,
       );
     }
+
+    this.sliderInner?.addEventListener("mousedown", this.onDragMouseDown);
+    window.addEventListener("mouseup", this.onDragMouseUp);
+
+    // Prevent ghost images when dragging
+    this.addEventListener("dragstart", this.preventDragstart);
+    this.classList.add("drag-none");
+    const draggables = this.querySelectorAll("img, video, svg, a");
+    draggables.forEach((el) => {
+      el.setAttribute("draggable", "false");
+      el.classList.add("drag-none");
+    });
   }
 
   protected disableDesktopDragscroll() {
@@ -465,6 +652,15 @@ export class TwSliderComponent extends Component {
       this.dragscrollService.destroy();
       this.dragscrollService = undefined;
     }
+    this.sliderInner?.removeEventListener("mousedown", this.onDragMouseDown);
+    window.removeEventListener("mouseup", this.onDragMouseUp);
+    this.removeEventListener("dragstart", this.preventDragstart);
+    this.classList.remove("drag-none");
+    const draggables = this.querySelectorAll("img, video, svg, a");
+    draggables.forEach((el) => {
+      el.removeAttribute("draggable");
+      el.classList.remove("drag-none");
+    });
   }
 
   public enableTouchScroll() {
@@ -615,7 +811,7 @@ export class TwSliderComponent extends Component {
     ) as HTMLElement;
   }
 
-  protected isSlideVisible(item: TwSliderSlide, offset: number) {
+  protected isSlideVisible(item: TwSliderSlide, _offset: number) {
     if (!this.sliderInner) {
       return false;
     }
@@ -628,11 +824,19 @@ export class TwSliderComponent extends Component {
     }
     const slideRect = slideEl.getBoundingClientRect();
 
-    return this.scope.angle === "horizontal"
-      ? slideRect.left + offset >= containerRect.left &&
-          slideRect.right - offset <= containerRect.right
-      : slideRect.top + offset >= containerRect.top &&
-          slideRect.bottom - offset <= containerRect.bottom;
+    // Count as "visible" if more than 50% of the slide overlaps the container.
+    // This is tolerant to gaps, padding and rounding errors.
+    if (this.scope.angle === "horizontal") {
+      const visibleLeft = Math.max(slideRect.left, containerRect.left);
+      const visibleRight = Math.min(slideRect.right, containerRect.right);
+      const visibleWidth = Math.max(0, visibleRight - visibleLeft);
+      return visibleWidth / slideRect.width > 0.5;
+    } else {
+      const visibleTop = Math.max(slideRect.top, containerRect.top);
+      const visibleBottom = Math.min(slideRect.bottom, containerRect.bottom);
+      const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+      return visibleHeight / slideRect.height > 0.5;
+    }
   }
 
   protected getVisibleSlides(offset: number) {
@@ -804,6 +1008,14 @@ export class TwSliderComponent extends Component {
   }
 
   protected template(): ReturnType<TemplateFunction> {
+    // Pass-through mode: consumer provided their own .slider-row / .slide markup
+    if (
+      this.querySelector(SLIDER_INNER_SELECTOR) ||
+      this.querySelector(SLIDES_SELECTOR)
+    ) {
+      this._usePassthrough = true;
+      return null;
+    }
     return template;
   }
 }

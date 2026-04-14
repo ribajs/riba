@@ -13,6 +13,7 @@ export interface Scope extends ScopeBase {
   items: StepItem[];
   currentStep: number;
   orientation: "horizontal" | "vertical";
+  lastIndex: number;
   goToStep: TwStepsComponent["goToStep"];
 }
 
@@ -29,6 +30,7 @@ export class TwStepsComponent extends Component {
     items: [],
     currentStep: 0,
     orientation: "horizontal",
+    lastIndex: 0,
     goToStep: this.goToStep.bind(this),
   };
 
@@ -36,7 +38,7 @@ export class TwStepsComponent extends Component {
     super();
   }
 
-  public goToStep(_event: Event, _el: HTMLElement, step: StepItem) {
+  public goToStep(step: StepItem) {
     this.scope.currentStep = step.index;
     this.updateStepStates();
     this.dispatchEvent(
@@ -68,6 +70,7 @@ export class TwStepsComponent extends Component {
         state: "upcoming" as const,
         index,
       }));
+      this.scope.lastIndex = this.scope.items.length - 1;
       this.updateStepStates();
     }
   }
@@ -81,6 +84,7 @@ export class TwStepsComponent extends Component {
         state: "upcoming" as const,
         index,
       }));
+      this.scope.lastIndex = this.scope.items.length - 1;
       this.updateStepStates();
     }
   }

@@ -1,4 +1,4 @@
-<div class="relative inline-block overflow-hidden">
+<div class="relative inline-block">
   <img
     rv-src="src"
     rv-alt="alt"
@@ -27,7 +27,7 @@
 
     <!-- Popover -->
     <div
-      rv-if="tag.open"
+      rv-show="tag.open"
       class="absolute bottom-full left-1/2 z-20 mb-3 w-56 -translate-x-1/2 transform"
     >
       <div class="rounded-lg bg-white p-3 shadow-xl ring-1 ring-black/5 dark:bg-gray-800 dark:ring-gray-700">
@@ -43,7 +43,7 @@
             </svg>
           </button>
         </div>
-        <div rv-if="tag.content" class="mt-1 text-xs text-gray-600 dark:text-gray-400" rv-template="tag.content"></div>
+        <div rv-show="tag.content" class="mt-1 text-xs text-gray-600 dark:text-gray-400" rv-template="tag.content"></div>
       </div>
       <!-- Arrow -->
       <div class="absolute left-1/2 -bottom-1.5 h-3 w-3 -translate-x-1/2 rotate-45 transform bg-white shadow ring-1 ring-black/5 dark:bg-gray-800 dark:ring-gray-700"></div>

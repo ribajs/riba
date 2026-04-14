@@ -117,11 +117,16 @@ export class TwAvatarComponent extends Component {
 
     // Derive initials from placeholder text
     if (this.scope.placeholder) {
-      const parts = this.scope.placeholder.trim().split(/\s+/);
-      this.scope.initials = parts
-        .slice(0, 2)
-        .map((p) => p.charAt(0).toUpperCase())
-        .join("");
+      const text = this.scope.placeholder.trim();
+      const parts = text.split(/\s+/);
+      if (parts.length === 1 && text.length <= 3) {
+        this.scope.initials = text.toUpperCase();
+      } else {
+        this.scope.initials = parts
+          .slice(0, 2)
+          .map((p) => p.charAt(0).toUpperCase())
+          .join("");
+      }
     }
   }
 

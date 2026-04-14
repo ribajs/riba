@@ -355,13 +355,15 @@ export class TwSlideshowComponent extends Component {
       return;
     }
 
-    this.dispatchEvent(new CustomEvent(event.type, { detail: event.detail }));
-
     try {
+      // Update active slides BEFORE dispatching the event,
+      // so listeners (e.g. tw-slide-video) see the correct active state
       this.updateSlides();
     } catch (error: any) {
       this.throw(error);
     }
+
+    this.dispatchEvent(new CustomEvent(event.type, { detail: event.detail }));
   }
 
   protected connectedCallback() {
@@ -375,6 +377,19 @@ export class TwSlideshowComponent extends Component {
     this.init(TwSlideshowComponent.observedAttributes);
     this.addEventListeners();
   }
+
+  protected onKeyDown = (event: KeyboardEvent) => {
+    const isHorizontal = this.scope.angle === "horizontal";
+    const prevKey = isHorizontal ? "ArrowLeft" : "ArrowUp";
+    const nextKey = isHorizontal ? "ArrowRight" : "ArrowDown";
+    if (event.key === prevKey) {
+      event.preventDefault();
+      this.prev();
+    } else if (event.key === nextKey) {
+      event.preventDefault();
+      this.next();
+    }
+  };
 
   protected addEventListeners() {
     this.routerEvents.on("newPageReady", this.onViewChanges);
@@ -401,6 +416,14 @@ export class TwSlideshowComponent extends Component {
       this.onScrollEnd as EventListener,
       { passive: true },
     );
+
+    // Keyboard navigation — make the inner focusable and listen for arrow keys
+    if (this.slideshowInner) {
+      if (!this.slideshowInner.hasAttribute("tabindex")) {
+        this.slideshowInner.setAttribute("tabindex", "0");
+      }
+      this.slideshowInner.addEventListener("keydown", this.onKeyDown);
+    }
   }
 
   protected removeEventListeners() {
@@ -423,6 +446,7 @@ export class TwSlideshowComponent extends Component {
       "scrollended",
       this.onScrollEnd as EventListener,
     );
+    this.slideshowInner?.removeEventListener("keydown", this.onKeyDown);
   }
 
   protected initAll() {
@@ -693,7 +717,7 @@ export class TwSlideshowComponent extends Component {
     ) as HTMLElement;
   }
 
-  protected isSlideVisible(item: TwSlideshowSlide, offset: number) {
+  protected isSlideVisible(item: TwSlideshowSlide, _offset: number) {
     if (!this.slideshowInner) {
       return false;
     }
@@ -706,14 +730,19 @@ export class TwSlideshowComponent extends Component {
     }
     const slideRect = slideEl.getBoundingClientRect();
 
-    const isVisible =
-      this.scope.angle === "horizontal"
-        ? slideRect.left + offset >= containerRect.left &&
-          slideRect.right - offset <= containerRect.right
-        : slideRect.top + offset >= containerRect.top &&
-          slideRect.bottom - offset <= containerRect.bottom;
-
-    return isVisible;
+    // Count as "visible" if more than 50% of the slide overlaps the container.
+    // This is tolerant to gaps, padding and rounding errors.
+    if (this.scope.angle === "horizontal") {
+      const visibleLeft = Math.max(slideRect.left, containerRect.left);
+      const visibleRight = Math.min(slideRect.right, containerRect.right);
+      const visibleWidth = Math.max(0, visibleRight - visibleLeft);
+      return visibleWidth / slideRect.width > 0.5;
+    } else {
+      const visibleTop = Math.max(slideRect.top, containerRect.top);
+      const visibleBottom = Math.min(slideRect.bottom, containerRect.bottom);
+      const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+      return visibleHeight / slideRect.height > 0.5;
+    }
   }
 
   protected getVisibleSlides(offset: number) {
@@ -947,6 +976,9 @@ export class TwSlideshowComponent extends Component {
   /**
    * Dynamically inject prev/next control buttons for pass-through mode.
    */
+  protected _passthroughPrevBtn?: HTMLButtonElement;
+  protected _passthroughNextBtn?: HTMLButtonElement;
+
   protected injectControls() {
     if (!this.scope.controls) return;
     const inner = this.querySelector(".slideshow-inner");
@@ -958,14 +990,14 @@ export class TwSlideshowComponent extends Component {
 
     const prevBtn = document.createElement("button");
     prevBtn.className =
-      "slideshow-control-prev pointer-events-auto flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors ml-2";
+      "slideshow-control-prev pointer-events-auto flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors disabled:opacity-30 disabled:cursor-not-allowed ml-2";
     prevBtn.setAttribute("aria-label", "Previous slide");
     prevBtn.appendChild(this.createChevronSvg("left"));
     prevBtn.addEventListener("click", () => this.prev());
 
     const nextBtn = document.createElement("button");
     nextBtn.className =
-      "slideshow-control-next pointer-events-auto flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors mr-2";
+      "slideshow-control-next pointer-events-auto flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors disabled:opacity-30 disabled:cursor-not-allowed mr-2";
     nextBtn.setAttribute("aria-label", "Next slide");
     nextBtn.appendChild(this.createChevronSvg("right"));
     nextBtn.addEventListener("click", () => this.next());
@@ -973,6 +1005,21 @@ export class TwSlideshowComponent extends Component {
     controlsDiv.appendChild(prevBtn);
     controlsDiv.appendChild(nextBtn);
     inner.appendChild(controlsDiv);
+
+    this._passthroughPrevBtn = prevBtn;
+    this._passthroughNextBtn = nextBtn;
+
+    // Hook into updateControls to sync disabled state
+    const origUpdateControls = this.updateControls.bind(this);
+    this.updateControls = () => {
+      origUpdateControls();
+      if (this._passthroughPrevBtn) {
+        this._passthroughPrevBtn.disabled = !this.scope.enablePrevControl;
+      }
+      if (this._passthroughNextBtn) {
+        this._passthroughNextBtn.disabled = !this.scope.enableNextControl;
+      }
+    };
   }
 
   /**

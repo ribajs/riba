@@ -5,6 +5,8 @@ interface BreadcrumbItem {
   label: string;
   href?: string;
   active?: boolean;
+  /** Computed display mode: "link" | "active" | "plain" */
+  mode?: "link" | "active" | "plain";
 }
 
 interface Scope extends ScopeBase {
@@ -32,19 +34,15 @@ export class TwBreadcrumbComponent extends Component {
 
   protected connectedCallback() {
     super.connectedCallback();
+    // Parse templates BEFORE init() triggers template loading which replaces children
+    if (this.scope.items.length === 0) {
+      this.parseChildTemplates();
+    }
     this.init(TwBreadcrumbComponent.observedAttributes);
   }
 
   protected requiredAttributes(): string[] {
     return [];
-  }
-
-  protected async beforeBind() {
-    await super.beforeBind();
-    // Parse items from <template> children if items attribute is not set
-    if (this.scope.items.length === 0) {
-      this.parseChildTemplates();
-    }
   }
 
   protected parseChildTemplates() {
@@ -63,6 +61,19 @@ export class TwBreadcrumbComponent extends Component {
     if (items.length > 0) {
       this.scope.items = items;
     }
+    this.computeItemModes();
+  }
+
+  protected computeItemModes() {
+    for (const item of this.scope.items) {
+      if (item.active) {
+        item.mode = "active";
+      } else if (item.href) {
+        item.mode = "link";
+      } else {
+        item.mode = "plain";
+      }
+    }
   }
 
   protected parsedAttributeChangedCallback(
@@ -80,6 +91,7 @@ export class TwBreadcrumbComponent extends Component {
     if (attributeName === "items" && typeof newValue === "string") {
       try {
         this.scope.items = JSON.parse(newValue);
+        this.computeItemModes();
       } catch {
         // Ignore parse errors
       }

@@ -4,6 +4,7 @@ import template from "./tw-pagination.component.html?raw";
 export interface PaginationPage {
   number: number;
   isEllipsis: boolean;
+  isCurrent: boolean;
 }
 
 export interface Scope extends ScopeBase {
@@ -47,7 +48,7 @@ export class TwPaginationComponent extends Component {
     super();
   }
 
-  public goToPage(_event: Event, _el: HTMLElement, page: PaginationPage) {
+  public goToPage(page: PaginationPage) {
     if (page.isEllipsis) {
       return;
     }
@@ -95,13 +96,13 @@ export class TwPaginationComponent extends Component {
 
     if (total <= maxVisible) {
       for (let i = 1; i <= total; i++) {
-        pages.push({ number: i, isEllipsis: false });
+        pages.push({ number: i, isEllipsis: false, isCurrent: i === current });
       }
       return pages;
     }
 
     // Always show first page
-    pages.push({ number: 1, isEllipsis: false });
+    pages.push({ number: 1, isEllipsis: false, isCurrent: current === 1 });
 
     const halfVisible = Math.floor((maxVisible - 2) / 2);
     let start = Math.max(2, current - halfVisible);
@@ -118,25 +119,35 @@ export class TwPaginationComponent extends Component {
     }
 
     if (start > 2) {
-      pages.push({ number: -1, isEllipsis: true });
+      pages.push({ number: -1, isEllipsis: true, isCurrent: false });
     }
 
     for (let i = start; i <= end; i++) {
-      pages.push({ number: i, isEllipsis: false });
+      pages.push({ number: i, isEllipsis: false, isCurrent: i === current });
     }
 
     if (end < total - 1) {
-      pages.push({ number: -1, isEllipsis: true });
+      pages.push({ number: -1, isEllipsis: true, isCurrent: false });
     }
 
     // Always show last page
-    pages.push({ number: total, isEllipsis: false });
+    pages.push({ number: total, isEllipsis: false, isCurrent: current === total });
 
     return pages;
   }
 
   protected updatePages() {
-    this.scope.pages = this.computePages();
+    const newPages = this.computePages();
+    // Mutate in place when length matches so rv-each child views update reactively
+    if (this.scope.pages.length === newPages.length) {
+      for (let i = 0; i < newPages.length; i++) {
+        this.scope.pages[i].number = newPages[i].number;
+        this.scope.pages[i].isEllipsis = newPages[i].isEllipsis;
+        this.scope.pages[i].isCurrent = newPages[i].isCurrent;
+      }
+    } else {
+      this.scope.pages = newPages;
+    }
     this.scope.hasPrev = this.scope.currentPage > 1;
     this.scope.hasNext = this.scope.currentPage < this.scope.totalPages;
   }

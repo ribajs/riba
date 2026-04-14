@@ -24,7 +24,7 @@
     rv-each-tab="items"
     role="tabpanel"
     class="tw-tab-pane text-gray-700 dark:text-gray-300"
-    rv-if="tab.active"
+    rv-show="tab.active"
     rv-id="'tab-content-' | append tab.handle"
     rv-aria-labelledby="'tab-title-' | append tab.handle"
     rv-template="tab.content"

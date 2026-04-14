@@ -8,7 +8,7 @@
   </div>
 
   <!-- Controls -->
-  <div rv-if="showControls" class="slideshow-controls absolute inset-0 flex items-center justify-between pointer-events-none z-10" rv-class="controlsPositionClass">
+  <div rv-if="showControls" class="slideshow-controls absolute inset-0 flex items-center justify-between pointer-events-none z-10" rv-add-class="controlsPositionClass">
     <button
       class="slideshow-control-prev pointer-events-auto flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors disabled:opacity-30 disabled:cursor-not-allowed ml-2"
       rv-on-click="prev"
@@ -32,7 +32,7 @@
   </div>
 
   <!-- Indicators -->
-  <div rv-if="showIndicators" class="slideshow-indicators absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10" rv-class="indicatorsPositionClass">
+  <div rv-if="showIndicators" class="slideshow-indicators absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10" rv-add-class="indicatorsPositionClass">
     <button
       rv-each-item="items"
       class="w-2.5 h-2.5 rounded-full transition-colors border border-white/60"

@@ -2,25 +2,23 @@
   <ol class="inline-flex items-center space-x-1 md:space-x-2">
     <li rv-each-item="items" class="inline-flex items-center">
       <span
-        rv-unless="%index% | eq 0"
+        rv-hide="%index% | eq 0"
         class="mx-1 text-gray-400 dark:text-gray-500"
         rv-text="separator"
       ></span>
       <a
-        rv-if="item.href"
-        rv-show="item.active | not"
+        rv-show="item.mode | eq 'link'"
         rv-href="item.href"
         class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
         rv-text="item.label"
       ></a>
       <span
-        rv-if="item.active"
+        rv-show="item.mode | eq 'active'"
         class="text-sm font-medium text-gray-500 dark:text-gray-400"
         rv-text="item.label"
       ></span>
       <span
-        rv-unless="item.href"
-        rv-show="item.active | not"
+        rv-show="item.mode | eq 'plain'"
         class="inline-flex items-center text-sm font-medium text-gray-700 dark:text-gray-400"
         rv-text="item.label"
       ></span>

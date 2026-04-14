@@ -17,17 +17,17 @@
     class="absolute left-0 z-10 mt-2 w-48 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-gray-800 dark:ring-gray-700"
   >
     <div class="py-1" rv-each-item="shareItems">
-      <div rv-if="item.available">
+      <div rv-show="item.available">
         <!-- Regular link (email, etc.) -->
         <a
-          rv-if="item.type | eq 'href'"
+          rv-show="item.type | eq 'href'"
           class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
           rv-href="item.url"
           rv-text="item.label"
         ></a>
         <!-- Popup or clipboard action -->
         <button
-          rv-unless="item.type | eq 'href'"
+          rv-hide="item.type | eq 'href'"
           type="button"
           class="block w-full cursor-pointer px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
           rv-on-click="shareOnService | args item"

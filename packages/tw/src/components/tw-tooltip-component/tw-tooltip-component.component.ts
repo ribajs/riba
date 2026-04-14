@@ -8,7 +8,7 @@ export interface Scope extends ScopeBase {
 }
 
 export class TwTooltipComponentComponent extends Component {
-  public static tagName = "tw-tooltip-component";
+  public static tagName = "tw-tooltip";
 
   protected autobind = true;
 
@@ -163,24 +163,27 @@ export class TwTooltipComponentComponent extends Component {
         border-right-color: #1f2937;
       }
 
-      /* Dark mode */
-      @media (prefers-color-scheme: dark) {
-        .tw-tooltip::before {
-          background-color: #e5e7eb;
-          color: #111827;
-        }
-        .tw-tooltip-top::after {
-          border-top-color: #e5e7eb;
-        }
-        .tw-tooltip-bottom::after {
-          border-bottom-color: #e5e7eb;
-        }
-        .tw-tooltip-left::after {
-          border-left-color: #e5e7eb;
-        }
-        .tw-tooltip-right::after {
-          border-right-color: #e5e7eb;
-        }
+      /* Dark mode (class-based via ThemeService) */
+      .dark .tw-tooltip::before,
+      .dark.tw-tooltip::before {
+        background-color: #e5e7eb;
+        color: #111827;
+      }
+      .dark .tw-tooltip-top::after,
+      .dark.tw-tooltip-top::after {
+        border-top-color: #e5e7eb;
+      }
+      .dark .tw-tooltip-bottom::after,
+      .dark.tw-tooltip-bottom::after {
+        border-bottom-color: #e5e7eb;
+      }
+      .dark .tw-tooltip-left::after,
+      .dark.tw-tooltip-left::after {
+        border-left-color: #e5e7eb;
+      }
+      .dark .tw-tooltip-right::after,
+      .dark.tw-tooltip-right::after {
+        border-right-color: #e5e7eb;
       }
     `;
     document.head.appendChild(style);
