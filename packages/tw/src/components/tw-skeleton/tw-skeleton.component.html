@@ -13,9 +13,8 @@
   <div
     rv-if="type | eq 'circle'"
     class="rounded-full bg-gray-200 dark:bg-gray-700"
-    rv-style-width="width | default 'w-12'"
-    rv-style-height="height | default 'h-12'"
-    style="width: 48px; height: 48px;"
+    rv-style-width="width | default '48px'"
+    rv-style-height="height | default '48px'"
   ></div>
 
   <!-- Rectangle skeleton -->
@@ -23,8 +22,7 @@
     rv-if="type | eq 'rect'"
     class="rounded-lg bg-gray-200 dark:bg-gray-700"
     rv-style-width="width"
-    rv-style-height="height"
-    style="height: 120px;"
+    rv-style-height="height | default '120px'"
   ></div>
 
   <!-- Card skeleton -->

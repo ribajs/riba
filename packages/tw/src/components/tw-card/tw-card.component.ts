@@ -7,6 +7,8 @@ interface Scope extends ScopeBase {
   imageAlt: string;
   title: string;
   compact: boolean;
+  paddingClass: string;
+  titleSizeClass: string;
 }
 
 export class TwCardComponent extends Component {
@@ -23,6 +25,8 @@ export class TwCardComponent extends Component {
     imageAlt: "",
     title: "",
     compact: false,
+    paddingClass: "p-5",
+    titleSizeClass: "text-xl",
   };
 
   constructor() {
@@ -32,6 +36,33 @@ export class TwCardComponent extends Component {
   protected connectedCallback() {
     super.connectedCallback();
     this.init(TwCardComponent.observedAttributes);
+  }
+
+  protected updateComputedClasses() {
+    this.scope.paddingClass = this.scope.compact ? "p-3" : "p-5";
+    this.scope.titleSizeClass = this.scope.compact ? "text-lg" : "text-xl";
+  }
+
+  protected async beforeBind() {
+    await super.beforeBind();
+    this.updateComputedClasses();
+  }
+
+  protected parsedAttributeChangedCallback(
+    attributeName: string,
+    oldValue: any,
+    newValue: any,
+    namespace: string | null,
+  ) {
+    super.parsedAttributeChangedCallback(
+      attributeName,
+      oldValue,
+      newValue,
+      namespace,
+    );
+    if (attributeName === "compact") {
+      this.updateComputedClasses();
+    }
   }
 
   protected requiredAttributes(): string[] {
