@@ -21,6 +21,7 @@ export class PopoverService {
   protected placement: Placement;
   protected _isShown = false;
   protected cleanup?: () => void;
+  protected abortController = new AbortController();
   protected onDocumentClick = this._onDocumentClick.bind(this);
 
   constructor(
@@ -48,7 +49,9 @@ export class PopoverService {
       "duration-150",
     );
 
-    this.trigger.addEventListener("click", () => this.toggle());
+    this.trigger.addEventListener("click", () => this.toggle(), {
+      signal: this.abortController.signal,
+    });
   }
 
   get isShown() {
@@ -143,5 +146,6 @@ export class PopoverService {
   dispose() {
     this.hide();
     this.cleanup?.();
+    this.abortController.abort();
   }
 }

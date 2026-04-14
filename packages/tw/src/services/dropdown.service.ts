@@ -19,6 +19,7 @@ export class DropdownService {
   protected _isShown = false;
   protected placement: Placement;
   protected cleanup?: () => void;
+  protected abortController = new AbortController();
   protected onDocumentClick = this._onDocumentClick.bind(this);
   protected onKeydown = this._onKeydown.bind(this);
 
@@ -34,7 +35,9 @@ export class DropdownService {
     // Initially hidden
     this.menu.style.display = "none";
 
-    this.trigger.addEventListener("click", () => this.toggle());
+    this.trigger.addEventListener("click", () => this.toggle(), {
+      signal: this.abortController.signal,
+    });
   }
 
   get isShown() {
@@ -132,5 +135,6 @@ export class DropdownService {
   dispose() {
     this.hide();
     this.cleanup?.();
+    this.abortController.abort();
   }
 }

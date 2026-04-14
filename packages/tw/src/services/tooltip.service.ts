@@ -20,6 +20,7 @@ export class TooltipService {
   protected hideDelay: number;
   protected showTimeout?: ReturnType<typeof setTimeout>;
   protected hideTimeout?: ReturnType<typeof setTimeout>;
+  protected abortController = new AbortController();
 
   constructor(
     trigger: HTMLElement,
@@ -50,10 +51,11 @@ export class TooltipService {
     this.tooltipEl.style.display = "none";
     document.body.appendChild(this.tooltipEl);
 
-    this.trigger.addEventListener("mouseenter", () => this.scheduleShow());
-    this.trigger.addEventListener("mouseleave", () => this.scheduleHide());
-    this.trigger.addEventListener("focus", () => this.scheduleShow());
-    this.trigger.addEventListener("blur", () => this.scheduleHide());
+    const signal = this.abortController.signal;
+    this.trigger.addEventListener("mouseenter", () => this.scheduleShow(), { signal });
+    this.trigger.addEventListener("mouseleave", () => this.scheduleHide(), { signal });
+    this.trigger.addEventListener("focus", () => this.scheduleShow(), { signal });
+    this.trigger.addEventListener("blur", () => this.scheduleHide(), { signal });
   }
 
   get isShown() {
@@ -150,6 +152,7 @@ export class TooltipService {
 
   dispose() {
     this.clearTimeouts();
+    this.abortController.abort();
     this.tooltipEl.remove();
   }
 }

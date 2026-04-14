@@ -35,6 +35,7 @@ export interface Scope extends ScopeBase {
   form: ValidationObject;
   onSubmit: TwFormComponent["onSubmit"];
   onReset: TwFormComponent["onReset"];
+  enableSubmit: TwFormComponent["enableSubmit"];
 
   disableSubmitUntilChange: boolean;
   submitDisabled: boolean;
@@ -91,6 +92,7 @@ export class TwFormComponent extends Component {
       submitDisabled: false,
       onSubmit: this.onSubmit.bind(this),
       onReset: this.onReset.bind(this),
+      enableSubmit: this.enableSubmit.bind(this),
 
       useAjax: true,
       ajaxRequestType: "form",
@@ -106,27 +108,17 @@ export class TwFormComponent extends Component {
 
   constructor() {
     super();
-    this.enableSubmit = this.enableSubmit.bind(this);
   }
 
   protected connectedCallback() {
     super.connectedCallback();
     this.init(TwFormComponent.observedAttributes);
-    this.addEventListeners();
   }
 
-  protected addEventListeners() {
+  public enableSubmit() {
     if (this.scope.disableSubmitUntilChange) {
-      this.addEventListener("input", this.enableSubmit);
+      this.scope.submitDisabled = false;
     }
-  }
-
-  protected removeEventListeners() {
-    this.removeEventListener("input", this.enableSubmit);
-  }
-
-  private enableSubmit() {
-    this.scope.submitDisabled = false;
   }
 
   protected requiredAttributes(): string[] {
