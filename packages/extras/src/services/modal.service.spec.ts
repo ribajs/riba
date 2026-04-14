@@ -49,18 +49,18 @@ describe("ModalService", () => {
       expect(modal.isShown).toBe(true);
     });
 
-    it("dispatches tw.modal.show event", () => {
+    it("dispatches modal.show event", () => {
       const modal = new ModalService(dialog);
       const handler = vi.fn();
-      dialog.addEventListener("tw.modal.show", handler);
+      dialog.addEventListener("modal.show", handler);
       modal.show();
       expect(handler).toHaveBeenCalledTimes(1);
     });
 
-    it("dispatches tw.modal.shown event", () => {
+    it("dispatches modal.shown event", () => {
       const modal = new ModalService(dialog);
       const handler = vi.fn();
-      dialog.addEventListener("tw.modal.shown", handler);
+      dialog.addEventListener("modal.shown", handler);
       modal.show();
       expect(handler).toHaveBeenCalledTimes(1);
     });
@@ -97,20 +97,20 @@ describe("ModalService", () => {
       expect(modal.isShown).toBe(false);
     });
 
-    it("dispatches tw.modal.hide event", () => {
+    it("dispatches modal.hide event", () => {
       const modal = new ModalService(dialog);
       modal.show();
       const handler = vi.fn();
-      dialog.addEventListener("tw.modal.hide", handler);
+      dialog.addEventListener("modal.hide", handler);
       modal.hide();
       expect(handler).toHaveBeenCalledTimes(1);
     });
 
-    it("dispatches tw.modal.hidden event", () => {
+    it("dispatches modal.hidden event", () => {
       const modal = new ModalService(dialog);
       modal.show();
       const handler = vi.fn();
-      dialog.addEventListener("tw.modal.hidden", handler);
+      dialog.addEventListener("modal.hidden", handler);
       modal.hide();
       expect(handler).toHaveBeenCalledTimes(1);
     });
@@ -118,7 +118,7 @@ describe("ModalService", () => {
     it("does nothing when already hidden", () => {
       const modal = new ModalService(dialog);
       const handler = vi.fn();
-      dialog.addEventListener("tw.modal.hide", handler);
+      dialog.addEventListener("modal.hide", handler);
       modal.hide();
       expect(handler).not.toHaveBeenCalled();
     });
@@ -182,15 +182,10 @@ describe("ModalService", () => {
 
     it("removes event listeners (Escape no longer triggers hide)", () => {
       const modal = new ModalService(dialog);
+      modal.show();
       modal.dispose();
-      // Re-show manually to test that keydown listener was removed
-      // We need to create a new service to show, since dispose called hide
-      const modal2 = new ModalService(dialog);
-      modal2.show();
-      modal2.dispose();
-      // After dispose, pressing Escape should not call hide again
       const handler = vi.fn();
-      dialog.addEventListener("tw.modal.hide", handler);
+      dialog.addEventListener("modal.hide", handler);
       const event = new KeyboardEvent("keydown", {
         key: "Escape",
         bubbles: true,

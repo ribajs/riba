@@ -1,5 +1,5 @@
 import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
-import { ModalService } from "../../services/modal.service.js";
+import { ModalService } from "@ribajs/extras";
 import type { ModalNotification } from "../../types/index.js";
 import template from "./tw-modal-item.component.html?raw";
 
@@ -62,7 +62,7 @@ export class TwModalItemComponent extends Component {
         keyboard: true,
       });
 
-      dialogEl.addEventListener("tw.modal.hidden", this.scope.onHidden, {
+      dialogEl.addEventListener("modal.hidden", this.scope.onHidden, {
         once: true,
       });
 

@@ -16,3 +16,4 @@ export * from "./touch-settings.js";
 export * from "./touch-swipe-data.js";
 export * from "./touch-type.js";
 export * from "./video-component-scope.js";
+export * from "./notification.js";

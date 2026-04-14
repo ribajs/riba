@@ -4,3 +4,4 @@ export * from "./route-class-star.binder.js";
 export * from "./route-preload.binder.js";
 export * from "./parent-route-class-star.binder.js";
 export * from "./route-back-on-star.binder.js";
+export * from "./dispatch-on-route.binder.js";

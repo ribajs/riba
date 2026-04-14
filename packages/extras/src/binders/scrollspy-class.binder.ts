@@ -5,12 +5,12 @@ import { isInViewport } from "@ribajs/utils/src/dom.js";
 /**
  * Adds or removes a CSS class based on whether a target element is in the viewport.
  *
- * Usage: `rv-tw-scrollspy-active="'#section-id'"`
+ * Usage: `rv-scrollspy-active="'#section-id'"`
  * This will add/remove the class "active" on the bound element when #section-id
  * is in the viewport.
  */
 export class ScrollspyClassBinder extends Binder<string, HTMLInputElement> {
-  static key = "tw-scrollspy-*";
+  static key = "scrollspy-*";
 
   private target?: HTMLElement;
   private className?: string;
@@ -39,11 +39,6 @@ export class ScrollspyClassBinder extends Binder<string, HTMLInputElement> {
 
   private onScroll = debounce(this._onScroll.bind(this));
 
-  /**
-   * Determine if an element is in the viewport
-   * @param elem The element
-   * @return Returns true if element is in the viewport
-   */
   private _isInViewport(elem: Element) {
     if (!elem) {
       return false;

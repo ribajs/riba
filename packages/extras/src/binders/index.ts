@@ -8,3 +8,5 @@ export * from "./sync-element-property.binder.js";
 export * from "./scroll-to-on-event.binder.js";
 export * from "./toggle-attribute.binder.js";
 export * from "./toggle-class.binder.js";
+export * from "./scrollspy-class.binder.js";
+export * from "./show-toast-on.binder.js";

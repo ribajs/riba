@@ -5,17 +5,17 @@ import type { ToastNotification } from "../types/notification.js";
 /**
  * Shows a toast notification when a specified event fires on the element.
  *
- * Usage: `rv-tw-show-toast-on-click="toastData"`
+ * Usage: `rv-show-toast-on-click="toastData"`
  */
 export class ShowToastOnEventBinder extends Binder<
   ToastNotification,
   HTMLElement
 > {
-  static key = "tw-show-toast-on-*";
+  static key = "show-toast-on-*";
 
   private toastData?: ToastNotification;
 
-  private _onEvent(event: CustomEvent) {
+  private _onEvent() {
     if (!this.toastData) {
       throw new Error("Toast data not set!");
     }
@@ -31,7 +31,7 @@ export class ShowToastOnEventBinder extends Binder<
     el.addEventListener(eventName as any, this.onEvent);
   }
 
-  routine(el: HTMLElement, toastData: ToastNotification) {
+  routine(_el: HTMLElement, toastData: ToastNotification) {
     if (this.args === null) {
       throw new Error("args is null");
     }
