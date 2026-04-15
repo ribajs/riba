@@ -7,31 +7,46 @@ import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 
 /**
- * Resolves the path to the @ribajs/iconset SVG directory.
+ * Resolves the path to the built @ribajs/iconset SVG directory (dist/svg).
+ * Requires the iconset package to have been built first.
  */
 function resolveIconsetPath() {
   try {
     const iconsetPkg = require.resolve("@ribajs/iconset/package.json");
-    return resolve(dirname(iconsetPkg), "src", "svg");
+    return resolve(dirname(iconsetPkg), "dist", "svg");
   } catch {
     return null;
   }
 }
 
 /**
- * Vite plugin that serves @ribajs/iconset SVGs at /iconset/svg/ during dev
- * and copies them to dist/iconset/svg/ during build.
+ * Vite plugin that serves @ribajs/iconset SVGs during dev and copies them
+ * into the build output.
+ *
+ * @param {Object} [options]
+ * @param {string} [options.baseUrl] - URL prefix for dev + build output (default: "/iconset/svg")
+ * @param {string} [options.outputDir] - Output directory inside the build relative to assets root (default: "iconset/svg")
  */
-function ribaIconsetPlugin() {
+export function ribaIconsetPlugin(options = {}) {
+  const { baseUrl = "/iconset/svg", outputDir = "iconset/svg" } = options;
   const iconsetSvgPath = resolveIconsetPath();
+
+  function assertIconsetBuilt() {
+    if (!iconsetSvgPath || !existsSync(iconsetSvgPath)) {
+      throw new Error(
+        "[@ribajs/vite-config] @ribajs/iconset dist/svg not found. " +
+          "Run `yarn workspace @ribajs/iconset build` first.",
+      );
+    }
+  }
 
   return {
     name: "riba-iconset",
 
     configureServer(server) {
-      if (!iconsetSvgPath || !existsSync(iconsetSvgPath)) return;
+      assertIconsetBuilt();
 
-      server.middlewares.use("/iconset/svg", (req, res, next) => {
+      server.middlewares.use(baseUrl, (req, res, next) => {
         const filePath = resolve(iconsetSvgPath, req.url.replace(/^\//, ""));
         if (existsSync(filePath)) {
           res.setHeader("Content-Type", "image/svg+xml");
@@ -46,7 +61,7 @@ function ribaIconsetPlugin() {
     },
 
     async generateBundle() {
-      if (!iconsetSvgPath || !existsSync(iconsetSvgPath)) return;
+      assertIconsetBuilt();
 
       const { readdirSync, readFileSync } = await import("fs");
       const files = readdirSync(iconsetSvgPath);
@@ -54,7 +69,7 @@ function ribaIconsetPlugin() {
         if (file.endsWith(".svg")) {
           this.emitFile({
             type: "asset",
-            fileName: `iconset/svg/${file}`,
+            fileName: `${outputDir}/${file}`,
             source: readFileSync(resolve(iconsetSvgPath, file)),
           });
         }

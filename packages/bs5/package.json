@@ -72,6 +72,7 @@
     "@ribajs/core": "workspace:^",
     "@ribajs/events": "workspace:^",
     "@ribajs/extras": "workspace:^",
+    "@ribajs/iconset": "workspace:^",
     "@ribajs/jsx": "workspace:^",
     "@ribajs/utils": "workspace:^",
     "@sphinxxxx/color-conversion": "^2.2.2",
