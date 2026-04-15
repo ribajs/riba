@@ -4,7 +4,7 @@ import { bs5Module } from "@ribajs/bs5";
 import { coreModule, Riba } from "@ribajs/core";
 import { IconsetModule } from "./iconset.module.js";
 
-const iconsetModules = import.meta.glob("@ribajs/iconset/src/svg/*.svg");
+const iconsetModules = import.meta.glob("@ribajs/iconset/svg/*.svg");
 const ICONSET = Object.keys(iconsetModules)
   .map((modulePath) => modulePath.split("/").pop()?.replace(".svg", ""))
   .filter((iconName): iconName is string => Boolean(iconName));

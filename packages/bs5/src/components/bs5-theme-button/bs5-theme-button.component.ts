@@ -2,6 +2,8 @@ import { Component, TemplateFunction } from "@ribajs/core";
 import { ThemeService } from "../../services/theme.js";
 import { hasChildNodesTrim } from "@ribajs/utils";
 import template from "./bs5-theme-button.component.html?raw";
+import iconSunUrl from "@ribajs/iconset/svg/icon_sun.svg?url";
+import iconMoonUrl from "@ribajs/iconset/svg/icon_moon.svg?url";
 import { themeChoices } from "../../constants/index.js";
 
 import type {
@@ -31,8 +33,8 @@ export class Bs5ThemeButtonComponent extends Component {
       light: "Light",
       dark: "Dark",
     },
-    lightIconSrc: "/iconset/svg/icon_sun.svg",
-    darkIconSrc: "/iconset/svg/icon_moon.svg",
+    lightIconSrc: iconSunUrl,
+    darkIconSrc: iconMoonUrl,
     iconSize: 32,
     // Methods / Properties
     setTheme: this.setTheme.bind(this),

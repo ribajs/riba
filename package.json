@@ -35,13 +35,14 @@
     "Browser"
   ],
   "scripts": {
+    "postinstall": "yarn workspace @ribajs/iconset build",
     "reinstall": "YARN_CHECKSUM_BEHAVIOR=update yarn install && yarn dlx @yarnpkg/sdks vscode",
     "test": "vitest run",
     "test:watch": "vitest",
     "format": "yarn run lint:ext && yarn workspaces foreach -v -p -W run lint",
     "lint:ext": "node lint-file-extension.js",
-    "build": "yarn workspaces foreach -v -W --jobs 5 run build",
-    "build:libs": "yarn workspaces foreach -v -p -W --no-private --jobs 5 run build",
+    "build": "yarn workspaces foreach -v -t -W --jobs 5 run build",
+    "build:libs": "yarn workspaces foreach -v -p -t -W --no-private --jobs 5 run build",
     "clean": "yarn workspaces foreach -v -p -W run clean",
     "release": "GITHUB_TOKEN=${GITHUB_TOKEN:-$(gh auth token)} release-it",
     "release:patch": "GITHUB_TOKEN=${GITHUB_TOKEN:-$(gh auth token)} release-it patch",

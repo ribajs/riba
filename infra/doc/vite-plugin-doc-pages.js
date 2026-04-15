@@ -72,7 +72,7 @@ function loadLocals(contentDir, projectRoot) {
   let icons = [];
   try {
     const esmRequire = createRequire(import.meta.url);
-    const iconsetPath = esmRequire.resolve('@ribajs/iconset/dist/svg.json');
+    const iconsetPath = esmRequire.resolve('@ribajs/iconset/svg.json');
     icons = JSON.parse(readFileSync(iconsetPath, 'utf8'));
   } catch {
     // Fallback: direct monorepo path
