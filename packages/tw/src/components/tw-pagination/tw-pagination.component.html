@@ -1,0 +1,36 @@
+<nav class="flex items-center justify-center" aria-label="Pagination">
+  <button
+    class="inline-flex items-center rounded-l-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+    rv-on-click="prevPage"
+    rv-disabled="hasPrev | not"
+    aria-label="Previous page"
+  >
+    <svg class="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+    <span rv-text="prevLabel"></span>
+  </button>
+
+  <button
+    rv-each-page="pages"
+    class="inline-flex items-center border-t border-b border-r border-gray-300 px-3 py-2 text-sm font-medium transition-colors dark:border-gray-600"
+    rv-add-class="page.pageClass"
+    rv-disabled="page.isEllipsis"
+    rv-on-click="goToPage | args page"
+  >
+    <span rv-show="page.isEllipsis">&hellip;</span>
+    <span rv-hide="page.isEllipsis" rv-text="page.number"></span>
+  </button>
+
+  <button
+    class="inline-flex items-center rounded-r-md border-t border-b border-r border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+    rv-on-click="nextPage"
+    rv-disabled="hasNext | not"
+    aria-label="Next page"
+  >
+    <span rv-text="nextLabel"></span>
+    <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+</nav>

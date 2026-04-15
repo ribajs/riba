@@ -1,0 +1,4 @@
+@import "tailwindcss";
+@import "@ribajs/tw/src/css/utilities.css";
+
+@custom-variant dark (&:where(.dark, .dark *));

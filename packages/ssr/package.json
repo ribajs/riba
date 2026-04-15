@@ -26,15 +26,15 @@
     "@types/imagesloaded": "^4.1.7",
     "@types/jest": "^30.0.0",
     "@types/masonry-layout": "^4.2.8",
-    "@typescript-eslint/eslint-plugin": "^8.57.2",
-    "@typescript-eslint/parser": "^8.57.2",
-    "eslint": "^10.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.58.1",
+    "@typescript-eslint/parser": "^8.58.1",
+    "eslint": "^10.2.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
     "jest": "^30.3.0",
     "jest-extended": "^7.0.0",
-    "prettier": "^3.8.1",
-    "ts-jest": "^29.4.6",
+    "prettier": "^3.8.2",
+    "ts-jest": "^29.4.9",
     "typescript": "6.0.2"
   }
 }

@@ -76,6 +76,8 @@ export function renderElement(element: JsxElement | null | undefined): string {
 
     for (const [key, val] of Object.entries(props ?? {})) {
       if (val == null) continue;
+      // Skip React/esbuild dev-only props that should never be rendered to DOM
+      if (key === "__self" || key === "__source") continue;
 
       if (typeof val == "boolean" && !isCustomElement(tag)) {
         if (val) {

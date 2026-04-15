@@ -1,0 +1,12 @@
+<div class="pointer-events-none z-50 flex w-full max-w-sm flex-col items-end gap-3" rv-add-class="positionClass">
+  <div rv-each-toast="notifications" class="w-full">
+    <div rv-if="toast.kind | eq 'toast'" class="w-full">
+      <tw-toast-item class="block w-full" rv-index="%toast%" rv-parent rv-co-toast="toast"></tw-toast-item>
+    </div>
+  </div>
+</div>
+<div rv-each-modal="notifications">
+  <div rv-if="modal.kind | eq 'modal'">
+    <tw-modal-item rv-index="%modal%" rv-parent rv-co-modal="modal"></tw-modal-item>
+  </div>
+</div>

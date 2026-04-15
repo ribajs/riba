@@ -1,0 +1,42 @@
+<nav class="border-b border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      <!-- Brand / Logo area -->
+      <div class="flex shrink-0 items-center">
+        <slot name="brand"></slot>
+      </div>
+
+      <!-- Desktop navigation links -->
+      <div class="hidden md:flex md:items-center md:space-x-4">
+        <slot name="nav"></slot>
+      </div>
+
+      <!-- Mobile hamburger button -->
+      <div class="flex md:hidden">
+        <button
+          type="button"
+          rv-on-click="toggle"
+          class="inline-flex items-center justify-center rounded-md p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+          rv-aria-expanded="isCollapsed | not"
+          aria-label="Toggle navigation"
+        >
+          <!-- Hamburger icon (shown when collapsed) -->
+          <svg rv-if="isCollapsed" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+          <!-- Close icon (shown when expanded) -->
+          <svg rv-unless="isCollapsed" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu (collapsible) -->
+  <div data-navbar-collapse class="overflow-hidden md:hidden" style="transition: max-height 0.3s ease">
+    <div class="space-y-1 px-4 pb-3 pt-2">
+      <slot name="nav-mobile"></slot>
+    </div>
+  </div>
+</nav>

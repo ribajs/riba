@@ -45,6 +45,63 @@ Priority: higher=first | Block binders (rv-if,rv-each-*) prevent child parsing |
 rv-text|textContent | rv-html|innerHTML | rv-value|two-way input | rv-if|conditional block | rv-show|display toggle
 rv-each-*|iterate arrays/objects | rv-on-*|event listeners | rv-class-*|toggle CSS class | rv-style-*|inline CSS
 rv-checked,rv-disabled,rv-enabled|form states | rv-template|dynamic HTML+rebind | rv-assign|merge obj into model
+rv-add-class|add class string to element | rv-remove-class|remove class string from element
+
+### rv-class vs rv-add-class — NO rv-class BINDER EXISTS
+
+There is **no `rv-class` binder** in Riba. Only these class-related binders exist:
+- `rv-class-*` (star binder) — toggles a single CSS class based on a boolean: `rv-class-active="item.active"`
+- `rv-add-class` — adds class(es) from a string value while **preserving** static classes from the `class` attribute
+- `rv-remove-class` — removes a class string
+
+If you write `rv-class="someClassString"`, it falls through to the **generic attribute binder** which does `setAttribute("class", value)` — this **overwrites** the entire `class` attribute, destroying all static Tailwind classes.
+
+```html
+<!-- BAD: rv-class overwrites static classes — bg-gray-200, rounded-full etc. are lost -->
+<div class="rounded-full bg-gray-200" rv-class="sizeClass"></div>
+
+<!-- GOOD: rv-add-class preserves static classes -->
+<div class="rounded-full bg-gray-200" rv-add-class="sizeClass"></div>
+```
+
+### rv-if/rv-unless inside rv-each — KNOWN BUG
+
+`rv-if`/`rv-unless` are block binders that remove/insert DOM nodes. Inside `rv-each-*` child views, they do not reactively update when the iterated object's properties change. The initial render works, but subsequent property mutations are ignored.
+
+The problem is that `rv-if` removes the element it's placed on. When the rv-each child view tries to update, the element is gone.
+
+**Two workarounds:**
+
+**1. Use `rv-show`/`rv-hide` (preferred for simple cases)**
+```html
+<!-- BAD -->
+<div rv-each-item="items">
+  <span rv-if="item.active">Active</span>
+</div>
+
+<!-- GOOD: rv-show toggles display:none, element stays in DOM -->
+<div rv-each-item="items">
+  <span rv-show="item.active">Active</span>
+</div>
+```
+`rv-unless` → use `rv-hide`. For toggling between two elements, use `rv-show` on one and `rv-hide` on the other. Also works: `rv-class-*` to toggle CSS classes.
+
+**2. Wrap in a child element (when rv-if is needed)**
+```html
+<!-- BAD: rv-if on the rv-each element's direct content -->
+<li rv-each-item="items">
+  <a rv-if="item.href" rv-href="item.href">Link</a>
+</li>
+
+<!-- GOOD: rv-if on a wrapper child — the wrapper gets removed but the li stays -->
+<li rv-each-item="items">
+  <div rv-if="item.href">
+    <a rv-href="item.href">Link</a>
+  </div>
+</li>
+```
+
+Duplicate `rv-class` attributes on the same element are also invalid (HTML drops the second). Use a single computed class string or separate `rv-class-*` toggles.
 
 ## Formatters
 

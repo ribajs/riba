@@ -1,0 +1,29 @@
+<form
+  class="space-y-4"
+  novalidate
+  rv-on-submit="onSubmit"
+  rv-on-reset="onReset"
+  rv-on-input="enableSubmit"
+>
+  <div rv-if="form.error" class="rounded-md border border-red-300 bg-red-50 p-4 text-sm text-red-700 dark:border-red-600 dark:bg-red-900/30 dark:text-red-400">
+    <span rv-text="form.error"></span>
+  </div>
+
+  <slot></slot>
+
+  <div class="flex items-center gap-3 pt-2">
+    <button
+      type="submit"
+      class="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:focus:ring-offset-gray-900"
+      rv-disabled="submitDisabled"
+    >
+      Submit
+    </button>
+    <button
+      type="reset"
+      class="inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-300 dark:ring-gray-600 dark:hover:bg-gray-600"
+    >
+      Reset
+    </button>
+  </div>
+</form>

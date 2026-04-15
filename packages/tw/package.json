@@ -1,0 +1,74 @@
+{
+  "name": "@ribajs/tw",
+  "description": "Tailwind CSS module for Riba.js",
+  "version": "2.0.0-rc.23",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "author": "Pascal Garber <pascal@artandcode.studio>",
+  "contributors": [],
+  "url": "https://github.com/ribajs/riba/tree/master/packages/tw",
+  "homepage": "https://ribajs.com/",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "source": "src/index.ts",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ribajs/riba/blob/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ribajs/riba.git"
+  },
+  "keywords": [
+    "Tailwind",
+    "Tailwind CSS",
+    "Art+Code Studio",
+    "Riba",
+    "Rivets",
+    "tinybind",
+    "SPA",
+    "TypeScript",
+    "Browser"
+  ],
+  "scripts": {
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
+    "watch": "yarn run build:module --watch",
+    "build:module": "tsc",
+    "clean": "rm -rf ./dist ./lib",
+    "check": "tsc --noEmit"
+  },
+  "files": [
+    "/src",
+    "/dist"
+  ],
+  "devDependencies": {
+    "@ribajs/eslint-config": "workspace:^",
+    "@ribajs/tsconfig": "workspace:^",
+    "@ribajs/types": "workspace:^",
+    "@types/jest": "^30.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.58.1",
+    "@typescript-eslint/parser": "^8.58.1",
+    "@yarnpkg/pnpify": "^4.1.6",
+    "eslint": "^10.2.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.2",
+    "typescript": "6.0.2"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.7.6",
+    "@ribajs/core": "workspace:^",
+    "@ribajs/events": "workspace:^",
+    "@ribajs/extras": "workspace:^",
+    "@ribajs/jsx": "workspace:^",
+    "@ribajs/utils": "workspace:^"
+  },
+  "bugs": {
+    "url": "https://github.com/ribajs/riba/issues"
+  }
+}

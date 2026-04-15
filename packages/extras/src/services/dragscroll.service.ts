@@ -24,8 +24,14 @@ export class Dragscroll {
     this.el = el;
     this.options = options;
 
+    console.debug("[Dragscroll] constructor", {
+      el: el.tagName + "." + el.className.split(" ").slice(0, 3).join("."),
+      touchCapable: this.touchCapable,
+      detectGlobalMove: options.detectGlobalMove,
+    });
+
     if (this.touchCapable) {
-      // Do noting on touch devices
+      console.debug("[Dragscroll] Skipping — touch device detected");
       return this;
     }
 
@@ -84,12 +90,19 @@ export class Dragscroll {
   public checkDraggable = throttle(this._checkDraggable.bind(this));
 
   protected onMouseDown(e: MouseEvent) {
+    console.debug("[Dragscroll] mousedown", {
+      clientX: e.clientX,
+      clientY: e.clientY,
+    });
     this.pushed = true;
     this.lastClientX = e.clientX;
     this.lastClientY = e.clientY;
   }
 
   protected onMouseUp() {
+    if (this.pushed) {
+      console.debug("[Dragscroll] mouseup");
+    }
     this.pushed = false;
   }
 

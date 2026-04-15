@@ -1,0 +1,23 @@
+<div>
+  <button
+    rv-on-click="toggle"
+    class="flex w-full items-center justify-between rounded-lg bg-blue-600 px-4 py-2 text-left text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-700 dark:hover:bg-blue-800"
+    type="button"
+    rv-aria-expanded="collapsed | not"
+  >
+    <span rv-text="title"></span>
+    <svg
+      class="h-4 w-4 shrink-0 transition-transform duration-200"
+      rv-class-rotate-180="collapsed | not"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  <div class="tw-collapse-content mt-2 overflow-hidden">
+    <div class="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800" rv-template="content"></div>
+  </div>
+</div>

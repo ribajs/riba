@@ -1,0 +1,109 @@
+<h1 class="text-3xl font-bold mb-8">TW Tabs + Steps Demo</h1>
+
+<!-- Tabs with template children -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Tabs</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">
+    Click on the tab headers to switch between content panels. Tabs are defined using <code class="rounded bg-gray-100 px-1.5 py-0.5 text-sm dark:bg-gray-800">&lt;template&gt;</code> children.
+  </p>
+  <tw-tabs>
+    <template title="Overview">
+      <div class="py-4">
+        <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Overview</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-3">
+          Riba.js is a TypeScript declarative data-binding and Web Components framework.
+          It evolved from Rivets.js and tinybind into a modern, ESM-only library.
+        </p>
+        <ul class="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
+          <li>Declarative data binding with <code class="rounded bg-gray-100 px-1.5 py-0.5 text-sm dark:bg-gray-800">rv-*</code> attributes</li>
+          <li>Web Components v1 support</li>
+          <li>TypeScript-first design</li>
+          <li>ESM-only, modern build pipeline</li>
+        </ul>
+      </div>
+    </template>
+    <template title="Features">
+      <div class="py-4">
+        <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Features</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="rounded-lg border border-gray-200 p-4 dark:border-gray-700">
+            <h4 class="font-medium text-gray-900 dark:text-white">Binders</h4>
+            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+              Bind DOM attributes and properties to your model using rv-text, rv-html, rv-value, rv-on-*, rv-each-*, and many more.
+            </p>
+          </div>
+          <div class="rounded-lg border border-gray-200 p-4 dark:border-gray-700">
+            <h4 class="font-medium text-gray-900 dark:text-white">Formatters</h4>
+            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+              Transform values using pipe syntax: string manipulation, comparison, math, type conversion, and more.
+            </p>
+          </div>
+          <div class="rounded-lg border border-gray-200 p-4 dark:border-gray-700">
+            <h4 class="font-medium text-gray-900 dark:text-white">Components</h4>
+            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+              Custom elements with lifecycle hooks, template loading, and automatic data binding through the scope object.
+            </p>
+          </div>
+          <div class="rounded-lg border border-gray-200 p-4 dark:border-gray-700">
+            <h4 class="font-medium text-gray-900 dark:text-white">Router</h4>
+            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+              PJAX-based SPA navigation with transition animations, prefetching, and history management.
+            </p>
+          </div>
+        </div>
+      </div>
+    </template>
+    <template title="Getting Started">
+      <div class="py-4">
+        <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Getting Started</h3>
+        <ol class="list-decimal list-inside space-y-3 text-gray-600 dark:text-gray-400">
+          <li>
+            <span class="font-medium text-gray-900 dark:text-white">Install the packages</span>
+            <pre class="mt-1 rounded-md bg-gray-100 p-3 text-sm dark:bg-gray-800"><code>yarn add @ribajs/core @ribajs/tw</code></pre>
+          </li>
+          <li>
+            <span class="font-medium text-gray-900 dark:text-white">Create your Riba instance</span>
+            <pre class="mt-1 rounded-md bg-gray-100 p-3 text-sm dark:bg-gray-800"><code>import { Riba, coreModule } from "@ribajs/core";
+import { twModule } from "@ribajs/tw";
+
+const riba = new Riba();
+riba.module.register(coreModule.init());
+riba.module.register(twModule.init());</code></pre>
+          </li>
+          <li>
+            <span class="font-medium text-gray-900 dark:text-white">Bind to the DOM</span>
+            <pre class="mt-1 rounded-md bg-gray-100 p-3 text-sm dark:bg-gray-800"><code>riba.bind(document.body, { message: "Hello!" });</code></pre>
+          </li>
+        </ol>
+      </div>
+    </template>
+  </tw-tabs>
+</section>
+
+<!-- Steps Wizard -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Steps Wizard</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">
+    Click on any step circle to navigate to that step. Completed steps show a checkmark.
+  </p>
+
+  <h3 class="text-lg font-medium mb-3">Horizontal Steps</h3>
+  <tw-steps orientation="horizontal">
+    <template title="Account Setup" description="Create your account"></template>
+    <template title="Profile Info" description="Add your details"></template>
+    <template title="Preferences" description="Configure settings"></template>
+    <template title="Complete" description="All done!"></template>
+  </tw-steps>
+</section>
+
+<section class="mb-10">
+  <h3 class="text-lg font-medium mb-3">Vertical Steps</h3>
+  <div class="max-w-md">
+    <tw-steps orientation="vertical">
+      <template title="Order Placed" description="Your order has been received"></template>
+      <template title="Processing" description="We are preparing your order"></template>
+      <template title="Shipped" description="Your order is on its way"></template>
+      <template title="Delivered" description="Package delivered to your address"></template>
+    </tw-steps>
+  </div>
+</section>

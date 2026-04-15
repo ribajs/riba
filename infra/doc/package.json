@@ -43,15 +43,15 @@
   "devDependencies": {
     "@ribajs/eslint-config": "workspace:^",
     "@ribajs/tsconfig": "workspace:^",
-    "@types/node": "^24.12.0",
+    "@types/node": "^24.12.2",
     "@types/prismjs": "^1.26.6",
     "concurrently": "^9.2.1",
     "js-yaml": "^4.1.1",
-    "marked": "^15.0.0",
-    "pug": "^3.0.3",
-    "sass": "^1.98.0",
+    "marked": "^18.0.0",
+    "pug": "^3.0.4",
+    "sass": "^1.99.0",
     "typescript": "^6.0.2",
-    "vite": "^8.0.3",
-    "vite-plugin-static-copy": "^3.2.0"
+    "vite": "^8.0.8",
+    "vite-plugin-static-copy": "^4.0.1"
   }
 }

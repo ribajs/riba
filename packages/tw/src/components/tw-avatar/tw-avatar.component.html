@@ -1,0 +1,21 @@
+<div class="relative inline-block">
+  <img
+    rv-if="src"
+    rv-src="src"
+    rv-alt="alt"
+    rv-add-class="imgClass"
+    class="rounded-full object-cover"
+  />
+  <div
+    rv-unless="src"
+    rv-add-class="placeholderClass"
+    class="flex items-center justify-center rounded-full bg-gray-200 font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300"
+  >
+    <span rv-text="initials"></span>
+  </div>
+  <span
+    rv-show="status"
+    rv-add-class="dotClass"
+    class="absolute bottom-0 right-0 block rounded-full ring-2 ring-white dark:ring-gray-900"
+  ></span>
+</div>

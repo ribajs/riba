@@ -1,0 +1,47 @@
+<nav class="tw-scrollspy-nav">
+  <ul class="space-y-1">
+    <li rv-each-anchor="anchors" class="nav-item">
+      <a
+        class="block px-3 py-1.5 text-sm rounded transition-colors"
+        rv-href="anchor.href"
+        rv-html="anchor.title"
+        rv-class-text-blue-600="anchor.active"
+        rv-class-font-semibold="anchor.active"
+        rv-class-bg-blue-50="anchor.active"
+        rv-class-text-gray-600="anchor.active | not"
+        rv-class-hover:text-gray-900="anchor.active | not"
+        rv-on-click="scrollToAnchor"
+      ></a>
+      <ul rv-if="anchor.childs | size | gt 0" class="ml-4 space-y-0.5 mt-0.5">
+        <li rv-each-child="anchor.childs" class="nav-item">
+          <a
+            class="block px-3 py-1 text-sm rounded transition-colors"
+            rv-href="child.href"
+            rv-html="child.title"
+            rv-class-text-blue-600="child.active"
+            rv-class-font-semibold="child.active"
+            rv-class-bg-blue-50="child.active"
+            rv-class-text-gray-500="child.active | not"
+            rv-class-hover:text-gray-800="child.active | not"
+            rv-on-click="scrollToAnchor"
+          ></a>
+          <ul rv-if="child.childs | size | gt 0" class="ml-4 space-y-0.5 mt-0.5">
+            <li rv-each-grandchild="child.childs" class="nav-item">
+              <a
+                class="block px-3 py-1 text-xs rounded transition-colors"
+                rv-href="grandchild.href"
+                rv-html="grandchild.title"
+                rv-class-text-blue-600="grandchild.active"
+                rv-class-font-semibold="grandchild.active"
+                rv-class-bg-blue-50="grandchild.active"
+                rv-class-text-gray-400="grandchild.active | not"
+                rv-class-hover:text-gray-700="grandchild.active | not"
+                rv-on-click="scrollToAnchor"
+              ></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>

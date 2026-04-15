@@ -1,0 +1,27 @@
+{
+  "name": "@ribajs/demo-tw-slideshow",
+  "version": "2.0.0-rc.23",
+  "type": "module",
+  "main": "./src/ts/main.ts",
+  "private": true,
+  "scripts": {
+    "build": "vite build --mode production",
+    "start": "vite",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ribajs/core": "workspace:^",
+    "@ribajs/extras": "workspace:^",
+    "@ribajs/tw": "workspace:^",
+    "@ribajs/utils": "workspace:^",
+    "@tailwindcss/vite": "^4.2.2",
+    "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "@ribajs/tsconfig": "workspace:^",
+    "@ribajs/vite-config": "workspace:^",
+    "typescript": "6.0.2",
+    "vite": "^8.0.8"
+  }
+}

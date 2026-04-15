@@ -1,0 +1,45 @@
+{
+  "name": "@ribajs/demo-tw-tabs",
+  "version": "2.0.0-rc.23",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "description": "",
+  "main": "./src/ts/main.ts",
+  "module": "src/ts/main.ts",
+  "source": "src/ts/main.ts",
+  "private": true,
+  "scripts": {
+    "build": "vite build --mode production",
+    "build:dev": "vite build --mode development",
+    "start": "vite",
+    "start:dev": "vite",
+    "serve": "serve dist",
+    "clear": "rm -rf ./dist",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx,.cts,.mts --fix && tsc --noEmit",
+    "check": "tsc --noEmit"
+  },
+  "files": [
+    "src"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@ribajs/eslint-config": "workspace:^",
+    "@ribajs/tsconfig": "workspace:^",
+    "@ribajs/vite-config": "workspace:^",
+    "@tailwindcss/vite": "^4.2.2",
+    "eslint": "^10.2.0",
+    "serve": "^14.2.6",
+    "typescript": "6.0.2",
+    "vite": "^8.0.8"
+  },
+  "dependencies": {
+    "@ribajs/core": "workspace:^",
+    "@ribajs/extras": "workspace:^",
+    "@ribajs/tw": "workspace:^",
+    "@ribajs/utils": "workspace:^",
+    "tailwindcss": "^4.2.2"
+  }
+}

@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/*
+ * Consumers of @ribajs/tw must add @source directives to scan the component
+ * templates so that Tailwind generates the required utility classes.
+ * They must also @import the utilities file for custom @utility definitions.
+ *
+ * Example in your project's CSS:
+ *
+ *   @import "tailwindcss";
+ *   @import "@ribajs/tw/src/css/utilities.css";
+ *   @source "../../node_modules/@ribajs/tw/src/**\/*.html";
+ *   @source "../../node_modules/@ribajs/tw/src/**\/*.ts";
+ *   @custom-variant dark (&:where(.dark, .dark *));
+ *
+ * In a Yarn PnP monorepo, use relative paths to the workspace package:
+ *   @import "../../../../packages/tw/src/css/utilities.css";
+ *   @source "../../../../packages/tw/src/**\/*.html";
+ *   @source "../../../../packages/tw/src/**\/*.ts";
+ */
+
+@import "./utilities.css";
+
+/* Use class-based dark mode so ThemeService can toggle it via the `dark` class on <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+

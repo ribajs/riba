@@ -1,0 +1,74 @@
+/* ── Custom styles for @ribajs/tw components ── */
+
+/* Scan all tw component templates and TS files so consumers of this
+   stylesheet only need to @import it, without adding their own @source
+   directives with brittle relative paths. */
+@source "../**/*.html";
+@source "../**/*.ts";
+
+/* Dynamic utility classes used in component TS files via rv-class bindings. */
+/* @source inline ensures Tailwind generates these even if the file scanner misses them. */
+@source inline("h-1 h-2 h-3 h-4 h-6 h-8 h-10 h-14 h-20 w-3 w-4 w-6 w-8 w-10 w-14 w-20 h-1.5 w-1.5 h-2.5 w-2.5 h-3.5 w-3.5 text-xs text-sm text-lg text-xl bg-blue-500 bg-blue-600 bg-green-400 bg-green-500 bg-yellow-400 bg-yellow-500 bg-red-400 bg-red-500 bg-gray-400 dark:bg-blue-400 dark:bg-green-400 dark:bg-yellow-400 dark:bg-red-400");
+
+/* All tw-* custom elements should be block-level so layout utilities
+   (space-y, gap, grid, flex) work correctly on them. */
+tw-accordion,
+tw-alert,
+tw-breadcrumb,
+tw-card,
+tw-carousel,
+tw-collapse,
+tw-contents,
+tw-dropdown,
+tw-form,
+tw-modal-item,
+tw-navbar,
+tw-notification-container,
+tw-pagination,
+tw-progress,
+tw-scrollspy,
+tw-share,
+tw-sidebar,
+tw-skeleton,
+tw-slide-video,
+tw-slider,
+tw-slideshow,
+tw-steps,
+tw-swap,
+tw-tabs,
+tw-tagged-image,
+tw-toast-item {
+  display: block;
+}
+
+/* Inline-level custom elements that should participate in text flow. */
+tw-avatar,
+tw-badge,
+tw-colorpicker,
+tw-kbd,
+tw-rating,
+tw-toggle-button,
+tw-tooltip {
+  display: inline-block;
+}
+
+/* Clickable elements bound with rv-on-click should show a pointer cursor */
+[rv-on-click] {
+  cursor: pointer;
+}
+
+/* Hide scrollbar while keeping scroll functionality */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Prevent drag ghost images (used by slideshow/slider drag mode) */
+.drag-none {
+  -webkit-user-drag: none;
+  user-drag: none;
+  user-select: none;
+}
