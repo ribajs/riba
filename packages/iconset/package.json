@@ -14,8 +14,10 @@
   "module": "dist/svg.json",
   "exports": {
     ".": "./dist/svg.json",
-    "./src/*": "./src/*",
-    "./dist/*": "./dist/*",
+    "./svg.json": "./dist/svg.json",
+    "./png.json": "./dist/png.json",
+    "./svg/*": "./dist/svg/*",
+    "./png/*": "./dist/png/*",
     "./package.json": "./package.json"
   },
   "license": "MIT",
@@ -42,11 +44,10 @@
   ],
   "scripts": {
     "build": "node build.mjs",
-    "clean": "echo 'Do not clean the iconset by default because we want to hold the build image files in the repo'",
+    "clean": "rm -rf ./dist",
     "check": "echo 'Config-only package, nothing to check'"
   },
   "files": [
-    "/src",
     "/dist"
   ],
   "devDependencies": {
