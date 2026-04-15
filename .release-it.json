@@ -1,0 +1,36 @@
+{
+  "git": {
+    "commitMessage": "chore: release v${version}",
+    "tagName": "v${version}",
+    "requireCleanWorkingDir": true,
+    "requireBranch": "main"
+  },
+  "github": {
+    "release": true,
+    "releaseName": "v${version}",
+    "autoGenerate": false
+  },
+  "npm": {
+    "publish": false
+  },
+  "hooks": {},
+  "plugins": {
+    "@release-it/bumper": {
+      "out": [
+        "packages/*/package.json",
+        "infra/*/package.json",
+        "vendor/*/package.json",
+        "backend/*/package.json",
+        "demos/*/package.json",
+        "examples/*/*/package.json"
+      ]
+    },
+    "@release-it/conventional-changelog": {
+      "preset": {
+        "name": "conventionalcommits"
+      },
+      "infile": "CHANGELOG.md",
+      "header": "# Changelog"
+    }
+  }
+}
