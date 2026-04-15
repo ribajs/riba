@@ -1,7 +1,7 @@
 {
   "name": "ribajs",
   "description": "Declarative data binding + template solution.",
-  "version": "2.0.0-rc.23",
+  "version": "2.0.0",
   "type": "module",
   "engines": {
     "node": ">=24.0.0"

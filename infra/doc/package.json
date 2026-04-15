@@ -1,6 +1,6 @@
 {
   "name": "@ribajs/doc",
-  "version": "2.0.0-rc.23",
+  "version": "2.0.0",
   "description": "Static documentation site for Riba.js",
   "type": "module",
   "main": "./src/ts/main.ts",

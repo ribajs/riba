@@ -1,7 +1,7 @@
 {
   "name": "@ribajs/bs5-photoswipe",
   "description": "Bootstrap 5 Photoswipe module for Riba.js",
-  "version": "2.0.0-rc.23",
+  "version": "2.0.0",
   "type": "module",
   "engines": {
     "node": ">=24.0.0"
