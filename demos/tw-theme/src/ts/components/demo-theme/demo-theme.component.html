@@ -1,3 +1,26 @@
+<!-- Sidebars (overlap mode — the backdrop is the main thing to eyeball in light vs dark) -->
+<tw-sidebar id="theme-sidebar-left" position="left" mode="overlap" width="16rem">
+  <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-6">Navigation</h2>
+  <nav>
+    <ul class="space-y-2">
+      <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Dashboard</a></li>
+      <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Settings</a></li>
+      <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Logout</a></li>
+    </ul>
+  </nav>
+</tw-sidebar>
+
+<tw-sidebar id="theme-sidebar-right" position="right" mode="overlap" width="20rem">
+  <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-6">Details</h2>
+  <p class="text-sm text-gray-600 dark:text-gray-400">
+    Click the backdrop to dismiss. The backdrop uses
+    <code class="rounded bg-gray-100 px-1 text-xs dark:bg-gray-800">bg-black/50 dark:bg-black/70</code>.
+  </p>
+</tw-sidebar>
+
+<!-- Modal + toast notifications (container lives at the root so backdrops overlay everything) -->
+<tw-notification-container channel-name="theme-demo"></tw-notification-container>
+
 <h1 class="text-3xl font-bold mb-8">TW Theme Demo</h1>
 
 <!-- Theme Controls -->
@@ -161,6 +184,125 @@
       class="w-full rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
     >
       Submit
+    </button>
+  </div>
+</section>
+
+<!-- Sidebar Backdrop Test -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Sidebar (Backdrop Test)</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">
+    Opens a sidebar in overlap mode. The dark backdrop should be noticeably darker in dark mode
+    (<code class="rounded bg-gray-100 px-1 text-sm dark:bg-gray-800">bg-black/70</code>) than in light mode
+    (<code class="rounded bg-gray-100 px-1 text-sm dark:bg-gray-800">bg-black/50</code>).
+  </p>
+  <div class="flex flex-wrap gap-3">
+    <tw-toggle-button target-id="theme-sidebar-left">
+      <button type="button" rv-on-click="toggle" class="inline-flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+        Open Left Sidebar
+      </button>
+    </tw-toggle-button>
+    <tw-toggle-button target-id="theme-sidebar-right">
+      <button type="button" rv-on-click="toggle" class="inline-flex items-center gap-2 rounded-md bg-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
+        Open Right Sidebar
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </tw-toggle-button>
+  </div>
+</section>
+
+<!-- Collapse & Accordion -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Collapse &amp; Accordion</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">
+    Collapse button uses <code class="rounded bg-gray-100 px-1 text-sm dark:bg-gray-800">bg-blue-600 dark:bg-blue-700</code>;
+    the panel below adapts its border and background to the theme.
+  </p>
+
+  <div class="space-y-4">
+    <tw-collapse title="Standalone collapse" content="The button above switches its hover and focus styles between light and dark. The content panel uses border and bg utilities with dark variants."></tw-collapse>
+
+    <tw-accordion show-only-one="true">
+      <template title="First accordion item" show="true">
+        <p>This accordion group shows one item at a time. The chevron rotates when expanded and the panel background switches between <code class="rounded bg-gray-100 px-1 text-sm dark:bg-gray-800">bg-white</code> and <code class="rounded bg-gray-100 px-1 text-sm dark:bg-gray-800">dark:bg-gray-800</code>.</p>
+      </template>
+      <template title="Second accordion item">
+        <p>Borders also adapt: <code class="rounded bg-gray-100 px-1 text-sm dark:bg-gray-800">border-gray-200</code> in light mode, <code class="rounded bg-gray-100 px-1 text-sm dark:bg-gray-800">dark:border-gray-700</code> in dark mode.</p>
+      </template>
+      <template title="Third accordion item">
+        <p>Inline code like <code class="rounded bg-gray-100 px-1 text-sm dark:bg-gray-800">bg-gray-100</code> is styled for both themes as well.</p>
+      </template>
+    </tw-accordion>
+  </div>
+</section>
+
+<!-- Dropdown -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Dropdown</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">
+    Floating menu surface — tests dark-mode background, hover state and divider color.
+  </p>
+  <tw-dropdown class="relative inline-block">
+    <button
+      data-dropdown-trigger
+      type="button"
+      class="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+    >
+      Options
+      <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+    <ul data-dropdown-menu role="menu" class="hidden mt-2 w-48 rounded-md border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-800">
+      <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Edit</a></li>
+      <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Duplicate</a></li>
+      <li><hr class="my-1 border-gray-200 dark:border-gray-700" /></li>
+      <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Archive</a></li>
+      <li><a href="#" role="menuitem" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:text-red-400 dark:hover:bg-gray-700">Delete</a></li>
+    </ul>
+  </tw-dropdown>
+</section>
+
+<!-- Alerts -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Alerts</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">
+    All four severity levels in their light and dark variants.
+  </p>
+  <div class="space-y-3">
+    <tw-alert type="info" title="Info" message="This is an informational alert." icon="true" dismissible="true"></tw-alert>
+    <tw-alert type="success" title="Success" message="Operation completed successfully!" icon="true" dismissible="true"></tw-alert>
+    <tw-alert type="warning" title="Warning" message="Please review your input carefully." icon="true" dismissible="true"></tw-alert>
+    <tw-alert type="error" title="Error" message="Something went wrong. Please try again." icon="true" dismissible="true"></tw-alert>
+  </div>
+</section>
+
+<!-- Modal & Toast Notifications -->
+<section class="mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Notifications (Second Backdrop Test)</h2>
+  <p class="text-gray-600 dark:text-gray-400 mb-4">
+    The modal renders an additional dark backdrop. Toasts stack in the corner with type-colored surfaces.
+  </p>
+  <div class="flex flex-wrap gap-3">
+    <button type="button" rv-on-click="showModal" class="rounded-md bg-purple-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
+      Open Modal
+    </button>
+    <button type="button" rv-on-click="showInfoToast" class="rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
+      Info Toast
+    </button>
+    <button type="button" rv-on-click="showSuccessToast" class="rounded-md bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
+      Success Toast
+    </button>
+    <button type="button" rv-on-click="showWarningToast" class="rounded-md bg-yellow-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
+      Warning Toast
+    </button>
+    <button type="button" rv-on-click="showErrorToast" class="rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
+      Error Toast
     </button>
   </div>
 </section>

@@ -179,7 +179,7 @@ export class TwSidebarComponent extends Component {
     if (this.backdropEl) return;
     const el = document.createElement("div");
     el.className =
-      "fixed inset-0 z-40 bg-black/50 transition-opacity duration-200 ease-in-out";
+      "fixed inset-0 z-40 bg-black/50 dark:bg-black/70 transition-opacity duration-200 ease-in-out";
     el.style.opacity = "0";
     el.addEventListener("click", () => this.hide());
     document.body.appendChild(el);
@@ -376,9 +376,10 @@ export class TwSidebarComponent extends Component {
     this.style.padding = "1rem";
     this.style.paddingTop = "2.5rem";
     this.style.transition = "transform 0.3s ease-in-out";
-    this.style.backgroundColor = "var(--tw-sidebar-bg, white)";
     this.style.boxShadow =
       "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)";
+    // Theme-aware surface via Tailwind classes (dark variant triggers from .dark ancestor)
+    this.classList.add("bg-white", "dark:bg-gray-800");
     if (this.scope.position === "left") {
       this.style.left = "0";
       this.style.right = "";

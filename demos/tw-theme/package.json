@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@ribajs/core": "workspace:^",
+    "@ribajs/events": "workspace:^",
     "@ribajs/extras": "workspace:^",
     "@ribajs/tw": "workspace:^",
     "@ribajs/utils": "workspace:^",

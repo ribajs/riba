@@ -3697,6 +3697,7 @@ __metadata:
   dependencies:
     "@ribajs/core": "workspace:^"
     "@ribajs/eslint-config": "workspace:^"
+    "@ribajs/events": "workspace:^"
     "@ribajs/extras": "workspace:^"
     "@ribajs/tsconfig": "workspace:^"
     "@ribajs/tw": "workspace:^"
