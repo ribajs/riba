@@ -24,7 +24,15 @@ export class TwProgressComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes(): string[] {
-    return ["value", "max", "type", "show-label", "size", "striped", "animated"];
+    return [
+      "value",
+      "max",
+      "type",
+      "show-label",
+      "size",
+      "striped",
+      "animated",
+    ];
   }
 
   public scope: Scope = {

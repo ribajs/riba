@@ -28,9 +28,8 @@ export class DemoInteractiveComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./demo-interactive.component.html?raw"
-      );
+      const { default: template } =
+        await import("./demo-interactive.component.html?raw");
       return template;
     }
   }

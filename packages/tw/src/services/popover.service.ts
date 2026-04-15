@@ -82,9 +82,12 @@ export class PopoverService {
         if (this.arrowEl && middlewareData.arrow) {
           const { x: ax, y: ay } = middlewareData.arrow;
           const side = placement.split("-")[0];
-          const staticSide = { top: "bottom", right: "left", bottom: "top", left: "right" }[
-            side
-          ] as string;
+          const staticSide = {
+            top: "bottom",
+            right: "left",
+            bottom: "top",
+            left: "right",
+          }[side] as string;
 
           Object.assign(this.arrowEl.style, {
             left: ax != null ? `${ax}px` : "",
@@ -135,10 +138,7 @@ export class PopoverService {
 
   protected _onDocumentClick(event: MouseEvent) {
     const target = event.target as Node;
-    if (
-      !this.trigger.contains(target) &&
-      !this.popoverEl.contains(target)
-    ) {
+    if (!this.trigger.contains(target) && !this.popoverEl.contains(target)) {
       this.hide();
     }
   }

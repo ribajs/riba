@@ -195,9 +195,7 @@ export class TwContentsComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: tpl } = await import(
-        "./tw-contents.component.html?raw"
-      );
+      const { default: tpl } = await import("./tw-contents.component.html?raw");
       return tpl;
     }
   }

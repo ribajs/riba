@@ -51,11 +51,7 @@ export class TwNotificationContainerComponent extends Component {
   protected async afterBind() {
     await super.afterBind();
     this.channelEvents = new EventDispatcher(this.scope.channelName);
-    this.channelEvents.on(
-      "show-notification",
-      this.onShowNotification,
-      this,
-    );
+    this.channelEvents.on("show-notification", this.onShowNotification, this);
   }
 
   protected onShowNotification(notification: Notification) {
@@ -75,11 +71,7 @@ export class TwNotificationContainerComponent extends Component {
 
   protected disconnectedCallback() {
     super.disconnectedCallback();
-    this.channelEvents?.off(
-      "show-notification",
-      this.onShowNotification,
-      this,
-    );
+    this.channelEvents?.off("show-notification", this.onShowNotification, this);
   }
 
   protected template(): ReturnType<TemplateFunction> {

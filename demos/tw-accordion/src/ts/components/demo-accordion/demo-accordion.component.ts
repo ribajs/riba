@@ -28,9 +28,8 @@ export class DemoAccordionComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./demo-accordion.component.html?raw"
-      );
+      const { default: template } =
+        await import("./demo-accordion.component.html?raw");
       return template;
     }
   }

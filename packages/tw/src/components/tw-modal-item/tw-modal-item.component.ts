@@ -78,10 +78,7 @@ export class TwModalItemComponent extends Component {
   /** Remove modal from DOM once hidden */
   public onHidden() {
     const parentScope = this.scope.$parent?.$parent;
-    if (
-      typeof parentScope?.onItemHide === "function" &&
-      this.scope.modal
-    ) {
+    if (typeof parentScope?.onItemHide === "function" && this.scope.modal) {
       parentScope.onItemHide(
         this.scope.$event,
         this,

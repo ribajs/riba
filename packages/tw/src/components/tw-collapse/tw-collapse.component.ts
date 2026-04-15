@@ -44,8 +44,7 @@ export class TwCollapseComponent extends Component {
 
   protected async afterBind() {
     await super.afterBind();
-    const collapseEl =
-      this.querySelector<HTMLElement>(".tw-collapse-content");
+    const collapseEl = this.querySelector<HTMLElement>(".tw-collapse-content");
     if (collapseEl) {
       collapseEl.style.transition = "max-height 0.3s ease";
       this.collapseService = new CollapseService(collapseEl, {

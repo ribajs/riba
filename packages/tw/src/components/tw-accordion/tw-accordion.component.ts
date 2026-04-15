@@ -14,7 +14,12 @@ export class TwAccordionComponent extends TemplatesComponent {
   public static tagName = "tw-accordion";
 
   static get observedAttributes(): string[] {
-    return ["items", "collapse-icon-src", "collapse-icon-size", "show-only-one"];
+    return [
+      "items",
+      "collapse-icon-src",
+      "collapse-icon-size",
+      "show-only-one",
+    ];
   }
 
   protected autobind = true;
@@ -69,10 +74,10 @@ export class TwAccordionComponent extends TemplatesComponent {
   ): AccordionItem {
     const result = super.transformTemplateAttributes(attributes, index);
     result.handle =
-      result.handle ||
-      (result.title || "").toLowerCase().replace(/\s+/g, "-");
+      result.handle || (result.title || "").toLowerCase().replace(/\s+/g, "-");
     result.show = !!result.show;
-    result.iconDirection = result.iconDirection || (result.show ? "up" : "down");
+    result.iconDirection =
+      result.iconDirection || (result.show ? "up" : "down");
     return result;
   }
 

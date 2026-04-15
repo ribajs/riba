@@ -28,9 +28,8 @@ export class DemoTabsComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./demo-tabs.component.html?raw"
-      );
+      const { default: template } =
+        await import("./demo-tabs.component.html?raw");
       return template;
     }
   }

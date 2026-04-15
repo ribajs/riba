@@ -523,7 +523,9 @@ export class TwSlideshowComponent extends Component {
 
     if (!this.dragscrollService) {
       if (!this.slideshowInner) {
-        console.warn("[tw-slideshow] No slideshowInner found, cannot enable dragscroll");
+        console.warn(
+          "[tw-slideshow] No slideshowInner found, cannot enable dragscroll",
+        );
         return;
       }
       const dragscrollOptions: DragscrollOptions = { detectGlobalMove: true };

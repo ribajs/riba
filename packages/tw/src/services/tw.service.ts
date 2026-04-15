@@ -200,9 +200,7 @@ export class TwService {
     return null;
   }
 
-  public isActiveBreakpointGreaterThan(
-    compareName: string,
-  ): boolean | null {
+  public isActiveBreakpointGreaterThan(compareName: string): boolean | null {
     if (!this.activeBreakpoint) {
       return null;
     }
@@ -212,9 +210,7 @@ export class TwService {
     );
   }
 
-  public isActiveBreakpointSmallerThan(
-    compareName: string,
-  ): boolean | null {
+  public isActiveBreakpointSmallerThan(compareName: string): boolean | null {
     if (!this.activeBreakpoint) {
       return null;
     }

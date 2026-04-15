@@ -64,9 +64,7 @@ export class ThemeService {
     const oldData = this.getThemeData();
 
     if (!THEME_CHOICES.includes(newChoice)) {
-      console.warn(
-        `Unsupported theme "${newChoice}", falling back to "os".`,
-      );
+      console.warn(`Unsupported theme "${newChoice}", falling back to "os".`);
       newChoice = "os";
     }
 
@@ -112,24 +110,15 @@ export class ThemeService {
     this.eventDispatcher.trigger("theme-change", data);
   }
 
-  onChange(
-    cb: (data: ThemeChangedData) => void,
-    thisContext?: any,
-  ): void {
+  onChange(cb: (data: ThemeChangedData) => void, thisContext?: any): void {
     this.eventDispatcher.on("theme-change", cb, thisContext);
   }
 
-  onceChange(
-    cb: (data: ThemeChangedData) => void,
-    thisContext?: any,
-  ): void {
+  onceChange(cb: (data: ThemeChangedData) => void, thisContext?: any): void {
     this.eventDispatcher.once("theme-change", cb, thisContext);
   }
 
-  offChange(
-    cb?: (data: ThemeChangedData) => void,
-    thisContext?: any,
-  ): void {
+  offChange(cb?: (data: ThemeChangedData) => void, thisContext?: any): void {
     this.eventDispatcher.off("theme-change", cb, thisContext);
   }
 }

@@ -93,9 +93,14 @@ export class TwScrollspyComponent extends Component {
   /**
    * Scroll to the element matching the anchor's href.
    */
-  public scrollToAnchor(event: Event, scope: { href?: string } & Record<string, any>) {
+  public scrollToAnchor(
+    event: Event,
+    scope: { href?: string } & Record<string, any>,
+  ) {
     event.preventDefault();
-    const href = scope.href || (event.currentTarget as HTMLAnchorElement)?.getAttribute("href");
+    const href =
+      scope.href ||
+      (event.currentTarget as HTMLAnchorElement)?.getAttribute("href");
     if (!href) return;
 
     const targetEl = document.querySelector(href);
@@ -259,10 +264,9 @@ export class TwScrollspyComponent extends Component {
   }
 
   protected addEventListeners() {
-    this.scrollTarget =
-      this.scope.target
-        ? document.querySelector(this.scope.target) || window
-        : window;
+    this.scrollTarget = this.scope.target
+      ? document.querySelector(this.scope.target) || window
+      : window;
     (this.scrollTarget as EventTarget).addEventListener(
       "scroll",
       this.onScroll,

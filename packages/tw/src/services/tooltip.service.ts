@@ -45,17 +45,26 @@ export class TooltipService {
 
     // Create arrow
     this.arrowEl = document.createElement("div");
-    this.arrowEl.className = "absolute h-2 w-2 rotate-45 bg-gray-900 dark:bg-gray-700";
+    this.arrowEl.className =
+      "absolute h-2 w-2 rotate-45 bg-gray-900 dark:bg-gray-700";
     this.tooltipEl.appendChild(this.arrowEl);
 
     this.tooltipEl.style.display = "none";
     document.body.appendChild(this.tooltipEl);
 
     const signal = this.abortController.signal;
-    this.trigger.addEventListener("mouseenter", () => this.scheduleShow(), { signal });
-    this.trigger.addEventListener("mouseleave", () => this.scheduleHide(), { signal });
-    this.trigger.addEventListener("focus", () => this.scheduleShow(), { signal });
-    this.trigger.addEventListener("blur", () => this.scheduleHide(), { signal });
+    this.trigger.addEventListener("mouseenter", () => this.scheduleShow(), {
+      signal,
+    });
+    this.trigger.addEventListener("mouseleave", () => this.scheduleHide(), {
+      signal,
+    });
+    this.trigger.addEventListener("focus", () => this.scheduleShow(), {
+      signal,
+    });
+    this.trigger.addEventListener("blur", () => this.scheduleHide(), {
+      signal,
+    });
   }
 
   get isShown() {
@@ -119,9 +128,12 @@ export class TooltipService {
       if (this.arrowEl && middlewareData.arrow) {
         const { x: ax, y: ay } = middlewareData.arrow;
         const side = placement.split("-")[0];
-        const staticSide = { top: "bottom", right: "left", bottom: "top", left: "right" }[
-          side
-        ] as string;
+        const staticSide = {
+          top: "bottom",
+          right: "left",
+          bottom: "top",
+          left: "right",
+        }[side] as string;
 
         Object.assign(this.arrowEl.style, {
           left: ax != null ? `${ax}px` : "",

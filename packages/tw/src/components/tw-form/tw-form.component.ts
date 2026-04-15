@@ -297,7 +297,10 @@ export class TwFormComponent extends Component {
     this.clearValidationErrors();
 
     invalidElements.forEach((el) => {
-      const input = el as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+      const input = el as
+        | HTMLInputElement
+        | HTMLSelectElement
+        | HTMLTextAreaElement;
       if (!input.validationMessage) return;
 
       // Add red border
@@ -342,18 +345,14 @@ export class TwFormComponent extends Component {
       .querySelectorAll(".tw-validation-error")
       .forEach((el) => el.remove());
     // Remove red border classes from all inputs
-    this.formEl
-      .querySelectorAll(
-        ".\\!border-red-500",
-      )
-      .forEach((el) => {
-        el.classList.remove(
-          "!border-red-500",
-          "!ring-red-500",
-          "!focus:border-red-500",
-          "!focus:ring-red-500",
-        );
-      });
+    this.formEl.querySelectorAll(".\\!border-red-500").forEach((el) => {
+      el.classList.remove(
+        "!border-red-500",
+        "!ring-red-500",
+        "!focus:border-red-500",
+        "!focus:ring-red-500",
+      );
+    });
   }
 
   protected scrollToElement(element: HTMLElement) {

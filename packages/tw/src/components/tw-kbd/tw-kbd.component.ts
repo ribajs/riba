@@ -66,10 +66,12 @@ export class TwKbdComponent extends Component {
     const sizeClasses = SIZE_CLASSES[this.scope.size] || SIZE_CLASSES.md;
 
     // Remove previously applied kbd classes
-    this.className = this.className.replace(
-      /(^|\s)(inline-flex|items-center|rounded-md|border-\S+|border|bg-\S+|font-mono|font-semibold|text-\S+|px-\S+|py-\S+|shadow-sm|dark:\S+)\b/g,
-      "",
-    ).trim();
+    this.className = this.className
+      .replace(
+        /(^|\s)(inline-flex|items-center|rounded-md|border-\S+|border|bg-\S+|font-mono|font-semibold|text-\S+|px-\S+|py-\S+|shadow-sm|dark:\S+)\b/g,
+        "",
+      )
+      .trim();
 
     const allClasses = `${baseClasses} ${sizeClasses}`;
     allClasses.split(/\s+/).forEach((cls) => {

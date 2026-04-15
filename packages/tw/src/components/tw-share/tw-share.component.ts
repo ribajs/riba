@@ -117,8 +117,7 @@ export class TwShareComponent extends Component {
       {
         id: "telegram",
         label: "Telegram",
-        urlTemplate:
-          "https://telegram.me/share/url?url={{url}}&text={{text}}",
+        urlTemplate: "https://telegram.me/share/url?url={{url}}&text={{text}}",
         type: "popup",
         url: "",
         availableFor: ["page", "image", "video"],

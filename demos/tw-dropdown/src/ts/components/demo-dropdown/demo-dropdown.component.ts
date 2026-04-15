@@ -28,9 +28,8 @@ export class DemoDropdownComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./demo-dropdown.component.html?raw"
-      );
+      const { default: template } =
+        await import("./demo-dropdown.component.html?raw");
       return template;
     }
   }

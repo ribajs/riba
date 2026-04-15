@@ -87,9 +87,8 @@ export class DemoNotificationsComponent extends Component {
     if (hasChildNodesTrim(this)) {
       return null;
     } else {
-      const { default: template } = await import(
-        "./demo-notifications.component.html?raw"
-      );
+      const { default: template } =
+        await import("./demo-notifications.component.html?raw");
       return template;
     }
   }

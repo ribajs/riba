@@ -566,8 +566,7 @@ export class TwSliderComponent extends Component {
     }
     while (container.children.length < this.scope.items.length) {
       const dot = document.createElement("button");
-      dot.className =
-        "w-2 h-2 rounded-full transition-colors";
+      dot.className = "w-2 h-2 rounded-full transition-colors";
       dot.setAttribute("aria-label", "Go to item");
       const idx = container.children.length;
       dot.addEventListener("click", () => this.goTo(idx));

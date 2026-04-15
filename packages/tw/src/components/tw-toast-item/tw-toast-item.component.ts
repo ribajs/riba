@@ -43,8 +43,7 @@ const TYPE_STYLES: Record<
     icon: '<svg class="h-5 w-5 text-yellow-500 dark:text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>',
   },
   error: {
-    container:
-      "bg-red-50 ring-red-200 dark:bg-red-900/30 dark:ring-red-700",
+    container: "bg-red-50 ring-red-200 dark:bg-red-900/30 dark:ring-red-700",
     title: "text-red-800 dark:text-red-200",
     message: "text-red-700 dark:text-red-300",
     closeButton:
@@ -164,10 +163,7 @@ export class TwToastItemComponent extends Component {
   public onHidden() {
     // Navigate up the parent scope chain to the notification container
     const parentScope = this.scope.$parent?.$parent;
-    if (
-      typeof parentScope?.onItemHide === "function" &&
-      this.scope.toast
-    ) {
+    if (typeof parentScope?.onItemHide === "function" && this.scope.toast) {
       parentScope.onItemHide(
         this.scope.$event,
         this,

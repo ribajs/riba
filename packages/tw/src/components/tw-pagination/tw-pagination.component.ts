@@ -42,7 +42,13 @@ export class TwPaginationComponent extends Component {
   protected autobind = true;
 
   static get observedAttributes(): string[] {
-    return ["total-pages", "current-page", "max-visible", "prev-label", "next-label"];
+    return [
+      "total-pages",
+      "current-page",
+      "max-visible",
+      "prev-label",
+      "next-label",
+    ];
   }
 
   public scope: Scope = {

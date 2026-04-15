@@ -21,8 +21,7 @@ const TYPE_CLASSES: Record<BadgeType, { solid: string; outline: string }> = {
       "bg-transparent border border-blue-400 text-blue-400 dark:border-blue-500 dark:text-blue-500",
   },
   success: {
-    solid:
-      "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300",
+    solid: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300",
     outline:
       "bg-transparent border border-green-400 text-green-400 dark:border-green-500 dark:text-green-500",
   },
@@ -104,10 +103,12 @@ export class TwBadgeComponent extends Component {
     const sizeClasses = SIZE_CLASSES[this.scope.size] || SIZE_CLASSES.md;
 
     // Remove previously applied badge classes
-    this.className = this.className.replace(
-      /(^|\s)(inline-flex|items-center|font-medium|rounded-full|text-xs|text-sm|px-\S+|py-\S+|bg-\S+|text-\S+|border-\S+|border|dark:\S+)\b/g,
-      "",
-    ).trim();
+    this.className = this.className
+      .replace(
+        /(^|\s)(inline-flex|items-center|font-medium|rounded-full|text-xs|text-sm|px-\S+|py-\S+|bg-\S+|text-\S+|border-\S+|border|dark:\S+)\b/g,
+        "",
+      )
+      .trim();
 
     const allClasses = `${baseClasses} ${sizeClasses} ${colorClasses}`;
     allClasses.split(/\s+/).forEach((cls) => {

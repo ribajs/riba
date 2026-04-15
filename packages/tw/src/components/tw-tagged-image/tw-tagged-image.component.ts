@@ -113,7 +113,8 @@ export class TwTaggedImageComponent extends Component {
   protected parseChildTags() {
     const tagEls = this.querySelectorAll<HTMLElement>("tag");
     for (const tagEl of Array.from(tagEls)) {
-      const label = tagEl.getAttribute("title") || tagEl.getAttribute("label") || "";
+      const label =
+        tagEl.getAttribute("title") || tagEl.getAttribute("label") || "";
       const content = tagEl.innerHTML || undefined;
       const x = parseFloat(tagEl.getAttribute("x") || "0");
       const y = parseFloat(tagEl.getAttribute("y") || "0");

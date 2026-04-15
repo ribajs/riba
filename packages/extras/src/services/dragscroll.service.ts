@@ -90,7 +90,10 @@ export class Dragscroll {
   public checkDraggable = throttle(this._checkDraggable.bind(this));
 
   protected onMouseDown(e: MouseEvent) {
-    console.debug("[Dragscroll] mousedown", { clientX: e.clientX, clientY: e.clientY });
+    console.debug("[Dragscroll] mousedown", {
+      clientX: e.clientX,
+      clientY: e.clientY,
+    });
     this.pushed = true;
     this.lastClientX = e.clientX;
     this.lastClientY = e.clientY;

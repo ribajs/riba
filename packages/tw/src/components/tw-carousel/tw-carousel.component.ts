@@ -93,7 +93,9 @@ export class TwCarouselComponent extends TwSlideshowComponent {
 
     if (attributeName === "autoplayInterval") {
       this.autoplayInterval =
-        typeof newValue === "number" ? newValue : parseInt(newValue, 10) || 5000;
+        typeof newValue === "number"
+          ? newValue
+          : parseInt(newValue, 10) || 5000;
       if (this.autoplayEnabled) {
         this.startAutoplay();
       }

@@ -105,8 +105,7 @@ export class TwAvatarComponent extends Component {
     const size = this.scope.size || "md";
     const sizeClass = SIZE_CLASSES[size] || SIZE_CLASSES.md;
     const textClass = INITIALS_TEXT_SIZE[size] || INITIALS_TEXT_SIZE.md;
-    const dotSize =
-      STATUS_DOT_SIZE_CLASSES[size] || STATUS_DOT_SIZE_CLASSES.md;
+    const dotSize = STATUS_DOT_SIZE_CLASSES[size] || STATUS_DOT_SIZE_CLASSES.md;
     const dotColor = this.scope.status
       ? STATUS_COLOR_CLASSES[this.scope.status] || ""
       : "";

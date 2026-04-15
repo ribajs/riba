@@ -79,7 +79,10 @@ export class TwStepsComponent extends Component {
     const templates = Array.from(this.querySelectorAll("template"));
     if (templates.length > 0) {
       this.scope.items = templates.map((tpl, index) => ({
-        label: tpl.getAttribute("title") || tpl.getAttribute("label") || `Step ${index + 1}`,
+        label:
+          tpl.getAttribute("title") ||
+          tpl.getAttribute("label") ||
+          `Step ${index + 1}`,
         description: tpl.getAttribute("description") || undefined,
         state: "upcoming" as const,
         index,
@@ -129,7 +132,7 @@ export class TwStepsComponent extends Component {
       (child) =>
         child.nodeType === Node.COMMENT_NODE ||
         (child.nodeType === Node.TEXT_NODE && !child.textContent?.trim()) ||
-        (child instanceof HTMLTemplateElement),
+        child instanceof HTMLTemplateElement,
     );
     if (hasOnlyTemplates) {
       return template;
