@@ -30,12 +30,16 @@ function resolveIconsetPath() {
 export function ribaIconsetPlugin(options = {}) {
   const { baseUrl = "/iconset/svg", outputDir = "iconset/svg" } = options;
   const iconsetSvgPath = resolveIconsetPath();
+  const iconsetAvailable = iconsetSvgPath && existsSync(iconsetSvgPath);
+  let warned = false;
 
-  function assertIconsetBuilt() {
-    if (!iconsetSvgPath || !existsSync(iconsetSvgPath)) {
-      throw new Error(
-        "[@ribajs/vite-config] @ribajs/iconset dist/svg not found. " +
-          "Run `yarn workspace @ribajs/iconset build` first.",
+  function warnMissingOnce() {
+    if (!warned) {
+      warned = true;
+      console.warn(
+        "[@ribajs/vite-config] @ribajs/iconset dist/svg not found — " +
+          "runtime icon URLs (/iconset/svg/*) will not be served. " +
+          "Run `yarn workspace @ribajs/iconset build` to enable them.",
       );
     }
   }
@@ -44,7 +48,10 @@ export function ribaIconsetPlugin(options = {}) {
     name: "riba-iconset",
 
     configureServer(server) {
-      assertIconsetBuilt();
+      if (!iconsetAvailable) {
+        warnMissingOnce();
+        return;
+      }
 
       server.middlewares.use(baseUrl, (req, res, next) => {
         const filePath = resolve(iconsetSvgPath, req.url.replace(/^\//, ""));
@@ -61,7 +68,10 @@ export function ribaIconsetPlugin(options = {}) {
     },
 
     async generateBundle() {
-      assertIconsetBuilt();
+      if (!iconsetAvailable) {
+        warnMissingOnce();
+        return;
+      }
 
       const { readdirSync, readFileSync } = await import("fs");
       const files = readdirSync(iconsetSvgPath);
