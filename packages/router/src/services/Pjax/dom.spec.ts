@@ -19,6 +19,24 @@ describe("Pjax Dom helpers", () => {
     const response = Dom.parseResponse(html, true, "#app > [data-namespace]");
 
     expect(response.container.dataset.namespace).toBe("page");
+    expect(response.containers).toHaveLength(1);
+    expect(response.containers[0]).toBe(response.container);
+  });
+
+  it("collects every direct child of the wrapper for multi-child outlets", () => {
+    const html =
+      "<html><body><div id='app'>" +
+      "<section data-namespace='primary'>first</section>" +
+      "<section data-namespace='secondary'>second</section>" +
+      "</div></body></html>";
+    const response = Dom.parseResponse(html, false, "#app > [data-namespace]");
+
+    expect(response.container.dataset.namespace).toBe("primary");
+    expect(response.containers).toHaveLength(2);
+    expect(response.containers.map((el) => el.dataset.namespace)).toEqual([
+      "primary",
+      "secondary",
+    ]);
   });
 });
 

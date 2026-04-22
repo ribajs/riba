@@ -54,6 +54,54 @@ describe("Pjax container lifecycle", () => {
     });
   });
 
+  it("keeps every sibling of a multi-child outlet on route change", async () => {
+    await withUrl("https://example.test/home.html", async () => {
+      const wrapper = document.createElement("div");
+      wrapper.id = "app";
+      const oldContainer = document.createElement("main");
+      oldContainer.dataset.namespace = "home";
+      wrapper.appendChild(oldContainer);
+      document.body.textContent = "";
+      document.body.appendChild(wrapper);
+
+      const pjax = new Pjax({
+        id: "main",
+        wrapper,
+        containerSelector: "#app > [data-namespace]",
+        listenAllLinks: false,
+        listenPopstate: false,
+        transitions: [
+          {
+            name: "default",
+            leave: async () => undefined,
+          },
+        ],
+      });
+      pjax.history.add("/home.html", "home");
+
+      const primary = document.createElement("main");
+      primary.dataset.namespace = "detail";
+      primary.style.visibility = "hidden";
+      const sidebar = document.createElement("aside");
+      sidebar.id = "detail-sidebar";
+      sidebar.style.visibility = "hidden";
+
+      vi.spyOn(pjax, "loadCached").mockImplementation(async () => {
+        wrapper.appendChild(primary);
+        wrapper.appendChild(sidebar);
+        (pjax as any).appendedContainers.set(primary, [primary, sidebar]);
+        return primary;
+      });
+
+      await (pjax as any).onStateChange(undefined, "/detail.html");
+
+      const remaining = Array.from(wrapper.children) as HTMLElement[];
+      expect(remaining).toEqual([primary, sidebar]);
+      expect(primary.style.visibility).toBe("visible");
+      expect(sidebar.style.visibility).toBe("visible");
+    });
+  });
+
   it("keeps both containers mounted during sync leave/enter", async () => {
     await withUrl("https://example.test/home.html", async () => {
       const wrapper = document.createElement("div");

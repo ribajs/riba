@@ -65,6 +65,36 @@ describe("BaseTransition (replace)", () => {
     expect(wrapper.firstElementChild).toBe(newPage);
   });
 
+  it("preserves every registered new container in a multi-child outlet", async () => {
+    const wrapper = document.createElement("div");
+    wrapper.id = "router-view";
+    const oldA = document.createElement("div");
+    oldA.id = "old-a";
+    const oldB = document.createElement("div");
+    oldB.id = "old-b";
+    wrapper.appendChild(oldA);
+    wrapper.appendChild(oldB);
+    document.body.appendChild(wrapper);
+
+    const newA = document.createElement("section");
+    newA.id = "new-a";
+    const newB = document.createElement("section");
+    newB.id = "new-b";
+    wrapper.appendChild(newA);
+    wrapper.appendChild(newB);
+
+    const transition = new TestTransition("replace");
+    transition.setNewContainers([newA, newB]);
+    await transition.init(oldA, Promise.resolve(newA));
+
+    const remaining = Array.from(wrapper.children);
+    expect(remaining).toEqual([newA, newB]);
+    expect(document.getElementById("old-a")).toBeNull();
+    expect(document.getElementById("old-b")).toBeNull();
+    expect(newA.style.visibility).toBe("visible");
+    expect(newB.style.visibility).toBe("visible");
+  });
+
   it("does not remove siblings when action is append", async () => {
     const wrapper = document.createElement("div");
     const oldA = document.createElement("div");

@@ -7,7 +7,22 @@ import { Transition } from "../../types/transition.js";
 export abstract class BaseTransition implements Transition {
   protected oldContainer?: HTMLElement;
 
+  /**
+   * Primary new container (first of the new page's top-level children).
+   *
+   * @deprecated Prefer {@link newContainers} in transition subclasses so multi-child
+   * outlets are handled. `newContainer` equals `newContainers[0]` and is retained for
+   * backward compatibility with existing `Transition` implementations.
+   */
   protected newContainer?: HTMLElement;
+
+  /**
+   * Every container appended to the outlet for the new page. Populated by Pjax
+   * via {@link setNewContainers} when the outlet holds multiple siblings. Falls
+   * back to `[newContainer]` in `done()` so single-child outlets behave exactly
+   * like before.
+   */
+  protected newContainers?: HTMLElement[];
 
   protected newContainerLoading?: Promise<HTMLElement>;
 
@@ -17,6 +32,15 @@ export abstract class BaseTransition implements Transition {
 
   constructor(action: "replace" | "append" = "replace") {
     this.action = action;
+  }
+
+  /**
+   * Register the complete set of elements that were appended to the outlet for
+   * the new page. Pjax calls this before {@link done} so transitions preserve
+   * every sibling of a multi-child page instead of only the primary container.
+   */
+  public setNewContainers(containers: HTMLElement[]) {
+    this.newContainers = containers.length > 0 ? containers : undefined;
   }
 
   /**
@@ -51,22 +75,23 @@ export abstract class BaseTransition implements Transition {
 
     if (this.action === "replace") {
       /**
-       * `router-view` may have multiple direct children (e.g. layout slots). PJAX still tracks a
-       * single "container" node for parsing, but the new page is appended; removing only
-       * `oldContainer` leaves stale siblings. Clear every sibling of the new container inside
-       * the shared parent so the outlet matches a full page swap.
+       * `router-view` may have multiple direct children (e.g. layout slots). PJAX appends
+       * the full set of new page children via {@link setNewContainers}; we clear every
+       * sibling in the shared parent that isn't one of them so the outlet matches a full
+       * page swap without dropping legitimate multi-child content.
        */
+      const newSet = new Set<Node>(
+        this.newContainers ?? (this.newContainer ? [this.newContainer] : []),
+      );
+      const parent = this.newContainer?.parentElement ?? null;
       if (
-        this.newContainer &&
-        this.newContainer.parentNode &&
-        this.oldContainer.parentNode === this.newContainer.parentNode
+        parent &&
+        newSet.size > 0 &&
+        this.oldContainer.parentNode === parent
       ) {
-        const parent = this.newContainer.parentElement;
-        if (parent) {
-          for (const node of Array.from(parent.childNodes)) {
-            if (node !== this.newContainer) {
-              node.remove();
-            }
+        for (const node of Array.from(parent.childNodes)) {
+          if (!newSet.has(node)) {
+            node.remove();
           }
         }
       } else {
@@ -77,7 +102,9 @@ export abstract class BaseTransition implements Transition {
     if (!this.newContainer) {
       throw new Error("Can't show new container");
     }
-    this.newContainer.style.visibility = "visible";
+    for (const el of this.newContainers ?? [this.newContainer]) {
+      el.style.visibility = "visible";
+    }
     return this.deferred.resolve(undefined);
   }
 

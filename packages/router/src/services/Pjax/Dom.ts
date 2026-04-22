@@ -48,9 +48,11 @@ class Dom {
     }
 
     const container = this.getContainer(template, containerSelector);
+    const containers = this.collectContainers(container);
 
     return {
       container,
+      containers,
       title,
       prefetchLinks: prefetchLinkElements,
     };
@@ -73,6 +75,7 @@ class Dom {
     // template.innerHTML = document.body.innerHTML;
 
     const container = this.getContainer(document, containerSelector);
+    const containers = this.collectContainers(container);
 
     if (parseTitle) {
       title = this.parseTitle(document);
@@ -83,10 +86,31 @@ class Dom {
     }
 
     return {
-      container: container,
+      container,
+      containers,
       title,
       prefetchLinks: prefetchLinkElements,
     };
+  }
+
+  /**
+   * Collect every direct child of the container's wrapper. The default
+   * `containerSelector` matches only `router-view > *:first-child`, but the
+   * outlet may legitimately hold multiple sibling sections (layout slots,
+   * page + sidebar, etc.). Returning all siblings lets PJAX swap the entire
+   * outlet in one step without silently dropping the later children.
+   *
+   * Falls back to `[container]` when the container has no parent (parsed
+   * fragment edge case).
+   */
+  public static collectContainers(container: HTMLElement): HTMLElement[] {
+    const parent = container.parentElement;
+    if (!parent) {
+      return [container];
+    }
+    return Array.from(parent.children).filter(
+      (child): child is HTMLElement => child instanceof HTMLElement,
+    );
   }
 
   /**
@@ -130,6 +154,16 @@ class Dom {
     element = element as HTMLElement;
     element.style.visibility = "hidden";
     wrapper.appendChild(element);
+  }
+
+  /**
+   * Put multiple containers (all siblings of a multi-child outlet) into the wrapper.
+   * Each is hidden before insertion so the transition can reveal them in one step.
+   */
+  public static putContainers(elements: HTMLElement[], wrapper: HTMLElement) {
+    for (const element of elements) {
+      this.putContainer(element, wrapper);
+    }
   }
 
   /**

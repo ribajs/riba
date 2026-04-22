@@ -224,6 +224,13 @@ class Pjax {
 
   protected wrapper?: HTMLElement;
 
+  /**
+   * Tracks every sibling that was appended to the wrapper for a given primary
+   * container, so transitions can preserve multi-child outlets (pages with
+   * multiple direct children inside `router-view`).
+   */
+  protected appendedContainers = new WeakMap<HTMLElement, HTMLElement[]>();
+
   protected viewId = "main";
 
   protected containerSelector: string;
@@ -525,7 +532,19 @@ class Pjax {
         throw new Error("[Pjax] you need a wrapper!");
       }
       const response = await responsePromise;
+      // Append the primary container first (so `response.container` keeps its
+      // existing identity/order), then any extra siblings for multi-child outlets.
       Dom.putContainer(response.container, this.wrapper);
+      const extras = response.containers.filter(
+        (el) => el !== response.container,
+      );
+      if (extras.length > 0) {
+        Dom.putContainers(extras, this.wrapper);
+      }
+      this.appendedContainers.set(response.container, [
+        response.container,
+        ...extras,
+      ]);
       if (this.parseTitle === true && response.title) {
         document.title = response.title;
       }
@@ -766,6 +785,8 @@ class Pjax {
 
     if (transitionDefinition) {
       const newContainer = await newContainerPromise;
+      const newContainers =
+        this.appendedContainers.get(newContainer) ?? [newContainer];
       const transitionData: TransitionData = {
         ...transitionSeed,
         next: this.buildPageData(newContainer, newUrl, newContainer.innerHTML),
@@ -774,32 +795,44 @@ class Pjax {
         data: transitionData,
         transition: transitionDefinition,
         finalize: async () => {
+          const newSet = new Set<Node>(newContainers);
+          const parent = newContainer.parentElement;
           if (
-            newContainer.parentNode &&
-            oldContainer.parentNode === newContainer.parentNode
+            parent &&
+            newSet.size > 0 &&
+            oldContainer.parentNode === parent
           ) {
-            const parent = newContainer.parentElement;
-            if (parent) {
-              for (const node of Array.from(parent.childNodes)) {
-                if (node !== newContainer) {
-                  node.remove();
-                }
+            for (const node of Array.from(parent.childNodes)) {
+              if (!newSet.has(node)) {
+                node.remove();
               }
             }
           } else {
             oldContainer.remove();
           }
-          newContainer.style.visibility = "visible";
+          for (const el of newContainers) {
+            el.style.visibility = "visible";
+          }
         },
       });
       this.onNewContainerLoaded(newContainer);
     } else {
       const transition = this.getTransition();
+      const newContainerEager = newContainerPromise.then((el) => {
+        const all = this.appendedContainers.get(el) ?? [el];
+        // Transition subclasses that opt into multi-child outlets read the
+        // full set via `setNewContainers`; BaseTransition.done() falls back
+        // to `[newContainer]` when that hook is missing.
+        if (typeof transition.setNewContainers === "function") {
+          transition.setNewContainers(all);
+        }
+        return el;
+      });
       const transitionResult = transition.init(
         oldContainer,
-        newContainerPromise,
+        newContainerEager,
       );
-      const newContainer = await newContainerPromise;
+      const newContainer = await newContainerEager;
       await transitionResult;
       this.onNewContainerLoaded(newContainer);
     }
