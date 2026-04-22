@@ -22,7 +22,9 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [24.x]
+        # Pin: Node 24.15.0 regresses Yarn PnP's ESM loader (EBADF on CJS wrap
+        # of unrs-resolver + iconset postinstall). Revisit when Node fixes it.
+        node-version: [24.14.1]
 
     steps:
     - name: Checkout

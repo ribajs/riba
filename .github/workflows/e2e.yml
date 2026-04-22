@@ -18,7 +18,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "24"
+          # Pin: Node 24.15.0 regresses Yarn PnP's ESM loader (EBADF on CJS wrap
+          # of unrs-resolver + iconset postinstall). Revisit when Node fixes it.
+          node-version: "24.14.1"
 
       - name: Install dependencies
         run: yarn install
