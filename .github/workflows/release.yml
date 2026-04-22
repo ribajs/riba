@@ -25,11 +25,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          # Pin: Node 24.15.0 introduced changes that trip Yarn PnP consumers. Yarn
-          # 4.14.1 handled one regression (EBADF fstat during install), but ESLint 10's
-          # config loader still crashes on 24.15 with "Cannot convert undefined or null
-          # to object" at require.cache access. Revisit once upstream ships a fix.
-          node-version: '24.14.1'
+          node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Configure Yarn for npm publishing
