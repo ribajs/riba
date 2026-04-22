@@ -25,11 +25,11 @@
     "@ribajs/tsconfig": "workspace:^",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.12.2",
-    "eslint": "^10.2.0",
+    "eslint": "^10.2.1",
     "jest": "^30.3.0",
     "jest-config": "^30.3.0",
     "jest-extended": "^7.0.0",
     "ts-jest": "^29.4.9",
-    "typescript": "6.0.2"
+    "typescript": "6.0.3"
   }
 }

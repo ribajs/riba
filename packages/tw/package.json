@@ -51,14 +51,14 @@
     "@ribajs/tsconfig": "workspace:^",
     "@ribajs/types": "workspace:^",
     "@types/jest": "^30.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.58.1",
-    "@typescript-eslint/parser": "^8.58.1",
+    "@typescript-eslint/eslint-plugin": "^8.59.0",
+    "@typescript-eslint/parser": "^8.59.0",
     "@yarnpkg/pnpify": "^4.1.6",
-    "eslint": "^10.2.0",
+    "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
-    "prettier": "^3.8.2",
-    "typescript": "6.0.2"
+    "prettier": "^3.8.3",
+    "typescript": "6.0.3"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.7.6",

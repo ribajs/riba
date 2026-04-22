@@ -33,7 +33,7 @@
   "devDependencies": {
     "@ribajs/tsconfig": "workspace:^",
     "@types/node": "^24.12.2",
-    "eslint": "^10.2.0",
-    "typescript": "6.0.2"
+    "eslint": "^10.2.1",
+    "typescript": "6.0.3"
   }
 }
