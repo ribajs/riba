@@ -49,7 +49,11 @@ const BUILD_TIMEOUT_MS = (() => {
  */
 function resolveSiteBase() {
   const fromEnv = process.env.VITE_BASE_PATH;
-  if (fromEnv && fromEnv.startsWith('/')) return fromEnv;
+  if (fromEnv && fromEnv.startsWith('/')) {
+    // A base without a trailing slash would be concatenated to `demos/<id>/`
+    // as `/subpathdemos/...`, which silently breaks every asset URL.
+    return fromEnv.endsWith('/') ? fromEnv : `${fromEnv}/`;
+  }
   return '/';
 }
 
