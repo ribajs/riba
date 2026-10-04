@@ -622,6 +622,8 @@ async function main() {
     }
 
     for (const entry of manifest) {
+      // `riba.demo.skip` leaves a demo out on purpose; a build-failed one stays judged.
+      if (entry.status === 'skipped') continue;
       const started = Date.now();
       /** @type {Record<string, any>} */
       let result;
