@@ -1,7 +1,7 @@
 import { Component, TemplateFunction, ScopeBase } from "@ribajs/core";
 import { htmlToElement, hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 import Debug from "debug";
-import { LocalesStaticService } from "@ribajs/i18n";
+import { I18nService } from "@ribajs/i18n";
 import { Product } from "@ribajs/shopify-tda";
 import { WebhooksService } from "../../services/webhooks.service.js";
 import { ShopifyApiProductService } from "../../services/shopify-api-product.service.js";
@@ -20,7 +20,7 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
 
   protected webhooksService = new WebhooksService();
   protected apProductService = ShopifyApiProductService.getSingleton();
-  protected localesService = LocalesStaticService.getInstance("main");
+  protected localesService = I18nService.getLocalesService();
 
   protected cardContainer: HTMLDivElement | null = null;
 
@@ -78,13 +78,9 @@ export class ShopifyNestApiSocketExplorerComponent extends Component {
   protected initLocales() {
     // set avaible langcodes
     this.scope.langcode = this.localesService.getLangcode();
-    this.localesService.event.on(
-      "changed",
-      (changedLangcode: string /*, initial: boolean*/) => {
-        // Activate localcode and disable the other
-        this.scope.langcode = changedLangcode;
-      },
-    );
+    this.localesService.on("changed", (changedLangcode: string) => {
+      this.scope.langcode = changedLangcode;
+    });
   }
 
   protected async beforeBind() {

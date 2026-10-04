@@ -12,7 +12,7 @@ import { Dropdown } from "@ribajs/bs5";
 import pugTemplate from "./api-explorer.component.pug";
 
 import * as monaco from "monaco-editor";
-import { LocalesStaticService } from "@ribajs/i18n";
+import { I18nService } from "@ribajs/i18n";
 
 export interface APIParam {
   /**
@@ -104,7 +104,7 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   protected autobind = true;
 
   protected editor?: monaco.editor.IStandaloneCodeEditor;
-  protected localesService = LocalesStaticService.getInstance("main");
+  protected localesService = I18nService.getLocalesService();
 
   static get observedAttributes(): string[] {
     return [];
@@ -229,13 +229,9 @@ export abstract class ShopifyNestApiExplorerComponent extends Component {
   protected initLocales() {
     // set available langcodes
     this.scope.langcode = this.localesService.getLangcode();
-    this.localesService.event.on(
-      "changed",
-      (changedLangcode: string /*, initial: boolean*/) => {
-        // Activate localcode and disable the other
-        this.scope.langcode = changedLangcode;
-      },
-    );
+    this.localesService.on("changed", (changedLangcode: string) => {
+      this.scope.langcode = changedLangcode;
+    });
   }
 
   /**
