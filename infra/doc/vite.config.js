@@ -5,6 +5,7 @@ import { cp } from 'fs/promises'
 import { isAbsolute, join, resolve } from 'path'
 import { ribaIconsetPlugin } from '@ribajs/vite-config'
 import { docPagesPlugin } from './vite-plugin-doc-pages.js'
+import { docLocalesPlugin } from './vite-plugin-doc-locales.js'
 
 const __dirname = new URL('.', import.meta.url).pathname;
 const demosDir = resolve(__dirname, '_demos');
@@ -75,6 +76,7 @@ export default defineConfig(({ command, mode }) => {
         basedir: resolve(basedir, 'views'),
         contentDir: resolve(basedir, 'content'),
       }),
+      docLocalesPlugin(),
       ribaIconsetPlugin({ baseUrl: '/iconset', outputDir: 'iconset' }),
       // Only registered when _demos/ exists, so a doc build without a previous
       // `yarn build:demos` (fresh checkout, CI order) still succeeds.
