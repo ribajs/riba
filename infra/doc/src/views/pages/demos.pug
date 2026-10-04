@@ -1,0 +1,82 @@
+extends ../layouts/page
+
+block append head
+  - pageTitle = "Demos"
+
+block title
+  | Demos
+
+block page-content
+  -
+    // Gallery of every demo of the monorepo, read from the `demos` Pug local
+    // (infra/doc/_demos/manifest.json). Sorted by category, then title, so the
+    // order is stable regardless of the build order of the demos. Demos without
+    // a category end up in the "Sonstige" section.
+    const FALLBACK_CATEGORY = "Sonstige";
+    const STATUS_BADGES = {
+      ok: { label: "live", cls: "text-bg-success" },
+      skipped: { label: "übersprungen", cls: "text-bg-secondary" },
+      "build-failed": { label: "Build fehlgeschlagen", cls: "text-bg-danger" },
+    };
+    const byTitle = (a, b) => String(a.title || a.id).localeCompare(String(b.title || b.id));
+    const sortedDemos = (demos || [])
+      .slice()
+      .sort((a, b) => {
+        const catA = a.category || FALLBACK_CATEGORY;
+        const catB = b.category || FALLBACK_CATEGORY;
+        return catA === catB ? byTitle(a, b) : catA.localeCompare(catB);
+      });
+    const groups = [];
+    for (const demo of sortedDemos) {
+      const category = demo.category || FALLBACK_CATEGORY;
+      let group = groups[groups.length - 1];
+      if (!group || group.category !== category) {
+        group = { category, demos: [] };
+        groups.push(group);
+      }
+      group.demos.push(demo);
+    }
+    const statusBadge = (demo) =>
+      STATUS_BADGES[demo.status] || {
+        label: demo.status || "unbekannt",
+        cls: "text-bg-secondary",
+      };
+    const anchor = (category) =>
+      "demos-" + String(category).toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+  section.my-5#demos
+    h2 Demos
+    p.text-muted
+      | Jeder Demo aus dem Monorepo wird mit
+      code yarn workspace @ribajs/doc build:demos
+      | gebaut und lässt sich hier direkt im Browser ausführen. Der Stand kommt aus dem Manifest dieses Builds.
+
+  if !groups.length
+    p.alert.alert-info
+      | Keine Demos gefunden. Das Manifest fehlt oder ist leer – bitte zuerst
+      code yarn workspace @ribajs/doc build:demos
+      | ausführen.
+
+  each group in groups
+    section.my-5(id=anchor(group.category))
+      h2= group.category
+      .row
+        each demo in group.demos
+          .col-12.col-md-6.col-xl-4.mb-4
+            //- rv-class-* is used for the state-dependent card styles, the href
+            //- stays a real link so PJAX routing and "open in new tab" keep working.
+            a.card.h-100.text-reset.text-decoration-none(
+              href=basePath + "/demo.html?id=" + encodeURIComponent(demo.id)
+              rv-class-shadow="true"
+              rv-class-border-warning="demo.status !== 'ok'"
+              rv-class-opacity-50="demo.status === 'skipped'"
+            )
+              .card-body
+                h3.card-title.h5.mb-2= demo.title
+                p.card-text.text-muted.mb-2= demo.description
+                p.mb-0
+                  span.badge(class=statusBadge(demo).cls)= statusBadge(demo).label
+                  if demo.knownIssues && demo.knownIssues.length
+                    span.badge.text-bg-warning.ms-1= demo.knownIssues.length + (demo.knownIssues.length === 1 ? " known issue" : " known issues")
+                  if demo.sizeKB
+                    span.badge.text-bg-light.border.ms-1= demo.sizeKB + " kB"

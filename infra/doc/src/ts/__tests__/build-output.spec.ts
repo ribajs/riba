@@ -8,6 +8,8 @@ const SITE_EXISTS = existsSync(SITE_DIR);
 const EXPECTED_PAGES = [
   "index.html",
   "guide.html",
+  "demos.html",
+  "demo.html",
   "core.html",
   "core-binders.html",
   "core-formatters.html",
@@ -81,6 +83,7 @@ describe.skipIf(!SITE_EXISTS)("Build output", () => {
       const html = readPage("index.html");
       const expectedLinks = [
         "Guide",
+        "Demos",
         "Modules",
         "Core",
         "Install",

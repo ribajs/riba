@@ -1,4 +1,5 @@
 export { BindContentComponent } from "./bind-content/bind-content.component.js";
+export { DemoViewerComponent } from "./demo-viewer/demo-viewer.component.js";
 export { ExampleTabsComponent } from "./example-tabs/example-tabs.component.js";
 export { FileTreeComponent } from "./file-tree/file-tree.component.js";
 export { IconPreviewComponent } from "./icon-preview/icon-preview.component.js";

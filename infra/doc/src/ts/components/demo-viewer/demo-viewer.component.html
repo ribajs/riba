@@ -1,0 +1,109 @@
+<!-- Fallback: no ?id= in the URL -->
+<div class="alert alert-info" rv-show="!requestedId">
+  Kein Demo ausgew&auml;hlt &ndash; bitte eines aus der
+  <a href="demos.html">Demo-&Uuml;bersicht</a> w&auml;hlen.
+</div>
+
+<!-- Fallback: unknown ?id= -->
+<!-- No <code> element here: CODE is in Riba's blockNodeNames, so a binder on a
+     <code> element would never be bound. -->
+<div class="alert alert-warning" rv-show="notFound">
+  Kein Demo mit der ID
+  <span class="font-monospace" rv-text="requestedId"></span> gefunden.
+  <a href="demos.html">Zur&uuml;ck zur Demo-&Uuml;bersicht</a>.
+</div>
+
+<div rv-show="found">
+  <h2 class="h4" rv-text="demo.title"></h2>
+  <p class="text-muted" rv-text="demo.description"></p>
+
+  <!-- Demos that are skipped or failed to build have no frame to show -->
+  <div class="alert alert-warning" rv-show="statusMessage">
+    <span rv-text="statusMessage"></span>
+  </div>
+
+  <!-- Known issues, linked to the GitHub issues -->
+  <div class="alert alert-warning" rv-show="hasIssues">
+    <strong>Bekannte Einschr&auml;nkungen</strong>
+    <ul class="mb-0">
+      <li rv-each-issue="issues">
+        <a
+          rv-show="issue.url"
+          rv-href="issue.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          rv-text="issue.label"
+        ></a>
+        <span rv-show="!issue.url" rv-text="issue.label"></span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Toolbar: device widths + actions -->
+  <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+    <div class="btn-group btn-group-sm" role="group" aria-label="Demo-Breite">
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        rv-class-active="isMobile"
+        rv-on-click="setWidth | args 375"
+      >
+        Mobil (375&nbsp;px)
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        rv-class-active="isTablet"
+        rv-on-click="setWidth | args 768"
+      >
+        Tablet (768&nbsp;px)
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        rv-class-active="isFull"
+        rv-on-click="setWidth | args 0"
+      >
+        Voll
+      </button>
+    </div>
+    <button
+      type="button"
+      class="btn btn-outline-secondary btn-sm"
+      rv-on-click="reload"
+    >
+      Neu laden
+    </button>
+    <a
+      class="btn btn-outline-secondary btn-sm"
+      rv-href="standaloneUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Standalone &ouml;ffnen
+    </a>
+    <a
+      class="btn btn-outline-secondary btn-sm"
+      rv-href="sourceUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Quellcode auf GitHub
+    </a>
+  </div>
+
+  <!-- The demo itself: max-width switches between device widths -->
+  <div
+    class="mx-auto border rounded overflow-hidden bg-white"
+    rv-style-max-width="frameMaxWidth"
+    style="height: calc(100vh - 22rem); min-height: 28rem;"
+  >
+    <iframe
+      class="d-block border-0 w-100 h-100"
+      title="Demo"
+      rv-src="frameSrc"
+    ></iframe>
+  </div>
+
+  <p class="text-muted small mt-2" rv-text="metaInfo"></p>
+</div>

@@ -1,6 +1,9 @@
 - title: Guide
   url: guide.html
   links: []
+- title: Demos
+  url: demos.html
+  links: []
 - title: Modules
   url: "#collapse"
   collapseable: true
