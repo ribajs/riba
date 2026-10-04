@@ -1,8 +1,8 @@
 # core-components Demo
 
-Zeigt das bidirektionale Datenbinding zwischen mehreren Custom Elements über die `rv-co-*`- und `rv-parent`-Binder. Eine gemeinsam genutzte Eingabevariable wird synchron zwischen verschiedenen Kindkomponenten und einem übergeordneten Scope gehalten – demonstriert damit die Übergabe von Attributen zwischen Komponenten.
+Shows bidirectional data binding between multiple custom elements via the `rv-co-*` and `rv-parent` binders. A shared input variable is kept in sync between different child components and a parent scope – thus demonstrating how attributes are passed between components.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

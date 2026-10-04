@@ -1,8 +1,8 @@
 # bs5-form Demo
 
-Demonstriert die `bs5-form`-Komponente mit einem vollständig validierten Kontaktformular (Name, Adresse, Nutzername, AGB-Checkbox), das bei Erfolg, Fehler oder ungültiger Eingabe automatisch Bootstrap-5-Toast-Benachrichtigungen ausgibt.
+Demonstrates the `bs5-form` component with a fully validated contact form (name, address, username, terms and conditions checkbox) that automatically outputs Bootstrap 5 toast notifications on success, on error or on invalid input.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

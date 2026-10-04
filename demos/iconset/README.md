@@ -1,8 +1,8 @@
 # iconset Demo
 
-Demonstriert das `@ribajs/iconset`-Paket, indem alle verfügbaren SVG-Icons als `bs5-icon`-Komponenten in einem responsiven Grid dargestellt werden. Über einen integrierten `bs5-colorpicker` lässt sich die Farbe aller Icons interaktiv per HSL-Farbauswahl anpassen.
+Demonstrates the `@ribajs/iconset` package by displaying all available SVG icons as `bs5-icon` components in a responsive grid. Via an integrated `bs5-colorpicker` the color of all icons can be adjusted interactively using HSL color selection.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

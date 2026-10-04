@@ -1,8 +1,8 @@
 # monaco-editor Demo
 
-Zeigt die Integration des Monaco-Editors (dem Editor aus VS Code) als Riba.js-Komponente für Rich-Text-HTML-Eingabe. Es wird ein einfaches Formular mit Titel-Feld und einem vollwertigen Code-Editor für HTML-Inhalte mit einem Speichern-Button demonstriert.
+Shows the integration of the Monaco editor (the editor from VS Code) as a Riba.js component for rich text HTML input. A simple form with a title field and a full-fledged code editor for HTML content with a save button is demonstrated.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

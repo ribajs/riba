@@ -1,8 +1,8 @@
 # moment Demo
 
-Demonstriert die Moment.js-Formatter des Riba.js-`moment`-Moduls für Datumsformatierung und Zeitberechnung. Die Demo zeigt Formatter wie `toMoment`, `dateFormat`, `duration`, `humanize`, `asSeconds/Minutes/Hours/Days` sowie eine `moment-timer`-Komponente als Countdown-Timer.
+Demonstrates the Moment.js formatters of the Riba.js `moment` module for date formatting and time calculation. The demo shows formatters like `toMoment`, `dateFormat`, `duration`, `humanize`, `asSeconds/Minutes/Hours/Days` as well as a `moment-timer` component as countdown timer.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

@@ -1,8 +1,8 @@
 # bs5-toggle-button-sidebar Demo
 
-Demonstriert das Zusammenspiel von `bs5-toggle-button`, `bs5-sidebar` und `bs5-navbar`, wobei eine linke und eine rechte Sidebar per Knopfdruck ein- und ausgeblendet werden. Das Verhalten ist responsiv: Auf kleinen Bildschirmen werden die Sidebars im Overlap-Modus angezeigt, auf größeren Breakpoints schieben sie den Hauptinhalt zur Seite.
+Demonstrates how `bs5-toggle-button`, `bs5-sidebar` and `bs5-navbar` work together, with a left and a right sidebar that are shown and hidden at the press of a button. The behaviour is responsive: on small screens the sidebars are displayed in overlap mode, on larger breakpoints they push the main content aside.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

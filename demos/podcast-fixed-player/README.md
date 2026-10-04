@@ -1,8 +1,8 @@
 # podcast-fixed-player Demo
 
-Zeigt die `podlove-fixed-web-player`-Variante, bei der der Podcast-Player als fixierter Footer am unteren Bildschirmrand eingeblendet wird. Ein `podlove-play-button` im Seiteninhalt startet die Wiedergabe im fest positionierten Player.
+Shows the `podlove-fixed-web-player` variant, where the podcast player is displayed as a fixed footer at the bottom of the screen. A `podlove-play-button` in the page content starts playback in the fixed player.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

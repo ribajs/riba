@@ -1,8 +1,8 @@
 # bs5-notifications Demo
 
-Zeigt das Benachrichtigungssystem mit Bootstrap-5-Toasts und Modals, die sowohl programmatisch aus einer Komponente als auch deklarativ über den `rv-show-toast-on-[event]`-Binder ausgelöst werden können – inklusive Zugriff auf `$event`- und `$context`-Objekte im Toast-Inhalt.
+Shows the notification system with Bootstrap 5 toasts and modals, which can be triggered both programmatically from a component and declaratively via the `rv-show-toast-on-[event]` binder – including access to the `$event` and `$context` objects in the toast content.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

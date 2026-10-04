@@ -1,8 +1,8 @@
 # empty-template Demo
 
-Zeigt das Muster, bei dem eine Komponente nur dann ihr eigenes Template rendert, wenn sie noch keine Kindknoten enthält. Dies erlaubt es, die Komponente wahlweise mit eigenem oder mit von außen bereitgestelltem Inhalt zu verwenden.
+Shows the pattern in which a component only renders its own template if it does not yet contain any child nodes. This makes it possible to use the component either with its own content or with content supplied from outside.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

@@ -1,8 +1,8 @@
 # extras-game-loop Demo
 
-Demonstriert die `Gameloop`-Klasse aus `@ribajs/extras`, die eine spieltypische Update-Render-Schleife mit fester Logikrate und interpoliertem Rendering bereitstellt. Konkret bewegt sich eine rote Box mit konstanter Geschwindigkeit hin und her, während die aktuelle FPS-Zahl angezeigt wird.
+Demonstrates the `Gameloop` class from `@ribajs/extras`, which provides a game-like update-render loop with a fixed logic rate and interpolated rendering. Concretely, a red box moves back and forth at a constant speed while the current FPS count is displayed.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

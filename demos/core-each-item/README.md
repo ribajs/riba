@@ -1,8 +1,8 @@
 # core-each-item Demo
 
-Demonstriert den `rv-each-item`-Binder anhand einer reaktiven Liste, die per Buttons mit allen Standard-Array-Methoden (`push`, `pop`, `shift`, `unshift`, `splice`, `sort`, `reset`) manipuliert werden kann. Jede Zustandsänderung wird sofort im DOM gespiegelt.
+Demonstrates the `rv-each-item` binder using a reactive list that can be manipulated with buttons for all standard array methods (`push`, `pop`, `shift`, `unshift`, `splice`, `sort`, `reset`). Every state change is immediately mirrored in the DOM.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

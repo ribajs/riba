@@ -1,8 +1,8 @@
 # router-view Demo
 
-Zeigt die Client-seitige Navigation mit der `router-view`-Komponente aus `@ribajs/router` über mehrere HTML-Seiten. Eine gemeinsame Navigationsleiste bleibt bei Seitenwechseln erhalten, während der Hauptinhalt dynamisch ausgetauscht wird, ohne die Seite neu zu laden.
+Shows client-side navigation with the `router-view` component from `@ribajs/router` across several HTML pages. A shared navigation bar is kept across page changes, while the main content is replaced dynamically, without reloading the page.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

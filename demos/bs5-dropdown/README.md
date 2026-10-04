@@ -1,8 +1,8 @@
 # bs5-dropdown Demo
 
-Zeigt vier Varianten des Bootstrap-5-Dropdowns: die `bs5-dropdown`-Komponente sowie den `rv-bs5-dropdown`-Binder, jeweils mit einfacher Listenauswahl und mit integrierter Echtzeit-Suchfunktion über die `fuse-search`-Komponente.
+Shows four variants of the Bootstrap 5 dropdown: the `bs5-dropdown` component and the `rv-bs5-dropdown` binder, each of them with a simple list selection and with an integrated real-time search function based on the `fuse-search` component.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

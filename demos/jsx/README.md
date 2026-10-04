@@ -1,8 +1,8 @@
 # jsx Demo
 
-Zeigt, wie Riba.js-Komponenten mit JSX/TSX als Template-Sprache erstellt werden, inklusive einer Bootstrap-5-Seitennavigation mit Sidebar, Navbar und Dark-Mode-Umschalter. Zusätzlich demonstriert eine eingebettete Komponente das Laden von Markdown-Dateien als Komponenten-Template.
+Shows how Riba.js components are created with JSX/TSX as template language, including a Bootstrap 5 page navigation with sidebar, navbar and dark mode toggle. Additionally, an embedded component demonstrates loading Markdown files as component template.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

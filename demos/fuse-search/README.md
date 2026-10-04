@@ -1,8 +1,8 @@
 # fuse-search Demo
 
-Demonstriert die `fuse-search`-Komponente aus `@ribajs/fuse`, die auf der Fuzzy-Search-Bibliothek Fuse.js basiert und eine Echtzeit-Suchfilterfunktion für Listen bereitstellt. Das Demo zeigt zwei Einsatzmöglichkeiten: eine eigenständige Suchliste und eine in ein Bootstrap-5-Dropdown integrierte Filtersuche mit Auswahl-Feedback.
+Demonstrates the `fuse-search` component from `@ribajs/fuse`, which is based on the fuzzy search library Fuse.js and provides a real-time search filter feature for lists. The demo shows two use cases: a standalone search list and a filter search integrated into a Bootstrap 5 dropdown with selection feedback.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

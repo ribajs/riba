@@ -1,8 +1,8 @@
 # extras-scroll-events Demo
 
-Demonstriert den `rv-scroll-events`-Binder aus `@ribajs/extras`, der einen Scrollbereich um benutzerdefinierte Scroll-Events wie `scrollstart`, `scrollended`, `scrollleft`, `scrollright`, `scrollup`, `scrolldown` und `scrolling` erweitert. Alle ausgelösten Events werden zusammen mit der aktuellen Scrollposition in einer seitlichen Live-Konsole angezeigt.
+Demonstrates the `rv-scroll-events` binder from `@ribajs/extras`, which extends a scroll area with custom scroll events such as `scrollstart`, `scrollended`, `scrollleft`, `scrollright`, `scrollup`, `scrolldown` and `scrolling`. All triggered events are displayed together with the current scroll position in a live console on the side.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

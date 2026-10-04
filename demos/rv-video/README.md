@@ -1,8 +1,8 @@
 # rv-video Demo
 
-Zeigt die `rv-video`-Komponente für responsives Video-Streaming mit automatischem Quelltausch je nach Viewport-Breite (mobil vs. Desktop). Zusätzlich demonstriert die Demo das dynamische Auswählen einer Videoquelle per Dropdown sowie benutzerdefinierte Video-Steuerelemente (Play/Pause, Mute) mit Bootstrap-5-Icons.
+Shows the `rv-video` component for responsive video streaming with automatic source switching depending on the viewport width (mobile vs. desktop). Additionally, the demo demonstrates dynamically selecting a video source via dropdown as well as custom video controls (play/pause, mute) with Bootstrap 5 icons.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git
@@ -13,4 +13,4 @@ yarn start
 
 ## Assets
 
-Das Beispiel-Videomaterial steht unter einer freien Lizenz und stammt von [Pixabay](https://pixabay.com/videos/).
+The example video material is available under a free license and comes from [Pixabay](https://pixabay.com/videos/).
