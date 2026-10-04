@@ -2,6 +2,7 @@ import { describe, it, expect, beforeAll, beforeEach, afterEach, vi } from "vite
 import { Riba, coreModule } from "@ribajs/core";
 import { extrasModule } from "@ribajs/extras";
 import { bs5Module } from "@ribajs/bs5";
+import { i18nModule, I18nService, LocalesStaticService } from "@ribajs/i18n";
 
 const MANIFEST = [
   {
@@ -100,7 +101,7 @@ describe("DemoViewerComponent", () => {
     const viewer = el as any;
     expect(viewer.scope.found).toBe(false);
     expect(viewer.scope.notFound).toBe(false);
-    expect(el.textContent).toContain("Demo-Übersicht");
+    expect(el.textContent).toContain("demo overview");
   });
 
   it("switches the frame between the device widths", async () => {
@@ -137,7 +138,7 @@ describe("DemoViewerComponent", () => {
       { label: "https://example.org/issue", url: "https://example.org/issue" },
       { label: "#7", url: "https://github.com/ribajs/riba/issues/7" },
     ]);
-    expect(viewer.scope.statusMessage).toContain("fehlgeschlagen");
+    expect(viewer.scope.statusMessage).toContain("build of this demo failed");
   });
 
   it("survives a broken manifest snapshot", async () => {
@@ -146,5 +147,71 @@ describe("DemoViewerComponent", () => {
     const el = await renderViewer("?id=core-each-item");
     expect((el as any).scope.found).toBe(false);
     expect(el.querySelector('a[href="demos.html"]')).not.toBeNull();
+  });
+
+  describe("in German", () => {
+    const de = {
+      demos: { "core-each-item": { title: "Schleife", description: "Beschreibung" } },
+      ui: {
+        status: { ok: "live" },
+        viewer: {
+          none_selected_html: 'Keine Demo ausgewählt – <a href="demos.html">Demo-Übersicht</a>.',
+          reload: "Neu laden",
+          category: "Kategorie: {{ category }}",
+          status: "Status: {{ status }}",
+          status_message: { "build-failed": "Der Build ist fehlgeschlagen." },
+        },
+      },
+    };
+    let localesService: LocalesStaticService;
+
+    beforeEach(async () => {
+      // the i18n module is global state of the test page, so it is registered per test
+      I18nService.reset();
+      document.documentElement.lang = "en";
+      localesService = new LocalesStaticService(
+        { de },
+        { sourceLangcode: "en", langcodes: ["en", "de"] },
+      );
+      riba.module.register(i18nModule.init({ localesService }));
+      await localesService.init();
+    });
+
+    afterEach(() => I18nService.reset());
+
+    it("shows the English manifest text until German is active", async () => {
+      const viewer = (await renderViewer("?id=core-each-item")) as any;
+      expect(viewer.scope.title).toBe("core-each-item Demo");
+      expect(viewer.scope.description).toBe("Iterates a list.");
+      expect(viewer.scope.metaInfo).toBe("Category: core · 240 kB · Status: ok");
+    });
+
+    it("translates the manifest fields and the built texts, and switches back", async () => {
+      const el = await renderViewer("?id=core-each-item");
+      const viewer = el as any;
+      await localesService.setLangcode("de");
+      expect(viewer.scope.title).toBe("Schleife");
+      expect(viewer.scope.description).toBe("Beschreibung");
+      expect(viewer.scope.metaInfo).toBe("Kategorie: core · 240 kB · Status: live");
+      expect(el.textContent).toContain("Neu laden");
+      await localesService.setLangcode("en");
+      expect(viewer.scope.title).toBe("core-each-item Demo");
+      expect(el.textContent).toContain("Reload");
+    });
+
+    it("falls back to English for a demo without a translation", async () => {
+      const el = await renderViewer("?id=broken");
+      const viewer = el as any;
+      await localesService.setLangcode("de");
+      expect(viewer.scope.title).toBe("broken Demo");
+      expect(viewer.scope.statusMessage).toBe("Der Build ist fehlgeschlagen.");
+    });
+
+    it("translates the fallback for a missing id", async () => {
+      const el = await renderViewer("");
+      await localesService.setLangcode("de");
+      expect(el.textContent).toContain("Demo-Übersicht");
+      expect(el.querySelector('a[href="demos.html"]')).not.toBeNull();
+    });
   });
 });

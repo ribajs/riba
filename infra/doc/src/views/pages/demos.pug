@@ -12,11 +12,11 @@ block page-content
     // (infra/doc/_demos/manifest.json). Sorted by category, then title, so the
     // order is stable regardless of the build order of the demos. Demos without
     // a category end up in the "Sonstige" section.
-    const FALLBACK_CATEGORY = "Sonstige";
+    const FALLBACK_CATEGORY = "Other";
     const STATUS_BADGES = {
       ok: { label: "live", cls: "text-bg-success" },
-      skipped: { label: "übersprungen", cls: "text-bg-secondary" },
-      "build-failed": { label: "Build fehlgeschlagen", cls: "text-bg-danger" },
+      skipped: { label: "skipped", cls: "text-bg-secondary" },
+      "build-failed": { label: "build failed", cls: "text-bg-danger" },
     };
     const byTitle = (a, b) => String(a.title || a.id).localeCompare(String(b.title || b.id));
     const sortedDemos = (demos || [])
@@ -38,7 +38,7 @@ block page-content
     }
     const statusBadge = (demo) =>
       STATUS_BADGES[demo.status] || {
-        label: demo.status || "unbekannt",
+        label: demo.status || "unknown",
         cls: "text-bg-secondary",
       };
     const anchor = (category) =>
@@ -46,20 +46,27 @@ block page-content
 
   section.my-5#demos
     h2 Demos
-    p.text-muted
-      | Jeder Demo aus dem Monorepo wird mit
+    p.text-muted(rv-i18n-html="'ui.demos.intro_html'")
+      | Every demo of the monorepo is built with
+      |
       code yarn workspace @ribajs/doc build:demos
-      | gebaut und lässt sich hier direkt im Browser ausführen. Der Stand kommt aus dem Manifest dieses Builds.
+      |
+      | and can be run right here in the browser. The status comes from the manifest of this build.
 
   if !groups.length
-    p.alert.alert-info
-      | Keine Demos gefunden. Das Manifest fehlt oder ist leer – bitte zuerst
+    p.alert.alert-info(rv-i18n-html="'ui.demos.empty_html'")
+      | No demos found. The manifest is missing or empty – please run
+      |
       code yarn workspace @ribajs/doc build:demos
-      | ausführen.
+      |
+      | first.
 
   each group in groups
     section.my-5(id=anchor(group.category))
-      h2= group.category
+      if group.category === FALLBACK_CATEGORY
+        h2(rv-i18n-text="'ui.demos.other'")= group.category
+      else
+        h2= group.category
       .row
         each demo in group.demos
           .col-12.col-md-6.col-xl-4.mb-4
@@ -72,11 +79,11 @@ block page-content
               rv-class-opacity-50="demo.status === 'skipped'"
             )
               .card-body
-                h3.card-title.h5.mb-2= demo.title
-                p.card-text.text-muted.mb-2= demo.description
+                h3.card-title.h5.mb-2(rv-i18n-text="'demos." + demo.id + ".title'")= demo.title
+                p.card-text.text-muted.mb-2(rv-i18n-text="'demos." + demo.id + ".description'")= demo.description
                 p.mb-0
-                  span.badge(class=statusBadge(demo).cls)= statusBadge(demo).label
+                  span.badge(class=statusBadge(demo).cls rv-i18n-text="'ui.status." + (demo.status || 'unknown') + "'")= statusBadge(demo).label
                   if demo.knownIssues && demo.knownIssues.length
-                    span.badge.text-bg-warning.ms-1= demo.knownIssues.length + (demo.knownIssues.length === 1 ? " known issue" : " known issues")
+                    span.badge.text-bg-warning.ms-1(rv-i18n-text="'ui.demos.known_issues'" data-count=demo.knownIssues.length)= demo.knownIssues.length + (demo.knownIssues.length === 1 ? " known issue" : " known issues")
                   if demo.sizeKB
                     span.badge.text-bg-light.border.ms-1= demo.sizeKB + " kB"
