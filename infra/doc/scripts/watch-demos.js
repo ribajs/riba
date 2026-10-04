@@ -28,6 +28,8 @@ import { cp, rm } from 'node:fs/promises';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { resolveSiteBase } from './site-base.js';
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const docRoot = resolve(__dirname, '..');
 const projectRoot = resolve(docRoot, '../..');
@@ -52,21 +54,6 @@ const BUILD_TIMEOUT_MS = (() => {
   const raw = Number(process.env.RIBA_DEMO_BUILD_TIMEOUT);
   return Number.isFinite(raw) && raw > 0 ? raw * 1000 : 300_000;
 })();
-
-/**
- * URL base for the built demos. Kept identical to build-demos.js: VITE_BASE_PATH
- * when absolute, a plain root base otherwise.
- * @returns {string} base path starting with '/'
- */
-function resolveSiteBase() {
-  const fromEnv = process.env.VITE_BASE_PATH;
-  if (fromEnv && fromEnv.startsWith('/')) {
-    // Keep in sync with build-demos.js: no trailing slash would concatenate to
-    // `/subpathdemos/...` and silently break every asset URL.
-    return fromEnv.endsWith('/') ? fromEnv : `${fromEnv}/`;
-  }
-  return '/';
-}
 
 /**
  * All directories under demos/ that carry a package.json.
@@ -139,12 +126,16 @@ function killBuild(child) {
  * Kills a demo build by its --outDir marker, independently of the pid we
  * spawned. `yarn` spawns `vite build` as a grandchild, and a grandchild that
  * outlives its parent gets reparented to init and survives `kill(-pgid)` —
- * observed as a vite build blocked for hours at 0 % CPU. The marker is specific
- * to demo builds (they all carry the shared `_demos` output dir), so nothing
- * outside a demo build can match.
+ * observed as a vite build blocked for hours at 0 % CPU.
+ *
+ * @param {string} [outDir] The single demo's outDir. Passing it is what keeps
+ *   the sweep from killing healthy sibling builds: all demos share the `_demos`
+ *   parent, so a marker on the parent matches every running build. Omit it only
+ *   at startup, when none of our own builds are running yet.
  */
-function killStrayBuilds() {
-  const marker = `--outDir ${demosOutDir}`.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function killStrayBuilds(outDir) {
+  if (!outDir) return;
+  const marker = `--outDir ${outDir}`.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   try {
     spawnSync('pkill', ['-9', '-f', `vite build.*${marker}`], { stdio: 'ignore' });
   } catch {
@@ -218,7 +209,7 @@ function buildDemo(id, base) {
       stderr = `${stderr}\n[watch-demos] ${message}`.trim();
       killBuild(child);
       // The grandchild may survive its reparented group; sweep by outDir marker.
-      killStrayBuilds();
+      killStrayBuilds(outDir);
       finish(false, message, true);
     }, BUILD_TIMEOUT_MS);
     // Do not hold the event loop open just for this timer.
@@ -373,7 +364,8 @@ const base = resolveSiteBase();
 function main() {
   // A previous watcher that was killed hard can have left a deadlocked vite
   // build behind; those hold handles and pollute this run, so clear them first.
-  killStrayBuilds();
+  // No build of ours is running yet, so the whole output tree is fair game.
+  killStrayBuilds(demosOutDir);
 
   const ids = discoverDemos();
   if (ids.length === 0) {
