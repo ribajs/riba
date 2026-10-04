@@ -2,6 +2,7 @@ import { Component, ScopeBase } from "@ribajs/core";
 import { hasChildNodesTrim } from "@ribajs/utils/src/dom.js";
 
 import template from "./demo-viewer.component.html?raw";
+import { getLocalesService, uiText } from "../../ui-text.js";
 
 /** Where the demo sources live, used for the "source on GitHub" link. */
 const SOURCES_URL = "https://github.com/ribajs/riba/tree/main/demos";
@@ -34,12 +35,11 @@ export interface DemoIssue {
   url: string;
 }
 
-/** Notices for demos that have no build output to show. */
+/** Notices (English source) for demos that have no build output to show, keyed like `ui.viewer.status_message.<status>`. */
 const STATUS_MESSAGES: Record<string, string> = {
-  skipped:
-    "Dieser Demo ist als „skip“ markiert, deshalb gibt es kein iframe zu zeigen.",
+  skipped: 'This demo is marked "skip", so there is no iframe to show.',
   "build-failed":
-    "Der Build dieses Demos ist fehlgeschlagen, das iframe bleibt daher leer.",
+    "The build of this demo failed, so the iframe stays empty.",
 };
 
 /**
@@ -120,6 +120,9 @@ export interface Scope extends ScopeBase {
   notFound: boolean;
   requestedId: string;
   demo: DemoEntry;
+  /** Title and description in the active language, English from the manifest as the fallback */
+  title: string;
+  description: string;
   issues: DemoIssue[];
   hasIssues: boolean;
   statusMessage: string;
@@ -165,6 +168,8 @@ export class DemoViewerComponent extends Component {
       status: "",
       knownIssues: [],
     },
+    title: "",
+    description: "",
     issues: [],
     hasIssues: false,
     statusMessage: "",
@@ -191,8 +196,25 @@ export class DemoViewerComponent extends Component {
 
   protected async beforeBind() {
     this.loadDemoFromLocation();
+    const service = getLocalesService();
+    if (service) {
+      this.unsubscribes.push(
+        service.on("ready", this.onLanguageChange),
+        service.on("changed", this.onLanguageChange),
+      );
+    }
     await super.beforeBind();
   }
+
+  protected disconnectedCallback() {
+    this.unsubscribes.forEach((unsubscribe) => unsubscribe());
+    this.unsubscribes = [];
+    super.disconnectedCallback();
+  }
+
+  private unsubscribes: Array<() => void> = [];
+
+  private onLanguageChange = () => this.refreshTexts();
 
   /**
    * Switches the frame between mobile, tablet and full width.
@@ -222,6 +244,42 @@ export class DemoViewerComponent extends Component {
     return hasChildNodesTrim(this) ? null : template;
   }
 
+  /**
+   * The texts that depend on the manifest entry and the active language.
+   * The manifest holds the English title and description; a translation
+   * from the catalog (`demos.<id>.*`) replaces them.
+   */
+  private refreshTexts() {
+    const { demo } = this.scope;
+    if (!this.scope.found) {
+      return;
+    }
+    this.scope.title = uiText(`demos.${demo.id}.title`, demo.title);
+    this.scope.description = uiText(
+      `demos.${demo.id}.description`,
+      demo.description,
+    );
+    const message = STATUS_MESSAGES[demo.status];
+    this.scope.statusMessage = message
+      ? uiText(`ui.viewer.status_message.${demo.status}`, message)
+      : "";
+    const status = uiText(
+      `ui.status.${demo.status || "unknown"}`,
+      demo.status || "unknown",
+    );
+    this.scope.metaInfo = [
+      demo.category
+        ? uiText("ui.viewer.category", "Category: {{ category }}", {
+            category: demo.category,
+          })
+        : "",
+      demo.sizeKB ? `${demo.sizeKB} kB` : "",
+      uiText("ui.viewer.status", "Status: {{ status }}", { status }),
+    ]
+      .filter(Boolean)
+      .join(" \u00b7 ");
+  }
+
   /** Reads `?id=` from the URL right before the inner view binds (SPA-safe). */
   private loadDemoFromLocation() {
     const id =
@@ -247,16 +305,9 @@ export class DemoViewerComponent extends Component {
     this.scope.demo = demo;
     this.scope.issues = normalizeIssues(demo.knownIssues);
     this.scope.hasIssues = this.scope.issues.length > 0;
-    this.scope.statusMessage = STATUS_MESSAGES[demo.status] ?? "";
     this.scope.frameSrc = url;
     this.scope.standaloneUrl = `./${url}`;
     this.scope.sourceUrl = `${SOURCES_URL}/${demo.id}`;
-    this.scope.metaInfo = [
-      demo.category ? `Kategorie: ${demo.category}` : "",
-      demo.sizeKB ? `${demo.sizeKB} kB` : "",
-      `Status: ${demo.status || "unbekannt"}`,
-    ]
-      .filter(Boolean)
-      .join(" \u00b7 ");
+    this.refreshTexts();
   }
 }

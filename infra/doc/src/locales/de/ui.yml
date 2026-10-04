@@ -1,0 +1,67 @@
+# German UI strings of the doc site. English is the markup and needs no file.
+# Keys mirror the rv-i18n-* attributes in views/ and the uiText() calls in ts/.
+nav:
+  guide: Anleitung
+  demos: Demos
+  group-modules: Module
+  group-core: Core
+  core: Installation
+  core-binders: Binder
+  core-formatters: Formatter
+  core-components: Komponenten
+  group-router: Router
+  router: Erste Schritte
+  router-lifecycle: Lebenszyklus
+  router-transitions: Übergänge
+  router-hooks: Hooks
+  router-strategies: Strategien
+  router-recipes: Rezepte
+  router-binders: Binder
+  router-components: Komponenten
+  i18n: I18n
+  iconset: Iconset
+  jquery: jQuery
+  bs5: Bootstrap 5
+  extras: Extras
+  octobercms: OctoberCMS
+
+status:
+  ok: live
+  skipped: übersprungen
+  build-failed: Build fehlgeschlagen
+  unknown: unbekannt
+
+demos:
+  other: Sonstige
+  intro_html: >-
+    Jede Demo aus dem Monorepo wird mit
+    <code>yarn workspace @ribajs/doc build:demos</code> gebaut und lässt sich
+    hier direkt im Browser ausführen. Der Stand kommt aus dem Manifest dieses
+    Builds.
+  empty_html: >-
+    Keine Demos gefunden. Das Manifest fehlt oder ist leer – bitte zuerst
+    <code>yarn workspace @ribajs/doc build:demos</code> ausführen.
+  known_issues:
+    one: "{{ count }} bekannte Einschränkung"
+    other: "{{ count }} bekannte Einschränkungen"
+
+viewer:
+  none_selected_html: >-
+    Keine Demo ausgewählt – bitte eine aus der
+    <a href="demos.html">Demo-Übersicht</a> wählen.
+  not_found_before: Keine Demo mit der ID
+  not_found_after: gefunden.
+  back: Zurück zur Demo-Übersicht
+  known_issues: Bekannte Einschränkungen
+  width: Demo-Breite
+  mobile: "Mobil (375\u00a0px)"
+  tablet: "Tablet (768\u00a0px)"
+  full: Voll
+  reload: Neu laden
+  standalone: Standalone öffnen
+  source: Quellcode auf GitHub
+  category: "Kategorie: {{ category }}"
+  status: "Status: {{ status }}"
+  status_message:
+    skipped: Diese Demo ist als „skip“ markiert, deshalb gibt es kein iframe zu zeigen.
+    build-failed: Der Build dieser Demo ist fehlgeschlagen, das iframe bleibt daher leer.

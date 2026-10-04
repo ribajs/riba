@@ -1,21 +1,22 @@
 <!-- Fallback: no ?id= in the URL -->
-<div class="alert alert-info" rv-show="!requestedId">
-  Kein Demo ausgew&auml;hlt &ndash; bitte eines aus der
-  <a href="demos.html">Demo-&Uuml;bersicht</a> w&auml;hlen.
+<div class="alert alert-info" rv-show="!requestedId" rv-i18n-html="'ui.viewer.none_selected_html'">
+  No demo selected &ndash; please choose one from the
+  <a href="demos.html">demo overview</a>.
 </div>
 
 <!-- Fallback: unknown ?id= -->
 <!-- No <code> element here: CODE is in Riba's blockNodeNames, so a binder on a
      <code> element would never be bound. -->
 <div class="alert alert-warning" rv-show="notFound">
-  Kein Demo mit der ID
-  <span class="font-monospace" rv-text="requestedId"></span> gefunden.
-  <a href="demos.html">Zur&uuml;ck zur Demo-&Uuml;bersicht</a>.
+  <span rv-i18n-text="'ui.viewer.not_found_before'">No demo with the ID</span>
+  <span class="font-monospace" rv-text="requestedId"></span>
+  <span rv-i18n-text="'ui.viewer.not_found_after'">found.</span>
+  <a href="demos.html" rv-i18n-text="'ui.viewer.back'">Back to the demo overview</a>.
 </div>
 
 <div rv-show="found">
-  <h2 class="h4" rv-text="demo.title"></h2>
-  <p class="text-muted" rv-text="demo.description"></p>
+  <h2 class="h4" rv-text="title"></h2>
+  <p class="text-muted" rv-text="description"></p>
 
   <!-- Demos that are skipped or failed to build have no frame to show -->
   <div class="alert alert-warning" rv-show="statusMessage">
@@ -24,7 +25,7 @@
 
   <!-- Known issues, linked to the GitHub issues -->
   <div class="alert alert-warning" rv-show="hasIssues">
-    <strong>Bekannte Einschr&auml;nkungen</strong>
+    <strong rv-i18n-text="'ui.viewer.known_issues'">Known issues</strong>
     <ul class="mb-0">
       <li rv-each-issue="issues">
         <a
@@ -41,14 +42,14 @@
 
   <!-- Toolbar: device widths + actions -->
   <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
-    <div class="btn-group btn-group-sm" role="group" aria-label="Demo-Breite">
+    <div class="btn-group btn-group-sm" role="group" aria-label="Demo width" rv-i18n-aria-label="'ui.viewer.width'">
       <button
         type="button"
         class="btn btn-outline-secondary"
         rv-class-active="isMobile"
         rv-on-click="setWidth | args 375"
       >
-        Mobil (375&nbsp;px)
+        <span rv-i18n-text="'ui.viewer.mobile'">Mobile (375&nbsp;px)</span>
       </button>
       <button
         type="button"
@@ -56,7 +57,7 @@
         rv-class-active="isTablet"
         rv-on-click="setWidth | args 768"
       >
-        Tablet (768&nbsp;px)
+        <span rv-i18n-text="'ui.viewer.tablet'">Tablet (768&nbsp;px)</span>
       </button>
       <button
         type="button"
@@ -64,7 +65,7 @@
         rv-class-active="isFull"
         rv-on-click="setWidth | args 0"
       >
-        Voll
+        <span rv-i18n-text="'ui.viewer.full'">Full</span>
       </button>
     </div>
     <button
@@ -72,7 +73,7 @@
       class="btn btn-outline-secondary btn-sm"
       rv-on-click="reload"
     >
-      Neu laden
+      <span rv-i18n-text="'ui.viewer.reload'">Reload</span>
     </button>
     <a
       class="btn btn-outline-secondary btn-sm"
@@ -80,7 +81,7 @@
       target="_blank"
       rel="noopener noreferrer"
     >
-      Standalone &ouml;ffnen
+      <span rv-i18n-text="'ui.viewer.standalone'">Open standalone</span>
     </a>
     <a
       class="btn btn-outline-secondary btn-sm"
@@ -88,7 +89,7 @@
       target="_blank"
       rel="noopener noreferrer"
     >
-      Quellcode auf GitHub
+      <span rv-i18n-text="'ui.viewer.source'">Source code on GitHub</span>
     </a>
   </div>
 
