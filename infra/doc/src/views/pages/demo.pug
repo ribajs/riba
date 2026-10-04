@@ -1,0 +1,18 @@
+extends ../layouts/page
+
+block append head
+  - pageTitle = "Demo"
+
+block title
+  | Demo
+
+block page-content
+  //- Manifest snapshot for rv-demo-viewer. The page is built statically, so the
+  //- `?id=` query cannot be resolved at build time; the viewer looks the demo up
+  //- in this snapshot in the browser. "</script" is escaped (a valid JSON string
+  //- escape) so demo descriptions can never break out of the script element.
+  script(type="application/json" id="demos-manifest")!= JSON.stringify(demos || []).replace(/<\/script/gi, '<\\/script')
+
+  section.my-5#demo
+    h2 Demo
+    rv-demo-viewer
