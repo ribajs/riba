@@ -1,55 +1,26 @@
-import { LocalesService } from "../types/locales-service.js";
+import type { Catalog, LocalesOptions, MessageTree } from "../types/index.js";
+import { LocalesService } from "./locales.service.js";
 
+/**
+ * Messages of all languages that are already in memory, e.g. bundled with the app
+ */
 export class LocalesStaticService extends LocalesService {
-  public static instances: {
-    [id: string]: LocalesStaticService;
-  } = {};
-
-  public static getInstance(id = "main") {
-    return LocalesStaticService.instances[id];
-  }
-
-  /**
-   * The current defined langcode
-   */
-  protected currentLangcode?: string;
-
-  /**
-   * The default theme langcode before any language was chosen
-   */
-  protected initialLangcode?: string;
-
   constructor(
-    protected locales: any,
-    protected id?: string,
-    doNotRetranslateDefaultLanguage = false,
-    showMissingTranslation = false,
-    autoDetectLangcode = false,
+    protected catalog: Catalog,
+    options: LocalesOptions = {},
   ) {
-    super(
-      doNotRetranslateDefaultLanguage,
-      showMissingTranslation,
-      autoDetectLangcode,
-    );
-    if (!id) {
-      id = "main";
+    super(options);
+    if (!this.langcodes.length) {
+      this.langcodes = Object.keys(catalog);
     }
-
-    this.locales = locales;
-
-    if (LocalesStaticService.instances[id]) {
-      return LocalesStaticService.instances[id];
+    // everything is in memory already, so any language can be read without a switch
+    for (const [langcode, tree] of Object.entries(catalog)) {
+      this.trees.set(langcode, tree);
+      this.loaded.add(langcode);
     }
-
-    this.init();
-    LocalesStaticService.instances[id] = this;
   }
 
-  /**
-   * Get file with all languages
-   * @param themeID
-   */
-  protected async getAll(/*themeID?: number*/) {
-    return this.locales;
+  protected async load(langcode: string): Promise<MessageTree | undefined> {
+    return this.catalog[langcode];
   }
 }

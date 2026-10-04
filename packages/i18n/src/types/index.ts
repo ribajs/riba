@@ -1,4 +1,4 @@
 export * from "./langcode.js";
-export * from "./local-var.js";
-export * from "./locales-service.js";
+export * from "./message-tree.js";
+export * from "./options.js";
 export * from "./module-options.js";

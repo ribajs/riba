@@ -1,6 +1,7 @@
 import { TemplateFunction, Component, ScopeBase } from "@ribajs/core";
-import { I18nService } from "../../services/index.js";
-import { LocalesService, Langcode } from "../../types/index.js";
+import { I18nService } from "../../services/i18n.service.js";
+import type { LocalesService } from "../../services/locales.service.js";
+import type { Langcode } from "../../types/index.js";
 
 export interface Scope extends ScopeBase {
   langcodes: Langcode[];
@@ -19,7 +20,7 @@ export class I18nSwitcherComponent extends Component {
   }
 
   protected localesService?: LocalesService;
-  protected initializedLocales = false;
+  protected unsubscribes: Array<() => void> = [];
 
   public scope: Scope = {
     langcodes: [],
@@ -34,7 +35,9 @@ export class I18nSwitcherComponent extends Component {
   }
 
   protected setLangcode(langcode: string) {
-    this.localesService?.setLangcode(langcode);
+    this.localesService?.setLangcode(langcode).catch((error: unknown) => {
+      console.error(error);
+    });
   }
 
   protected requiredAttributes(): string[] {
@@ -42,28 +45,20 @@ export class I18nSwitcherComponent extends Component {
   }
 
   protected disconnectedCallback() {
-    this.localesService?.event.off("ready", this.onLocalesReady, this);
-    this.localesService?.event.off("changed", this.onLanguageChanged, this);
+    this.unsubscribes.forEach((unsubscribe) => unsubscribe());
+    this.unsubscribes = [];
     super.disconnectedCallback();
   }
 
   protected async beforeBind() {
     await super.beforeBind();
 
-    this.localesService = I18nService.options.localesService;
-
-    if (!this.localesService) {
-      throw new Error("LocalesService not defined!");
-    }
-
-    if (this.localesService.ready) {
-      const langcode = this.localesService.getLangcode();
-      if (langcode) {
-        return await this.initLocales(langcode);
-      }
-    } else {
-      this.localesService?.event.on("ready", this.onLocalesReady, this);
-    }
+    this.localesService = I18nService.getLocalesService();
+    this.unsubscribes.push(
+      this.localesService.on("ready", this.refresh),
+      this.localesService.on("changed", this.refresh),
+    );
+    this.refresh();
   }
 
   protected template(): ReturnType<TemplateFunction> {
@@ -95,56 +90,18 @@ export class I18nSwitcherComponent extends Component {
       event.preventDefault();
       event.stopPropagation();
     }
-    for (const i in this.scope.langcodes) {
-      if (Object.prototype.hasOwnProperty.call(this.scope.langcodes, i)) {
-        if (this.scope.langcodes[i].active !== true) {
-          this.setLangcode(this.scope.langcodes[i].code);
-          return;
-        }
-      }
+    const next = this.scope.langcodes.find((langcode) => !langcode.active);
+    if (next) {
+      this.setLangcode(next.code);
     }
   }
 
-  protected onLocalesReady = async (
-    langcode: string /*, translationNeeded: boolean*/,
-  ) => {
-    await this.initLocales(langcode);
-  };
-
-  protected onLanguageChanged = (
-    changedLangcode: string /*, initial: boolean*/,
-  ) => {
-    // Activate localcode and disable the other
-    this.scope.langcodes.forEach((langCode) => {
-      langCode.active = langCode.code === changedLangcode;
-    });
-  };
-
-  protected async initLocales(langcode: string) {
+  /** The languages are configured on the service, only the active one changes */
+  protected refresh = () => {
     if (!this.localesService) {
-      throw new Error("LocalesService not defined!");
+      return;
     }
-
-    // set available langcodes
-    const langcodes = await this.localesService.getAvailableLangcodes();
-
-    if (!langcodes) {
-      throw new Error("No lancodes found!");
-    }
-
-    this.scope.langcodes = langcodes;
-    // set active langcodes
-    this.scope.langcodes.forEach((langCode) => {
-      langCode.active = langCode.code === langcode;
-    });
-
-    if (!this.initializedLocales) {
-      this.localesService.event.on("changed", this.onLanguageChanged, this);
-      this.initializedLocales = true;
-    }
-    this.localesService.event.off("ready", this.onLocalesReady, this);
-
-    this.scope.ready = true;
-    return this.scope.langcodes;
-  }
+    this.scope.langcodes = this.localesService.getAvailableLangcodes();
+    this.scope.ready = this.localesService.ready;
+  };
 }

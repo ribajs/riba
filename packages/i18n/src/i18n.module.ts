@@ -11,10 +11,14 @@ export const i18nModule: RibaModule<I18nModuleOptions> = {
   formatters,
   services,
   init(options) {
-    if (!options) {
-      throw new Error("[i18nModule] Module options required!");
+    if (!options?.localesService) {
+      throw new Error("[i18nModule] Module option localesService required!");
     }
     services.I18nService.setSingleton(options);
+    // The service emits "error" itself, this keeps the rejection from going unhandled
+    options.localesService.init().catch((error: unknown) => {
+      console.error("[i18nModule] The locales service failed to start", error);
+    });
     return this;
   },
 };
