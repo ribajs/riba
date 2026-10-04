@@ -32,3 +32,25 @@ Hotlinking demos that load imgur images must send no referrer (`<meta name="refe
 
   The viewer shows a banner with the link, and the smoke gate reports its findings as `known`
   instead of failing. `skip: true` leaves a demo out of the build entirely.
+
+## Languages
+
+English is the markup of every page, so the site is complete without a translation. A translation is
+a catalog (`_site/locales/<lang>.json`) that the i18n module loads once the language is active
+(`?lang=de`, the switcher in the navbar, or the browser language; the choice is remembered). A text
+without a translation stays English. The catalogs are built from these sources, only languages with
+content get a file:
+
+| Source | Becomes |
+|---|---|
+| `demos/<id>/README.<lang>.md` | Title and description of the demo card and viewer (`demos.<id>.*`); `README.md` stays the English source |
+| `src/doc/**/<page>.<lang>.md` next to `<page>.md` | The translated page, rendered with the same markdown rules (`md.<page>`); `md()` wraps a page in `rv-i18n-html` only when a sibling exists |
+| `src/locales/<lang>/<name>.yml` | UI strings under `<name>.*` (`ui.yml` holds navigation, gallery and viewer texts) |
+
+Markup asks for a UI string with `rv-i18n-text="'ui.some.key'"` (the English text stays inside the
+element), scripts with `uiText('ui.some.key', 'English text')`. Add the key to `src/locales/<lang>/ui.yml`.
+
+`yarn workspace @ribajs/doc check:locales` (part of `check`, and of the deploy workflow) fails on a
+translation without an English sibling, a translated page no page renders, an orphan key, a `{{ placeholder }}`
+that differs from the English text, a demo without an English description and invalid YAML or JSON.
+`build:demos` fails for a demo without an English `README.md` title and first paragraph.

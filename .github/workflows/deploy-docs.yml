@@ -34,6 +34,8 @@ jobs:
       run: yarn workspace @ribajs/doc run build:demos
     - name: Build documentation
       run: yarn workspace @ribajs/doc run build
+    - name: Check translations
+      run: yarn workspace @ribajs/doc run check:locales
     - name: Install Playwright Chromium
       run: yarn playwright install --with-deps chromium
     - name: Smoke-test demos
