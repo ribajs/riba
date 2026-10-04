@@ -18,6 +18,8 @@ import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from '
 import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { resolveSiteBase } from './site-base.js';
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const docRoot = resolve(__dirname, '..');
 const projectRoot = resolve(docRoot, '../..');
@@ -40,22 +42,6 @@ const BUILD_TIMEOUT_MS = (() => {
   const raw = Number(process.env.RIBA_DEMO_BUILD_TIMEOUT);
   return Number.isFinite(raw) && raw > 0 ? raw * 1000 : 300_000;
 })();
-
-/**
- * URL base for the built demos.
- * VITE_BASE_PATH is also read by the doc's own vite.config.js; when it is unset
- * the doc uses a relative base, so the demos fall back to a plain root base.
- * @returns {string} base path starting with '/'
- */
-function resolveSiteBase() {
-  const fromEnv = process.env.VITE_BASE_PATH;
-  if (fromEnv && fromEnv.startsWith('/')) {
-    // A base without a trailing slash would be concatenated to `demos/<id>/`
-    // as `/subpathdemos/...`, which silently breaks every asset URL.
-    return fromEnv.endsWith('/') ? fromEnv : `${fromEnv}/`;
-  }
-  return '/';
-}
 
 /**
  * All directories under demos/ that carry a package.json.
@@ -306,8 +292,11 @@ function killBuild(child) {
  * specific to this script (every demo build carries the shared `_demos` output
  * dir), so nothing outside a demo build can match.
  */
-function killStrayBuilds() {
-  const marker = `--outDir ${demosOutDir}`.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function killStrayBuilds(outDir) {
+  if (!outDir) return;
+  // The marker must name the single demo: every demo shares the `_demos`
+  // parent, so a sweep on the parent would kill healthy sibling builds too.
+  const marker = `--outDir ${outDir}`.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   try {
     spawnSync('pkill', ['-9', '-f', `vite build.*${marker}`], { stdio: 'ignore' });
   } catch {
@@ -384,7 +373,7 @@ function buildDemo(id, base) {
       stderr = `${stderr}\n[build-demos] ${message}`.trim();
       killBuild(child);
       // The grandchild may survive its reparented group; sweep by outDir marker.
-      killStrayBuilds();
+      killStrayBuilds(outDir);
       finish(false, message, true);
     }, BUILD_TIMEOUT_MS);
     // Do not hold the event loop open just for this timer.
@@ -471,7 +460,8 @@ async function buildEntry(id, base) {
 async function main() {
   // A previous run that was interrupted may have left a deadlocked vite build
   // behind; those hold handles and pollute this run, so clear them first.
-  killStrayBuilds();
+  // Nothing of ours is running yet, so the whole output tree is fair game.
+  killStrayBuilds(demosOutDir);
   const ids = discoverDemos();
   if (ids.length === 0) {
     console.error(`[build-demos] no demos with a package.json found in ${demosSrcDir}`);
