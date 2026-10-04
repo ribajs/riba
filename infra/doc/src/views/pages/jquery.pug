@@ -9,11 +9,11 @@ block title
 block page-content
 
   section.my-5
-    include:markdown-it(html) ../../../../../packages/jquery/README.md
+    != md('../../../../packages/jquery/README.md')
 
   section.my-5#binders
     h2 Binders
 
     section.my-5#on-event
       h3 on-[event]
-      include:markdown-it(html) ../../doc/reference/jquery/binders/on-[event].md
+      != md('reference/jquery/binders/on-[event].md')

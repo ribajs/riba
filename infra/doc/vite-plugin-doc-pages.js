@@ -4,8 +4,8 @@ import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
 import yaml from 'js-yaml';
 import pug from 'pug';
-import { marked } from 'marked';
 import Prism from 'prismjs';
+import { md } from './scripts/doc-markdown.js';
 
 // Load additional Prism languages
 import 'prismjs/components/prism-javascript.js';
@@ -39,15 +39,11 @@ function loadYaml(contentDir, name) {
 }
 
 /**
- * Pug filters for markdown-it and prismjs includes.
- * These match the existing template syntax:
- *   include:markdown-it(html) ../../doc/guide/install.md
+ * Pug filters for prismjs includes, matching the template syntax
  *   include:prismjs(language='typescript') ../../demos/...
+ * Markdown pages go through the `md()` helper instead, see scripts/doc-markdown.js.
  */
 const pugFilters = {
-  'markdown-it': (text, options) => {
-    return marked.parse(text, { async: false });
-  },
   'prismjs': (text, options) => {
     const lang = options.language || 'markup';
     const grammar = Prism.languages[lang] || Prism.languages.markup;
@@ -111,12 +107,15 @@ function loadLocals(contentDir, projectRoot) {
     // fallback
   }
 
+  const roots = { docDir: resolve(contentDir, '..', 'doc'), projectRoot };
+
   return {
     site,
     navigation,
     icons,
     riba,
     demos: loadDemos(),
+    md: (path) => md(path, roots),
   };
 }
 
@@ -172,7 +171,7 @@ function compilePages(options) {
 /**
  * Vite plugin: compile Pug pages to HTML and register them as multi-page entries.
  * Adapted from das-frittierwerk/vite-plugin-pug-pages.js with doc-specific extensions:
- * - Custom Pug filters for markdown-it and prismjs
+ * - Custom Pug filter for prismjs and the md() markdown helper
  * - Loads icons and riba version as Pug locals
  * - Watches doc/ directory for markdown changes
  */

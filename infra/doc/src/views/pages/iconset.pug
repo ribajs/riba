@@ -10,7 +10,7 @@ block page-content
 
   section.my-5#icons
     h2 Icons
-    include:markdown-it(html) ../../doc/reference/iconset/icons.md
+    != md('reference/iconset/icons.md')
   .row
     if icons && icons.length
       each icon in icons

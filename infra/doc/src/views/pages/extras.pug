@@ -9,23 +9,23 @@ block title
 block page-content
 
   section.my-5
-    include:markdown-it(html) ../../../../../packages/extras/README.md
+    != md('../../../../packages/extras/README.md')
 
   section.my-5#binders
     h2 Binders
 
     section.my-5#data-scroll-position-y-binder
       h3 data-scroll-position-y
-      include:markdown-it(html) ../../doc/reference/extras/binders/data-scroll-position-y.md
+      != md('reference/extras/binders/data-scroll-position-y.md')
 
     section.my-5#touch-events-binder
       h3 touch-events
-      include:markdown-it(html) ../../doc/reference/extras/binders/touch-events.md
+      != md('reference/extras/binders/touch-events.md')
       include ../../doc/demos/extras-touch-events
 
     section.my-5#scroll-events-binder
       h3 scroll-events
-      include:markdown-it(html) ../../doc/reference/extras/binders/scroll-events.md
+      != md('reference/extras/binders/scroll-events.md')
       include ../../doc/demos/extras-scroll-events
 
   section.my-5#services
@@ -34,9 +34,9 @@ block page-content
     section.my-5#touch-events-service
       h3 TouchEventsService
       section
-        include:markdown-it(html) ../../doc/reference/extras/services/touch-events-service.md
+        != md('reference/extras/services/touch-events-service.md')
 
     section.my-5#scroll-events-service
       h3 ScrollEventsService
       section
-        include:markdown-it(html) ../../doc/reference/extras/services/scroll-events-service.md
+        != md('reference/extras/services/scroll-events-service.md')

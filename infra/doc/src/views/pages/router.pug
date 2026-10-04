@@ -11,22 +11,22 @@ block page-content
   section.my-5#about
     h2 About
     section
-      include:markdown-it(html) ../../doc/reference/router/about.md
+      != md('reference/router/about.md')
 
   section.my-5#install
     h2 Install
     section
-      include:markdown-it(html) ../../doc/reference/router/install.md
+      != md('reference/router/install.md')
 
   section.my-5#markup
     h2 Markup and Basic Transition
     section
-      include:markdown-it(html) ../../doc/reference/router/basic-transition.md
+      != md('reference/router/basic-transition.md')
 
   section.my-5#events
     h2 Events
     section
-      include:markdown-it(html) ../../doc/reference/router/events.md
+      != md('reference/router/events.md')
 
   section.my-5#next-steps
     h2 Next Steps

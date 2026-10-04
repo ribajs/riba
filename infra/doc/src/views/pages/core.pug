@@ -9,7 +9,7 @@ block title
 block page-content
 
   section.my-5
-    include:markdown-it(html) ../../../../../packages/core/README.md
+    != md('../../../../packages/core/README.md')
 
   section.my-5#submodules
     h2 Submodules

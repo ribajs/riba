@@ -8,6 +8,6 @@ rv-bind-content
       template(title="index.html", type="source")
         include:prismjs(language = 'html') ../../../../../demos/core-each-item/src/index.html
       template(title="Info", type="info")
-        include:markdown-it(html) ../../../../../demos/core-each-item/README.md
+        != md('../../../../demos/core-each-item/README.md')
       template(title="Preview", type="preview")
         rv-each-item-example 
