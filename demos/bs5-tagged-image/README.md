@@ -1,8 +1,8 @@
 # bs5-tagged-image Demo
 
-Demonstriert die `bs5-tagged-image`-Komponente, die es erlaubt, Bilder mit klickbaren Positions-Tags zu versehen, die Bootstrap-5-Popovers mit Titeln und Inhalten öffnen. Das Demo zeigt verschiedene Varianten wie responsive Cover/Contain-Layouts, Bootstrap-Farben, unterschiedliche Formen sowie die Integration in ein Karussell und einen Slideshow-Kontext.
+Demonstrates the `bs5-tagged-image` component, which allows images to be marked with clickable position tags that open Bootstrap 5 popovers with titles and contents. The demo shows different variants such as responsive cover/contain layouts, Bootstrap colors, different shapes as well as the integration into a carousel and a slideshow context.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

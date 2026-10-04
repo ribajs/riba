@@ -1,8 +1,8 @@
 # bs5-slideshow Demo
 
-Demonstriert die `bs5-slideshow`-Komponente als flexibles Bootstrap-5-Karussell mit verschiedenen Konfigurationen: Einzelbild, mehrere gleichzeitig sichtbare Folien, variable Breiten, Autoplay, Beschriftungen, responsives Verhalten, benutzerdefinierte Templates für Steuerelemente und Indikatoren sowie die Übergabe von Folien als Attribut.
+Demonstrates the `bs5-slideshow` component as a flexible Bootstrap 5 carousel with various configurations: single image, several slides visible at the same time, variable widths, autoplay, captions, responsive behaviour, custom templates for controls and indicators as well as passing slides in as an attribute.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

@@ -1,8 +1,8 @@
 # podcast Demo
 
-Demonstriert den Podlove Web Player als Riba.js-Komponente (`@ribajs/podcast`) mit echten Podcast-Episodendaten. Der Demo enthält einen vollständigen eingebetteten Player mit Kapitelmarken, Transkripten und Mitwirkenden sowie einen `podlove-play-button` zum Starten einer weiteren Episode.
+Demonstrates the Podlove Web Player as a Riba.js component (`@ribajs/podcast`) with real podcast episode data. The demo contains a fully embedded player with chapter marks, transcripts and contributors as well as a `podlove-play-button` to start another episode.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

@@ -1,8 +1,8 @@
 # content-slider Demo
 
-Demonstriert die `content-slider`-Komponente, einen Slider, bei dem jede Folie ein Hintergrundbild sowie beliebigen HTML-Inhalt (Titel, Text, Links) enthält. Es werden zwei Konfigurationen gezeigt: eine mit Standardwerten und eine mit angepassten Spaltenklassen und eigenen Pfeil-Icons, um die Anpassbarkeit des Sliders zu illustrieren.
+Demonstrates the `content-slider` component, a slider in which each slide contains a background image as well as arbitrary HTML content (title, text, links). Two configurations are shown: one with default values and one with custom column classes and custom arrow icons, to illustrate the customizability of the slider.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

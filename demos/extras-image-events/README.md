@@ -1,8 +1,8 @@
 # extras-image-events Demo
 
-Demonstriert Bild-Ladeereignisse (`load`, `error`, `binder-changed`) über Ribas Binding-System, indem ein Bild angezeigt wird, das per Knopfdruck durch ein zufälliges ersetzt werden kann. Alle ausgelösten Events werden mit Zeitstempel in einer Live-Konsole protokolliert.
+Demonstrates image load events (`load`, `error`, `binder-changed`) via Riba's binding system by displaying an image that can be replaced with a random one at the press of a button. All triggered events are logged with a timestamp in a live console.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

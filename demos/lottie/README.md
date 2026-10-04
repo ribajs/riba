@@ -1,8 +1,8 @@
 # lottie Demo
 
-Zeigt verschiedene Konfigurationsmöglichkeiten des Lottie-Animationsplayers (`@ribajs/lottie`) in Riba.js. Die Demo umfasst das Abspielen von Animationen per URL oder JSON-Objekt, verschiedene Abspiel-Modi (Bounce, Hover, Loop), Hintergrundfarben, benutzerdefiniertes Styling und Event-Handler.
+Shows the various configuration options of the Lottie animation player (`@ribajs/lottie`) in Riba.js. The demo covers playing animations by URL or JSON object, different playback modes (Bounce, Hover, Loop), background colors, custom styling and event handlers.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

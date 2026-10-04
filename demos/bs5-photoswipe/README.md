@@ -1,8 +1,8 @@
 # bs5-photoswipe Demo
 
-Demonstriert eine Foto-Galerie-Lightbox mit zufälligen Bildern von picsum.photos, die in einem Masonry-Grid dargestellt werden und per Klick eine vollbildfähige Lightbox mit Zoom-, Teilen- und Navigationssteuerung öffnen.
+Demonstrates a photo gallery lightbox with random images from picsum.photos, which are laid out in a masonry grid and open a full-screen capable lightbox with zoom, share and navigation controls on click.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

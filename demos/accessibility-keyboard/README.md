@@ -1,8 +1,8 @@
 # accessibility-keyboard Demo
 
-Zeigt eine virtuelle Bildschirmtastatur mit Unterstützung für zahlreiche internationale Layouts (Englisch, Deutsch, Arabisch, Japanisch u. v. m.), die über ein Dropdown-Menü umgeschaltet werden können.
+Shows a virtual on-screen keyboard that supports numerous international layouts (English, German, Arabic, Japanese and many more), which can be switched via a dropdown menu.
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git

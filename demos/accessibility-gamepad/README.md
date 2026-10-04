@@ -1,8 +1,8 @@
 # accessibility-gamepad Demo
 
-Stellt einen visuellen SNES-Controller dar, der Echtzeit-Gamepad-Eingaben über die Gamepad-API empfängt und die aktiven Tasten (A, B, X, Y, D-Pad usw.) interaktiv hervorhebt.
+Renders a visual SNES controller that receives real-time gamepad input via the Gamepad API and interactively highlights the currently pressed buttons (A, B, X, Y, D-pad, etc.).
 
-## Starten
+## Getting started
 
 ```bash
 git clone --recurse-submodules https://github.com/ribajs/riba.git
