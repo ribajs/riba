@@ -45,6 +45,10 @@ describe.skipIf(!SITE_EXISTS)("Build output", () => {
     it.each(EXPECTED_PAGES)("generates %s", (page) => {
       expect(existsSync(resolve(SITE_DIR, page))).toBe(true);
     });
+
+    it("ships the demo manifest", () => {
+      expect(existsSync(resolve(SITE_DIR, "demos/manifest.json"))).toBe(true);
+    });
   });
 
   describe("Layout structure", () => {
