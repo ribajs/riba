@@ -13,9 +13,9 @@ Every `demos/*` package with a `package.json` is built into `_demos/<id>/` and c
 | `yarn workspace @ribajs/doc build:demos` | Build all demos (4 in parallel, per-demo timeout, one retry) and write `_demos/manifest.json` |
 | `yarn workspace @ribajs/doc build` | Build the site; copies `_demos` to `_site/demos` |
 | `yarn workspace @ribajs/doc smoke:demos` | Load every demo in headless Chromium; writes `_smoke/report.json` + screenshots, exits 1 on any unexplained finding |
-| `yarn workspace @ribajs/doc start:live` | Site + demo watcher + preview on `http://localhost:4173` |
+| `yarn workspace @ribajs/doc start:live` | Site + demo watcher + preview on `http://127.0.0.1:4173` |
 
-Use `localhost`, not `127.0.0.1`: imgur answers hotlinked images with 403 when the `Referer` is an IP literal.
+Hotlinking demos that load imgur images must send no referrer (`<meta name="referrer" content="no-referrer">`): imgur answers 403 when the `Referer` is an IP literal such as `127.0.0.1`.
 
 ### Authoring rules for demos
 
