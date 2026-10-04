@@ -4,6 +4,8 @@
 /infra/*/dist/
 !infra/webpack-serve/dist/
 /packages/*/dist/
+/infra/doc/_demos/
+/infra/doc/_smoke/
 /demos/*/dist
 /demos/*/public/iconset
 node_modules/
