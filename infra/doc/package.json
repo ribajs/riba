@@ -9,6 +9,7 @@
     "build": "vite build --mode production",
     "build:dev": "vite build --mode development",
     "build:demos": "node scripts/build-demos.js",
+    "smoke:demos": "node scripts/smoke-demos.mjs",
     "watch": "node scripts/watch.js",
     "watch:demos": "node scripts/watch-demos.js",
     "start": "concurrently 'yarn:watch' 'yarn:preview'",
