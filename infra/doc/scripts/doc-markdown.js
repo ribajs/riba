@@ -6,9 +6,9 @@
  * as `guide/install.<lang>.md`; the language tag follows the usual `de`,
  * `de-AT` shape.
  */
-import { existsSync, readFileSync, readdirSync } from "node:fs";
-import { basename, dirname, join, relative, resolve, sep } from "node:path";
-import { marked } from "marked";
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { basename, dirname, join, relative, resolve, sep } from 'node:path';
+import { marked } from 'marked';
 
 const LANG_FILE = /^(.+)\.([a-z]{2,3}(?:-[A-Za-z0-9]+)*)\.md$/;
 
@@ -26,8 +26,8 @@ export function renderMarkdown(text) {
  */
 export function markdownKey(file, { docDir, projectRoot }) {
   const fromDoc = relative(docDir, file);
-  const rel = fromDoc.startsWith("..") ? relative(projectRoot, file) : fromDoc;
-  return rel.split(sep).join("/").replace(/\.md$/, "");
+  const rel = fromDoc.startsWith('..') ? relative(projectRoot, file) : fromDoc;
+  return rel.split(sep).join('/').replace(/\.md$/, '');
 }
 
 /**
@@ -37,7 +37,7 @@ export function markdownKey(file, { docDir, projectRoot }) {
  */
 export function translationsOf(file) {
   const dir = dirname(file);
-  const stem = basename(file, ".md");
+  const stem = basename(file, '.md');
   if (!existsSync(dir)) return [];
   const langs = [];
   for (const name of readdirSync(dir)) {
@@ -58,7 +58,7 @@ export function findTranslatedMarkdown(rootDir) {
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
       const full = join(dir, entry.name);
       if (entry.isDirectory()) {
-        if (entry.name !== "node_modules") walk(full);
+        if (entry.name !== 'node_modules') walk(full);
         continue;
       }
       const match = LANG_FILE.exec(entry.name);
@@ -84,7 +84,7 @@ export function findTranslatedMarkdown(rootDir) {
  */
 export function md(path, roots) {
   const file = resolve(roots.docDir, path);
-  const html = renderMarkdown(readFileSync(file, "utf8"));
+  const html = renderMarkdown(readFileSync(file, 'utf8'));
   if (translationsOf(file).length === 0) return html;
   const key = markdownKey(file, roots);
   return `<div class="md-i18n" rv-i18n-html="'md.${key}'">${html}</div>`;
