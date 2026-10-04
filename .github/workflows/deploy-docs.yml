@@ -30,8 +30,14 @@ jobs:
         cache: "yarn"
     - name: Install dependencies
       run: yarn install
+    - name: Build demos
+      run: yarn workspace @ribajs/doc run build:demos
     - name: Build documentation
       run: yarn workspace @ribajs/doc run build
+    - name: Install Playwright Chromium
+      run: yarn playwright install --with-deps chromium
+    - name: Smoke-test demos
+      run: yarn workspace @ribajs/doc run smoke:demos
     - name: Setup Pages
       uses: actions/configure-pages@v5
     - name: Upload artifact
