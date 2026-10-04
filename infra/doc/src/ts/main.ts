@@ -5,11 +5,11 @@ ready(async () => {
   const { Riba, coreModule } = await import("@ribajs/core");
   const { extrasModule } = await import("@ribajs/extras");
   const { routerModule } = await import("@ribajs/router");
-  const { i18nModule, LocalesStaticService } = await import("@ribajs/i18n");
+  const { i18nModule } = await import("@ribajs/i18n");
   const { bs5Module } = await import("@ribajs/bs5");
   const { EventDispatcher } = await import("@ribajs/events");
   const { DocModule } = await import("./doc.module.js");
-  const { docI18nLocales } = await import("./doc-i18n-locales.js");
+  const { DocLocalesService } = await import("./doc-locales.service.js");
   const { createSlideTransitions } = await import(
     "@ribajs/demo-router-slide-transition",
   );
@@ -57,11 +57,18 @@ ready(async () => {
       transitions: [...slideDemoTransitions],
     }),
   );
-  riba.module.register(
-    i18nModule.init({
-      localesService: new LocalesStaticService(docI18nLocales),
-    }),
+  // English is the markup; German comes from locales/de.json once it is active.
+  // A relative base ("./") resolves against the page, which sits at the site root.
+  const localesService = new DocLocalesService(
+    (langcode) => `${import.meta.env.BASE_URL}locales/${langcode}.json`,
+    {
+      sourceLangcode: "en",
+      langcodes: ["en", "de"],
+      detect: ["query", "storage", "navigator"],
+      persist: true,
+    },
   );
+  riba.module.register(i18nModule.init({ localesService }));
   riba.module.register(bs5Module.init());
   riba.module.register(DocModule.init());
 
@@ -119,6 +126,11 @@ ready(async () => {
       document.body.style.overflow = "";
     },
   );
+
+  // Translated markdown arrives as html after the first highlighting
+  localesService.on("changed", () => {
+    requestAnimationFrame(() => Prism.highlightAll());
+  });
 
   riba.bind(document.body, model);
 

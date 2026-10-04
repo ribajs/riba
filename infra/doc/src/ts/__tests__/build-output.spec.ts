@@ -111,7 +111,8 @@ describe.skipIf(!SITE_EXISTS)("Build output", () => {
         "OctoberCMS",
       ];
       for (const link of expectedLinks) {
-        expect(html).toContain(`<span>${link}</span>`);
+        // the English title is the markup, the binder swaps in a translation
+        expect(html).toContain(`>${link}</span>`);
       }
     });
   });
