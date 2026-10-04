@@ -1,25 +1,30 @@
+//- The English title is the source; the key lets the i18n binder swap in a translation
+mixin navTitle(item)
+  - const key = item.url && item.url.endsWith('.html') ? item.url.slice(0, -5) : 'group-' + item.title.toLowerCase().replace(/\s+/g, '-')
+  span(rv-i18n-text="'ui.nav." + key + "'")= item.title
+
 nav.nav.sidebar-menu.w-100.flex-column
   each link in navigation
     .nav-item.nav-item-level-0
       if link.collapseable
         .nav-link.cursor-pointer.dropdown-toggle(data-bs-toggle="collapse" data-bs-target="#sidebar-collapse-" + link.title.toLowerCase().replace(/\s+/g, '-'))
-          span= link.title
+          +navTitle(link)
       else
         a.nav-link(href=link.url rv-route-class-active=link.url)
-          span= link.title
+          +navTitle(link)
       if link.links && link.links.length
         .collapse.show(id="sidebar-collapse-" + link.title.toLowerCase().replace(/\s+/g, '-'))
           each sublink in link.links
             .nav-item.nav-item-level-1
               if sublink.collapseable
                 .nav-link.cursor-pointer.dropdown-toggle(data-bs-toggle="collapse" data-bs-target="#sidebar-collapse-" + sublink.title.toLowerCase().replace(/\s+/g, '-'))
-                  span= sublink.title
+                  +navTitle(sublink)
               else
                 a.nav-link(href=sublink.url rv-route-class-active=sublink.url)
-                  span= sublink.title
+                  +navTitle(sublink)
               if sublink.links && sublink.links.length
                 .collapse.show(id="sidebar-collapse-" + sublink.title.toLowerCase().replace(/\s+/g, '-'))
                   each subsublink in sublink.links
                     .nav-item.nav-item-level-2
                       a.nav-link(href=subsublink.url rv-route-class-active=subsublink.url)
-                        span= subsublink.title
+                        +navTitle(subsublink)

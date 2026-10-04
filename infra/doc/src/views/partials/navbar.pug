@@ -17,3 +17,8 @@ bs5-navbar.navbar.navbar-dark.navbar-main.fixed-top.bg-primary
         ul.nav.d-none.d-md-flex
           li.nav-item
             a.nav-link(href=site.repository target="_blank") Github
+      //- Language switcher: the languages come from the locales service configured in main.ts
+      .col-auto.d-flex.align-items-center.ms-2
+        i18n-switcher
+          .btn-group.btn-group-sm(role="group" aria-label="Language")
+            button.btn.btn-outline-light.text-uppercase(type="button" rv-each-langcode="langcodes" rv-text="langcode.code" rv-on-click="switch | args langcode" rv-class-active="langcode.active")
