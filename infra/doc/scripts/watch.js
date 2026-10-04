@@ -90,9 +90,18 @@ function watchDir(dir) {
 }
 
 const srcDir = resolve(projectRoot, 'src');
+// The demo READMEs (README.md and README.<lang>.md) feed the locale catalogs,
+// but sit outside src/, so they get their own filtered watcher.
+const demosDir = resolve(projectRoot, '../../demos');
 const configPath = resolve(projectRoot, 'vite.config.js');
 
 watchDir(srcDir);
+watch(demosDir, { recursive: true }, (eventType, filename) => {
+  if (!filename || filename.includes('node_modules')) return;
+  if (!/(^|[/\\])README(\.[A-Za-z-]+)?\.md$/.test(filename)) return;
+  console.log(`[watch] demos/${filename}`);
+  scheduleBuild();
+});
 watch(configPath, () => {
   console.log('[watch] vite.config.js');
   scheduleBuild();

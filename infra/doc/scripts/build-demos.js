@@ -9,7 +9,10 @@
  *   the manifest (status "build-failed" + a trimmed `error`) and the script
  *   continues with the next demo, so one broken demo cannot hide the other 44.
  * - The exit code is 0 as long as the manifest could be written; only a fatal
- *   error (unwritable manifest) makes the script fail.
+ *   error (unwritable manifest) or a demo without an English description makes
+ *   the script fail. The English README.md is the canonical text of the
+ *   registry, translations come from README.<lang>.md via build-locales.js, and
+ *   without the English text there is nothing to fall back to.
  * - Per-demo overrides live in demos/<id>/package.json under `riba.demo` so the
  *   demos stay self-describing and the doc build needs no hardcoded list.
  */
@@ -423,6 +426,14 @@ async function main() {
     `[build-demos] ${manifest.length} demos, ${counts.ok} ok, ${counts['build-failed']} build-failed, ${counts.skipped} skipped`,
   );
   console.log(`[build-demos] manifest: ${manifestFile}`);
+
+  const undescribed = manifest.filter((entry) => !entry.description);
+  for (const entry of undescribed) {
+    console.error(
+      `[build-demos] no English description: demos/${entry.id}/README.md needs a title and a first paragraph`,
+    );
+  }
+  if (undescribed.length > 0) process.exitCode = 1;
 }
 
 main().catch((err) => {
