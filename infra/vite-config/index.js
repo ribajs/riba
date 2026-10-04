@@ -3,6 +3,7 @@ import pugRollupPlugin from "rollup-plugin-pug";
 import { resolve, dirname } from "path";
 import { existsSync } from "fs";
 import { createRequire } from "module";
+import { ribaBasePathPlugin } from "./base-path-plugin.js";
 
 const require = createRequire(import.meta.url);
 
@@ -97,6 +98,10 @@ export function ribaIconsetPlugin(options = {}) {
  * @param {Object} [options.input] - Rollup input entries
  * @param {boolean} [options.pug] - Enable pug plugin (default: true)
  * @param {boolean} [options.iconset] - Enable iconset plugin (default: true)
+ * @param {boolean} [options.basePathPlugin] - Prefix root-absolute asset paths
+ *   in the bundle with the resolved base (default: true). Needed as soon as the
+ *   site is served from a sub-path; the plugin itself decides whether it has
+ *   anything to do, based on config.base.
  * @param {string} [options.cwd] - Current working directory (default: process.cwd())
  * @returns {import('vite').UserConfig}
  */
@@ -106,6 +111,7 @@ export function ribaViteConfig(options = {}) {
     outDir = "../dist",
     pug = true,
     iconset = true,
+    basePathPlugin = true,
     cwd = process.cwd(),
     input,
   } = options;
@@ -120,6 +126,11 @@ export function ribaViteConfig(options = {}) {
   }
   if (iconset) {
     plugins.push(ribaIconsetPlugin());
+  }
+  // Last: generateBundle walks the finished bundle, so it sees the pug output as
+  // HTML and the assets ribaIconsetPlugin emitted.
+  if (basePathPlugin) {
+    plugins.push(ribaBasePathPlugin());
   }
 
   return defineConfig({
