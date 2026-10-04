@@ -17,7 +17,7 @@ test.describe("Router basic navigation (no transitions)", () => {
     await routerView.evaluate((el) =>
       el.classList.remove("transition-complete"),
     );
-    await page.locator('a.nav-link[href="/page-1.html"]').click();
+    await page.locator('a.nav-link[href="./page-1.html"]').click();
     await expect(routerView).toHaveClass(/transition-complete/, {
       timeout: 10_000,
     });
@@ -38,7 +38,7 @@ test.describe("Router basic navigation (no transitions)", () => {
     await routerView.evaluate((el) =>
       el.classList.remove("transition-complete"),
     );
-    await page.locator('a.nav-link[href="/page-2.html"]').click();
+    await page.locator('a.nav-link[href="./page-2.html"]').click();
     await expect(routerView).toHaveClass(/transition-complete/, {
       timeout: 10_000,
     });
@@ -48,7 +48,7 @@ test.describe("Router basic navigation (no transitions)", () => {
     await routerView.evaluate((el) =>
       el.classList.remove("transition-complete"),
     );
-    await page.locator('a.nav-link[href="/index.html"]').click();
+    await page.locator('a.nav-link[href="./index.html"]').click();
     await expect(routerView).toHaveClass(/transition-complete/, {
       timeout: 10_000,
     });
@@ -67,7 +67,7 @@ test.describe("Router basic navigation (no transitions)", () => {
     await routerView.evaluate((el) =>
       el.classList.remove("transition-complete"),
     );
-    await page.locator('a.nav-link[href="/page-1.html"]').click();
+    await page.locator('a.nav-link[href="./page-1.html"]').click();
     await expect(routerView).toHaveClass(/transition-complete/, {
       timeout: 10_000,
     });
@@ -93,7 +93,7 @@ test.describe("Router basic navigation (no transitions)", () => {
     await routerView.evaluate((el) =>
       el.classList.remove("transition-complete"),
     );
-    await page.locator('a.nav-link[href="/page-1.html"]').click();
+    await page.locator('a.nav-link[href="./page-1.html"]').click();
     await expect(routerView).toHaveClass(/transition-complete/, {
       timeout: 10_000,
     });
