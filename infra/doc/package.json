@@ -19,7 +19,7 @@
     "hmr": "vite serve",
     "preview": "vite preview",
     "clear": "rm -rf ./_site",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit && node scripts/check-locales.js"
   },
   "engines": {
     "node": ">=24.0.0"
