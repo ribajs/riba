@@ -1,77 +1,72 @@
 import { HttpService } from "@ribajs/core";
-import { LocalesService } from "../types/locales-service.js";
+import type { LocalesOptions, MessageTree } from "../types/index.js";
+import { LocalesService } from "./locales.service.js";
+
+export interface LocalesRestOptions extends LocalesOptions {
+  /**
+   * Fetch the messages of the source language too.
+   * Off by default: the markup is the source, so its catalog is not needed.
+   */
+  loadSourceCatalog?: boolean;
+}
+
+export type LocalesUrl = string | ((langcode: string) => string);
 
 /**
- * LocalesRestService get locales object from url
+ * Messages fetched over HTTP, one request per language the first time it is needed
  */
 export class LocalesRestService extends LocalesService {
-  public static instances: {
-    [url: string]: LocalesRestService;
-  } = {};
-
-  public static getInstance(url: string) {
-    return LocalesRestService.instances[url];
-  }
-
-  public locales: any = {};
-
-  /**
-   * The current defined langcode
-   */
-  protected currentLangcode?: string;
-
-  /**
-   * The default theme langcode before any language was chosen
-   */
-  protected initialLangcode?: string;
+  protected requests = new Map<string, Promise<unknown>>();
 
   constructor(
-    protected url: string,
-    doNotRetranslateDefaultLanguage = false,
-    showMissingTranslation = false,
-    autoDetectLangcode = false,
+    protected url: LocalesUrl,
+    protected restOptions: LocalesRestOptions = {},
   ) {
-    super(
-      doNotRetranslateDefaultLanguage,
-      showMissingTranslation,
-      autoDetectLangcode,
-    );
-
-    this.url = url;
-
-    if (!this.url) {
-      throw new Error(`Url is required!`);
+    super(restOptions);
+    if (!url) {
+      throw new Error("[i18n] The url of LocalesRestService is required.");
     }
-
-    if (LocalesRestService.instances[this.url]) {
-      return LocalesRestService.instances[this.url];
-    }
-
-    this.init();
-    LocalesRestService.instances[this.url] = this;
   }
 
-  /**
-   * Get file with all languages
-   * @param themeID
-   */
-  protected async getAll(url?: string) {
-    if (!url) {
-      url = this.url;
-    }
+  /** Hook to change a url right before it is requested, e.g. to add a query */
+  protected buildUrl(url: string, _langcode: string): string {
+    return url;
+  }
 
-    if (!url) {
-      throw new Error(`Url is required!`);
-    }
+  /** Hook to pick the messages of one language out of the response body */
+  protected parse(body: unknown, _langcode: string): MessageTree | undefined {
+    return body as MessageTree | undefined;
+  }
 
-    if ((window as any).Shopify.shop) {
-      url = url + `?shop=${(window as any).Shopify.shop}`;
+  protected urlFor(langcode: string) {
+    const url = typeof this.url === "function" ? this.url(langcode) : this.url;
+    return this.buildUrl(url, langcode);
+  }
+
+  /** Requests to the same url are shared, also if several languages live in one file */
+  protected fetchJSON(url: string): Promise<unknown> {
+    let request = this.requests.get(url);
+    if (!request) {
+      request = HttpService.getJSON<unknown>(url)
+        .then((response) => response.body)
+        .catch((error: unknown) => {
+          // a failed request must be retried by the next load
+          this.requests.delete(url);
+          throw error;
+        });
+      this.requests.set(url, request);
     }
-    if (this.locales[url]) {
-      return this.locales[url];
+    return request;
+  }
+
+  protected async load(langcode: string): Promise<MessageTree | undefined> {
+    if (
+      langcode === this.sourceLangcode &&
+      !this.restOptions.loadSourceCatalog
+    ) {
+      return undefined;
     }
-    const resp = await HttpService.getJSON<string[]>(url);
-    this.locales[url as string] = resp.body;
-    return this.locales[url as string];
+    const body = await this.fetchJSON(this.urlFor(langcode));
+    return this.parse(body, langcode);
   }
 }

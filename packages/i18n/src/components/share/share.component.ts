@@ -4,8 +4,8 @@ import {
   Scope as Bs5ShareScope,
 } from "@ribajs/bs5/src/components/bs5-share/bs5-share.component.js";
 import labelTemplate from "./share.label.html?raw";
-import { I18nService } from "../../services/index.js";
-import { LocalesService } from "../../types/index.js";
+import { I18nService } from "../../services/i18n.service.js";
+import type { LocalesService } from "../../services/locales.service.js";
 
 import template from "@ribajs/bs5/src/components/bs5-share/bs5-share.component.html?raw";
 
@@ -70,65 +70,47 @@ export class I18nShareComponent extends Bs5ShareComponent {
     };
   }
 
-  protected async initI18n() {
-    return new Promise<string | undefined>((resolve) => {
-      this.localesService?.event.on(
-        "changed",
-        async (langcode: string) => {
-          return resolve(langcode);
-        },
-        this,
-      );
-      if (this.localesService?.ready) {
-        const langcode = this.localesService?.getLangcode();
-        return resolve(langcode);
-      } else {
-        this.localesService?.event.on(
-          "ready",
-          async (langcode: string) => {
-            return resolve(langcode);
-          },
-          this,
-        );
-      }
-    });
-  }
+  protected sourceText?: string;
+  protected sourceLabels: Record<string, string> = {};
+  protected unsubscribes: Array<() => void> = [];
 
-  protected async i18n(langcode: string, value: string) {
-    if (!value) {
+  /** Translate the text and the service labels, a missing key keeps the source */
+  protected translateScope = () => {
+    const service = this.localesService;
+    if (!service?.ready) {
       return;
     }
+    if (this.scope.textI18n) {
+      this.scope.text =
+        service.lookup(this.scope.textI18n) ?? this.sourceText ?? "";
+    }
+    if (this.scope.serviceLabelI18n) {
+      for (const shareItem of this.scope.shareItems) {
+        shareItem.label =
+          service.lookup(this.scope.serviceLabelI18n + "." + shareItem.id) ??
+          this.sourceLabels[shareItem.id];
+      }
+    }
+  };
 
-    return this.localesService
-      ?.get([langcode, ...value.split(".")])
-      .then((locale: string) => {
-        // this.debug('changed local', local);
-        return locale;
-      })
-      .catch((error: Error) => {
-        console.error(error);
-      });
+  protected disconnectedCallback() {
+    this.unsubscribes.forEach((unsubscribe) => unsubscribe());
+    this.unsubscribes = [];
+    super.disconnectedCallback();
   }
 
   protected async beforeBind() {
     await super.beforeBind();
-    this.localesService = I18nService.options.localesService;
-    const langcode = await this.initI18n();
-
-    if (this.scope.textI18n && langcode) {
-      this.scope.text =
-        (await this.i18n(langcode, this.scope.textI18n)) || this.scope.text;
+    this.localesService = I18nService.getLocalesService();
+    this.sourceText = this.scope.text;
+    for (const shareItem of this.scope.shareItems) {
+      this.sourceLabels[shareItem.id] = shareItem.label;
     }
-
-    if (this.scope.serviceLabelI18n && langcode) {
-      for (const shareItem of this.scope.shareItems) {
-        shareItem.label =
-          (await this.i18n(
-            langcode,
-            this.scope.serviceLabelI18n + "." + shareItem.id,
-          )) || shareItem.label;
-      }
-    }
+    this.unsubscribes.push(
+      this.localesService.on("ready", this.translateScope),
+      this.localesService.on("changed", this.translateScope),
+    );
+    this.translateScope();
   }
 
   protected async afterBind() {
