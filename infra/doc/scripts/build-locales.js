@@ -16,25 +16,25 @@ import {
   readFileSync,
   readdirSync,
   writeFileSync,
-} from "node:fs";
-import { dirname, join, resolve } from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
-import yaml from "js-yaml";
-import { markdownKey, renderMarkdown, translationsOf } from "./doc-markdown.js";
-import { extractDescription, extractTitle } from "./readme-metadata.js";
+} from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import yaml from 'js-yaml';
+import { markdownKey, renderMarkdown, translationsOf } from './doc-markdown.js';
+import { extractDescription, extractTitle } from './readme-metadata.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /** Paths the catalog build needs, all derived from the doc project root. */
-export function resolveRoots(docRoot = resolve(__dirname, "..")) {
-  const projectRoot = resolve(docRoot, "../..");
+export function resolveRoots(docRoot = resolve(__dirname, '..')) {
+  const projectRoot = resolve(docRoot, '../..');
   return {
     docRoot,
     projectRoot,
-    srcDir: join(docRoot, "src"),
-    docDir: join(docRoot, "src", "doc"),
-    localesDir: join(docRoot, "src", "locales"),
-    demosDir: join(projectRoot, "demos"),
+    srcDir: join(docRoot, 'src'),
+    docDir: join(docRoot, 'src', 'doc'),
+    localesDir: join(docRoot, 'src', 'locales'),
+    demosDir: join(projectRoot, 'demos'),
   };
 }
 
@@ -43,9 +43,9 @@ const LANG_FILE = /^README\.([a-z]{2,3}(?:-[A-Za-z0-9]+)*)\.md$/;
 
 function deepMerge(target, source) {
   for (const [key, value] of Object.entries(source)) {
-    if (value && typeof value === "object" && !Array.isArray(value)) {
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
       target[key] = deepMerge(
-        target[key] && typeof target[key] === "object" ? target[key] : {},
+        target[key] && typeof target[key] === 'object' ? target[key] : {},
         value,
       );
     } else {
@@ -65,9 +65,9 @@ export function readUiStrings({ localesDir }) {
     const langDir = join(localesDir, dir.name);
     for (const file of readdirSync(langDir).sort()) {
       if (!/\.ya?ml$/.test(file)) continue;
-      const name = file.replace(/\.ya?ml$/, "");
-      const parsed = yaml.load(readFileSync(join(langDir, file), "utf8"));
-      if (parsed && typeof parsed === "object") tree[name] = parsed;
+      const name = file.replace(/\.ya?ml$/, '');
+      const parsed = yaml.load(readFileSync(join(langDir, file), 'utf8'));
+      if (parsed && typeof parsed === 'object') tree[name] = parsed;
     }
     if (Object.keys(tree).length) result[dir.name] = tree;
   }
@@ -87,7 +87,7 @@ export function readDemoTranslations({ demosDir }) {
     for (const file of readdirSync(demoDir)) {
       const match = LANG_FILE.exec(file);
       if (!match) continue;
-      const markdown = readFileSync(join(demoDir, file), "utf8");
+      const markdown = readFileSync(join(demoDir, file), 'utf8');
       const fields = {};
       const title = extractTitle(markdown);
       const description = extractDescription(markdown);
@@ -106,7 +106,7 @@ function* walkPug(dir) {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = join(dir, entry.name);
     if (entry.isDirectory()) yield* walkPug(full);
-    else if (entry.name.endsWith(".pug")) yield full;
+    else if (entry.name.endsWith('.pug')) yield full;
   }
 }
 
@@ -117,9 +117,9 @@ function* walkPug(dir) {
  */
 export function referencedMarkdown({ srcDir, docDir }) {
   const files = new Set();
-  for (const dir of [join(srcDir, "views"), docDir]) {
+  for (const dir of [join(srcDir, 'views'), docDir]) {
     for (const pug of walkPug(dir)) {
-      for (const line of readFileSync(pug, "utf8").split("\n")) {
+      for (const line of readFileSync(pug, 'utf8').split('\n')) {
         if (/^\s*\/\/-/.test(line)) continue;
         for (const match of line.matchAll(/\bmd\('([^']+)'\)/g)) {
           files.add(resolve(docDir, match[1]));
@@ -141,7 +141,7 @@ export function readMarkdownTranslations(roots) {
     const key = markdownKey(source, roots);
     for (const lang of translationsOf(source)) {
       const file = source.replace(/\.md$/, `.${lang}.md`);
-      (result[lang] ||= {})[key] = renderMarkdown(readFileSync(file, "utf8"));
+      (result[lang] ||= {})[key] = renderMarkdown(readFileSync(file, 'utf8'));
     }
   }
   return result;
@@ -152,7 +152,7 @@ export function readMarkdownTranslations(roots) {
  * The key holds slashes but never a dot.
  */
 function setPath(tree, path, value) {
-  const segments = path.split(".");
+  const segments = path.split('.');
   let node = tree;
   for (const segment of segments.slice(0, -1)) {
     node = node[segment] ||= {};
@@ -195,7 +195,7 @@ export function writeLocales(outDir, catalogs) {
     writeFileSync(
       join(outDir, `${lang}.json`),
       `${JSON.stringify(tree)}\n`,
-      "utf8",
+      'utf8',
     );
   }
 }
@@ -206,9 +206,9 @@ if (
 ) {
   const roots = resolveRoots();
   const catalogs = buildLocales(roots);
-  const outDir = join(roots.docRoot, "_site", "locales");
+  const outDir = join(roots.docRoot, '_site', 'locales');
   writeLocales(outDir, catalogs);
   console.log(
-    `[build-locales] ${Object.keys(catalogs).join(", ") || "no languages"} -> ${outDir}`,
+    `[build-locales] ${Object.keys(catalogs).join(', ') || 'no languages'} -> ${outDir}`,
   );
 }
