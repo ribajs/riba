@@ -9,7 +9,7 @@ describe("Module availability for documentation site", () => {
   let riba: Riba;
 
   beforeAll(() => {
-    // Set lang attribute required by LocalesStaticService
+    // The html lang is the source language of the locales service
     document.documentElement.setAttribute("lang", "en");
 
     riba = new Riba();
@@ -19,7 +19,7 @@ describe("Module availability for documentation site", () => {
     riba.module.register(routerModule.init());
     riba.module.register(
       i18nModule.init({
-        localesService: new LocalesStaticService({ locales: {} }),
+        localesService: new LocalesStaticService({ en: {} }),
       }),
     );
   });
