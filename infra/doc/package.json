@@ -8,6 +8,7 @@
   "scripts": {
     "build": "vite build --mode production",
     "build:dev": "vite build --mode development",
+    "build:demos": "node scripts/build-demos.js",
     "watch": "node scripts/watch.js",
     "start": "concurrently 'yarn:watch' 'yarn:preview'",
     "hmr": "vite serve",

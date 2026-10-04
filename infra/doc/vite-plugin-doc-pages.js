@@ -60,6 +60,27 @@ const pugFilters = {
 };
 
 /**
+ * Load the demo registry written by `yarn workspace @ribajs/doc build:demos`.
+ * A missing or broken manifest must never break the doc build, so anything
+ * unexpected degrades to an empty list.
+ * @returns {Array<Record<string, unknown>>}
+ */
+function loadDemos() {
+  const manifestPath = resolve(__dirname, '_demos', 'manifest.json');
+  if (!existsSync(manifestPath)) return [];
+  try {
+    const parsed = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (err) {
+    console.warn(
+      `[vite-plugin-doc-pages] could not read ${manifestPath}:`,
+      err instanceof Error ? err.message : err,
+    );
+    return [];
+  }
+}
+
+/**
  * Load all content and build Pug locals.
  * @param {string} contentDir
  * @param {string} projectRoot
@@ -95,6 +116,7 @@ function loadLocals(contentDir, projectRoot) {
     navigation,
     icons,
     riba,
+    demos: loadDemos(),
   };
 }
 
