@@ -21,6 +21,10 @@
  * The script is a plain Node ESM program, deliberately NOT a @playwright/test
  * spec: it must be runnable from CI or from a terminal without a test runner.
  *
+ * After the demos, a language phase loads the gallery and the viewer in English and
+ * with ?lang=de (see smokeLanguages) and fails on a console error, a missing
+ * translation or a missing English fallback.
+ *
  * Usage:  yarn workspace @ribajs/doc smoke:demos
  *   SMOKE_PORT       port for the own static server (default 4799, 0 = free port)
  *   SMOKE_TIMEOUT    ms per demo (default 30000)
@@ -584,6 +588,128 @@ function clearOldScreenshots() {
   }
 }
 
+/**
+ * Language phase: the doc pages the demos are listed on, in English and with
+ * `?lang=de`. English is the markup, German comes from `locales/de.json`, so this
+ * proves the catalog loads, the active language is applied, a translated demo
+ * shows its German text and an untranslated one falls back to English.
+ * Skipped when no catalog was built (no translation exists).
+ * @param {import('@playwright/test').Browser} browser
+ * @param {string} origin
+ * @param {Array<Record<string, any>>} manifest
+ * @returns {Promise<{ checked: number, failures: string[] }>}
+ */
+async function smokeLanguages(browser, origin, manifest) {
+  const catalogFile = join(siteDir, 'locales', 'de.json');
+  if (!existsSync(catalogFile)) {
+    console.log('[smoke-demos] language phase skipped: no locales/de.json was built');
+    return { checked: 0, failures: [] };
+  }
+  const catalog = JSON.parse(readFileSync(catalogFile, 'utf8'));
+  // A demo whose German description differs from the English one, else the
+  // comparison below could not tell the two languages apart.
+  const translated = manifest.find(
+    (entry) =>
+      entry.status === 'ok' &&
+      catalog.demos?.[entry.id]?.description &&
+      catalog.demos[entry.id].description !== entry.description,
+  );
+  const untranslated = manifest.find((entry) => !catalog.demos?.[entry.id] && entry.status === 'ok');
+  /** @type {string[]} */
+  const failures = [];
+  let checked = 0;
+
+  /**
+   * @param {string} name
+   * @param {string} path
+   * @param {(page: import('@playwright/test').Page) => Promise<string[]>} inspect problems of the page
+   */
+  const run = async (name, path, inspect) => {
+    const page = await browser.newPage({ viewport: VIEWPORT });
+    page.setDefaultTimeout(Math.min(10_000, DEMO_TIMEOUT_MS));
+    /** @type {string[]} */
+    const problems = [];
+    const own = (url) => classifyUrl(url, origin) !== 'external';
+    page.on('pageerror', (err) => problems.push(`page error: ${shorten(err.message, 200)}`));
+    page.on('console', (msg) => {
+      const where = msg.location().url;
+      if (msg.type() === 'error' && (!where || own(where))) problems.push(`console: ${shorten(msg.text(), 200)}`);
+    });
+    page.on('response', (res) => {
+      if (res.status() >= 400 && own(res.url())) problems.push(`${res.status()} ${res.url()}`);
+    });
+    try {
+      await page.goto(`${origin}/${path}`, { waitUntil: 'domcontentloaded' });
+      await page.waitForTimeout(SETTLE_MS);
+      problems.push(...(await inspect(page)));
+    } catch (err) {
+      problems.push(err instanceof Error ? err.message : String(err));
+    } finally {
+      await page.close();
+    }
+    checked++;
+    if (problems.length) failures.push(`${name}: ${problems.join('; ')}`);
+    console.log(`language ${name}: ${problems.length ? 'FAILED' : 'ok'}`);
+  };
+
+  // Titles often stay the same in both languages (they are ids), so the
+  // description is what proves that the translation was applied.
+  const cardText = (page, id, selector = '.card-title') =>
+    page
+      .locator(`a.card[href$="demo.html?id=${encodeURIComponent(id)}"] ${selector}`)
+      .first()
+      .textContent()
+      .then((text) => (text || '').trim());
+  const expectLang = async (page, lang) =>
+    (await page.evaluate(() => document.documentElement.lang)) === lang ? [] : [`html lang is not ${lang}`];
+
+  if (!translated) {
+    failures.push('locales/de.json holds no demo whose description differs from the English one');
+    checked++;
+  }
+  if (untranslated) {
+    await run('demos.html (en)', 'demos.html', async (page) => {
+      const problems = await expectLang(page, 'en');
+      if (translated && (await cardText(page, translated.id, '.card-text')) !== translated.description) {
+        problems.push(`English card of ${translated.id} does not show the manifest description`);
+      }
+      return problems;
+    });
+  }
+  await run('demos.html?lang=de', 'demos.html?lang=de', async (page) => {
+    const problems = await expectLang(page, 'de');
+    if (translated) {
+      const want = catalog.demos[translated.id].description;
+      const got = await cardText(page, translated.id, '.card-text');
+      if (got !== want) problems.push(`card of ${translated.id} shows "${shorten(got, 60)}", expected the German description`);
+    }
+    if (untranslated) {
+      const got = await cardText(page, untranslated.id, '.card-text');
+      if (got !== untranslated.description) {
+        problems.push(`untranslated ${untranslated.id} shows "${shorten(got, 60)}", expected the English description`);
+      }
+    }
+    return problems;
+  });
+  if (translated) {
+    await run(`demo.html?id=${translated.id}&lang=de`, `demo.html?id=${encodeURIComponent(translated.id)}&lang=de`, async (page) => {
+      const problems = await expectLang(page, 'de');
+      const got = ((await page.locator('rv-demo-viewer p.text-muted').first().textContent()) || '').trim();
+      if (got !== catalog.demos[translated.id].description) problems.push(`viewer description is "${shorten(got, 60)}"`);
+      return problems;
+    });
+  }
+  if (untranslated) {
+    await run(`demo.html?id=${untranslated.id}&lang=de`, `demo.html?id=${encodeURIComponent(untranslated.id)}&lang=de`, async (page) => {
+      const problems = await expectLang(page, 'de');
+      const got = ((await page.locator('rv-demo-viewer p.text-muted').first().textContent()) || '').trim();
+      if (got !== untranslated.description) problems.push(`viewer description is "${shorten(got, 60)}", expected the English fallback`);
+      return problems;
+    });
+  }
+  return { checked, failures };
+}
+
 async function main() {
   if (!existsSync(siteDir)) {
     console.error(`[smoke-demos] site not found: ${siteDir} (run "yarn workspace @ribajs/doc build" first)`);
@@ -603,6 +729,9 @@ async function main() {
   let browser = null;
   /** @type {Record<string, any>[]} */
   const results = [];
+  let languageChecks = 0;
+  /** @type {string[]} */
+  let languageFailures = [];
   try {
     const chromium = await loadChromium();
     try {
@@ -656,6 +785,12 @@ async function main() {
         console.log(`${result.id}: FAILED ${failureCause(result)} (${seconds}s)`);
       }
     }
+
+    if (browser) {
+      const language = await smokeLanguages(browser, origin, manifest);
+      languageChecks = language.checked;
+      languageFailures = language.failures;
+    }
   } finally {
     if (browser) await browser.close().catch(() => undefined);
     await new Promise((done) => server.close(() => done(undefined)));
@@ -674,14 +809,19 @@ async function main() {
     known,
     failed,
     external,
+    language: { checked: languageChecks, failures: languageFailures },
     results,
   };
   writeFileSync(reportFile, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   console.log(
     `[smoke-demos] ${report.total} demos: ${passed} ok, ${known} known, ${failed} failed, ${external} external findings`,
   );
+  console.log(
+    `[smoke-demos] language phase: ${languageChecks - languageFailures.length}/${languageChecks} ok`,
+  );
+  for (const failure of languageFailures) console.error(`[smoke-demos] language FAILED ${failure}`);
   console.log(`[smoke-demos] report: ${reportFile}`);
-  process.exitCode = failed > 0 ? 1 : 0;
+  process.exitCode = failed > 0 || languageFailures.length > 0 ? 1 : 0;
 }
 
 /**
