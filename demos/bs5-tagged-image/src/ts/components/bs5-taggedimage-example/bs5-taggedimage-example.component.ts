@@ -39,12 +39,9 @@ export class Bs5TaggedImageExampleComponent extends Component {
 
   protected getFadeshowImageTags() {
     return [1, 2, 3, 4, 5].map((n) => ({
-      src: `../../../images/shotokan-karate-cuxhaven-${n}.jpg`,
+      src: `/images/shotokan-karate-cuxhaven-${n}.jpg`,
       srcset: [800, 1000, 1200, 1400, 1600, 1920]
-        .map(
-          (w) =>
-            `../../../images/shotokan-karate-cuxhaven-${n}-${w}.jpg ${w}w,`,
-        )
+        .map((w) => `/images/shotokan-karate-cuxhaven-${n}-${w}.jpg ${w}w,`)
         .join("\n"),
       title: `Image ${n}`,
       tags: [1, 2, 3, 4, 5, 6, 7].map((n) => ({
