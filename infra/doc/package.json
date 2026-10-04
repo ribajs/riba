@@ -11,6 +11,7 @@
     "build:demos": "node scripts/build-demos.js",
     "smoke:demos": "node scripts/smoke-demos.mjs",
     "build:locales": "node scripts/build-locales.js",
+    "check:locales": "node scripts/check-locales.js",
     "watch": "node scripts/watch.js",
     "watch:demos": "node scripts/watch-demos.js",
     "start": "concurrently 'yarn:watch' 'yarn:preview'",
