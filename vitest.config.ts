@@ -9,6 +9,7 @@ export default defineConfig({
       "packages/*/src/**/*.spec.ts",
       "infra/*/src/**/*.spec.ts",
       "infra/*/*.spec.ts",
+      "infra/*/scripts/*.spec.js",
     ],
     exclude: ["**/node_modules/**", "**/dist/**", "**/deno/**"],
     globals: true,

@@ -13,20 +13,20 @@ block content
         .separator.col-12
           h2 Why Riba.js?
         section.flexible.col-12.col-md-6.my-3
-          include:markdown-it(html) ../../doc/why/flexible.md
+          != md('why/flexible.md')
         section.configurable.col-12.col-md-6.my-3
-          include:markdown-it(html) ../../doc/why/configurable.md
+          != md('why/configurable.md')
       .row
         .separator.col-12
           h2 Highlights
         section.binders.col-12.col-md-6.my-3
-          include:markdown-it(html) ../../doc/highlights/binders.md
+          != md('highlights/binders.md')
         section.formatters.col-12.col-md-6.my-3(rv-block)
-          include:markdown-it(html) ../../doc/highlights/formatters.md
+          != md('highlights/formatters.md')
         section.adapters.col-12.col-md-6.my-3
-          include:markdown-it(html) ../../doc/highlights/adapters.md
+          != md('highlights/adapters.md')
         section.web-components.col-12.col-md-6.my-3
-          include:markdown-it(html) ../../doc/highlights/web-components.md
+          != md('highlights/web-components.md')
       .row
         .separator.col-12
           h2 Example
